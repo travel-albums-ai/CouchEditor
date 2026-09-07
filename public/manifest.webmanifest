@@ -1,0 +1,33 @@
+{
+  "name": "Travel Albums",
+  "short_name": "Travel Albums",
+  "description": "Browse and relive your trips as an installable desktop-style web app.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "display_override": [
+    "window-controls-overlay",
+    "fullscreen",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#0b1118",
+  "theme_color": "#0b1118",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "travel",
+    "photo"
+  ],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/logo_new_48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

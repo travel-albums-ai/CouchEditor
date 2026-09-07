@@ -1,0 +1,94 @@
+[
+  {
+    "path": "/",
+    "type": "redirect",
+    "to": "/allPhotos",
+    "replace": true,
+    "title": "Home Redirect",
+    "icon": "material-symbols:home-outline-rounded",
+    "visible": true,
+    "includeInMenu": false
+  },
+  {
+    "path": "/albums",
+    "root": "/albums",
+    "type": "page",
+    "component": "AlbumsPage",
+    "title": "Albums",
+    "icon": "material-symbols:photo-album-outline-rounded",
+    "visible": false,
+    "includeInMenu": false
+  },
+
+  {
+    "path": "/selectedPhotos/:type_name/:id",
+    "root": "/selectedPhotos",
+    "type": "page",
+    "component": "SelectedPhotosPage_type_name",
+    "title": "Selected Photos",
+    "icon": "material-symbols:photo-library",
+    "visible": true,
+    "includeInMenu": false,
+    "order": 2,
+    "actionBar": true,
+    "frameless": true
+  },
+  {
+    "path": "/selectedType/:type_name",
+    "root": "/selectedType",
+    "type": "page",
+    "component": "SelectedPage_type",
+    "title": "Selected Section",
+    "icon": "material-symbols:photo-library",
+    "visible": true,
+    "includeInMenu": false,
+    "order": 2,
+    "actionBar": true,
+    "frameless": true
+  },
+  {
+    "path": "/allPhotos",
+    "root": "/allPhotos",
+    "type": "page",
+    "component": "SelectedPhotosPage_type_name",
+    "title": "All Photos",
+    "icon": "material-symbols:photo-library",
+    "visible": true,
+    "includeInMenu": true,
+    "order": 2,
+    "frameless": true
+  },
+  {
+    "path": "/albumsByYear",
+    "root": "/albumsByYear",
+    "type": "page",
+    "component": "AlbumsByYearPage",
+    "title": "Albums",
+    "icon": "material-symbols:photo-album-outline-rounded",
+    "visible": false,
+    "includeInMenu": false,
+    "order": 3
+  },
+  {
+    "path": "/welcome",
+    "root": "/welcome",
+    "type": "page",
+    "component": "WelcomePage",
+    "title": "Welcome",
+    "icon": "material-symbols:waving-hand-outline",
+    "visible": false,
+    "includeInMenu": false,
+    "order": -1,
+    "actionBar": false
+  },
+    {
+    "path": "*",
+    "type": "redirect",
+    "to": "/allPhotos",
+    "replace": true,
+    "title": "Fallback Redirect",
+    "icon": "material-symbols:warning-outline-rounded",
+    "visible": true,
+    "includeInMenu": false
+  }
+]

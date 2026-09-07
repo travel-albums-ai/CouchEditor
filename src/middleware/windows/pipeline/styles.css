@@ -1,0 +1,140 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  /* background: #111; */
+
+  display: flex;
+}
+
+.toolbox {
+  width: 180px;
+  flex-shrink: 0;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  background: #1a1a1a;
+  border-right: 1px solid #333;
+  color: #eee;
+}
+
+.toolbox-item {
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+  color: #111;
+  border: 1px solid #ccc;
+  cursor: grab;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbox-item:active {
+  cursor: grabbing;
+}
+
+.reactflow-canvas {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.node {
+  min-width: 180px;
+  padding: 14px;
+  border-radius: 12px;
+  background: white;
+  color: #111;
+  border: 1px solid #ccc;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node strong {
+  font-size: 14px;
+}
+
+.node small {
+  color: #666;
+}
+
+.node input {
+  max-width: 180px;
+}
+
+.viewer {
+  width: 340px;
+}
+
+.source {
+  width: 4px;
+}
+
+.viewer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.viewer-grid img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.empty {
+  height: 150px;
+
+  display: grid;
+  place-items: center;
+
+  background: #eee;
+  border-radius: 8px;
+  color: #888;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.react-flow__controls {
+  gap: 4px;
+  box-shadow: none;
+}
+
+.react-flow__minimap {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-flow__minimap-node {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 16px;
+}

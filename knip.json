@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/knip/schema.json",
+
+  "entry": [
+  ],
+
+  "project": [
+    "src/**/*.{ts,tsx}"
+  ],
+
+  "ignore": [
+    "src/**/*.d.ts"
+  ],
+
+  "ignoreDependencies": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/release-notes-generator",
+    "conventional-changelog-conventionalcommits"
+  ],
+
+  "ignoreBinaries": [],
+  "ignoreExportsUsedInFile": true,
+
+  "typescript": {
+    "config": "tsconfig.json"
+  }
+}

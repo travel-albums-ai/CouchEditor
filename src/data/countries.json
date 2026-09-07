@@ -1,0 +1,1726 @@
+{
+  "data": {
+    "countries": [
+      {
+        "country": "AF",
+        "countryName": "Afghanistan",
+        "flag": "circle-flags:af",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "AX",
+        "countryName": "Åland",
+        "flag": "circle-flags:ax",
+        "independent": false,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "AL",
+        "countryName": "Albania",
+        "flag": "circle-flags:al",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "DZ",
+        "countryName": "Algeria",
+        "flag": "circle-flags:dz",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "AS",
+        "countryName": "American Samoa",
+        "flag": "circle-flags:as",
+        "independent": false
+      },
+      {
+        "country": "AD",
+        "countryName": "Andorra",
+        "flag": "circle-flags:ad",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "AO",
+        "countryName": "Angola",
+        "flag": "circle-flags:ao",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "AI",
+        "countryName": "Anguilla",
+        "flag": "circle-flags:ai",
+        "independent": false
+      },
+      {
+        "country": "AQ",
+        "countryName": "Antarctica",
+        "flag": "circle-flags:aq",
+        "independent": false,
+        "continent": "Antarctica"
+      },
+      {
+        "country": "AG",
+        "countryName": "Antigua and Barbuda",
+        "flag": "circle-flags:ag",
+        "independent": true
+      },
+      {
+        "country": "AR",
+        "countryName": "Argentina",
+        "flag": "circle-flags:ar",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "AM",
+        "countryName": "Armenia",
+        "flag": "circle-flags:am",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "AW",
+        "countryName": "Aruba",
+        "flag": "circle-flags:aw",
+        "independent": false
+      },
+      {
+        "country": "AU",
+        "countryName": "Australia",
+        "flag": "circle-flags:au",
+        "independent": true,
+        "continent": "Australasia"
+      },
+      {
+        "country": "AT",
+        "countryName": "Austria",
+        "flag": "circle-flags:at",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "AZ",
+        "countryName": "Azerbaijan",
+        "flag": "circle-flags:az",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "BS",
+        "countryName": "Bahamas",
+        "flag": "circle-flags:bs",
+        "independent": true
+      },
+      {
+        "country": "BH",
+        "countryName": "Bahrain",
+        "flag": "circle-flags:bh",
+        "independent": true
+      },
+      {
+        "country": "BD",
+        "countryName": "Bangladesh",
+        "flag": "circle-flags:bd",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "BB",
+        "countryName": "Barbados",
+        "flag": "circle-flags:bb",
+        "independent": true
+      },
+      {
+        "country": "BY",
+        "countryName": "Belarus",
+        "flag": "circle-flags:by",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "BE",
+        "countryName": "Belgium",
+        "flag": "circle-flags:be",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "BZ",
+        "countryName": "Belize",
+        "flag": "circle-flags:bz",
+        "independent": true
+      },
+      {
+        "country": "BJ",
+        "countryName": "Benin",
+        "flag": "circle-flags:bj",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "BM",
+        "countryName": "Bermuda",
+        "flag": "circle-flags:bm",
+        "independent": false
+      },
+      {
+        "country": "BT",
+        "countryName": "Bhutan",
+        "flag": "circle-flags:bt",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "BO",
+        "countryName": "Bolivia",
+        "flag": "circle-flags:bo",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "BQ",
+        "countryName": "Bonaire",
+        "flag": "circle-flags:bq",
+        "independent": false
+      },
+      {
+        "country": "BA",
+        "countryName": "Bosnia and Herzegovina",
+        "flag": "circle-flags:ba",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "BW",
+        "countryName": "Botswana",
+        "flag": "circle-flags:bw",
+        "independent": true,
+        "continent": "Southern Africa"
+      },
+      {
+        "country": "BV",
+        "countryName": "Bouvet Island",
+        "flag": "circle-flags:bv",
+        "independent": false
+      },
+      {
+        "country": "BR",
+        "countryName": "Brazil",
+        "flag": "circle-flags:br",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "IO",
+        "countryName": "British Indian Ocean Territory",
+        "flag": "circle-flags:io",
+        "independent": false
+      },
+      {
+        "country": "VG",
+        "countryName": "British Virgin Islands",
+        "flag": "circle-flags:vg",
+        "independent": false
+      },
+      {
+        "country": "BN",
+        "countryName": "Brunei",
+        "flag": "circle-flags:bn",
+        "independent": true
+      },
+      {
+        "country": "BG",
+        "countryName": "Bulgaria",
+        "flag": "circle-flags:bg",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "BF",
+        "countryName": "Burkina Faso",
+        "flag": "circle-flags:bf",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "BI",
+        "countryName": "Burundi",
+        "flag": "circle-flags:bi",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "KH",
+        "countryName": "Cambodia",
+        "flag": "circle-flags:kh",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "CM",
+        "countryName": "Cameroon",
+        "flag": "circle-flags:cm",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "CA",
+        "countryName": "Canada",
+        "flag": "circle-flags:ca",
+        "independent": true,
+        "continent": "Northern America"
+      },
+      {
+        "country": "CV",
+        "countryName": "Cape Verde",
+        "flag": "circle-flags:cv",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "KY",
+        "countryName": "Cayman Islands",
+        "flag": "circle-flags:ky",
+        "independent": false
+      },
+      {
+        "country": "CF",
+        "countryName": "Central African Republic",
+        "flag": "circle-flags:cf",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "TD",
+        "countryName": "Chad",
+        "flag": "circle-flags:td",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "CL",
+        "countryName": "Chile",
+        "flag": "circle-flags:cl",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "CN",
+        "countryName": "China",
+        "flag": "circle-flags:cn",
+        "independent": true,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "CX",
+        "countryName": "Christmas Island",
+        "flag": "circle-flags:cx",
+        "independent": false
+      },
+      {
+        "country": "CP",
+        "countryName": "Clipperton Island",
+        "flag": "circle-flags:cp",
+        "independent": false
+      },
+      {
+        "country": "CC",
+        "countryName": "Cocos (Keeling) Islands",
+        "flag": "circle-flags:cc",
+        "independent": false
+      },
+      {
+        "country": "MF",
+        "countryName": "Collectivity of Saint Martin",
+        "flag": "circle-flags:mf",
+        "independent": false
+      },
+      {
+        "country": "CO",
+        "countryName": "Colombia",
+        "flag": "circle-flags:co",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "KM",
+        "countryName": "Comoros",
+        "flag": "circle-flags:km",
+        "independent": true
+      },
+      {
+        "country": "CG",
+        "countryName": "Congo",
+        "flag": "circle-flags:cg",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "CK",
+        "countryName": "Cook Islands",
+        "flag": "circle-flags:ck",
+        "independent": false
+      },
+      {
+        "country": "CR",
+        "countryName": "Costa Rica",
+        "flag": "circle-flags:cr",
+        "independent": true
+      },
+      {
+        "country": "HR",
+        "countryName": "Croatia",
+        "flag": "circle-flags:hr",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "CU",
+        "countryName": "Cuba",
+        "flag": "circle-flags:cu",
+        "independent": true,
+        "continent": "Caribbean"
+      },
+      {
+        "country": "CW",
+        "countryName": "Curaçao",
+        "flag": "circle-flags:cw",
+        "independent": false
+      },
+      {
+        "country": "CY",
+        "countryName": "Cyprus",
+        "flag": "circle-flags:cy",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "CZ",
+        "countryName": "Czech Republic",
+        "flag": "circle-flags:cz",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "CD",
+        "countryName": "Democratic Republic Of The Congo",
+        "flag": "circle-flags:cd",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "DK",
+        "countryName": "Denmark",
+        "flag": "circle-flags:dk",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "DJ",
+        "countryName": "Djibouti",
+        "flag": "circle-flags:dj",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "DM",
+        "countryName": "Dominica",
+        "flag": "circle-flags:dm",
+        "independent": true
+      },
+      {
+        "country": "DO",
+        "countryName": "Dominican Republic",
+        "flag": "circle-flags:do",
+        "independent": true
+      },
+      {
+        "country": "EC",
+        "countryName": "Ecuador",
+        "flag": "circle-flags:ec",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "EG",
+        "countryName": "Egypt",
+        "flag": "circle-flags:eg",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "SV",
+        "countryName": "El Salvador",
+        "flag": "circle-flags:sv",
+        "independent": true
+      },
+      {
+        "country": "GQ",
+        "countryName": "Equatorial Guinea",
+        "flag": "circle-flags:gq",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "ER",
+        "countryName": "Eritrea",
+        "flag": "circle-flags:er",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "EE",
+        "countryName": "Estonia",
+        "flag": "circle-flags:ee",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "SZ",
+        "countryName": "Eswatini",
+        "flag": "circle-flags:sz",
+        "independent": true
+      },
+      {
+        "country": "ET",
+        "countryName": "Ethiopia",
+        "flag": "circle-flags:et",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "FK",
+        "countryName": "Falkland Islands",
+        "flag": "circle-flags:fk",
+        "independent": false
+      },
+      {
+        "country": "FO",
+        "countryName": "Faroe Islands",
+        "flag": "circle-flags:fo",
+        "independent": false
+      },
+      {
+        "country": "FM",
+        "countryName": "Federated States of Micronesia",
+        "flag": "circle-flags:fm",
+        "independent": true,
+        "continent": "Micronesia"
+      },
+      {
+        "country": "FJ",
+        "countryName": "Fiji",
+        "flag": "circle-flags:fj",
+        "independent": true
+      },
+      {
+        "country": "FI",
+        "countryName": "Finland",
+        "flag": "circle-flags:fi",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "countryName": "France",
+        "country": "FR",
+        "flag": "circle-flags:fr",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "GF",
+        "countryName": "French Guiana",
+        "flag": "circle-flags:gf",
+        "independent": false
+      },
+      {
+        "country": "PF",
+        "countryName": "French Polynesia",
+        "flag": "circle-flags:pf",
+        "independent": false
+      },
+      {
+        "country": "TF",
+        "countryName": "French Southern and Antarctic Lands",
+        "flag": "circle-flags:tf",
+        "independent": false
+      },
+      {
+        "country": "GA",
+        "countryName": "Gabon",
+        "flag": "circle-flags:ga",
+        "independent": true,
+        "continent": "Middle Africa"
+      },
+      {
+        "country": "GM",
+        "countryName": "Gambia",
+        "flag": "circle-flags:gm",
+        "independent": true
+      },
+      {
+        "country": "GE",
+        "countryName": "Georgia",
+        "flag": "circle-flags:ge",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "countryName": "Germany",
+        "country": "DE",
+        "flag": "circle-flags:de",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "GH",
+        "countryName": "Ghana",
+        "flag": "circle-flags:gh",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "GI",
+        "countryName": "Gibraltar",
+        "flag": "circle-flags:gi",
+        "independent": false,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "GR",
+        "countryName": "Greece",
+        "flag": "circle-flags:gr",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "GL",
+        "countryName": "Greenland",
+        "flag": "circle-flags:gl",
+        "independent": false,
+        "continent": "Northern America"
+      },
+      {
+        "country": "GD",
+        "countryName": "Grenada",
+        "flag": "circle-flags:gd",
+        "independent": true
+      },
+      {
+        "country": "GP",
+        "countryName": "Guadeloupe",
+        "flag": "circle-flags:gp",
+        "independent": false
+      },
+      {
+        "country": "GU",
+        "countryName": "Guam",
+        "flag": "circle-flags:gu",
+        "independent": false
+      },
+      {
+        "country": "GT",
+        "countryName": "Guatemala",
+        "flag": "circle-flags:gt",
+        "independent": true,
+        "continent": "Central America"
+      },
+      {
+        "country": "GG",
+        "countryName": "Guernsey",
+        "flag": "circle-flags:gg",
+        "independent": false
+      },
+      {
+        "country": "GN",
+        "countryName": "Guinea",
+        "flag": "circle-flags:gn",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "GW",
+        "countryName": "Guinea-Bissau",
+        "flag": "circle-flags:gw",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "GY",
+        "countryName": "Guyana",
+        "flag": "circle-flags:gy",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "HT",
+        "countryName": "Haiti",
+        "flag": "circle-flags:ht",
+        "independent": true
+      },
+      {
+        "country": "HM",
+        "countryName": "Heard Island and McDonald Islands",
+        "flag": "circle-flags:hm",
+        "independent": false
+      },
+      {
+        "country": "HN",
+        "countryName": "Honduras",
+        "flag": "circle-flags:hn",
+        "independent": true
+      },
+      {
+        "country": "HK",
+        "countryName": "Hong Kong",
+        "flag": "circle-flags:hk",
+        "independent": false,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "HU",
+        "countryName": "Hungary",
+        "flag": "circle-flags:hu",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "IS",
+        "countryName": "Iceland",
+        "flag": "circle-flags:is",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "IN",
+        "countryName": "India",
+        "flag": "circle-flags:in",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "ID",
+        "countryName": "Indonesia",
+        "flag": "circle-flags:id",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "IR",
+        "countryName": "Iran",
+        "flag": "circle-flags:ir",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "IQ",
+        "countryName": "Iraq",
+        "flag": "circle-flags:iq",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "IE",
+        "countryName": "Ireland",
+        "flag": "circle-flags:ie",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "IM",
+        "countryName": "Isle of Man",
+        "flag": "circle-flags:it-82",
+        "independent": false,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "IL",
+        "countryName": "Israel",
+        "flag": "circle-flags:il",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "countryName": "Italy",
+        "country": "IT",
+        "flag": "circle-flags:it",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "CI",
+        "countryName": "Ivory Coast",
+        "flag": "circle-flags:ci",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "JM",
+        "countryName": "Jamaica",
+        "flag": "circle-flags:jm",
+        "independent": true
+      },
+      {
+        "country": "JP",
+        "countryName": "Japan",
+        "flag": "circle-flags:jp",
+        "independent": true,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "JE",
+        "countryName": "Jersey",
+        "flag": "circle-flags:je",
+        "independent": false
+      },
+      {
+        "country": "JO",
+        "countryName": "Jordan",
+        "flag": "circle-flags:jo",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "KZ",
+        "countryName": "Kazakhstan",
+        "flag": "circle-flags:kz",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "KE",
+        "countryName": "Kenya",
+        "flag": "circle-flags:ke",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "KI",
+        "countryName": "Kiribati",
+        "flag": "circle-flags:ki",
+        "independent": true
+      },
+      {
+        "country": "XK",
+        "countryName": "Kosovo",
+        "flag": "circle-flags:xk",
+        "independent": false,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "KW",
+        "countryName": "Kuwait",
+        "flag": "circle-flags:kw",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "KG",
+        "countryName": "Kyrgyzstan",
+        "flag": "circle-flags:kg",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "LA",
+        "countryName": "Laos",
+        "flag": "circle-flags:la",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "LV",
+        "countryName": "Latvia",
+        "flag": "circle-flags:lv",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "LB",
+        "countryName": "Lebanon",
+        "flag": "circle-flags:lb",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "LS",
+        "countryName": "Lesotho",
+        "flag": "circle-flags:ls",
+        "independent": true
+      },
+      {
+        "country": "LR",
+        "countryName": "Liberia",
+        "flag": "circle-flags:lr",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "LY",
+        "countryName": "Libya",
+        "flag": "circle-flags:ly",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "LI",
+        "countryName": "Liechtenstein",
+        "flag": "circle-flags:li",
+        "independent": true
+      },
+      {
+        "country": "LT",
+        "countryName": "Lithuania",
+        "flag": "circle-flags:lt",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "LU",
+        "countryName": "Luxembourg",
+        "flag": "circle-flags:lu",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "MO",
+        "countryName": "Macao",
+        "flag": "circle-flags:mo",
+        "independent": false,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "MG",
+        "countryName": "Madagascar",
+        "flag": "circle-flags:mg",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "MW",
+        "countryName": "Malawi",
+        "flag": "circle-flags:mw",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "MY",
+        "countryName": "Malaysia",
+        "flag": "circle-flags:my",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "MV",
+        "countryName": "Maldives",
+        "flag": "circle-flags:mv",
+        "independent": true
+      },
+      {
+        "country": "ML",
+        "countryName": "Mali",
+        "flag": "circle-flags:ml",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "MT",
+        "countryName": "Malta",
+        "flag": "circle-flags:mt",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "MH",
+        "countryName": "Marshall Islands",
+        "flag": "circle-flags:lang-mh",
+        "independent": true
+      },
+      {
+        "country": "MQ",
+        "countryName": "Martinique",
+        "flag": "circle-flags:mq",
+        "independent": false
+      },
+      {
+        "country": "MR",
+        "countryName": "Mauritania",
+        "flag": "circle-flags:mr",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "MU",
+        "countryName": "Mauritius",
+        "flag": "circle-flags:mu",
+        "independent": true
+      },
+      {
+        "country": "YT",
+        "countryName": "Mayotte",
+        "flag": "circle-flags:yt",
+        "independent": false
+      },
+      {
+        "country": "MX",
+        "countryName": "Mexico",
+        "flag": "circle-flags:mx",
+        "independent": true,
+        "continent": "Central America"
+      },
+      {
+        "country": "MD",
+        "countryName": "Moldova",
+        "flag": "circle-flags:md",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "MC",
+        "countryName": "Monaco",
+        "flag": "circle-flags:mc",
+        "independent": true
+      },
+      {
+        "country": "MN",
+        "countryName": "Mongolia",
+        "flag": "circle-flags:mn",
+        "independent": true,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "ME",
+        "countryName": "Montenegro",
+        "flag": "circle-flags:me",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "MS",
+        "countryName": "Montserrat",
+        "flag": "circle-flags:ms",
+        "independent": false
+      },
+      {
+        "country": "MA",
+        "countryName": "Morocco",
+        "flag": "circle-flags:ma",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "MZ",
+        "countryName": "Mozambique",
+        "flag": "circle-flags:mz",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "MM",
+        "countryName": "Myanmar",
+        "flag": "circle-flags:lang-my",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "NA",
+        "countryName": "Namibia",
+        "flag": "circle-flags:na",
+        "independent": true,
+        "continent": "Southern Africa"
+      },
+      {
+        "country": "NR",
+        "countryName": "Nauru",
+        "flag": "circle-flags:nr",
+        "independent": true
+      },
+      {
+        "country": "NP",
+        "countryName": "Nepal",
+        "flag": "circle-flags:np",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "countryName": "Netherlands",
+        "country": "NL",
+        "flag": "circle-flags:nl",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "NC",
+        "countryName": "New Caledonia",
+        "flag": "circle-flags:nc",
+        "independent": false
+      },
+      {
+        "country": "NZ",
+        "countryName": "New Zealand",
+        "flag": "circle-flags:nz",
+        "independent": true,
+        "continent": "Australasia"
+      },
+      {
+        "country": "NI",
+        "countryName": "Nicaragua",
+        "flag": "circle-flags:ni",
+        "independent": true
+      },
+      {
+        "country": "NE",
+        "countryName": "Niger",
+        "flag": "circle-flags:ne",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "NG",
+        "countryName": "Nigeria",
+        "flag": "circle-flags:ng",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "NU",
+        "countryName": "Niue",
+        "flag": "circle-flags:nu",
+        "independent": false
+      },
+      {
+        "country": "NF",
+        "countryName": "Norfolk Island",
+        "flag": "circle-flags:nf",
+        "independent": false
+      },
+      {
+        "country": "KP",
+        "countryName": "North Korea",
+        "flag": "circle-flags:kp",
+        "independent": true,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "MP",
+        "countryName": "Northern Mariana Islands",
+        "flag": "circle-flags:mp",
+        "independent": false
+      },
+      {
+        "country": "NO",
+        "countryName": "Norway",
+        "flag": "circle-flags:no",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "OM",
+        "countryName": "Oman",
+        "flag": "circle-flags:om",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "PK",
+        "countryName": "Pakistan",
+        "flag": "circle-flags:pk",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "PW",
+        "countryName": "Palau",
+        "flag": "circle-flags:pw",
+        "independent": true
+      },
+      {
+        "country": "PS",
+        "countryName": "Palestine",
+        "flag": "circle-flags:ps",
+        "independent": false
+      },
+      {
+        "country": "PA",
+        "countryName": "Panama",
+        "flag": "circle-flags:pa",
+        "independent": true
+      },
+      {
+        "country": "PG",
+        "countryName": "Papua New Guinea",
+        "flag": "circle-flags:pg",
+        "independent": true,
+        "continent": "Melanesia"
+      },
+      {
+        "country": "PY",
+        "countryName": "Paraguay",
+        "flag": "circle-flags:py",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "PE",
+        "countryName": "Peru",
+        "flag": "circle-flags:pe",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "PH",
+        "countryName": "Philippines",
+        "flag": "circle-flags:ph",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "PN",
+        "countryName": "Pitcairn Islands",
+        "flag": "circle-flags:pn",
+        "independent": false
+      },
+      {
+        "country": "PL",
+        "countryName": "Poland",
+        "flag": "circle-flags:pl",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "PT",
+        "countryName": "Portugal",
+        "flag": "circle-flags:pt",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "PR",
+        "countryName": "Puerto Rico",
+        "flag": "circle-flags:pr",
+        "independent": false
+      },
+      {
+        "country": "QA",
+        "countryName": "Qatar",
+        "flag": "circle-flags:qa",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "MK",
+        "countryName": "Republic of North Macedonia",
+        "flag": "circle-flags:mk",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "RE",
+        "countryName": "Réunion",
+        "flag": "circle-flags:re",
+        "independent": false
+      },
+      {
+        "country": "RO",
+        "countryName": "Romania",
+        "flag": "circle-flags:ro",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "RU",
+        "countryName": "Russia",
+        "flag": "circle-flags:ru",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "RW",
+        "countryName": "Rwanda",
+        "flag": "circle-flags:rw",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "BL",
+        "countryName": "Saint Barthélemy",
+        "flag": "circle-flags:bl",
+        "independent": false
+      },
+      {
+        "country": "SH",
+        "countryName": "Saint Helena, Ascension and Tristan da Cunha",
+        "flag": "circle-flags:sh",
+        "independent": false
+      },
+      {
+        "country": "KN",
+        "countryName": "Saint Kitts and Nevis",
+        "flag": "circle-flags:kn",
+        "independent": false
+      },
+      {
+        "country": "LC",
+        "countryName": "Saint Lucia",
+        "flag": "circle-flags:lc",
+        "independent": true
+      },
+      {
+        "country": "PM",
+        "countryName": "Saint Pierre and Miquelon",
+        "flag": "circle-flags:pm",
+        "independent": false
+      },
+      {
+        "country": "VC",
+        "countryName": "Saint Vincent and the Grenadines",
+        "flag": "circle-flags:vc",
+        "independent": true
+      },
+      {
+        "country": "WS",
+        "countryName": "Samoa",
+        "flag": "circle-flags:ws",
+        "independent": true
+      },
+      {
+        "country": "SM",
+        "countryName": "San Marino",
+        "flag": "circle-flags:sm",
+        "independent": true
+      },
+      {
+        "country": "ST",
+        "countryName": "Sao Tome and Principe",
+        "flag": "circle-flags:st",
+        "independent": true
+      },
+      {
+        "country": "SA",
+        "countryName": "Saudi Arabia",
+        "flag": "circle-flags:sa",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "SN",
+        "countryName": "Senegal",
+        "flag": "circle-flags:sn",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "RS",
+        "countryName": "Serbia",
+        "flag": "circle-flags:rs",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "SC",
+        "countryName": "Seychelles",
+        "flag": "circle-flags:sc",
+        "independent": true
+      },
+      {
+        "country": "SL",
+        "countryName": "Sierra Leone",
+        "flag": "circle-flags:sl",
+        "independent": true
+      },
+      {
+        "country": "SG",
+        "countryName": "Singapore",
+        "flag": "circle-flags:sg",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "SX",
+        "countryName": "Sint Maarten",
+        "flag": "circle-flags:gs",
+        "independent": false
+      },
+      {
+        "country": "SK",
+        "countryName": "Slovakia",
+        "flag": "circle-flags:sk",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "SI",
+        "countryName": "Slovenia",
+        "flag": "circle-flags:si",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "SB",
+        "countryName": "Solomon Islands",
+        "flag": "circle-flags:sb",
+        "independent": true
+      },
+      {
+        "country": "SO",
+        "countryName": "Somalia",
+        "flag": "circle-flags:lang-so",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "ZA",
+        "countryName": "South Africa",
+        "flag": "circle-flags:za",
+        "independent": true,
+        "continent": "Southern Africa"
+      },
+      {
+        "country": "GS",
+        "countryName": "South Georgia and the South Sandwich Islands",
+        "flag": "circle-flags:gs",
+        "independent": false
+      },
+      {
+        "country": "KR",
+        "countryName": "South Korea",
+        "flag": "circle-flags:kr",
+        "independent": true,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "SS",
+        "countryName": "South Sudan",
+        "flag": "circle-flags:ss",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "countryName": "Spain",
+        "country": "ES",
+        "flag": "circle-flags:es",
+        "independent": true,
+        "continent": "Southern Europe"
+      },
+      {
+        "country": "LK",
+        "countryName": "Sri Lanka",
+        "flag": "circle-flags:lk",
+        "independent": true,
+        "continent": "Southern Asia"
+      },
+      {
+        "country": "SD",
+        "countryName": "Sudan",
+        "flag": "circle-flags:sd",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "SR",
+        "countryName": "Suriname",
+        "flag": "circle-flags:sr",
+        "independent": true
+      },
+      {
+        "country": "SJ",
+        "countryName": "Svalbard and Jan Mayen",
+        "flag": "circle-flags:sj",
+        "independent": false
+      },
+      {
+        "country": "SE",
+        "countryName": "Sweden",
+        "flag": "circle-flags:se",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "country": "CH",
+        "countryName": "Switzerland",
+        "flag": "circle-flags:ch",
+        "independent": true,
+        "continent": "Western Europe"
+      },
+      {
+        "country": "SY",
+        "countryName": "Syria",
+        "flag": "circle-flags:sy",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "TW",
+        "countryName": "Taiwan",
+        "flag": "circle-flags:tw",
+        "independent": false,
+        "continent": "Eastern Asia"
+      },
+      {
+        "country": "TJ",
+        "countryName": "Tajikistan",
+        "flag": "circle-flags:tj",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "TZ",
+        "countryName": "Tanzania",
+        "flag": "circle-flags:tz",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "TH",
+        "countryName": "Thailand",
+        "flag": "circle-flags:th",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "TL",
+        "countryName": "Timor-Leste",
+        "flag": "circle-flags:tl",
+        "independent": true
+      },
+      {
+        "country": "TG",
+        "countryName": "Togo",
+        "flag": "circle-flags:tg",
+        "independent": true,
+        "continent": "Western Africa"
+      },
+      {
+        "country": "TK",
+        "countryName": "Tokelau",
+        "flag": "circle-flags:lang-tk",
+        "independent": false
+      },
+      {
+        "country": "TO",
+        "countryName": "Tonga",
+        "flag": "circle-flags:lang-to",
+        "independent": true
+      },
+      {
+        "country": "TT",
+        "countryName": "Trinidad and Tobago",
+        "flag": "circle-flags:tt",
+        "independent": true
+      },
+      {
+        "country": "TN",
+        "countryName": "Tunisia",
+        "flag": "circle-flags:tn",
+        "independent": true,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "TR",
+        "countryName": "Turkey",
+        "flag": "circle-flags:tr",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "TM",
+        "countryName": "Turkmenistan",
+        "flag": "circle-flags:tm",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "TC",
+        "countryName": "Turks and Caicos Islands",
+        "flag": "circle-flags:tc",
+        "independent": false
+      },
+      {
+        "country": "TV",
+        "countryName": "Tuvalu",
+        "flag": "circle-flags:tv",
+        "independent": true
+      },
+      {
+        "country": "UG",
+        "countryName": "Uganda",
+        "flag": "circle-flags:ug",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "UA",
+        "countryName": "Ukraine",
+        "flag": "circle-flags:ua",
+        "independent": true,
+        "continent": "Eastern Europe"
+      },
+      {
+        "country": "AE",
+        "countryName": "United Arab Emirates",
+        "flag": "circle-flags:ae",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "countryName": "United Kingdom",
+        "country": "GB",
+        "flag": "circle-flags:gb",
+        "independent": true,
+        "continent": "Northern Europe"
+      },
+      {
+        "countryName": "United States",
+        "country": "US",
+        "flag": "circle-flags:us",
+        "independent": true,
+        "continent": "Northern America"
+      },
+      {
+        "country": "UM",
+        "countryName": "United States Minor Outlying Islands",
+        "flag": "circle-flags:um",
+        "independent": false
+      },
+      {
+        "country": "VI",
+        "countryName": "United States Virgin Islands",
+        "flag": "circle-flags:vi",
+        "independent": false
+      },
+      {
+        "country": "UY",
+        "countryName": "Uruguay",
+        "flag": "circle-flags:uy",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "UZ",
+        "countryName": "Uzbekistan",
+        "flag": "circle-flags:uz",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "VU",
+        "countryName": "Vanuatu",
+        "flag": "circle-flags:vu",
+        "independent": true
+      },
+      {
+        "country": "VA",
+        "countryName": "Vatican City",
+        "flag": "circle-flags:va",
+        "independent": true
+      },
+      {
+        "country": "VE",
+        "countryName": "Venezuela",
+        "flag": "circle-flags:ve",
+        "independent": true,
+        "continent": "South America"
+      },
+      {
+        "country": "VN",
+        "countryName": "Vietnam",
+        "flag": "circle-flags:vn",
+        "independent": true,
+        "continent": "South-Eastern Asia"
+      },
+      {
+        "country": "WF",
+        "countryName": "Wallis and Futuna",
+        "flag": "circle-flags:wf",
+        "independent": false
+      },
+      {
+        "country": "EH",
+        "countryName": "Western Sahara",
+        "flag": "circle-flags:eh",
+        "independent": false,
+        "continent": "Northern Africa"
+      },
+      {
+        "country": "YE",
+        "countryName": "Yemen",
+        "flag": "circle-flags:ye",
+        "independent": true,
+        "continent": "Western Asia"
+      },
+      {
+        "country": "ZM",
+        "countryName": "Zambia",
+        "flag": "circle-flags:zm",
+        "independent": true,
+        "continent": "Eastern Africa"
+      },
+      {
+        "country": "ZW",
+        "countryName": "Zimbabwe",
+        "flag": "circle-flags:zw",
+        "independent": true,
+        "continent": "Eastern Africa"
+      }
+    ],
+    "unstableCountries": [
+      "DZ",
+      "AQ",
+      "BD",
+      "BY",
+      "BJ",
+      "BF",
+      "BI",
+      "CM",
+      "TD",
+      "CO",
+      "CD",
+      "ER",
+      "ET",
+      "GH",
+      "GL",
+      "GT",
+      "GN",
+      "GW",
+      "GY",
+      "HT",
+      "HN",
+      "IR",
+      "IQ",
+      "CI",
+      "XK",
+      "LB",
+      "LY",
+      "ML",
+      "MR",
+      "MZ",
+      "MM",
+      "NI",
+      "NE",
+      "NG",
+      "KP",
+      "PK",
+      "RU",
+      "SL",
+      "SO",
+      "SS",
+      "SD",
+      "SY",
+      "TG",
+      "TT",
+      "UG",
+      "UA",
+      "VE",
+      "YE",
+      "ZW",
+      "LK",
+      "AF",
+      "US",
+      "AL"
+    ]
+  }
+}
