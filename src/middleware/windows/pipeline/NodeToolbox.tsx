@@ -1,4 +1,4 @@
-import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
+import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 import { hueRotationStage } from '@/lib/utils';
-import { AdjustmentPreview } from '@/middleware/windows/pipeline/AdjustmentPreview';
-import { createSliderNode } from '@/middleware/windows/pipeline/AdjustmentSliderNode';
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
+import { createSliderNode } from '@/middleware/windows/pipeline/components/AdjustmentSliderNode';
 
 export default createSliderNode({
   min: -180,

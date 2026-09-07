@@ -1,7 +1,7 @@
-import { BeforeAfter } from '@/middleware/windows/pipeline/BeforeAfter';
-import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
-import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
-import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { BeforeAfter } from '@/middleware/windows/pipeline/components/BeforeAfter';
+import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { Box, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';

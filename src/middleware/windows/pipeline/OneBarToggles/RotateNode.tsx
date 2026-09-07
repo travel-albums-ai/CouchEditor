@@ -1,5 +1,5 @@
-import { createSliderNode } from "../AdjustmentSliderNode";
-import { BeforeAfter } from "../BeforeAfter";
+import { createSliderNode } from "../components/AdjustmentSliderNode";
+import { BeforeAfter } from "../components/BeforeAfter";
 
 export default createSliderNode({
   min: 0,

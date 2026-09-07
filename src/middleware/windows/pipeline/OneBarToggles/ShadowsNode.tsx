@@ -1,6 +1,6 @@
 import { shadowsStage } from '@/lib/utils';
-import { AdjustmentPreview } from '@/middleware/windows/pipeline/AdjustmentPreview';
-import { createSliderNode } from "../AdjustmentSliderNode";
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
+import { createSliderNode } from "../components/AdjustmentSliderNode";
 
 export default createSliderNode({
   min: -100,

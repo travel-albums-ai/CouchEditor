@@ -1,6 +1,6 @@
 import SolidChip from '@/components/SolidChip';
-import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
-import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { Box, Button, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { FolderInput, Images } from 'lucide-react';

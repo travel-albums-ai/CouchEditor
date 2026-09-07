@@ -1,4 +1,4 @@
-import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
+import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, useTheme } from '@mui/material';
 import { Info } from 'lucide-react';
 import { useState } from 'react';

@@ -1,6 +1,6 @@
-import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
-import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
-import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { type Node, type NodeProps } from '@xyflow/react';
 import { Film } from 'lucide-react';
 import { useState } from 'react';

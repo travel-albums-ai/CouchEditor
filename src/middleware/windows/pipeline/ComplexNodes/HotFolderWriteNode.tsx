@@ -1,11 +1,11 @@
 import SolidChip from '@/components/SolidChip';
-import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
-import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
+import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { Box, Button, Typography } from '@mui/material';
 import type { Node, NodeProps } from '@xyflow/react';
 import { FolderOutput, Images } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import type { ImageArray } from './types';
+import type { ImageArray } from '../types';
 
 function toSafeFileName(name: string, index: number): string {
   const cleaned = name.trim().replace(/[\\/:*?"<>|]+/g, '_');

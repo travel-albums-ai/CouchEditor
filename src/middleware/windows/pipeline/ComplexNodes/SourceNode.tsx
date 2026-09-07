@@ -1,8 +1,8 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
-import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
-import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
+import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { Box, Button } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { Images, Upload } from 'lucide-react';
