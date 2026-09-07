@@ -22,7 +22,7 @@ export const themeTokens = {
   dark: {
     palette: {
       mode: 'dark',
-      primary: { main: '#c05b33' },
+      primary: { main: '#7152f8' },
       secondary: { main: '#f48fb1' },
       background: { default: '#0f151d', paper: '#141822' },
       text: {

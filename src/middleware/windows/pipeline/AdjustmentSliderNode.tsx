@@ -2,7 +2,7 @@ import SolidChip from '@/components/SolidChip';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
-import { Box } from '@mui/material';
+import { Box, Slider } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { JSX, useState } from "react";
 
@@ -34,7 +34,7 @@ export function createSliderNode(config: SliderNodeConfig) {
       <NodeWrapper title={config.label ?? config.type} icon={config.icon} type={config.type} helper={config.info && config.info({...config, amount })}>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <input
+          {/* <input
             type="range"
             min={config.min}
             max={config.max}
@@ -51,7 +51,29 @@ export function createSliderNode(config: SliderNodeConfig) {
                 new CustomEvent("pipeline:changed")
               );
             }}
+          /> */}
+
+          <Slider
+            min={config.min}
+            max={config.max}
+            step={config.step}
+            sx={{ width: '150px', mx: 1 }}
+            value={amount}
+            onChange={(event, value) => {
+              const newValue = Array.isArray(value) ? value[0] : value;
+
+              data.amount = newValue;
+              setAmount(newValue);
+
+              // Tell the pipeline engine that this node changed.
+              window.dispatchEvent(
+                new CustomEvent("pipeline:changed")
+              );
+            }}
           />
+
+
+
           <SolidChip count={amount} />
         </Box>
 
