@@ -17,7 +17,15 @@ export default function FloatingStack({ children, sx } : { children: React.React
         backdropFilter: 'blur(4px)',
         border: '1px solid',
         borderColor: 'divider',
-        p: 1, borderRadius: 2,
+        p: 1,
+        borderRadius: 2,
+        transition: 'background-color 0.5s ease',
+        '&:hover': {
+          transition: 'background-color 1s ease',
+          bgcolor: theme => performanceMode
+            ? `color-mix(in srgb, color-mix(in srgb, ${theme.palette.background.paper} 95%, ${theme.palette.primary.main} 5%) 95%, transparent 8%)`
+            : 'background.paper',
+        },
         boxShadow: performanceMode
           ? 4
           : 0,
