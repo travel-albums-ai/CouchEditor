@@ -33,10 +33,9 @@ export default function FloatingStack({
           ...(performanceMode && {
             boxShadow: 4,
             backdropFilter: 'blur(4px)',
-            transition: 'border-color 0.75s ease, box-shadow 0.75s ease, background-color 0.75s ease',
+            transition: 'border-color 0.15s ease, box-shadow 0.35s ease, background-color 0.5s ease',
 
             '&:hover': {
-              transition: 'border-color 2s ease, box-shadow 2s ease, background-color 2s ease',
               borderColor: theme =>
                 alpha(theme.palette.primary.main, 0.26),
               boxShadow: theme =>
@@ -44,7 +43,7 @@ export default function FloatingStack({
               bgcolor: theme =>
                 alpha(
                   theme.palette.background.paper,
-                  0.95
+                  0.85
                 ),
             },
           }),

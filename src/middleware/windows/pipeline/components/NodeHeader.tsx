@@ -86,7 +86,7 @@ function NodeHeader({
           borderBottomColor,
           background,
           transition:
-            'background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+            'border-color 0.15s ease, box-shadow 0.35s ease, background-color 0.5s ease',
 
           '&:hover': {
             background: hoverBackground,
