@@ -28,7 +28,7 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
         }}
       />}
 
-      <Box sx={{
+      <Box className="nodrag" sx={{
         p: 1, py: 2,
         borderRadius: 2,
         borderTopLeftRadius: 0,
