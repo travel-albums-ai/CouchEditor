@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { MoveRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -12,6 +12,7 @@ type AdjustmentPreviewProps = {
 
 export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
+  const theme = useTheme();
 
   useEffect(() => {
     let cancelled = false;
@@ -42,10 +43,18 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
   }, [algorithm, amount]);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, justifyContent: 'center' }}>
-      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '50px' }} />
+    <Box sx={{
+      display: 'flex', alignItems: 'center',
+      gap: 1, px: 0.5, justifyContent: 'center',
+      opacity: 0.5,
+      transition: 'opacity 0.25s ease',
+      '&:hover': {
+        opacity: 1,
+      }
+    }}>
+      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '60px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
       <MoveRight aria-hidden="true" />
-      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '50px' }} />
+      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '60px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
     </Box>
   );
 }

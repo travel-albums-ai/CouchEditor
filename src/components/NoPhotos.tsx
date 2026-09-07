@@ -1,6 +1,3 @@
-import NoPhotosEmpty from '@/components/NoPhotosEmpty';
-import NoPhotosError from '@/components/NoPhotosError';
-import NoPhotosLoading from '@/components/NoPhotosLoading';
 import { Box } from '@mui/material';
 
 export default function NoPhotos({ isEmpty = true, isLoading = false, isError = false }: { isEmpty?: boolean, isLoading?: boolean, isError?: boolean }) {
@@ -29,13 +26,6 @@ export default function NoPhotos({ isEmpty = true, isLoading = false, isError = 
           filter: 'grayscale(100%)',
         }}
       />
-
-      {isLoading && <NoPhotosLoading />}
-
-      {!isLoading && isEmpty && <NoPhotosEmpty />}
-
-      {isError && <NoPhotosError />}
-
     </Box>
   );
 }
