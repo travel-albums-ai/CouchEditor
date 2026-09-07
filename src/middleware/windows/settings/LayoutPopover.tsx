@@ -3,7 +3,7 @@ import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { CreditCard, GalleryHorizontal, Languages, PaintBucket } from 'lucide-react';
+import { Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,29 +23,29 @@ const groups = [
     ],
     icon: <PaintBucket />,
   },
-  {
-    title: "Card",
-    controls: [
-      { key: 'thumbSizeStatus', labelKey: 'layoutThumbSizeStatus', type: 'toolbar', toolbarComponentId: 'thumbSizeStatus' },
-      { key: "thumbnailCover", labelKey: 'layoutThumbnailCover', type: 'toolbar', toolbarComponentId: "thumbnailCover" },
-      { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
-      { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
-      { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
-      { key: 'showLocation', labelKey: 'layoutShowLocation', type: 'boolean' },
-      { key: 'showFileName', labelKey: 'layoutShowFileName', type: 'boolean' },
-    ],
-    icon: <CreditCard style={{ transform: 'rotate(180deg)' }} />,
-  },
-  {
-    title: "Scroller",
-    controls: [
-      { key: 'scrollerColumns', labelKey: 'layoutScrollerColumns', type: 'toolbar', toolbarComponentId: "scroller-columns-toggle" },
-      { key: 'scrollerRows', labelKey: 'layoutScrollerRows', type: 'toolbar', toolbarComponentId: "scroller-rows-toggle" },
-      { key: 'scrollerGrouping', labelKey: 'layoutScrollerGrouping', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
-      { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
-    ],
-    icon: <GalleryHorizontal />,
-  },
+  // {
+  //   title: "Card",
+  //   controls: [
+  //     { key: 'thumbSizeStatus', labelKey: 'layoutThumbSizeStatus', type: 'toolbar', toolbarComponentId: 'thumbSizeStatus' },
+  //     { key: "thumbnailCover", labelKey: 'layoutThumbnailCover', type: 'toolbar', toolbarComponentId: "thumbnailCover" },
+  //     { key: 'showDescription', labelKey: 'layoutShowDescription', type: 'boolean' },
+  //     { key: 'showTags', labelKey: 'layoutShowTags', type: 'boolean' },
+  //     { key: 'showDate', labelKey: 'layoutShowDate', type: 'boolean' },
+  //     { key: 'showLocation', labelKey: 'layoutShowLocation', type: 'boolean' },
+  //     { key: 'showFileName', labelKey: 'layoutShowFileName', type: 'boolean' },
+  //   ],
+  //   icon: <CreditCard style={{ transform: 'rotate(180deg)' }} />,
+  // },
+  // {
+  //   title: "Scroller",
+  //   controls: [
+  //     { key: 'scrollerColumns', labelKey: 'layoutScrollerColumns', type: 'toolbar', toolbarComponentId: "scroller-columns-toggle" },
+  //     { key: 'scrollerRows', labelKey: 'layoutScrollerRows', type: 'toolbar', toolbarComponentId: "scroller-rows-toggle" },
+  //     { key: 'scrollerGrouping', labelKey: 'layoutScrollerGrouping', type: 'toolbar', toolbarComponentId: "scroller-grouping-toggle" },
+  //     { key: 'scrollerOriginal', labelKey: 'layoutScrollerOriginal', type: 'toolbar', toolbarComponentId: "scroller-original-toggle" },
+  //   ],
+  //   icon: <GalleryHorizontal />,
+  // },
 ]
 
 export default function LayoutPopover() {

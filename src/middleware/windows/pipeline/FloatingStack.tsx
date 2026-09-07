@@ -11,13 +11,16 @@ export default function FloatingStack({ children, sx } : { children: React.React
       sx={{ position: 'absolute',
         zIndex: 10,
         alignItems: 'center',
-        // bgcolor: 'background.paper',
-        bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 95%, transparent 8%)`,
+        bgcolor: theme => performanceMode
+          ? `color-mix(in srgb, ${theme.palette.background.paper} 95%, transparent 8%)`
+          : 'background.paper',
         backdropFilter: 'blur(4px)',
         border: '1px solid',
         borderColor: 'divider',
         p: 1, borderRadius: 2,
-        boxShadow: performanceMode ? 4 : 0,
+        boxShadow: performanceMode
+          ? 4
+          : 0,
         ...sx
       }}
     >
