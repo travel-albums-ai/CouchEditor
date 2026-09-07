@@ -59,7 +59,6 @@ import PopNode from "./PopNode";
 import RescaleNode from "./RescaleNode";
 import RotateNode from "./RotateNode";
 import SaturationNode from "./SaturationNode";
-import SelectionNode from "./SelectionNode";
 import SepiaNode from "./SepiaNode";
 import ShadowsNode from "./ShadowsNode";
 import SharpenNode from "./SharpenNode";
@@ -79,7 +78,7 @@ const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 const nodeTypes = {
   source: SourceNode,
   "hot-folder-read": HotFolderReadNode,
-  selection: SelectionNode,
+  // selection: SelectionNode,
   grouper: GrouperNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
@@ -618,7 +617,7 @@ function Pipeline() {
                 tooltip: 'Toggle toolbox',
                 icon: <PanelLeftDashed /> ,
                 onClick: () => toggleToolbox(),
-                title: 'Toggle toolbox',
+                title: '',
               }
             ] satisfies GenericToggleButtonProps[]} />
             <FormControl size="small" sx={{ minWidth: 180 }}>
@@ -677,7 +676,7 @@ function Pipeline() {
               justifyContent: 'center',
               border: '1px solid',
               borderColor: trashActive ? 'error.main' : 'divider',
-              bgcolor: trashActive ? 'error.main' : 'background.paper',
+              bgcolor: trashActive ? 'error.main' : 'background.default',
               color: trashActive ? 'error.contrastText' : 'text.secondary',
               boxShadow: 3,
               transform: trashActive ? 'scale(1.15)' : 'scale(1)',

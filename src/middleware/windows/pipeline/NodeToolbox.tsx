@@ -1,6 +1,6 @@
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -10,7 +10,7 @@ export const paletteItems: Array<{
 }> = [
   { type: "source", label: "Local Storage", icon: <HardDrive size={16} />, group: "input" },
   { type: "hot-folder-read", label: "Hot Folder", icon: <FolderInput size={16} />, group: "input" },
-  { type: "selection", label: "Gallery", icon: <GalleryVerticalEnd size={16} />, group: "input" },
+  // { type: "selection", label: "Gallery", icon: <GalleryVerticalEnd size={16} />, group: "input" },
   { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
   { type: "ai-colorizer", label: "AI Colorizer", icon: <Astroid size={16} />, group: "ai" },
   { type: "ai-denoiser", label: "AI Denoiser", icon: <Astroid size={16} />, group: "ai" },
