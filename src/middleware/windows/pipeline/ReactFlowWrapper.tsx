@@ -579,7 +579,7 @@ function Pipeline() {
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
-            boxShadow: 3,
+            boxShadow: 4,
 
           }}
         >
@@ -651,7 +651,7 @@ function Pipeline() {
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
-            boxShadow: 3,
+            boxShadow: 4,
           }}
         >
           <GeneralRegistryToolbar

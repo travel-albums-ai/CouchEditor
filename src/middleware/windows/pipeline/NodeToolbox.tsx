@@ -75,10 +75,12 @@ function NodeToolbox() {
       my: 1.5,
       borderRadius: 2,
       boxShadow: 4,
+      bgcolor: 'background.paper',
       border: '1px solid',
       borderColor: 'divider',
       overflowY: 'auto',
       p: 1,
+      px: 2,
 
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
