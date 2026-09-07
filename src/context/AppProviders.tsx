@@ -1,7 +1,6 @@
 import { AISinkProvider } from '@/context/aiSinkStore';
 import { BYOKProvider } from '@/context/byokStore';
 import { DescriptionsProvider } from '@/context/descriptionsStore';
-import { LayoutProvider } from '@/context/layoutStore';
 import { NotificationsProvider } from '@/context/notificationsProvider';
 import { SelectedProvider } from '@/context/selectedStore';
 import React from 'react';
@@ -21,15 +20,11 @@ export default function AppProviders({ children }: Props) {
             <AISinkProvider>
               <DescriptionsProvider>
                 <SelectedProvider>
-                  <LayoutProvider>
-                    {/* <FilterPresetProvider> */}
-                    <PipelineProvider>
-                      <AlbumPhotoCardProvider>
-                        {children}
-                      </AlbumPhotoCardProvider>
-                    </PipelineProvider>
-                    {/* </FilterPresetProvider> */}
-                  </LayoutProvider>
+                  <PipelineProvider>
+                    <AlbumPhotoCardProvider>
+                      {children}
+                    </AlbumPhotoCardProvider>
+                  </PipelineProvider>
                 </SelectedProvider>
               </DescriptionsProvider>
             </AISinkProvider>
