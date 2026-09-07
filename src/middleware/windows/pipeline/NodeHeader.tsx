@@ -8,7 +8,7 @@ import { Box, Typography, useTheme } from '@mui/material';
 import { cloneElement } from 'react';
 import stc from 'string-to-color';
 
-function NodeHeader({ type, sx } : { type: string, sx?: object }) {
+function NodeHeader({ type, sx, children } : { type: string, sx?: object, children?: React.ReactNode }) {
   const theme = useTheme();
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
 
@@ -21,6 +21,7 @@ function NodeHeader({ type, sx } : { type: string, sx?: object }) {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         gap: 1,
         py: 0.75,
         px: 1,
@@ -53,12 +54,15 @@ function NodeHeader({ type, sx } : { type: string, sx?: object }) {
 
       }}
     >
-      {relevantPaletteItem?.icon !== undefined && cloneElement(relevantPaletteItem?.icon, { size: 16, style: {
-        color: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(relevantPaletteItem?.group)} 100%) 95%, ${theme.palette.text.primary} 50%)`
-      } })}
-      <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-        {relevantPaletteItem?.label}
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        {relevantPaletteItem?.icon !== undefined && cloneElement(relevantPaletteItem?.icon, { size: 16, style: {
+          color: `color-mix(in srgb, color-mix(in srgb, ${stc(type)} 50%, ${stc(relevantPaletteItem?.group)} 100%) 95%, ${theme.palette.text.primary} 50%)`
+        } })}
+        <Typography variant="caption" color="textSecondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {relevantPaletteItem?.label}
+        </Typography>
+      </Box>
+      {children}
     </Box>
   </>
 }

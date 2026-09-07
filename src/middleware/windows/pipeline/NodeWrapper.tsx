@@ -1,8 +1,11 @@
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
-import { Box, useTheme } from '@mui/material';
+import { Box, IconButton, useTheme } from '@mui/material';
+import { Info } from 'lucide-react';
+import { useState } from 'react';
 
-function NodeWrapper({ children, type} : { children: React.ReactNode, type: string }) {
+function NodeWrapper({ children, type, helper } : { children: React.ReactNode, type: string, helper?: React.ReactNode }) {
   const theme = useTheme();
+  const [showHelper, setShowHelper] = useState<boolean>(false);
 
   return <>
 
@@ -28,7 +31,13 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
           borderBottomRightRadius: 0,
           border: 'unset'
         }}
-      />}
+      >
+        {helper && <IconButton
+          sx={{ color: theme.palette.text.disabled }}
+          onClick={() => setShowHelper(!showHelper)} size="small">
+          <Info size={16} />
+        </IconButton>}
+      </NodeHeader>}
 
       <Box className="nodrag" sx={{
         p: 1, py: 2,
@@ -41,6 +50,7 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
         bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 100%, transparent 10%)`,
       }}>
         {children}
+        {showHelper && helper}
       </Box>
 
     </Box>

@@ -1,6 +1,6 @@
-import { createSliderNode } from "./AdjustmentSliderNode";
 import { hdrEffectStage } from '@/lib/utils';
 import { AdjustmentPreview } from './AdjustmentPreview';
+import { createSliderNode } from "./AdjustmentSliderNode";
 
 export default createSliderNode({
   min: 0,
