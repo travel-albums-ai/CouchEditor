@@ -73,14 +73,9 @@ import { VIEWER_NODE_TYPES } from "./types";
 
 const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 
-// ============================================================
-// React Flow node registry
-// ============================================================
-
 const nodeTypes = {
   source: SourceNode,
   "hot-folder-read": HotFolderReadNode,
-  // selection: SelectionNode,
   grouper: GrouperNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
@@ -116,60 +111,10 @@ const nodeTypes = {
   "hot-folder-write": HotFolderWriteNode,
 };
 
-// ============================================================
-// Initial graph
-// ============================================================
-
 const initialNodes: Node[] = [
-  // {
-  //   id: "selection",
-  //   type: "selection",
-  //   position: {
-  //     x: 50,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
-
-  // {
-  //   id: "brightness",
-  //   type: "brightness",
-  //   position: {
-  //     x: 650,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
-
-  // {
-  //   id: "viewer",
-  //   type: "viewer",
-  //   position: {
-  //     x: 1250,
-  //     y: 200,
-  //   },
-  //   data: {},
-  // },
 ];
 
 const initialEdges: Edge[] = [
-  // {
-  //   id: "source-invert",
-  //   type: CONNECTION_LINE_TYPE,
-  //   source: "selection",
-  //   sourceHandle: "image",
-  //   target: "brightness",
-  //   targetHandle: "image",
-  // },
-
-  // {
-  //   id: "brightness-viewer",
-  //   type: CONNECTION_LINE_TYPE,
-  //   source: "brightness",
-  //   sourceHandle: "image",
-  //   target: "viewer",
-  //   targetHandle: "image",
-  // },
 ];
 
 const SNAP_GRID: [number, number] = [20, 20];
@@ -617,7 +562,7 @@ function Pipeline() {
         </FloatingStack>
 
         <FloatingStack sx={{ top: 12, right: 20 }}>
-          <FormControl size="small" sx={{ minWidth: 180 }}>
+          <FormControl size="small" sx={{ minWidth: 250 }}>
             <Select
               value={currentPipelineId}
               displayEmpty
@@ -630,7 +575,12 @@ function Pipeline() {
               <MenuItem value="" disabled>Load pipeline</MenuItem>
               {pipelines.map((pipeline) => (
                 <MenuItem key={pipeline.id} value={pipeline.id}>
-                  {pipeline.name}
+                  <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, border: '1px solid', borderColor: 'divider' }}>
+                    demo
+                    </Box>
+                    {pipeline.name}
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
