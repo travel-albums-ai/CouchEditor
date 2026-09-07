@@ -28,8 +28,8 @@ import {
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import Header from '@/layout/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -574,10 +574,13 @@ function Pipeline() {
           direction="row"
           spacing={1}
           sx={{ position: 'absolute',
-            top: 8, left: 16, zIndex: 10,
-            alignItems: 'center', bgcolor: 'divider',
+            top: 12, left: 12, zIndex: 10,
+            alignItems: 'center',bgcolor: 'background.paper',
+            border: '1px solid',
+            borderColor: 'divider',
             p: 1, borderRadius: 2,
             boxShadow: 3,
+
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -639,21 +642,23 @@ function Pipeline() {
           </Box>
         </Stack>
 
-
         <Stack
           direction="row"
           spacing={1}
           sx={{ position: 'absolute',
-            top: 8, right: 16, zIndex: 10,
-            alignItems: 'center', bgcolor: 'divider',
+            top: 12, right: 20, zIndex: 10,
+            alignItems: 'center',bgcolor: 'background.paper',
+            border: '1px solid',
+            borderColor: 'divider',
             p: 1, borderRadius: 2,
             boxShadow: 3,
           }}
         >
-
-          <Header />
+          <GeneralRegistryToolbar
+            noGhost={true}
+            group="header"
+          />
         </Stack>
-
 
         <Stack
           direction="row"
