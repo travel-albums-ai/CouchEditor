@@ -1,4 +1,4 @@
-import { createSliderNode } from "./AdjustmentSliderNode";
+import { createSliderNode } from "../AdjustmentSliderNode";
 
 export default createSliderNode({
   min: -3,
