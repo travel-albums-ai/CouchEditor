@@ -1,6 +1,5 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { LayoutDashboard, LayoutGrid } from 'lucide-react';
 
@@ -13,26 +12,6 @@ export default function ThumbnailCoverToggle() {
   }
 
   return <>
-    <WebMCPDataRun
-      name="toggle_thumbnail_format"
-      description="Toggle the thumbnail format of photos."
-      inputSchema={{
-        type: 'object',
-        properties: {
-          thumbnailFormat: {
-            type: 'string',
-            enum: ['cover', 'contain'],
-            description: 'The thumbnail format of photos.',
-          },
-        },
-        additionalProperties: false,
-      }}
-      execute={async ({ thumbnailFormat }: { thumbnailFormat: 'cover' | 'contain' }) => {
-        handleThumbnailFormatChange(thumbnailFormat);
-        return 'thumbnailFormat: ' + (thumbnailFormat ?? 'cover') + '.';
-      }}
-    />
-
     <GenericToggleButtonGroup items={[
       {
         value: 'cover',

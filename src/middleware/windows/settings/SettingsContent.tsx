@@ -1,4 +1,3 @@
-import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import SidebarCoreButton from '@/middleware/interface/sidebar/SidebarCoreButton';
 import BYOKPopover from '@/middleware/windows/settings/BYOKPopover';
@@ -66,39 +65,6 @@ export default function SettingsContent() {
   }, [sections]);
 
   return (<>
-    <WebMCPDataRun
-      name="toggle_settings_section"
-      description="Toggle the active settings section."
-      inputSchema={{
-        type: 'object',
-        properties: {
-          mode: {
-            type: 'string',
-            enum: ['layout', 'indexer', 'sections', 'demo', 'tags'],
-            description: 'Settings section to switch to.',
-          },
-        },
-        required: ['mode'],
-        additionalProperties: false,
-      }}
-      execute={async ({ mode }: { mode: 'layout' | 'indexer' | 'sections' | 'demo' | 'tags' }) => {
-        setSetting((prev) => ({
-          ...prev,
-          activeSettingsTab: mode,
-        }));
-
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `Settings section switched to ${mode}.`,
-            },
-          ],
-        };
-      }}
-      deps={[activeSettingsTab, setSetting]}
-    />
-
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%" }} id="settings-content">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
         {Object.entries(groupedSections).map(([group, groupSections], index) => (

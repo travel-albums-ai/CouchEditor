@@ -1,6 +1,5 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import WebMCPDataRun from '@/components/WebMCPDataRun';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { CircleQuestionMark } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -15,15 +14,6 @@ export default function TutorialToggle() {
   }
 
   return <>
-    <WebMCPDataRun
-      name="toggle_tutorial"
-      description="Toggle the tutorial setting."
-      execute={async () => {
-        handleTutorialToggle();
-        return 'Tutorial ' + (!tutorial ? 'enabled' : 'disabled') + '.';
-      }}
-    />
-
     <GenericToggleButtonGroup variant="standard" items={[
       {
         webMcp: true,
