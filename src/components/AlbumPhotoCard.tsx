@@ -1,12 +1,9 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
-import DescribePhotoReadOnly from '@/components/DescribePhotoReadOnly';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import { useDescriptions } from '@/context/descriptionsStore';
-import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
@@ -100,7 +97,7 @@ function AlbumPhotoCard({
   const [isHovered, setIsHovered] = useState(false);
   const [showGps, setShowGps] = useState(false);
 
-  const { hasDescription } = useDescriptions();
+  // const { hasDescription } = useDescriptions();
 
   const width = useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = useAlbumPhotoCardStoreSelector((state) => state.height);
@@ -127,7 +124,7 @@ function AlbumPhotoCard({
   const { ref, inView } = useInView();
 
   // const favorite = isFavorite(photo.id);
-  const isSelected = useSelected_isSelected(photo.id);
+  // const isSelected = useSelected_isSelected(photo.id);
 
   const hasGps =
     Number.isFinite(photo.latitude) &&
@@ -144,9 +141,9 @@ function AlbumPhotoCard({
   }, []);
 
   const thumbnailBorder = useMemo(() => {
-    if (selectMode && isSelected) {
-      return `3px solid ${theme.palette.success.main}`;
-    }
+    // if (selectMode && isSelected) {
+    //   return `3px solid ${theme.palette.success.main}`;
+    // }
 
     if (isPreviewed) {
       return `4px solid ${theme.palette.primary.main}`;
@@ -155,7 +152,7 @@ function AlbumPhotoCard({
     return 'none';
   }, [
     isPreviewed,
-    isSelected,
+    // isSelected,
     selectMode,
     theme.palette.primary.main,
     theme.palette.success.main,
@@ -227,13 +224,13 @@ function AlbumPhotoCard({
                 />
               )}
 
-              {showDescription && !isHovered && hasDescription(photo.id) && (
+              {/* {showDescription && !isHovered && hasDescription(photo.id) && (
                 <DescribePhotoReadOnly
                   photoId={photo.id}
                   className="album-photo-description"
                   sx={detailsSx}
                 />
-              )}
+              )} */}
 
               {isHovered && (
                 <Stack

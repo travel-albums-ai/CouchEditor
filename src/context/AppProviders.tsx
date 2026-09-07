@@ -1,6 +1,4 @@
-import { AISinkProvider } from '@/context/aiSinkStore';
 import { BYOKProvider } from '@/context/byokStore';
-import { DescriptionsProvider } from '@/context/descriptionsStore';
 import { NotificationsProvider } from '@/context/notificationsProvider';
 import { SelectedProvider } from '@/context/selectedStore';
 import React from 'react';
@@ -17,17 +15,13 @@ export default function AppProviders({ children }: Props) {
       <ThemeContextProvider>
         <NotificationsProvider>
           <BYOKProvider>
-            <AISinkProvider>
-              <DescriptionsProvider>
-                <SelectedProvider>
-                  <PipelineProvider>
-                    <AlbumPhotoCardProvider>
-                      {children}
-                    </AlbumPhotoCardProvider>
-                  </PipelineProvider>
-                </SelectedProvider>
-              </DescriptionsProvider>
-            </AISinkProvider>
+            <SelectedProvider>
+              <PipelineProvider>
+                <AlbumPhotoCardProvider>
+                  {children}
+                </AlbumPhotoCardProvider>
+              </PipelineProvider>
+            </SelectedProvider>
           </BYOKProvider>
         </NotificationsProvider>
       </ThemeContextProvider>
