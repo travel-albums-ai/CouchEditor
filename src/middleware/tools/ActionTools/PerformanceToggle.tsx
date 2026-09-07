@@ -19,7 +19,7 @@ export default function PerformanceToggle() {
         tooltip: t('togglePerformanceTooltip'),
         icon: <Turtle />,
         onClick: () => handleOnChange(performanceMode),
-        selected: performanceMode,
+        selected: !performanceMode,
       },
     ] satisfies GenericToggleButtonProps[]} />
   </>
