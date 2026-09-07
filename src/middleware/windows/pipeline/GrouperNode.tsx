@@ -18,14 +18,14 @@ function GrouperNode(_props: NodeProps<Node>) {
       <InputHandle
         key={input.id}
         id={input.id}
-        style={{ top: `${29 + index * 15}%` }}
+        style={{ top: `${29 + index * 14}%` }}
       />
     ))}
 
     <NodeWrapper title={'Grouper'} icon={<Combine />} toolbar={<></>} type="grouper">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
         {INPUTS.map((input) => (
-          <Typography key={input.id} variant="caption" sx={{ lineHeight: 2.2 }}>{input.label}</Typography>
+          <Typography key={input.id} variant="caption" sx={{ lineHeight: 2.4 }}>{input.label}</Typography>
         ))}
       </Box>
       <small>Merges up to four connected photo arrays</small>

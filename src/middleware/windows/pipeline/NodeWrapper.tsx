@@ -46,7 +46,6 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
       </NodeHeader>}
 
       <Box className="nodrag" sx={{
-        p: 1, py: 2,
         borderRadius: 2,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
@@ -55,7 +54,14 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
         gap: 2,
         bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 100%, transparent 10%)`,
       }}>
-        {children}
+        <Box sx={{
+          display: 'flex',
+          p: 2,
+          flexDirection: 'column',
+          gap: 2,
+        }}>
+          {children}
+        </Box>
         {showHelper && helper}
       </Box>
 

@@ -91,7 +91,13 @@ function ViewerNode({
           Lightbox
         </Button>
         <Button
-          variant="outlined"
+          sx={{
+            bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 80%, ${theme.palette.primary.main} 20%)`,
+            '&:hover': {
+              bgcolor: 'primary.main',
+            }
+          }}
+          variant="contained"
           fullWidth
           startIcon={<Download size={14} />}
           disabled={images.length === 0 || downloading}

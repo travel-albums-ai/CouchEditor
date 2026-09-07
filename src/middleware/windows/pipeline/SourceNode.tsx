@@ -33,15 +33,21 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
     <NodeWrapper type="source">
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
+          sx={{
+            bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 80%, ${theme.palette.primary.main} 20%)`,
+            '&:hover': {
+              bgcolor: 'primary.main',
+            }
+          }}
           fullWidth
           component="label"
-          variant="outlined"
+          variant="contained"
           startIcon={<Upload size={16} />}
         >
         Select Images
           <input
             type="file"
-            accept="image/*"
+            accept="image/jpeg, image/png, image/webp"
             multiple
             hidden
             onChange={(event) => {
@@ -67,20 +73,6 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         {previewUrls.length > 0 ? (
           <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-            {/* {previewUrls.map((value, index) => (
-              <img
-                key={index}
-                src={value}
-                alt=""
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '300px',
-                  objectFit: 'cover',
-                  borderRadius: '6px',
-                }}
-              />
-            ))} */}
             {previewUrls.map((value, index) => (
               <AlbumPhotoThumbnailBackgroundNg
                 key={index}
