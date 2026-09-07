@@ -1,3 +1,4 @@
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, useTheme } from '@mui/material';
 import { Info } from 'lucide-react';
@@ -6,6 +7,7 @@ import { useState } from 'react';
 function NodeWrapper({ children, type, helper } : { children: React.ReactNode, type: string, helper?: React.ReactNode }) {
   const theme = useTheme();
   const [showHelper, setShowHelper] = useState<boolean>(false);
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode);
 
   return <>
 
@@ -20,10 +22,17 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
         borderRadius: 2,
         border: `1px solid ${theme.palette.divider}`,
         boxShadow: `0 0 0px transparent`,
-        transition: 'all 0.25s ease',
-        '&:hover': {
-          boxShadow: `0 0px 3px ${theme.palette.primary.main}`,
-          border: `1px solid ${theme.palette.primary.main}42`,
+        ...performanceMode && {
+          transition: 'all 0.25s ease',
+          '&:hover': {
+            boxShadow: `0 0px 3px ${theme.palette.primary.main}`,
+            border: `1px solid ${theme.palette.primary.main}42`,
+          },
+        },
+        ...!performanceMode && {
+          '&:hover': {
+            border: `1px solid ${theme.palette.primary.main}88`,
+          },
         },
       }}
       key={type}

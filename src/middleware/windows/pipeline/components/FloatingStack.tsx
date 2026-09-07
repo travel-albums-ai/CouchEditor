@@ -18,13 +18,13 @@ export default function FloatingStack({ children, sx } : { children: React.React
         borderColor: 'divider',
         p: 1,
         borderRadius: 2,
-        transition: 'all 0.75s ease',
-        '&:hover': {
-          border: theme => `1px solid ${theme.palette.primary.main}42`,
-          boxShadow: theme => `0 0px 3px ${theme.palette.primary.main}`,
-          bgcolor: theme => performanceMode
-            ? `color-mix(in srgb, color-mix(in srgb, ${theme.palette.background.paper} 95%, ${theme.palette.primary.main} 3%) 95%, transparent 8%)`
-            : 'background.paper',
+        ...performanceMode && {
+          transition: 'all 0.75s ease',
+          '&:hover': {
+            border: theme => `1px solid ${theme.palette.primary.main}42`,
+            boxShadow: theme => `0 0px 3px ${theme.palette.primary.main}`,
+            bgcolor: theme => `color-mix(in srgb, color-mix(in srgb, ${theme.palette.background.paper} 95%, ${theme.palette.primary.main} 3%) 95%, transparent 8%)`,
+          },
         },
         boxShadow: performanceMode
           ? 4
