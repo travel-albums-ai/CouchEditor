@@ -1,9 +1,8 @@
-import ServerStatus from '@/middleware/base/ServerStatus';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import { PlatformDownloadButton } from '@/middleware/windows/onboarding/PlatformDownload';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { ExternalLink, PackageOpen, Play, SquareMousePointer } from 'lucide-react';
 
 const phaseSteps = [
@@ -41,10 +40,6 @@ export default function OnboardingIndexer() {
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', width: '100%', justifyContent: 'space-between' }} >
         <PlatformDownloadButton />
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1, mr: 1 }}>
-          <ServerStatus />
-          <Typography variant="caption" color="textSecondary">Server status</Typography>
-        </Box>
       </Box>
     </OnboardingWrapper>
 
