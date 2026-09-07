@@ -1,4 +1,4 @@
-import { Box, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
+import { Box, FormControl, MenuItem, Select, Stack, TextField, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -178,6 +178,7 @@ function Pipeline() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
+  const theme = useTheme();
 
   const { screenToFlowPosition, fitView } = useReactFlow();
   const {
@@ -536,8 +537,6 @@ function Pipeline() {
 
   return (
     <Box className="app" sx={{ width: '100%', height: '100%' }}>
-      {showToolbox && <NodeToolbox />}
-
       <div
         className="reactflow-canvas"
         onDragOver={onDragOver}
@@ -565,17 +564,35 @@ function Pipeline() {
           zoomOnDoubleClick={false}
           fitView
         >
-          <Background gap={SNAP_GRID[0]} />
-          <Controls />
+          <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.divider} />
+          <Controls position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
           <MiniMap />
         </ReactFlow>
+
+
+
+        {showToolbox && <Stack
+          direction="row"
+          spacing={1}
+          sx={{ position: 'absolute',
+            top: 80, left: 12, zIndex: 10,
+            alignItems: 'center',bgcolor: 'background.paper',
+            border: '1px solid',
+            borderColor: 'divider',
+            p: 1, borderRadius: 2,
+            boxShadow: performanceMode ? 4 : 0,
+
+          }}
+        >
+          <NodeToolbox />
+        </Stack>}
 
         <Stack
           direction="row"
           spacing={1}
           sx={{ position: 'absolute',
             top: 12, left: 12, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.default',
+            alignItems: 'center',bgcolor: 'background.paper',
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
@@ -584,6 +601,16 @@ function Pipeline() {
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <img
+              src="./couchLogo.png"
+              alt="Logo"
+              height={30}
+              fetchPriority="high"
+              style={{
+                // opacity: 0.3,
+                // filter: 'grayscale(100%)',
+              }}
+            />
             <TextField
               size="small"
               value={currentPipelineName}
@@ -623,7 +650,7 @@ function Pipeline() {
           spacing={1}
           sx={{ position: 'absolute',
             top: 12, right: 20, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.default',
+            alignItems: 'center',bgcolor: 'background.paper',
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
@@ -657,7 +684,7 @@ function Pipeline() {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ position: 'absolute', bottom: 16, left:58, zIndex: 10,
+          sx={{ position: 'absolute', bottom: 16, right: 232, zIndex: 10,
           }}
         >
           <Box

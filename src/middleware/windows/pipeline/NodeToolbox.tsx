@@ -1,6 +1,5 @@
-import { useSettingsStoreSelector } from '@/context/settingsStore';
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
-import { Box, Divider, Tooltip, Typography } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
@@ -56,8 +55,6 @@ const groupedPaletteItems = paletteItems.reduce((acc, item) => {
 }, {} as Record<string, typeof paletteItems>);
 
 function NodeToolbox() {
-  const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
-
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     nodeType: string
@@ -76,14 +73,8 @@ function NodeToolbox() {
       m: 1,
       my: 1.5,
       borderRadius: 2,
-      boxShadow: performanceMode ? 4 : 0,
-      bgcolor: 'background.default',
-      border: '1px solid',
-      borderColor: 'divider',
       overflowY: 'auto',
       p: 1,
-      px: 2,
-
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}
@@ -91,16 +82,14 @@ function NodeToolbox() {
             display: 'flex', flexDirection: 'column', gap: 0
           }}
         >
-          <Divider sx={{ mb: 0.5, borderStyle: 'dotted', borderColor: 'divider' }}>
-            <Typography variant="caption" sx={{ textTransform: 'uppercase', fontSize: 10 }} color="textDisabled">
-              {group}
-            </Typography>
-          </Divider>
+          <Typography variant="caption" sx={{ mb: 0.5, textTransform: 'uppercase', fontWeight: 'bold' }} color="textDisabled">
+            {group}
+          </Typography>
 
           <Box sx={{
             display: 'grid',
             alignContent: 'start',
-            mb: 1,
+            mb: 2,
             gridTemplateColumns: 'repeat(2, 140px)',
             gap: 1,
           }}>

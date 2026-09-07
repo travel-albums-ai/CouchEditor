@@ -24,7 +24,7 @@ export const themeTokens = {
       mode: 'dark',
       primary: { main: '#a8c7fa' },
       secondary: { main: '#f48fb1' },
-      background: { default: '#3c3c3c', paper: '#282828' },
+      background: { default: '#0f151d', paper: '#141822' },
       text: {
         primary: '#e0e0e0',
         secondary: '#b0b0b0',
