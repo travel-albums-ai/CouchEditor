@@ -1,4 +1,3 @@
-import IndexerContent from '@/components/IndexerContent';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
@@ -19,7 +18,6 @@ export default function OnboardingIndexing() {
   return (<>
     <OnboardingWrapper>
       <Box sx={{ flex: 0, width: '100%', p: 1 }}>
-        <IndexerContent />
       </Box>
     </OnboardingWrapper>
 
