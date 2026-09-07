@@ -8,6 +8,5 @@ export default createSliderNode({
   step: 1,
   defaultValue: 0,
   type: "shadows",
-  label: "Shadows",
   info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={shadowsStage} label="Shadows" />
 });

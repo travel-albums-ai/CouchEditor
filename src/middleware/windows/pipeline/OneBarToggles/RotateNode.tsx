@@ -7,7 +7,5 @@ export default createSliderNode({
   step: 1,
   defaultValue: 0,
   type: "rotate",
-  info: (config) => <>
-    <BeforeAfter image2style={{ transform: `rotate(${config.amount}deg)` }} />
-  </>
+  info: (config) => <BeforeAfter image2style={{ transform: `rotate(${config.amount}deg)` }} />
 });

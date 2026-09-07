@@ -8,6 +8,5 @@ export default createSliderNode({
   step: 1,
   defaultValue: 0,
   type: "highlights",
-  label: "Highlights",
   info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={highlightsStage} label="Highlights" />
 });
