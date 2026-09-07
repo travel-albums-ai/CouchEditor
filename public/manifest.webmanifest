@@ -24,7 +24,7 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/logo_new_48.png",
+      "src": "/couchLogo.png",
       "sizes": "48x48",
       "type": "image/png",
       "purpose": "any maskable"

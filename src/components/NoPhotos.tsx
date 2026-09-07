@@ -18,7 +18,7 @@ export default function NoPhotos({ isEmpty = true, isLoading = false, isError = 
       }}
     >
       <img
-        src="./logo_new_240.webp"
+        src="./couchLogo.png"
         alt="Logo"
         width={120}
         height={93}
