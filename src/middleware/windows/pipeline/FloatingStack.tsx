@@ -10,7 +10,10 @@ export default function FloatingStack({ children, sx } : { children: React.React
       spacing={1}
       sx={{ position: 'absolute',
         zIndex: 10,
-        alignItems: 'center',bgcolor: 'background.paper',
+        alignItems: 'center',
+        // bgcolor: 'background.paper',
+        bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 95%, transparent 8%)`,
+        backdropFilter: 'blur(4px)',
         border: '1px solid',
         borderColor: 'divider',
         p: 1, borderRadius: 2,
