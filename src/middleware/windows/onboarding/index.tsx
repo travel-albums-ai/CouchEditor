@@ -1,10 +1,8 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import OnboardingIndexer from '@/middleware/windows/onboarding/OnboardingIndexer';
-import OnboardingIndexing from '@/middleware/windows/onboarding/OnboardingIndexing';
 import OnboardingTakeout from '@/middleware/windows/onboarding/OnboardingTakeout';
 import OnboardingWelcome from '@/middleware/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Step, StepLabel, Stepper } from '@mui/material';
-import { ChevronLeft, ChevronsRight, CircleX, Workflow } from 'lucide-react';
+import { ChevronLeft, ChevronsRight, CircleX } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,11 +14,8 @@ export default function Onboarding() {
   const { t } = useTranslation();
 
   const steps = [
-    t('onboardingStepWelcome'),
-    'Google Takeout',
-    'Install',
-    'Folders',
-    'Indexing',
+    "Welcome",
+    'Let\'s Get Started',
   ];
 
 
@@ -50,18 +45,9 @@ export default function Onboarding() {
       <Box sx={{ height: '780px', display: 'flex', flexDirection: 'column', gap: 2 }}>
         {activeStep === 0 && <OnboardingWelcome />}
         {activeStep === 1 && <OnboardingTakeout />}
-        {activeStep === 2 && <OnboardingIndexer />}
-        {activeStep === 4 && <OnboardingIndexing />}
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1 }}>
-        <Button
-          startIcon={<Workflow size={16} /> }
-          onClick={() => {
-            setSetting(prev => ({ ...prev, onboarding: false, pipelineOpen: true }))
-          } } variant="outlined">
-          Try Image Pipeline Now
-        </Button>
         <Button
           disabled={activeStep === 0}
           startIcon={ <ChevronLeft size={16} /> }

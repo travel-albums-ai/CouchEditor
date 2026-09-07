@@ -32,18 +32,17 @@ export default function OnboardingWelcome() {
   return (<>
     <OnboardingWrapper>
       <img
-        src="./logo_new_240.webp"
+        src="./couchLogo.png"
         alt="Logo"
         fetchPriority="high"
-        width={240}
-        height={186}
+        width={340}
         style={{
-          aspectRatio: '1/1',
+          // aspectRatio: '1/1',
           margin: 20
         }}
       />
       <Typography sx={{ p: 2, pt: 0, lineHeight: 2, textAlign: 'center', userSelect: 'none' }} variant="body1" color="textPrimary">
-        {t('onboardingWelcomeBody')}
+        Welcome to Couch Editor! Your journey from the comfort of your couch to organizing and reliving your travel memories starts here at scale
       </Typography>
     </OnboardingWrapper>
     <OnboardingWrapperInfo light={true}>
