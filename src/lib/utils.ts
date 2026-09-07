@@ -100,17 +100,6 @@ export const gammaStage = (gamma: number): Stage => {
   };
 };
 
-export const whitesBlacksStage = (whites: number, blacks: number): Stage => {
-  return (img) => {
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(clamp(d[i] + whites) - blacks);
-      d[i + 1] = clamp(clamp(d[i + 1] + whites) - blacks);
-      d[i + 2] = clamp(clamp(d[i + 2] + whites) - blacks);
-    }
-  };
-};
-
 export const luminosityStage = (strength: number): Stage => {
   return (img) => {
     const d = img.data;
@@ -166,6 +155,7 @@ export const saturationStage = (amount: number): Stage => {
     }
   };
 };
+
 
 export const hueRotationStage = (amount: number): Stage => {
   const rotation = ((amount % 360) + 360) % 360 / 360;
@@ -233,50 +223,6 @@ export const vibranceStage = (amount: number): Stage => {
       d[i] = clamp(r + (r - avg) * boost);
       d[i + 1] = clamp(g + (g - avg) * boost);
       d[i + 2] = clamp(b + (b - avg) * boost);
-    }
-  };
-};
-
-export const temperatureTintStage = (temp: number, tint: number): Stage => {
-  return (img) => {
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(d[i] + temp * 0.6 + tint * 0.15);
-      d[i + 1] = clamp(d[i + 1] + tint * 0.5);
-      d[i + 2] = clamp(d[i + 2] - temp * 0.6 + tint * 0.15);
-    }
-  };
-};
-
-type RGB = { r: number; g: number; b: number };
-
-export const splitToningStage = (
-  // shadowColor: RGB,
-  shadowTintR: number,
-  shadowTintG: number,
-  shadowTintB: number,
-  highlightTintR: number,
-  highlightTintG: number,
-  highlightTintB: number,
-  // highlightColor: RGB,
-  strength: number
-): Stage => {
-  return (img) => {
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const lum = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
-      const shadowWeight = (1 - lum) * strength;
-      const highlightWeight = lum * strength;
-
-      d[i] = clamp(
-        d[i] + (shadowTintR - 128) * shadowWeight + (highlightTintR - 128) * highlightWeight
-      );
-      d[i + 1] = clamp(
-        d[i + 1] + (shadowTintG - 128) * shadowWeight + (highlightTintG - 128) * highlightWeight
-      );
-      d[i + 2] = clamp(
-        d[i + 2] + (shadowTintB - 128) * shadowWeight + (highlightTintB - 128) * highlightWeight
-      );
     }
   };
 };
@@ -363,6 +309,63 @@ export const sharpenStage = (amount: number): Stage => {
           data[idx + c] = clamp(center + neighbors);
         }
       }
+    }
+  };
+};
+
+
+export const whitesBlacksStage = (whites: number, blacks: number): Stage => {
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clamp(clamp(d[i] + whites) - blacks);
+      d[i + 1] = clamp(clamp(d[i + 1] + whites) - blacks);
+      d[i + 2] = clamp(clamp(d[i + 2] + whites) - blacks);
+    }
+  };
+};
+
+
+export const temperatureTintStage = (temp: number, tint: number): Stage => {
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      d[i] = clamp(d[i] + temp * 0.6 + tint * 0.15);
+      d[i + 1] = clamp(d[i + 1] + tint * 0.5);
+      d[i + 2] = clamp(d[i + 2] - temp * 0.6 + tint * 0.15);
+    }
+  };
+};
+
+type RGB = { r: number; g: number; b: number };
+
+export const splitToningStage = (
+  // shadowColor: RGB,
+  shadowTintR: number,
+  shadowTintG: number,
+  shadowTintB: number,
+  highlightTintR: number,
+  highlightTintG: number,
+  highlightTintB: number,
+  // highlightColor: RGB,
+  strength: number
+): Stage => {
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const lum = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
+      const shadowWeight = (1 - lum) * strength;
+      const highlightWeight = lum * strength;
+
+      d[i] = clamp(
+        d[i] + (shadowTintR - 128) * shadowWeight + (highlightTintR - 128) * highlightWeight
+      );
+      d[i + 1] = clamp(
+        d[i + 1] + (shadowTintG - 128) * shadowWeight + (highlightTintG - 128) * highlightWeight
+      );
+      d[i + 2] = clamp(
+        d[i + 2] + (shadowTintB - 128) * shadowWeight + (highlightTintB - 128) * highlightWeight
+      );
     }
   };
 };
