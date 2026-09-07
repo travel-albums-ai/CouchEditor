@@ -1,11 +1,16 @@
-import { hdrEffectStage } from '@/lib/utils';
 import { Box } from '@mui/material';
 import { MoveRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const previewImageUrl = 'sample.jpg';
 
-export function HdrPreview({ amount }: { amount: number }) {
+type AdjustmentPreviewProps = {
+  amount: number;
+  algorithm: (amount: number) => (image: ImageData) => void;
+  label: string;
+};
+
+export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
 
   useEffect(() => {
@@ -22,7 +27,7 @@ export function HdrPreview({ amount }: { amount: number }) {
 
       context.drawImage(image, 0, 0);
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      hdrEffectStage(amount)(imageData);
+      algorithm(amount)(imageData);
       context.putImageData(imageData, 0, 0);
 
       if (!cancelled) {
@@ -34,13 +39,13 @@ export function HdrPreview({ amount }: { amount: number }) {
     return () => {
       cancelled = true;
     };
-  }, [amount]);
+  }, [algorithm, amount]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, justifyContent: 'center' }}>
-      <img src={previewImageUrl} alt="HDR preview before" style={{ maxWidth: '50px' }} />
+      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '50px' }} />
       <MoveRight aria-hidden="true" />
-      <img src={processedImageUrl} alt="HDR preview after" style={{ maxWidth: '50px' }} />
+      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '50px' }} />
     </Box>
   );
 }

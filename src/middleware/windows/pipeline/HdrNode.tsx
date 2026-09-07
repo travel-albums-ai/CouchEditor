@@ -1,5 +1,6 @@
 import { createSliderNode } from "./AdjustmentSliderNode";
-import { HdrPreview } from './HdrPreview';
+import { hdrEffectStage } from '@/lib/utils';
+import { AdjustmentPreview } from './AdjustmentPreview';
 
 export default createSliderNode({
   min: 0,
@@ -7,5 +8,7 @@ export default createSliderNode({
   step: 1,
   defaultValue: 0,
   type: "hdr",
-  info: ({ amount }) => <HdrPreview amount={amount} />
+  info: ({ amount }) => (
+    <AdjustmentPreview amount={amount} algorithm={hdrEffectStage} label="HDR" />
+  )
 });
