@@ -75,7 +75,7 @@ function NodeToolbox() {
       my: 1.5,
       borderRadius: 2,
       boxShadow: 4,
-      bgcolor: 'background.paper',
+      bgcolor: 'background.default',
       border: '1px solid',
       borderColor: 'divider',
       overflowY: 'auto',

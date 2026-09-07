@@ -575,7 +575,7 @@ function Pipeline() {
           spacing={1}
           sx={{ position: 'absolute',
             top: 12, left: 12, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.paper',
+            alignItems: 'center',bgcolor: 'background.default',
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
@@ -647,7 +647,7 @@ function Pipeline() {
           spacing={1}
           sx={{ position: 'absolute',
             top: 12, right: 20, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.paper',
+            alignItems: 'center',bgcolor: 'background.default',
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
