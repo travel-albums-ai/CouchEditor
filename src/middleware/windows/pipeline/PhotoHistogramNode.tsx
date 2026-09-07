@@ -14,7 +14,7 @@ function PhotoHistogramNode({
   const images = data.image ?? [];
 
   const match = previewPhotoObj
-    ? images.find((image) => image.name === previewPhotoObj.title)
+    ? images.find((image) => image.name === previewPhotoObj)
     : undefined;
 
   return (<>
