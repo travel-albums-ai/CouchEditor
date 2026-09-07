@@ -19,7 +19,7 @@ export const blackAndWhiteStage = (): Stage => {
   return (img) => {
     const d = img.data;
     for (let i = 0; i < d.length; i += 4) {
-      const lum = clamp(0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]);
+      const lum = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
       d[i] = lum;
       d[i + 1] = lum;
       d[i + 2] = lum;
@@ -34,21 +34,23 @@ export const sepiaStage = (): Stage => {
       const red = d[i];
       const green = d[i + 1];
       const blue = d[i + 2];
-
-      d[i] = clamp(0.393 * red + 0.769 * green + 0.189 * blue);
-      d[i + 1] = clamp(0.349 * red + 0.686 * green + 0.168 * blue);
-      d[i + 2] = clamp(0.272 * red + 0.534 * green + 0.131 * blue);
+      d[i] = 0.393 * red + 0.769 * green + 0.189 * blue;
+      d[i + 1] = 0.349 * red + 0.686 * green + 0.168 * blue;
+      d[i + 2] = 0.272 * red + 0.534 * green + 0.131 * blue;
     }
   };
 };
 
 export const brightnessStage = (amount: number): Stage => {
+  const lut = new Uint8ClampedArray(256);
+  for (let v = 0; v < 256; v++) lut[v] = v + amount; // clamps/rounds on write
+
   return (img) => {
     const d = img.data;
     for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(d[i] + amount);
-      d[i + 1] = clamp(d[i + 1] + amount);
-      d[i + 2] = clamp(d[i + 2] + amount);
+      d[i] = lut[d[i]];
+      d[i + 1] = lut[d[i + 1]];
+      d[i + 2] = lut[d[i + 2]];
     }
   };
 };
