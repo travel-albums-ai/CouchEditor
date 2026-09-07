@@ -49,7 +49,7 @@ function NodeHeader({
   const background = useMemo(
     () =>
       performanceMode
-        ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 100%, var(--mui-palette-background-paper) 45%)`
+        ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 100%, var(--bg-paper) 45%)`
         : `linear-gradient(90deg, transparent 0%, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 125%)`,
     [performanceMode, typeColor, groupColor]
   );
@@ -57,7 +57,7 @@ function NodeHeader({
   const hoverBackground = useMemo(
     () =>
       performanceMode
-        ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 4%, ${groupColor} 12%) 100%, var(--mui-palette-background-paper) 30%)`
+        ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 4%, ${groupColor} 12%) 100%, var(--bg-paper) 30%)`
         : `linear-gradient(90deg, transparent 0%, color-mix(in srgb, ${typeColor} 4%, ${groupColor} 12%) 150%)`,
     [performanceMode, typeColor, groupColor]
   );
