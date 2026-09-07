@@ -10,21 +10,6 @@ const benchmarkBuffer: BenchmarkEntry[] = [];
 const FLUSH_INTERVAL_MS = 2500;
 let flushTimer: ReturnType<typeof setInterval> | null = null;
 
-export const benchmarkFunction = <T>(fn: () => T, file: string, details?: string[]): T => {
-  if (!debug) {
-    return fn();
-  }
-
-  const t0 = performance.now();
-  const result = fn();
-  const durationMs = performance.now() - t0;
-
-  benchmarkBuffer.push({ file, durationMs, details });
-  startAutoFlush();
-
-  return result;
-};
-
 export const benchmarkFunctionAsync = async <T>(fn: () => Promise<T>, file: string, details?: string[]): Promise<T> => {
   if (!debug) {
     return fn();

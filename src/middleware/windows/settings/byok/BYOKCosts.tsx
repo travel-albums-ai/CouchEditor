@@ -1,7 +1,7 @@
+import CostAnalyzer from '@/components/CostAnalyzer';
 import SettingsSection from '@/components/SettingsSection';
 import SolidChip from '@/components/SolidChip';
 import { useBYOKStoreSelector } from '@/context/byokStore';
-import CostAnalyzer from '@/robot/CostAnalyzer';
 import { Box, Typography } from '@mui/material';
 import { Astroid, BoxIcon, Clock, Coins, FileQuestionMark, LogIn, LogOut } from 'lucide-react';
 

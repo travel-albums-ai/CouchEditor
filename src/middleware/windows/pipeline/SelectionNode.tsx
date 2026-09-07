@@ -2,7 +2,6 @@ import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useSections_GLOBAL } from "@/context/globals/sectionsStore";
 import type { GalleryPhoto } from "@/lib/galleryData";
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/OutputHandle';
@@ -21,7 +20,7 @@ function SelectionNode({
 }: NodeProps<Node<SelectionNodeData>>) {
   // Same route-driven photo resolution as ScrollerDrawer.
   const { type_name = "", id: sectionId = "" } = useParams();
-  const sections = useSections_GLOBAL();
+  const sections = [] as Section[];
   const photosFiltered = [] as GalleryPhoto[];
 
   const [selectedTypeName, setSelectedTypeName] = useState(

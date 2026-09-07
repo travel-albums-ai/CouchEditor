@@ -1,6 +1,6 @@
 {
-  "name": "Travel Albums",
-  "short_name": "Travel Albums",
+  "name": "Couch Editor",
+  "short_name": "Couch Editor",
   "description": "Browse and relive your trips as an installable desktop-style web app.",
   "id": "/",
   "start_url": "/",

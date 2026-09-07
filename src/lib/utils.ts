@@ -4,9 +4,6 @@ export function clamp(v: number) {
   return Math.max(0, Math.min(255, v));
 }
 
-export const applyIf = (enabled: boolean, stage: Stage): Stage | null =>
-  enabled ? stage : null;
-
 export const invertStage = (): Stage => {
   return (img) => {
     const d = img.data;
