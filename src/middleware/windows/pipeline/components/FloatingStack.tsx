@@ -11,9 +11,7 @@ export default function FloatingStack({
   children,
   sx,
 }: FloatingStackProps) {
-  const performanceMode = useSettingsStoreSelector(
-    s => s.performanceMode
-  );
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode);
 
   return (
     <Stack

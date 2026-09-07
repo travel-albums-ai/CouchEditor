@@ -1,7 +1,3 @@
-// ============================================================
-// Palette of node types that can be dragged onto the canvas
-// ============================================================
-
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { paletteItems } from '@/middleware/windows/pipeline/NodeToolbox';
 import { Box, Typography, useTheme } from '@mui/material';
