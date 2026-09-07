@@ -1,7 +1,3 @@
-// ============================================================
-// Palette of node types that can be dragged onto the canvas
-// ============================================================
-
 import NodeHeader from '@/middleware/windows/pipeline/NodeHeader';
 import { Box, Divider, Tooltip, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, GalleryVerticalEnd, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
@@ -75,10 +71,15 @@ function NodeToolbox() {
     <Box sx={{
       display: 'flex', flexDirection: 'column',
       gap: 0,
-      borderRight: '1px solid',
+      m: 1,
+      my: 1.5,
+      borderRadius: 2,
+      boxShadow: 4,
+      border: '1px solid',
       borderColor: 'divider',
       overflowY: 'auto',
-      pr: 2
+      p: 1,
+
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
         <Box key={group}

@@ -29,6 +29,7 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import Header from '@/layout/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -639,11 +640,25 @@ function Pipeline() {
         </Stack>
 
 
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ position: 'absolute',
+            top: 8, right: 16, zIndex: 10,
+            alignItems: 'center', bgcolor: 'divider',
+            p: 1, borderRadius: 2,
+            boxShadow: 3,
+          }}
+        >
+
+          <Header />
+        </Stack>
+
 
         <Stack
           direction="row"
           spacing={1}
-          sx={{ position: 'absolute', top: 8, right: 16, zIndex: 10,
+          sx={{ position: 'absolute', bottom: 16, left:58, zIndex: 10,
           }}
         >
           <Box
