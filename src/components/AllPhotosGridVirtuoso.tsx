@@ -4,7 +4,7 @@ import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';
 
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { GalleryPhoto } from '@/lib/galleryData';
-import AlbumPhotoCard from '../../components/AlbumPhotoCard';
+import AlbumPhotoCard from './AlbumPhotoCard';
 
 type Props = {
   photos: GalleryPhoto[];
