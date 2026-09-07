@@ -13,6 +13,7 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import useKeyboardNav from '@/hooks/useKeyboardNav';
 import useWheelNav from '@/hooks/useWheelNav';
 import { GalleryPhoto } from '@/lib/galleryData';
+import LightboxBackground from '@/middleware/windows/lightbox/LightboxBackground';
 import LightboxFilmstripNg from '@/middleware/windows/lightbox/LightboxFilmstripNg';
 import LightboxViewer from '@/middleware/windows/lightbox/LightboxViewer';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -121,7 +122,7 @@ export default function LightboxWindow() {
   return (
     <>ss
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1, position: 'relative' }}>
-        {/* <LightboxBackground photo={currentPhoto} /> */}
+        <LightboxBackground photo={currentPhoto} />
         <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
 
           <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
