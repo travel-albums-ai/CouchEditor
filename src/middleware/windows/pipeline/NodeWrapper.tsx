@@ -15,6 +15,7 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
         mx: 0.25,
         gap: 0,
         borderRadius: 2,
+        border: `1px solid ${theme.palette.divider}`,
       }}
       key={type}
     >
@@ -25,6 +26,7 @@ function NodeWrapper({ children, type} : { children: React.ReactNode, type: stri
           width: '100%',
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
+          border: 'unset'
         }}
       />}
 
