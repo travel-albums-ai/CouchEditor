@@ -580,27 +580,28 @@ export const samplePipeline = [
         "id": "source-27",
         "type": "source",
         "position": {
-          "x": -1460,
-          "y": 20
+          "x": -1360,
+          "y": 580
         },
         "data": {},
         "measured": {
-          "width": 920,
-          "height": 1037
+          "width": 938,
+          "height": 1038
         },
-        "selected": false
+        "selected": false,
+        "dragging": false
       },
       {
         "id": "viewer-single-29",
         "type": "viewer-single",
         "position": {
-          "x": 260,
-          "y": 1220
+          "x": -240,
+          "y": 980
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 638,
+          "height": 667
         },
         "selected": false,
         "dragging": false
@@ -609,13 +610,13 @@ export const samplePipeline = [
         "id": "viewer-single-30",
         "type": "viewer-single",
         "position": {
-          "x": 280,
-          "y": 500
+          "x": 440,
+          "y": 820
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 638,
+          "height": 667
         },
         "selected": false,
         "dragging": false
@@ -624,13 +625,13 @@ export const samplePipeline = [
         "id": "viewer-single-31",
         "type": "viewer-single",
         "position": {
-          "x": 280,
-          "y": -220
+          "x": 1120,
+          "y": 720
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 638,
+          "height": 667
         },
         "selected": false,
         "dragging": false
@@ -639,15 +640,15 @@ export const samplePipeline = [
         "id": "vignette-32",
         "type": "vignette",
         "position": {
-          "x": -420,
-          "y": 760
+          "x": -260,
+          "y": 700
         },
         "data": {
           "amount": 81
         },
         "measured": {
-          "width": 191,
-          "height": 86
+          "width": 242,
+          "height": 103
         },
         "selected": false,
         "dragging": false
@@ -656,15 +657,15 @@ export const samplePipeline = [
         "id": "hdr-33",
         "type": "hdr",
         "position": {
-          "x": -420,
-          "y": 1020
+          "x": -220,
+          "y": 840
         },
         "data": {
           "amount": 68
         },
         "measured": {
-          "width": 191,
-          "height": 86
+          "width": 242,
+          "height": 103
         },
         "selected": false,
         "dragging": false
@@ -673,15 +674,15 @@ export const samplePipeline = [
         "id": "pop-34",
         "type": "pop",
         "position": {
-          "x": -400,
+          "x": -300,
           "y": 560
         },
         "data": {
           "amount": 68
         },
         "measured": {
-          "width": 191,
-          "height": 86
+          "width": 242,
+          "height": 103
         },
         "selected": false,
         "dragging": false
