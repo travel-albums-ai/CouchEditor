@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, PanelLeftDashed, Save, Trash2 } from 'lucide-react';
+import { CirclePlus, Copy, Save, Trash2 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -176,7 +176,6 @@ function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
-  const { toggleToolbox } = usePipelineStore();
 
   const { screenToFlowPosition, fitView } = useReactFlow();
   const {
@@ -591,8 +590,7 @@ function Pipeline() {
                 setCurrentPipelineName(event.target.value);
                 setIsDirty(true);
               }}
-              slotProps={{ htmlInput: { 'aria-label': 'Pipeline title' } }}
-              sx={{ width: 180,  }}
+              sx={{ maxWidth: 400, minWidth: 300 }}
             />
             <GenericToggleButtonGroup items={[
               {
@@ -605,39 +603,16 @@ function Pipeline() {
                 tooltip: 'Save pipeline',
                 icon: <Save /> ,
                 onClick: () => saveCurrent(),
-                title: 'Save',
+                title: '',
               },
               {
                 tooltip: 'Save as clone',
                 icon: <Copy /> ,
                 onClick: () => saveAsCopy(),
-                title: 'Clone',
-              },
-              {
-                tooltip: 'Toggle toolbox',
-                icon: <PanelLeftDashed /> ,
-                onClick: () => toggleToolbox(),
                 title: '',
-              }
+              },
             ] satisfies GenericToggleButtonProps[]} />
-            <FormControl size="small" sx={{ minWidth: 180 }}>
-              <Select
-                value={currentPipelineId}
-                displayEmpty
-                onChange={(event) => loadPipeline(event.target.value)}
-                renderValue={(value) => value
-                  ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
-                  : 'Load pipeline'}
-                aria-label="Load pipeline"
-              >
-                <MenuItem value="" disabled>Load pipeline</MenuItem>
-                {pipelines.map((pipeline) => (
-                  <MenuItem key={pipeline.id} value={pipeline.id}>
-                    {pipeline.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+
           </Box>
         </Stack>
 
@@ -653,6 +628,24 @@ function Pipeline() {
             boxShadow: 4,
           }}
         >
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <Select
+              value={currentPipelineId}
+              displayEmpty
+              onChange={(event) => loadPipeline(event.target.value)}
+              renderValue={(value) => value
+                ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
+                : 'Load pipeline'}
+              aria-label="Load pipeline"
+            >
+              <MenuItem value="" disabled>Load pipeline</MenuItem>
+              {pipelines.map((pipeline) => (
+                <MenuItem key={pipeline.id} value={pipeline.id}>
+                  {pipeline.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <GeneralRegistryToolbar
             noGhost={true}
             group="header"
