@@ -243,20 +243,20 @@ export const hueRotationStage = (amount: number): Stage => {
 
 export const vibranceStage = (amount: number): Stage => {
   const strength = amount / 100;
+  const ONE_THIRD = 1 / 3;
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i];
-      const g = d[i + 1];
-      const b = d[i + 2];
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      const r = d[i], g = d[i + 1], b = d[i + 2];
       const max = Math.max(r, g, b);
-      const avg = (r + g + b) / 3;
+      const avg = (r + g + b) * ONE_THIRD;
       const sat = max === 0 ? 0 : (max - avg) / max;
       const boost = strength * (1 - sat);
 
-      d[i] = clamp(r + (r - avg) * boost);
-      d[i + 1] = clamp(g + (g - avg) * boost);
-      d[i + 2] = clamp(b + (b - avg) * boost);
+      d[i] = r + (r - avg) * boost;
+      d[i + 1] = g + (g - avg) * boost;
+      d[i + 2] = b + (b - avg) * boost;
     }
   };
 };
@@ -265,12 +265,16 @@ export const fadeStage = (amount: number): Stage => {
   const strength = amount / 100;
   const lift = 28 * strength;
   const squeeze = 1 - 0.3 * strength;
+  const lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = i * squeeze + lift;
+
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(d[i] * squeeze + lift);
-      d[i + 1] = clamp(d[i + 1] * squeeze + lift);
-      d[i + 2] = clamp(d[i + 2] * squeeze + lift);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      d[i] = lut[d[i]];
+      d[i + 1] = lut[d[i + 1]];
+      d[i + 2] = lut[d[i + 2]];
     }
   };
 };
@@ -282,19 +286,26 @@ export const vignetteStage = (amount: number): Stage => {
     const { width, height, data } = img;
     const cx = width / 2;
     const cy = height / 2;
-    const maxDist = Math.sqrt(cx * cx + cy * cy);
+    const maxDistSq = cx * cx + cy * cy;
+    // dist^2.2 = sqrt(distSq)^2.2 = distSq^1.1 — skips the sqrt entirely
+    const invMaxDistPow = 1 / Math.pow(maxDistSq, 1.1);
+
+    const dx2 = new Float64Array(width);
+    for (let x = 0; x < width; x++) {
+      const dx = x - cx;
+      dx2[x] = dx * dx;
+    }
 
     for (let y = 0; y < height; y++) {
+      const dy = y - cy;
+      const dy2 = dy * dy;
+      const rowOffset = y * width;
       for (let x = 0; x < width; x++) {
-        const dx = x - cx;
-        const dy = y - cy;
-        const dist = Math.sqrt(dx * dx + dy * dy) / maxDist;
-        const falloff = 1 - strength * Math.pow(dist, 2.2);
-        const idx = (y * width + x) * 4;
-
-        data[idx] = clamp(data[idx] * falloff);
-        data[idx + 1] = clamp(data[idx + 1] * falloff);
-        data[idx + 2] = clamp(data[idx + 2] * falloff);
+        const falloff = 1 - strength * Math.pow(dx2[x] + dy2, 1.1) * invMaxDistPow;
+        const idx = (rowOffset + x) * 4;
+        data[idx] *= falloff;
+        data[idx + 1] *= falloff;
+        data[idx + 2] *= falloff;
       }
     }
   };
@@ -305,13 +316,14 @@ export const grainStage = (amount: number): Stage => {
   return (img) => {
     if (strength <= 0) return;
     const d = img.data;
+    const len = d.length;
     const scale = strength * 35;
 
-    for (let i = 0; i < d.length; i += 4) {
+    for (let i = 0; i < len; i += 4) {
       const noise = (Math.random() - 0.5) * scale;
-      d[i] = clamp(d[i] + noise);
-      d[i + 1] = clamp(d[i + 1] + noise);
-      d[i + 2] = clamp(d[i + 2] + noise);
+      d[i] += noise;
+      d[i + 1] += noise;
+      d[i + 2] += noise;
     }
   };
 };
@@ -322,27 +334,49 @@ export const sharpenStage = (amount: number): Stage => {
     if (strength <= 0) return;
     const { width, height, data } = img;
     const src = new Uint8ClampedArray(data);
+    const center = 1 + 4 * strength;
+    const edge = -strength;
 
-    const kernelCenter = 1 + 4 * strength;
-    const kernelEdge = -strength;
-
-    const sample = (x: number, y: number, c: number) => {
-      const cx = Math.min(width - 1, Math.max(0, x));
-      const cy = Math.min(height - 1, Math.max(0, y));
-      return src[(cy * width + cx) * 4 + c];
-    };
-
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const idx = (y * width + x) * 4;
+    // Interior: direct indexing, no bounds checks
+    for (let y = 1; y < height - 1; y++) {
+      const row = y * width;
+      const rowAbove = row - width;
+      const rowBelow = row + width;
+      for (let x = 1; x < width - 1; x++) {
+        const idx = (row + x) * 4;
+        const idxUp = (rowAbove + x) * 4;
+        const idxDown = (rowBelow + x) * 4;
         for (let c = 0; c < 3; c++) {
-          const center = sample(x, y, c) * kernelCenter;
-          const neighbors =
-            (sample(x - 1, y, c) + sample(x + 1, y, c) + sample(x, y - 1, c) + sample(x, y + 1, c)) *
-            kernelEdge;
-          data[idx + c] = clamp(center + neighbors);
+          data[idx + c] =
+            src[idx + c] * center +
+            (src[idx - 4 + c] + src[idx + 4 + c] + src[idxUp + c] + src[idxDown + c]) * edge;
         }
       }
+    }
+
+    // Border: 1px ring only — bounds-checked sampling
+    const clampX = (x: number) => (x < 0 ? 0 : x >= width ? width - 1 : x);
+    const clampY = (y: number) => (y < 0 ? 0 : y >= height ? height - 1 : y);
+    const sampleClamped = (x: number, y: number, c: number) =>
+      src[(clampY(y) * width + clampX(x)) * 4 + c];
+
+    const writeBorderPixel = (x: number, y: number) => {
+      const idx = (y * width + x) * 4;
+      for (let c = 0; c < 3; c++) {
+        data[idx + c] =
+          sampleClamped(x, y, c) * center +
+          (sampleClamped(x - 1, y, c) + sampleClamped(x + 1, y, c) +
+           sampleClamped(x, y - 1, c) + sampleClamped(x, y + 1, c)) * edge;
+      }
+    };
+
+    for (let x = 0; x < width; x++) {
+      writeBorderPixel(x, 0);
+      writeBorderPixel(x, height - 1);
+    }
+    for (let y = 1; y < height - 1; y++) {
+      writeBorderPixel(0, y);
+      writeBorderPixel(width - 1, y);
     }
   };
 };
