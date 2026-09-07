@@ -1,5 +1,5 @@
+import SidebarCoreButton from '@/components/SidebarCoreButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SidebarCoreButton from '@/middleware/interface/sidebar/SidebarCoreButton';
 import BYOKPopover from '@/middleware/windows/settings/BYOKPopover';
 import LayoutPopover from '@/middleware/windows/settings/LayoutPopover';
 import { Box, Tooltip, Typography } from '@mui/material';

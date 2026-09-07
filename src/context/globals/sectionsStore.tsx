@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Section } from '@/hooks/sections/useTransform_AllSections';
 import { createContext, useContext, type ReactNode } from 'react';
 
 const SectionsContext = createContext<Section[]>([]);

@@ -1,5 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
+import DescribePhotoReadOnly from '@/components/DescribePhotoReadOnly';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
@@ -8,7 +9,6 @@ import { useDescriptions } from '@/context/descriptionsStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { type GalleryPhoto } from '@/lib/galleryData';
-import DescribePhotoReadOnly from '@/middleware/interface/preview/DescribePhotoReadOnly';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
 import dayjs from 'dayjs';

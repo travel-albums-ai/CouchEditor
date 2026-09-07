@@ -12,7 +12,6 @@
 
 import type { GalleryPhoto } from "../../../lib/galleryData";
 import { composeUrl } from "../../../lib/thumbnailService";
-import type { Stage } from "../../interface/adjustments/types";
 import {
   blackAndWhiteStage,
   brightnessStage,
@@ -33,7 +32,8 @@ import {
   sharpenStage,
   vibranceStage,
   vignetteStage,
-} from "../../interface/adjustments/utils";
+} from "../../../lib/utils";
+import type { Stage } from "../../interface/adjustments/types";
 import type {
   NodeOutputs,
   PipelineEvaluateMessage,
