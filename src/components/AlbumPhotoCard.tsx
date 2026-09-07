@@ -1,4 +1,3 @@
-import AlbumPhotoCardTags from '@/components/albumPhotoCard/AlbumPhotoCardTags';
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
@@ -6,7 +5,6 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useDescriptions } from '@/context/descriptionsStore';
-import { useFavorites } from '@/context/favoritesStore';
 import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { type GalleryPhoto } from '@/lib/galleryData';
@@ -125,11 +123,11 @@ function AlbumPhotoCard({
     (state) => state.previewPhotoObj?.id === photo.id,
   );
 
-  const { isFavorite } = useFavorites();
+  // const { isFavorite } = useFavorites();
 
   const { ref, inView } = useInView();
 
-  const favorite = isFavorite(photo.id);
+  // const favorite = isFavorite(photo.id);
   const isSelected = useSelected_isSelected(photo.id);
 
   const hasGps =
@@ -227,20 +225,20 @@ function AlbumPhotoCard({
           </Box>}
           {inView && (
             <>
-              {(selectMode || favorite) && (
+              {(selectMode) && (
                 <GeneralRegistryToolbar
                   fullWidth={false}
                   group="album-photo-card"
                   sx={toolbarSx}
                   context={{
                     photoId: photo.id,
-                    favorite,
+                    // favorite,
                     selectMode,
                   }}
                 />
               )}
 
-              {showTags && <AlbumPhotoCardTags photo={photo} />}
+              {/* {showTags && <AlbumPhotoCardTags photo={photo} />} */}
 
               {showDescription && !isHovered && hasDescription(photo.id) && (
                 <DescribePhotoReadOnly
