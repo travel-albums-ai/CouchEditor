@@ -1,3 +1,5 @@
+import { highlightsStage } from '@/lib/utils';
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/AdjustmentPreview';
 import { createSliderNode } from "../AdjustmentSliderNode";
 
 export default createSliderNode({
@@ -7,5 +9,5 @@ export default createSliderNode({
   defaultValue: 0,
   type: "highlights",
   label: "Highlights",
-  info: () => <small>Recover or control bright areas</small>,
+  info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={highlightsStage} label="Highlights" />
 });

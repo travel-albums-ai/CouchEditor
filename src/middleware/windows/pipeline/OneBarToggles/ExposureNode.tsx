@@ -1,3 +1,5 @@
+import { exposureStage } from '@/lib/utils';
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/AdjustmentPreview';
 import { createSliderNode } from "../AdjustmentSliderNode";
 
 export default createSliderNode({
@@ -6,4 +8,5 @@ export default createSliderNode({
   step: 0.1,
   defaultValue: 0,
   type: "exposure",
+  info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={exposureStage} label="Exposure" />
 });

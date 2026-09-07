@@ -8,7 +8,5 @@ export default createSliderNode({
   step: 1,
   defaultValue: 0,
   type: "hdr",
-  info: ({ amount }) => (
-    <AdjustmentPreview amount={amount} algorithm={hdrEffectStage} label="HDR" />
-  )
+  info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={hdrEffectStage} label="HDR" />
 });

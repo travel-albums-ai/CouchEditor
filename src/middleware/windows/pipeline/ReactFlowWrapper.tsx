@@ -58,6 +58,8 @@ import RotateNode from "./OneBarToggles/RotateNode";
 import SaturationNode from "./OneBarToggles/SaturationNode";
 import ShadowsNode from "./OneBarToggles/ShadowsNode";
 import SharpenNode from "./OneBarToggles/SharpenNode";
+import VibranceNode from "./OneBarToggles/VibranceNode";
+import VignetteNode from "./OneBarToggles/VignetteNode";
 import PerspectiveNode from "./PerspectiveNode";
 import PhotoHistogramNode from "./PhotoHistogramNode";
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
@@ -67,9 +69,7 @@ import SepiaNode from "./SepiaNode";
 import SinglePhotoViewerNode from "./SinglePhotoViewerNode";
 import SourceNode from "./SourceNode";
 import { VIEWER_NODE_TYPES } from "./types";
-import VibranceNode from "./VibranceNode";
 import ViewerNode from "./ViewerNode";
-import VignetteNode from "./VignetteNode";
 
 const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 

@@ -1,12 +1,12 @@
-import { contrastStage } from '@/lib/utils';
+import { vignetteStage } from '@/lib/utils';
 import { AdjustmentPreview } from '@/middleware/windows/pipeline/AdjustmentPreview';
 import { createSliderNode } from "../AdjustmentSliderNode";
 
 export default createSliderNode({
-  min: -100,
+  min: 0,
   max: 100,
   step: 1,
   defaultValue: 0,
-  type: "contrast",
-  info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={contrastStage} label="Contrast" />
+  type: "vignette",
+  info: ({ amount }) => <AdjustmentPreview amount={amount} algorithm={vignetteStage} label="Vignette" />
 });
