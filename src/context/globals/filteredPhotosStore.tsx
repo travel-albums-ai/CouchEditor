@@ -1,12 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useFilter_AllPhotos } from '@/hooks/pipeline/useFilter_AllPhotos';
 import type { GalleryPhoto } from '@/lib/galleryData';
 import { createContext, useContext, type ReactNode } from 'react';
 
 const FilteredPhotosContext = createContext<GalleryPhoto[]>([]);
 
 export function FilteredPhotosProvider({ children }: { children: ReactNode }) {
-  const photos = useFilter_AllPhotos();
+  const photos = [] as GalleryPhoto[];
 
   return (
     <FilteredPhotosContext.Provider value={photos}>
