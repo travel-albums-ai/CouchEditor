@@ -2,20 +2,20 @@ import OnboardingButton from '@/middleware/windows/onboarding/OnboardingButton';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
-import { FolderOutput, SquareMousePointer } from 'lucide-react';
+import { Astroid, Turtle } from 'lucide-react';
 
 const phaseSteps = [
   {
     key: '1',
-    icon: <SquareMousePointer />,
-    titleKey: 'onboardingPhaseGoogleTakeoutTitle',
-    descriptionKey: 'onboardingPhaseGoogleTakeoutDescription',
+    icon: <Astroid />,
+    titleKey: 'AI as BYOK',
+    descriptionKey: 'Add AI features to your pipeline to enhance the capabilities.',
   },
   {
     key: '2',
-    icon: <FolderOutput />,
-    titleKey: 'onboardingPhaseConfigureFoldersTitle',
-    descriptionKey: 'onboardingPhaseConfigureFoldersDescription',
+    icon: <Turtle />,
+    titleKey: "High Performance",
+    descriptionKey: 'Achieve high performance in your pipelines with optimized configurations. Benefits include faster execution and efficient resource utilization.',
   },
 ]
 

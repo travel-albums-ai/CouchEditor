@@ -2,27 +2,27 @@ import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhas
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
 import { Typography } from '@mui/material';
-import { Database, LayoutPanelLeft, SquareMousePointer } from 'lucide-react';
+import { GlobeOff, Save, Workflow } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
   {
     key: '1',
-    icon: <SquareMousePointer />,
-    titleKey: 'Download and Prepare ',
-    descriptionKey: "Fetch your images, indexer and configure the folders to start indexing your photos.",
+    icon: <GlobeOff />,
+    titleKey: 'Locally running',
+    descriptionKey: "All your data is stored and processed locally on your machine. Except AI features which may require cloud processing.",
   },
   {
     key: '2',
-    icon: <Database />,
-    titleKey: "Index the photos",
-    descriptionKey: "Let the indexer run and index your photos. This may take some time depending on the number of photos you have.",
+    icon: <Workflow />,
+    titleKey: "Drag and Drop",
+    descriptionKey: "Build interactive workflows to process and manage photod efficiently.",
   },
   {
     key: '3',
-    icon: <LayoutPanelLeft />,
-    titleKey: 'Hello memories! 🌍 🍕 🐈 🏔️ ⛵ 🥰 ',
-    descriptionKey: 'Enjoy your travel albums! Remember your trips, your meals, your adventures and share them with your friends and family.',
+    icon: <Save />,
+    titleKey: 'Exchange with others pipelines',
+    descriptionKey: 'Build and share reusable pipelines with others.',
   },
 ]
 
