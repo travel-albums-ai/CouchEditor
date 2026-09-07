@@ -1,5 +1,8 @@
 import { Stage } from '@/middleware/interface/adjustments/types';
 
+const LUM_R = 0.2126, LUM_G = 0.7152, LUM_B = 0.0722;
+const INV_255_SQ = 1 / (255 * 255);
+
 export function clamp(v: number) {
   return Math.max(0, Math.min(255, v));
 }
@@ -60,13 +63,26 @@ export const highlightsStage = (amount: number): Stage => {
 
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const luminance = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
-      const highlightWeight = luminance * luminance;
+    const len = d.length;
 
-      d[i] = clamp(d[i] + (strength >= 0 ? (255 - d[i]) * strength : d[i] * strength) * highlightWeight);
-      d[i + 1] = clamp(d[i + 1] + (strength >= 0 ? (255 - d[i + 1]) * strength : d[i + 1] * strength) * highlightWeight);
-      d[i + 2] = clamp(d[i + 2] + (strength >= 0 ? (255 - d[i + 2]) * strength : d[i + 2] * strength) * highlightWeight);
+    if (strength >= 0) {
+      for (let i = 0; i < len; i += 4) {
+        const r = d[i], g = d[i + 1], b = d[i + 2];
+        const rawLum = LUM_R * r + LUM_G * g + LUM_B * b;
+        const w = rawLum * rawLum * INV_255_SQ * strength;
+        d[i] = r + (255 - r) * w;
+        d[i + 1] = g + (255 - g) * w;
+        d[i + 2] = b + (255 - b) * w;
+      }
+    } else {
+      for (let i = 0; i < len; i += 4) {
+        const r = d[i], g = d[i + 1], b = d[i + 2];
+        const rawLum = LUM_R * r + LUM_G * g + LUM_B * b;
+        const w = rawLum * rawLum * INV_255_SQ * strength;
+        d[i] = r + r * w;
+        d[i + 1] = g + g * w;
+        d[i + 2] = b + b * w;
+      }
     }
   };
 };
@@ -76,25 +92,39 @@ export const shadowsStage = (amount: number): Stage => {
 
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const luminance = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
-      const shadowWeight = (1 - luminance) * (1 - luminance);
+    const len = d.length;
 
-      d[i] = clamp(d[i] + (strength >= 0 ? (255 - d[i]) * strength : d[i] * strength) * shadowWeight);
-      d[i + 1] = clamp(d[i + 1] + (strength >= 0 ? (255 - d[i + 1]) * strength : d[i + 1] * strength) * shadowWeight);
-      d[i + 2] = clamp(d[i + 2] + (strength >= 0 ? (255 - d[i + 2]) * strength : d[i + 2] * strength) * shadowWeight);
+    if (strength >= 0) {
+      for (let i = 0; i < len; i += 4) {
+        const r = d[i], g = d[i + 1], b = d[i + 2];
+        const inv = 255 - (LUM_R * r + LUM_G * g + LUM_B * b);
+        const w = inv * inv * INV_255_SQ * strength;
+        d[i] = r + (255 - r) * w;
+        d[i + 1] = g + (255 - g) * w;
+        d[i + 2] = b + (255 - b) * w;
+      }
+    } else {
+      for (let i = 0; i < len; i += 4) {
+        const r = d[i], g = d[i + 1], b = d[i + 2];
+        const inv = 255 - (LUM_R * r + LUM_G * g + LUM_B * b);
+        const w = inv * inv * INV_255_SQ * strength;
+        d[i] = r + r * w;
+        d[i + 1] = g + g * w;
+        d[i + 2] = b + b * w;
+      }
     }
   };
 };
 
 export const gammaStage = (gamma: number): Stage => {
-  const lut = new Uint8Array(256);
+  const lut = new Uint8ClampedArray(256); // auto rounds/clamps on write
   for (let i = 0; i < 256; i++) {
-    lut[i] = clamp(Math.round(Math.pow(i / 255, gamma) * 255));
+    lut[i] = Math.pow(i / 255, gamma) * 255;
   }
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
       d[i] = lut[d[i]];
       d[i + 1] = lut[d[i + 1]];
       d[i + 2] = lut[d[i + 2]];
@@ -103,16 +133,20 @@ export const gammaStage = (gamma: number): Stage => {
 };
 
 export const luminosityStage = (strength: number): Stage => {
+  const inv = 1 - strength;
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const lum = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
-      d[i] = clamp(d[i] + (lum - d[i]) * strength);
-      d[i + 1] = clamp(d[i + 1] + (lum - d[i + 1]) * strength);
-      d[i + 2] = clamp(d[i + 2] + (lum - d[i + 2]) * strength);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      const lum = LUM_R * d[i] + LUM_G * d[i + 1] + LUM_B * d[i + 2];
+      d[i] = d[i] * inv + lum * strength;
+      d[i + 1] = d[i + 1] * inv + lum * strength;
+      d[i + 2] = d[i + 2] * inv + lum * strength;
     }
   };
 };
+
+///
 
 export const exposureStage = (exposureEV: number): Stage => {
   const factor = Math.pow(2, exposureEV);
@@ -157,7 +191,6 @@ export const saturationStage = (amount: number): Stage => {
     }
   };
 };
-
 
 export const hueRotationStage = (amount: number): Stage => {
   const rotation = ((amount % 360) + 360) % 360 / 360;
@@ -315,6 +348,8 @@ export const sharpenStage = (amount: number): Stage => {
   };
 };
 
+
+//// NOT USED
 
 export const whitesBlacksStage = (whites: number, blacks: number): Stage => {
   return (img) => {
