@@ -37,19 +37,6 @@ export default function AllPhotosGridVirtuoso({ photos, width: propWidth, height
   const width = propWidth ?? useAlbumPhotoCardStoreSelector((state) => state.width);
   const height = propHeight ?? useAlbumPhotoCardStoreSelector((state) => state.height);
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
-  // const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj)
-
-  // const photosRef = useRef(photos);
-  // photosRef.current = photos;
-
-  // useEffect(() => {
-  //   if (!previewPhotoObj) return;
-  //   const index = photosRef.current.findIndex((p) => p.id === previewPhotoObj.id);
-  //   if (index >= 0) {
-  //     virtuosoRef.current?.scrollToIndex({ index, align: 'center', behavior: 'auto' });
-  //   }
-  // }, [previewPhotoObj]);
-
 
   const itemContent = useCallback(
     (index: number) => {

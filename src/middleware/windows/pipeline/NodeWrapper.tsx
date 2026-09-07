@@ -40,7 +40,7 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
       >
         {helper && <IconButton
           sx={{ color: theme.palette.text.disabled }}
-          onClick={() => setShowHelper(!showHelper)} size="small">
+          onClick={() => setShowHelper((prev) => !prev)} size="small">
           <Info size={16} />
         </IconButton>}
       </NodeHeader>}
@@ -51,7 +51,7 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
         borderTopRightRadius: 0,
         display: 'flex',
         flexDirection: 'column',
-        gap: 2,
+        gap: 0,
         bgcolor: `color-mix(in srgb, ${theme.palette.background.paper} 100%, transparent 10%)`,
       }}>
         <Box sx={{
@@ -62,7 +62,10 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
         }}>
           {children}
         </Box>
-        {showHelper && helper}
+
+        {showHelper && <Box sx={{
+          pb: 1,
+        }}>{helper}</Box>}
       </Box>
 
     </Box>
