@@ -2,13 +2,10 @@ import { Box } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import LightboxViewer from './LightboxViewer';
 
-import AlbumsMetaDetails from '@/components/AlbumsMetaDetails';
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
-import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useFilteredPhotos_GLOBAL } from '@/context/globals/filteredPhotosStore';
 import { useSections_GLOBAL } from '@/context/globals/sectionsStore';
@@ -16,16 +13,13 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import useKeyboardNav from '@/hooks/useKeyboardNav';
 import useWheelNav from '@/hooks/useWheelNav';
 import { GalleryPhoto } from '@/lib/galleryData';
-import { composeUrl } from '@/lib/thumbnailService';
-import DescribePhoto from '@/middleware/interface/preview/DescribePhoto';
-import EXIFSection from '@/middleware/windows/lightbox/EXIFSection';
-import LightboxBackground from '@/middleware/windows/lightbox/LightboxBackground';
 import LightboxFilmstripNg from '@/middleware/windows/lightbox/LightboxFilmstripNg';
-import LocationSection from '@/middleware/windows/lightbox/LocationSection';
-import { ChevronLeft, ChevronRight, FileText } from 'lucide-react';
+import LightboxViewer from '@/middleware/windows/lightbox/LightboxViewer';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
+  const lightboxImages = useSettingsStoreSelector(s => s.lightboxImages);
   const previewPhotoObj: GalleryPhoto | undefined = useSettingsStoreSelector(s => s.previewPhotoObj);
 
   const width = useAlbumPhotoCardStoreSelector(state => state.width);
@@ -44,7 +38,8 @@ export default function LightboxWindow() {
 
   const foundSet = foundSection?.data?.find((d: any) => d.name === id);
 
-  const photos = showAll ? photosFiltered : foundSet?.photos || [];
+  // const photos = showAll ? photosFiltered : foundSet?.photos || [];
+  const photos = lightboxImages
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -117,16 +112,16 @@ export default function LightboxWindow() {
       const photo = photos[index];
       if (!photo) continue;
       const image = new Image();
-      image.src = composeUrl(photo, true);
+      image.src = photo
     }
   }, [showWindow, currentIndex, photos]);
 
-  if (!showWindow || !currentPhoto) return null;
+  // if (!showWindow || !currentPhoto) return null;
 
   return (
-    <>
+    <>ss
       <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1, position: 'relative' }}>
-        <LightboxBackground photo={currentPhoto} />
+        {/* <LightboxBackground photo={currentPhoto} /> */}
         <Box sx={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 0, minHeight: 0, minWidth: 0, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
 
           <Box sx={{ display: 'flex', flexDirection: 'row', flex: 1, width: '100%', height: '100%', overflow: 'hidden', gap: 1 }}>
@@ -143,7 +138,7 @@ export default function LightboxWindow() {
           </Box>
         </Box>
 
-        {currentPhoto && <Box key={currentPhoto.id} sx={{
+        <Box sx={{
           flex: '0 0 500px',
           minHeight: 0,
           minWidth: 0,
@@ -181,20 +176,20 @@ export default function LightboxWindow() {
 
 
 
-          <LocationSection photo={currentPhoto} />
+          {/* <LocationSection photo={currentPhoto} /> */}
 
-          <SettingsSection transparent={true} gap={1} divider={false} title="Metadata" icon={<FileText />}>
+          {/* <SettingsSection transparent={true} gap={1} divider={false} title="Metadata" icon={<FileText />}>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'center', width: '100%', p: 1 }}>
               <AlbumsMetaDetails photos={[currentPhoto]} minWidth={25} />
             </Box>
             <DescribePhoto photoId={currentPhoto.id} />
-          </SettingsSection>
+          </SettingsSection> */}
 
 
-          <EXIFSection photo={currentPhoto} />
+          {/* <EXIFSection photo={currentPhoto} /> */}
 
 
-        </Box>}
+        </Box>
       </Box>
     </>
   );

@@ -1,6 +1,7 @@
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 import { GalleryPhoto } from '@/lib/galleryData';
 import type { SupportedLanguage } from '@/lib/i18n';
+import { ImageArray } from '@/middleware/windows/pipeline/types';
 
 type SettingsStore = {
   onboarding: boolean,
@@ -10,6 +11,7 @@ type SettingsStore = {
   indexerStartedAt: number | null,
   serverOnline: boolean,
   lightboxOpen: boolean,
+  lightboxImages: ImageArray,
   pipelineOpen: boolean,
 
   performanceMode: boolean,

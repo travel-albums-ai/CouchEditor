@@ -1,5 +1,6 @@
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
 import { Box, Button } from '@mui/material';
@@ -53,6 +54,8 @@ function ViewerNode({
 }: NodeProps<Node<{ image?: ImageArray }>>) {
   const images = data.image ?? [];
   const [downloading, setDownloading] = useState(false);
+  const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
+  const { setSetting } = useSettings();
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -73,6 +76,20 @@ function ViewerNode({
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
 
 
+        <Button
+          variant="outlined"
+          fullWidth
+          startIcon={<Download size={14} />}
+          disabled={images.length === 0 || downloading}
+          onClick={() => {
+            setSetting(prev => ({ ...prev,
+              lightboxOpen: true,
+              lightboxImages: images
+            }));
+          }}
+        >
+          Lightbox
+        </Button>
         <Button
           variant="outlined"
           fullWidth
