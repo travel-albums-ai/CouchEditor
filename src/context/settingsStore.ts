@@ -1,5 +1,4 @@
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
-import { GalleryPhoto } from '@/lib/galleryData';
 import type { SupportedLanguage } from '@/lib/i18n';
 import { ImageArray } from '@/middleware/windows/pipeline/types';
 
@@ -31,7 +30,7 @@ type SettingsStore = {
   scrollerAutoScroll: boolean,
   mapShowPreview: boolean,
   activeSettingsTab?: string,
-  previewPhotoObj?: GalleryPhoto
+  previewPhotoObj?: string
   focusedPhoto: string,
   loading: boolean,
   loadingValue: number | null,
@@ -198,7 +197,7 @@ export const useSettings = () => {
         },
       }))
     },
-    setPreviewPhotoObj: (photo: GalleryPhoto | undefined) => {
+    setPreviewPhotoObj: (photo: string | undefined) => {
       setSetting(prev => ({
         ...prev,
         previewPhotoObj: photo,

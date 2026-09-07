@@ -1,3 +1,4 @@
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/middleware/windows/pipeline/NodeWrapper';
@@ -27,10 +28,6 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
       urls.forEach((url) => URL.revokeObjectURL(url));
     };
   }, [files]);
-
-  const label = files.length
-    ? `${files.length} photo${files.length === 1 ? "" : "s"} selected`
-    : "Choose photos";
 
   return (
     <NodeWrapper type="source">
@@ -70,10 +67,24 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         {previewUrls.length > 0 ? (
           <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-            {previewUrls.map((value, index) => (
+            {/* {previewUrls.map((value, index) => (
               <img
                 key={index}
                 src={value}
+                alt=""
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '300px',
+                  objectFit: 'cover',
+                  borderRadius: '6px',
+                }}
+              />
+            ))} */}
+            {previewUrls.map((value, index) => (
+              <AlbumPhotoThumbnailBackgroundNg
+                key={index}
+                photo={{ name: files[index].name, src: value}}
                 alt=""
                 style={{
                   display: 'block',
