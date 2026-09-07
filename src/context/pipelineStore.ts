@@ -1,3 +1,4 @@
+import { samplePipeline } from '@/context/samplePipelines';
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 import type { Edge, Node } from '@xyflow/react';
 
@@ -5,6 +6,8 @@ export type PipelineGraph = {
   nodes: Node[]
   edges: Edge[]
 }
+
+
 
 export type SavedPipeline = PipelineGraph & {
   id: string
@@ -17,7 +20,8 @@ type PipelineStore = {
 }
 
 const defaults: PipelineStore = {
-  pipelines: [],
+  // pipelines: [],
+  pipelines: samplePipeline as SavedPipeline[],
   showToolbox: true
 }
 

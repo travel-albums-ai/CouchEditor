@@ -41,11 +41,9 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   import('workbox-window').then(({ Workbox }) => {
     try {
       const wb = new Workbox('/sw.js');
-      // expose workbox instance so the UI can trigger skip-waiting
       try { (window as any).__WORKBOX = wb } catch {}
 
       wb.addEventListener('waiting', () => {
-        // signal UI to show the update dialog instead of using window.confirm
         try {
           setSettingsStore((prev: any) => ({ ...prev, newVersion: true }))
         } catch (e) {
@@ -59,7 +57,6 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 
       wb.register();
     } catch (err) {
-      // ignore registration errors in dev
       console.warn('SW registration failed', err);
     }
   }).catch(() => {
