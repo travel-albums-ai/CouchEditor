@@ -7,6 +7,14 @@ export function clamp(v: number) {
   return Math.max(0, Math.min(255, v));
 }
 
+function hueToRgb(p: number, q: number, t: number): number {
+  const wrapped = (t + 1) % 1;
+  if (wrapped < 1 / 6) return p + (q - p) * 6 * wrapped;
+  if (wrapped < 1 / 2) return q;
+  if (wrapped < 2 / 3) return p + (q - p) * (2 / 3 - wrapped) * 6;
+  return p;
+}
+
 export const invertStage = (): Stage => {
   return (img) => {
     const d = img.data;
@@ -146,20 +154,15 @@ export const luminosityStage = (strength: number): Stage => {
   };
 };
 
-///
-
 export const exposureStage = (exposureEV: number): Stage => {
   const factor = Math.pow(2, exposureEV);
-
-  const lut = new Uint8Array(256);
-
-  for (let i = 0; i < 256; i++) {
-    lut[i] = clamp(Math.round(i * factor));
-  }
+  const lut = new Uint8ClampedArray(256); // clamps/rounds on write
+  for (let i = 0; i < 256; i++) lut[i] = i * factor;
 
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
       d[i] = lut[d[i]];
       d[i + 1] = lut[d[i + 1]];
       d[i + 2] = lut[d[i + 2]];
@@ -169,78 +172,74 @@ export const exposureStage = (exposureEV: number): Stage => {
 
 export const contrastStage = (amount: number): Stage => {
   const factor = (259 * (amount + 255)) / (255 * (259 - amount));
+  const lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = factor * (i - 128) + 128;
+
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(factor * (d[i] - 128) + 128);
-      d[i + 1] = clamp(factor * (d[i + 1] - 128) + 128);
-      d[i + 2] = clamp(factor * (d[i + 2] - 128) + 128);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      d[i] = lut[d[i]];
+      d[i + 1] = lut[d[i + 1]];
+      d[i + 2] = lut[d[i + 2]];
     }
   };
 };
 
 export const saturationStage = (amount: number): Stage => {
   const factor = 1 + amount / 100;
+  const invFactor = 1 - factor;
+
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
       const lum = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
-      d[i] = clamp(lum + (d[i] - lum) * factor);
-      d[i + 1] = clamp(lum + (d[i + 1] - lum) * factor);
-      d[i + 2] = clamp(lum + (d[i + 2] - lum) * factor);
+      const lumTerm = lum * invFactor; // shared across all 3 channels
+      d[i] = d[i] * factor + lumTerm;
+      d[i + 1] = d[i + 1] * factor + lumTerm;
+      d[i + 2] = d[i + 2] * factor + lumTerm;
     }
   };
 };
 
 export const hueRotationStage = (amount: number): Stage => {
-  const rotation = ((amount % 360) + 360) % 360 / 360;
+  const rotation = (((amount % 360) + 360) % 360) / 360;
 
   return (img) => {
     const d = img.data;
+    const len = d.length;
 
-    for (let i = 0; i < d.length; i += 4) {
+    for (let i = 0; i < len; i += 4) {
       const red = d[i] / 255;
       const green = d[i + 1] / 255;
       const blue = d[i + 2] / 255;
       const max = Math.max(red, green, blue);
       const min = Math.min(red, green, blue);
+
+      if (max === min) continue; // gray pixel, hue is undefined — skip
+
       const lightness = (max + min) / 2;
-
-      if (max === min) continue;
-
       const delta = max - min;
-      const saturation = lightness > 0.5
-        ? delta / (2 - max - min)
-        : delta / (max + min);
-      let hue: number;
+      const saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
 
-      if (max === red) {
-        hue = (green - blue) / delta + (green < blue ? 6 : 0);
-      } else if (max === green) {
-        hue = (blue - red) / delta + 2;
-      } else {
-        hue = (red - green) / delta + 4;
-      }
+      let hue: number;
+      if (max === red) hue = (green - blue) / delta + (green < blue ? 6 : 0);
+      else if (max === green) hue = (blue - red) / delta + 2;
+      else hue = (red - green) / delta + 4;
 
       hue = (hue / 6 + rotation) % 1;
-      const q = lightness < 0.5
-        ? lightness * (1 + saturation)
-        : lightness + saturation - lightness * saturation;
+      const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
       const p = 2 * lightness - q;
-      const hueToRgb = (t: number) => {
-        const wrapped = (t + 1) % 1;
-        if (wrapped < 1 / 6) return p + (q - p) * 6 * wrapped;
-        if (wrapped < 1 / 2) return q;
-        if (wrapped < 2 / 3) return p + (q - p) * (2 / 3 - wrapped) * 6;
-        return p;
-      };
 
-      d[i] = clamp(hueToRgb(hue + 1 / 3) * 255);
-      d[i + 1] = clamp(hueToRgb(hue) * 255);
-      d[i + 2] = clamp(hueToRgb(hue - 1 / 3) * 255);
+      d[i] = hueToRgb(p, q, hue + 1 / 3) * 255;
+      d[i + 1] = hueToRgb(p, q, hue) * 255;
+      d[i + 2] = hueToRgb(p, q, hue - 1 / 3) * 255;
     }
   };
 };
+
+///
 
 export const vibranceStage = (amount: number): Stage => {
   const strength = amount / 100;

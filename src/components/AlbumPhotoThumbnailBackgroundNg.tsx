@@ -8,7 +8,6 @@ type Props = {
   height?: number;
   style?: React.CSSProperties;
   className?: string;
-  original?: boolean;
 };
 
 export default function AlbumPhotoThumbnailBackgroundNg({
@@ -17,13 +16,9 @@ export default function AlbumPhotoThumbnailBackgroundNg({
   height,
   style,
   className,
-  original = false,
 }: Props) {
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
-  const { setSetting } = useSettings()
   const { setPreviewPhotoObj } = useSettings();
-
-  console.log('ddd',photo);
 
   const src = photo.src;
 
