@@ -19,6 +19,12 @@ function NodeWrapper({ children, type, helper } : { children: React.ReactNode, t
         gap: 0,
         borderRadius: 2,
         border: `1px solid ${theme.palette.divider}`,
+        boxShadow: `0 0 0px transparent`,
+        transition: 'box-shadow 0.25s ease',
+        '&:hover': {
+          boxShadow: `0 0px 3px ${theme.palette.primary.main}`,
+          border: `1px solid ${theme.palette.primary.main}42`,
+        },
       }}
       key={type}
     >
