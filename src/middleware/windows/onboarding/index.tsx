@@ -1,5 +1,4 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import OnboardingFolders from '@/middleware/windows/onboarding/OnboardingFolders';
 import OnboardingIndexer from '@/middleware/windows/onboarding/OnboardingIndexer';
 import OnboardingIndexing from '@/middleware/windows/onboarding/OnboardingIndexing';
 import OnboardingTakeout from '@/middleware/windows/onboarding/OnboardingTakeout';
@@ -52,7 +51,6 @@ export default function Onboarding() {
         {activeStep === 0 && <OnboardingWelcome />}
         {activeStep === 1 && <OnboardingTakeout />}
         {activeStep === 2 && <OnboardingIndexer />}
-        {activeStep === 3 && <OnboardingFolders />}
         {activeStep === 4 && <OnboardingIndexing />}
       </Box>
 
