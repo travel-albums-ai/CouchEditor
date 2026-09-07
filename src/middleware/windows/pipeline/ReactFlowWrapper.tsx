@@ -31,6 +31,7 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import FloatingStack from '@/middleware/windows/pipeline/FloatingStack';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -569,47 +570,17 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-
-
-        {showToolbox && <Stack
-          direction="row"
-          spacing={1}
-          sx={{ position: 'absolute',
-            top: 80, left: 12, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.paper',
-            border: '1px solid',
-            borderColor: 'divider',
-            p: 1, borderRadius: 2,
-            boxShadow: performanceMode ? 4 : 0,
-
-          }}
-        >
+        {showToolbox && <FloatingStack sx={{ top: 80, left: 12 }}>
           <NodeToolbox />
-        </Stack>}
+        </FloatingStack>}
 
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ position: 'absolute',
-            top: 12, left: 12, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.paper',
-            border: '1px solid',
-            borderColor: 'divider',
-            p: 1, borderRadius: 2,
-            boxShadow: performanceMode ? 4 : 0,
-
-          }}
-        >
+        <FloatingStack sx={{ top: 12, left: 12 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <img
               src="./couchLogo.png"
               alt="Logo"
               height={30}
               fetchPriority="high"
-              style={{
-                // opacity: 0.3,
-                // filter: 'grayscale(100%)',
-              }}
             />
             <TextField
               size="small"
@@ -643,20 +614,9 @@ function Pipeline() {
             ] satisfies GenericToggleButtonProps[]} />
 
           </Box>
-        </Stack>
+        </FloatingStack>
 
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ position: 'absolute',
-            top: 12, right: 20, zIndex: 10,
-            alignItems: 'center',bgcolor: 'background.paper',
-            border: '1px solid',
-            borderColor: 'divider',
-            p: 1, borderRadius: 2,
-            boxShadow: performanceMode ? 4 : 0,
-          }}
-        >
+        <FloatingStack sx={{ top: 12, right: 20 }}>
           <FormControl size="small" sx={{ minWidth: 180 }}>
             <Select
               value={currentPipelineId}
@@ -676,10 +636,11 @@ function Pipeline() {
             </Select>
           </FormControl>
           <GeneralRegistryToolbar
+            fullWidth={false}
             noGhost={true}
             group="header"
           />
-        </Stack>
+        </FloatingStack>
 
         <Stack
           direction="row"
