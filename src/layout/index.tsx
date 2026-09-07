@@ -15,13 +15,7 @@ export default function AppLayout() {
     <>
       <GeneralRegistryWindow />
       <MainDriver />
-
-
       <AiLoadingBar />
-
-
-      {/* <Header /> */}
-
       <ReactFlowWrapper />
 
       <Box

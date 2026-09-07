@@ -9,7 +9,6 @@ import { useSelected_isSelected } from '@/context/selectedStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { type GalleryPhoto } from '@/lib/galleryData';
 import DescribePhotoReadOnly from '@/middleware/interface/preview/DescribePhotoReadOnly';
-import AlbumMapPanel from '@/pages/components/AlbumMapPanel';
 import { Box, Card, Divider, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
 import dayjs from 'dayjs';
@@ -212,16 +211,6 @@ function AlbumPhotoCard({
                 onClick: () => setShowGps(!showGps),
               },
             ] satisfies GenericToggleButtonProps[]} />
-
-
-
-            {showGps && (
-              <Box sx={{ width: mapWidth || width * 0.75, height: mapHeight || height * 0.65 }}>
-                <AlbumMapPanel photos={[photo]} height={mapHeight || height * 0.65} />
-              </Box>
-            )}
-
-            {/* {showGps && <Box><AlbumMapPanel photos={[photo]} height={100} /></Box>} */}
           </Box>}
           {inView && (
             <>
@@ -237,8 +226,6 @@ function AlbumPhotoCard({
                   }}
                 />
               )}
-
-              {/* {showTags && <AlbumPhotoCardTags photo={photo} />} */}
 
               {showDescription && !isHovered && hasDescription(photo.id) && (
                 <DescribePhotoReadOnly
