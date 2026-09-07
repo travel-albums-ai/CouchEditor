@@ -3,13 +3,11 @@ import LoadingBar from '@/components/LoadingBar';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import GeneralRegistryWindow from '@/components/registry/GeneralRegistryWindow';
 import MainDriver from '@/components/tutorial/MainDriver';
-import { useSelectedStoreSelector } from '@/context/selectedStore';
 import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 
 export default function AppLayout() {
-  const selectedPhotos = useSelectedStoreSelector(s => s.photos)
 
   return (
     <>
@@ -39,7 +37,6 @@ export default function AppLayout() {
           noGhost
           noDivider={false}
           group="status-bar"
-          context={{ selectedPhotos }}
         />
       </Box>
     </>
