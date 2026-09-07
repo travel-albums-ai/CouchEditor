@@ -30,6 +30,7 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import { useSettingsStoreSelector } from '@/context/settingsStore';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import BlackAndWhiteNode from "./BlackAndWhiteNode";
@@ -176,6 +177,7 @@ function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
 
   const { screenToFlowPosition, fitView } = useReactFlow();
   const {
@@ -577,7 +579,7 @@ function Pipeline() {
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
-            boxShadow: 4,
+            boxShadow: performanceMode ? 4 : 0,
 
           }}
         >
@@ -625,7 +627,7 @@ function Pipeline() {
             border: '1px solid',
             borderColor: 'divider',
             p: 1, borderRadius: 2,
-            boxShadow: 4,
+            boxShadow: performanceMode ? 4 : 0,
           }}
         >
           <FormControl size="small" sx={{ minWidth: 180 }}>
@@ -663,7 +665,7 @@ function Pipeline() {
             sx={{
               width: 56,
               height: 56,
-              borderRadius: '50%',
+              borderRadius: 2,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -671,7 +673,7 @@ function Pipeline() {
               borderColor: trashActive ? 'error.main' : 'divider',
               bgcolor: trashActive ? 'error.main' : 'background.default',
               color: trashActive ? 'error.contrastText' : 'text.secondary',
-              boxShadow: 3,
+              boxShadow: performanceMode ? 4 : 0,
               transform: trashActive ? 'scale(1.15)' : 'scale(1)',
               transition: 'transform 0.15s ease-in-out, background-color 0.15s ease-in-out',
               cursor: currentPipelineId ? 'pointer' : 'default'
