@@ -1,5 +1,5 @@
-import AppRoutes from '@/components/AppRoutes';
 import { setSettingsStore } from '@/context/settingsStore';
+import AppLayout from '@/layout';
 import '@/lib/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
@@ -31,9 +31,8 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <SpeedInsights />
     <Analytics />
-
     <AppProviders>
-      <AppRoutes />
+      <AppLayout />
     </AppProviders>
   </QueryClientProvider>,
 )
