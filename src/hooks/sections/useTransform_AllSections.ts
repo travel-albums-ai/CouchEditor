@@ -1,7 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { useSidebarStoreSelector } from '@/context/sidebarStore';
 import { SectionType } from '@/hooks/sections/sectionTypes';
-import { useFilteredSections } from '@/hooks/sections/useFilteredSections';
 import { GalleryPhoto } from '@/lib/galleryData';
 import { useMemo } from 'react';
 
@@ -33,7 +32,7 @@ export function useTransform_AllSections(forced = false): Section[] {
     .trim()
     .toLowerCase();
 
-  const filteredSections = useFilteredSections(forced);
+  const filteredSections = [] as Section[];
 
   return useMemo(() => {
     let result = filteredSections;
