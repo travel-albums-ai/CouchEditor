@@ -515,7 +515,7 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        {showToolbox && <FloatingStack sx={{ top: 80, left: 12 }}>
+        {showToolbox && <FloatingStack sx={{ top: 80, left: 12, bottom: 10, overflow: 'auto' }}>
           <NodeToolbox />
         </FloatingStack>}
 

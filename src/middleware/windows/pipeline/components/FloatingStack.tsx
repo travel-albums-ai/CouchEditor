@@ -10,7 +10,6 @@ export default function FloatingStack({ children, sx } : { children: React.React
       spacing={1}
       sx={{ position: 'absolute',
         zIndex: 10,
-        alignItems: 'center',
         bgcolor: theme => performanceMode
           ? `color-mix(in srgb, ${theme.palette.background.paper} 95%, transparent 8%)`
           : 'background.paper',
@@ -23,7 +22,7 @@ export default function FloatingStack({ children, sx } : { children: React.React
         '&:hover': {
           transition: 'background-color 1s ease',
           bgcolor: theme => performanceMode
-            ? `color-mix(in srgb, color-mix(in srgb, ${theme.palette.background.paper} 95%, ${theme.palette.primary.main} 5%) 95%, transparent 8%)`
+            ? `color-mix(in srgb, color-mix(in srgb, ${theme.palette.background.paper} 95%, ${theme.palette.primary.main} 3%) 95%, transparent 8%)`
             : 'background.paper',
         },
         boxShadow: performanceMode

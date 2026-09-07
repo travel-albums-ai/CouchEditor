@@ -68,12 +68,13 @@ function NodeToolbox() {
 
   return <>
     <Box sx={{
-      display: 'flex', flexDirection: 'column',
+      display: 'flex',
+      flexDirection: 'column',
       gap: 0,
       m: 1,
       my: 1.5,
       borderRadius: 2,
-      overflowY: 'auto',
+      overflow: 'auto',
       p: 1,
     }}>
       {Object.entries(groupedPaletteItems).map(([group, items]) => (
