@@ -37,7 +37,7 @@ root.render(
   </QueryClientProvider>,
 )
 
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+if (import.meta.env.PROD && typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   import('workbox-window').then(({ Workbox }) => {
     try {
       const wb = new Workbox('/sw.js');
