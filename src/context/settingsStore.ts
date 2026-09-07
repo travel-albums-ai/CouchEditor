@@ -5,7 +5,6 @@ import type { SupportedLanguage } from '@/lib/i18n';
 type SettingsStore = {
   onboarding: boolean,
   newVersion?: boolean,
-  mascot: boolean,
   indexing: boolean,
   indexerProgress: any,
   indexerStartedAt: number | null,
@@ -91,7 +90,6 @@ const defaults: SettingsStore = {
   performanceMode: false,
   indexing: false,
   indexerProgress: { totalFound: 0, totalFiles: 0, done: 0, preindexed: 0, failed: 0 },
-  mascot: false,
   serverType: 'http',
   indexerStartedAt: null,
   lightboxOpen: false,

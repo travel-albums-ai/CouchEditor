@@ -2,7 +2,7 @@ import SolidChip from '@/components/SolidChip';
 import { useSettings } from '@/context/settingsStore';
 import { useFetch_TakeoutMetadata } from '@/hooks/remote/useFetch_TakeoutMetadata';
 import { Box, Button, Card, Typography } from '@mui/material';
-import { Astroid, Database, DatabaseSearch, PersonStanding } from 'lucide-react';
+import { Database, DatabaseSearch, PersonStanding } from 'lucide-react';
 import stc from 'string-to-color';
 
 export default function DashboardSuggestions() {
@@ -25,14 +25,6 @@ export default function DashboardSuggestions() {
       labels: ['refresh data'],
       actionTitle: 'Clear Cache',
       action: () => refetch()
-    },
-    {
-      title: 'SpotAI Mascot',
-      description: 'Show the AI Mascot companion to help you along',
-      icon: <Astroid />,
-      actionTitle: 'Toggle Mascot',
-      labels: ['companion', 'mascot'],
-      action: () => setSetting((prev) => ({ ...prev, mascot: !prev.mascot}))
     },
     {
       title: 'Trigger Indexer',

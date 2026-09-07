@@ -1,9 +1,8 @@
 import IndexerContent from '@/components/IndexerContent';
-import { TwinLensMascot } from '@/mascot/TwinLensMascot';
 import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import { Coffee } from 'lucide-react';
 
 const phaseSteps = [
@@ -26,13 +25,6 @@ export default function OnboardingIndexing() {
 
     <OnboardingWrapperInfo light={true}>
       <OnboardingPhasesList phaseSteps={phaseSteps} />
-
-      <Box sx={{ width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Tooltip arrow placement="bottom" title="Spot the mascot! It's SpotAI, the twin-lens mascot of Travel Albums. He loves to travel and take photos, just like you!">
-          <TwinLensMascot />
-        </Tooltip>
-      </Box>
-
 
     </OnboardingWrapperInfo>
   </>)
