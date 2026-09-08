@@ -127,6 +127,8 @@ const initialEdges: Edge[] = [
 const SNAP_GRID: [number, number] = [20, 20];
 const LAST_PIPELINE_STORAGE_KEY = 'lastOpenedPipelineId';
 const PIPELINE_FILE_EXTENSION = '.cep';
+const PIPELINE_NODE_COUNT_EVENT = 'pipeline:node-count';
+const PIPELINE_NODE_COUNT_REQUEST_EVENT = 'pipeline:node-count-request';
 
 function isPipelineGraph(value: unknown): value is PipelineGraph & { name?: unknown } {
   if (!value || typeof value !== 'object') return false;
@@ -161,6 +163,26 @@ function Pipeline() {
   const [currentPipelineName, setCurrentPipelineName] = useState('');
   const [isDirty, setIsDirty] = useState(false);
   const restoredPipelineRef = useRef(false);
+  const evaluationId = useRef(0);
+  const nodesRef = useRef(nodes);
+  const edgesRef = useRef(edges);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodes.length }));
+  }, [nodes.length]);
+
+  useEffect(() => {
+    const handleNodeCountRequest = () => {
+      window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodesRef.current.length }));
+    };
+
+    window.addEventListener(PIPELINE_NODE_COUNT_REQUEST_EVENT, handleNodeCountRequest);
+
+    return () => {
+      window.removeEventListener(PIPELINE_NODE_COUNT_REQUEST_EVENT, handleNodeCountRequest);
+      window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: 0 }));
+    };
+  }, []);
 
   useEffect(() => {
     if (restoredPipelineRef.current) return;
@@ -200,10 +222,6 @@ function Pipeline() {
   // Free the worker thread (and its in-memory AI result cache)
   // when the pipeline page unmounts.
   useEffect(() => () => terminatePipelineWorker(), []);
-
-  const evaluationId = useRef(0);
-  const nodesRef = useRef(nodes);
-  const edgesRef = useRef(edges);
 
   useEffect(() => {
     nodesRef.current = nodes;
