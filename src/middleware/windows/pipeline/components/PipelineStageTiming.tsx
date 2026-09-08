@@ -48,10 +48,10 @@ export default function PipelineStageTiming({
     };
   }, [nodeId, nodeType]);
 
-  return <>
+  return <Box>
     {isProcessing && <Box sx={{ opacity: 0.1 }}>
-      <Skeleton variant="text" width={70} sx={{ bgcolor: 'primary.main' }} />
+      <Skeleton variant="text" width={70} sx={{ bgcolor: 'primary.main' }} height={24} />
     </Box>}
-    {!isProcessing && <SolidChip count={durationMs === null ? '--' : durationMs.toFixed(1)} label="ms" minWidth={70} />}
-  </>;
+    {!isProcessing && <SolidChip count={durationMs === null ? '--' : durationMs.toFixed(1)} height={24} label="ms" minWidth={70} />}
+  </Box>;
 }

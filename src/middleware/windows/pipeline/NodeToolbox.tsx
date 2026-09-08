@@ -1,7 +1,7 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const paletteItems: Array<{
@@ -33,6 +33,7 @@ export const paletteItems: Array<{
   { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, groupKey: "pipelineGroupLight" },
   { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupLight" },
   { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
+  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
 
   { type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />, groupKey: "pipelineGroupColor" },
   { type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />, groupKey: "pipelineGroupColor" },
@@ -41,6 +42,8 @@ export const paletteItems: Array<{
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />, groupKey: "pipelineGroupColor" },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />, groupKey: "pipelineGroupColor" },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />, groupKey: "pipelineGroupColor" },
 
   { type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />, groupKey: "pipelineGroupDetail" },
   { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, groupKey: "pipelineGroupDetail", ai: true },

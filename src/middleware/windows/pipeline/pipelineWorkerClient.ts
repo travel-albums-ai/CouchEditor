@@ -45,6 +45,13 @@ const NODE_DATA_KEYS = [
   "bottomLefty",
   "bottomRightx",
   "bottomRighty",
+  "whites",
+  "blacks",
+  "temperature",
+  "tint",
+  "shadowTint",
+  "highlightTint",
+  "strength",
 ] as const;
 
 type PendingViewer = {

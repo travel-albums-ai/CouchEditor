@@ -2,6 +2,7 @@ import { Stage } from '@/middleware/interface/adjustments/types';
 
 const LUM_R = 0.2126, LUM_G = 0.7152, LUM_B = 0.0722;
 const INV_255_SQ = 1 / (255 * 255);
+type RGB = { r: number; g: number; b: number };
 
 export function clamp(v: number) {
   return Math.max(0, Math.min(255, v));
@@ -407,17 +408,14 @@ export const temperatureTintStage = (temp: number, tint: number): Stage => {
   };
 };
 
-type RGB = { r: number; g: number; b: number };
 
 export const splitToningStage = (
-  // shadowColor: RGB,
   shadowTintR: number,
   shadowTintG: number,
   shadowTintB: number,
   highlightTintR: number,
   highlightTintG: number,
   highlightTintB: number,
-  // highlightColor: RGB,
   strength: number
 ): Stage => {
   return (img) => {

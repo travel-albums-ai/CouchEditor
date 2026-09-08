@@ -65,8 +65,11 @@ import RotateNode from "./OneBarToggles/RotateNode";
 import SaturationNode from "./OneBarToggles/SaturationNode";
 import ShadowsNode from "./OneBarToggles/ShadowsNode";
 import SharpenNode from "./OneBarToggles/SharpenNode";
+import SplitToningNode from "./OneBarToggles/SplitToningNode";
+import TemperatureTintNode from "./OneBarToggles/TemperatureTintNode";
 import VibranceNode from "./OneBarToggles/VibranceNode";
 import VignetteNode from "./OneBarToggles/VignetteNode";
+import WhitesBlacksNode from "./OneBarToggles/WhitesBlacksNode";
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import BlackAndWhiteNode from "./SimpleToggles/BlackAndWhiteNode";
 import FlipNode from "./SimpleToggles/FlipNode";
@@ -109,6 +112,9 @@ const nodeTypes = {
   hdr: HdrNode,
   "hue-rotation": HueRotationNode,
   fade: FadeNode,
+  "whites-blacks": WhitesBlacksNode,
+  "temperature-tint": TemperatureTintNode,
+  "split-toning": SplitToningNode,
   rescale: RescaleNode,
   "selected-photo": SelectedPhotoNode,
   viewer: ViewerNode,
