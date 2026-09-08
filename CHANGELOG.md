@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.3.0...v1.4.0) (2026-09-08)
+
+### ✨ Features
+
+* add stageStarted event handling and update PipelineStageTiming component ([1bd6971](https://github.com/travel-albums-ai/CouchEditor/commit/1bd6971875a7cc311c629af6ba3d63a8f89ee480))
+
 ## [1.3.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.2.1...v1.3.0) (2026-09-08)
 
 ### ✨ Features
