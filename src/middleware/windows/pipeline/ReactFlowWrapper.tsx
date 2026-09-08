@@ -516,11 +516,11 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        {showToolbox && <FloatingStack sx={{ top: 80, left: 12, bottom: 10, overflow: 'auto' }}>
+        {showToolbox && <FloatingStack sx={{ top: 80, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
           <NodeToolbox />
         </FloatingStack>}
 
-        <FloatingStack sx={{ top: 12, left: 12 }}>
+        <FloatingStack sx={{ top: 12, left: 12 }} id="pipeline-header-left">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <img
               src="./couchLogo.png"
@@ -529,6 +529,7 @@ function Pipeline() {
               fetchPriority="high"
             />
             <TextField
+              id="pipeline-name"
               size="small"
               value={currentPipelineName}
               placeholder="Pipeline title..."
@@ -538,7 +539,7 @@ function Pipeline() {
               }}
               sx={{ maxWidth: 400, minWidth: 300 }}
             />
-            <GenericToggleButtonGroup items={[
+            <GenericToggleButtonGroup id="pipeline-actions" items={[
               {
                 tooltip: 'New pipeline',
                 icon: <CirclePlus /> ,
@@ -562,8 +563,8 @@ function Pipeline() {
           </Box>
         </FloatingStack>
 
-        <FloatingStack sx={{ top: 12, right: 20 }}>
-          <FormControl size="small" sx={{ minWidth: 250 }}>
+        <FloatingStack sx={{ top: 12, right: 20 }} id="pipeline-header-right">
+          <FormControl id="pipeline-loader" size="small" sx={{ minWidth: 250 }}>
             <Select
               value={currentPipelineId}
               displayEmpty
@@ -591,7 +592,7 @@ function Pipeline() {
           />
         </FloatingStack>
 
-        <Stack
+        <Stack id="pipeline-trash"
           direction="row"
           spacing={1}
           sx={{ position: 'absolute', bottom: 16, right: 232, zIndex: 10,

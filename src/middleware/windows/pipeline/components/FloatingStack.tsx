@@ -3,11 +3,13 @@ import { Stack, alpha } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material/styles';
 
 type FloatingStackProps = {
+  id?: string;
   children: React.ReactNode;
   sx?: SxProps<Theme>;
 };
 
 export default function FloatingStack({
+  id,
   children,
   sx,
 }: FloatingStackProps) {
@@ -15,6 +17,7 @@ export default function FloatingStack({
 
   return (
     <Stack
+      id={id}
       direction="row"
       spacing={1}
       sx={[

@@ -45,11 +45,11 @@ export default function OnboardingWelcome() {
           margin: 20
         }}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, mb: 1 }}>
         <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="h6" color="textPrimary">
         Couch Editor
         </Typography>
-        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="body1" color="textPrimary">
+        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }} variant="body1" color="textPrimary">
         Photo processing made easy and efficient.
         </Typography>
       </Box>

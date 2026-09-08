@@ -4,95 +4,95 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { driver } from "driver.js";
 
 
-const sidebar = [
-  {
-    element: "#sidebar",
-    popover: {
-      title: "Discover all sections",
-      description: "Your photos are organized in sections. You can also pin your favorite sections here.",
-      side: "left",
-    },
-  },
-  {
-    element: "#sort-sections-toggle",
-    popover: {
-      title: "Sort Sections",
-      description: "Use this toggle to sort sections in ascending or descending order.",
-      side: "bottom",
-    },
-  },
-  {
-    element: "#sidebar-section-peopleAndPets",
-    popover: {
-      title: "People & Pets",
-      description: "Discover your friends and pets in your photos.",
-      side: "bottom",
-    },
-  },
-  {
-    element: "#sidebar-section-folders",
-    popover: {
-      title: "Folders",
-      description: "Find what what was indexed in your folders.",
-      side: "bottom",
-    },
-  },
-  {
-    element: "#sidebar-section-countries",
-    popover: {
-      title: "Countries",
-      description: "Discover the countries where your photos were taken.",
-      side: "bottom",
-    },
-  }
-]
+// const sidebar = [
+//   {
+//     element: "#sidebar",
+//     popover: {
+//       title: "Discover all sections",
+//       description: "Your photos are organized in sections. You can also pin your favorite sections here.",
+//       side: "left",
+//     },
+//   },
+//   {
+//     element: "#sort-sections-toggle",
+//     popover: {
+//       title: "Sort Sections",
+//       description: "Use this toggle to sort sections in ascending or descending order.",
+//       side: "bottom",
+//     },
+//   },
+//   {
+//     element: "#sidebar-section-peopleAndPets",
+//     popover: {
+//       title: "People & Pets",
+//       description: "Discover your friends and pets in your photos.",
+//       side: "bottom",
+//     },
+//   },
+//   {
+//     element: "#sidebar-section-folders",
+//     popover: {
+//       title: "Folders",
+//       description: "Find what what was indexed in your folders.",
+//       side: "bottom",
+//     },
+//   },
+//   {
+//     element: "#sidebar-section-countries",
+//     popover: {
+//       title: "Countries",
+//       description: "Discover the countries where your photos were taken.",
+//       side: "bottom",
+//     },
+//   }
+// ]
 
-const statusBar = [
-  {
-    element: "#status-bar",
-    popover: {
-      title: "Status Bar",
-      description: "This bar displays the current status of your application, including any notifications or messages.",
-      side: "top",
-    },
-  },
-  {
-    element: "#database-counts",
-    popover: {
-      title: "Database Counts",
-      description: "This section displays the counts of various items in your database.",
-      side: "top",
-    },
-  },
-  {
-    element: "#zoom-controls",
-    popover: {
-      title: "Zoom controls",
-      description: "Use these controls to zoom in and out of your photos.",
-      side: "top",
-    },
-  },
-  {
-    element: "#indexer",
-    popover: {
-      title: "Indexer",
-      description: "Use the indexer to process your photos efficiently.",
-      side: "top",
-    },
-  },
-  {
-    element: "#keyboard-list",
-    popover: {
-      title: "Be efficient with shortcuts",
-      description: "Consult the list of keyboard shortcuts available in the app. Dynamically updated based on your current context.",
-      side: "top",
-    },
-  },
-]
+// const statusBar = [
+//   {
+//     element: "#status-bar",
+//     popover: {
+//       title: "Status Bar",
+//       description: "This bar displays the current status of your application, including any notifications or messages.",
+//       side: "top",
+//     },
+//   },
+//   {
+//     element: "#database-counts",
+//     popover: {
+//       title: "Database Counts",
+//       description: "This section displays the counts of various items in your database.",
+//       side: "top",
+//     },
+//   },
+//   {
+//     element: "#zoom-controls",
+//     popover: {
+//       title: "Zoom controls",
+//       description: "Use these controls to zoom in and out of your photos.",
+//       side: "top",
+//     },
+//   },
+//   {
+//     element: "#indexer",
+//     popover: {
+//       title: "Indexer",
+//       description: "Use the indexer to process your photos efficiently.",
+//       side: "top",
+//     },
+//   },
+//   {
+//     element: "#keyboard-list",
+//     popover: {
+//       title: "Be efficient with shortcuts",
+//       description: "Consult the list of keyboard shortcuts available in the app. Dynamically updated based on your current context.",
+//       side: "top",
+//     },
+//   },
+// ]
 
 const header = [
   {
-    element: "#header",
+    element: "#pipeline-header-left",
     popover: {
       title: "Header of the app",
       description: "Reach settings, fullscreen mode, dark/light mode and more from here.",
@@ -100,26 +100,50 @@ const header = [
     },
   },
   {
-    element: "#search-modal",
+    element: "#pipeline-name",
     popover: {
-      title: "Search Modal",
-      description: "Use this modal to search for files and navigate through breadcrumbs.",
+      title: "Pipeline Name",
+      description: "This section displays the name of the current pipeline.",
       side: "bottom",
     },
   },
   {
-    element: "#search-filters-toggle",
+    element: "#pipeline-actions",
     popover: {
-      title: "Search Filters",
-      description: "Use this toggle to apply global filters to your search results.",
+      title: "Pipeline Actions",
+      description: "This section contains actions you can perform on the current pipeline.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#pipeline-header-right",
+    popover: {
+      title: "Header Right Section",
+      description: "Access search, notifications, and other utilities from this section of the header.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#pipeline-loader",
+    popover: {
+      title: "Pipeline Loader",
+      description: "This section shows the saved pipelines that are available to load.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#toggle-toolbox-toggle",
+    popover: {
+      title: "Toggle Toolbox",
+      description: "Use this toggle to open and close the pipeline toolbox.",
       side: "bottom",
     },
   },
   {
     element: "#settings-toggle",
     popover: {
-      title: "Settings",
-      description: "Use this toggle to open and close the settings modal.",
+      title: "Settings Toggle",
+      description: "Use this toggle to open and close the settings panel.",
       side: "bottom",
     },
   },
@@ -131,6 +155,31 @@ const header = [
       side: "bottom",
     },
   },
+  {
+    element: "#performance-toggle",
+    popover: {
+      title: "Performance Mode",
+      description: "Use this toggle to switch between different performance modes.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#pipeline-toolbox",
+    popover: {
+      title: "Pipeline Toolbox",
+      description: "Use this toolbox to access various pipeline tools and functionalities.",
+      side: "bottom",
+    },
+  },
+  {
+    element: "#pipeline-trash",
+    popover: {
+      title: "Pipeline Trash",
+      description: "Use this toggle to open and close the pipeline trash.",
+      side: "bottom",
+    },
+  },
+
   {
     element: "#fullscreen-toggle",
     popover: {
@@ -161,8 +210,8 @@ export default function MainDriver() {
 
       steps: [
         ...header,
-        ...sidebar,
-        ...statusBar,
+        // ...sidebar,
+        // ...statusBar,
         {
           element: "#outlet-drawer",
           popover: {
