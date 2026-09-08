@@ -10,7 +10,7 @@ const URLS = [
     tooltip: 'GitHub',
     title: 'GitHub',
     icon: <Settings />,
-    url: 'https://github.com/travel-albums-ai/CouchEditor',
+    url: 'https://github.com/travel-albums-ai/CouchEditor/blob/main/README.md',
   },
   {
     tooltip: 'Release Notes',
