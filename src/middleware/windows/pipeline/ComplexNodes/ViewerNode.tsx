@@ -8,6 +8,7 @@ import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
 import { Download, Images } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ImageArray } from "../types";
 
 // Photo titles aren't guaranteed to be filesystem-safe or unique.
@@ -52,6 +53,7 @@ async function downloadAsZip(images: ImageArray) {
 function ViewerNode({
   data,
 }: NodeProps<Node<{ image?: ImageArray }>>) {
+  const { t } = useTranslation();
   const images = data.image ?? [];
   const [downloading, setDownloading] = useState(false);
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
@@ -88,7 +90,7 @@ function ViewerNode({
             }));
           }}
         >
-          Lightbox
+          {t('pipelineViewerLightbox')}
         </Button>
         <Button
           sx={{
@@ -103,9 +105,9 @@ function ViewerNode({
           disabled={images.length === 0 || downloading}
           onClick={handleDownload}
         >
-          {downloading ? 'Zipping…' : 'Download All'}
+          {downloading ? t('pipelineViewerZipping') : t('pipelineViewerDownloadAll')}
         </Button>
-        <SolidChip count={images.length} label="Photos" fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+        <SolidChip count={images.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
       </Box>
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>

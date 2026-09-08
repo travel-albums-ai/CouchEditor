@@ -5,6 +5,7 @@ import { Box, Button, Typography } from '@mui/material';
 import type { Node, NodeProps } from '@xyflow/react';
 import { FolderOutput, Images } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ImageArray } from '../types';
 
 function toSafeFileName(name: string, index: number): string {
@@ -53,11 +54,12 @@ async function writeImages(
 function HotFolderWriteNode({
   data,
 }: NodeProps<Node<{ image?: ImageArray }>>) {
+  const { t } = useTranslation();
   const images = data.image ?? [];
   const directoryRef = useRef<FileSystemDirectoryHandle | null>(null);
   const writeIdRef = useRef(0);
   const [directoryName, setDirectoryName] = useState<string>();
-  const [status, setStatus] = useState('Choose a writable folder');
+  const [status, setStatus] = useState(() => t('pipelineChooseWritableFolder'));
   const [writing, setWriting] = useState(false);
 
   useEffect(() => {
@@ -67,17 +69,17 @@ function HotFolderWriteNode({
 
     const writeId = ++writeIdRef.current;
     setWriting(true);
-    setStatus(images.length === 0 ? 'Folder will be emptied' : 'Writing photos…');
+    setStatus(images.length === 0 ? t('pipelineFolderWillBeEmptied') : t('pipelineWritingPhotos'));
 
     void writeImages(directory, images)
       .then(() => {
         if (writeId !== writeIdRef.current) return;
-        setStatus(images.length === 0 ? 'Folder is empty' : `Wrote ${images.length} photos`);
+        setStatus(images.length === 0 ? t('pipelineFolderEmpty') : t('pipelineWrotePhotos', { count: images.length }));
       })
       .catch((error: unknown) => {
         if (writeId !== writeIdRef.current) return;
         console.error('Failed to write hot folder:', error);
-        setStatus('Could not write to folder');
+        setStatus(t('pipelineCouldNotWriteFolder'));
       })
       .finally(() => {
         if (writeId === writeIdRef.current) setWriting(false);
@@ -90,24 +92,24 @@ function HotFolderWriteNode({
       const permission = await directory.requestPermission({ mode: 'readwrite' });
 
       if (permission !== 'granted') {
-        setStatus('Write permission was denied');
+        setStatus(t('pipelineWritePermissionDenied'));
         return;
       }
 
       directoryRef.current = directory;
       setDirectoryName(directory.name);
-      setStatus('Folder selected');
+      setStatus(t('pipelineFolderSelected'));
 
       const writeId = ++writeIdRef.current;
       setWriting(true);
       void writeImages(directory, images)
         .then(() => {
-          if (writeId === writeIdRef.current) setStatus(images.length === 0 ? 'Folder is empty' : `Wrote ${images.length} photos`);
+          if (writeId === writeIdRef.current) setStatus(images.length === 0 ? t('pipelineFolderEmpty') : t('pipelineWrotePhotos', { count: images.length }));
         })
         .catch((error: unknown) => {
           if (writeId !== writeIdRef.current) return;
           console.error('Failed to write hot folder:', error);
-          setStatus('Could not write to folder');
+          setStatus(t('pipelineCouldNotWriteFolder'));
         })
         .finally(() => {
           if (writeId === writeIdRef.current) setWriting(false);
@@ -115,7 +117,7 @@ function HotFolderWriteNode({
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
       console.error('Failed to choose hot folder:', error);
-      setStatus('Could not access folder');
+      setStatus(t('pipelineCouldNotAccessFolder'));
     }
   };
 
@@ -129,10 +131,10 @@ function HotFolderWriteNode({
           onClick={() => void chooseFolder()}
           disabled={writing}
         >
-          {directoryName ?? 'Choose Folder'}
+          {directoryName ?? t('pipelineChooseFolder')}
         </Button>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <SolidChip count={images.length} label="Photos" fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+          <SolidChip count={images.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
           <Typography variant="caption" color="text.secondary">{status}</Typography>
         </Box>
       </NodeWrapper>

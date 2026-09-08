@@ -5,6 +5,7 @@ import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHan
 import { Box, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type CropNodeData = {
   top?: number;
@@ -18,6 +19,7 @@ function CropNode({
   data,
 }: NodeProps<Node<CropNodeData>>) {
   const { setNodes } = useReactFlow();
+  const { t } = useTranslation();
   const [crop, setCrop] = useState({
     top: data.top ?? 0,
     bottom: data.bottom ?? 0,
@@ -61,17 +63,17 @@ function CropNode({
     <>
       <InputHandle id="image" />
       <NodeWrapper type="crop">
-        {slider('top', 'Top')}
-        {slider('bottom', 'Bottom')}
-        {slider('left', 'Left')}
-        {slider('right', 'Right')}
+        {slider('top', t('pipelineCropTop'))}
+        {slider('bottom', t('pipelineCropBottom'))}
+        {slider('left', t('pipelineCropLeft'))}
+        {slider('right', t('pipelineCropRight'))}
 
         <BeforeAfter
           image2style={{
             clipPath: `inset(${crop.top}% ${crop.right}% ${crop.bottom}% ${crop.left}%)`,
           }}
         />
-        <small>Crop each edge independently</small>
+        <small>{t('pipelineCropDescription')}</small>
       </NodeWrapper>
       <OutputHandle id="image" />
     </>

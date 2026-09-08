@@ -4,15 +4,17 @@ import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHan
 import { type Node, type NodeProps } from '@xyflow/react';
 import { Film } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
+  const { t } = useTranslation();
   const [fileName, setFileName] = useState(data.lutFile?.name ?? '');
 
   return (
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={'3D LUT'} icon={<Film />} toolbar={<></>} type="lut">
+      <NodeWrapper title={t('pipelineLut')} icon={<Film />} toolbar={<></>} type="lut">
         <input
           type="file"
           accept=".cube,text/plain"
@@ -26,7 +28,7 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
             window.dispatchEvent(new CustomEvent('pipeline:changed'));
           }}
         />
-        <small>{fileName || 'Choose a .cube LUT'}</small>
+        <small>{fileName || t('pipelineLutChooseFile')}</small>
       </NodeWrapper>
       <OutputHandle id="image" />
     </>

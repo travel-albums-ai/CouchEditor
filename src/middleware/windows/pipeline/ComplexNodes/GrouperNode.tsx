@@ -4,15 +4,18 @@ import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHan
 import { Box, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import { Combine } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const INPUTS = [
-  { id: 'image-1', label: 'Photo array 1' },
-  { id: 'image-2', label: 'Photo array 2' },
-  { id: 'image-3', label: 'Photo array 3' },
-  { id: 'image-4', label: 'Photo array 4' },
+  { id: 'image-1', number: 1 },
+  { id: 'image-2', number: 2 },
+  { id: 'image-3', number: 3 },
+  { id: 'image-4', number: 4 },
 ];
 
 function GrouperNode(_props: NodeProps<Node>) {
+  const { t } = useTranslation();
+
   return <>
     {INPUTS.map((input, index) => (
       <InputHandle
@@ -22,13 +25,13 @@ function GrouperNode(_props: NodeProps<Node>) {
       />
     ))}
 
-    <NodeWrapper title={'Grouper'} icon={<Combine />} toolbar={<></>} type="grouper">
+    <NodeWrapper title={t('pipelineGrouper')} icon={<Combine />} toolbar={<></>} type="grouper">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
         {INPUTS.map((input) => (
-          <Typography key={input.id} variant="caption" sx={{ lineHeight: 2.4 }}>{input.label}</Typography>
+          <Typography key={input.id} variant="caption" sx={{ lineHeight: 2.4 }}>{t('pipelinePhotoArray', { number: input.number })}</Typography>
         ))}
       </Box>
-      <small>Merges up to four connected photo arrays</small>
+      <small>{t('pipelineGrouperDescription')}</small>
     </NodeWrapper>
     <OutputHandle id="image" position={Position.Right} />
   </>;

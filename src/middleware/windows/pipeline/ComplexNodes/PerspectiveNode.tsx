@@ -5,21 +5,23 @@ import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHan
 import { Box, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Corner = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 type Axis = 'x' | 'y';
 type PerspectiveKey = `${Corner}${Axis}`;
 type PerspectiveNodeData = Partial<Record<PerspectiveKey, number>>;
 
-const corners: Array<{ key: Corner; label: string }> = [
-  { key: 'topLeft', label: 'Top left' },
-  { key: 'topRight', label: 'Top right' },
-  { key: 'bottomLeft', label: 'Bottom left' },
-  { key: 'bottomRight', label: 'Bottom right' },
+const corners: Array<{ key: Corner; labelKey: string }> = [
+  { key: 'topLeft', labelKey: 'pipelinePerspectiveTopLeft' },
+  { key: 'topRight', labelKey: 'pipelinePerspectiveTopRight' },
+  { key: 'bottomLeft', labelKey: 'pipelinePerspectiveBottomLeft' },
+  { key: 'bottomRight', labelKey: 'pipelinePerspectiveBottomRight' },
 ];
 
 function PerspectiveNode({ id, data }: NodeProps<Node<PerspectiveNodeData>>) {
   const { setNodes } = useReactFlow();
+  const { t } = useTranslation();
   const [offsets, setOffsets] = useState<PerspectiveNodeData>(() => Object.fromEntries(
     corners.flatMap(({ key }) => [
       [`${key}x`, data[`${key}x`] ?? 0],
@@ -69,15 +71,15 @@ function PerspectiveNode({ id, data }: NodeProps<Node<PerspectiveNodeData>>) {
     <>
       <InputHandle id="image" />
       <NodeWrapper type="perspective">
-        {corners.map(({ key, label }) => (
+        {corners.map(({ key, labelKey }) => (
           <Box key={key} sx={{ mb: 0.5 }}>
-            <Typography variant="caption" sx={{ display: 'block' }}>{label}</Typography>
+            <Typography variant="caption" sx={{ display: 'block' }}>{t(labelKey)}</Typography>
             {slider(key, 'x')}
             {slider(key, 'y')}
           </Box>
         ))}
         <BeforeAfter image2style={{ clipPath: `polygon(${polygon})` }} />
-        <small>Move each corner to correct perspective and tilt</small>
+        <small>{t('pipelinePerspectiveDescription')}</small>
       </NodeWrapper>
       <OutputHandle id="image" />
     </>

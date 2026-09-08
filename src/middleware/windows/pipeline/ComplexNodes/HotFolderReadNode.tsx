@@ -5,6 +5,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { FolderInput, Images } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const POLL_INTERVAL_MS = 1000;
 const IMAGE_TYPES = new Set([
@@ -49,12 +50,13 @@ function HotFolderReadNode({
   data,
 }: NodeProps<Node<HotFolderReadData>>) {
   const { setNodes } = useReactFlow();
+  const { t } = useTranslation();
   const directoryRef = useRef<FileSystemDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
   const snapshotRef = useRef<string | null>(null);
   const [directoryName, setDirectoryName] = useState<string>();
   const [fileCount, setFileCount] = useState(data.files?.length ?? 0);
-  const [status, setStatus] = useState('Choose a folder to watch');
+  const [status, setStatus] = useState(() => t('pipelineChooseFolderToWatch'));
 
   useEffect(() => {
     let disposed = false;
@@ -78,13 +80,13 @@ function HotFolderReadNode({
               : node
           ));
           setFileCount(files.length);
-          setStatus(files.length === 0 ? 'Folder is empty' : `Found ${files.length} photos`);
+          setStatus(files.length === 0 ? t('pipelineFolderEmpty') : t('pipelineFoundPhotos', { count: files.length }));
           window.dispatchEvent(new CustomEvent('pipeline:changed'));
         }
       } catch (error: unknown) {
         if (!disposed) {
           console.error('Failed to read hot folder:', error);
-          setStatus('Could not read folder');
+          setStatus(t('pipelineCouldNotReadFolder'));
         }
       } finally {
         pollingRef.current = false;
@@ -106,18 +108,18 @@ function HotFolderReadNode({
       const permission = await directory.requestPermission({ mode: 'read' });
 
       if (permission !== 'granted') {
-        setStatus('Read permission was denied');
+        setStatus(t('pipelineReadPermissionDenied'));
         return;
       }
 
       directoryRef.current = directory;
       snapshotRef.current = null;
       setDirectoryName(directory.name);
-      setStatus('Watching for image changes…');
+      setStatus(t('pipelineWatchingImageChanges'));
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
       console.error('Failed to choose hot folder:', error);
-      setStatus('Could not access folder');
+      setStatus(t('pipelineCouldNotAccessFolder'));
     }
   };
 
@@ -129,10 +131,10 @@ function HotFolderReadNode({
           startIcon={<FolderInput size={14} />}
           onClick={() => void chooseFolder()}
         >
-          {directoryName ?? 'Choose Folder'}
+          {directoryName ?? t('pipelineChooseFolder')}
         </Button>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <SolidChip count={fileCount} label="Photos" fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+          <SolidChip count={fileCount} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
           <Typography variant="caption" color="text.secondary">{status}</Typography>
         </Box>
       </NodeWrapper>

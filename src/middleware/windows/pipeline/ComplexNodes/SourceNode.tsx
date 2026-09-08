@@ -7,8 +7,10 @@ import { Box, Button } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { Images, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
+  const { t } = useTranslation();
   const [files, setFiles] = useState(data.files ?? []);
 
   // Object URLs are just for the node preview; the pipeline
@@ -44,7 +46,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
           variant="contained"
           startIcon={<Upload size={16} />}
         >
-        Select Images
+          {t('pipelineSourceSelectImages')}
           <input
             type="file"
             accept="image/jpeg, image/png, image/webp"
@@ -67,7 +69,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
             }}
           />
         </Button>
-        <SolidChip count={files.length} label="Photos" fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+        <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
       </Box>
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
