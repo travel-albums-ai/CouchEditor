@@ -386,25 +386,26 @@ export const sharpenStage = (amount: number): Stage => {
 
 export const hdrEffectStage = (amount: number, radius = 12): Stage => {
   const strength = amount / 100;
+  const boostScale = strength * 1.5;
 
   return (img) => {
     if (strength <= 0) return;
     const { width, height, data } = img;
-    const src = new Uint8ClampedArray(data);
+    const len = data.length;
+    const pixelCount = width * height;
 
-    const lum = new Float32Array(width * height);
-    for (let i = 0, p = 0; i < src.length; i += 4, p++) {
-      lum[p] = 0.2126 * src[i] + 0.7152 * src[i + 1] + 0.0722 * src[i + 2];
+    const lum = new Float32Array(pixelCount);
+    for (let i = 0, p = 0; i < len; i += 4, p++) {
+      lum[p] = 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
     }
 
     const blurred = boxBlur1D(lum, width, height, radius);
 
-    for (let i = 0, p = 0; i < data.length; i += 4, p++) {
-      const detail = lum[p] - blurred[p];
-      const boost = detail * strength * 1.5;
-      data[i] = clamp(src[i] + boost);
-      data[i + 1] = clamp(src[i + 1] + boost);
-      data[i + 2] = clamp(src[i + 2] + boost);
+    for (let i = 0, p = 0; i < len; i += 4, p++) {
+      const boost = (lum[p] - blurred[p]) * boostScale;
+      data[i] = clamp(data[i] + boost);
+      data[i + 1] = clamp(data[i + 1] + boost);
+      data[i + 2] = clamp(data[i + 2] + boost);
     }
   };
 };
@@ -414,45 +415,74 @@ export const popStage = (amount: number): Stage => {
   const contrastFactor = 1 + 0.5 * strength;
   const saturationFactor = 1 + 0.6 * strength;
 
+  const contrastLUT = new Uint8ClampedArray(256);
+  for (let v = 0; v < 256; v++) {
+    contrastLUT[v] = clamp(contrastFactor * (v - 128) + 128);
+  }
+
   return (img) => {
     if (strength <= 0) return;
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      let r = clamp(contrastFactor * (d[i] - 128) + 128);
-      let g = clamp(contrastFactor * (d[i + 1] - 128) + 128);
-      let b = clamp(contrastFactor * (d[i + 2] - 128) + 128);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      const r = contrastLUT[d[i]];
+      const g = contrastLUT[d[i + 1]];
+      const b = contrastLUT[d[i + 2]];
 
       const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-      r = clamp(lum + (r - lum) * saturationFactor);
-      g = clamp(lum + (g - lum) * saturationFactor);
-      b = clamp(lum + (b - lum) * saturationFactor);
-
-      d[i] = r;
-      d[i + 1] = g;
-      d[i + 2] = b;
+      d[i] = clamp(lum + (r - lum) * saturationFactor);
+      d[i + 1] = clamp(lum + (g - lum) * saturationFactor);
+      d[i + 2] = clamp(lum + (b - lum) * saturationFactor);
     }
   };
 };
 
 export const whitesBlacksStage = (whites: number, blacks: number): Stage => {
+  if (whites === 0 && blacks === 0) {
+    return () => {};
+  }
+
+  const lut = new Uint8ClampedArray(256);
+  for (let v = 0; v < 256; v++) {
+    lut[v] = clamp(clamp(v + whites) - blacks);
+  }
+
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(clamp(d[i] + whites) - blacks);
-      d[i + 1] = clamp(clamp(d[i + 1] + whites) - blacks);
-      d[i + 2] = clamp(clamp(d[i + 2] + whites) - blacks);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      d[i] = lut[d[i]];
+      d[i + 1] = lut[d[i + 1]];
+      d[i + 2] = lut[d[i + 2]];
     }
   };
 };
 
-
 export const temperatureTintStage = (temp: number, tint: number): Stage => {
+  if (temp === 0 && tint === 0) {
+    return () => {};
+  }
+
+  const rOffset = temp * 0.6 + tint * 0.15;
+  const gOffset = tint * 0.5;
+  const bOffset = -temp * 0.6 + tint * 0.15;
+
+  const rLUT = new Uint8ClampedArray(256);
+  const gLUT = new Uint8ClampedArray(256);
+  const bLUT = new Uint8ClampedArray(256);
+  for (let v = 0; v < 256; v++) {
+    rLUT[v] = clamp(v + rOffset);
+    gLUT[v] = clamp(v + gOffset);
+    bLUT[v] = clamp(v + bOffset);
+  }
+
   return (img) => {
     const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      d[i] = clamp(d[i] + temp * 0.6 + tint * 0.15);
-      d[i + 1] = clamp(d[i + 1] + tint * 0.5);
-      d[i + 2] = clamp(d[i + 2] - temp * 0.6 + tint * 0.15);
+    const len = d.length;
+    for (let i = 0; i < len; i += 4) {
+      d[i] = rLUT[d[i]];
+      d[i + 1] = gLUT[d[i + 1]];
+      d[i + 2] = bLUT[d[i + 2]];
     }
   };
 };
