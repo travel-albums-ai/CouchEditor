@@ -1,3 +1,9 @@
+## [1.15.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.15.0...v1.15.1) (2026-09-08)
+
+### 🐛 Fixes
+
+* update GitHub URL in ExtendedMenu to point to README.md ([2f1b534](https://github.com/travel-albums-ai/CouchEditor/commit/2f1b5349f3bc834d7eebc0ad286da3e9250e84fa))
+
 ## [1.15.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.14.0...v1.15.0) (2026-09-08)
 
 ### ✨ Features
