@@ -78,7 +78,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
             {previewUrls.map((value, index) => (
               <AlbumPhotoThumbnailBackgroundNg
                 key={index}
-                photo={{ name: files[index].name, src: value}}
+                photo={{ name: files[index]?.name, src: value}}
                 alt=""
                 style={{
                   display: 'block',
