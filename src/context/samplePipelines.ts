@@ -938,7 +938,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 484,
-          "height": 135
+          "height": 139
         },
         "selected": false,
         "dragging": false
@@ -1296,7 +1296,7 @@ export const samplePipeline = [
         "id": "information-6",
         "type": "information",
         "position": {
-          "x": -280,
+          "x": -240,
           "y": 300
         },
         "data": {
@@ -1317,7 +1317,7 @@ export const samplePipeline = [
           "y": 360
         },
         "data": {
-          "selectedPhotoName": "WhatsApp Image 2026-09-03 at 2.50.12 PM.jpeg"
+          "selectedPhotoName": "WhatsApp Image 2026-09-03 at 2.41.36 PM.jpeg"
         },
         "measured": {
           "width": 330,
@@ -1337,6 +1337,81 @@ export const samplePipeline = [
         "measured": {
           "width": 301,
           "height": 156
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-white-point-1",
+        "type": "rgb-white-point",
+        "position": {
+          "x": -520,
+          "y": 320
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 240
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-black-point-2",
+        "type": "rgb-black-point",
+        "position": {
+          "x": -560,
+          "y": 600
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 240
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-midtones-3",
+        "type": "rgb-midtones",
+        "position": {
+          "x": -560,
+          "y": 860
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 240
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "temperature-tint-4",
+        "type": "temperature-tint",
+        "position": {
+          "x": -560,
+          "y": 1120
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 218
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "split-toning-5",
+        "type": "split-toning",
+        "position": {
+          "x": -560,
+          "y": 1360
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 222
         },
         "selected": false,
         "dragging": false
