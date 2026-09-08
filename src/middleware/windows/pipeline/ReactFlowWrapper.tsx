@@ -352,7 +352,7 @@ function Pipeline() {
   const onConnect = useCallback(
     (connection: Connection) => {
       setEdges((current) =>
-        addEdge({ ...connection, type: CONNECTION_LINE_TYPE }, current)
+        addEdge({ ...connection, type: CONNECTION_LINE_TYPE, style: { opacity: 0.2 } }, current)
       );
     },
     [setEdges]
