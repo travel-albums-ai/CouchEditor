@@ -5,13 +5,17 @@ import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { Box, Button } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
-import { Images, Upload } from 'lucide-react';
+import { HardDrive, Images, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 
 function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
   const { t } = useTranslation();
   const [files, setFiles] = useState(data.files ?? []);
+  const totalSizeInMb = files.reduce(
+    (total, file) => total + (file instanceof File ? file.size : 0),
+    0
+  ) / (1024 * 1024);
 
   // Object URLs are just for the node preview; the pipeline
   // loads the actual images itself when it evaluates.
@@ -69,7 +73,8 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
             }}
           />
         </Button>
-        <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+        <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={150} />
+        <SolidChip count={`${totalSizeInMb.toFixed(2)} MB`} label="" fontSize={16} height={38} icon={<HardDrive size={16} />} minWidth={120} />
       </Box>
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
