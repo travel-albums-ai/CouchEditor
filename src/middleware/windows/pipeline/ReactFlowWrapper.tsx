@@ -158,7 +158,7 @@ function Pipeline() {
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const theme = useTheme();
 
-  const { screenToFlowPosition, fitView } = useReactFlow();
+  const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
   const {
     pipelines,
     saveNew,
@@ -180,6 +180,15 @@ function Pipeline() {
   const evaluationId = useRef(0);
   const nodesRef = useRef(nodes);
   const edgesRef = useRef(edges);
+
+  const fitPipelineView = useCallback(async () => {
+    const fitted = await fitView({ padding: 0.18 });
+
+    if (!fitted) return;
+
+    const viewport = getViewport();
+    setViewport({ ...viewport, x: viewport.x + 150 });
+  }, [fitView, getViewport, setViewport]);
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodes.length }));
@@ -229,9 +238,9 @@ function Pipeline() {
   // Nodes are measured asynchronously, so fitView is deferred a frame
   // to ensure it accounts for the restored graph's actual dimensions.
   useEffect(() => {
-    const frame = requestAnimationFrame(() => fitView());
+    const frame = requestAnimationFrame(() => void fitPipelineView());
     return () => cancelAnimationFrame(frame);
-  }, [fitView]);
+  }, [fitPipelineView]);
 
   // Free the worker thread (and its in-memory AI result cache)
   // when the pipeline page unmounts.
@@ -432,12 +441,12 @@ function Pipeline() {
       setCurrentPipelineId(id);
       setCurrentPipelineName(name);
       setIsDirty(false);
-      fitView();
+      void fitPipelineView();
     } catch (error) {
       console.error('Pipeline import failed:', error);
       window.alert('The selected file is not a valid .cep pipeline.');
     }
-  }, [fitView, saveNew, setEdges, setNodes]);
+  }, [fitPipelineView, saveNew, setEdges, setNodes]);
 
   const loadPipeline = useCallback((id: string) => {
     if (!id || id === currentPipelineId) return;
@@ -455,8 +464,8 @@ function Pipeline() {
     setCurrentPipelineId(pipeline.id);
     setCurrentPipelineName(pipeline.name);
     setIsDirty(false);
-    fitView();
-  }, [currentPipelineId, fitView, isDirty, loadById, setEdges, setNodes]);
+    void fitPipelineView();
+  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setEdges, setNodes]);
 
   const deleteCurrent = useCallback(() => {
     if (!currentPipelineId) return;
@@ -477,8 +486,8 @@ function Pipeline() {
     setCurrentPipelineId('');
     setCurrentPipelineName('');
     setIsDirty(false);
-    fitView();
-  }, [fitView, setEdges, setNodes]);
+    void fitPipelineView();
+  }, [fitPipelineView, setEdges, setNodes]);
 
   useEffect(() => {
     const handler = () => {
@@ -620,9 +629,9 @@ function Pipeline() {
         return;
       }
 
-      fitView();
+      void fitPipelineView();
     },
-    [fitView]
+    [fitPipelineView]
   );
 
   return (
@@ -652,7 +661,6 @@ function Pipeline() {
           onNodeDragStop={onNodeDragStop}
           deleteKeyCode={["Backspace", "Delete"]}
           zoomOnDoubleClick={false}
-          fitView
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.divider} />
           <Controls position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
