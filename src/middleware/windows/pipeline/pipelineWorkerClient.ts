@@ -108,6 +108,17 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
       return;
     }
 
+    case "stageStarted": {
+      window.dispatchEvent(
+        new CustomEvent(`${message.nodeType}:stageStarted`, {
+          detail: {
+            nodeId: message.nodeId,
+          },
+        })
+      );
+      return;
+    }
+
     case "viewer": {
       const pending = pendingViewers.get(message.nodeId);
 

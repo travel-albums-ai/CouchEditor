@@ -70,6 +70,13 @@ export type PipelineStageTimingMessage = {
   durationMs: number;
 };
 
+export type PipelineStageStartedMessage = {
+  type: "stageStarted";
+  evaluationId: number;
+  nodeType: string;
+  nodeId: string;
+};
+
 export type PipelineViewerImagePayload = {
   blob: Blob;
   width: number;
@@ -98,6 +105,7 @@ export type PipelineErrorMessage = {
 export type PipelineWorkerOutbound =
   | PipelineProgressMessage
   | PipelineStageTimingMessage
+  | PipelineStageStartedMessage
   | PipelineViewerMessage
   | PipelineDoneMessage
   | PipelineErrorMessage;
