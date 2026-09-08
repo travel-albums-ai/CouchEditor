@@ -1,3 +1,9 @@
+## [1.11.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.10.0...v1.11.0) (2026-09-08)
+
+### ✨ Features
+
+* add 'Selected Photo' option to pipeline and update translations ([b27103e](https://github.com/travel-albums-ai/CouchEditor/commit/b27103e8dcc65e281b388768ff189af899ce3be1))
+
 ## [1.10.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.9.0...v1.10.0) (2026-09-08)
 
 ### ✨ Features
