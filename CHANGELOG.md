@@ -1,3 +1,9 @@
+## [1.14.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.13.0...v1.14.0) (2026-09-08)
+
+### ✨ Features
+
+* update onboarding button text and remove BYOKPersona component ([3cfafcb](https://github.com/travel-albums-ai/CouchEditor/commit/3cfafcb65029f7f38344af875ba83c118082dfeb))
+
 ## [1.13.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.12.0...v1.13.0) (2026-09-08)
 
 ### ✨ Features
