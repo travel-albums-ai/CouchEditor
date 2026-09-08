@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.5.0...v1.6.0) (2026-09-08)
+
+### ✨ Features
+
+* add new pipeline group translations for detail, effects, light, and transform across multiple languages ([b4184ff](https://github.com/travel-albums-ai/CouchEditor/commit/b4184ffca56aeb27cfff4919f9b1ef211c30fe7d))
+
 ## [1.5.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.4.0...v1.5.0) (2026-09-08)
 
 ### ✨ Features
