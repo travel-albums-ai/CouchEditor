@@ -2,7 +2,7 @@ import { BeforeAfter } from '@/middleware/windows/pipeline/components/BeforeAfte
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
-import { Box, Typography } from '@mui/material';
+import { Box, Slider, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -44,14 +44,13 @@ function CropNode({
   const slider = (edge: keyof CropNodeData, label: string) => (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <Typography variant="caption" sx={{ width: 52 }}>{label}</Typography>
-      <input
-        type="range"
+      <Slider
+        value={crop[edge]}
+        onChange={(event, value) => updateCrop(edge, value as number)}
         min={0}
         max={90}
         step={1}
-        value={crop[edge]}
-        onChange={(event) => updateCrop(edge, Number(event.target.value))}
-        style={{ flex: 1 }}
+        sx={{ flex: 1 }}
       />
       <Typography variant="caption" sx={{ width: 32, textAlign: 'right' }}>
         {crop[edge]}%

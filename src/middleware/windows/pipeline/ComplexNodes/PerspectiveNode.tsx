@@ -2,7 +2,7 @@ import { BeforeAfter } from '@/middleware/windows/pipeline/components/BeforeAfte
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
-import { Box, Typography } from '@mui/material';
+import { Box, Slider, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -45,14 +45,13 @@ function PerspectiveNode({ id, data }: NodeProps<Node<PerspectiveNodeData>>) {
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Typography variant="caption" sx={{ width: 18 }}>{axis.toUpperCase()}</Typography>
-        <input
-          type="range"
+        <Slider
+          value={offsets[key] ?? 0}
+          onChange={(event, value) => updateOffset(corner, axis, value as number)}
           min={-45}
           max={45}
           step={1}
-          value={offsets[key] ?? 0}
-          onChange={(event) => updateOffset(corner, axis, Number(event.target.value))}
-          style={{ flex: 1 }}
+          sx={{ flex: 1 }}
         />
         <Typography variant="caption" sx={{ width: 32, textAlign: 'right' }}>
           {offsets[key] ?? 0}%
