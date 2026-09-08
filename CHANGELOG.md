@@ -1,3 +1,29 @@
+## [1.0.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.0...v1.0.1) (2026-09-08)
+
+### 🐛 Fixes
+
+* handle potential undefined file names in SourceNode and comment out BYOKOpenAi component in BYOKPopover ([513000b](https://github.com/travel-albums-ai/CouchEditor/commit/513000b3136ad87566247f4dbb03d3782563ca8d))
+
+### 🧹 Refactors
+
+* add descriptions for image processing pipeline actions in German localization ([cf05d59](https://github.com/travel-albums-ai/CouchEditor/commit/cf05d598d0d6c4d3d9cdf9a9c957dd9d8e277ce3))
+* add German localization for onboarding and pipeline features ([4df0d46](https://github.com/travel-albums-ai/CouchEditor/commit/4df0d463ee79f8aca3e888444d63a106b8ee430f))
+* add localized descriptions for image processing pipeline nodes ([5791a69](https://github.com/travel-albums-ai/CouchEditor/commit/5791a69798197865f43458f7e2662c9b1c52a9e8))
+* clean up localization file by removing unused keys and comments ([f3e4ac6](https://github.com/travel-albums-ai/CouchEditor/commit/f3e4ac6007b657a312ced1f3aa9b57123a337323))
+* enhance localization for pipeline features and improve UI text ([8b0eb5f](https://github.com/travel-albums-ai/CouchEditor/commit/8b0eb5fb76f868906c9194f2fc8afbb1032fcc1b))
+* enhance localization for rescale and settings components ([6c61bfc](https://github.com/travel-albums-ai/CouchEditor/commit/6c61bfc9fc2d161320b086b0c1ff33f10787a949))
+* enhance onboarding experience by integrating localized strings for AI features and pipeline tools ([52a59c4](https://github.com/travel-albums-ai/CouchEditor/commit/52a59c4e79eaae35bdc23ab9a7871edb2ad2cde5))
+* enhance onboarding flow by adding AI configuration steps and updating settings structure ([9bfc3b9](https://github.com/travel-albums-ai/CouchEditor/commit/9bfc3b9c56422894c8d7ff0851141c4933360137))
+* remove commented-out code for card and scroller settings ([59bd796](https://github.com/travel-albums-ai/CouchEditor/commit/59bd7963a48f8ddc2fda1b25cac6530fbc986ebb))
+* remove unnecessary assets configuration from GitHub plugin ([63ccdc9](https://github.com/travel-albums-ai/CouchEditor/commit/63ccdc91bbe6e3d162b6df59cdb1f1c93263cc00))
+* reorder import statements in RescaleNode component ([8c67f0f](https://github.com/travel-albums-ai/CouchEditor/commit/8c67f0f6175de621d1fdead7930c66fda3d1c336))
+* replace input range with Slider component in CropNode and PerspectiveNode ([243274c](https://github.com/travel-albums-ai/CouchEditor/commit/243274cb3093971ec94e5cdc722f54e0304ff47d))
+* simplify OnboardingTakeout component by removing unnecessary wrappers and updating phase steps ([f8bc097](https://github.com/travel-albums-ai/CouchEditor/commit/f8bc097c2198bd595cce51aaac5592730120b4a7))
+* streamline MainDriver component by consolidating tutorial steps and removing unused code ([1a2260d](https://github.com/travel-albums-ai/CouchEditor/commit/1a2260d803e693082a197b4ec25c45d25e04eb2d))
+* update action tools to use localized strings for UI elements ([7965b1d](https://github.com/travel-albums-ai/CouchEditor/commit/7965b1d0306a7a802feb8de2af388efd31f64251))
+* update label for original scale preset to 'Auto' ([ca07514](https://github.com/travel-albums-ai/CouchEditor/commit/ca07514de04eaa60ffe489a1edb72e5df59798bb))
+* update onboarding components by removing unused files and enhancing layout and accessibility ([e528de2](https://github.com/travel-albums-ai/CouchEditor/commit/e528de2de0e6210fd63adb1f8d8d114cbfc3c8f1))
+
 ## 1.0.0 (2026-09-08)
 
 ### ✨ Features
