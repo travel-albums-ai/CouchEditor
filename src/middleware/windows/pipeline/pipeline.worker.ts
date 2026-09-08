@@ -1101,6 +1101,47 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
+type CachedNodeOutput = {
+  signature: string;
+  outputs: NodeOutputs;
+};
+
+const nodeOutputCache = new Map<string, CachedNodeOutput>();
+
+function serializeForCache(value: unknown): string {
+  if (value instanceof File) {
+    return JSON.stringify({
+      type: "File",
+      name: value.name,
+      size: value.size,
+      lastModified: value.lastModified,
+      typeName: value.type,
+    });
+  }
+
+  if (value instanceof Blob) {
+    return JSON.stringify({
+      type: "Blob",
+      size: value.size,
+      typeName: value.type,
+    });
+  }
+
+  if (Array.isArray(value)) {
+    return `[${value.map(serializeForCache).join(",")}]`;
+  }
+
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${serializeForCache(entry)}`);
+
+    return `{${entries.join(",")}}`;
+  }
+
+  return JSON.stringify(value);
+}
+
 async function runEvaluation(
   message: PipelineEvaluateMessage,
   signal: AbortSignal
@@ -1108,6 +1149,7 @@ async function runEvaluation(
   const { evaluationId, nodes, edges } = message;
 
   const outputs = new Map<string, Promise<NodeOutputs>>();
+  const signatures = new Map<string, string>();
 
   const evaluateNode = (nodeId: string): Promise<NodeOutputs> => {
     // Already evaluating?
@@ -1146,6 +1188,13 @@ async function runEvaluation(
       );
 
       const inputs = Object.fromEntries(inputEntries);
+
+      const upstreamSignatures = incoming.map((edge) => ({
+        source: edge.source,
+        sourceHandle: edge.sourceHandle,
+        targetHandle: edge.targetHandle,
+        signature: signatures.get(edge.source),
+      }));
 
       // Special case:
       // Source node gets its Files from node.data.
@@ -1199,6 +1248,19 @@ async function runEvaluation(
         ].map((value) => typeof value === "number" ? value : 0);
       }
 
+      const signature = serializeForCache({
+        type: node.type,
+        data: node.data,
+        upstream: upstreamSignatures,
+      });
+      signatures.set(nodeId, signature);
+
+      const cached = nodeOutputCache.get(nodeId);
+      if (cached?.signature === signature) {
+        console.log(`↺ reused ${node.id}`);
+        return cached.outputs;
+      }
+
       // Cancellation plumbing available to every node.
       inputs.evaluationId = evaluationId;
       inputs.signal = signal;
@@ -1227,6 +1289,8 @@ async function runEvaluation(
       console.log(`✓ completed ${node.id}`);
 
       throwIfStale(evaluationId);
+
+      nodeOutputCache.set(nodeId, { signature, outputs: result });
 
       return result;
     })();
