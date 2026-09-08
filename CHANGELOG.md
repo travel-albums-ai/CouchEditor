@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.1...v1.0.2) (2026-09-08)
+
+### 🐛 Fixes
+
+* change image edit quality from medium to low in requestOpenAIImageEdit function ([c3a53bb](https://github.com/travel-albums-ai/CouchEditor/commit/c3a53bb72fa93a618c17e6874178c3acc39b9e95))
+
 ## [1.0.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.0...v1.0.1) (2026-09-08)
 
 ### 🐛 Fixes
