@@ -18,13 +18,15 @@ type PipelineStore = {
   pipelines: SavedPipeline[]
   showToolbox: boolean
   searchTermToolbox: string
+  collapsedToolboxGroups: Record<string, boolean>
 }
 
 const defaults: PipelineStore = {
   // pipelines: [],
   pipelines: samplePipeline as SavedPipeline[],
   showToolbox: true,
-  searchTermToolbox: ''
+  searchTermToolbox: '',
+  collapsedToolboxGroups: {}
 }
 
 const {

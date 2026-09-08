@@ -1,17 +1,17 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
-import { usePipelineStoreSelector } from '@/context/pipelineStore';
+import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
 export default function NodeToolboxItem({ group, items, onDragStart, isSearching } : { group: string, items: any[], onDragStart: (event: React.DragEvent<HTMLDivElement>, nodeType: string) => void, isSearching: boolean }) {
   const enableAI  = useBYOKStoreSelector((state) => state.enableAI)
   const searchTermToolbox = usePipelineStoreSelector((state) => state.searchTermToolbox)
+  const collapse = usePipelineStoreSelector((state) => state.collapsedToolboxGroups[group] ?? false)
+  const { setState } = usePipelineStore()
   const { t } = useTranslation();
-  const [collapse, setCollapse] = useState(false);
 
   return <>
     <Box
@@ -26,7 +26,13 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         {!isSearching && <Box
           component="span"
           sx={{ cursor: 'pointer', ml: 1, color: 'text.disabled' }}
-          onClick={() => setCollapse(!collapse)}
+          onClick={() => setState((prev) => ({
+            ...prev,
+            collapsedToolboxGroups: {
+              ...prev.collapsedToolboxGroups,
+              [group]: !collapse,
+            },
+          }))}
         >
           {collapse
             ? <ChevronDown size={16} style={{ color: 'inherit', }} />
