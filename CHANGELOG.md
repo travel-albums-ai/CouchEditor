@@ -1,3 +1,14 @@
+## [1.0.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.2...v1.0.3) (2026-09-08)
+
+### 🐛 Fixes
+
+* adjust connection line style opacity in Pipeline component ([c30a11e](https://github.com/travel-albums-ai/CouchEditor/commit/c30a11eec534294a8abbcba071cf0b3f187cbf8d))
+
+### 🧹 Refactors
+
+* enhance file input handling in LutNode with button component ([dfcd72a](https://github.com/travel-albums-ai/CouchEditor/commit/dfcd72a4aa114f875f6b16adc63b667d0279d851))
+* replace icon components in InputHandle and OutputHandle with Circle and adjust styles ([aef4050](https://github.com/travel-albums-ai/CouchEditor/commit/aef4050f2f10e693e7ac15a3334dba24413ed2a8))
+
 ## [1.0.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.1...v1.0.2) (2026-09-08)
 
 ### 🐛 Fixes
