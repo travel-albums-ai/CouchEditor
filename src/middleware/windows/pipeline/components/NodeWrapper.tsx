@@ -29,7 +29,7 @@ function NodeWrapper({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'stretch',
-          mx: 0.25,
+          // mx: 0.25,
           borderRadius: 2,
           border: 1,
           borderColor: 'divider',

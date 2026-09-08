@@ -1,6 +1,6 @@
-import { useTheme } from '@mui/material';
+import { alpha, useTheme } from '@mui/material';
 import { Handle, Position } from "@xyflow/react";
-import { SquareArrowRightExit } from 'lucide-react';
+import { Circle } from 'lucide-react';
 
 export function OutputHandle({ id, position }: { id: string; position?: Position }) {
   const theme = useTheme()
@@ -13,7 +13,13 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
       id={id}
     >
       <div style={{ position: 'relative' }}>
-        <SquareArrowRightExit size={10} style={{ position: 'absolute', top: '3px', right: '3px' }} />
+        <Circle size={10} style={{
+          position: 'absolute',
+          top: '3px',
+          right: '3px',
+          stroke: theme.palette.divider,
+          fill: alpha(theme.palette.secondary.main, 0.5),
+        }} />
       </div>
     </Handle>
   </>;

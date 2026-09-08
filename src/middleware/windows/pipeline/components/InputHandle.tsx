@@ -1,6 +1,6 @@
-import { useTheme } from '@mui/material';
+import { alpha, useTheme } from '@mui/material';
 import { Handle, Position } from "@xyflow/react";
-import { SquareArrowRightEnter } from 'lucide-react';
+import { Circle } from 'lucide-react';
 import type { CSSProperties } from 'react';
 
 export function InputHandle({
@@ -22,7 +22,13 @@ export function InputHandle({
       id={id}
     >
       <div style={{ position: 'relative' }}>
-        <SquareArrowRightEnter size={10} style={{ position: 'absolute', top: '3px', right: '3px' }} />
+        <Circle size={10} style={{
+          position: 'absolute',
+          top: '3px',
+          right: '3px',
+          stroke: theme.palette.divider,
+          fill: alpha(theme.palette.primary.main, 0.5),
+        }} />
       </div>
     </Handle>
   </>;
