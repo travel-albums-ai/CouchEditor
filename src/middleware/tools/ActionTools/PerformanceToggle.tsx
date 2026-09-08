@@ -16,6 +16,13 @@ export default function PerformanceToggle() {
   return <>
     <GenericToggleButtonGroup variant="standard" id="performance-toggle" items={[
       {
+        kbd: 'Alt+p',
+        meta: {
+          name: 'Performance Mode',
+          description: 'Toggle the performance mode',
+          icon: <Turtle />,
+          group: 'Tools'
+        },
         tooltip: t('togglePerformanceTooltip'),
         icon: <Turtle />,
         onClick: () => handleOnChange(performanceMode),

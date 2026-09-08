@@ -12,7 +12,13 @@ export default function SettingsWindowToggle() {
   return <>
     <GenericToggleButtonGroup variant="standard" id="settings-toggle" items={[
       {
-        webMcp: true,
+        kbd: 'Alt+s',
+        meta: {
+          name: 'Settings',
+          description: 'Toggle the settings window',
+          icon: <Settings />,
+          group: 'Tools'
+        },
         tooltip: 'Toggle Settings Modal',
         icon: <Settings />,
         onClick: () => handleOnChange(),

@@ -10,6 +10,13 @@ export default function ToggleToolbox() {
   return <>
     <GenericToggleButtonGroup variant="standard" id="toggle-toolbox-toggle" items={[
       {
+        kbd: 'Alt+t',
+        meta: {
+          name: 'Toolbox',
+          description: 'Toggle the toolbox panel',
+          icon: <PanelLeftDashed />,
+          group: 'Tools'
+        },
         tooltip: "Toggle Toolbox",
         icon: <PanelLeftDashed />,
         onClick: () => toggleToolbox(),

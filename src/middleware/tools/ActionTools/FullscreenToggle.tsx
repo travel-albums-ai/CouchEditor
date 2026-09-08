@@ -27,17 +27,21 @@ export default function FullscreenToggle() {
   };
 
   return <>
-    <GenericToggleButtonGroup
-      id="fullscreen-toggle"
-      variant="standard"
-      items={[
-        {
-          tooltip: t(fullscreen ? 'exitFullscreen' : 'enterFullscreen'),
-          icon:  <Minimize2 />,
-          onClick: toggleFullscreen,
-          selected: fullscreen,
+    <GenericToggleButtonGroup id="fullscreen-toggle" variant="standard" items={[
+      {
+        kbd: 'Alt+f',
+        meta: {
+          name: 'Fullscreen',
+          description: 'Toggle fullscreen mode',
+          icon: <Minimize2 />,
+          group: 'Tools'
         },
-      ] satisfies GenericToggleButtonProps[]}
+        tooltip: t(fullscreen ? 'exitFullscreen' : 'enterFullscreen'),
+        icon:  <Minimize2 />,
+        onClick: toggleFullscreen,
+        selected: fullscreen,
+      },
+    ] satisfies GenericToggleButtonProps[]}
     />
   </>;
 }

@@ -17,7 +17,6 @@ export default function DarkLightStatus() {
     <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
       {
         tooltip: t('toggleThemeTooltip'),
-        webMcp: true,
         kbd: 'Alt+`',
         meta: {
           name: t('toggleThemeName'),

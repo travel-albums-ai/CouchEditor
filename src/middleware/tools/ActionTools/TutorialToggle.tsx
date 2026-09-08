@@ -16,7 +16,13 @@ export default function TutorialToggle() {
   return <>
     <GenericToggleButtonGroup variant="standard" items={[
       {
-        webMcp: true,
+        kbd: 'Alt+h',
+        meta: {
+          name: 'Tutorial',
+          description: 'Toggle the tutorial mode',
+          icon: <CircleQuestionMark />,
+          group: 'Tools'
+        },
         tooltip: t('tutorialToggleTooltip'),
         icon: <CircleQuestionMark size={16} />,
         onClick: () => handleTutorialToggle(),
