@@ -74,7 +74,7 @@ export default function Onboarding() {
           }}
           startIcon={ onboardingStep === steps.length - 1 ? <CircleX size={16} /> : <ChevronsRight size={16} /> }
           variant="contained">
-          {onboardingStep === steps.length - 1 ? 'Close onboarding' : t('onboardingNextStep')}
+          {onboardingStep === steps.length - 1 ? '👋' : t('onboardingNextStep')}
         </Button>
       </Box>
     </Box>
