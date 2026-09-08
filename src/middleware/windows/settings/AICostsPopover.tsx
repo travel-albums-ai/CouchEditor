@@ -1,10 +1,12 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import BYOKCosts from '@/middleware/windows/settings/byok/BYOKCosts';
 import BYOKOpenAi from '@/middleware/windows/settings/byok/BYOKOpenAi';
+import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { Box, Button } from '@mui/material';
-import { Astroid, Key, UserKey } from 'lucide-react';
+import { Box, Button, Typography } from '@mui/material';
+import { Astroid, Key, PersonStanding, Plus, UserKey } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +15,7 @@ const toggleControls = [
   { key: 'byokOpenAIKey', labelKey: 'Open AI Key', value: 'show-people-and-pets', type: 'field', icon: <Key size={16} /> },
 ] as const
 
-export default function BYOKPopover() {
+export default function AICostsPopover() {
   const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
   const { getMainPersona, getAdditionalPersonas, addAdditionalPersona } = useBYOK()
@@ -51,6 +53,21 @@ export default function BYOKPopover() {
     </SettingsSection>
 
     <BYOKOpenAi />
+
+    <BYOKCosts />
+
+    <SettingsSection title="AI identifiable personas" icon={<PersonStanding />} uuid="byok-personas">
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, justifyContent: 'space-between' }}>
+        <Typography variant="subtitle2">Identify personas in photos</Typography>
+        <Button variant="outlined" size="small" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus size={16} /></Button>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <BYOKPersona persona={getMainPersona()} main={true} index={0} />
+        {getAdditionalPersonas().map((persona, index) => <BYOKPersona persona={persona} main={false} index={index} key={index} />)}
+      </Box>
+    </SettingsSection>
+
 
   </>
 }

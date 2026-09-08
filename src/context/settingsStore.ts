@@ -4,6 +4,7 @@ import { ImageArray } from '@/middleware/windows/pipeline/types';
 
 type SettingsStore = {
   onboarding: boolean,
+  onboardingStep: number,
   newVersion?: boolean,
   serverOnline: boolean,
   lightboxOpen: boolean,
@@ -25,6 +26,7 @@ type SettingsStore = {
 
 const defaults: SettingsStore = {
   onboarding: true,
+  onboardingStep: 0,
   newVersion: false,
   performanceMode: false,
   lightboxOpen: false,

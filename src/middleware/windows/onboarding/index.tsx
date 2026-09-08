@@ -1,4 +1,5 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import OnboardingAI from '@/middleware/windows/onboarding/OnboardingAI';
 import OnboardingTakeout from '@/middleware/windows/onboarding/OnboardingTakeout';
 import OnboardingWelcome from '@/middleware/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Step, StepLabel, Stepper } from '@mui/material';
@@ -46,6 +47,7 @@ export default function Onboarding() {
       <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2 }}>
         {activeStep === 0 && <OnboardingWelcome />}
         {activeStep === 1 && <OnboardingTakeout />}
+        {activeStep === 2 && <OnboardingAI />}
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1, borderTop: '1px solid', borderColor: 'divider', pt: 5 }}>
