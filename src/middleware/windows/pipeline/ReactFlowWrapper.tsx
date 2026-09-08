@@ -121,6 +121,7 @@ const initialEdges: Edge[] = [
 ];
 
 const SNAP_GRID: [number, number] = [20, 20];
+const LAST_PIPELINE_STORAGE_KEY = 'lastOpenedPipelineId';
 
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -141,9 +142,40 @@ function Pipeline() {
   const nodeIdRef = useRef(0);
   const trashRef = useRef<HTMLDivElement>(null);
   const [trashActive, setTrashActive] = useState(false);
-  const [currentPipelineId, setCurrentPipelineId] = useState<string>('');
+  const [currentPipelineId, setCurrentPipelineId] = useState<string>(() =>
+    localStorage.getItem(LAST_PIPELINE_STORAGE_KEY) ?? ''
+  );
   const [currentPipelineName, setCurrentPipelineName] = useState('');
   const [isDirty, setIsDirty] = useState(false);
+  const restoredPipelineRef = useRef(false);
+
+  useEffect(() => {
+    if (restoredPipelineRef.current) return;
+
+    restoredPipelineRef.current = true;
+
+    if (!currentPipelineId) return;
+
+    const pipeline = loadById(currentPipelineId);
+    if (!pipeline) {
+      localStorage.removeItem(LAST_PIPELINE_STORAGE_KEY);
+      setCurrentPipelineId('');
+      return;
+    }
+
+    setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
+    setEdges(pipeline.edges.map((edge) => ({ ...edge })));
+    setCurrentPipelineName(pipeline.name);
+    setIsDirty(false);
+  }, [currentPipelineId, loadById, setEdges, setNodes]);
+
+  useEffect(() => {
+    if (currentPipelineId) {
+      localStorage.setItem(LAST_PIPELINE_STORAGE_KEY, currentPipelineId);
+    } else {
+      localStorage.removeItem(LAST_PIPELINE_STORAGE_KEY);
+    }
+  }, [currentPipelineId]);
 
   // Nodes are measured asynchronously, so fitView is deferred a frame
   // to ensure it accounts for the restored graph's actual dimensions.
