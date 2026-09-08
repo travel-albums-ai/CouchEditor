@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.9.0...v1.10.0) (2026-09-08)
+
+### ✨ Features
+
+* add Selected Photo node and update pipeline handling ([92c61c0](https://github.com/travel-albums-ai/CouchEditor/commit/92c61c0915062c25ba17b89dd3ec45002a2a20a9))
+
 ## [1.9.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.8.0...v1.9.0) (2026-09-08)
 
 ### ✨ Features
