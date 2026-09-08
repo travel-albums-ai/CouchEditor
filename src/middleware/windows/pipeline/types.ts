@@ -5,6 +5,7 @@ export type ImageValue = {
   src: string;
   width: number;
   height: number;
+  byteSize: number;
   name: string;
 };
 

@@ -64,7 +64,7 @@ export default function SplitToningNode({
   return (
     <ToneNodeLayout id={id} type="split-toning">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="caption">{t('pipelineShadowTint')}</Typography>
+        <Typography variant="caption" color="textSecondary">{t('pipelineShadowTint')}</Typography>
         <input
           aria-label={t('pipelineShadowTint')}
           type="color"
@@ -73,7 +73,7 @@ export default function SplitToningNode({
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="caption">{t('pipelineHighlightTint')}</Typography>
+        <Typography variant="caption" color="textSecondary">{t('pipelineHighlightTint')}</Typography>
         <input
           aria-label={t('pipelineHighlightTint')}
           type="color"
@@ -81,7 +81,7 @@ export default function SplitToningNode({
           onChange={(event) => updateTint('highlightTint', event.target.value)}
         />
       </Box>
-      <Typography variant="caption">
+      <Typography variant="caption" color="textSecondary">
         {t('pipelineSplitToningStrength')}
       </Typography>
       <AdjustmentSlider

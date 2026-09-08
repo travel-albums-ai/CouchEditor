@@ -1,5 +1,5 @@
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,8 +42,13 @@ function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
       <ToneNodeLayout id={id} type={config.type}>
         {CHANNELS.map(({ key, labelKey, color }) => (
           <label key={key}>
-            <Box sx={{ backgroundColor: color, width: '10px', display: 'inline-block', height: '10px', borderRadius: 4, opacity: 0.5, mx: 1 }} />
-            {t(labelKey)}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Box sx={{ backgroundColor: color, width: '16px',
+                border: '1px solid',
+                borderColor: 'background.paper',
+                display: 'inline-block', height: '16px', borderRadius: 4, opacity: 0.5 }} />
+              <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0 }}>{t(labelKey)}</Typography>
+            </Box>
             <AdjustmentSlider
               min={config.min}
               max={config.max}

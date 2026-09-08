@@ -46,7 +46,7 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
     <Box sx={{
       display: 'flex', alignItems: 'center',
       gap: 1, px: 0.5, justifyContent: 'center',
-      opacity: 0.5,
+      opacity: 0.85,
       transition: 'opacity 0.25s ease',
       '&:hover': {
         opacity: 1,

@@ -1,4 +1,5 @@
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
+import { Typography } from '@mui/material';
 import { type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,32 +20,28 @@ export default function TemperatureTintNode({
 
   return (
     <ToneNodeLayout id={id} type="temperature-tint">
-      <label>
-        {t('pipelineTemperature')}
-        <AdjustmentSlider
-          min={-100}
-          max={100}
-          step={1}
-          value={temperature}
-          onChange={(value) => {
-            Object.assign(data, { temperature: value });
-            setTemperature(value);
-          }}
-        />
-      </label>
-      <label>
-        {t('pipelineTint')}
-        <AdjustmentSlider
-          min={-100}
-          max={100}
-          step={1}
-          value={tint}
-          onChange={(value) => {
-            Object.assign(data, { tint: value });
-            setTint(value);
-          }}
-        />
-      </label>
+      <Typography variant="caption" color="textSecondary">{t('pipelineTemperatureTint')}</Typography>
+      <AdjustmentSlider
+        min={-100}
+        max={100}
+        step={1}
+        value={temperature}
+        onChange={(value) => {
+          Object.assign(data, { temperature: value });
+          setTemperature(value);
+        }}
+      />
+      <Typography variant="caption" color="textSecondary">{t('pipelineTint')}</Typography>
+      <AdjustmentSlider
+        min={-100}
+        max={100}
+        step={1}
+        value={tint}
+        onChange={(value) => {
+          Object.assign(data, { tint: value });
+          setTint(value);
+        }}
+      />
     </ToneNodeLayout>
   );
 }

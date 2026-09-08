@@ -143,6 +143,7 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
         src: URL.createObjectURL(payload.blob),
         width: payload.width,
         height: payload.height,
+        byteSize: payload.blob.size,
         name: payload.name,
       }));
 
