@@ -1,5 +1,5 @@
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useTranslation } from 'react-i18next';
 
@@ -46,15 +46,21 @@ function InformationNode({ id, data }: NodeProps<Node<InformationNodeData>>) {
           <MenuItem value="notes">{t('pipelineInformationNotes')}</MenuItem>
         </Select>
       </FormControl>
-      <TextField
-        label={t(`pipelineInformation${size[0].toUpperCase()}${size.slice(1)}`)}
+      <textarea
+        style={{
+          border: '0px none',
+          fontSize: size === 'header' ? 30 : size === 'description' ? 20 : 16,
+          width: '100%',
+          lineHeight: '1.5',
+          minWidth: size !== 'notes' ? '250px' : '350px',
+          minHeight: size !== 'notes' ? '150px' : '250px',
+          maxHeight: '300px'
+        }}
+        placeholder="..."
         value={content}
         onChange={(event) => updateNode({ content: event.target.value })}
-        size="small"
-        fullWidth
-        multiline={size !== 'header'}
-        minRows={size === 'notes' ? 4 : size === 'description' ? 2 : undefined}
-      />
+      >
+      </textarea>
     </NodeWrapper>
   );
 }
