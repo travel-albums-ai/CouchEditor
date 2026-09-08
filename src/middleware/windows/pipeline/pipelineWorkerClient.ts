@@ -29,6 +29,7 @@ const NODE_DATA_KEYS = [
   "lutFile",
   "photos",
   "amount",
+  "selectedPhotoName",
   "passthru",
   "apiKey",
   "scale",

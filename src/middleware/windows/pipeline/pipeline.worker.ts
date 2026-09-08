@@ -1021,6 +1021,21 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "selected-photo": {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      const selectedPhotoName = inputs.selectedPhotoName as string | undefined;
+
+      if (!selectedPhotoName) {
+        return { image: [] };
+      }
+
+      const selected = sources.find((source) => source.name === selectedPhotoName);
+
+      return { image: selected ? [selected] : [] };
+    },
+  },
+
   // The viewer passes images through; encoding for transport to the
   // main thread happens in the result-posting layer below.
   viewer: {
@@ -1206,6 +1221,10 @@ async function runEvaluation(
       // Selection node gets its GalleryPhotos from node.data.
       if (node.type === "selection") {
         inputs.photos = node.data.photos;
+      }
+
+      if (node.type === "selected-photo") {
+        inputs.selectedPhotoName = node.data.selectedPhotoName;
       }
 
       if (node.type === "lut") {

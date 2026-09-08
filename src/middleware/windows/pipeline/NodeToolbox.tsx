@@ -17,6 +17,7 @@ export const paletteItems: Array<{
 
   { type: "crop", labelKey: "pipelineCrop", icon: <Crop size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} />, groupKey: "pipelineGroupTransform" },
+  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />, groupKey: "pipelineGroupTransform" },

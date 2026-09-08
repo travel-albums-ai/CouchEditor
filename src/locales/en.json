@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Hue Rotation",
   "pipelineFade": "Fade",
   "pipelineRescale": "Rescale",
+  "pipelineSelectedPhoto": "Selected Photo",
   "pipelineRescaleAuto": "Auto",
   "pipelineRescaleDescription": "Rescales the image according to the selected preset",
   "pipelineRescalePreset10": "10%",

@@ -43,6 +43,7 @@ import LutNode from "./ComplexNodes/LutNode";
 import PerspectiveNode from "./ComplexNodes/PerspectiveNode";
 import PhotoHistogramNode from "./ComplexNodes/PhotoHistogramNode";
 import RescaleNode from "./ComplexNodes/RescaleNode";
+import SelectedPhotoNode from "./ComplexNodes/SelectedPhotoNode";
 import SinglePhotoViewerNode from "./ComplexNodes/SinglePhotoViewerNode";
 import SourceNode from "./ComplexNodes/SourceNode";
 import ViewerNode from "./ComplexNodes/ViewerNode";
@@ -107,6 +108,7 @@ const nodeTypes = {
   "hue-rotation": HueRotationNode,
   fade: FadeNode,
   rescale: RescaleNode,
+  "selected-photo": SelectedPhotoNode,
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
   "photo-histogram": PhotoHistogramNode,
