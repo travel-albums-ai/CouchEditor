@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { paletteItems } from '@/middleware/windows/pipeline/NodeToolbox';
+import { paletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { cloneElement, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
