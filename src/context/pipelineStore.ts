@@ -36,7 +36,7 @@ function createPipelineId() {
   return `pipeline-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 }
 
-function prepareGraph({ nodes, edges }: PipelineGraph): PipelineGraph {
+export function prepareGraph({ nodes, edges }: PipelineGraph): PipelineGraph {
   return {
     nodes: nodes.map((node) => {
       const {

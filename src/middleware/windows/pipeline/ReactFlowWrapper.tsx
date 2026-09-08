@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Save, Trash2 } from 'lucide-react';
+import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -29,7 +29,7 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
-import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
 import { MinimapPipeline } from '@/middleware/windows/pipeline/components/MinimapPipeline';
@@ -124,6 +124,14 @@ const initialEdges: Edge[] = [
 
 const SNAP_GRID: [number, number] = [20, 20];
 const LAST_PIPELINE_STORAGE_KEY = 'lastOpenedPipelineId';
+const PIPELINE_FILE_EXTENSION = '.cep';
+
+function isPipelineGraph(value: unknown): value is PipelineGraph & { name?: unknown } {
+  if (!value || typeof value !== 'object') return false;
+
+  const candidate = value as { nodes?: unknown; edges?: unknown };
+  return Array.isArray(candidate.nodes) && Array.isArray(candidate.edges);
+}
 
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -142,6 +150,7 @@ function Pipeline() {
     loadById
   } = usePipelineStore();
   const nodeIdRef = useRef(0);
+  const pipelineFileInputRef = useRef<HTMLInputElement>(null);
   const trashRef = useRef<HTMLDivElement>(null);
   const [trashActive, setTrashActive] = useState(false);
   const [currentPipelineId, setCurrentPipelineId] = useState<string>(() =>
@@ -333,6 +342,61 @@ function Pipeline() {
     setCurrentPipelineName(name.trim() || 'Untitled pipeline');
     setIsDirty(false);
   }, [cloneExisting, currentPipelineId, currentPipelineName, edges, isDirty, nodes, saveNew]);
+
+  const downloadPipeline = useCallback(() => {
+    const name = currentPipelineName.trim() || 'Untitled pipeline';
+    const pipeline = {
+      name,
+      ...prepareGraph({ nodes, edges }),
+    };
+    const blob = new Blob([JSON.stringify(pipeline, null, 2)], {
+      type: 'application/json',
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${name.replace(/[\\/:*?"<>|]+/g, '_')}${PIPELINE_FILE_EXTENSION}`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [currentPipelineName, edges, nodes]);
+
+  const uploadPipeline = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith(PIPELINE_FILE_EXTENSION)) {
+      window.alert('Please choose a .cep pipeline file.');
+      return;
+    }
+
+    try {
+      const imported = JSON.parse(await file.text()) as unknown;
+
+      if (!isPipelineGraph(imported)) {
+        throw new Error('Invalid pipeline format');
+      }
+
+      const name = typeof imported.name === 'string'
+        ? imported.name.trim() || file.name.replace(/\.cep$/i, '')
+        : file.name.replace(/\.cep$/i, '');
+      const id = saveNew(name, {
+        nodes: imported.nodes,
+        edges: imported.edges,
+      });
+
+      setNodes(imported.nodes.map((node) => ({ ...node, data: { ...node.data } })));
+      setEdges(imported.edges.map((edge) => ({ ...edge })));
+      setCurrentPipelineId(id);
+      setCurrentPipelineName(name);
+      setIsDirty(false);
+      fitView();
+    } catch (error) {
+      console.error('Pipeline import failed:', error);
+      window.alert('The selected file is not a valid .cep pipeline.');
+    }
+  }, [fitView, saveNew, setEdges, setNodes]);
 
   const loadPipeline = useCallback((id: string) => {
     if (!id || id === currentPipelineId) return;
@@ -594,7 +658,26 @@ function Pipeline() {
                 onClick: () => saveAsCopy(),
                 title: '',
               },
+              {
+                tooltip: 'Download pipeline',
+                icon: <Download />,
+                onClick: downloadPipeline,
+                title: '',
+              },
+              {
+                tooltip: 'Upload pipeline',
+                icon: <Upload />,
+                onClick: () => pipelineFileInputRef.current?.click(),
+                title: '',
+              },
             ] satisfies GenericToggleButtonProps[]} />
+            <input
+              ref={pipelineFileInputRef}
+              type="file"
+              accept=".cep"
+              hidden
+              onChange={uploadPipeline}
+            />
 
           </Box>
         </FloatingStack>
