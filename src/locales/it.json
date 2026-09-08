@@ -153,7 +153,7 @@
   "aiActionColorized": "colorizzate",
   "aiActionDenoised": "denoizzate",
   "aiEngaged": "Attivo",
-  "aiPassthru": "Passthrough",
+  "aiPassthru": "Ignora",
   "aiNoOpenAiKey": "Nessuna chiave OpenAI configurata",
   "aiIdle": "Inattivo",
   "layoutLocale": "Lingua",

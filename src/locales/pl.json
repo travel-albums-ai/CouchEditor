@@ -62,7 +62,7 @@
   "pipelineGroupDecorative": "dekoracyjne",
   "pipelineGroupOutput": "wyjście",
   "pipelineLocalStorage": "Pamięć lokalna",
-  "pipelineHotFolder": "Hot Folder",
+  "pipelineHotFolder": "Monitorowany folder",
   "pipelineGrouper": "Grupowanie",
   "pipelineInformation": "Informacje",
   "pipelineInformationSize": "Rozmiar",

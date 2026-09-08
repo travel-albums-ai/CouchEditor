@@ -62,7 +62,7 @@
   "pipelineGroupDecorative": "decoratief",
   "pipelineGroupOutput": "uitvoer",
   "pipelineLocalStorage": "Lokale opslag",
-  "pipelineHotFolder": "Hot folder",
+  "pipelineHotFolder": "Bewaakte map",
   "pipelineGrouper": "Grouper",
   "pipelineInformation": "Informatie",
   "pipelineInformationSize": "Grootte",

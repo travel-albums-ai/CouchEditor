@@ -153,7 +153,7 @@
   "aiActionColorized": "renklendirildi",
   "aiActionDenoised": "gürültü giderildi",
   "aiEngaged": "Etkin",
-  "aiPassthru": "Passthru",
+  "aiPassthru": "Atla",
   "aiNoOpenAiKey": "OpenAI anahtarı yapılandırılmamış",
   "aiIdle": "Boşta",
   "layoutLocale": "Dil",
