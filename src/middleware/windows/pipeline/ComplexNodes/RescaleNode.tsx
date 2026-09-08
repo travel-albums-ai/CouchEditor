@@ -4,8 +4,8 @@ import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { Maximize2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 const SCALE_PRESETS = [
   { value: "1", labelKey: "pipelineRescaleAuto" },
