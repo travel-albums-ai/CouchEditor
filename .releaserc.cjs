@@ -55,11 +55,6 @@ if (hasGitHubToken) {
       successComment: false,
       failComment: false,
       releasedLabels: false,
-      assets: [
-        {
-          path: "**/TravelAlbums*.exe",
-        }
-      ]
     }
   ]);
 }
