@@ -94,6 +94,7 @@ export type PipelineViewerMessage = {
 export type PipelineDoneMessage = {
   type: "done";
   evaluationId: number;
+  durationMs: number;
 };
 
 export type PipelineErrorMessage = {

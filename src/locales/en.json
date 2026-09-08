@@ -8,6 +8,7 @@
   "onboardingNextStep": "Next step",
   "domElementsTooltip": "Number of DOM elements on the page",
   "pipelineNodesTooltip": "Number of nodes in the current pipeline",
+  "pipelineTotalTimeTooltip": "Total time taken by the current pipeline",
   "layoutTheme": "Theme",
   "toggleThemeTooltip": "Toggle theme",
   "toggleThemeName": "Toggle Theme",

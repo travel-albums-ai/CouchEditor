@@ -146,6 +146,12 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
     }
 
     case "done": {
+      window.dispatchEvent(
+        new CustomEvent('pipeline:total-timing', {
+          detail: { durationMs: message.durationMs },
+        })
+      );
+
       // Viewers that never reported (e.g. an upstream failure)
       // settle empty instead of hanging.
       for (const [nodeId, pending] of pendingViewers) {

@@ -1178,6 +1178,7 @@ async function runEvaluation(
   signal: AbortSignal
 ): Promise<void> {
   const { evaluationId, nodes, edges } = message;
+  const startedAt = performance.now();
 
   const outputs = new Map<string, Promise<NodeOutputs>>();
   const signatures = new Map<string, string>();
@@ -1375,7 +1376,11 @@ async function runEvaluation(
 
   throwIfStale(evaluationId);
 
-  workerScope.postMessage({ type: "done", evaluationId });
+  workerScope.postMessage({
+    type: "done",
+    evaluationId,
+    durationMs: performance.now() - startedAt,
+  });
 }
 
 workerScope.onmessage = (event) => {
