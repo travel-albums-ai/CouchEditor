@@ -76,10 +76,10 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
           border: `2px solid ${theme.palette.divider}`,
           boxShadow: theme.shadows[24],
         }),
-        backdrop: {
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backdrop: ({ theme }) => ({
+          backgroundColor: `${theme.palette.background.default}CC`,
           backdropFilter: 'blur(1px)',
-        },
+        }),
       },
     },
     MuiTooltip: {

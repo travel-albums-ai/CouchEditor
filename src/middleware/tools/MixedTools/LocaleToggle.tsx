@@ -3,9 +3,9 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { supportedLanguages, type SupportedLanguage } from '@/lib/i18n';
 import { ToggleButtonGroup } from '@mui/material';
 
-// language codes whose flag country differs from the language code itself
 const FLAG_COUNTRY_OVERRIDES: Partial<Record<string, string>> = {
   en: 'GB',
+  uk: 'UA',
 };
 
 const languageDisplayNames = new Intl.DisplayNames(['en'], { type: 'language' });
@@ -23,6 +23,7 @@ export default function LocaleToggle() {
 
   return (
     <ToggleButtonGroup
+      sx={{ display: 'flex', justifyContent: 'center', gap: 0, flexWrap: 'wrap', width: '400px' }}
       value={locale}
       exclusive
       onChange={(_, newLocale: SupportedLanguage) => {

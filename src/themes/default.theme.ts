@@ -5,9 +5,17 @@ export const themeTokens = {
   light: {
     palette: {
       mode: 'light',
-      primary: { main: '#1976d2' },
-      secondary: { main: '#dc004e' },
-      background: { default: '#fafafa', paper: '#ffffff' },
+      primary: { main: '#7152f8' },
+      secondary: { main: '#f48fb1' },
+      background: {
+        default: '#f4f5f8',
+        paper: '#ffffff',
+      },
+      text: {
+        primary: '#20232a',
+        secondary: '#6b6f76',
+        disabled: '#a0a3a8',
+      },
     },
     shape: {
       borderRadius: 4,
