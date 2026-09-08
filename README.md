@@ -1,153 +1,145 @@
-[![Travel Albums](/readme/landing.png)](https://github.com/rand0mC0d3r/trip-gallery)
+# CouchEditor
 
-**[Try out the DEMO](https://app.travel-albums.com/#/allPhotos)**
+CouchEditor is a visual workspace for building photo-editing recipes.
 
+Instead of applying the same edits one photo at a time, you can arrange a set of editing steps on a canvas, connect them together, and preview the result. Save the recipe for later or share it as a `.cep` pipeline file.
 
-# 🗺️ Travel Albums
+<!-- IMAGE PLACEHOLDER: Add a welcoming screenshot of CouchEditor with a small example pipeline visible. -->
 
-> **TL;DR:** A local-first React gallery for exploring a Google Takeout-style photo archive. It indexes photo metadata, generates thumbnails, and turns a large personal collection into filterable galleries, timelines, places, trips, albums, and maps.
+## What can I do with CouchEditor?
 
-Travel Albums is a Vite/React interface for exploring a Google Takeout-style photo archive.
+- Choose photos from your computer.
+- Arrange editing steps such as crop, resize, rotate, brightness, contrast, color, sharpening, and effects.
+- Preview one photo or a complete set of photos.
+- Use optional AI tools such as colorizing and denoising when AI features are enabled.
+- Download the finished photos from a viewer step.
+- Save your editing recipe in CouchEditor.
+- Export a recipe as a `.cep` file and import it on another computer or browser.
 
-## ✨ What it can do
+## The basic idea
 
-[![Travel Albums](/readme/features.png)](https://github.com/rand0mC0d3r/trip-gallery)
+A CouchEditor project is made from **steps** connected on a canvas:
 
- - 🖼️ Browse all indexed photos in grid, row, scroller, day, or adjustments views.
-- 🧭 Group collections into dashboard sections such as albums, countries, cities, people/pets, trips, timeline, tags, and “now and then”.
-- 📍 Use EXIF/GPS metadata for location-aware views and nearby-place suggestions.
-- 🔎 Filter, sort, search, pin, select, favorite, tag, ignore, or mark photos private.
-- ⌨️ Navigate and select photos with keyboard shortcuts.
-- 🗂️ Explore indexed thumbnails and normalized metadata from Takeout sidecar JSON files.
- - 🎞️ Inspect EXIF details, maps, charts, collages, and image-negative conversion and adjustments tools.
+1. An **input** step provides photos.
+2. **Editing** steps change the photos.
+3. An **output** step displays or exports the result.
 
-## 🚀 Quick start
+For example:
 
-### Prerequisites
+`Photos → Crop → Brightness → Viewer`
 
-- Node.js 18 or higher (a current LTS release is recommended).
-- npm
+The steps do not change your original files. They describe what should happen to the photos while you work.
 
+## Getting started
 
-### Install and run
+1. Open CouchEditor.
+2. Open the toolbox on the left side of the canvas if it is hidden.
+3. Drag a photo input step onto the canvas.
+4. Choose the photos you want to edit.
+5. Drag an editing step onto the canvas.
+6. Drag an output step onto the canvas.
+7. Connect the steps by dragging from one circular connector to the next.
+8. Adjust the controls in the editing step and review the result in the output step.
+
+<!-- IMAGE PLACEHOLDER: Add a screenshot showing the toolbox, a photo input, one edit, and a viewer connected together. -->
+
+### Choosing photos
+
+Use the photo input step to select JPEG, PNG, or WebP images from your computer. The number of selected photos appears on the step, and thumbnails appear below it.
+
+### Adding an edit
+
+The toolbox groups available steps by purpose:
+
+- **Input**: bring photos or other information into the pipeline.
+- **Transform**: crop, resize, rotate, flip, mirror, or correct perspective.
+- **Light**: adjust exposure, brightness, contrast, highlights, shadows, gamma, or luminosity.
+- **Color**: adjust saturation, vibrance, hue, black and white, sepia, inversion, or LUT color presets.
+- **Detail**: sharpen, remove noise, or add grain.
+- **Effects**: add vignette, pop, HDR, or fade effects.
+- **AI**: use optional AI-powered editing tools.
+- **Output**: preview a photo, preview a group of photos, view a histogram, or write to a folder.
+
+### Connecting steps
+
+Connect steps in the order you want them applied. A step can only use the result of a step connected before it.
+
+To change a connection, drag its endpoint to another connector. To remove a connection, double-click it. To remove a step, drag it to the trash area or select it and press `Delete`.
+
+<!-- IMAGE PLACEHOLDER: Add a close-up screenshot showing the connection points and a connected editing chain. -->
+
+## Saving your work
+
+The pipeline title field is in the top-left corner.
+
+- **New** clears the current canvas so you can start another recipe.
+- **Save** stores the current recipe in CouchEditor.
+- **Save as clone** creates a separate copy while keeping the original recipe.
+- The pipeline selector in the top-right loads a recipe you saved earlier.
+- The trash button removes the currently selected saved recipe.
+
+CouchEditor keeps saved recipes in the browser where you are using it. Clearing browser storage or changing browsers may remove access to those saved recipes, so export important recipes as `.cep` files.
+
+## Sharing a pipeline
+
+### Download a pipeline
+
+1. Give the pipeline a useful title.
+2. Select the **Download pipeline** button in the top-left toolbar.
+3. CouchEditor downloads a file with the pipeline title and the `.cep` extension.
+
+The downloaded file contains the editing recipe, not the original photos. This keeps the file small and makes it safe to share. The person opening it will need to select their own photos.
+
+### Upload a pipeline
+
+1. Select the **Upload pipeline** button in the top-left toolbar.
+2. Choose a `.cep` file.
+3. CouchEditor opens the recipe as a new saved pipeline.
+4. Select photos in the photo input step before running it.
+
+<!-- IMAGE PLACEHOLDER: Add a screenshot with the Download pipeline and Upload pipeline buttons highlighted. -->
+
+## Viewing and downloading results
+
+Connect a viewer step to the end of your pipeline.
+
+- A single-photo viewer is useful for checking one result.
+- A multi-photo viewer shows the complete output set.
+- The multi-photo viewer can open the results in a larger view or download them together as a ZIP file.
+- A histogram step helps inspect the tonal distribution of a photo.
+
+## AI editing
+
+AI steps are optional. If they are enabled in your installation, they appear in the AI section of the toolbox. AI features may require provider settings or an API key before they can be used.
+
+<!-- IMAGE PLACEHOLDER: Add a screenshot of the AI settings or an AI editing step, if this is part of the public user experience. -->
+
+## Tips for a comfortable workflow
+
+- Start with a viewer connected directly to your photo input, then add edits between them.
+- Keep one pipeline focused on one look or task.
+- Give saved pipelines names that describe the result, such as `Warm family photos` or `Web-size exports`.
+- Save before experimenting with a large change, or use **Save as clone** first.
+- Export recipes you want to keep or share.
+
+## For developers
+
+CouchEditor is a Vite and React application.
 
 ```bash
 npm install
 npm run dev
 ```
 
-This starts the Vite development client at `http://localhost:5173`.
+The development server will show the local address to open in a browser.
 
-## 🧑‍💻 Everyday use
+Useful commands:
 
-| Goal | Where to start |
-| --- | --- |
-| Browse everything | Open **All Photos** |
-| Discover groups | Open the **Dashboard** and select a populated section |
-| Change presentation | Use the gallery-type control to switch grid, rows, scroller, per-day, or adjustments mode |
-| Compare or curate | Turn on selection mode, select photos, then apply favorite/private/ignore/tag actions |
-| Navigate efficiently | Use `←` / `→` to move the preview; in selection mode, use `Enter` to toggle the current photo |
-| Refresh source data | Reload the indexed data available to the client |
-
-The UI uses hash routing, so it can be hosted from a relative path and its views can be deep-linked with URLs such as `#/allPhotos` and `#/selectedPhotos/:type_name/:id`.
-
-## 🗂️ Project structure
-
-```text
-.
-├── src/
-│   ├── components/       # Reusable UI pieces and route host
-│   ├── context/          # App-wide state providers and persisted stores
-│   ├── data/             # Routes and geographic reference data
-│   ├── hooks/            # Fetching, transforms, pipelines, sections, and workers
-│   ├── layout/           # Header, sidebar, breadcrumbs, status bar, shell
-│   ├── lib/              # Shared domain types, i18n, storage, and services
-│   ├── windows/          # Onboarding, search, and gallery flows
-│   ├── pages/            # Route-level gallery/dashboard/settings views
-│   └── routes.ts         # Data-driven route normalization and menu generation
-└── vite.config.ts        # Vite, aliases, build options, and bundle analysis
+```bash
+npm run build   # Create a production build
+npm run lint    # Check the source code
 ```
 
-## 🧩 Architecture and patterns
+## License
 
-### Client
-
-- **React 19 + TypeScript + Vite** power the client; `@/` aliases `src/`.
-- **Material UI** and Emotion provide the component system and theme-aware styling.
-- **React Router** maps a JSON route catalog to pages, redirects, and menu items.
-- **React Query** wraps client data fetching, while focused React context stores hold gallery state.
-- **i18next** supplies localization wiring.
-
-`AppProviders` composes settings, theme, notifications, filters, selection, labels, favorites, privacy, and derived gallery-data providers around the route tree. This keeps page components focused on rendering and interaction.
-
-### Data model
-
-The client’s core `GalleryPhoto` model (`src/lib/galleryData.ts`) includes:
-
-```text
-id, albumName, title, batch, takenAt, takenAtTs, width,
-latitude?, longitude?, people[], imageUrl, sourceUrl, tiny,
-likes, views, description, social[]
-```
-
-Section hooks transform these records into UI-ready groups. A section contains a type, title, and sets of photos; the dashboard and selected routes consume those derived collections rather than reimplementing grouping logic.
-
-## 🎛️ Extending the interface
-
-### Add a route or page
-
-1. Create a page under `src/pages/`.
-2. Register its component key in `src/routes.ts`.
-3. Add a matching entry in `src/data/routes.json`.
-4. Control visibility, menu inclusion, label, icon, and order from the route JSON.
-
-### Add a derived gallery section
-
-Place reusable grouping logic in `src/hooks/sections/`. Compose existing data-transform hooks and return stable, UI-ready section data. The section provider makes the result available to the dashboard, navigation, and selected-gallery routes.
-
-### Add a visualization
-
-The gallery visualization selector chooses a renderer based on the persisted `albumType` setting. Keep a new page-local renderer adjacent to its consuming page in a feature-specific components folder; place shared UI in `src/components/`. Use the existing renderer contracts that accept `GalleryPhoto[]`.
-
-### Add state or remote data
-
-- Keep reusable state logic in `src/hooks/`.
-- Use a focused context store when state is shared across unrelated views.
-- Put request wrappers in `src/hooks/remote/` and expose loading, error, data, and refresh/cancellation behavior.
-- Keep source modules out of `src/gallery`, which is reserved for volatile gallery data/assets.
-
-## ⚡ Performance notes
-
-Trip Gallery is designed for photo libraries that do not fit comfortably in a single DOM render:
-
-- `react-virtuoso` backs grid and row gallery renderers to virtualize long lists.
-- Background workers perform expensive grouping and filtering for sections.
-- Derived hooks favor memoized, stable data transformations to limit rerenders.
-- Vite ignores archive, thumbnail, and sprite folders during development watch; `npm run analyze` emits `dist/stats.json` for bundle inspection.
-
-## 🛠️ Commands
-
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite client |
-| `npm run build` | Create a production client build |
-| `npm run preview` | Build and preview the client |
-
-## ✅ Contribution guidelines
-
-- Keep components small and place reusable components in `src/components/`.
-- Use one React component per file.
-- Prefer Material UI component props, theme tokens, and scoped `sx` styling over raw inline styles.
-- Extract reusable React behavior into `src/hooks/`; name hooks with `use…`.
-- Keep transforms deterministic and memoize expensive derived data.
-- If `src/gallery` is present in a working copy, treat it as volatile gallery data/assets and do not add source modules there.
-- Do not commit personal paths, archives, thumbnails, generated metadata, or credentials.
-- Run `npm run lint` and `npm run build` before opening a pull request.
-
-## 📦 Build and packaging
-
-The standard build produces static client assets in `dist/` with relative asset paths, which supports desktop/embedded packaging.
-
----
-
-Built for exploring local travel memories—without handing your photo library to a cloud service. ☁️
+See [LICENSE](LICENSE) for licensing information.
