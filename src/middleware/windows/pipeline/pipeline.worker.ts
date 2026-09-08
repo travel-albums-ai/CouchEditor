@@ -811,6 +811,22 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "google-drive": {
+    async execute(inputs) {
+      const files = inputs.files as File[] | undefined;
+
+      if (!files || files.length === 0) { return { image: [] } }
+
+      const image = await mapWithConcurrency(
+        files.slice(0, 10),
+        inputs.evaluationId as number,
+        loadFileImage
+      );
+
+      return { image };
+    },
+  },
+
   selection: {
     async execute(inputs) {
       const photos = inputs.photos as GalleryPhoto[] | undefined;
@@ -1212,8 +1228,8 @@ async function runEvaluation(
       }));
 
       // Special case:
-      // Source node gets its Files from node.data.
-      if (node.type === "source" || node.type === "hot-folder-read") {
+      // File-backed source nodes get their Files from node.data.
+      if (node.type === "source" || node.type === "hot-folder-read" || node.type === "google-drive") {
         inputs.files = node.data.files;
       }
 

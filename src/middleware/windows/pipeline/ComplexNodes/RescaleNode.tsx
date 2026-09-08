@@ -2,8 +2,8 @@ import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedCo
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { type Node, type NodeProps } from "@xyflow/react";
-import { Maximize2 } from 'lucide-react';
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +19,7 @@ const SCALE_PRESETS = [
 ];
 
 function RescaleNode({
+  id,
   data,
 }: NodeProps<Node<{ scale?: number }>>) {
   const { t } = useTranslation();
@@ -26,7 +27,8 @@ function RescaleNode({
 
   return (<>
     <InputHandle id="image" />
-    <NodeWrapper title={t('pipelineRescale')} icon={<Maximize2 />} toolbar={<></>} type="rescale">
+    <NodeWrapper  tools={<PipelineStageTiming nodeId={id} nodeType={'rescale'} />}
+      type="rescale">
 
       <SegmentedControl
         value={scale}

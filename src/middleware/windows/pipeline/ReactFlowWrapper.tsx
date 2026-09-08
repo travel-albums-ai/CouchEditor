@@ -36,6 +36,7 @@ import { MinimapPipeline } from '@/middleware/windows/pipeline/components/Minima
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import CropNode from "./ComplexNodes/CropNode";
+import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
 import GrouperNode from "./ComplexNodes/GrouperNode";
 import HotFolderReadNode from "./ComplexNodes/HotFolderReadNode";
 import HotFolderWriteNode from "./ComplexNodes/HotFolderWriteNode";
@@ -79,6 +80,7 @@ const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 const nodeTypes = {
   source: SourceNode,
   "hot-folder-read": HotFolderReadNode,
+  "google-drive": GoogleDriveNode,
   grouper: GrouperNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
@@ -200,14 +202,23 @@ function Pipeline() {
   useEffect(() => () => terminatePipelineWorker(), []);
 
   const evaluationId = useRef(0);
+  const nodesRef = useRef(nodes);
+  const edgesRef = useRef(edges);
+
+  useEffect(() => {
+    nodesRef.current = nodes;
+    edgesRef.current = edges;
+  }, [edges, nodes]);
 
   const evaluate = useCallback(async () => {
     const id = ++evaluationId.current;
+    const currentNodes = nodesRef.current;
+    const currentEdges = edgesRef.current;
 
     let results;
 
     try {
-      results = await evaluatePipeline(nodes, edges);
+      results = await evaluatePipeline(currentNodes, currentEdges);
     } catch (error) {
       console.error("Pipeline evaluation failed:", error);
       return;
@@ -220,7 +231,7 @@ function Pipeline() {
     }
 
     // Update viewer nodes with their resolved result.
-    for (const node of nodes) {
+    for (const node of currentNodes) {
       if (!VIEWER_NODE_TYPES.has(node.type ?? "")) {
         continue;
       }
@@ -262,8 +273,6 @@ function Pipeline() {
       );
     }
   }, [
-    nodes,
-    edges,
     setNodes,
   ]);
 
@@ -442,7 +451,9 @@ function Pipeline() {
   useEffect(() => {
     const handler = () => {
       setIsDirty(true);
-      evaluate();
+      requestAnimationFrame(() => {
+        void evaluate();
+      });
     };
 
     window.addEventListener('pipeline:changed', handler);
