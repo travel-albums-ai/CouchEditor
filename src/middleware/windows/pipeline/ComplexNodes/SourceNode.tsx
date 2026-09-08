@@ -4,7 +4,7 @@ import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { Box, Button } from '@mui/material';
-import { type Node, type NodeProps } from "@xyflow/react";
+import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { Images, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
@@ -95,7 +95,7 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
         )}
       </Box>
 
-      <OutputHandle id="image" />
+      <OutputHandle id="image" position={Position.Top} />
     </NodeWrapper>
   );
 }
