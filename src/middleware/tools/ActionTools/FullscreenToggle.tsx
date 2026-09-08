@@ -31,10 +31,10 @@ export default function FullscreenToggle() {
       {
         kbd: 'Alt+f',
         meta: {
-          name: 'Fullscreen',
-          description: 'Toggle fullscreen mode',
+          name: t('fullscreenName'),
+          description: t('fullscreenDescription'),
           icon: <Minimize2 />,
-          group: 'Tools'
+          group: t('toolsGroup')
         },
         tooltip: t(fullscreen ? 'exitFullscreen' : 'enterFullscreen'),
         icon:  <Minimize2 />,

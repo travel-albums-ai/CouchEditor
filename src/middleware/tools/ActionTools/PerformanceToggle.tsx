@@ -18,10 +18,10 @@ export default function PerformanceToggle() {
       {
         kbd: 'Alt+p',
         meta: {
-          name: 'Performance Mode',
-          description: 'Toggle the performance mode',
+          name: t('performanceModeName'),
+          description: t('performanceModeDescription'),
           icon: <Turtle />,
-          group: 'Tools'
+          group: t('toolsGroup')
         },
         tooltip: t('togglePerformanceTooltip'),
         icon: <Turtle />,

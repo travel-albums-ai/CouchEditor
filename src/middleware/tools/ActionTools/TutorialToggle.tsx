@@ -18,10 +18,10 @@ export default function TutorialToggle() {
       {
         kbd: 'Alt+h',
         meta: {
-          name: 'Tutorial',
-          description: 'Toggle the tutorial mode',
+          name: t('tutorialName'),
+          description: t('tutorialDescription'),
           icon: <CircleQuestionMark />,
-          group: 'Tools'
+          group: t('toolsGroup')
         },
         tooltip: t('tutorialToggleTooltip'),
         icon: <CircleQuestionMark size={16} />,

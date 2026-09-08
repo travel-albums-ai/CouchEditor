@@ -2,10 +2,12 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Settings } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsWindowToggle() {
   const { setSetting } = useSettings()
   const showSettings = useSettingsStoreSelector((state) => state.showSettings);
+  const { t } = useTranslation()
 
   const handleOnChange = () => setSetting((prev) => ({ ...prev, showSettings: !prev.showSettings}));
 
@@ -14,12 +16,12 @@ export default function SettingsWindowToggle() {
       {
         kbd: 'Alt+s',
         meta: {
-          name: 'Settings',
-          description: 'Toggle the settings window',
+          name: t('settingsName'),
+          description: t('settingsDescription'),
           icon: <Settings />,
-          group: 'Tools'
+          group: t('toolsGroup')
         },
-        tooltip: 'Toggle Settings Modal',
+        tooltip: t('settingsToggleTooltip'),
         icon: <Settings />,
         onClick: () => handleOnChange(),
         selected: showSettings,
