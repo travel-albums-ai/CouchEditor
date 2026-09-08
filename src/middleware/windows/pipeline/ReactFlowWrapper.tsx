@@ -61,6 +61,11 @@ import HighlightsNode from "./OneBarToggles/HighlightsNode";
 import HueRotationNode from "./OneBarToggles/HueRotationNode";
 import LuminosityNode from "./OneBarToggles/LuminosityNode";
 import PopNode from "./OneBarToggles/PopNode";
+import {
+  RgbBlackPointNode,
+  RgbMidtonesNode,
+  RgbWhitePointNode,
+} from "./OneBarToggles/RgbChannelsNode";
 import RotateNode from "./OneBarToggles/RotateNode";
 import SaturationNode from "./OneBarToggles/SaturationNode";
 import ShadowsNode from "./OneBarToggles/ShadowsNode";
@@ -114,6 +119,9 @@ const nodeTypes = {
   fade: FadeNode,
   "whites-blacks": WhitesBlacksNode,
   "temperature-tint": TemperatureTintNode,
+  "rgb-black-point": RgbBlackPointNode,
+  "rgb-white-point": RgbWhitePointNode,
+  "rgb-midtones": RgbMidtonesNode,
   "split-toning": SplitToningNode,
   rescale: RescaleNode,
   "selected-photo": SelectedPhotoNode,

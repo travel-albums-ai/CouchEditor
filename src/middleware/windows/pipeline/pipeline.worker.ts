@@ -26,6 +26,9 @@ import {
   invertStage,
   luminosityStage,
   popStage,
+  rgbBlackPointStage,
+  rgbMidtonesStage,
+  rgbWhitePointStage,
   saturationStage,
   sepiaStage,
   shadowsStage,
@@ -547,6 +550,11 @@ const SLIDER_NODE_TYPES = new Set([
   "rotate",
 ]);
 const TONE_NODE_TYPES = new Set(["whites-blacks", "temperature-tint"]);
+const RGB_CHANNEL_NODE_TYPES = new Set([
+  "rgb-black-point",
+  "rgb-white-point",
+  "rgb-midtones",
+]);
 
 const drawSource = (
   ctx: OffscreenCanvasRenderingContext2D,
@@ -617,6 +625,30 @@ function twoAmountStageNode(
           inputs.evaluationId as number,
           drawSource,
           createStage(first, second)
+        ),
+      };
+    },
+  };
+}
+
+function threeAmountStageNode(
+  createStage: (first: number, second: number, third: number) => Stage,
+  defaultAmount: number
+): PipelineNodeDefinition {
+  return {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) return { image: [] };
+
+      const red = (inputs.red as number | undefined) ?? defaultAmount;
+      const green = (inputs.green as number | undefined) ?? defaultAmount;
+      const blue = (inputs.blue as number | undefined) ?? defaultAmount;
+      return {
+        image: await renderImages(
+          sources,
+          inputs.evaluationId as number,
+          drawSource,
+          createStage(red, green, blue)
         ),
       };
     },
@@ -1032,6 +1064,9 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   fade: amountStageNode(fadeStage, 0),
   "whites-blacks": twoAmountStageNode(whitesBlacksStage, "whites", "blacks"),
   "temperature-tint": twoAmountStageNode(temperatureTintStage, "temperature", "tint"),
+  "rgb-black-point": threeAmountStageNode(rgbBlackPointStage, 0),
+  "rgb-white-point": threeAmountStageNode(rgbWhitePointStage, 255),
+  "rgb-midtones": threeAmountStageNode(rgbMidtonesStage, 1),
   "split-toning": {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1299,6 +1334,11 @@ async function runEvaluation(
         inputs.blacks = node.data.blacks;
         inputs.temperature = node.data.temperature;
         inputs.tint = node.data.tint;
+      }
+      if (RGB_CHANNEL_NODE_TYPES.has(node.type ?? "")) {
+        inputs.red = node.data.red;
+        inputs.green = node.data.green;
+        inputs.blue = node.data.blue;
       }
       if (node.type === "split-toning") {
         inputs.shadowTint = node.data.shadowTint;

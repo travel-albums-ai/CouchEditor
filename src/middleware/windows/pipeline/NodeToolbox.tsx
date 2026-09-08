@@ -1,7 +1,7 @@
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const paletteItems: Array<{
@@ -34,6 +34,9 @@ export const paletteItems: Array<{
   { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupLight" },
   { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
   { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
+  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
+  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
+  { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
 
   { type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />, groupKey: "pipelineGroupColor" },
   { type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />, groupKey: "pipelineGroupColor" },
