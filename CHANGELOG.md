@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.3...v1.1.0) (2026-09-08)
+
+### ✨ Features
+
+* add InformationNode component and integrate into pipeline with localization support ([136ac13](https://github.com/travel-albums-ai/CouchEditor/commit/136ac135ff6ef4dd634f90943a53787cb6408bf5))
+
 ## [1.0.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.2...v1.0.3) (2026-09-08)
 
 ### 🐛 Fixes
