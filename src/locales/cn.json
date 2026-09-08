@@ -100,6 +100,7 @@
   "pipelineHueRotation": "色相旋转",
   "pipelineFade": "淡化",
   "pipelineRescale": "缩放",
+  "pipelineSelectedPhoto": "已选照片",
   "pipelineRescaleAuto": "自动",
   "pipelineRescaleDescription": "根据所选预设缩放图像",
   "pipelineRescalePreset10": "10%",

@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Rotazione tonalità",
   "pipelineFade": "Dissolvenza",
   "pipelineRescale": "Ridimensiona",
+  "pipelineSelectedPhoto": "Foto selezionata",
   "pipelineRescaleAuto": "Auto",
   "pipelineRescaleDescription": "Ridimensiona l'immagine in base al preset selezionato",
   "pipelineRescalePreset10": "10%",

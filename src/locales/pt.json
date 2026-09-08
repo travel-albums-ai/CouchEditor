@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Rotação de matiz",
   "pipelineFade": "Desvanecer",
   "pipelineRescale": "Redimensionar",
+  "pipelineSelectedPhoto": "Foto selecionada",
   "pipelineRescaleAuto": "Automático",
   "pipelineRescaleDescription": "Redimensiona a imagem de acordo com a predefinição selecionada",
   "pipelineRescalePreset10": "10%",

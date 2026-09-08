@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Rotasi Hue",
   "pipelineFade": "Pudar",
   "pipelineRescale": "Skala Ulang",
+  "pipelineSelectedPhoto": "Foto Terpilih",
   "pipelineRescaleAuto": "Otomatis",
   "pipelineRescaleDescription": "Mengubah skala gambar sesuai preset yang dipilih",
   "pipelineRescalePreset10": "10%",

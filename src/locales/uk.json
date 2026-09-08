@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Поворот відтінку",
   "pipelineFade": "Згасання",
   "pipelineRescale": "Масштабування",
+  "pipelineSelectedPhoto": "Вибране фото",
   "pipelineRescaleAuto": "Авто",
   "pipelineRescaleDescription": "Масштабує зображення відповідно до вибраного пресету",
   "pipelineRescalePreset10": "10%",

@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Obrót odcienia",
   "pipelineFade": "Wygaszenie",
   "pipelineRescale": "Skalowanie",
+  "pipelineSelectedPhoto": "Wybrane zdjęcie",
   "pipelineRescaleAuto": "Auto",
   "pipelineRescaleDescription": "Skaluje obraz zgodnie z wybranym ustawieniem",
   "pipelineRescalePreset10": "10%",

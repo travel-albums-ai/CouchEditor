@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Rotire nuanță",
   "pipelineFade": "Estompare",
   "pipelineRescale": "Redimensionare",
+  "pipelineSelectedPhoto": "Fotografie selectată",
   "pipelineRescaleAuto": "Automat",
   "pipelineRescaleDescription": "Redimensionează imaginea conform presetării selectate",
   "pipelineRescalePreset10": "10%",

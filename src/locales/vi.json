@@ -100,6 +100,7 @@
   "pipelineHueRotation": "Xoay màu",
   "pipelineFade": "Mờ dần",
   "pipelineRescale": "Đổi tỷ lệ",
+  "pipelineSelectedPhoto": "Ảnh đã chọn",
   "pipelineRescaleAuto": "Tự động",
   "pipelineRescaleDescription": "Đổi tỷ lệ ảnh theo preset đã chọn",
   "pipelineRescalePreset10": "10%",

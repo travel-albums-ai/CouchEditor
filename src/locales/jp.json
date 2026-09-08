@@ -100,6 +100,7 @@
   "pipelineHueRotation": "色相回転",
   "pipelineFade": "フェード",
   "pipelineRescale": "リスケール",
+  "pipelineSelectedPhoto": "選択した写真",
   "pipelineRescaleAuto": "自動",
   "pipelineRescaleDescription": "選択したプリセットに従って画像をリスケールします",
   "pipelineRescalePreset10": "10%",

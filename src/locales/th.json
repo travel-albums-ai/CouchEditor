@@ -100,6 +100,7 @@
   "pipelineHueRotation": "หมุนเฉดสี",
   "pipelineFade": "จาง",
   "pipelineRescale": "ปรับขนาด",
+  "pipelineSelectedPhoto": "รูปภาพที่เลือก",
   "pipelineRescaleAuto": "อัตโนมัติ",
   "pipelineRescaleDescription": "ปรับขนาดภาพตามพรีเซ็ตที่เลือก",
   "pipelineRescalePreset10": "10%",

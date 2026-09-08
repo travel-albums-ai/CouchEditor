@@ -108,6 +108,7 @@
   "pipelineHueRotation": "Farbton drehen",
   "pipelineFade": "Verblassen",
   "pipelineRescale": "Größe ändern",
+  "pipelineSelectedPhoto": "Ausgewähltes Foto",
   "pipelineRescaleAuto": "Auto",
   "pipelineRescaleDescription": "Bild entsprechend dem ausgewählten Preset skalieren",
   "pipelineRescalePreset10": "10%",

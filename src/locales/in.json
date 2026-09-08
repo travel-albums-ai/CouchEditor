@@ -100,6 +100,7 @@
   "pipelineHueRotation": "ह्यू रोटेशन",
   "pipelineFade": "फेड",
   "pipelineRescale": "रीस्केल",
+  "pipelineSelectedPhoto": "चयनित फ़ोटो",
   "pipelineRescaleAuto": "ऑटो",
   "pipelineRescaleDescription": "चयनित प्रीसेट के अनुसार इमेज का आकार बदलता है",
   "pipelineRescalePreset10": "10%",

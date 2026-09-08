@@ -100,6 +100,7 @@
   "pipelineHueRotation": "색조 회전",
   "pipelineFade": "페이드",
   "pipelineRescale": "크기 조정",
+  "pipelineSelectedPhoto": "선택한 사진",
   "pipelineRescaleAuto": "자동",
   "pipelineRescaleDescription": "선택한 프리셋에 따라 이미지 크기를 조정합니다",
   "pipelineRescalePreset10": "10%",
