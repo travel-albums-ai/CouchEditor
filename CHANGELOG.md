@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.2.1...v1.3.0) (2026-09-08)
+
+### ✨ Features
+
+* add PipelineStageTiming component and integrate timing functionality into image processing nodes ([d96303e](https://github.com/travel-albums-ai/CouchEditor/commit/d96303e117d137fd9babef517059b7dfb698f8b2))
+
 ## [1.2.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.2.0...v1.2.1) (2026-09-08)
 
 ### 🐛 Fixes
