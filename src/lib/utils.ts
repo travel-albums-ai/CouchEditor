@@ -487,42 +487,6 @@ export const splitToningStage = (
   };
 };
 
-//// NOT USED
-
-// export const removeFilmBaseStage = (
-//   base: RGB,
-//   strength: MaskStrength = { r: 1, g: 1, b: 1 }
-// ): Stage => {
-//   const r0 = Math.max(1, base.r * strength.r);
-//   const g0 = Math.max(1, base.g * strength.g);
-//   const b0 = Math.max(1, base.b * strength.b);
-
-//   return (img) => {
-//     const d = img.data;
-
-//     for (let i = 0; i < d.length; i += 4) {
-//       d[i]     = clamp((d[i]     / r0) * 255);
-//       d[i + 1] = clamp((d[i + 1] / g0) * 255);
-//       d[i + 2] = clamp((d[i + 2] / b0) * 255);
-//     }
-//   };
-// };
-
-// export const perChannelGammaStage = (gr: number, gg: number, gb: number): Stage => {
-//   const lut = (g: number) => {
-//     const t = new Uint8Array(256);
-//     for (let i = 0; i < 256; i++) t[i] = Math.pow(i / 255, g) * 255;
-//     return t;
-//   };
-//   const lr = lut(gr), lg = lut(gg), lb = lut(gb);
-//   return (img) => {
-//     const d = img.data;
-//     for (let i = 0; i < d.length; i += 4) {
-//       d[i] = lr[d[i]]; d[i + 1] = lg[d[i + 1]]; d[i + 2] = lb[d[i + 2]];
-//     }
-//   };
-// };
-
 export const rgbBlackPointStage = (
   blackR: number,
   blackG: number,
