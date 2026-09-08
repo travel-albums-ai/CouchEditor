@@ -1,8 +1,9 @@
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
+import { Button, Typography } from '@mui/material';
 import { type Node, type NodeProps } from '@xyflow/react';
-import { Film } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,21 +15,37 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper title={t('pipelineLut')} icon={<Film />} toolbar={<></>} type="lut">
-        <input
-          type="file"
-          accept=".cube,text/plain"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-
-            if (!file) return;
-
-            Object.assign(data, { lutFile: file });
-            setFileName(file.name);
-            window.dispatchEvent(new CustomEvent('pipeline:changed'));
+      <NodeWrapper type="lut">
+        <Button
+          sx={{
+            bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 80%, ${theme.palette.primary.main} 20%)`,
+            '&:hover': {
+              bgcolor: 'primary.main',
+            }
           }}
-        />
-        <small>{fileName || t('pipelineLutChooseFile')}</small>
+          fullWidth
+          component="label"
+          variant="contained"
+          startIcon={<Upload size={16} />}
+        >
+          <input
+            type="file"
+            accept=".cube,text/plain"
+            hidden
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+
+              if (!file) return;
+
+              Object.assign(data, { lutFile: file });
+              setFileName(file.name);
+              window.dispatchEvent(new CustomEvent('pipeline:changed'));
+            }}
+          />
+          *.cube
+        </Button>
+        <Typography variant="subtitle2" color="textPrimary">{fileName || t('pipelineLutChooseFile')}</Typography>
+
       </NodeWrapper>
       <OutputHandle id="image" />
     </>
