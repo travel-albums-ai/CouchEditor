@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.11.0...v1.12.0) (2026-09-08)
+
+### ✨ Features
+
+* add download and upload functionality for pipeline files ([d4c45fc](https://github.com/travel-albums-ai/CouchEditor/commit/d4c45fc77b963e77b84ae0cf1ef2c3d33ba577cc))
+
 ## [1.11.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.10.0...v1.11.0) (2026-09-08)
 
 ### ✨ Features
