@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.7.0...v1.8.0) (2026-09-08)
+
+### ✨ Features
+
+* implement caching for node outputs to optimize evaluation process ([fb8a52f](https://github.com/travel-albums-ai/CouchEditor/commit/fb8a52fff62431bb61efe3dcfdeeecb979f6c456))
+
 ## [1.7.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.6.0...v1.7.0) (2026-09-08)
 
 ### ✨ Features
