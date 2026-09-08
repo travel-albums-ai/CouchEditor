@@ -1,3 +1,9 @@
+## [1.15.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.14.0...v1.15.0) (2026-09-08)
+
+### ✨ Features
+
+* update README to reflect CouchEditor branding and clarify functionality ([d89f5e0](https://github.com/travel-albums-ai/CouchEditor/commit/d89f5e041adc32876ff219cff90d6c7445ddbaf7))
+
 ## [1.14.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.13.0...v1.14.0) (2026-09-08)
 
 ### ✨ Features
