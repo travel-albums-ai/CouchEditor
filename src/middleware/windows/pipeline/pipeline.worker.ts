@@ -1205,7 +1205,17 @@ async function runEvaluation(
 
       console.log(`▶ executing ${node.id}`);
 
+      const startedAt = performance.now();
       const result = await definition.execute(inputs);
+      const durationMs = performance.now() - startedAt;
+
+      workerScope.postMessage({
+        type: "stageTiming",
+        evaluationId,
+        nodeType: node.type ?? "",
+        nodeId: node.id,
+        durationMs,
+      });
 
       console.log(`✓ completed ${node.id}`);
 

@@ -2,6 +2,7 @@ import SolidChip from '@/components/SolidChip';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { Box, Slider } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { JSX, useState } from "react";
@@ -21,6 +22,7 @@ export type SliderNodeConfig = {
 // data.amount + "pipeline:changed" wiring as BrightnessNode.
 export function createSliderNode(config: SliderNodeConfig) {
   function SliderNode({
+    id,
     data,
   }: NodeProps<Node<{ amount?: number }>>) {
     const [amount, setAmount] = useState(
@@ -29,7 +31,11 @@ export function createSliderNode(config: SliderNodeConfig) {
 
     return <>
       <InputHandle id="image" />
-      <NodeWrapper title={config.label ?? config.type} icon={config.icon} type={config.type} helper={config.info && config.info({...config, amount })}>
+      <NodeWrapper type={config.type}
+        tools={<PipelineStageTiming nodeId={id} nodeType={config.type} />}
+        helper={<>
+          {config.info && config.info({...config, amount })}
+        </>}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Slider
             min={config.min}
@@ -37,7 +43,7 @@ export function createSliderNode(config: SliderNodeConfig) {
             step={config.step}
             sx={{ width: '150px', mx: 1 }}
             value={amount}
-            onChange={(event, value) => {
+            onChange={(_, value) => {
               const newValue = Array.isArray(value) ? value[0] : value;
 
               data.amount = newValue;

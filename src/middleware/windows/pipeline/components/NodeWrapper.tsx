@@ -9,12 +9,14 @@ type NodeWrapperProps = {
   children: React.ReactNode;
   type: string;
   helper?: React.ReactNode;
+  tools?: React.ReactNode;
 };
 
 function NodeWrapper({
   children,
   type,
   helper,
+  tools,
 }: NodeWrapperProps) {
   const [showHelper, setShowHelper] = useState(false);
   const performanceMode = useSettingsStoreSelector(
@@ -30,6 +32,7 @@ function NodeWrapper({
           flexDirection: 'column',
           alignItems: 'stretch',
           // mx: 0.25,
+          minWidth: 250,
           borderRadius: 2,
           border: 1,
           borderColor: 'divider',
@@ -66,19 +69,23 @@ function NodeWrapper({
             borderBottomRightRadius: 0,
           }}
         >
-          {helper && (
-            <IconButton
-              size="small"
-              sx={{
-                color: 'text.disabled',
-              }}
-              onClick={() =>
-                setShowHelper(prev => !prev)
-              }
-            >
-              <Info size={16} />
-            </IconButton>
-          )}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            {tools && tools}
+            {helper && (
+              <IconButton
+                size="small"
+                sx={{
+                  color: 'text.disabled',
+                }}
+                onClick={() =>
+                  setShowHelper(prev => !prev)
+                }
+              >
+                <Info size={16} />
+              </IconButton>
+            )}
+
+          </Box>
         </NodeHeader>
       )}
 
