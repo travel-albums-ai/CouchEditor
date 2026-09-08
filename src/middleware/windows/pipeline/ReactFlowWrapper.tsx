@@ -674,9 +674,11 @@ function Pipeline() {
         <FloatingStack sx={{ top: 12, left: 12 }} id="pipeline-header-left">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <img
-              src="./couchLogo.png"
+              src="./couchLogoMini.png"
               alt="Logo"
+              width={45}
               height={30}
+              style={{ width: 45, height: 30 }}
               fetchPriority="high"
             />
             <TextField

@@ -37,11 +37,14 @@ export default function OnboardingWelcome() {
   return (<>
     <OnboardingWrapper>
       <img
-        src="./couchLogo.png"
+        src="./couchLogoMedium.png"
         alt={t('logoAlt')}
         fetchPriority="high"
         width={340}
+        height={226}
         style={{
+          width: 340,
+          height: 226,
           margin: 20
         }}
       />

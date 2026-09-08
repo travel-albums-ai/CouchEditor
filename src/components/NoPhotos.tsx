@@ -15,13 +15,12 @@ export default function NoPhotos({ isEmpty = true, isLoading = false, isError = 
       }}
     >
       <img
-        src="./couchLogo.png"
+        src="./couchLogoMini.png"
         alt="Logo"
-        width={120}
-        height={93}
+        width={90}
+        height={60}
         fetchPriority="high"
         style={{
-          aspectRatio: '40/31',
           opacity: 0.3,
           filter: 'grayscale(100%)',
         }}

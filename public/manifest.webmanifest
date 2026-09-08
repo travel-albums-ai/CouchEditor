@@ -24,7 +24,7 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/couchLogo.png",
+      "src": "/couchLogoMini.png",
       "sizes": "48x48",
       "type": "image/png",
       "purpose": "any maskable"

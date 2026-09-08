@@ -1,7 +1,7 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import LoadingBar from '@/components/LoadingBar';
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import GeneralRegistryWindow from '@/components/registry/GeneralRegistryWindow';
+import StatusBar from '@/components/StatusBar';
 import MainDriver from '@/components/tutorial/MainDriver';
 import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import Box from '@mui/material/Box';
@@ -32,12 +32,7 @@ export default function AppLayout() {
         }}
       >
         <LoadingBar />
-
-        <GeneralRegistryToolbar
-          noGhost
-          noDivider={false}
-          group="status-bar"
-        />
+        <StatusBar />
       </Box>
     </>
   );
