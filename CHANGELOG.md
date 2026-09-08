@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.4.0...v1.5.0) (2026-09-08)
+
+### ✨ Features
+
+* add new pipeline groups for detail, effects, and light adjustments in NodeToolbox ([d33a289](https://github.com/travel-albums-ai/CouchEditor/commit/d33a2899248e242aee2e1fa6e581809d93c83521))
+
+### 🧹 Refactors
+
+* replace TextField with textarea in InformationNode component for content input ([08d68df](https://github.com/travel-albums-ai/CouchEditor/commit/08d68dfeb5fd37fe3a2d294d077106b0f062317e))
+
 ## [1.4.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.3.0...v1.4.0) (2026-09-08)
 
 ### ✨ Features
