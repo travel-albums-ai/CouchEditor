@@ -582,8 +582,8 @@ export const samplePipeline = [
         "id": "source-27",
         "type": "source",
         "position": {
-          "x": -1200,
-          "y": 740
+          "x": -1180,
+          "y": 1100
         },
         "data": {},
         "measured": {
@@ -642,8 +642,8 @@ export const samplePipeline = [
         "id": "vignette-32",
         "type": "vignette",
         "position": {
-          "x": 480,
-          "y": 740
+          "x": 440,
+          "y": 960
         },
         "data": {
           "amount": 81
@@ -659,8 +659,8 @@ export const samplePipeline = [
         "id": "hdr-33",
         "type": "hdr",
         "position": {
-          "x": 100,
-          "y": 740
+          "x": -220,
+          "y": 960
         },
         "data": {
           "amount": 68
@@ -676,8 +676,8 @@ export const samplePipeline = [
         "id": "pop-34",
         "type": "pop",
         "position": {
-          "x": 860,
-          "y": 720
+          "x": 1120,
+          "y": 960
         },
         "data": {
           "amount": 68
@@ -693,8 +693,8 @@ export const samplePipeline = [
         "id": "viewer-single-1",
         "type": "viewer-single",
         "position": {
-          "x": -1860,
-          "y": 740
+          "x": -1840,
+          "y": 880
         },
         "data": {},
         "measured": {
@@ -708,8 +708,8 @@ export const samplePipeline = [
         "id": "photo-histogram-3",
         "type": "photo-histogram",
         "position": {
-          "x": -1200,
-          "y": 400
+          "x": -1180,
+          "y": 580
         },
         "data": {},
         "measured": {
@@ -723,7 +723,7 @@ export const samplePipeline = [
         "id": "photo-histogram-4",
         "type": "photo-histogram",
         "position": {
-          "x": 1460,
+          "x": 1440,
           "y": 780
         },
         "data": {},
@@ -733,17 +733,332 @@ export const samplePipeline = [
         },
         "selected": false,
         "dragging": false
+      },
+      {
+        "id": "temperature-tint-1",
+        "type": "temperature-tint",
+        "position": {
+          "x": -700,
+          "y": -400
+        },
+        "data": {
+          "temperature": 56,
+          "tint": 24
+        },
+        "measured": {
+          "width": 250,
+          "height": 218
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "split-toning-2",
+        "type": "split-toning",
+        "position": {
+          "x": -700,
+          "y": -160
+        },
+        "data": {
+          "strength": 100
+        },
+        "measured": {
+          "width": 250,
+          "height": 222
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-midtones-3",
+        "type": "rgb-midtones",
+        "position": {
+          "x": -700,
+          "y": 80
+        },
+        "data": {
+          "red": 2.15,
+          "green": 0.71
+        },
+        "measured": {
+          "width": 250,
+          "height": 240
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-1-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -420,
+          "y": 240
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-1-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -420,
+          "y": -460
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-1-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 240,
+          "y": 240
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "crop-4",
+        "type": "crop",
+        "position": {
+          "x": -1040,
+          "y": 160
+        },
+        "data": {
+          "top": 19,
+          "bottom": 8,
+          "left": 15,
+          "right": 17
+        },
+        "measured": {
+          "width": 250,
+          "height": 331
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rotate-5",
+        "type": "rotate",
+        "position": {
+          "x": -1840,
+          "y": -220
+        },
+        "data": {
+          "amount": 213
+        },
+        "measured": {
+          "width": 250,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "mirror-6",
+        "type": "mirror",
+        "position": {
+          "x": -1840,
+          "y": 40
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 91
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "flip-7",
+        "type": "flip",
+        "position": {
+          "x": -1840,
+          "y": -80
+        },
+        "data": {},
+        "measured": {
+          "width": 250,
+          "height": 91
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rescale-8",
+        "type": "rescale",
+        "position": {
+          "x": -1140,
+          "y": 900
+        },
+        "data": {},
+        "measured": {
+          "width": 484,
+          "height": 139
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-1-copy-2",
+        "type": "viewer-single",
+        "position": {
+          "x": -1840,
+          "y": 160
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-1-copy-2-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -1540,
+          "y": -580
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "vignette-9",
+        "type": "vignette",
+        "position": {
+          "x": -2520,
+          "y": -460
+        },
+        "data": {
+          "amount": 100
+        },
+        "measured": {
+          "width": 250,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "hdr-10",
+        "type": "hdr",
+        "position": {
+          "x": -2500,
+          "y": 380
+        },
+        "data": {
+          "amount": 93
+        },
+        "measured": {
+          "width": 250,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "pop-11",
+        "type": "pop",
+        "position": {
+          "x": -2500,
+          "y": 1240
+        },
+        "data": {
+          "amount": 100
+        },
+        "measured": {
+          "width": 250,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-12",
+        "type": "viewer-single",
+        "position": {
+          "x": -2500,
+          "y": 1380
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-12-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2500,
+          "y": 520
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-12-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2520,
+          "y": -320
+        },
+        "data": {},
+        "measured": {
+          "width": 634,
+          "height": 666
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "information-13",
+        "type": "information",
+        "position": {
+          "x": -1580,
+          "y": 1560
+        },
+        "data": {
+          "content": "Start here !"
+        },
+        "measured": {
+          "width": 378,
+          "height": 272
+        },
+        "selected": false,
+        "dragging": false
       }
     ],
     "edges": [
-      {
-        "type": "smoothstep",
-        "source": "source-27",
-        "sourceHandle": "image",
-        "target": "pop-34",
-        "targetHandle": "image",
-        "id": "xy-edge__source-27image-pop-34image"
-      },
       {
         "type": "smoothstep",
         "source": "pop-34",
@@ -751,22 +1066,6 @@ export const samplePipeline = [
         "target": "viewer-single-31",
         "targetHandle": "image",
         "id": "xy-edge__pop-34image-viewer-single-31image"
-      },
-      {
-        "type": "smoothstep",
-        "source": "source-27",
-        "sourceHandle": "image",
-        "target": "vignette-32",
-        "targetHandle": "image",
-        "id": "xy-edge__source-27image-vignette-32image"
-      },
-      {
-        "type": "smoothstep",
-        "source": "source-27",
-        "sourceHandle": "image",
-        "target": "hdr-33",
-        "targetHandle": "image",
-        "id": "xy-edge__source-27image-hdr-33image"
       },
       {
         "type": "smoothstep",
@@ -786,28 +1085,6 @@ export const samplePipeline = [
       },
       {
         "type": "smoothstep",
-        "source": "source-27",
-        "sourceHandle": "image",
-        "target": "viewer-single-1",
-        "targetHandle": "image",
-        "style": {
-          "opacity": 0.5
-        },
-        "id": "xy-edge__source-27image-viewer-single-1image"
-      },
-      {
-        "type": "smoothstep",
-        "source": "source-27",
-        "sourceHandle": "image",
-        "target": "photo-histogram-3",
-        "targetHandle": "image",
-        "style": {
-          "opacity": 0.5
-        },
-        "id": "xy-edge__source-27image-photo-histogram-3image"
-      },
-      {
-        "type": "smoothstep",
         "source": "pop-34",
         "sourceHandle": "image",
         "target": "photo-histogram-4",
@@ -816,6 +1093,248 @@ export const samplePipeline = [
           "opacity": 0.5
         },
         "id": "xy-edge__pop-34image-photo-histogram-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rgb-midtones-3",
+        "sourceHandle": "image",
+        "target": "viewer-single-1-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rgb-midtones-3image-viewer-single-1-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "split-toning-2",
+        "sourceHandle": "image",
+        "target": "viewer-single-1-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__split-toning-2image-viewer-single-1-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "temperature-tint-1",
+        "sourceHandle": "image",
+        "target": "viewer-single-1-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__temperature-tint-1image-viewer-single-1-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-27",
+        "sourceHandle": "image",
+        "target": "rescale-8",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__source-27image-rescale-8image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "viewer-single-1",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-viewer-single-1image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "photo-histogram-3",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-photo-histogram-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "hdr-33",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-hdr-33image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "vignette-32",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-vignette-32image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "pop-34",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-pop-34image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "rgb-midtones-3",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-rgb-midtones-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "split-toning-2",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-split-toning-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "temperature-tint-1",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-temperature-tint-1image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "crop-4",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-crop-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "crop-4",
+        "sourceHandle": "image",
+        "target": "viewer-single-1-copy-2",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__crop-4image-viewer-single-1-copy-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "rotate-5",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-rotate-5image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rotate-5",
+        "sourceHandle": "image",
+        "target": "viewer-single-1-copy-2-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rotate-5image-viewer-single-1-copy-2-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "vignette-9",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-vignette-9image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "hdr-10",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-hdr-10image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "pop-11",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__rescale-8image-pop-11image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "vignette-9",
+        "sourceHandle": "image",
+        "target": "viewer-single-12-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__vignette-9image-viewer-single-12-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "hdr-10",
+        "sourceHandle": "image",
+        "target": "viewer-single-12-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__hdr-10image-viewer-single-12-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "pop-11",
+        "sourceHandle": "image",
+        "target": "viewer-single-12",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 0.5
+        },
+        "id": "xy-edge__pop-11image-viewer-single-12image"
       }
     ],
     "id": "pipeline-1788796202862-7id76m",
