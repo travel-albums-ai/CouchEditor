@@ -7,14 +7,14 @@ const phaseSteps = [
   {
     key: '1',
     icon: <Astroid />,
-    titleKey: 'I probably speak your language',
-    descriptionKey: 'Pick your preferred language.',
+    titleKey: 'onboardingLanguage',
+    descriptionKey: 'onboardingLanguageDescription',
   },
   {
     key: '2',
     icon: <Turtle />,
-    titleKey: "Theme Preference",
-    descriptionKey: 'Choose between light and dark themes for the application interface.',
+    titleKey: 'onboardingThemePreference',
+    descriptionKey: 'onboardingThemePreferenceDescription',
   },
 ]
 

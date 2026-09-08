@@ -8,26 +8,26 @@ const phaseSteps = [
   {
     key: '1',
     icon: <GlobeOff />,
-    titleKey: 'Locally running',
-    descriptionKey: "Your computer is the server. Nothing is uploaded",
+    titleKey: 'onboardingLocallyRunning',
+    descriptionKey: 'onboardingLocallyRunningDescription',
   },
   {
     key: '4',
     icon: <Astroid />,
-    titleKey: 'AI features',
-    descriptionKey: "Math only goes so far. AI features require cloud processing.",
+    titleKey: 'onboardingAiFeatures',
+    descriptionKey: 'onboardingAiFeaturesDescription',
   },
   {
     key: '2',
     icon: <Workflow />,
-    titleKey: "Drag and Drop",
-    descriptionKey: "Build interactive workflows to process photos efficiently.",
+    titleKey: 'onboardingDragAndDrop',
+    descriptionKey: 'onboardingDragAndDropDescription',
   },
   {
     key: '3',
     icon: <Save />,
-    titleKey: 'Shareable pipelines',
-    descriptionKey: 'Build and share reusable pipelines with others.',
+    titleKey: 'onboardingShareablePipelines',
+    descriptionKey: 'onboardingShareablePipelinesDescription',
   },
 ]
 
@@ -38,7 +38,7 @@ export default function OnboardingWelcome() {
     <OnboardingWrapper>
       <img
         src="./couchLogo.png"
-        alt="Logo"
+        alt={t('logoAlt')}
         fetchPriority="high"
         width={340}
         style={{
@@ -47,10 +47,10 @@ export default function OnboardingWelcome() {
       />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, mb: 1 }}>
         <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="h6" color="textPrimary">
-        Couch Editor
+          {t('couchEditor')}
         </Typography>
         <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }} variant="body1" color="textPrimary">
-        Photo processing made easy and efficient.
+          {t('couchEditorTagline')}
         </Typography>
       </Box>
     </OnboardingWrapper>

@@ -6,13 +6,14 @@ import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
 import type { Node, NodeProps } from "@xyflow/react";
 import { Astroid, Sparkles } from 'lucide-react';
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 export type AIImageEditNodeConfig = {
   // Must match the nodeDefinitions key in pipeline.worker.ts, which is
   // also used as the progress event name prefix ("<type>:progress").
   type: string;
-  title: string;
-  actionLabel: string;
+  titleKey: string;
+  actionLabelKey: string;
 };
 
 type Progress = { runId: number; completed: number; total: number };
@@ -25,6 +26,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
     data,
   }: NodeProps<Node<{ passthru?: boolean; apiKey?: string }>>) {
     const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey);
+    const { t } = useTranslation();
 
     const [engaged, setEngaged] = useState(data.passthru === false);
     const [progress, setProgress] = useState<Progress | null>(null);
@@ -70,7 +72,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
 
     return (<>
       <InputHandle id="image" />
-      <NodeWrapper title={config.title} icon={<Astroid />} toolbar={<></>} type={config.type}>
+      <NodeWrapper title={t(config.titleKey)} icon={<Astroid />} toolbar={<></>} type={config.type}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Button
             variant={engaged ? 'contained' : 'outlined'}
@@ -78,13 +80,13 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
             startIcon={<Sparkles size={14} />}
             onClick={() => setEngaged((current) => !current)}
           >
-            {engaged ? 'Engaged' : 'Passthru'}
+            {engaged ? t('aiEngaged') : t('aiPassthru')}
           </Button>
         </Box>
 
         {engaged && !byokOpenAIKey && (
           <Alert severity="warning" sx={{ py: 0, mt: 1 }}>
-            No OpenAI key configured
+            {t('aiNoOpenAiKey')}
           </Alert>
         )}
 
@@ -93,8 +95,8 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
             <LinearProgress variant="determinate" value={percent} />
             <Typography variant="caption" color="textSecondary">
               {progress
-                ? `${progress.completed}/${progress.total} ${config.actionLabel}`
-                : 'Idle'}
+                ? `${progress.completed}/${progress.total} ${t(config.actionLabelKey)}`
+                : t('aiIdle')}
             </Typography>
           </Box>
         )}

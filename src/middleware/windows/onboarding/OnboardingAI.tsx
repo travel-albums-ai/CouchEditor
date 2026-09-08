@@ -7,14 +7,14 @@ const phaseSteps = [
   {
     key: '1',
     icon: <Astroid />,
-    titleKey: 'AI Tooling',
-    descriptionKey: 'Configure your AI tooling preferences.',
+    titleKey: 'onboardingAiTooling',
+    descriptionKey: 'onboardingAiToolingDescription',
   },
   {
     key: '2',
     icon: <Turtle />,
-    titleKey: "Select a model",
-    descriptionKey: 'Choose the AI model that best fits your needs and price budget.',
+    titleKey: 'onboardingSelectModel',
+    descriptionKey: 'onboardingSelectModelDescription',
   },
 ]
 

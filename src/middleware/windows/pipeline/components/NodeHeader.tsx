@@ -2,6 +2,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { paletteItems } from '@/middleware/windows/pipeline/NodeToolbox';
 import { Box, Typography } from '@mui/material';
 import { cloneElement, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
 type NodeHeaderProps = {
@@ -18,6 +19,7 @@ function NodeHeader({
   const performanceMode = useSettingsStoreSelector(
     s => s.performanceMode
   );
+  const { t } = useTranslation();
 
   const paletteItem = useMemo(
     () => paletteItems.find(item => item.type === type),
@@ -122,7 +124,7 @@ function NodeHeader({
             textOverflow: 'ellipsis',
           }}
         >
-          {paletteItem?.label}
+          {paletteItem && t(paletteItem.labelKey)}
         </Typography>
       </Box>
 

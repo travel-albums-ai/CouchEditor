@@ -1,60 +1,62 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const paletteItems: Array<{
   type: string;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
-  group: string;
+  groupKey: string;
 }> = [
-  { type: "source", label: "Local Storage", icon: <HardDrive size={16} />, group: "input" },
-  { type: "hot-folder-read", label: "Hot Folder", icon: <FolderInput size={16} />, group: "input" },
+  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, groupKey: "pipelineGroupInput" },
+  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
   // { type: "selection", label: "Gallery", icon: <GalleryVerticalEnd size={16} />, group: "input" },
-  { type: "grouper", label: "Grouper", icon: <Group size={16} />, group: "utility" },
-  { type: "ai-colorizer", label: "AI Colorizer", icon: <Astroid size={16} />, group: "ai" },
-  { type: "ai-denoiser", label: "AI Denoiser", icon: <Astroid size={16} />, group: "ai" },
-  { type: "invert", label: "Invert", icon: <SquaresExclude size={16} />, group: "color" },
-  { type: "black-white", label: "Black & White", icon: <Landmark size={16} /> , group: "color" },
-  { type: "sepia", label: "Sepia", icon: <Palette size={16} />, group: "color" },
-  { type: "lut", label: "3D LUT", icon: <Film size={16} />, group: "color" },
-  { type: "flip", label: "Flip 180°", icon: <SquareCenterlineDashedVertical size={16} />, group: "utility" },
-  { type: "mirror", label: "Mirror", icon: <SquareCenterlineDashedHorizontal size={16} />, group: "utility" },
-  { type: "rotate", label: "Rotate", icon: <Angle size={16} />, group: "utility" },
-  { type: "brightness", label: "Brightness", icon: <Lightbulb size={16} />, group: "basics" },
-  { type: "highlights", label: "Highlights", icon: <Sun size={16} />, group: "tone" },
-  { type: "shadows", label: "Shadows", icon: <Moon size={16} />, group: "tone" },
-  { type: "gamma", label: "Gamma", icon: <Palette size={16} />, group: "adjustment" },
-  { type: "luminosity", label: "Luminosity", icon: <Lightbulb size={16} />, group: "adjustment" },
-  { type: "exposure", label: "Exposure", icon: <Sun size={16} />, group: "basics" },
-  { type: "contrast", label: "Contrast", icon: <Contrast size={16} />, group: "basics" },
-  { type: "saturation", label: "Saturation", icon: <SwatchBook size={16} />, group: "adjustment" },
-  { type: "vibrance", label: "Vibrance", icon:<Pipette size={16} />, group: "adjustment" },
-  { type: "vignette", label: "Vignette", icon: <Theater size={16} />, group: "decorative" },
-  { type: "grain", label: "Grain", icon: <Wheat size={16} />, group: "decorative" },
-  { type: "sharpen", label: "Sharpen", icon: <Slice size={16} />, group: "decorative" },
-  { type: "pop", label: "Pop", icon: <Gem size={16} />, group: "decorative" },
-  { type: "hdr", label: "HDR Effect", icon: <Mountain size={16} />, group: "decorative" },
-  { type: "hue-rotation", label: "Hue Rotation", icon: <Palette size={16} />, group: "color" },
-  { type: "fade", label: "Fade", icon: <EyeDashed size={16} />, group: "decorative" },
-  { type: "rescale", label: "Rescale", icon: <ImageUpscale size={16} />, group: "utility" },
-  { type: "crop", label: "Crop", icon: <Crop size={16} />, group: "utility" },
-  { type: "perspective", label: "Perspective / Tilt", icon: <SquareDashedMousePointer size={16} />, group: "utility" },
-  { type: "viewer", label: "Photos Viewer", icon:<Images size={16} />, group: "output" },
-  { type: "viewer-single", label: "Photo Viewer", icon: <Image size={16} />, group: "output" },
-  { type: "photo-histogram", label: "Photo Histogram", icon: <ChartColumn size={16} />, group: "output" },
-  { type: "hot-folder-write", label: "Hot Folder", icon: <FolderOutput size={16} />, group: "output" },
+  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi" },
+  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi" },
+  { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} /> , groupKey: "pipelineGroupColor" },
+  { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupBasics" },
+  { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />, groupKey: "pipelineGroupTone" },
+  { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, groupKey: "pipelineGroupTone" },
+  { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupAdjustment" },
+  { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupAdjustment" },
+  { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />, groupKey: "pipelineGroupBasics" },
+  { type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />, groupKey: "pipelineGroupBasics" },
+  { type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />, groupKey: "pipelineGroupAdjustment" },
+  { type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />, groupKey: "pipelineGroupAdjustment" },
+  { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "hue-rotation", labelKey: "pipelineHueRotation", icon: <Palette size={16} />, groupKey: "pipelineGroupColor" },
+  { type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />, groupKey: "pipelineGroupDecorative" },
+  { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "crop", labelKey: "pipelineCrop", icon: <Crop size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />, groupKey: "pipelineGroupOutput" },
+  { type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />, groupKey: "pipelineGroupOutput" },
+  { type: "photo-histogram", labelKey: "pipelinePhotoHistogram", icon: <ChartColumn size={16} />, groupKey: "pipelineGroupOutput" },
+  { type: "hot-folder-write", labelKey: "pipelineHotFolder", icon: <FolderOutput size={16} />, groupKey: "pipelineGroupOutput" },
 ];
 
 const groupedPaletteItems = paletteItems.reduce((acc, item) => {
-  if (!acc[item.group]) {
-    acc[item.group] = [];
+  if (!acc[item.groupKey]) {
+    acc[item.groupKey] = [];
   }
-  acc[item.group].push(item);
+  acc[item.groupKey].push(item);
   return acc;
 }, {} as Record<string, typeof paletteItems>);
 
 function NodeToolbox() {
+  const { t } = useTranslation();
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     nodeType: string
@@ -84,7 +86,7 @@ function NodeToolbox() {
           }}
         >
           <Typography variant="caption" sx={{ mb: 0.5, textTransform: 'uppercase', fontWeight: 'bold' }} color="textDisabled">
-            {group}
+            {t(group)}
           </Typography>
 
           <Box sx={{
@@ -95,7 +97,7 @@ function NodeToolbox() {
             gap: 1,
           }}>
             {items.map((item, i) => (
-              <Tooltip title={`Drag to add a ${item.label} to your flow`} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
+              <Tooltip title={t('pipelineDragToAdd', { label: t(item.labelKey) })} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
                 <Box
                   key={item.type}
                   draggable
