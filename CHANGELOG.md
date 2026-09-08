@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.6.0...v1.7.0) (2026-09-08)
+
+### ✨ Features
+
+* update translations for 'aiPassthru' in multiple languages ([6412743](https://github.com/travel-albums-ai/CouchEditor/commit/6412743cda57928f060efe059afec700b1cb06b9))
+
 ## [1.6.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.5.0...v1.6.0) (2026-09-08)
 
 ### ✨ Features
