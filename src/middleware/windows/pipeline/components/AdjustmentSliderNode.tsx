@@ -1,9 +1,8 @@
-import SolidChip from '@/components/SolidChip';
+import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
-import { Box, Slider } from '@mui/material';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { JSX, useState } from "react";
 
@@ -36,27 +35,17 @@ export function createSliderNode(config: SliderNodeConfig) {
         helper={<>
           {config.info && config.info({...config, amount })}
         </>}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Slider
-            min={config.min}
-            max={config.max}
-            step={config.step}
-            sx={{ width: '150px', mx: 1 }}
-            value={amount}
-            onChange={(_, value) => {
-              const newValue = Array.isArray(value) ? value[0] : value;
-
-              data.amount = newValue;
-              setAmount(newValue);
-
-              // Tell the pipeline engine that this node changed.
-              window.dispatchEvent(
-                new CustomEvent("pipeline:changed")
-              );
-            }}
-          />
-          <SolidChip count={amount} />
-        </Box>
+        <AdjustmentSlider
+          min={config.min}
+          max={config.max}
+          step={config.step}
+          value={amount}
+          throttleMs={1000}
+          onChange={(newValue) => {
+            data.amount = newValue;
+            setAmount(newValue);
+          }}
+        />
 
       </NodeWrapper>
       <OutputHandle id="image" />
