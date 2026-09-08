@@ -10,28 +10,28 @@ import { useTranslation } from 'react-i18next';
 const sectionsMetadata = {
   ai: {
     icon: <Brain size={16} />,
-    title: 'AI',
-    guidance: 'Configure AI features and personas',
+    titleKey: 'settingsAiTitle',
+    guidanceKey: 'settingsAiGuidance',
   },
   features: {
     icon: <Dock size={16} />,
-    title: 'Features',
-    guidance: 'Manage application features and settings',
+    titleKey: 'settingsFeaturesTitle',
+    guidanceKey: 'settingsFeaturesGuidance',
   },
   default: {
     icon: <Proportions size={16} />,
-    title: 'Layout',
-    guidance: 'Customize the layout of the application',
+    titleKey: 'settingsLayoutTitle',
+    guidanceKey: 'settingsLayoutGuidance',
   },
   indexer: {
     icon: <GalleryVerticalEnd size={16} />,
-    title: 'Indexer',
-    guidance: 'Configure the indexer settings and behavior',
+    titleKey: 'settingsIndexerTitle',
+    guidanceKey: 'settingsIndexerGuidance',
   },
   debug: {
     icon: <Bug size={16} />,
-    title: 'Debug',
-    guidance: 'Review debug settings and behavior',
+    titleKey: 'settingsDebugTitle',
+    guidanceKey: 'settingsDebugGuidance',
   },
 };
 
@@ -41,8 +41,8 @@ export default function SettingsContent() {
   const activeSettingsTab = useSettingsStoreSelector((state) => state.activeSettingsTab);
 
   const sections = useMemo(() => [
-    { key: 'layout', title: "Interface", component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
-    { key: 'byok', group: 'ai', title: 'BYOK & AI', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: 'Set BYOK keys to use AI enhanced features' },
+    { key: 'layout', titleKey: 'settingsInterfaceTitle', component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
+    { key: 'byok', group: 'ai', titleKey: 'settingsByokTitle', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidance') },
   ], [t])
 
   useEffect(() => {
@@ -72,16 +72,16 @@ export default function SettingsContent() {
             <Box sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px dotted', mt: index === 0 ? 0 : 4, borderColor: 'divider', p: 1, gap: 1, justifyContent: 'space-between' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 0, justifyContent: 'flex-start' }}>
                 <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.icon}</Typography>
-                <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group]?.title || group}</Typography>
+                <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0, flex: 1 }}>{sectionsMetadata[group] ? t(sectionsMetadata[group].titleKey) : group}</Typography>
               </Box>
-              <Tooltip title={sectionsMetadata[group]?.guidance || ''} placement="top" arrow>
+              <Tooltip title={sectionsMetadata[group] ? t(sectionsMetadata[group].guidanceKey) : ''} placement="top" arrow>
                 <Info size={16} />
               </Tooltip>
             </Box>
             {groupSections.map(section => (
               <SidebarCoreButton
                 key={section.key}
-                title={section.title}
+                title={t(section.titleKey)}
                 icon={section.icon}
                 isActive={activeSettingsTab === section.key}
                 onClick={() => setSetting((prev) => ({ ...prev, activeSettingsTab: section.key }))}
@@ -98,7 +98,7 @@ export default function SettingsContent() {
           .map(section => (<Fragment key={section.key}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, justifyContent: 'space-between' }}>
               {section.icon && cloneElement(section.icon, { size: 24 })}
-              <Typography variant="h5" sx={{ lineHeight: 1, flex: 1 }}> {section.title}</Typography>
+              <Typography variant="h5" sx={{ lineHeight: 1, flex: 1 }}> {t(section.titleKey)}</Typography>
               { section.guidance && <Typography variant="body2" color="textDisabled">{section.guidance}</Typography> }
             </Box>
             <Box key={section.key} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>

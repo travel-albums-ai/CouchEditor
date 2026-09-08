@@ -9,14 +9,14 @@ import { useTranslation } from 'react-i18next';
 
 const groups = [
   {
-    title: "Locale",
+    titleKey: 'layoutLocale',
     controls: [
       { key: 'locale', labelKey: 'layoutLocale', type: 'toolbar', toolbarComponentId: "localeToggle" },
     ],
     icon: <Languages />,
   },
   {
-    title: "Theme",
+    titleKey: 'layoutThemeSection',
     controls: [
       { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
       { key: 'darkLightStatus', labelKey: 'toggleThemeName', type: 'toolbar', toolbarComponentId: "darkLightStatus" },
@@ -32,7 +32,7 @@ export default function LayoutPopover() {
 
   return <>
     {groups.map((group) => (
-      <SettingsSection key={group.title} title={group.title} icon={group.icon} >
+      <SettingsSection key={group.titleKey} title={t(group.titleKey)} icon={group.icon} >
         {group.controls
           .map((control) => (
             <Fragment key={control.key}>

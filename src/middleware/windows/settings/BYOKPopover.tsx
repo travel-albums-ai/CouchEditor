@@ -9,8 +9,8 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
-  { key: 'enableAI', labelKey: 'Open AI', value: 'show-people-and-pets', type: 'boolean', icon: <Astroid size={16} /> },
-  { key: 'byokOpenAIKey', labelKey: 'Open AI Key', value: 'show-people-and-pets', type: 'field', icon: <Key size={16} /> },
+  { key: 'enableAI', labelKey: 'byokEnableAi', value: 'show-people-and-pets', type: 'boolean', icon: <Astroid size={16} /> },
+  { key: 'byokOpenAIKey', labelKey: 'byokOpenAiKey', value: 'show-people-and-pets', type: 'field', icon: <Key size={16} /> },
 ] as const
 
 export default function BYOKPopover() {
@@ -20,7 +20,7 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true} uuid="byok-toggle-ai">
+    <SettingsSection title={t('byokSectionTitle')} icon={<Key />} transparent={true} uuid="byok-toggle-ai">
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>
@@ -45,7 +45,7 @@ export default function BYOKPopover() {
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
         <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
-          <Button startIcon={<UserKey size={16} />} size="small" color="inherit" variant="outlined">Get your OpenAI API key</Button>
+          <Button startIcon={<UserKey size={16} />} size="small" color="inherit" variant="outlined">{t('byokGetApiKey')}</Button>
         </a>
       </Box>
     </SettingsSection>

@@ -4,27 +4,29 @@ import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { Maximize2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useState } from "react";
 
 const SCALE_PRESETS = [
-  { value: "1", label: "Auto" },
-  { value: "0.1", label: "10%" },
-  { value: "0.25", label: "25%" },
-  { value: "0.5", label: "50%" },
-  { value: "0.65", label: "65%" },
-  { value: "0.85", label: "85%" },
-  { value: "1.5", label: "150%" },
-  { value: "2", label: "200%" },
+  { value: "1", labelKey: "pipelineRescaleAuto" },
+  { value: "0.1", labelKey: "pipelineRescalePreset10" },
+  { value: "0.25", labelKey: "pipelineRescalePreset25" },
+  { value: "0.5", labelKey: "pipelineRescalePreset50" },
+  { value: "0.65", labelKey: "pipelineRescalePreset65" },
+  { value: "0.85", labelKey: "pipelineRescalePreset85" },
+  { value: "1.5", labelKey: "pipelineRescalePreset150" },
+  { value: "2", labelKey: "pipelineRescalePreset200" },
 ];
 
 function RescaleNode({
   data,
 }: NodeProps<Node<{ scale?: number }>>) {
+  const { t } = useTranslation();
   const [scale, setScale] = useState(String(data.scale ?? 1));
 
   return (<>
     <InputHandle id="image" />
-    <NodeWrapper title={'Rescale'} icon={<Maximize2 />} toolbar={<></>} type="rescale">
+    <NodeWrapper title={t('pipelineRescale')} icon={<Maximize2 />} toolbar={<></>} type="rescale">
 
       <SegmentedControl
         value={scale}
@@ -40,11 +42,11 @@ function RescaleNode({
       >
         {SCALE_PRESETS.map((preset) => (
           <SegmentedControlItem key={preset.value} value={preset.value}>
-            {preset.label}
+            {t(preset.labelKey)}
           </SegmentedControlItem>
         ))}
       </SegmentedControl>
-      <small>Rescales the image according to the selected preset</small>
+      <small>{t('pipelineRescaleDescription')}</small>
 
     </NodeWrapper>
     <OutputHandle id="image" />
