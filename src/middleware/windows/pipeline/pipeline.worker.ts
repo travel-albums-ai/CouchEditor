@@ -397,7 +397,7 @@ async function requestOpenAIImageEdit(
   formData.append("prompt", prompt);
   formData.append("image[]", blob, "source.jpg");
   formData.append("size", "auto");
-  formData.append("quality", "medium");
+  formData.append("quality", "low");
   formData.append("output_format", "jpeg");
   formData.append("output_compression", "90");
 
