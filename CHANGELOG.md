@@ -1,3 +1,9 @@
+## [1.13.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.12.0...v1.13.0) (2026-09-08)
+
+### ✨ Features
+
+* update BYOKStore default settings and enhance NodeToolbox AI functionality ([4533a65](https://github.com/travel-albums-ai/CouchEditor/commit/4533a65aadccc237ca79201771d436c0f9679b2e))
+
 ## [1.12.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.11.0...v1.12.0) (2026-09-08)
 
 ### ✨ Features
