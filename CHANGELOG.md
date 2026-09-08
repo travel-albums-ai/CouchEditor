@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.8.0...v1.9.0) (2026-09-08)
+
+### ✨ Features
+
+* optimize pipeline change dispatching in AdjustmentSliderNode ([2019901](https://github.com/travel-albums-ai/CouchEditor/commit/20199016737fd6899c98206cc5fba4a5632604ef))
+
 ## [1.8.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.7.0...v1.8.0) (2026-09-08)
 
 ### ✨ Features
