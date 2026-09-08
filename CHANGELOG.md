@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.1.0...v1.2.0) (2026-09-08)
+
+### ✨ Features
+
+* implement pipeline restoration from local storage and update state management ([4a18783](https://github.com/travel-albums-ai/CouchEditor/commit/4a1878379f853eebfafd6723b5306130e427cde4))
+
 ## [1.1.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.0.3...v1.1.0) (2026-09-08)
 
 ### ✨ Features
