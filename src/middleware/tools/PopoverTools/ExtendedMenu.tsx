@@ -10,25 +10,25 @@ const URLS = [
     tooltip: 'GitHub',
     title: 'GitHub',
     icon: <Settings />,
-    url: 'https://github.com/travel-albums-ai/travel-albums',
+    url: 'https://github.com/travel-albums-ai/CouchEditor',
   },
   {
     tooltip: 'Release Notes',
     title: 'Release Notes',
     icon: <ScrollText />,
-    url: 'https://github.com/travel-albums-ai/travel-albums/releases',
+    url: 'https://github.com/travel-albums-ai/CouchEditor/releases',
   },
   {
     tooltip: 'Website',
     title: 'Website',
     icon: <ScrollText />,
-    url: 'https://www.travel-albums.com/',
+    url: 'https://couch-editor.com/',
   },
   {
     tooltip: 'Open an issue',
     title: 'Open an issue',
     icon: <ScrollText />,
-    url: 'https://github.com/travel-albums-ai/travel-albums/issues',
+    url: 'https://github.com/travel-albums-ai/CouchEditor/issues/new',
   },
 ];
 

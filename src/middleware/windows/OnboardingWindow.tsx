@@ -20,7 +20,7 @@ export default function OnboardingWindow() {
             userSelect: 'none',
             backgroundColor: 'transparent',
             width: 700,
-            height: 980,
+            height: 900,
             maxWidth: 'none',
             maxHeight: 'none',
           },

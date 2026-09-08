@@ -1,8 +1,7 @@
-import OnboardingPhasesList from '@/middleware/windows/onboarding/OnboardingPhasesList';
+import OnboardingPhasesListHorizontal from '@/middleware/windows/onboarding/OnboardingPhasesListHorizontal';
 import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
-import OnboardingWrapperInfo from '@/middleware/windows/onboarding/OnboardingWrapperInfo';
-import { Typography } from '@mui/material';
-import { GlobeOff, Save, Workflow } from 'lucide-react';
+import { Box, Typography } from '@mui/material';
+import { Astroid, GlobeOff, Save, Workflow } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const phaseSteps = [
@@ -10,18 +9,24 @@ const phaseSteps = [
     key: '1',
     icon: <GlobeOff />,
     titleKey: 'Locally running',
-    descriptionKey: "All your data is stored and processed locally on your machine. Except AI features which may require cloud processing.",
+    descriptionKey: "Your computer is the server. Nothing is uploaded",
+  },
+  {
+    key: '4',
+    icon: <Astroid />,
+    titleKey: 'AI features',
+    descriptionKey: "Math only goes so far. AI features require cloud processing.",
   },
   {
     key: '2',
     icon: <Workflow />,
     titleKey: "Drag and Drop",
-    descriptionKey: "Build interactive workflows to process and manage photod efficiently.",
+    descriptionKey: "Build interactive workflows to process photos efficiently.",
   },
   {
     key: '3',
     icon: <Save />,
-    titleKey: 'Exchange with others pipelines',
+    titleKey: 'Shareable pipelines',
     descriptionKey: 'Build and share reusable pipelines with others.',
   },
 ]
@@ -37,16 +42,20 @@ export default function OnboardingWelcome() {
         fetchPriority="high"
         width={340}
         style={{
-          // aspectRatio: '1/1',
           margin: 20
         }}
       />
-      <Typography sx={{ p: 2, pt: 0, lineHeight: 2, textAlign: 'center', userSelect: 'none' }} variant="body1" color="textPrimary">
-        Welcome to Couch Editor! Your journey from the comfort of your couch to organizing and reliving your travel memories starts here at scale
-      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="h6" color="textPrimary">
+        Couch Editor
+        </Typography>
+        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="body1" color="textPrimary">
+        Photo processing made easy and efficient.
+        </Typography>
+      </Box>
     </OnboardingWrapper>
-    <OnboardingWrapperInfo light={true}>
-      <OnboardingPhasesList phaseSteps={phaseSteps} />
-    </OnboardingWrapperInfo>
+
+    <OnboardingPhasesListHorizontal phaseSteps={phaseSteps} />
+
   </>)
 }

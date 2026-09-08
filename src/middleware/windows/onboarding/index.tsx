@@ -15,7 +15,8 @@ export default function Onboarding() {
 
   const steps = [
     "Welcome",
-    'Let\'s Get Started',
+    "Themes & Locales",
+    "AI Tools",
   ];
 
 
@@ -33,7 +34,7 @@ export default function Onboarding() {
           {steps.map((label) => (
             <Step key={label}
               sx={{
-                width: '110px'
+                width: '140px'
               }}
             >
               <StepLabel >{label}</StepLabel>
@@ -42,12 +43,12 @@ export default function Onboarding() {
         </Stepper>
       </Box>
 
-      <Box sx={{ height: '780px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2 }}>
         {activeStep === 0 && <OnboardingWelcome />}
         {activeStep === 1 && <OnboardingTakeout />}
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1, borderTop: '1px solid', borderColor: 'divider', pt: 5 }}>
         <Button
           disabled={activeStep === 0}
           startIcon={ <ChevronLeft size={16} /> }
