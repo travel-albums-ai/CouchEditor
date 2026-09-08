@@ -382,8 +382,57 @@ export const sharpenStage = (amount: number): Stage => {
   };
 };
 
+// Verified with AI
 
-//// NOT USED
+export const hdrEffectStage = (amount: number, radius = 12): Stage => {
+  const strength = amount / 100;
+
+  return (img) => {
+    if (strength <= 0) return;
+    const { width, height, data } = img;
+    const src = new Uint8ClampedArray(data);
+
+    const lum = new Float32Array(width * height);
+    for (let i = 0, p = 0; i < src.length; i += 4, p++) {
+      lum[p] = 0.2126 * src[i] + 0.7152 * src[i + 1] + 0.0722 * src[i + 2];
+    }
+
+    const blurred = boxBlur1D(lum, width, height, radius);
+
+    for (let i = 0, p = 0; i < data.length; i += 4, p++) {
+      const detail = lum[p] - blurred[p];
+      const boost = detail * strength * 1.5;
+      data[i] = clamp(src[i] + boost);
+      data[i + 1] = clamp(src[i + 1] + boost);
+      data[i + 2] = clamp(src[i + 2] + boost);
+    }
+  };
+};
+
+export const popStage = (amount: number): Stage => {
+  const strength = amount / 100;
+  const contrastFactor = 1 + 0.5 * strength;
+  const saturationFactor = 1 + 0.6 * strength;
+
+  return (img) => {
+    if (strength <= 0) return;
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      let r = clamp(contrastFactor * (d[i] - 128) + 128);
+      let g = clamp(contrastFactor * (d[i + 1] - 128) + 128);
+      let b = clamp(contrastFactor * (d[i + 2] - 128) + 128);
+
+      const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      r = clamp(lum + (r - lum) * saturationFactor);
+      g = clamp(lum + (g - lum) * saturationFactor);
+      b = clamp(lum + (b - lum) * saturationFactor);
+
+      d[i] = r;
+      d[i + 1] = g;
+      d[i + 2] = b;
+    }
+  };
+};
 
 export const whitesBlacksStage = (whites: number, blacks: number): Stage => {
   return (img) => {
@@ -437,6 +486,8 @@ export const splitToningStage = (
     }
   };
 };
+
+//// NOT USED
 
 export const removeFilmBaseStage = (
   base: RGB,
@@ -560,30 +611,6 @@ export const rgbMidtonesStage = (
   };
 };
 
-export const popStage = (amount: number): Stage => {
-  const strength = amount / 100;
-  const contrastFactor = 1 + 0.5 * strength;
-  const saturationFactor = 1 + 0.6 * strength;
-
-  return (img) => {
-    if (strength <= 0) return;
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      let r = clamp(contrastFactor * (d[i] - 128) + 128);
-      let g = clamp(contrastFactor * (d[i + 1] - 128) + 128);
-      let b = clamp(contrastFactor * (d[i + 2] - 128) + 128);
-
-      const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-      r = clamp(lum + (r - lum) * saturationFactor);
-      g = clamp(lum + (g - lum) * saturationFactor);
-      b = clamp(lum + (b - lum) * saturationFactor);
-
-      d[i] = r;
-      d[i + 1] = g;
-      d[i + 2] = b;
-    }
-  };
-};
 
 function boxBlur1D(src: Float32Array, width: number, height: number, radius: number): Float32Array {
   const tmp = new Float32Array(width * height);
@@ -614,28 +641,3 @@ function boxBlur1D(src: Float32Array, width: number, height: number, radius: num
 
   return out;
 }
-
-export const hdrEffectStage = (amount: number, radius = 12): Stage => {
-  const strength = amount / 100;
-
-  return (img) => {
-    if (strength <= 0) return;
-    const { width, height, data } = img;
-    const src = new Uint8ClampedArray(data);
-
-    const lum = new Float32Array(width * height);
-    for (let i = 0, p = 0; i < src.length; i += 4, p++) {
-      lum[p] = 0.2126 * src[i] + 0.7152 * src[i + 1] + 0.0722 * src[i + 2];
-    }
-
-    const blurred = boxBlur1D(lum, width, height, radius);
-
-    for (let i = 0, p = 0; i < data.length; i += 4, p++) {
-      const detail = lum[p] - blurred[p];
-      const boost = detail * strength * 1.5;
-      data[i] = clamp(src[i] + boost);
-      data[i + 1] = clamp(src[i + 1] + boost);
-      data[i + 2] = clamp(src[i + 2] + boost);
-    }
-  };
-};
