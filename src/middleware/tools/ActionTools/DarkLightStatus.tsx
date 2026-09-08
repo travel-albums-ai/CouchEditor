@@ -11,6 +11,7 @@ export default function DarkLightStatus() {
 
   const handleOnChange = (mode?: 'light' | 'dark') => {
     setSetting((prev) => ({ ...prev, themeMode: mode === 'light' ? 'dark' : 'light'}))
+    localStorage.setItem("theme", mode === 'light' ? 'dark' : 'light');
   }
 
   return <>
