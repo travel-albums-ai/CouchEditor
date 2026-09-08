@@ -3,7 +3,7 @@ import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { Cloud, Images, LogIn, RefreshCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -106,7 +106,7 @@ async function readJpgsFromDrive(accessToken: string): Promise<File[]> {
 function GoogleDriveNode({ id, data }: NodeProps<Node<GoogleDriveData>>) {
   const { setNodes } = useReactFlow();
   const { t } = useTranslation();
-  const [clientId, setClientId] = useState(import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '');
+  const [clientId, setClientId] = useState(import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '516963449880-glbojakq37njk6c44sarqfo5j7jm43gu.apps.googleusercontent.com');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
   const files = data.files ?? [];
@@ -155,14 +155,14 @@ function GoogleDriveNode({ id, data }: NodeProps<Node<GoogleDriveData>>) {
 
   return (
     <NodeWrapper type="google-drive">
-      <TextField
+      {/* <TextField
         label={t('pipelineGoogleDriveClientId')}
         value={clientId}
         onChange={(event) => setClientId(event.target.value)}
         size="small"
         fullWidth
         placeholder="...apps.googleusercontent.com"
-      />
+      /> */}
       <Button
         variant="contained"
         startIcon={loading ? <RefreshCw size={16} /> : <LogIn size={16} />}

@@ -17,12 +17,14 @@ export type SavedPipeline = PipelineGraph & {
 type PipelineStore = {
   pipelines: SavedPipeline[]
   showToolbox: boolean
+  searchTermToolbox: string
 }
 
 const defaults: PipelineStore = {
   // pipelines: [],
   pipelines: samplePipeline as SavedPipeline[],
-  showToolbox: true
+  showToolbox: true,
+  searchTermToolbox: ''
 }
 
 const {

@@ -229,5 +229,6 @@
   "tutorialStepTrashTitle": "Pipeline Trash",
   "tutorialStepTrashDescription": "Use this toggle to open and close the pipeline trash.",
   "tutorialStepMainScreenTitle": "Main Screen",
-  "tutorialStepMainScreenDescription": "This is where your main content is displayed. It has draggable items."
+  "tutorialStepMainScreenDescription": "This is where your main content is displayed. It has draggable items.",
+  "searchToolbox": "Search in the toolbox..."
 }

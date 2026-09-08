@@ -1,7 +1,8 @@
-import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import { useBYOKStoreSelector } from '@/context/byokStore';
+import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
-import { Box, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Box, InputAdornment, TextField, Tooltip, Typography } from '@mui/material';
+import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Search, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const paletteItems: Array<{
@@ -75,8 +76,9 @@ const groupedPaletteItems = paletteItems.reduce((acc, item) => {
 
 function NodeToolbox() {
   const { t } = useTranslation();
-  const { setSetting } = useBYOK()
   const enableAI  = useBYOKStoreSelector((state) => state.enableAI)
+  const searchTermToolbox = usePipelineStoreSelector((state) => state.searchTermToolbox)
+  const { setState } = usePipelineStore()
 
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
@@ -100,7 +102,26 @@ function NodeToolbox() {
       overflow: 'auto',
       p: 1,
     }}>
+      <TextField
+        size="small"
+        placeholder={t('searchToolbox')}
+        value={searchTermToolbox}
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search size={16} />
+              </InputAdornment>
+            ),
+          },
+        }}
+        onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
+        sx={{ mb: 2 }}
+      />
+
+
       {Object.entries(groupedPaletteItems)
+        .filter(([group, items]) => items.some(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase())))
         .filter(([group, items]) => enableAI || !items.every(item => item.ai))
         .map(([group, items]) => (
           <Box key={group}
@@ -120,6 +141,7 @@ function NodeToolbox() {
               gap: 1,
             }}>
               {items
+                .filter(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase()))
                 .filter(item => enableAI || item.ai === undefined)
                 .map((item, i) => (
                   <Tooltip title={t('pipelineDragToAdd', { label: t(item.labelKey) })} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
