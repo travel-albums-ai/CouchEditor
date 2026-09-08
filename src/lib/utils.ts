@@ -382,8 +382,6 @@ export const sharpenStage = (amount: number): Stage => {
   };
 };
 
-// Verified with AI
-
 export const hdrEffectStage = (amount: number, radius = 12): Stage => {
   const strength = amount / 100;
   const boostScale = strength * 1.5;
@@ -487,6 +485,7 @@ export const temperatureTintStage = (temp: number, tint: number): Stage => {
   };
 };
 
+// Verified with AI
 
 export const splitToningStage = (
   shadowTintR: number,
