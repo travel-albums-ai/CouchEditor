@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.2.0...v1.2.1) (2026-09-08)
+
+### 🐛 Fixes
+
+* add position prop to OutputHandle in SourceNode component ([a5abfa4](https://github.com/travel-albums-ai/CouchEditor/commit/a5abfa4bba3a104a55b2026dd05d5bed10679527))
+
 ## [1.2.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.1.0...v1.2.0) (2026-09-08)
 
 ### ✨ Features
