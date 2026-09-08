@@ -36,7 +36,7 @@ type BYOKStore = {
 }
 
 const defaults: BYOKStore = {
-  enableAI: true,
+  enableAI: false,
   aiLoading: false,
   byokOpenAIKey: '',
   serviceTier: 'flex',
