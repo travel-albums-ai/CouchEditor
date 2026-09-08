@@ -7,7 +7,7 @@ import { Maximize2 } from 'lucide-react';
 import { useState } from "react";
 
 const SCALE_PRESETS = [
-  { value: "1", label: "Original" },
+  { value: "1", label: "Auto" },
   { value: "0.1", label: "10%" },
   { value: "0.25", label: "25%" },
   { value: "0.5", label: "50%" },
