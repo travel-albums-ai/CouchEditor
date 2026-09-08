@@ -772,6 +772,13 @@ function lutStage(lut: CubeLut): Stage {
 }
 
 const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
+  information: {
+    async execute() {
+      await Promise.resolve();
+      return {};
+    },
+  },
+
   source: {
     async execute(inputs) {
       const files = inputs.files as File[] | undefined;

@@ -1,6 +1,6 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Wheat } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const paletteItems: Array<{
@@ -13,6 +13,7 @@ export const paletteItems: Array<{
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
   // { type: "selection", label: "Gallery", icon: <GalleryVerticalEnd size={16} />, group: "input" },
   { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineGroupUtility" },
+  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />, groupKey: "pipelineGroupUtility" },
   { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi" },
   { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi" },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />, groupKey: "pipelineGroupColor" },

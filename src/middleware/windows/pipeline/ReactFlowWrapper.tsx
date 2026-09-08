@@ -46,6 +46,7 @@ import RescaleNode from "./ComplexNodes/RescaleNode";
 import SinglePhotoViewerNode from "./ComplexNodes/SinglePhotoViewerNode";
 import SourceNode from "./ComplexNodes/SourceNode";
 import ViewerNode from "./ComplexNodes/ViewerNode";
+import InformationNode from "./InformationNode";
 import NodeToolbox from "./NodeToolbox";
 import BrightnessNode from "./OneBarToggles/BrightnessNode";
 import ContrastNode from "./OneBarToggles/ContrastNode";
@@ -110,6 +111,7 @@ const nodeTypes = {
   "viewer-single": SinglePhotoViewerNode,
   "photo-histogram": PhotoHistogramNode,
   "hot-folder-write": HotFolderWriteNode,
+  information: InformationNode,
 };
 
 const initialNodes: Node[] = [
