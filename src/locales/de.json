@@ -60,13 +60,26 @@
   "pipelineGrouper": "Gruppierung",
   "pipelineAiColorizer": "KI-Kolorierung",
   "pipelineAiDenoiser": "KI-Rauschreduzierung",
+
   "pipelineInvert": "Invertieren",
+  "pipelineInvertDescription": "Invertiert die Farben des Bildes",
+
   "pipelineBlackAndWhite": "Schwarzweiß",
+  "pipelineBlackAndWhiteDescription": "Konvertiert das Bild in Schwarzweiß",
+
   "pipelineSepia": "Sepia",
+  "pipelineSepiaDescription": "Verleiht dem Bild einen warmen Sepiaton",
+
   "pipelineLut": "3D-LUT",
-  "pipelineFlip": "Um 180° drehen",
+
+  "pipelineFlip": "180° drehen",
+  "pipelineFlipDescription": "Dreht das Bild auf den Kopf",
+
   "pipelineMirror": "Spiegeln",
+  "pipelineMirrorDescription": "Spiegelt das Bild horizontal",
+
   "pipelineRotate": "Drehen",
+
   "pipelineBrightness": "Helligkeit",
   "pipelineHighlights": "Lichter",
   "pipelineShadows": "Schatten",
