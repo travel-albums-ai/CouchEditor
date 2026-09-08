@@ -147,3 +147,7 @@ body {
   stroke: var(--accent);
   stroke-width: 16px;
 }
+
+.react-flow__minimap-mask {
+  fill: var(--bg-overlay);
+}

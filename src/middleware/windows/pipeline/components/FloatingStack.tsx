@@ -40,11 +40,6 @@ export default function FloatingStack({
                 alpha(theme.palette.primary.main, 0.26),
               boxShadow: theme =>
                 `0 0 3px ${alpha(theme.palette.primary.main, 0.8)}`,
-              bgcolor: theme =>
-                alpha(
-                  theme.palette.background.paper,
-                  0.85
-                ),
             },
           }),
         },

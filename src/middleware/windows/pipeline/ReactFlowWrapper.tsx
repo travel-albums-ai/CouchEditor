@@ -32,6 +32,7 @@ import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
+import { MinimapPipeline } from '@/middleware/windows/pipeline/components/MinimapPipeline';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import CropNode from "./ComplexNodes/CropNode";
@@ -576,9 +577,7 @@ function Pipeline() {
               {pipelines.map((pipeline) => (
                 <MenuItem key={pipeline.id} value={pipeline.id}>
                   <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
-                    <Box sx={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1, border: '1px solid', borderColor: 'divider' }}>
-                    demo
-                    </Box>
+                    <MinimapPipeline pipeline={pipeline} />
                     {pipeline.name}
                   </Box>
                 </MenuItem>
