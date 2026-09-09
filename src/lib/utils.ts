@@ -280,7 +280,10 @@ export const fadeStage = (amount: number): Stage => {
   };
 };
 
-export const vignetteStage = (amount: number): Stage => {
+export const vignetteStage = (
+  amount: number,
+  color: [number, number, number] = [0, 0, 0]
+): Stage => {
   const strength = amount / 100;
   return (img) => {
     if (strength <= 0) return;
@@ -304,9 +307,10 @@ export const vignetteStage = (amount: number): Stage => {
       for (let x = 0; x < width; x++) {
         const falloff = 1 - strength * Math.pow(dx2[x] + dy2, 1.1) * invMaxDistPow;
         const idx = (rowOffset + x) * 4;
-        data[idx] *= falloff;
-        data[idx + 1] *= falloff;
-        data[idx + 2] *= falloff;
+        const tint = 1 - falloff;
+        data[idx] = data[idx] * falloff + color[0] * tint;
+        data[idx + 1] = data[idx + 1] * falloff + color[1] * tint;
+        data[idx + 2] = data[idx + 2] * falloff + color[2] * tint;
       }
     }
   };

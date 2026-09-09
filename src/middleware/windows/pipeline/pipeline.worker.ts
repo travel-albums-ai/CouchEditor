@@ -1064,7 +1064,23 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   contrast: amountStageNode(contrastStage, 0),
   saturation: amountStageNode(saturationStage, 0),
   vibrance: amountStageNode(vibranceStage, 0),
-  vignette: amountStageNode(vignetteStage, 0),
+  vignette: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) return { image: [] };
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+      const color = (inputs.color as [number, number, number] | undefined) ?? [0, 0, 0];
+      return {
+        image: await renderImages(
+          sources,
+          inputs.evaluationId as number,
+          drawSource,
+          vignetteStage(amount, color)
+        ),
+      };
+    },
+  },
   grain: amountStageNode(grainStage, 0),
   sharpen: amountStageNode(sharpenStage, 0),
   pop: amountStageNode(popStage, 0),
@@ -1340,6 +1356,10 @@ async function runEvaluation(
       // Slider nodes get their amount from node.data.
       if (SLIDER_NODE_TYPES.has(node.type ?? "")) {
         inputs.amount = node.data.amount;
+      }
+
+      if (node.type === "vignette") {
+        inputs.color = node.data.color;
       }
 
       if (TONE_NODE_TYPES.has(node.type ?? "")) {
