@@ -30,6 +30,7 @@ const NODE_DATA_KEYS = [
   "photos",
   "amount",
   "selectedPhotoName",
+  "selectedInput",
   "passthru",
   "apiKey",
   "scale",

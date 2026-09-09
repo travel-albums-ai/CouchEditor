@@ -1,4 +1,4 @@
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -12,6 +12,7 @@ export const paletteItems: Array<{
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
   { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />, groupKey: "pipelineGroupInput" },
   { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineGroupInput" },
+  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />, groupKey: "pipelineGroupInput" },
   { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />, groupKey: "pipelineGroupInput" },
   { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />, groupKey: "pipelineGroupInput" },
 

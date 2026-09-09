@@ -35,6 +35,7 @@ import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStac
 import { MinimapPipeline } from '@/middleware/windows/pipeline/components/MinimapPipeline';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
+import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
 import CropNode from "./ComplexNodes/CropNode";
 import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
 import GrouperNode from "./ComplexNodes/GrouperNode";
@@ -90,6 +91,7 @@ const nodeTypes = {
   "hot-folder-read": HotFolderReadNode,
   "google-drive": GoogleDriveNode,
   grouper: GrouperNode,
+  "array-switch": ArraySwitchNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
   invert: InvertNode,
@@ -328,6 +330,10 @@ function Pipeline() {
       cropValues: nodes
         .filter((node) => node.type === "crop")
         .map((node) => `${node.id}:${node.data.top ?? 0}:${node.data.bottom ?? 0}:${node.data.left ?? 0}:${node.data.right ?? 0}`)
+        .sort(),
+      arraySwitchValues: nodes
+        .filter((node) => node.type === "array-switch")
+        .map((node) => `${node.id}:${node.data.selectedInput ?? 1}`)
         .sort(),
       edges: edges
         .map(

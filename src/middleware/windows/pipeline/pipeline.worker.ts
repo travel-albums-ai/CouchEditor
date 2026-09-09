@@ -920,6 +920,15 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "array-switch": {
+    async execute(inputs) {
+      const selectedInput = Number(inputs.selectedInput) === 2 ? "image-2" : "image-1";
+      const image = inputs[selectedInput];
+
+      return { image: Array.isArray(image) ? image as WorkerImage[] : [] };
+    },
+  },
+
   invert: stageNode(invertStage),
   "black-white": stageNode(blackAndWhiteStage),
   sepia: stageNode(sepiaStage),
@@ -1321,6 +1330,10 @@ async function runEvaluation(
 
       if (node.type === "lut") {
         inputs.lutFile = node.data.lutFile;
+      }
+
+      if (node.type === "array-switch") {
+        inputs.selectedInput = node.data.selectedInput;
       }
 
       // Special case:
