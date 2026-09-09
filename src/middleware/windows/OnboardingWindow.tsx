@@ -1,10 +1,10 @@
-import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import Onboarding from '@/middleware/windows/onboarding';
 import { Dialog } from '@mui/material';
 
 export default function OnboardingWindow() {
   const onboarding = useSettingsStoreSelector((state) => state.onboarding);
-
+  const { setSetting } = useSettings()
   const showWindow = onboarding === true
 
   if (!showWindow) return null
@@ -13,7 +13,7 @@ export default function OnboardingWindow() {
     <Dialog
       fullWidth
       open={onboarding}
-      onClose={() => { }}
+      onClose={() => setSetting(prev => ({ ...prev, onboarding: false }))}
       slotProps={{
         paper: {
           sx: {
