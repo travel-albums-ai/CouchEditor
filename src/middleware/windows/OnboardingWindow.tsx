@@ -21,8 +21,9 @@ export default function OnboardingWindow() {
             backgroundColor: 'transparent',
             width: 700,
             height: 900,
+
             maxWidth: 'none',
-            maxHeight: 'none',
+            maxHeight: '90vh',
           },
         },
       }}
