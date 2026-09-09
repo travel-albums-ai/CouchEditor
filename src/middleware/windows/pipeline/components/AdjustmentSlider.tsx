@@ -9,6 +9,7 @@ type AdjustmentSliderProps = {
   value: number;
   onChange: (value: number) => void;
   throttleMs?: number;
+  disabled?: boolean;
 };
 
 export default function AdjustmentSlider({
@@ -18,6 +19,7 @@ export default function AdjustmentSlider({
   value,
   onChange,
   throttleMs = 100,
+  disabled,
 }: AdjustmentSliderProps) {
   const lastChangeAt = useRef(0);
   const pendingChange = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -55,8 +57,9 @@ export default function AdjustmentSlider({
       <Slider
         min={min}
         max={max}
+        disabled={disabled}
         step={step}
-        sx={{ width: '150px', mx: 1 }}
+        sx={{ width: '150px', mx: 1, opacity: disabled ? 0.5 : 1 }}
         value={value}
         onChange={(_, nextValue) => {
           const nextAmount = Array.isArray(nextValue) ? nextValue[0] : nextValue;

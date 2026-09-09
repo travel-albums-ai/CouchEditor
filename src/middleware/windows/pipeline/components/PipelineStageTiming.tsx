@@ -10,11 +10,13 @@ type StageTimingDetail = {
 type PipelineStageTimingProps = {
   nodeId: string;
   nodeType: string;
+  isBusy?: (busy: boolean) => void;
 };
 
 export default function PipelineStageTiming({
   nodeId,
   nodeType,
+  isBusy,
 }: PipelineStageTimingProps) {
   const [durationMs, setDurationMs] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -28,6 +30,7 @@ export default function PipelineStageTiming({
 
       if (startedNodeId === nodeId) {
         setIsProcessing(true);
+        isBusy?.(true)
       }
     };
     const handleTiming = (event: Event) => {
@@ -36,6 +39,7 @@ export default function PipelineStageTiming({
 
       if (timingNodeId === nodeId) {
         setIsProcessing(false);
+        isBusy?.(false);
         setDurationMs(nextDurationMs);
       }
     };

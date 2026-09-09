@@ -24,18 +24,18 @@ export function createSliderNode(config: SliderNodeConfig) {
     id,
     data,
   }: NodeProps<Node<{ amount?: number }>>) {
-    const [amount, setAmount] = useState(
-      data.amount ?? config.defaultValue
-    );
+    const [amount, setAmount] = useState(data.amount ?? config.defaultValue);
+    const [isBusy, setIsBusy] = useState(false);
 
     return <>
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
-        tools={<PipelineStageTiming nodeId={id} nodeType={config.type} />}
+        tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
         helper={<>
           {config.info && config.info({...config, amount })}
         </>}>
         <AdjustmentSlider
+          disabled={isBusy}
           min={config.min}
           max={config.max}
           step={config.step}
