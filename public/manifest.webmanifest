@@ -1,7 +1,7 @@
 {
   "name": "Couch Editor",
   "short_name": "Couch Editor",
-  "description": "Browse and relive your trips as an installable desktop-style web app.",
+  "description": "Build reusable photo-editing recipes on a visual canvas and export them as .cep pipeline files.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -18,8 +18,9 @@
   "lang": "en",
   "dir": "ltr",
   "categories": [
-    "travel",
-    "photo"
+    "photo",
+    "productivity",
+    "design"
   ],
   "prefer_related_applications": false,
   "icons": [
