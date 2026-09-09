@@ -1084,7 +1084,23 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   grain: amountStageNode(grainStage, 0),
   sharpen: amountStageNode(sharpenStage, 0),
   pop: amountStageNode(popStage, 0),
-  hdr: amountStageNode(hdrEffectStage, 0),
+  hdr: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) return { image: [] };
+
+      const amount = (inputs.amount as number | undefined) ?? 0;
+      const radius = (inputs.radius as number | undefined) ?? 12;
+      return {
+        image: await renderImages(
+          sources,
+          inputs.evaluationId as number,
+          drawSource,
+          hdrEffectStage(amount, radius)
+        ),
+      };
+    },
+  },
   "hue-rotation": amountStageNode(hueRotationStage, 0),
   fade: amountStageNode(fadeStage, 0),
   "whites-blacks": twoAmountStageNode(whitesBlacksStage, "whites", "blacks"),
@@ -1360,6 +1376,10 @@ async function runEvaluation(
 
       if (node.type === "vignette") {
         inputs.color = node.data.color;
+      }
+
+      if (node.type === "hdr") {
+        inputs.radius = node.data.radius;
       }
 
       if (TONE_NODE_TYPES.has(node.type ?? "")) {
