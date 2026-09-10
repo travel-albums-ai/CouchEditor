@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.3...v1.19.0) (2026-09-10)
+
+### ✨ Features
+
+* add reset node functionality and corresponding UI button ([41abd9f](https://github.com/travel-albums-ai/CouchEditor/commit/41abd9fb192cea95be9a6dcc636226f1600c9cd5))
+
 ## [1.18.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.2...v1.18.3) (2026-09-10)
 
 ### 🐛 Fixes
