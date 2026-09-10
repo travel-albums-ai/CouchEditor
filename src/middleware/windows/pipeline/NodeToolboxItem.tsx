@@ -1,10 +1,9 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
+import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
 
 export default function NodeToolboxItem({ group, items, onDragStart, isSearching } : { group: string, items: any[], onDragStart: (event: React.DragEvent<HTMLDivElement>, nodeType: string) => void, isSearching: boolean }) {
   const enableAI  = useBYOKStoreSelector((state) => state.enableAI)
@@ -19,25 +18,25 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'flex', flexDirection: 'column', gap: 0
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Typography variant="caption" sx={{ mb: 0.5, textTransform: 'uppercase', fontWeight: 'bold' }} color="textDisabled">
-          {t(group)}
-        </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 0.5, mb: 0.5 }} onClick={() => setState((prev) => ({
+        ...prev,
+        collapsedToolboxGroups: {
+          ...prev.collapsedToolboxGroups,
+          [group]: !collapse,
+        },
+      }))}>
         {!isSearching && <Box
           component="span"
-          sx={{ cursor: 'pointer', ml: 1, color: 'text.disabled' }}
-          onClick={() => setState((prev) => ({
-            ...prev,
-            collapsedToolboxGroups: {
-              ...prev.collapsedToolboxGroups,
-              [group]: !collapse,
-            },
-          }))}
+          sx={{ cursor: 'pointer', color: 'text.secondary',  lineHeight: 0 }}
+
         >
-          {collapse
-            ? <ChevronDown size={16} style={{ color: 'inherit', }} />
-            : <ChevronDown style={{ transform: 'rotate(180deg)', opacity: 0.5, color: 'inherit' }} size={16}  />}
+          {!collapse
+            ? <ChevronDown size={16} style={{ color: 'inherit', lineHeight: 0 }} />
+            : <ChevronDown style={{ transform: 'rotate(180deg)', opacity: 1, lineHeight: 0, color: 'inherit' }} size={16}  />}
         </Box>}
+        <Typography variant="caption" sx={{ textTransform: 'capitalize', fontWeight: 'bold' }} color="textPrimary">
+          {t(group)}
+        </Typography>
       </Box>
 
       {(isSearching || !collapse) && <Box sx={{
@@ -59,7 +58,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                   onDragStart(event, item.type)
                 }
               >
-                <NodeHeader
+                <NodeToolboxHeader
                   type={item.type}
                 />
               </Box>
