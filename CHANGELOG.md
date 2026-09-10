@@ -1,3 +1,9 @@
+## [1.30.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.29.0...v1.30.0) (2026-09-10)
+
+### ✨ Features
+
+* update GridVirtuoso to use ImageValue type and enhance AlbumPhotoThumbnailBackgroundNg integration ([b25d25c](https://github.com/travel-albums-ai/CouchEditor/commit/b25d25cb43dc52e483bd4673836cddb59504d517))
+
 ## [1.29.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.28.0...v1.29.0) (2026-09-10)
 
 ### ✨ Features
