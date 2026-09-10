@@ -183,7 +183,13 @@ vec3 sampleClamped(ivec2 coordinate) {
 // just factored out so the three branches aren't hand-duplicating the
 // per-channel formula.
 vec3 applyBlackPoint(vec3 rgb, vec3 point) {
-  return (rgb * 255.0 - point) / max(vec3(1.0), vec3(255.0) - point) / 255.0;
+  vec3 normalizedPoint = clamp(point / 255.0, 0.0, 1.0);
+  return clamp(
+    (rgb - normalizedPoint) /
+      max(vec3(1.0 / 255.0), vec3(1.0) - normalizedPoint),
+    0.0,
+    1.0
+  );
 }
 
 vec3 applyWhitePoint(vec3 rgb, vec3 point) {
