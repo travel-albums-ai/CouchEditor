@@ -668,7 +668,7 @@ function Pipeline() {
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: alpha(theme.palette.divider, 0.05),  }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: alpha(theme.palette.divider, 0.03),  }}>
             <Workflow size={16} /> Editor
           </Box>
           <Box sx={{
