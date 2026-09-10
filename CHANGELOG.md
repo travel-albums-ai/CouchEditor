@@ -1,3 +1,9 @@
+## [1.21.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.20.0...v1.21.0) (2026-09-10)
+
+### ✨ Features
+
+* replace FormControl with GenericToggleButtonGroup for size selection in InformationNode ([e7271a6](https://github.com/travel-albums-ai/CouchEditor/commit/e7271a6ed0806b3e49c767757375c05df0c1dd10))
+
 ## [1.20.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.19.0...v1.20.0) (2026-09-10)
 
 ### ✨ Features
