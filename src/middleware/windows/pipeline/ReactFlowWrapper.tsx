@@ -186,6 +186,20 @@ function Pipeline() {
   const nodesRef = useRef(nodes);
   const edgesRef = useRef(edges);
 
+  const styleEdges = useCallback((pipelineEdges: Edge[]) =>
+    pipelineEdges.map((edge) => ({
+      ...edge,
+      style: {
+        strokeWidth: 2,
+        stroke: alpha(theme.palette.primary.main, 0.6),
+      },
+    })),
+  [theme.palette.primary.main]);
+
+  useEffect(() => {
+    setEdges((current) => styleEdges(current));
+  }, [setEdges, styleEdges]);
+
   const fitPipelineView = useCallback(async () => {
     const fitted = await fitView({ padding: 0.18 });
 
@@ -227,10 +241,10 @@ function Pipeline() {
     }
 
     setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
-    setEdges(pipeline.edges.map((edge) => ({ ...edge })));
+    setEdges(styleEdges(pipeline.edges));
     setCurrentPipelineName(pipeline.name);
     setIsDirty(false);
-  }, [currentPipelineId, loadById, setEdges, setNodes]);
+  }, [currentPipelineId, loadById, setEdges, setNodes, styleEdges]);
 
   useEffect(() => {
     if (currentPipelineId) {
@@ -446,7 +460,7 @@ function Pipeline() {
       });
 
       setNodes(imported.nodes.map((node) => ({ ...node, data: { ...node.data } })));
-      setEdges(imported.edges.map((edge) => ({ ...edge })));
+      setEdges(styleEdges(imported.edges));
       setCurrentPipelineId(id);
       setCurrentPipelineName(name);
       setIsDirty(false);
@@ -455,7 +469,7 @@ function Pipeline() {
       console.error('Pipeline import failed:', error);
       window.alert('The selected file is not a valid .cep pipeline.');
     }
-  }, [fitPipelineView, saveNew, setEdges, setNodes]);
+  }, [fitPipelineView, saveNew, setEdges, setNodes, styleEdges]);
 
   const loadPipeline = useCallback((id: string) => {
     if (!id || id === currentPipelineId) return;
@@ -469,12 +483,12 @@ function Pipeline() {
     if (!pipeline) return;
 
     setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
-    setEdges(pipeline.edges.map((edge) => ({ ...edge })));
+    setEdges(styleEdges(pipeline.edges));
     setCurrentPipelineId(pipeline.id);
     setCurrentPipelineName(pipeline.name);
     setIsDirty(false);
     void fitPipelineView();
-  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setEdges, setNodes]);
+  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setEdges, setNodes, styleEdges]);
 
   const deleteCurrent = useCallback(() => {
     if (!currentPipelineId) return;
@@ -513,14 +527,17 @@ function Pipeline() {
   const onConnect = useCallback(
     (connection: Connection) => {
       setEdges((current) =>
-        addEdge({ ...connection, type: CONNECTION_LINE_TYPE, style: {
-          opacity: 1,
-          strokeWidth: 2,
-          stroke: alpha(theme.palette.primary.main, 0.6)
-        } }, current)
+        addEdge({
+          ...connection,
+          type: CONNECTION_LINE_TYPE,
+          style: {
+            strokeWidth: 2,
+            stroke: alpha(theme.palette.primary.main, 0.6),
+          },
+        }, current)
       );
     },
-    [setEdges]
+    [setEdges, theme.palette.primary.main]
   );
 
   // Dragging an existing edge's endpoint onto a new handle
@@ -528,10 +545,10 @@ function Pipeline() {
   const onReconnect = useCallback(
     (oldEdge: Edge, newConnection: Connection) => {
       setEdges((current) =>
-        reconnectEdge(oldEdge, newConnection, current)
+        styleEdges(reconnectEdge(oldEdge, newConnection, current))
       );
     },
-    [setEdges]
+    [setEdges, styleEdges]
   );
 
   const onEdgeDoubleClick = useCallback(
