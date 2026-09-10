@@ -207,8 +207,8 @@ function Pipeline() {
     if (!fitted) return;
 
     const viewport = getViewport();
-    setViewport({ ...viewport, x: viewport.x + 170, zoom: viewport.zoom - 0.05 });
-  }, [fitView, getViewport, setViewport]);
+    setViewport({ ...viewport, x: viewport.x + (showToolbox ? 170 : 0), zoom: viewport.zoom - 0.05 });
+  }, [fitView, getViewport, setViewport, showToolbox]);
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodes.length }));
@@ -710,17 +710,15 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        {showToolbox && <FloatingStack sx={{ top: 10, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
-          <NodeToolbox />
-        </FloatingStack>}
-        {!showToolbox && <FloatingStack sx={{ top: 10, left: 12, overflow: 'auto' }} id="pipeline-toolbox" asIs>
-          <GeneralRegistryToolbar
-            fullWidth={false}
-            noGhost={true}
-            group="toolbox"
-          />
-        </FloatingStack>}
-
+        <FloatingStack
+          sx={{ top: 10, left: 12, bottom: showToolbox ? 10 : 'auto', overflow: 'auto' }}
+          id="pipeline-toolbox"
+          key={`pipeline-toolbox-${showToolbox ? 'visible' : 'hidden'}`}
+          asIs={!showToolbox}>
+          {showToolbox
+            ? <NodeToolbox />
+            : <GeneralRegistryToolbar fullWidth={false} noGhost={true} group="toolbox"/>}
+        </FloatingStack>
 
         <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-toolbox">
           <Box
