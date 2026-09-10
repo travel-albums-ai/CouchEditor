@@ -1,3 +1,9 @@
+## [1.33.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.32.0...v1.33.0) (2026-09-10)
+
+### ✨ Features
+
+* implement CubeLut and lutStage functions for LUT processing ([9e4a0c0](https://github.com/travel-albums-ai/CouchEditor/commit/9e4a0c0f0eafd856decd87f982cdd702cc1e1108))
+
 ## [1.32.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.31.0...v1.32.0) (2026-09-10)
 
 ### ✨ Features
