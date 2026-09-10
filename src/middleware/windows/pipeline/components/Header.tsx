@@ -33,7 +33,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
             <Typography sx={{ fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch Editor</Typography>
             <SolidChip label="Beta" variant="header" />
           </Box>
-          <Typography variant="caption" color="textDisabled">Drag. Slide. See.</Typography>
+          <Typography variant="caption" color="textDisabled">Drag · Slide · See.</Typography>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
