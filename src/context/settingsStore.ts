@@ -33,7 +33,7 @@ const defaults: SettingsStore = {
   lightboxImages: [],
   serverOnline: true,
   thumbnailFormat: 'cover',
-  themeMode: 'dark',
+  themeMode: 'light',
   themeId: 'default',
   tutorial: false,
   loading: false,
