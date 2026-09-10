@@ -5,12 +5,14 @@ type FloatingStackProps = {
   id?: string;
   children: React.ReactNode;
   sx?: SxProps<Theme>;
+  asIs?: boolean;
 };
 
 export default function FloatingStack({
   id,
   children,
   sx,
+  asIs,
 }: FloatingStackProps) {
 
   return (
@@ -23,9 +25,9 @@ export default function FloatingStack({
           position: 'absolute',
           zIndex: 10,
           bgcolor: theme => alpha(theme.palette.background.paper, 0.9),
-          border: 1,
+          border: asIs ? 0 : 1,
           borderColor: 'divider',
-          p: 1,
+          p: asIs ? 0 : 1,
           borderRadius: 2,
           boxShadow: 2,
           backdropFilter: 'blur(4px)',

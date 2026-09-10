@@ -189,6 +189,7 @@ function Pipeline() {
   const styleEdges = useCallback((pipelineEdges: Edge[]) =>
     pipelineEdges.map((edge) => ({
       ...edge,
+      type: CONNECTION_LINE_TYPE,
       style: {
         strokeWidth: 2,
         stroke: alpha(theme.palette.primary.main, 0.6),
@@ -712,7 +713,7 @@ function Pipeline() {
         {showToolbox && <FloatingStack sx={{ top: 10, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
           <NodeToolbox />
         </FloatingStack>}
-        {!showToolbox && <FloatingStack sx={{ top: 10, left: 12, overflow: 'auto' }} id="pipeline-toolbox">
+        {!showToolbox && <FloatingStack sx={{ top: 10, left: 12, overflow: 'auto' }} id="pipeline-toolbox" asIs>
           <GeneralRegistryToolbar
             fullWidth={false}
             noGhost={true}
