@@ -109,7 +109,7 @@ out vec2 vTexCoord;
 
 void main() {
   gl_Position = vec4(aPosition, 0.0, 1.0);
-  vTexCoord = aTexCoord;
+  vTexCoord = vec2(aTexCoord.x, 1.0 - aTexCoord.y);
 }`;
 
 export const gpuFragmentShader = `#version 300 es
@@ -202,7 +202,7 @@ void main() {
   // downscaled live-preview pass), this and the original code would both
   // need a different approach — I haven't seen the renderer/pipeline code
   // that calls this shader, so flagging rather than assuming.
-  ivec2 texel = ivec2(gl_FragCoord.xy);
+  ivec2 texel = ivec2(gl_FragCoord.x, uResolution.y - gl_FragCoord.y);
   vec4 color = vec4(sampleClamped(texel), texture(uImage, vTexCoord).a);
   vec3 rgb = color.rgb;
   float amount = uParams[0];

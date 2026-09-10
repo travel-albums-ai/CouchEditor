@@ -1,7 +1,7 @@
 import GridVirtuoso from '@/components/GridVirtuoso';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
-import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { useSettings } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { Box, Button } from '@mui/material';
@@ -57,7 +57,6 @@ function ViewerNode({
   const { t } = useTranslation();
   const images = data.image ?? [];
   const [downloading, setDownloading] = useState(false);
-  const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
   const { setSetting } = useSettings();
 
   const handleDownload = async () => {
@@ -77,8 +76,6 @@ function ViewerNode({
     <NodeWrapper type="viewer">
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
-
-
         <Button
           variant="outlined"
           fullWidth

@@ -1,3 +1,4 @@
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
@@ -36,20 +37,19 @@ function SinglePhotoViewerNode({
               <SolidChip label={`${match.width} x ${match.height} px`} fontSize={14} minWidth={32} height={28} icon={<RulerDimensionLine />} />
               <SolidChip label={`${formatMegabytes(match.byteSize)}`} fontSize={14} minWidth={32} height={28} icon={<HardDrive />} />
             </Box>
-            <img
-              src={match.src}
-              alt={match.name ?? ''}
+            <AlbumPhotoThumbnailBackgroundNg
+              photo={{ name: match.name, src: match.src}}
+              alt=""
               style={{
-                border: '1px dotted',
-                borderColor: theme.palette.divider,
                 display: 'block',
                 width: '100%',
+                border: '1px dotted',
+                borderColor: theme.palette.divider,
                 height: '550px',
                 objectFit: 'contain',
                 borderRadius: '6px',
               }}
             />
-
           </>
         ) : (<>
           <NoPhotos />
