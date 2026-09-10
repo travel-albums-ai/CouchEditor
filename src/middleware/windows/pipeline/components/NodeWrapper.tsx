@@ -99,12 +99,12 @@ function NodeWrapper({
             borderRadius: 2,
             border: 1,
             borderColor: 'divider',
-            boxShadow: theme => `0 0 8px 1px ${theme.palette.divider}`,
+            boxShadow: theme => `0 0 8px 0px ${theme.palette.divider}`,
             transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
 
             '&:hover': {
               borderColor: theme => alpha(theme.palette.primary.main, 0.5),
-              boxShadow: theme => `0 0 14px 4px ${theme.palette.divider}`,
+              boxShadow: theme => `0 0 12px 2px ${theme.palette.divider}`,
             },
           },
         ]}
