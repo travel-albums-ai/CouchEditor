@@ -1,3 +1,9 @@
+## [1.22.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.21.0...v1.22.0) (2026-09-10)
+
+### ✨ Features
+
+* add drag-and-drop functionality for image uploads in SourceNode ([009b965](https://github.com/travel-albums-ai/CouchEditor/commit/009b9650162dd39ac39b60da0356d67aee66c986))
+
 ## [1.21.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.20.0...v1.21.0) (2026-09-10)
 
 ### ✨ Features
