@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Download, GalleryHorizontalEnd, Save, Trash2, Upload, Workflow } from 'lucide-react';
+import { CirclePlus, Copy, Download, GalleryHorizontalEnd, Save, Trash2, Upload, Users2, Workflow } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -670,12 +670,18 @@ function Pipeline() {
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: alpha(theme.palette.divider, 0.03),  }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: 'transparent',
+            border: 1,
+            borderColor: alpha(theme.palette.divider, 0.3),
+
+          }}>
             <Workflow size={16} /> Editor
           </Box>
           <Box sx={{
             display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
             bgcolor: alpha(theme.palette.primary.main, 0.05),
+            border: 1,
+            borderColor: alpha(theme.palette.primary.main, 0.3),
             '&:hover': {
               bgcolor: alpha(theme.palette.primary.main, 0.1),
             },
@@ -687,7 +693,7 @@ function Pipeline() {
                 size="small"
                 value={currentPipelineId}
                 displayEmpty
-                sx={{ height: 36,  borderColor: alpha(theme.palette.primary.main, 0.3) }}
+                sx={{ height: 36, border: 0, borderColor: 'transparent' }}
                 onChange={(event) => loadPipeline(event.target.value)}
                 renderValue={(value) => value
                   ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
@@ -705,6 +711,20 @@ function Pipeline() {
                 ))}
               </Select>
             </FormControl>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'secondary.main', borderRadius: 2, p: 2, height: 42,
+            bgcolor: alpha(theme.palette.secondary.main, 0.15),
+            border: 1,
+            borderColor: alpha(theme.palette.secondary.main, 0.3),
+            '&:hover': {
+              bgcolor: alpha(theme.palette.secondary.main, 0.2),
+            },
+
+          }}>
+            <Users2 size={16} /> Community
+            <Box sx={{ color: 'text.primary'}}>
+              <SolidChip label="Coming soon..." />
+            </Box>
           </Box>
         </Box>
         <GeneralRegistryToolbar
