@@ -1,3 +1,13 @@
+## [1.30.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.30.0...v1.30.1) (2026-09-10)
+
+### 🐛 Fixes
+
+* adjust InputHandle and OutputHandle positions in SelectedPhotoNode component ([9747074](https://github.com/travel-albums-ai/CouchEditor/commit/9747074d0b0c16ccab412286a553b0e8ad866e8a))
+
+### 🧹 Refactors
+
+* convert AlbumPhotoThumbnailBackgroundNg to a memoized component and streamline image styling logic ([7105329](https://github.com/travel-albums-ai/CouchEditor/commit/7105329aa7972280dd73c122d52f29c9bee9a9f8))
+
 ## [1.30.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.29.0...v1.30.0) (2026-09-10)
 
 ### ✨ Features
