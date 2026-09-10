@@ -1351,8 +1351,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1044
         },
         "selected": false,
         "dragging": false
@@ -1361,13 +1361,13 @@ export const samplePipeline = [
         "id": "rotate-3",
         "type": "rotate",
         "position": {
-          "x": 20,
+          "x": 0,
           "y": 600
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1377,12 +1377,12 @@ export const samplePipeline = [
         "type": "flip",
         "position": {
           "x": 1260,
-          "y": 1420
+          "y": 1340
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -1392,12 +1392,12 @@ export const samplePipeline = [
         "type": "mirror",
         "position": {
           "x": 1260,
-          "y": 1540
+          "y": 1460
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -1406,13 +1406,13 @@ export const samplePipeline = [
         "id": "perspective-7",
         "type": "perspective",
         "position": {
-          "x": 1540,
+          "x": 1560,
           "y": 640
         },
         "data": {},
         "measured": {
-          "width": 322,
-          "height": 546
+          "width": 318,
+          "height": 538
         },
         "selected": false,
         "dragging": false
@@ -1426,8 +1426,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 288,
-          "height": 228
+          "width": 284,
+          "height": 236
         },
         "selected": false,
         "dragging": false
@@ -1436,13 +1436,13 @@ export const samplePipeline = [
         "id": "crop-9",
         "type": "crop",
         "position": {
-          "x": 1540,
-          "y": 1200
+          "x": -600,
+          "y": 1220
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 331
+          "width": 280,
+          "height": 271
         },
         "selected": false,
         "dragging": false
@@ -1456,8 +1456,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 484,
-          "height": 139
+          "width": 480,
+          "height": 143
         },
         "selected": false,
         "dragging": false
@@ -1473,8 +1473,8 @@ export const samplePipeline = [
           "passthru": true
         },
         "measured": {
-          "width": 250,
-          "height": 97
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1483,15 +1483,15 @@ export const samplePipeline = [
         "id": "ai-denoiser-12",
         "type": "ai-denoiser",
         "position": {
-          "x": 20,
+          "x": 0,
           "y": 740
         },
         "data": {
           "passthru": true
         },
         "measured": {
-          "width": 250,
-          "height": 97
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1501,12 +1501,12 @@ export const samplePipeline = [
         "type": "invert",
         "position": {
           "x": 1260,
-          "y": 1180
+          "y": 1100
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -1515,13 +1515,13 @@ export const samplePipeline = [
         "id": "black-white-14",
         "type": "black-white",
         "position": {
-          "x": 1260,
-          "y": 1060
+          "x": 1560,
+          "y": 1200
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -1531,12 +1531,12 @@ export const samplePipeline = [
         "type": "sepia",
         "position": {
           "x": 1260,
-          "y": 1300
+          "y": 1220
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -1550,8 +1550,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 140
+          "width": 280,
+          "height": 148
         },
         "selected": false,
         "dragging": false
@@ -1560,13 +1560,13 @@ export const samplePipeline = [
         "id": "hue-rotation-17",
         "type": "hue-rotation",
         "position": {
-          "x": -280,
-          "y": 1280
+          "x": -300,
+          "y": 1260
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1575,13 +1575,13 @@ export const samplePipeline = [
         "id": "brightness-18",
         "type": "brightness",
         "position": {
-          "x": -280,
+          "x": -300,
           "y": 1140
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1590,13 +1590,13 @@ export const samplePipeline = [
         "id": "exposure-19",
         "type": "exposure",
         "position": {
-          "x": -280,
-          "y": 1420
+          "x": -300,
+          "y": 1380
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1605,13 +1605,13 @@ export const samplePipeline = [
         "id": "contrast-20",
         "type": "contrast",
         "position": {
-          "x": 20,
-          "y": 1420
+          "x": 0,
+          "y": 1340
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1620,13 +1620,13 @@ export const samplePipeline = [
         "id": "highlights-21",
         "type": "highlights",
         "position": {
-          "x": 20,
-          "y": 1280
+          "x": 0,
+          "y": 1220
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1635,13 +1635,13 @@ export const samplePipeline = [
         "id": "shadows-22",
         "type": "shadows",
         "position": {
-          "x": 20,
-          "y": 1560
+          "x": 0,
+          "y": 1460
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1650,13 +1650,13 @@ export const samplePipeline = [
         "id": "gamma-23",
         "type": "gamma",
         "position": {
-          "x": 20,
-          "y": 1140
+          "x": 0,
+          "y": 1100
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1665,13 +1665,13 @@ export const samplePipeline = [
         "id": "luminosity-24",
         "type": "luminosity",
         "position": {
-          "x": -280,
+          "x": -300,
           "y": 600
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1680,13 +1680,13 @@ export const samplePipeline = [
         "id": "saturation-25",
         "type": "saturation",
         "position": {
-          "x": -280,
-          "y": 1560
+          "x": 0,
+          "y": 1580
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1695,13 +1695,13 @@ export const samplePipeline = [
         "id": "vibrance-26",
         "type": "vibrance",
         "position": {
-          "x": -280,
-          "y": 1000
+          "x": -300,
+          "y": 1020
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1711,12 +1711,12 @@ export const samplePipeline = [
         "type": "vignette",
         "position": {
           "x": 1260,
-          "y": 940
+          "y": 920
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 147
         },
         "selected": false,
         "dragging": false
@@ -1725,13 +1725,13 @@ export const samplePipeline = [
         "id": "grain-28",
         "type": "grain",
         "position": {
-          "x": -280,
+          "x": -300,
           "y": 740
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1740,13 +1740,13 @@ export const samplePipeline = [
         "id": "pop-29",
         "type": "pop",
         "position": {
-          "x": 20,
+          "x": 0,
           "y": 860
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1755,13 +1755,13 @@ export const samplePipeline = [
         "id": "hdr-30",
         "type": "hdr",
         "position": {
-          "x": -280,
+          "x": -300,
           "y": 860
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 148
         },
         "selected": false,
         "dragging": false
@@ -1770,13 +1770,13 @@ export const samplePipeline = [
         "id": "fade-31",
         "type": "fade",
         "position": {
-          "x": 20,
-          "y": 1000
+          "x": 0,
+          "y": 980
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1790,8 +1790,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 434,
-          "height": 286
+          "width": 430,
+          "height": 293
         },
         "selected": false,
         "dragging": false
@@ -1805,8 +1805,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 304,
-          "height": 156
+          "width": 300,
+          "height": 164
         },
         "selected": false,
         "dragging": false
@@ -1822,8 +1822,8 @@ export const samplePipeline = [
           "content": "Hello to Couch Editor"
         },
         "measured": {
-          "width": 378,
-          "height": 272
+          "width": 374,
+          "height": 279
         },
         "selected": false,
         "dragging": false
@@ -1835,12 +1835,10 @@ export const samplePipeline = [
           "x": 1260,
           "y": 360
         },
-        "data": {
-          "selectedPhotoName": "WhatsApp Image 2026-09-03 at 2.41.36 PM.jpeg"
-        },
+        "data": {},
         "measured": {
-          "width": 330,
-          "height": 85
+          "width": 280,
+          "height": 93
         },
         "selected": false,
         "dragging": false
@@ -1854,8 +1852,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 301,
-          "height": 156
+          "width": 297,
+          "height": 164
         },
         "selected": false,
         "dragging": false
@@ -1864,13 +1862,13 @@ export const samplePipeline = [
         "id": "rgb-white-point-1",
         "type": "rgb-white-point",
         "position": {
-          "x": -520,
-          "y": 320
+          "x": -540,
+          "y": 380
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 240
+          "width": 280,
+          "height": 190
         },
         "selected": false,
         "dragging": false
@@ -1879,13 +1877,13 @@ export const samplePipeline = [
         "id": "rgb-black-point-2",
         "type": "rgb-black-point",
         "position": {
-          "x": -560,
+          "x": -600,
           "y": 600
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 240
+          "width": 280,
+          "height": 190
         },
         "selected": false,
         "dragging": false
@@ -1894,13 +1892,13 @@ export const samplePipeline = [
         "id": "rgb-midtones-3",
         "type": "rgb-midtones",
         "position": {
-          "x": -560,
-          "y": 860
+          "x": -600,
+          "y": 820
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 240
+          "width": 280,
+          "height": 190
         },
         "selected": false,
         "dragging": false
@@ -1909,13 +1907,13 @@ export const samplePipeline = [
         "id": "temperature-tint-4",
         "type": "temperature-tint",
         "position": {
-          "x": -560,
-          "y": 1120
+          "x": -600,
+          "y": 1040
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 218
+          "width": 280,
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -1924,13 +1922,13 @@ export const samplePipeline = [
         "id": "split-toning-5",
         "type": "split-toning",
         "position": {
-          "x": -560,
-          "y": 1360
+          "x": -300,
+          "y": 1500
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 222
+          "width": 280,
+          "height": 188
         },
         "selected": false,
         "dragging": false

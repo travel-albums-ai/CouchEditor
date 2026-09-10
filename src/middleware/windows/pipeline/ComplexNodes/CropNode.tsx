@@ -62,17 +62,15 @@ function CropNode({
   return (
     <>
       <InputHandle id="image" />
-      <NodeWrapper type="crop">
+      <NodeWrapper type="crop" helper={<BeforeAfter
+        image2style={{
+          clipPath: `inset(${crop.top}% ${crop.right}% ${crop.bottom}% ${crop.left}%)`,
+        }}
+      />}>
         {slider('top', t('pipelineCropTop'))}
         {slider('bottom', t('pipelineCropBottom'))}
         {slider('left', t('pipelineCropLeft'))}
         {slider('right', t('pipelineCropRight'))}
-
-        <BeforeAfter
-          image2style={{
-            clipPath: `inset(${crop.top}% ${crop.right}% ${crop.bottom}% ${crop.left}%)`,
-          }}
-        />
         <small>{t('pipelineCropDescription')}</small>
       </NodeWrapper>
       <OutputHandle id="image" />
