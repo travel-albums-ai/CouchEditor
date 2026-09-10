@@ -1,3 +1,9 @@
+## [1.31.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.30.1...v1.31.0) (2026-09-10)
+
+### ✨ Features
+
+* enhance scaleImage function to support asynchronous bitmap resizing ([30878ef](https://github.com/travel-albums-ai/CouchEditor/commit/30878efc3f56289c27ab46e04660dea88ca0de3b))
+
 ## [1.30.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.30.0...v1.30.1) (2026-09-10)
 
 ### 🐛 Fixes
