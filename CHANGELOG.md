@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.24.1...v1.25.0) (2026-09-10)
+
+### ✨ Features
+
+* add GPU-based image processing operations and integrate into rendering pipeline ([23e8315](https://github.com/travel-albums-ai/CouchEditor/commit/23e8315e8cdf26fd4db73c12aaf69b565993db42))
+
 ## [1.24.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.24.0...v1.24.1) (2026-09-10)
 
 ### 🐛 Fixes
