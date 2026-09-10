@@ -186,6 +186,389 @@ function createCanvas(
   return [canvas, ctx];
 }
 
+type GpuOperation = {
+  kind:
+    | "invert"
+    | "black-white"
+    | "sepia"
+    | "brightness"
+    | "highlights"
+    | "shadows"
+    | "gamma"
+    | "luminosity"
+    | "exposure"
+    | "contrast"
+    | "saturation"
+    | "vibrance"
+    | "fade"
+    | "vignette"
+    | "grain"
+    | "sharpen"
+    | "pop"
+    | "hdr"
+    | "whites-blacks"
+    | "temperature-tint"
+    | "split-toning"
+    | "rgb-black-point"
+    | "rgb-white-point"
+    | "rgb-midtones"
+    | "hue-rotation";
+  params?: number[];
+};
+
+type GpuRenderer = {
+  canvas: OffscreenCanvas;
+  gl: WebGL2RenderingContext;
+  program: WebGLProgram;
+  positionBuffer: WebGLBuffer;
+  texture: WebGLTexture;
+  positionLocation: number;
+  texCoordLocation: number;
+  operationLocation: WebGLUniformLocation;
+  paramsLocation: WebGLUniformLocation;
+  resolutionLocation: WebGLUniformLocation;
+};
+
+let gpuRenderer: GpuRenderer | null | undefined;
+
+const gpuVertexShader = `#version 300 es
+in vec2 aPosition;
+in vec2 aTexCoord;
+out vec2 vTexCoord;
+
+void main() {
+  gl_Position = vec4(aPosition, 0.0, 1.0);
+  vTexCoord = aTexCoord;
+}`;
+
+const gpuFragmentShader = `#version 300 es
+precision highp float;
+
+uniform sampler2D uImage;
+uniform int uOperation;
+uniform float uParams[8];
+uniform vec2 uResolution;
+in vec2 vTexCoord;
+out vec4 outColor;
+
+const float LUM_R = 0.2126;
+const float LUM_G = 0.7152;
+const float LUM_B = 0.0722;
+
+float lum(vec3 color) {
+  return dot(color, vec3(LUM_R, LUM_G, LUM_B));
+}
+
+float hueToRgb(float p, float q, float t) {
+  t = fract(t);
+  if (t < 1.0 / 6.0) return p + (q - p) * 6.0 * t;
+  if (t < 1.0 / 2.0) return q;
+  if (t < 2.0 / 3.0) return p + (q - p) * (2.0 / 3.0 - t) * 6.0;
+  return p;
+}
+
+float randomNoise(vec2 coordinate) {
+  return fract(sin(dot(coordinate, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+vec3 applyHslRotation(vec3 color, float rotation) {
+  float maxColor = max(color.r, max(color.g, color.b));
+  float minColor = min(color.r, min(color.g, color.b));
+  if (maxColor == minColor) return color;
+
+  float lightness = (maxColor + minColor) * 0.5;
+  float delta = maxColor - minColor;
+  float saturation = lightness > 0.5
+    ? delta / (2.0 - maxColor - minColor)
+    : delta / (maxColor + minColor);
+  float hue;
+  if (maxColor == color.r) hue = (color.g - color.b) / delta + (color.g < color.b ? 6.0 : 0.0);
+  else if (maxColor == color.g) hue = (color.b - color.r) / delta + 2.0;
+  else hue = (color.r - color.g) / delta + 4.0;
+  hue = fract(hue / 6.0 + rotation);
+  float q = lightness < 0.5
+    ? lightness * (1.0 + saturation)
+    : lightness + saturation - lightness * saturation;
+  float p = 2.0 * lightness - q;
+  return vec3(
+    hueToRgb(p, q, hue + 1.0 / 3.0),
+    hueToRgb(p, q, hue),
+    hueToRgb(p, q, hue - 1.0 / 3.0)
+  );
+}
+
+vec3 sampleClamped(ivec2 coordinate) {
+  ivec2 size = ivec2(uResolution);
+  return texelFetch(uImage, clamp(coordinate, ivec2(0), size - 1), 0).rgb;
+}
+
+void main() {
+  vec4 color = texture(uImage, vTexCoord);
+  vec3 rgb = color.rgb;
+  float amount = uParams[0];
+
+  if (uOperation == 1) {
+    rgb = 1.0 - rgb;
+  } else if (uOperation == 2) {
+    rgb = vec3(lum(rgb));
+  } else if (uOperation == 3) {
+    rgb = vec3(
+      dot(rgb, vec3(0.393, 0.769, 0.189)),
+      dot(rgb, vec3(0.349, 0.686, 0.168)),
+      dot(rgb, vec3(0.272, 0.534, 0.131))
+    );
+  } else if (uOperation == 4) {
+    rgb += amount / 255.0;
+  } else if (uOperation == 5 || uOperation == 6) {
+    float weight = uOperation == 5 ? lum(rgb) : 1.0 - lum(rgb);
+    weight *= weight * amount;
+    rgb = amount >= 0.0
+      ? mix(rgb, vec3(1.0), weight)
+      : rgb + rgb * weight;
+  } else if (uOperation == 7) {
+    rgb = pow(max(rgb, vec3(0.0)), vec3(amount));
+  } else if (uOperation == 8) {
+    rgb = mix(rgb, vec3(lum(rgb)), amount);
+  } else if (uOperation == 9) {
+    rgb *= pow(2.0, amount);
+  } else if (uOperation == 10) {
+    float factor = (259.0 * (amount + 255.0)) / (255.0 * (259.0 - amount));
+    rgb = factor * (rgb - vec3(128.0 / 255.0)) + vec3(128.0 / 255.0);
+  } else if (uOperation == 11) {
+    float factor = 1.0 + amount / 100.0;
+    rgb = vec3(lum(rgb)) + (rgb - vec3(lum(rgb))) * factor;
+  } else if (uOperation == 12) {
+    float strength = amount / 100.0;
+    float maxColor = max(rgb.r, max(rgb.g, rgb.b));
+    float average = (rgb.r + rgb.g + rgb.b) / 3.0;
+    float saturation = maxColor == 0.0 ? 0.0 : (maxColor - average) / maxColor;
+    rgb += (rgb - vec3(average)) * (strength * (1.0 - saturation));
+  } else if (uOperation == 13) {
+    float strength = amount / 100.0;
+    rgb = rgb * (1.0 - 0.3 * strength) + vec3(28.0 / 255.0 * strength);
+  } else if (uOperation == 14) {
+    float strength = amount / 100.0;
+    if (strength > 0.0) {
+      vec2 centered = (gl_FragCoord.xy - uResolution * 0.5);
+      float maxDistance = dot(uResolution * 0.5, uResolution * 0.5);
+      float falloff = 1.0 - strength * pow(dot(centered, centered), 1.1) / pow(maxDistance, 1.1);
+      rgb = mix(vec3(uParams[1], uParams[2], uParams[3]), rgb, falloff);
+    }
+  } else if (uOperation == 15) {
+    if (amount > 0.0) {
+      float noise = (randomNoise(gl_FragCoord.xy) - 0.5) * (amount / 100.0 * 35.0) / 255.0;
+      rgb += vec3(noise);
+    }
+  } else if (uOperation == 16) {
+    if (amount > 0.0) {
+      float strength = amount / 100.0;
+      float contrastFactor = 1.0 + 0.5 * strength;
+      float saturationFactor = 1.0 + 0.6 * strength;
+      rgb = contrastFactor * (rgb - vec3(128.0 / 255.0)) + vec3(128.0 / 255.0);
+      rgb = vec3(lum(rgb)) + (rgb - vec3(lum(rgb))) * saturationFactor;
+    }
+  } else if (uOperation == 17) {
+    rgb = clamp(rgb + vec3(amount / 255.0), 0.0, 1.0);
+    rgb = clamp(rgb - vec3(uParams[1] / 255.0), 0.0, 1.0);
+  } else if (uOperation == 18) {
+    rgb += vec3(amount * 0.6 + uParams[1] * 0.15, uParams[1] * 0.5, -amount * 0.6 + uParams[1] * 0.15) / 255.0;
+  } else if (uOperation == 19) {
+    float pixelLum = lum(rgb);
+    float shadowWeight = (1.0 - pixelLum) * uParams[6];
+    float highlightWeight = pixelLum * uParams[6];
+    rgb += (vec3(uParams[0], uParams[1], uParams[2]) - vec3(128.0)) * shadowWeight / 255.0;
+    rgb += (vec3(uParams[3], uParams[4], uParams[5]) - vec3(128.0)) * highlightWeight / 255.0;
+  } else if (uOperation == 20) {
+    rgb = (rgb * 255.0 - vec3(uParams[0], uParams[1], uParams[2])) /
+      max(vec3(1.0), vec3(255.0) - vec3(uParams[0], uParams[1], uParams[2])) / 255.0;
+  } else if (uOperation == 21) {
+    rgb = rgb * 255.0 / max(vec3(1.0), vec3(uParams[0], uParams[1], uParams[2]));
+  } else if (uOperation == 22) {
+    rgb = pow(max(rgb, vec3(0.0)), vec3(uParams[0], uParams[1], uParams[2]));
+  } else if (uOperation == 23) {
+    if (amount > 0.0) {
+      float strength = amount / 100.0;
+      vec3 neighbors = sampleClamped(ivec2(gl_FragCoord.xy) + ivec2(-1, 0))
+        + sampleClamped(ivec2(gl_FragCoord.xy) + ivec2(1, 0))
+        + sampleClamped(ivec2(gl_FragCoord.xy) + ivec2(0, -1))
+        + sampleClamped(ivec2(gl_FragCoord.xy) + ivec2(0, 1));
+      rgb = rgb * (1.0 + 4.0 * strength) - neighbors * strength;
+    }
+  } else if (uOperation == 24) {
+    if (amount > 0.0) {
+      float strength = amount / 100.0;
+      float radius = clamp(uParams[1], 0.0, 12.0);
+      vec3 average = vec3(0.0);
+      float currentLum = lum(rgb);
+      float sampleCount = 0.0;
+      for (int y = -12; y <= 12; y++) {
+        for (int x = -12; x <= 12; x++) {
+          if (float(abs(x)) <= radius && float(abs(y)) <= radius) {
+            average += vec3(lum(sampleClamped(ivec2(gl_FragCoord.xy) + ivec2(x, y))));
+            sampleCount += 1.0;
+          }
+        }
+      }
+      average /= sampleCount;
+      rgb += (currentLum - average) * (strength * 1.5);
+    }
+  } else if (uOperation == 25) {
+    rgb = applyHslRotation(rgb, amount / 360.0);
+  }
+
+  outColor = vec4(clamp(rgb, 0.0, 1.0), color.a);
+}`;
+
+const gpuOperationIds: Record<GpuOperation["kind"], number> = {
+  invert: 1,
+  "black-white": 2,
+  sepia: 3,
+  brightness: 4,
+  highlights: 5,
+  shadows: 6,
+  gamma: 7,
+  luminosity: 8,
+  exposure: 9,
+  contrast: 10,
+  saturation: 11,
+  vibrance: 12,
+  fade: 13,
+  vignette: 14,
+  grain: 15,
+  sharpen: 23,
+  pop: 16,
+  hdr: 24,
+  "whites-blacks": 17,
+  "temperature-tint": 18,
+  "split-toning": 19,
+  "rgb-black-point": 20,
+  "rgb-white-point": 21,
+  "rgb-midtones": 22,
+  "hue-rotation": 25,
+};
+
+function compileShader(
+  gl: WebGL2RenderingContext,
+  type: number,
+  source: string
+): WebGLShader {
+  const shader = gl.createShader(type);
+  if (!shader) throw new Error("Could not create GPU shader");
+
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    const log = gl.getShaderInfoLog(shader) ?? "Unknown shader error";
+    gl.deleteShader(shader);
+    throw new Error(log);
+  }
+
+  return shader;
+}
+
+function getGpuRenderer(): GpuRenderer | null {
+  if (gpuRenderer !== undefined) return gpuRenderer;
+
+  try {
+    const canvas = new OffscreenCanvas(1, 1);
+    const gl = canvas.getContext("webgl2", { premultipliedAlpha: false });
+    if (!gl) {
+      gpuRenderer = null;
+      return gpuRenderer;
+    }
+
+    const vertexShader = compileShader(gl, gl.VERTEX_SHADER, gpuVertexShader);
+    const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, gpuFragmentShader);
+    const program = gl.createProgram();
+    if (!program) throw new Error("Could not create GPU program");
+
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    gl.deleteShader(vertexShader);
+    gl.deleteShader(fragmentShader);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      throw new Error(gl.getProgramInfoLog(program) ?? "Could not link GPU program");
+    }
+
+    const positionBuffer = gl.createBuffer();
+    const texture = gl.createTexture();
+    const operationLocation = gl.getUniformLocation(program, "uOperation");
+    const paramsLocation = gl.getUniformLocation(program, "uParams");
+    const resolutionLocation = gl.getUniformLocation(program, "uResolution");
+    if (!positionBuffer || !texture || !operationLocation || !paramsLocation || !resolutionLocation) {
+      throw new Error("Could not initialize GPU resources");
+    }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([
+        -1, -1, 0, 0,
+        1, -1, 1, 0,
+        -1, 1, 0, 1,
+        1, 1, 1, 1,
+      ]),
+      gl.STATIC_DRAW
+    );
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    gpuRenderer = {
+      canvas,
+      gl,
+      program,
+      positionBuffer,
+      texture,
+      positionLocation: gl.getAttribLocation(program, "aPosition"),
+      texCoordLocation: gl.getAttribLocation(program, "aTexCoord"),
+      operationLocation,
+      paramsLocation,
+      resolutionLocation,
+    };
+  } catch {
+    gpuRenderer = null;
+  }
+
+  return gpuRenderer;
+}
+
+function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerImage | null {
+  const renderer = getGpuRenderer();
+  if (!renderer) return null;
+
+  const { canvas, gl } = renderer;
+  canvas.width = source.width;
+  canvas.height = source.height;
+  gl.viewport(0, 0, source.width, source.height);
+  gl.useProgram(renderer.program);
+  gl.bindBuffer(gl.ARRAY_BUFFER, renderer.positionBuffer);
+  gl.enableVertexAttribArray(renderer.positionLocation);
+  gl.vertexAttribPointer(renderer.positionLocation, 2, gl.FLOAT, false, 16, 0);
+  gl.enableVertexAttribArray(renderer.texCoordLocation);
+  gl.vertexAttribPointer(renderer.texCoordLocation, 2, gl.FLOAT, false, 16, 8);
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, renderer.texture);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source.bitmap);
+  gl.uniform1i(renderer.operationLocation, gpuOperationIds[operation.kind]);
+  gl.uniform1fv(renderer.paramsLocation, new Float32Array(operation.params ?? []));
+  gl.uniform2f(renderer.resolutionLocation, source.width, source.height);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+  if (gl.getError() !== gl.NO_ERROR) return null;
+
+  return {
+    bitmap: canvas.transferToImageBitmap(),
+    width: source.width,
+    height: source.height,
+    name: source.name,
+  };
+}
+
 // Renders a source image, optionally applying a per-pixel transform,
 // and hands back the canvas backing store as an ImageBitmap (no copy).
 function renderImage(
@@ -195,8 +578,14 @@ function renderImage(
     canvas: OffscreenCanvas,
     source: WorkerImage
   ) => void,
-  transformPixels?: Stage
+  transformPixels?: Stage,
+  gpuOperation?: GpuOperation
 ): WorkerImage {
+  if (gpuOperation) {
+    const gpuImage = renderGpuImage(source, gpuOperation);
+    if (gpuImage) return gpuImage;
+  }
+
   const [canvas, ctx] = createCanvas(source.width, source.height);
 
   draw(ctx, canvas, source);
@@ -223,10 +612,11 @@ function renderImages(
     canvas: OffscreenCanvas,
     source: WorkerImage
   ) => void,
-  transformPixels?: Stage
+  transformPixels?: Stage,
+  gpuOperation?: GpuOperation
 ): Promise<WorkerImage[]> {
   return mapWithConcurrency(sources, evaluationId, (source) =>
-    Promise.resolve(renderImage(source, draw, transformPixels))
+    Promise.resolve(renderImage(source, draw, transformPixels, gpuOperation))
   );
 }
 
@@ -563,7 +953,10 @@ const drawSource = (
 ) => ctx.drawImage(source.bitmap, 0, 0);
 
 // Node definition for a pixel-transform stage with no parameters (invert).
-function stageNode(createStage: () => Stage): PipelineNodeDefinition {
+function stageNode(
+  createStage: () => Stage,
+  gpuOperation?: GpuOperation
+): PipelineNodeDefinition {
   return {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -574,7 +967,8 @@ function stageNode(createStage: () => Stage): PipelineNodeDefinition {
         sources,
         inputs.evaluationId as number,
         drawSource,
-        createStage()
+        createStage(),
+        gpuOperation
       );
 
       return { image };
@@ -585,7 +979,8 @@ function stageNode(createStage: () => Stage): PipelineNodeDefinition {
 // Node definition for a pixel-transform stage driven by a slider amount.
 function amountStageNode(
   createStage: (amount: number) => Stage,
-  defaultAmount: number
+  defaultAmount: number,
+  createGpuOperation?: (amount: number) => GpuOperation
 ): PipelineNodeDefinition {
   return {
     async execute(inputs) {
@@ -599,7 +994,8 @@ function amountStageNode(
         sources,
         inputs.evaluationId as number,
         drawSource,
-        createStage(amount)
+        createStage(amount),
+        createGpuOperation?.(amount)
       );
 
       return { image };
@@ -610,7 +1006,8 @@ function amountStageNode(
 function twoAmountStageNode(
   createStage: (first: number, second: number) => Stage,
   firstKey: string,
-  secondKey: string
+  secondKey: string,
+  createGpuOperation?: (first: number, second: number) => GpuOperation
 ): PipelineNodeDefinition {
   return {
     async execute(inputs) {
@@ -624,7 +1021,8 @@ function twoAmountStageNode(
           sources,
           inputs.evaluationId as number,
           drawSource,
-          createStage(first, second)
+          createStage(first, second),
+          createGpuOperation?.(first, second)
         ),
       };
     },
@@ -633,7 +1031,8 @@ function twoAmountStageNode(
 
 function threeAmountStageNode(
   createStage: (first: number, second: number, third: number) => Stage,
-  defaultAmount: number
+  defaultAmount: number,
+  createGpuOperation?: (first: number, second: number, third: number) => GpuOperation
 ): PipelineNodeDefinition {
   return {
     async execute(inputs) {
@@ -648,7 +1047,8 @@ function threeAmountStageNode(
           sources,
           inputs.evaluationId as number,
           drawSource,
-          createStage(red, green, blue)
+          createStage(red, green, blue),
+          createGpuOperation?.(red, green, blue)
         ),
       };
     },
@@ -929,9 +1329,9 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
-  invert: stageNode(invertStage),
-  "black-white": stageNode(blackAndWhiteStage),
-  sepia: stageNode(sepiaStage),
+  invert: stageNode(invertStage, { kind: "invert" }),
+  "black-white": stageNode(blackAndWhiteStage, { kind: "black-white" }),
+  sepia: stageNode(sepiaStage, { kind: "sepia" }),
 
   lut: {
     async execute(inputs) {
@@ -1055,15 +1455,15 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
-  brightness: amountStageNode(brightnessStage, 0),
-  highlights: amountStageNode(highlightsStage, 0),
-  shadows: amountStageNode(shadowsStage, 0),
-  gamma: amountStageNode(gammaStage, 1),
-  luminosity: amountStageNode(luminosityStage, 0),
-  exposure: amountStageNode(exposureStage, 0),
-  contrast: amountStageNode(contrastStage, 0),
-  saturation: amountStageNode(saturationStage, 0),
-  vibrance: amountStageNode(vibranceStage, 0),
+  brightness: amountStageNode(brightnessStage, 0, (amount) => ({ kind: "brightness", params: [amount] })),
+  highlights: amountStageNode(highlightsStage, 0, (amount) => ({ kind: "highlights", params: [amount / 100] })),
+  shadows: amountStageNode(shadowsStage, 0, (amount) => ({ kind: "shadows", params: [amount / 100] })),
+  gamma: amountStageNode(gammaStage, 1, (amount) => ({ kind: "gamma", params: [amount] })),
+  luminosity: amountStageNode(luminosityStage, 0, (amount) => ({ kind: "luminosity", params: [amount] })),
+  exposure: amountStageNode(exposureStage, 0, (amount) => ({ kind: "exposure", params: [amount] })),
+  contrast: amountStageNode(contrastStage, 0, (amount) => ({ kind: "contrast", params: [amount] })),
+  saturation: amountStageNode(saturationStage, 0, (amount) => ({ kind: "saturation", params: [amount] })),
+  vibrance: amountStageNode(vibranceStage, 0, (amount) => ({ kind: "vibrance", params: [amount] })),
   vignette: {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1076,14 +1476,15 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
           sources,
           inputs.evaluationId as number,
           drawSource,
-          vignetteStage(amount, color)
+          vignetteStage(amount, color),
+          { kind: "vignette", params: [amount, color[0] / 255, color[1] / 255, color[2] / 255] }
         ),
       };
     },
   },
-  grain: amountStageNode(grainStage, 0),
-  sharpen: amountStageNode(sharpenStage, 0),
-  pop: amountStageNode(popStage, 0),
+  grain: amountStageNode(grainStage, 0, (amount) => ({ kind: "grain", params: [amount] })),
+  sharpen: amountStageNode(sharpenStage, 0, (amount) => ({ kind: "sharpen", params: [amount] })),
+  pop: amountStageNode(popStage, 0, (amount) => ({ kind: "pop", params: [amount] })),
   hdr: {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1096,18 +1497,19 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
           sources,
           inputs.evaluationId as number,
           drawSource,
-          hdrEffectStage(amount, radius)
+          hdrEffectStage(amount, radius),
+          { kind: "hdr", params: [amount, radius] }
         ),
       };
     },
   },
-  "hue-rotation": amountStageNode(hueRotationStage, 0),
-  fade: amountStageNode(fadeStage, 0),
-  "whites-blacks": twoAmountStageNode(whitesBlacksStage, "whites", "blacks"),
-  "temperature-tint": twoAmountStageNode(temperatureTintStage, "temperature", "tint"),
-  "rgb-black-point": threeAmountStageNode(rgbBlackPointStage, 0),
-  "rgb-white-point": threeAmountStageNode(rgbWhitePointStage, 255),
-  "rgb-midtones": threeAmountStageNode(rgbMidtonesStage, 1),
+  "hue-rotation": amountStageNode(hueRotationStage, 0, (amount) => ({ kind: "hue-rotation", params: [amount] })),
+  fade: amountStageNode(fadeStage, 0, (amount) => ({ kind: "fade", params: [amount] })),
+  "whites-blacks": twoAmountStageNode(whitesBlacksStage, "whites", "blacks", (whites, blacks) => ({ kind: "whites-blacks", params: [whites, blacks] })),
+  "temperature-tint": twoAmountStageNode(temperatureTintStage, "temperature", "tint", (temperature, tint) => ({ kind: "temperature-tint", params: [temperature, tint] })),
+  "rgb-black-point": threeAmountStageNode(rgbBlackPointStage, 0, (red, green, blue) => ({ kind: "rgb-black-point", params: [red, green, blue] })),
+  "rgb-white-point": threeAmountStageNode(rgbWhitePointStage, 255, (red, green, blue) => ({ kind: "rgb-white-point", params: [red, green, blue] })),
+  "rgb-midtones": threeAmountStageNode(rgbMidtonesStage, 1, (red, green, blue) => ({ kind: "rgb-midtones", params: [red, green, blue] })),
   "split-toning": {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1115,7 +1517,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       const shadow = (inputs.shadowTint as [number, number, number] | undefined) ?? [48, 64, 96];
       const highlight = (inputs.highlightTint as [number, number, number] | undefined) ?? [255, 224, 176];
       const strength = ((inputs.strength as number | undefined) ?? 50) / 100;
-      return { image: await renderImages(sources, inputs.evaluationId as number, drawSource, splitToningStage(...shadow, ...highlight, strength)) };
+      return { image: await renderImages(sources, inputs.evaluationId as number, drawSource, splitToningStage(...shadow, ...highlight, strength), { kind: "split-toning", params: [...shadow, ...highlight, strength] }) };
     },
   },
 
