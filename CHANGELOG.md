@@ -1,3 +1,9 @@
+## [1.32.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.31.0...v1.32.0) (2026-09-10)
+
+### ✨ Features
+
+* add PipelineStageTiming component to LutNode and improve duration display format ([47ec682](https://github.com/travel-albums-ai/CouchEditor/commit/47ec6825e5c8d407f1ac5537df00de72305db844))
+
 ## [1.31.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.30.1...v1.31.0) (2026-09-10)
 
 ### ✨ Features
