@@ -42,7 +42,8 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           borderColor: alpha(theme.palette.divider, 0.3),
 
         }}>
-          <Workflow size={16} /> Editor
+          <Workflow size={16} />
+          <Typography variant="subtitle2">Editor</Typography>
         </Box>
         <Box sx={{
           display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
@@ -54,7 +55,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           },
         }}>
           <GalleryHorizontalEnd size={16} />
-          Templates
+          <Typography variant="subtitle2" sx={{ mr: 2 }}>Templates</Typography>
           <PipelineSelector
             currentPipelineId={currentPipelineId}
             pipelines={pipelines}
@@ -70,7 +71,8 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           },
 
         }}>
-          <Users2 size={16} /> Community
+          <Users2 size={16} />
+          <Typography variant="subtitle2">Community</Typography>
           <Box sx={{ color: 'text.primary'}}>
             <SolidChip label="Coming soon..." />
           </Box>
