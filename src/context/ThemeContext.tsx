@@ -121,7 +121,7 @@ export function ThemeContextProvider({ children }: Props) {
 
             '*': {
               scrollbarWidth: 'thin',
-              scrollbarColor: `${theme.palette.primary.main}55 transparent`,
+              scrollbarColor: `${theme.palette.primary.main}25 transparent`,
             },
 
             '*::-webkit-scrollbar': {
@@ -135,18 +135,18 @@ export function ThemeContextProvider({ children }: Props) {
             },
 
             '*::-webkit-scrollbar-thumb': {
-              background: `${theme.palette.primary.main}55`,
+              background: `${theme.palette.primary.main}35`,
               borderRadius: 999,
               border: '4px solid transparent',
               backgroundClip: 'padding-box',
             },
 
             '*::-webkit-scrollbar-thumb:hover': {
-              background: `${theme.palette.primary.main}88`,
+              background: `${theme.palette.primary.main}35`,
             },
 
             '*::-webkit-scrollbar-thumb:active': {
-              background: `${theme.palette.primary.main}AA`,
+              background: `${theme.palette.primary.main}35`,
             },
           })}
         />
