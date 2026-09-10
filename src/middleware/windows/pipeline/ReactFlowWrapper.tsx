@@ -206,7 +206,7 @@ function Pipeline() {
     if (!fitted) return;
 
     const viewport = getViewport();
-    setViewport({ ...viewport, x: viewport.x + 150 });
+    setViewport({ ...viewport, x: viewport.x + 170, zoom: viewport.zoom - 0.05 });
   }, [fitView, getViewport, setViewport]);
 
   useEffect(() => {

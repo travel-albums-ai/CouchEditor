@@ -2,7 +2,7 @@ import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeId, useReactFlow } from '@xyflow/react';
-import { Copy, Trash2 } from 'lucide-react';
+import { Copy, RotateCcw, Trash2 } from 'lucide-react';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
@@ -19,12 +19,40 @@ export default function NodeWrapper({
   tools,
 }: NodeWrapperProps) {
   const nodeId = useNodeId();
-  const { addNodes, deleteElements, getNode, getNodes } = useReactFlow();
+  const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
 
   const deleteNode = () => {
     if (nodeId) {
       void deleteElements({ nodes: [{ id: nodeId }] });
     }
+  };
+
+  const resetNode = () => {
+    if (!nodeId) return;
+
+    const node = getNode(nodeId);
+    if (!node) return;
+
+    const existingIds = new Set(getNodes().map(existingNode => existingNode.id));
+    const baseId = `${nodeId}-reset`;
+    let resetId = baseId;
+    let suffix = 2;
+
+    while (existingIds.has(resetId)) {
+      resetId = `${baseId}-${suffix++}`;
+    }
+
+    setNodes((current) => current.map((currentNode) =>
+      currentNode.id === nodeId
+        ? { ...currentNode, id: resetId, data: {}, selected: true }
+        : currentNode
+    ));
+    setEdges((current) => current.map((edge) => ({
+      ...edge,
+      source: edge.source === nodeId ? resetId : edge.source,
+      target: edge.target === nodeId ? resetId : edge.target,
+    })));
+    window.dispatchEvent(new CustomEvent('pipeline:changed'));
   };
 
   const cloneNode = () => {
@@ -73,6 +101,11 @@ export default function NodeWrapper({
           <Tooltip title="Clone node">
             <IconButton size="small" aria-label="Clone node" onClick={cloneNode}>
               <Copy size={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Reset node">
+            <IconButton size="small" aria-label="Reset node" onClick={resetNode}>
+              <RotateCcw size={16} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete node">
