@@ -1,4 +1,4 @@
-import { alpha, Box, FormControl, MenuItem, Select, Stack, TextField, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Stack, TextField, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Download, GalleryHorizontalEnd, Save, Trash2, Upload, Users2, Workflow } from 'lucide-react';
+import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -29,13 +29,11 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import LoadingBar from '@/components/LoadingBar';
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
-import SolidChip from '@/components/SolidChip';
 import StatusBar from '@/components/StatusBar';
 import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
-import { MinimapPipeline } from '@/middleware/windows/pipeline/components/MinimapPipeline';
+import Header from '@/middleware/windows/pipeline/components/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
@@ -666,90 +664,11 @@ function Pipeline() {
 
   return (
     <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
-      <Box sx={{ p: 2, py: 1.5, bgcolor: 'background.paper', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-        boxShadow: theme => `0px 4px 6px ${theme.palette.divider}`,
-        zIndex: 10 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <img
-            src="./couchLogoMini.png"
-            alt="Logo"
-            width={45}
-            height={30}
-            style={{ width: 45, height: 30 }}
-            fetchPriority="high"
-          />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography sx={{ fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch Editor</Typography>
-              <SolidChip label="Beta" />
-            </Box>
-            <Typography variant="caption" >Drag. Slide. See.</Typography>
-          </Box>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: 'transparent',
-            border: 1,
-            borderColor: alpha(theme.palette.divider, 0.3),
-
-          }}>
-            <Workflow size={16} /> Editor
-          </Box>
-          <Box sx={{
-            display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
-            bgcolor: alpha(theme.palette.primary.main, 0.05),
-            border: 1,
-            borderColor: alpha(theme.palette.primary.main, 0.3),
-            '&:hover': {
-              bgcolor: alpha(theme.palette.primary.main, 0.1),
-            },
-          }}>
-            <GalleryHorizontalEnd size={16} />
-            Templates
-            <FormControl id="pipeline-loader" size="small" sx={{ minWidth: 250 }}>
-              <Select
-                size="small"
-                value={currentPipelineId}
-                displayEmpty
-                sx={{ height: 36, border: 0, borderColor: 'transparent' }}
-                onChange={(event) => loadPipeline(event.target.value)}
-                renderValue={(value) => value
-                  ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
-                  : 'Load pipeline'}
-                aria-label="Load pipeline"
-              >
-                <MenuItem value="" disabled>Load pipeline</MenuItem>
-                {pipelines.map((pipeline) => (
-                  <MenuItem key={pipeline.id} value={pipeline.id}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
-                      <MinimapPipeline pipeline={pipeline} />
-                      {pipeline.name}
-                    </Box>
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'secondary.main', borderRadius: 2, p: 2, height: 42,
-            bgcolor: alpha(theme.palette.secondary.main, 0.15),
-            border: 1,
-            borderColor: alpha(theme.palette.secondary.main, 0.3),
-            '&:hover': {
-              bgcolor: alpha(theme.palette.secondary.main, 0.2),
-            },
-
-          }}>
-            <Users2 size={16} /> Community
-            <Box sx={{ color: 'text.primary'}}>
-              <SolidChip label="Coming soon..." />
-            </Box>
-          </Box>
-        </Box>
-        <GeneralRegistryToolbar
-          fullWidth={false}
-          noGhost={true}
-          group="header"
-        />
-      </Box>
+      <Header
+        currentPipelineId={currentPipelineId}
+        pipelines={pipelines}
+        loadPipeline={loadPipeline}
+      />
       <div
         className="reactflow-canvas"
         onDragOver={onDragOver}
