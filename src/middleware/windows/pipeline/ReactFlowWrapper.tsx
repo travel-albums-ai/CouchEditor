@@ -685,7 +685,7 @@ function Pipeline() {
                 size="small"
                 value={currentPipelineId}
                 displayEmpty
-                sx={{ height: 32}}
+                sx={{ height: 36,  borderColor: alpha(theme.palette.primary.main, 0.3) }}
                 onChange={(event) => loadPipeline(event.target.value)}
                 renderValue={(value) => value
                   ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
@@ -753,6 +753,14 @@ function Pipeline() {
 
         <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-header-left">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <GenericToggleButtonGroup id="pipeline-actions" variant="standard" items={[
+              {
+                tooltip: 'New pipeline',
+                icon: <CirclePlus /> ,
+                onClick: () => clearWorkspace(),
+                title: '',
+              },
+            ] satisfies GenericToggleButtonProps[]} />
             <TextField
               id="pipeline-name"
               size="small"
@@ -765,12 +773,6 @@ function Pipeline() {
               sx={{ maxWidth: 400, minWidth: 300 }}
             />
             <GenericToggleButtonGroup id="pipeline-actions" items={[
-              {
-                tooltip: 'New pipeline',
-                icon: <CirclePlus /> ,
-                onClick: () => clearWorkspace(),
-                title: '',
-              },
               {
                 tooltip: 'Save pipeline',
                 icon: <Save /> ,

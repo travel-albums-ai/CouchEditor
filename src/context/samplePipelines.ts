@@ -587,8 +587,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1044
         },
         "selected": false,
         "dragging": false
@@ -598,12 +598,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": -220,
-          "y": 1100
+          "y": 1140
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -613,12 +613,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": 440,
-          "y": 1100
+          "y": 1140
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -628,12 +628,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": 1100,
-          "y": 1100
+          "y": 1140
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -649,8 +649,8 @@ export const samplePipeline = [
           "amount": 81
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 147
         },
         "selected": false,
         "dragging": false
@@ -666,8 +666,8 @@ export const samplePipeline = [
           "amount": 68
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 148
         },
         "selected": false,
         "dragging": false
@@ -683,8 +683,8 @@ export const samplePipeline = [
           "amount": 68
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -698,8 +698,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -713,8 +713,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 434,
-          "height": 286
+          "width": 430,
+          "height": 293
         },
         "selected": false,
         "dragging": false
@@ -723,13 +723,13 @@ export const samplePipeline = [
         "id": "photo-histogram-4",
         "type": "photo-histogram",
         "position": {
-          "x": 1440,
-          "y": 780
+          "x": 1460,
+          "y": 820
         },
         "data": {},
         "measured": {
-          "width": 434,
-          "height": 286
+          "width": 430,
+          "height": 293
         },
         "selected": false,
         "dragging": false
@@ -746,8 +746,8 @@ export const samplePipeline = [
           "tint": 24
         },
         "measured": {
-          "width": 250,
-          "height": 218
+          "width": 280,
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -763,8 +763,8 @@ export const samplePipeline = [
           "strength": 100
         },
         "measured": {
-          "width": 250,
-          "height": 222
+          "width": 280,
+          "height": 188
         },
         "selected": false,
         "dragging": false
@@ -781,8 +781,8 @@ export const samplePipeline = [
           "green": 0.71
         },
         "measured": {
-          "width": 250,
-          "height": 240
+          "width": 280,
+          "height": 190
         },
         "selected": false,
         "dragging": false
@@ -791,13 +791,13 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy",
         "type": "viewer-single",
         "position": {
-          "x": -420,
+          "x": -360,
           "y": 240
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -806,13 +806,13 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy-copy",
         "type": "viewer-single",
         "position": {
-          "x": -420,
+          "x": -360,
           "y": -460
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -821,13 +821,13 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy-copy-copy",
         "type": "viewer-single",
         "position": {
-          "x": 240,
+          "x": 320,
           "y": 240
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -846,8 +846,8 @@ export const samplePipeline = [
           "right": 17
         },
         "measured": {
-          "width": 250,
-          "height": 331
+          "width": 280,
+          "height": 271
         },
         "selected": false,
         "dragging": false
@@ -863,8 +863,8 @@ export const samplePipeline = [
           "amount": 213
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -878,8 +878,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -893,8 +893,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 280,
+          "height": 95
         },
         "selected": false,
         "dragging": false
@@ -908,8 +908,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 484,
-          "height": 139
+          "width": 480,
+          "height": 143
         },
         "selected": false,
         "dragging": false
@@ -923,8 +923,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -938,8 +938,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -949,14 +949,14 @@ export const samplePipeline = [
         "type": "vignette",
         "position": {
           "x": -2520,
-          "y": -460
+          "y": -500
         },
         "data": {
           "amount": 100
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 147
         },
         "selected": false,
         "dragging": false
@@ -972,8 +972,8 @@ export const samplePipeline = [
           "amount": 93
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 148
         },
         "selected": false,
         "dragging": false
@@ -983,14 +983,14 @@ export const samplePipeline = [
         "type": "pop",
         "position": {
           "x": -2500,
-          "y": 1240
+          "y": 1280
         },
         "data": {
           "amount": 100
         },
         "measured": {
-          "width": 250,
-          "height": 102
+          "width": 280,
+          "height": 104
         },
         "selected": false,
         "dragging": false
@@ -1000,12 +1000,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": -2500,
-          "y": 1380
+          "y": 1420
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -1015,12 +1015,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": -2500,
-          "y": 520
+          "y": 560
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -1034,8 +1034,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -1045,16 +1045,16 @@ export const samplePipeline = [
         "type": "information",
         "position": {
           "x": -1580,
-          "y": 1560
+          "y": 1580
         },
         "data": {
           "content": "Start here !"
         },
         "measured": {
-          "width": 378,
-          "height": 272
+          "width": 374,
+          "height": 279
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       }
     ],
@@ -1937,5 +1937,636 @@ export const samplePipeline = [
     "edges": [],
     "id": "pipeline-1788796499557-424bey",
     "name": "Demo"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-1",
+        "type": "source",
+        "position": {
+          "x": -580,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1044
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rotate-3",
+        "type": "rotate",
+        "position": {
+          "x": 640,
+          "y": 300
+        },
+        "data": {
+          "amount": 162
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "flip-4",
+        "type": "flip",
+        "position": {
+          "x": 640,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 95
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "mirror-5",
+        "type": "mirror",
+        "position": {
+          "x": 640,
+          "y": 580
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 95
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "exposure-7",
+        "type": "exposure",
+        "position": {
+          "x": 640,
+          "y": 720
+        },
+        "data": {
+          "amount": 1
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-8",
+        "type": "brightness",
+        "position": {
+          "x": 640,
+          "y": 860
+        },
+        "data": {
+          "amount": 34
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-9",
+        "type": "contrast",
+        "position": {
+          "x": 640,
+          "y": 1000
+        },
+        "data": {
+          "amount": 16
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "highlights-10",
+        "type": "highlights",
+        "position": {
+          "x": 640,
+          "y": 1280
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "shadows-11",
+        "type": "shadows",
+        "position": {
+          "x": 640,
+          "y": 1420
+        },
+        "data": {
+          "amount": 32
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "gamma-12",
+        "type": "gamma",
+        "position": {
+          "x": 640,
+          "y": 1140
+        },
+        "data": {
+          "amount": 2.22
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rescale-13",
+        "type": "rescale",
+        "position": {
+          "x": 80,
+          "y": 280
+        },
+        "data": {
+          "scale": 0.5
+        },
+        "measured": {
+          "width": 476,
+          "height": 143
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "gamma-14",
+        "type": "gamma",
+        "position": {
+          "x": 640,
+          "y": 1560
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "luminosity-15",
+        "type": "luminosity",
+        "position": {
+          "x": 1040,
+          "y": 300
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "whites-blacks-16",
+        "type": "whites-blacks",
+        "position": {
+          "x": 1040,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 192
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-black-point-17",
+        "type": "rgb-black-point",
+        "position": {
+          "x": 1040,
+          "y": 660
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 190
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "saturation-18",
+        "type": "saturation",
+        "position": {
+          "x": 1040,
+          "y": 880
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "vibrance-19",
+        "type": "vibrance",
+        "position": {
+          "x": 1040,
+          "y": 1020
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "hue-rotation-20",
+        "type": "hue-rotation",
+        "position": {
+          "x": 1040,
+          "y": 1160
+        },
+        "data": {
+          "amount": -61
+        },
+        "measured": {
+          "width": 280,
+          "height": 104
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "temperature-tint-21",
+        "type": "temperature-tint",
+        "position": {
+          "x": 1040,
+          "y": 1300
+        },
+        "data": {
+          "temperature": -48
+        },
+        "measured": {
+          "width": 280,
+          "height": 146
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "split-toning-22",
+        "type": "split-toning",
+        "position": {
+          "x": 1060,
+          "y": 1500
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 188
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-23-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 1400,
+          "y": 380
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "selected-photo-1",
+        "type": "selected-photo",
+        "position": {
+          "x": -100,
+          "y": 160
+        },
+        "data": {
+          "selectedPhotoName": "IMG_20220731_133328.jpg"
+        },
+        "measured": {
+          "width": 280,
+          "height": 93
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "rescale-13",
+        "sourceHandle": "image",
+        "target": "rotate-3",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rescale-13image-rotate-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rotate-3",
+        "sourceHandle": "image",
+        "target": "flip-4",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rotate-3image-flip-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "flip-4",
+        "sourceHandle": "image",
+        "target": "mirror-5",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__flip-4image-mirror-5image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "mirror-5",
+        "sourceHandle": "image",
+        "target": "exposure-7",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__mirror-5image-exposure-7image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "exposure-7",
+        "sourceHandle": "image",
+        "target": "brightness-8",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__exposure-7image-brightness-8image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-8",
+        "sourceHandle": "image",
+        "target": "contrast-9",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-8image-contrast-9image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-9",
+        "sourceHandle": "image",
+        "target": "gamma-12",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-9image-gamma-12image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "gamma-12",
+        "sourceHandle": "image",
+        "target": "highlights-10",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__gamma-12image-highlights-10image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "highlights-10",
+        "sourceHandle": "image",
+        "target": "shadows-11",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__highlights-10image-shadows-11image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "shadows-11",
+        "sourceHandle": "image",
+        "target": "gamma-14",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__shadows-11image-gamma-14image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "luminosity-15",
+        "sourceHandle": "image",
+        "target": "whites-blacks-16",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__luminosity-15image-whites-blacks-16image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "whites-blacks-16",
+        "sourceHandle": "image",
+        "target": "rgb-black-point-17",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__whites-blacks-16image-rgb-black-point-17image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rgb-black-point-17",
+        "sourceHandle": "image",
+        "target": "saturation-18",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rgb-black-point-17image-saturation-18image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "saturation-18",
+        "sourceHandle": "image",
+        "target": "vibrance-19",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__saturation-18image-vibrance-19image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "vibrance-19",
+        "sourceHandle": "image",
+        "target": "hue-rotation-20",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__vibrance-19image-hue-rotation-20image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "hue-rotation-20",
+        "sourceHandle": "image",
+        "target": "temperature-tint-21",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__hue-rotation-20image-temperature-tint-21image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "temperature-tint-21",
+        "sourceHandle": "image",
+        "target": "split-toning-22",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__temperature-tint-21image-split-toning-22image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "split-toning-22",
+        "sourceHandle": "image",
+        "target": "viewer-single-23-copy",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__split-toning-22image-viewer-single-23-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "gamma-14",
+        "sourceHandle": "image",
+        "target": "luminosity-15",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__gamma-14image-luminosity-15image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-1",
+        "sourceHandle": "image",
+        "target": "selected-photo-1",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-1image-selected-photo-1image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "selected-photo-1",
+        "sourceHandle": "image",
+        "target": "rescale-13",
+        "targetHandle": "image",
+        "style": {
+          "opacity": 1,
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__selected-photo-1image-rescale-13image"
+      }
+    ],
+    "id": "pipeline-1789043070838-5dq8f2",
+    "name": "StressTest"
   }
 ]
