@@ -21,7 +21,7 @@ function GrouperNode(_props: NodeProps<Node>) {
       <InputHandle
         key={input.id}
         id={input.id}
-        style={{ top: `${29 + index * 14}%` }}
+        style={{ top: `${31 + index * 14}%` }}
       />
     ))}
 

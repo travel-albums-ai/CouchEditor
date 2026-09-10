@@ -56,6 +56,7 @@ export default function AdjustmentSlider({
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <Slider
         min={min}
+        size="small"
         max={max}
         disabled={disabled}
         step={step}

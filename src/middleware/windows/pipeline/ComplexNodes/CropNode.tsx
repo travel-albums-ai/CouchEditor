@@ -45,6 +45,7 @@ function CropNode({
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <Typography variant="caption" sx={{ width: 52 }}>{label}</Typography>
       <Slider
+        size="small"
         value={crop[edge]}
         onChange={(event, value) => updateCrop(edge, value as number)}
         min={0}

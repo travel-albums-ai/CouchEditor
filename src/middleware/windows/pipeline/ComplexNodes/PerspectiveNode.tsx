@@ -46,6 +46,7 @@ function PerspectiveNode({ id, data }: NodeProps<Node<PerspectiveNodeData>>) {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Typography variant="caption" sx={{ width: 18 }}>{axis.toUpperCase()}</Typography>
         <Slider
+          size="small"
           value={offsets[key] ?? 0}
           onChange={(event, value) => updateOffset(corner, axis, value as number)}
           min={-45}
