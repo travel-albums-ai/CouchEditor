@@ -30,10 +30,10 @@ export function InputHandle({
           filter: 'grayscale(0)',
         },
       }}>
-        <Circle size={12} style={{
+        <Circle size={10} style={{
           position: 'absolute',
           top: '0px',
-          right: '1px',
+          right: '2px',
           stroke: theme.palette.divider,
           fill: theme.palette.primary.main,
         }} />

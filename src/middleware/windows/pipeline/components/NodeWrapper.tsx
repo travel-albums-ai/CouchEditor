@@ -5,6 +5,7 @@ import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeId, useReactFlow } from '@xyflow/react';
 import { Copy, Info, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import stc from 'string-to-color';
 
 type NodeWrapperProps = {
   children: React.ReactNode;
@@ -98,12 +99,13 @@ function NodeWrapper({
             minWidth: 280,
             borderRadius: 2,
             border: 1,
+
             borderColor: 'divider',
             boxShadow: theme => `0 0 8px 0px ${theme.palette.divider}`,
             transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
 
             '&:hover': {
-              borderColor: theme => alpha(theme.palette.primary.main, 0.5),
+              borderColor: theme => `color-mix(in srgb, ${stc(type)} 45%, ${theme.palette.divider} 75%)`,
               boxShadow: theme => `0 0 12px 2px ${theme.palette.divider}`,
             },
           },
@@ -120,7 +122,7 @@ function NodeWrapper({
               borderBottomRightRadius: 0,
             }}
           >
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 0.5 }}>
               {tools && tools}
               {helper && (
                 <IconButton
@@ -158,6 +160,7 @@ function NodeWrapper({
               flexDirection: 'column',
               gap: 2,
               p: 2,
+              pr: 1.5
             }}
           >
             {children}

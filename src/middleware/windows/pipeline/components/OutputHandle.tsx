@@ -26,7 +26,7 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
           top: '0px',
           right: '3px',
           stroke: theme.palette.divider,
-          fill: theme.palette.secondary.main,
+          fill: theme.palette.primary.main,
         }} />
       </Box>
     </Handle>

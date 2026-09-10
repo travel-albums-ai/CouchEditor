@@ -1,5 +1,6 @@
 import SolidChip from '@/components/SolidChip';
 import { Box, Skeleton } from '@mui/material';
+import { Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 type StageTimingDetail = {
@@ -54,8 +55,8 @@ export default function PipelineStageTiming({
 
   return <Box>
     {isProcessing && <Box sx={{ opacity: 0.1 }}>
-      <Skeleton variant="text" width={70} sx={{ bgcolor: 'primary.main' }} height={24} />
+      <Skeleton variant="rounded" width={64} sx={{ bgcolor: 'primary.main' }} height={24} />
     </Box>}
-    {!isProcessing && <SolidChip count={durationMs === null ? '--' : durationMs.toFixed(1)} height={24} label="ms" minWidth={70} />}
+    {!isProcessing && <SolidChip count={durationMs === null ? '--' : durationMs.toFixed(1)} height={24} minWidth={64} icon={<Timer size={16} />} fontSize={11} variant="header" borderless/>}
   </Box>;
 }

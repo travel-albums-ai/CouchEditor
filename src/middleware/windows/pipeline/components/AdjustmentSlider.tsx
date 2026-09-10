@@ -70,7 +70,7 @@ export default function AdjustmentSlider({
         }}
       />
 
-      <SolidChip count={value} fontSize={14} height={28} minWidth={50} variant="header" />
+      <SolidChip count={value} fontSize={14} height={28} minWidth={50} />
     </Box>
   );
 }

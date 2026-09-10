@@ -48,42 +48,6 @@ function NodeHeader({
     [isDark, typeColor, groupColor]
   );
 
-  // const borderBottomColor = useMemo(
-  //   () =>
-  //     isDark
-  //       ? `color-mix(in srgb, ${typeColor} 35%, ${groupColor} 55%)`
-  //       : `color-mix(in srgb, ${typeColor} 45%, ${groupColor} 65%)`,
-  //   [isDark, typeColor, groupColor]
-  // );
-
-  // const background = useMemo(
-  //   () => {
-  //     if (performanceMode) {
-  //       return isDark
-  //         ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 100%, var(--bg-paper) 45%)`
-  //         : `color-mix(in srgb, color-mix(in srgb, ${typeColor} 5%, ${groupColor} 8%) 100%, var(--bg-paper) 25%)`;
-  //     }
-
-  //     return isDark
-  //       ? `linear-gradient(
-  //           90deg,
-  //           transparent 0%,
-  //           color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 125%
-  //         )`
-  //       : `linear-gradient(
-  //           90deg,
-  //           color-mix(in srgb, ${typeColor} 3%, transparent) 0%,
-  //           color-mix(in srgb, ${groupColor} 10%, transparent) 100%
-  //         )`;
-  //   },
-  //   [
-  //     performanceMode,
-  //     isDark,
-  //     typeColor,
-  //     groupColor,
-  //   ]
-  // );
-
   const hoverBackground = useMemo(
     () => {
       return isDark
@@ -96,7 +60,7 @@ function NodeHeader({
           0deg,
             ${theme.palette.background.paper} 0%,
             ${theme.palette.background.paper} 30%,
-            color-mix(in srgb, ${typeColor} 16%, transparent) 100%
+            color-mix(in srgb, ${typeColor} 6%, transparent) 100%
           )`;
     },
     [
@@ -106,14 +70,6 @@ function NodeHeader({
       groupColor,
     ]
   );
-
-  // const hoverShadow = useMemo(
-  //   () =>
-  //     isDark
-  //       ? `0 1px 2px 0px color-mix(in srgb, ${typeColor} 15%, ${groupColor} 25%)`
-  //       : `0 1px 3px 0px color-mix(in srgb, ${typeColor} 12%, ${groupColor} 18%)`,
-  //   [isDark, typeColor, groupColor]
-  // );
 
   return (
     <Box
