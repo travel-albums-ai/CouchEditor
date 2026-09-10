@@ -1,11 +1,11 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
-import { GalleryPhoto } from '@/lib/galleryData';
+import { ImageValue } from '@/middleware/windows/pipeline/types';
 import { Box } from '@mui/material';
 import { useCallback, useMemo, useRef } from 'react';
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';
 
 type Props = {
-  photos: GalleryPhoto[];
+  photos: ImageValue[];
   width?: number;
   height?: number;
 };
@@ -43,14 +43,14 @@ export default function GridVirtuoso({ photos }: Props) {
       return (
         <AlbumPhotoThumbnailBackgroundNg
           key={index}
-          photo={{ name: photo.name, src: photo.src}}
-          alt=""
+          photo={{ name: photo?.name, src: photo?.src} as ImageValue}
           style={{
             display: 'block',
             width: '100%',
             height: '300px',
             objectFit: 'cover',
-            borderRadius: '6px',
+            borderRadius: '8px',
+            padding: '1px',
           }}
         />
       );
