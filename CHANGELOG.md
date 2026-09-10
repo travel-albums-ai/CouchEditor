@@ -1,3 +1,9 @@
+## [1.23.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.22.0...v1.23.0) (2026-09-10)
+
+### ✨ Features
+
+* update viewport adjustment and streamline toolbox rendering in Pipeline component ([7515b3a](https://github.com/travel-albums-ai/CouchEditor/commit/7515b3a0de1f6b977b4212c70bc6f83511061695))
+
 ## [1.22.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.21.0...v1.22.0) (2026-09-10)
 
 ### ✨ Features
