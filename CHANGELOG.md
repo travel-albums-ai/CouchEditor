@@ -1,3 +1,9 @@
+## [1.29.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.28.0...v1.29.0) (2026-09-10)
+
+### ✨ Features
+
+* add help button to NodeWrapper for improved user assistance ([f009122](https://github.com/travel-albums-ai/CouchEditor/commit/f00912239d384aec71c011274738edb977a57540))
+
 ## [1.28.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.27.0...v1.28.0) (2026-09-10)
 
 ### ✨ Features
