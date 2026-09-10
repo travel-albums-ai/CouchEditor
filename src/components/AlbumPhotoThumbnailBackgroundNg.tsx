@@ -11,7 +11,7 @@ type Props = {
   className?: string;
 };
 
-export default function AlbumPhotoThumbnailBackgroundNg({
+export default React.memo(function AlbumPhotoThumbnailBackgroundNg({
   photo,
   width,
   height,
@@ -19,34 +19,40 @@ export default function AlbumPhotoThumbnailBackgroundNg({
   className,
 }: Props) {
   const thumbnailFormat = useSettingsStoreSelector(s => s.thumbnailFormat);
-  const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj);
+  const isSelected = useSettingsStoreSelector(
+    s => s.previewPhotoObj === photo?.name
+  );
   const { setPreviewPhotoObj } = useSettings();
-  const theme = useTheme()
+  const theme = useTheme();
 
-  const src = photo.src;
+  const handleClick = React.useCallback(() => {
+    setPreviewPhotoObj(photo?.name);
+  }, [setPreviewPhotoObj, photo?.name]);
+
+  const imgStyle = React.useMemo<React.CSSProperties>(() => ({
+    width: '100%',
+    height,
+    display: 'block',
+    objectFit: thumbnailFormat === 'cover' ? 'cover' : 'contain',
+    objectPosition: 'center',
+    border: isSelected
+      ? `2px solid ${theme.palette.primary.main}`
+      : '2px solid transparent',
+    ...style,
+  }), [height, thumbnailFormat, isSelected, theme.palette.primary.main, style]);
 
   return (
     <img
-      src={src}
+      src={photo.src}
       alt=""
       width={width}
       height={height}
       loading="lazy"
       decoding="async"
-      onClick={() => {
-        setPreviewPhotoObj(photo?.name);
-      }}
+      onClick={handleClick}
       draggable={false}
       className={className}
-      style={{
-        width: '100%',
-        height,
-        display: 'block',
-        objectFit: thumbnailFormat === 'cover' ? 'cover' : 'contain',
-        objectPosition: 'center',
-        border: previewPhotoObj === photo?.name ? `2px solid ${theme.palette.primary.main}` : '2px solid transparent',
-        ...style,
-      }}
+      style={imgStyle}
     />
   );
-}
+});
