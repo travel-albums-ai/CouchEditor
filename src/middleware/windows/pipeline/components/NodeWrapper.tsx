@@ -95,28 +95,16 @@ function NodeWrapper({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'stretch',
-            minWidth: 250,
+            minWidth: 280,
             borderRadius: 2,
             border: 1,
             borderColor: 'divider',
-            boxShadow: 'none',
+            boxShadow: theme => `0 0 8px 1px ${theme.palette.divider}`,
+            transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
 
             '&:hover': {
-              borderColor: theme =>
-                alpha(
-                  theme.palette.primary.main,
-                  performanceMode ? 0.26 : 0.53
-                ),
-            },
-          },
-
-          performanceMode && {
-            transition:
-              'border-color 0.25s ease, box-shadow 0.25s ease',
-
-            '&:hover': {
-              boxShadow: theme =>
-                `0 0 3px ${alpha(theme.palette.primary.main, 0.8)}`,
+              borderColor: theme => alpha(theme.palette.primary.main, 0.5),
+              boxShadow: theme => `0 0 14px 4px ${theme.palette.divider}`,
             },
           },
         ]}

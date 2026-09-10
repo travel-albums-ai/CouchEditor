@@ -44,64 +44,59 @@ function NodeHeader({
     () =>
       isDark
         ? `color-mix(in srgb, ${typeColor} 55%, ${groupColor} 100%)`
-        : `color-mix(in srgb, ${typeColor} 65%, ${groupColor} 85%)`,
+        : `color-mix(in srgb, ${typeColor} 100%, ${groupColor} 20%)`,
     [isDark, typeColor, groupColor]
   );
 
-  const borderBottomColor = useMemo(
-    () =>
-      isDark
-        ? `color-mix(in srgb, ${typeColor} 35%, ${groupColor} 55%)`
-        : `color-mix(in srgb, ${typeColor} 45%, ${groupColor} 65%)`,
-    [isDark, typeColor, groupColor]
-  );
+  // const borderBottomColor = useMemo(
+  //   () =>
+  //     isDark
+  //       ? `color-mix(in srgb, ${typeColor} 35%, ${groupColor} 55%)`
+  //       : `color-mix(in srgb, ${typeColor} 45%, ${groupColor} 65%)`,
+  //   [isDark, typeColor, groupColor]
+  // );
 
-  const background = useMemo(
-    () => {
-      if (performanceMode) {
-        return isDark
-          ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 100%, var(--bg-paper) 45%)`
-          : `color-mix(in srgb, color-mix(in srgb, ${typeColor} 5%, ${groupColor} 8%) 100%, var(--bg-paper) 25%)`;
-      }
+  // const background = useMemo(
+  //   () => {
+  //     if (performanceMode) {
+  //       return isDark
+  //         ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 100%, var(--bg-paper) 45%)`
+  //         : `color-mix(in srgb, color-mix(in srgb, ${typeColor} 5%, ${groupColor} 8%) 100%, var(--bg-paper) 25%)`;
+  //     }
 
-      return isDark
-        ? `linear-gradient(
-            90deg,
-            transparent 0%,
-            color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 125%
-          )`
-        : `linear-gradient(
-            90deg,
-            color-mix(in srgb, ${typeColor} 3%, transparent) 0%,
-            color-mix(in srgb, ${groupColor} 10%, transparent) 100%
-          )`;
-    },
-    [
-      performanceMode,
-      isDark,
-      typeColor,
-      groupColor,
-    ]
-  );
+  //     return isDark
+  //       ? `linear-gradient(
+  //           90deg,
+  //           transparent 0%,
+  //           color-mix(in srgb, ${typeColor} 2%, ${groupColor} 8%) 125%
+  //         )`
+  //       : `linear-gradient(
+  //           90deg,
+  //           color-mix(in srgb, ${typeColor} 3%, transparent) 0%,
+  //           color-mix(in srgb, ${groupColor} 10%, transparent) 100%
+  //         )`;
+  //   },
+  //   [
+  //     performanceMode,
+  //     isDark,
+  //     typeColor,
+  //     groupColor,
+  //   ]
+  // );
 
   const hoverBackground = useMemo(
     () => {
-      if (performanceMode) {
-        return isDark
-          ? `color-mix(in srgb, color-mix(in srgb, ${typeColor} 4%, ${groupColor} 12%) 100%, var(--bg-paper) 30%)`
-          : `color-mix(in srgb, color-mix(in srgb, ${typeColor} 8%, ${groupColor} 12%) 100%, var(--bg-paper) 15%)`;
-      }
-
       return isDark
         ? `linear-gradient(
-            90deg,
+            270deg,
             transparent 0%,
             color-mix(in srgb, ${typeColor} 4%, ${groupColor} 12%) 150%
           )`
         : `linear-gradient(
-            90deg,
-            color-mix(in srgb, ${typeColor} 5%, transparent) 0%,
-            color-mix(in srgb, ${groupColor} 16%, transparent) 100%
+          0deg,
+            ${theme.palette.background.paper} 0%,
+            ${theme.palette.background.paper} 30%,
+            color-mix(in srgb, ${typeColor} 16%, transparent) 100%
           )`;
     },
     [
@@ -112,13 +107,13 @@ function NodeHeader({
     ]
   );
 
-  const hoverShadow = useMemo(
-    () =>
-      isDark
-        ? `0 1px 2px 0px color-mix(in srgb, ${typeColor} 15%, ${groupColor} 25%)`
-        : `0 1px 3px 0px color-mix(in srgb, ${typeColor} 12%, ${groupColor} 18%)`,
-    [isDark, typeColor, groupColor]
-  );
+  // const hoverShadow = useMemo(
+  //   () =>
+  //     isDark
+  //       ? `0 1px 2px 0px color-mix(in srgb, ${typeColor} 15%, ${groupColor} 25%)`
+  //       : `0 1px 3px 0px color-mix(in srgb, ${typeColor} 12%, ${groupColor} 18%)`,
+  //   [isDark, typeColor, groupColor]
+  // );
 
   return (
     <Box
@@ -130,19 +125,11 @@ function NodeHeader({
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 1,
-          py: 0.75,
-          px: 1,
-          borderRadius: 2,
-          border: 1,
-          borderColor: 'divider',
-          borderBottomColor,
-          background,
-          transition:
-            'border-color 0.15s ease, box-shadow 0.35s ease, background 0.5s ease',
+          p: 1,
+          bgcolor: 'background.paper',
 
           '&:hover': {
             background: hoverBackground,
-            boxShadow: hoverShadow,
           },
         },
         sx,
@@ -158,7 +145,7 @@ function NodeHeader({
       >
         {paletteItem?.icon &&
           cloneElement(paletteItem.icon, {
-            size: 16,
+            size: 20,
             style: {
               color: iconColor,
             },
@@ -166,8 +153,14 @@ function NodeHeader({
 
         <Typography
           variant="caption"
-          color="textSecondary"
+          color="textPrimary"
           sx={{
+            fontSize: 14,
+            fontWeight: 600,
+            opacity: 0.87,
+            '&:hover': {
+              opacity: 1,
+            },
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',

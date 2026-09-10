@@ -1,4 +1,4 @@
-import { alpha, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { Handle, Position } from "@xyflow/react";
 import { Circle } from 'lucide-react';
 
@@ -8,19 +8,27 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
   return <>
     <Handle
       type="source"
-      style={{ width: '16px', height: '16px', backgroundColor: theme.palette.background.paper, border: 0 }}
+      style={{ width: '16px', height: '16px', backgroundColor: 'transparent', border: 0 }}
       position={position ?? Position.Right}
       id={id}
     >
-      <div style={{ position: 'relative' }}>
+      <Box sx={{ position: 'relative',
+        opacity: 0.5,
+        filter: 'grayscale(0.5)',
+        transition: 'opacity 0.25s ease, filter 0.25s ease',
+        '&:hover': {
+          opacity: 1,
+          filter: 'grayscale(0)',
+        },
+      }}>
         <Circle size={10} style={{
           position: 'absolute',
-          top: '3px',
+          top: '0px',
           right: '3px',
           stroke: theme.palette.divider,
-          fill: alpha(theme.palette.secondary.main, 0.5),
+          fill: theme.palette.secondary.main,
         }} />
-      </div>
+      </Box>
     </Handle>
   </>;
 }
