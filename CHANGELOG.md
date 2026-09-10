@@ -1,3 +1,9 @@
+## [1.27.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.26.0...v1.27.0) (2026-09-10)
+
+### ✨ Features
+
+* enhance GPU operations with fixed-parameter contracts and refactor shader logic ([08ad6a8](https://github.com/travel-albums-ai/CouchEditor/commit/08ad6a81a53b49e19d30621a9935306b67e765bb))
+
 ## [1.26.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.25.0...v1.26.0) (2026-09-10)
 
 ### ✨ Features
