@@ -1,3 +1,13 @@
+## [1.34.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.34.0...v1.34.1) (2026-09-10)
+
+### 🐛 Fixes
+
+* conditionally render helper tooltip in NodeWrapper component ([d27bed1](https://github.com/travel-albums-ai/CouchEditor/commit/d27bed1d1075bd9b0ae7315e57745bd0bca96270))
+
+### 🧹 Refactors
+
+* update comments for clarity on worker thread and cache management ([9c713f2](https://github.com/travel-albums-ai/CouchEditor/commit/9c713f26f5771a24f632b0bce3a9b9aa6548390e))
+
 ## [1.34.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.33.0...v1.34.0) (2026-09-10)
 
 ### ✨ Features
