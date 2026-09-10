@@ -1,3 +1,9 @@
+## [1.20.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.19.0...v1.20.0) (2026-09-10)
+
+### ✨ Features
+
+* update FloatingStack component to conditionally style based on asIs prop ([98385be](https://github.com/travel-albums-ai/CouchEditor/commit/98385be4a3be46b96b60776e4e4024ff0fcb6eb3))
+
 ## [1.19.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.3...v1.19.0) (2026-09-10)
 
 ### ✨ Features
