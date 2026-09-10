@@ -1,4 +1,4 @@
-import { Box, FormControl, MenuItem, Select, Stack, TextField, useTheme } from '@mui/material';
+import { alpha, Box, FormControl, MenuItem, Select, Stack, TextField, Typography, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -18,7 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
+import { CirclePlus, Copy, Download, GalleryHorizontalEnd, Save, Trash2, Upload, Workflow } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -29,6 +29,7 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
+import SolidChip from '@/components/SolidChip';
 import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
@@ -641,7 +642,76 @@ function Pipeline() {
   );
 
   return (
-    <Box className="app" sx={{ width: '100%', height: '100%' }}>
+    <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
+      <Box sx={{ p: 2, py: 1.5, bgcolor: 'background.paper', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+        boxShadow: theme => `0px 4px 6px ${theme.palette.divider}`,
+        zIndex: 10 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <img
+            src="./couchLogoMini.png"
+            alt="Logo"
+            width={45}
+            height={30}
+            style={{ width: 45, height: 30 }}
+            fetchPriority="high"
+          />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography sx={{ fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch Editor</Typography>
+              <SolidChip label="Beta" />
+            </Box>
+            <Typography variant="caption" >Drag. Slide. See.</Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: alpha(theme.palette.divider, 0.05),  }}>
+            <Workflow size={16} /> Editor
+          </Box>
+          <Box sx={{
+            display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
+            bgcolor: alpha(theme.palette.primary.main, 0.05),
+            '&:hover': {
+              bgcolor: alpha(theme.palette.primary.main, 0.1),
+            },
+          }}>
+            <GalleryHorizontalEnd size={16} />
+            Templates
+            <FormControl id="pipeline-loader" size="small" sx={{ minWidth: 250 }}>
+              <Select
+                size="small"
+                value={currentPipelineId}
+                displayEmpty
+                sx={{ height: 32}}
+                onChange={(event) => loadPipeline(event.target.value)}
+                renderValue={(value) => value
+                  ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
+                  : 'Load pipeline'}
+                aria-label="Load pipeline"
+              >
+                <MenuItem value="" disabled>Load pipeline</MenuItem>
+                {pipelines.map((pipeline) => (
+                  <MenuItem key={pipeline.id} value={pipeline.id}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
+                      <MinimapPipeline pipeline={pipeline} />
+                      {pipeline.name}
+                    </Box>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+
+          </Box>
+          {/* <Button disabled variant="outlined" size="large" startIcon={<Workflow size={16} />}>Editor</Button> */}
+          {/* <Button variant="outlined" size="large" startIcon={<GalleryHorizontalEnd size={16} />}>Templates</Button> */}
+
+        </Box>
+        <GeneralRegistryToolbar
+          fullWidth={false}
+          noGhost={true}
+          group="header"
+        />
+      </Box>
       <div
         className="reactflow-canvas"
         onDragOver={onDragOver}
@@ -673,20 +743,12 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        {showToolbox && <FloatingStack sx={{ top: 80, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
+        {showToolbox && <FloatingStack sx={{ top: 10, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
           <NodeToolbox />
         </FloatingStack>}
 
-        <FloatingStack sx={{ top: 12, left: 12 }} id="pipeline-header-left">
+        <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-header-left">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <img
-              src="./couchLogoMini.png"
-              alt="Logo"
-              width={45}
-              height={30}
-              style={{ width: 45, height: 30 }}
-              fetchPriority="high"
-            />
             <TextField
               id="pipeline-name"
               size="small"
@@ -717,17 +779,20 @@ function Pipeline() {
                 onClick: () => saveAsCopy(),
                 title: '',
               },
+            ] satisfies GenericToggleButtonProps[]} />
+            <GenericToggleButtonGroup id="pipeline-actions" items={[
               {
                 tooltip: 'Download pipeline',
                 icon: <Download />,
                 onClick: downloadPipeline,
-                title: '',
+
+                title: 'Export',
               },
               {
                 tooltip: 'Upload pipeline',
                 icon: <Upload />,
                 onClick: () => pipelineFileInputRef.current?.click(),
-                title: '',
+                title: 'Import',
               },
             ] satisfies GenericToggleButtonProps[]} />
             <input
@@ -739,35 +804,6 @@ function Pipeline() {
             />
 
           </Box>
-        </FloatingStack>
-
-        <FloatingStack sx={{ top: 12, right: 20 }} id="pipeline-header-right">
-          <FormControl id="pipeline-loader" size="small" sx={{ minWidth: 250 }}>
-            <Select
-              value={currentPipelineId}
-              displayEmpty
-              onChange={(event) => loadPipeline(event.target.value)}
-              renderValue={(value) => value
-                ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
-                : 'Load pipeline'}
-              aria-label="Load pipeline"
-            >
-              <MenuItem value="" disabled>Load pipeline</MenuItem>
-              {pipelines.map((pipeline) => (
-                <MenuItem key={pipeline.id} value={pipeline.id}>
-                  <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
-                    <MinimapPipeline pipeline={pipeline} />
-                    {pipeline.name}
-                  </Box>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <GeneralRegistryToolbar
-            fullWidth={false}
-            noGhost={true}
-            group="header"
-          />
         </FloatingStack>
 
         <Stack id="pipeline-trash"
