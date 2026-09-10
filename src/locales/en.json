@@ -173,6 +173,7 @@
   "pipelineFolderSelected": "Folder selected",
   "pipelineLutChooseFile": "Choose a .cube LUT",
   "pipelineSourceSelectImages": "Select Images",
+  "pipelineDropImages": "Drop images here",
   "pipelineViewerLightbox": "Lightbox",
   "pipelineViewerZipping": "Zipping…",
   "pipelineViewerDownloadAll": "Download All",
