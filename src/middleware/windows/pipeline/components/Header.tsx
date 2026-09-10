@@ -1,9 +1,9 @@
 import { alpha, Box, FormControl, MenuItem, Select, Typography, useTheme } from '@mui/material';
 import { GalleryHorizontalEnd, Users2, Workflow } from 'lucide-react';
 
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import SolidChip from '@/components/SolidChip';
 import type { SavedPipeline } from '@/context/pipelineStore';
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { MinimapPipeline } from './MinimapPipeline';
 
 type HeaderProps = {

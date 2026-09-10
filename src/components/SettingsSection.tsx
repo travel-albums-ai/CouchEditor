@@ -24,8 +24,8 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
       bgcolor: theme =>
         transparent
           ? tint
-            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.default} 90%) 55%, transparent)`
-            : alpha(theme.palette.background.default, 0.55)
+            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.paper} 90%) 55%, transparent)`
+            : alpha(theme.palette.background.paper, 0.55)
           : tint
             ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.paper} 90%) 55%, transparent)`
             : `${theme.palette.background.paper}BD`,

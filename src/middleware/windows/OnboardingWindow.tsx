@@ -18,10 +18,8 @@ export default function OnboardingWindow() {
         paper: {
           sx: {
             userSelect: 'none',
-            backgroundColor: 'transparent',
             width: 700,
-            height: 900,
-
+            height: 800,
             maxWidth: 'none',
             maxHeight: '90vh',
           },

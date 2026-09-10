@@ -22,14 +22,24 @@ export default function Onboarding() {
 
 
   return (<>
-    <Box sx={{
-    }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', pt: 2 }}>
+
+
+      <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {onboardingStep === 0 && <OnboardingWelcome />}
+        {onboardingStep === 1 && <OnboardingTakeout />}
+        {onboardingStep === 2 && <OnboardingAI />}
+      </Box>
+
       <Box sx={{
-        p: 2,
+        px: 1,
+        pr: 3,
         display: 'flex',
         width: '100%',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 1,
       }}>
         <Stepper activeStep={onboardingStep} alternativeLabel nonLinear={true} >
           {steps.map((label) => (
@@ -42,40 +52,34 @@ export default function Onboarding() {
             </Step>
           ))}
         </Stepper>
-      </Box>
 
-      <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {onboardingStep === 0 && <OnboardingWelcome />}
-        {onboardingStep === 1 && <OnboardingTakeout />}
-        {onboardingStep === 2 && <OnboardingAI />}
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, gap: 1, borderTop: '1px solid', borderColor: 'divider', pt: 5 }}>
-        <Button
-          disabled={onboardingStep === 0}
-          startIcon={ <ChevronLeft size={16} /> }
-          onClick={() => {
-            if (onboardingStep > 0) {
-              setSetting(prev => ({ ...prev, onboardingStep: prev.onboardingStep - 1 }))
-            }
-          } } variant="outlined">
-          {t('onboardingPreviousStep')}
-        </Button>
-        <Button
-          disabled={onboardingStep === 2 && !serverOnline}
-          onClick={() => {
-            if (onboardingStep < steps.length - 1) {
-              setSetting(prev => ({ ...prev, onboardingStep: prev.onboardingStep + 1 }))
-            }
-            if (onboardingStep === steps.length - 1) {
-              setSetting(prev => ({ ...prev, onboarding: false }))
-              setSetting(prev => ({ ...prev, tutorial: true }))
-            }
-          }}
-          startIcon={ onboardingStep === steps.length - 1 ? <CircleX size={16} /> : <ChevronsRight size={16} /> }
-          variant="contained">
-          {onboardingStep === steps.length - 1 ? '👋' : t('onboardingNextStep')}
-        </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'stretch' }}>
+          <Button
+            size="large"
+            disabled={onboardingStep === 0}
+            onClick={() => {
+              if (onboardingStep > 0) {
+                setSetting(prev => ({ ...prev, onboardingStep: prev.onboardingStep - 1 }))
+              }
+            } } variant="outlined">
+            <ChevronLeft size={16} />
+          </Button>
+          <Button
+            size="large"
+            disabled={onboardingStep === 2 && !serverOnline}
+            onClick={() => {
+              if (onboardingStep < steps.length - 1) {
+                setSetting(prev => ({ ...prev, onboardingStep: prev.onboardingStep + 1 }))
+              }
+              if (onboardingStep === steps.length - 1) {
+                setSetting(prev => ({ ...prev, onboarding: false }))
+                setSetting(prev => ({ ...prev, tutorial: true }))
+              }
+            }}
+            variant="contained">
+            { onboardingStep === steps.length - 1 ? <CircleX size={16} /> : <ChevronsRight size={16} /> }
+          </Button>
+        </Box>
       </Box>
     </Box>
   </>)
