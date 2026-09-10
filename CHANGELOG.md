@@ -1,3 +1,9 @@
+## [1.17.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.16.0...v1.17.0) (2026-09-10)
+
+### ✨ Features
+
+* integrate GeneralRegistryToolbar into Header component and add Product Hunt badge for promotion ([8e98e3a](https://github.com/travel-albums-ai/CouchEditor/commit/8e98e3a6b0b3cd5facbc56ff67e8cafda9b0bcac))
+
 ## [1.16.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.15.1...v1.16.0) (2026-09-10)
 
 ### ✨ Features
