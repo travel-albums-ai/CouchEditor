@@ -1,3 +1,9 @@
+## [1.26.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.25.0...v1.26.0) (2026-09-10)
+
+### ✨ Features
+
+* add GPU shader operations and types for enhanced image processing ([5ab0669](https://github.com/travel-albums-ai/CouchEditor/commit/5ab06690885e00775df151c609468425026734eb))
+
 ## [1.25.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.24.1...v1.25.0) (2026-09-10)
 
 ### ✨ Features
