@@ -511,7 +511,11 @@ function Pipeline() {
   const onConnect = useCallback(
     (connection: Connection) => {
       setEdges((current) =>
-        addEdge({ ...connection, type: CONNECTION_LINE_TYPE, style: { opacity: 0.5 } }, current)
+        addEdge({ ...connection, type: CONNECTION_LINE_TYPE, style: {
+          opacity: 1,
+          strokeWidth: 2,
+          stroke: alpha(theme.palette.primary.main, 0.6)
+        } }, current)
       );
     },
     [setEdges]

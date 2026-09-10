@@ -8,7 +8,7 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
   return <>
     <Handle
       type="source"
-      style={{ width: '16px', height: '16px', backgroundColor: 'transparent', border: 0 }}
+      style={{ width: '12px', height: '12px', backgroundColor: 'transparent', border: 0 }}
       position={position ?? Position.Right}
       id={id}
     >
@@ -23,7 +23,7 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
       }}>
         <Circle size={10} style={{
           position: 'absolute',
-          right: '3px',
+          right: '2px',
           stroke: theme.palette.divider,
           fill: theme.palette.primary.main,
         }} />

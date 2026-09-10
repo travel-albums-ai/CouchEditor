@@ -17,7 +17,7 @@ export function InputHandle({
   return <>
     <Handle
       type="target"
-      style={{ width: '16px', height: '16px', backgroundColor: 'transparent', border: 0, ...style }}
+      style={{ width: '10px', height: '10px', backgroundColor: 'transparent', border: 0, ...style }}
       position={position ?? Position.Left}
       id={id}
     >
@@ -32,7 +32,7 @@ export function InputHandle({
       }}>
         <Circle size={10} style={{
           position: 'absolute',
-          right: '2px',
+          right: '-1px',
           stroke: theme.palette.divider,
           fill: theme.palette.primary.main,
         }} />
