@@ -16,7 +16,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
   const theme = useTheme();
 
   return (
-    <Box sx={{ p: 2, py: 1.5, bgcolor: 'background.paper', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+    <Box sx={{ px: 2, pr: 1.5, py: 1.5, bgcolor: 'background.paper', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
       boxShadow: theme => `0px 4px 4px -2px ${theme.palette.divider}`,
       zIndex: 10 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -85,7 +85,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           noGhost={true}
           group="header"
         />
-        <Box sx={{ mb: -1, mt: -1 }}>
+        <Box sx={{ mb: -1.5, mt: -1 }}>
           <a href="https://www.producthunt.com/products/coucheditor?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-coucheditor" target="_blank" rel="noopener noreferrer">
             <img alt="CouchEditor - Image editing without the Photoshop headache. 🛋️🎨 | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1244803&amp;theme=neutral&amp;t=1789053328284" />
           </a>
