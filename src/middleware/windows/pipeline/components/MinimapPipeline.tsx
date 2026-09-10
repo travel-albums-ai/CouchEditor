@@ -1,5 +1,6 @@
 import { SavedPipeline } from '@/context/pipelineStore';
 import { Box, useTheme } from '@mui/material';
+import stc from 'string-to-color';
 
 export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
   const theme = useTheme();
@@ -10,7 +11,7 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
     return null;
   }
 
-  const SIZE = 50;
+  const SIZE = 100;
   const PADDING = 5;
 
   const getNodeWidth = (node: typeof nodes[number]) =>
@@ -65,6 +66,7 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
         '&:hover': {
           opacity: 1,
         },
+
       }}
     >
       {nodes.map(node => {
@@ -88,8 +90,8 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
               width: Math.max(width * scale, 2),
               height: Math.max(height * scale, 2),
 
-              backgroundColor: theme.palette.primary.main,
-              borderRadius: '1px',
+              backgroundColor: theme => `color-mix(in srgb, ${stc(node.type)} 50%, ${theme.palette.primary.main} 50%)`,
+              borderRadius: 2,
             }}
           />
         );

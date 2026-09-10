@@ -1,4 +1,4 @@
-import { Box, ButtonBase, Popover, Typography } from '@mui/material';
+import { alpha, Box, ButtonBase, Popover, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import type { SavedPipeline } from '@/context/pipelineStore';
@@ -33,8 +33,9 @@ export default function PipelineSelector({
         aria-expanded={isOpen ? 'true' : undefined}
         onClick={(event) => setAnchorEl(event.currentTarget)}
         sx={{
-          height: 32,
+          height: 30,
           border: '1px solid',
+          borderColor: theme => alpha(theme.palette.primary.main, 0.4),
           minWidth: 250,
           justifyContent: 'flex-start',
           px: 1,
@@ -78,7 +79,7 @@ export default function PipelineSelector({
                 gap: 1,
                 minHeight: 66,
                 p: 1,
-                borderRadius: 1,
+                borderRadius: 2,
                 textAlign: 'left',
                 '&:hover': {
                   bgcolor: 'action.hover',

@@ -28,30 +28,29 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           style={{ width: 45, height: 30 }}
           fetchPriority="high"
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography sx={{ fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch Editor</Typography>
             <SolidChip label="Beta" variant="header" />
           </Box>
-          <Typography variant="caption" color="textDisabled">Drag · Slide · See.</Typography>
+          <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>Drag · Slide · See the difference</Typography>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42, bgcolor: 'transparent',
-          border: 1,
-          borderColor: alpha(theme.palette.divider, 0.3),
-
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42,
+          bgcolor: alpha(theme.palette.divider, 0.03),
         }}>
           <Workflow size={16} />
           <Typography variant="subtitle2">Editor</Typography>
         </Box>
         <Box sx={{
           display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
-          bgcolor: alpha(theme.palette.primary.main, 0.05),
+          bgcolor: 'background.paper',
           border: 1,
-          borderColor: alpha(theme.palette.primary.main, 0.3),
+          borderColor: 'divider',
           '&:hover': {
-            bgcolor: alpha(theme.palette.primary.main, 0.1),
+            bgcolor: alpha(theme.palette.primary.main, 0.07),
+            borderColor: alpha(theme.palette.primary.main, 0.3),
           },
         }}>
           <GalleryHorizontalEnd size={16} />
@@ -63,7 +62,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'secondary.main', borderRadius: 2, p: 2, height: 42,
-          bgcolor: alpha(theme.palette.secondary.main, 0.15),
+          bgcolor: 'background.paper',
           border: 1,
           borderColor: alpha(theme.palette.secondary.main, 0.3),
           '&:hover': {
@@ -73,7 +72,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
         }}>
           <Users2 size={16} />
           <Typography variant="subtitle2">Community</Typography>
-          <Box sx={{ color: 'text.primary'}}>
+          <Box sx={{ color: 'text.primary', bgcolor: theme => alpha(theme.palette.secondary.main, 0.2) }}>
             <SolidChip label="Coming soon..." />
           </Box>
         </Box>
