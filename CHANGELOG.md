@@ -1,3 +1,9 @@
+## [1.18.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.1...v1.18.2) (2026-09-10)
+
+### 🐛 Fixes
+
+* adjust border radius in MinimapPipeline for improved styling ([f80a8e0](https://github.com/travel-albums-ai/CouchEditor/commit/f80a8e0830b99638392b0d1edd91c33f9a254ed7))
+
 ## [1.18.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.0...v1.18.1) (2026-09-10)
 
 ### 🐛 Fixes
