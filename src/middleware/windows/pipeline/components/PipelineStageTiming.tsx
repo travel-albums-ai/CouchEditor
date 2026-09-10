@@ -53,10 +53,16 @@ export default function PipelineStageTiming({
     };
   }, [nodeId, nodeType]);
 
+  const displayInSeconds = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
+
   return <Box>
     {isProcessing && <Box sx={{ opacity: 0.1 }}>
       <Skeleton variant="rounded" width={64} sx={{ bgcolor: 'primary.main' }} height={24} />
     </Box>}
-    {!isProcessing && <SolidChip count={durationMs === null ? '--' : durationMs.toFixed(1)} height={24} minWidth={64} icon={<Timer size={16} />} fontSize={11} variant="header" borderless/>}
+    {!isProcessing && <SolidChip
+      count={displayInSeconds}
+      height={24}
+      minWidth={64}
+      icon={<Timer size={16} />} fontSize={11} variant="header" borderless/>}
   </Box>;
 }

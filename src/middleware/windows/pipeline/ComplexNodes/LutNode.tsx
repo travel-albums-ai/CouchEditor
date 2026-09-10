@@ -1,13 +1,14 @@
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { Button, Typography } from '@mui/material';
 import { type Node, type NodeProps } from '@xyflow/react';
 import { Upload } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
+function LutNode({ id, data }: NodeProps<Node<{ lutFile?: File }>>) {
   const { t } = useTranslation();
   const [fileName, setFileName] = useState(data.lutFile?.name ?? '');
 
@@ -15,7 +16,7 @@ function LutNode({ data }: NodeProps<Node<{ lutFile?: File }>>) {
     <>
       <InputHandle id="image" />
 
-      <NodeWrapper type="lut">
+      <NodeWrapper type="lut" tools={<PipelineStageTiming nodeId={id} nodeType={'lut'} />}>
         <Button
           sx={{
             bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 80%, ${theme.palette.primary.main} 20%)`,
