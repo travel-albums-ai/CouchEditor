@@ -184,6 +184,7 @@ function Pipeline() {
   const evaluationId = useRef(0);
   const nodesRef = useRef(nodes);
   const edgesRef = useRef(edges);
+  const fitPaneOnDoubleClickRef = useRef(true);
 
   const styleEdges = useCallback((pipelineEdges: Edge[]) =>
     pipelineEdges.map((edge) => ({
@@ -658,9 +659,16 @@ function Pipeline() {
         return;
       }
 
-      void fitPipelineView();
+      if (fitPaneOnDoubleClickRef.current) {
+        fitPaneOnDoubleClickRef.current = false;
+        void fitPipelineView();
+        return;
+      }
+
+      fitPaneOnDoubleClickRef.current = true;
+      setViewport({ ...getViewport(), zoom: 1 });
     },
-    [fitPipelineView]
+    [fitPipelineView, getViewport, setViewport]
   );
 
   return (
