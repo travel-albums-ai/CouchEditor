@@ -304,7 +304,7 @@ export async function evaluatePipeline(
   return results;
 }
 
-// Frees the worker thread, its in-memory AI result cache, and every
+// Frees the worker thread, its in-memory phase result cache, and every
 // outstanding object URL. Called when the pipeline page unmounts; the
 // worker respawns lazily on the next evaluation.
 export function terminatePipelineWorker() {

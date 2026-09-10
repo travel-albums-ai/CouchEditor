@@ -1298,11 +1298,38 @@ function errorMessage(error: unknown): string {
 }
 
 type CachedNodeOutput = {
-  signature: string;
   outputs: NodeOutputs;
 };
 
-const nodeOutputCache = new Map<string, CachedNodeOutput>();
+// Keep phase results by their content signature rather than node id. This
+// lets equivalent phases share the same in-worker ImageBitmaps across runs.
+const MAX_CACHED_PHASES = 64;
+const phaseOutputCache = new Map<string, CachedNodeOutput>();
+
+function getCachedPhaseOutput(signature: string): NodeOutputs | undefined {
+  const cached = phaseOutputCache.get(signature);
+
+  if (!cached) return undefined;
+
+  // Refresh insertion order so frequently reused phases stay resident.
+  phaseOutputCache.delete(signature);
+  phaseOutputCache.set(signature, cached);
+
+  return cached.outputs;
+}
+
+function cachePhaseOutput(signature: string, outputs: NodeOutputs) {
+  phaseOutputCache.delete(signature);
+  phaseOutputCache.set(signature, { outputs });
+
+  while (phaseOutputCache.size > MAX_CACHED_PHASES) {
+    const oldestSignature = phaseOutputCache.keys().next().value;
+
+    if (oldestSignature === undefined) break;
+
+    phaseOutputCache.delete(oldestSignature);
+  }
+}
 
 function serializeForCache(value: unknown): string {
   if (value instanceof File) {
@@ -1387,7 +1414,6 @@ async function runEvaluation(
       const inputs = Object.fromEntries(inputEntries);
 
       const upstreamSignatures = incoming.map((edge) => ({
-        source: edge.source,
         sourceHandle: edge.sourceHandle,
         targetHandle: edge.targetHandle,
         signature: signatures.get(edge.source),
@@ -1485,10 +1511,10 @@ async function runEvaluation(
       });
       signatures.set(nodeId, signature);
 
-      const cached = nodeOutputCache.get(nodeId);
-      if (cached?.signature === signature) {
+      const cached = getCachedPhaseOutput(signature);
+      if (cached) {
         console.log(`↺ reused ${node.id}`);
-        return cached.outputs;
+        return cached;
       }
 
       // Cancellation plumbing available to every node.
@@ -1520,7 +1546,7 @@ async function runEvaluation(
 
       throwIfStale(evaluationId);
 
-      nodeOutputCache.set(nodeId, { signature, outputs: result });
+      cachePhaseOutput(signature, result);
 
       return result;
     })();

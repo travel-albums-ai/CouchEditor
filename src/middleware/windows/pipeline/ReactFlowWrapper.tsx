@@ -262,7 +262,7 @@ function Pipeline() {
     return () => cancelAnimationFrame(frame);
   }, [fitPipelineView]);
 
-  // Free the worker thread (and its in-memory AI result cache)
+  // Free the worker thread (and its in-memory phase result cache)
   // when the pipeline page unmounts.
   useEffect(() => () => terminatePipelineWorker(), []);
 
