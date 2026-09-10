@@ -463,9 +463,30 @@ function drawPerspective(
   }
 }
 
-function scaleImage(source: WorkerImage, scale: number): WorkerImage {
+async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerImage> {
   const width = Math.max(1, Math.round(source.width * scale));
   const height = Math.max(1, Math.round(source.height * scale));
+
+  if (width === source.width && height === source.height) {
+    return source;
+  }
+
+  try {
+    const bitmap = await createImageBitmap(source.bitmap, {
+      resizeWidth: width,
+      resizeHeight: height,
+      resizeQuality: "high",
+    });
+
+    return {
+      bitmap,
+      width,
+      height,
+      name: source.name,
+    };
+  } catch {
+    // Keep a canvas fallback for browsers without bitmap resizing support.
+  }
 
   const [canvas, ctx] = createCanvas(width, height);
 
@@ -1308,7 +1329,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       const image = await mapWithConcurrency(
         sources,
         inputs.evaluationId as number,
-        (source) => Promise.resolve(scaleImage(source, scale))
+        (source) => scaleImage(source, scale)
       );
 
       return { image };
