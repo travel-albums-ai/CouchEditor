@@ -1,10 +1,10 @@
-import { alpha, Box, FormControl, MenuItem, Select, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Typography, useTheme } from '@mui/material';
 import { GalleryHorizontalEnd, Users2, Workflow } from 'lucide-react';
 
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import SolidChip from '@/components/SolidChip';
 import type { SavedPipeline } from '@/context/pipelineStore';
-import { MinimapPipeline } from './MinimapPipeline';
+import PipelineSelector from './PipelineSelector';
 
 type HeaderProps = {
   currentPipelineId: string;
@@ -55,29 +55,11 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
         }}>
           <GalleryHorizontalEnd size={16} />
           Templates
-          <FormControl id="pipeline-loader" size="small" sx={{ minWidth: 250 }}>
-            <Select
-              size="small"
-              value={currentPipelineId}
-              displayEmpty
-              sx={{ height: 36, border: 0, borderColor: 'transparent' }}
-              onChange={(event) => loadPipeline(event.target.value)}
-              renderValue={(value) => value
-                ? pipelines.find((pipeline) => pipeline.id === value)?.name ?? 'Pipeline'
-                : 'Load pipeline'}
-              aria-label="Load pipeline"
-            >
-              <MenuItem value="" disabled>Load pipeline</MenuItem>
-              {pipelines.map((pipeline) => (
-                <MenuItem key={pipeline.id} value={pipeline.id}>
-                  <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
-                    <MinimapPipeline pipeline={pipeline} />
-                    {pipeline.name}
-                  </Box>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <PipelineSelector
+            currentPipelineId={currentPipelineId}
+            pipelines={pipelines}
+            loadPipeline={loadPipeline}
+          />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'secondary.main', borderRadius: 2, p: 2, height: 42,
           bgcolor: alpha(theme.palette.secondary.main, 0.15),
