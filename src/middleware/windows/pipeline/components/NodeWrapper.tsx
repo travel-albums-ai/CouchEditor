@@ -1,10 +1,8 @@
-import { useSettingsStoreSelector } from '@/context/settingsStore';
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeId, useReactFlow } from '@xyflow/react';
-import { Copy, Info, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { Copy, Trash2 } from 'lucide-react';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
@@ -14,18 +12,14 @@ type NodeWrapperProps = {
   tools?: React.ReactNode;
 };
 
-function NodeWrapper({
+export default function NodeWrapper({
   children,
   type,
   helper,
   tools,
 }: NodeWrapperProps) {
-  const [showHelper, setShowHelper] = useState(false);
   const nodeId = useNodeId();
   const { addNodes, deleteElements, getNode, getNodes } = useReactFlow();
-  const performanceMode = useSettingsStoreSelector(
-    s => s.performanceMode
-  );
 
   const deleteNode = () => {
     if (nodeId) {
@@ -89,6 +83,22 @@ function NodeWrapper({
         </Box>
       </NodeToolbar>
 
+      {helper && <NodeToolbar position={Position.Bottom} offset={8}>
+        <Box
+          className="nodrag nopan"
+          sx={{
+            p: 1,
+            border: 1,
+            borderColor: 'divider',
+            borderRadius: 2,
+            bgcolor: 'background.paper',
+            boxShadow: 4,
+          }}
+        >
+          {helper}
+        </Box>
+      </NodeToolbar>}
+
       <Box
         sx={[
           {
@@ -122,23 +132,7 @@ function NodeWrapper({
               borderBottomRightRadius: 0,
             }}
           >
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 0.5 }}>
-              {tools && tools}
-              {helper && (
-                <IconButton
-                  size="small"
-                  sx={{
-                    color: 'text.disabled',
-                  }}
-                  onClick={() =>
-                    setShowHelper(prev => !prev)
-                  }
-                >
-                  <Info size={16} />
-                </IconButton>
-              )}
-
-            </Box>
+            {tools && tools}
           </NodeHeader>
         )}
 
@@ -146,35 +140,21 @@ function NodeWrapper({
           className="nodrag"
           sx={{
             display: 'flex',
+            cursor: 'default',
             flexDirection: 'column',
             borderRadius: 2,
             borderTopLeftRadius: 0,
             borderTopRightRadius: 0,
+            gap: 2,
+            p: 2,
+            pr: 1.5,
             bgcolor: theme =>
               alpha(theme.palette.background.paper, 1),
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 2,
-              p: 2,
-              pr: 1.5
-            }}
-          >
-            {children}
-          </Box>
-
-          {showHelper && (
-            <Box sx={{ pb: 1 }}>
-              {helper}
-            </Box>
-          )}
+          {children}
         </Box>
       </Box>
     </>
   );
 }
-
-export default NodeWrapper;

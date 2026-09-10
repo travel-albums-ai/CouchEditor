@@ -52,9 +52,9 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
         opacity: 1,
       }
     }}>
-      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '60px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
       <MoveRight aria-hidden="true" />
-      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '60px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
     </Box>
   );
 }

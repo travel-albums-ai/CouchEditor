@@ -91,15 +91,7 @@ function NodeHeader({
         sx,
       ]}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1,
-          minWidth: 0,
-        }}
-      >
-        {paletteItem?.icon &&
+      {paletteItem?.icon &&
           cloneElement(paletteItem.icon, {
             size: 20,
             style: {
@@ -107,24 +99,24 @@ function NodeHeader({
             },
           })}
 
-        <Typography
-          variant="caption"
-          color="textPrimary"
-          sx={{
-            fontSize: 14,
-            fontWeight: 600,
-            opacity: 0.87,
-            '&:hover': {
-              opacity: 1,
-            },
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {paletteItem && t(paletteItem.labelKey)}
-        </Typography>
-      </Box>
+      <Typography
+        variant="caption"
+        color="textPrimary"
+        sx={{
+          flex: 1,
+          fontSize: 14,
+          fontWeight: 600,
+          opacity: 0.87,
+          '&:hover': {
+            opacity: 1,
+          },
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {paletteItem && t(paletteItem.labelKey)}
+      </Typography>
 
       {children}
     </Box>
