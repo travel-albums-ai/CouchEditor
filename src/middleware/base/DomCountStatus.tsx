@@ -45,10 +45,12 @@ export default function DomCountStatus() {
 
   return (
     <SolidChip
+      fontSize={14}
+      height={30}
       count={count}
       label={"DOM/e"}
       variant="text"
-      minWidth={80}
+      minWidth={120}
       tooltip={t('domElementsTooltip')}
     />
   )

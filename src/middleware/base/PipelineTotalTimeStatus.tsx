@@ -1,4 +1,5 @@
 import SolidChip from '@/components/SolidChip';
+import { Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -26,10 +27,13 @@ export default function PipelineTotalTimeStatus() {
 
   return (
     <SolidChip
+      icon={<Timer />}
       count={durationMs === null ? '--' : durationMs.toFixed(1)}
       label="ms"
       variant="text"
-      minWidth={80}
+      minWidth={120}
+      fontSize={14}
+      height={30}
       tooltip={t('pipelineTotalTimeTooltip')}
     />
   )

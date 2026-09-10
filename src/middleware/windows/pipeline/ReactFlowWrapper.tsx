@@ -28,8 +28,10 @@ import {
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import LoadingBar from '@/components/LoadingBar';
 import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import SolidChip from '@/components/SolidChip';
+import StatusBar from '@/components/StatusBar';
 import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
@@ -703,12 +705,7 @@ function Pipeline() {
                 ))}
               </Select>
             </FormControl>
-
-
           </Box>
-          {/* <Button disabled variant="outlined" size="large" startIcon={<Workflow size={16} />}>Editor</Button> */}
-          {/* <Button variant="outlined" size="large" startIcon={<GalleryHorizontalEnd size={16} />}>Templates</Button> */}
-
         </Box>
         <GeneralRegistryToolbar
           fullWidth={false}
@@ -750,6 +747,26 @@ function Pipeline() {
         {showToolbox && <FloatingStack sx={{ top: 10, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
           <NodeToolbox />
         </FloatingStack>}
+
+
+        <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-toolbox">
+          <Box
+            id="status-bar"
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: 1.5,
+              p: 0.5,
+              py: 0,
+              position: 'relative',
+            }}
+          >
+            <LoadingBar />
+            <StatusBar />
+          </Box>
+        </FloatingStack>
 
         <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-header-left">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

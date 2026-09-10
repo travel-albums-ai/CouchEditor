@@ -1,4 +1,5 @@
 import SolidChip from '@/components/SolidChip';
+import { Workflow } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -25,9 +26,12 @@ export default function PipelineNodeCountStatus() {
   return (
     <SolidChip
       count={count}
-      label={"PL/n"}
+      icon={<Workflow />}
+      label={"Nodes"}
       variant="text"
-      minWidth={80}
+      minWidth={120}
+      fontSize={14}
+      height={30}
       tooltip={t('pipelineNodesTooltip')}
     />
   )

@@ -9,8 +9,11 @@ export default function VersionStatus() {
     <SolidChip
       count={version}
       label={"v"}
-      variant="text"
-      minWidth={60}
+      variant="header"
+      minWidth={80}
+      fontSize={14}
+      height={30}
+      borderless
       tooltip={`Version: ${version}`}
     />
   )
