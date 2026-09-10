@@ -1,3 +1,9 @@
+## [1.24.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.23.0...v1.24.0) (2026-09-10)
+
+### ✨ Features
+
+* implement GridVirtuoso component for optimized photo grid rendering in SourceNode and ViewerNode ([bd1e6b4](https://github.com/travel-albums-ai/CouchEditor/commit/bd1e6b41566096fbad46e804877618d953fa5867))
+
 ## [1.23.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.22.0...v1.23.0) (2026-09-10)
 
 ### ✨ Features
