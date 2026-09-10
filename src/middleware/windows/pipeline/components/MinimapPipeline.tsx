@@ -91,7 +91,7 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
               height: Math.max(height * scale, 2),
 
               backgroundColor: theme => `color-mix(in srgb, ${stc(node.type)} 50%, ${theme.palette.primary.main} 50%)`,
-              borderRadius: 2,
+              borderRadius: 0.75,
             }}
           />
         );
