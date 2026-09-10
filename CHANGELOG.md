@@ -1,3 +1,9 @@
+## [1.18.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.17.1...v1.18.0) (2026-09-10)
+
+### ✨ Features
+
+* Updated minimap and styling ([5c7adc0](https://github.com/travel-albums-ai/CouchEditor/commit/5c7adc0dd1ff027fed14387ac662ef1f66daca21))
+
 ## [1.17.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.17.0...v1.17.1) (2026-09-10)
 
 ### 🐛 Fixes
