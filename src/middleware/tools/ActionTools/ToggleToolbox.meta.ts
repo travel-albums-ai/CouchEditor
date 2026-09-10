@@ -4,7 +4,7 @@ export const meta = {
   id: "ToggleToolbox",
   tool: [
     {
-      id: 'header',
+      id: 'toolbox',
       side: 'right',
       priority: 0
     }

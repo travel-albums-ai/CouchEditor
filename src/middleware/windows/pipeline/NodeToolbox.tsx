@@ -1,3 +1,4 @@
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
@@ -35,22 +36,28 @@ export default function NodeToolbox() {
       overflow: 'auto',
       p: 1,
     }}>
-      <TextField
-        size="small"
-        placeholder={t('searchToolbox')}
-        value={searchTermToolbox}
-        slotProps={{
-          input: {
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search size={16} />
-              </InputAdornment>
-            ),
-          },
-        }}
-        onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
-        sx={{ mb: 2 }}
-      />
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <TextField
+          size="small"
+          placeholder={t('searchToolbox')}
+          value={searchTermToolbox}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search size={16} />
+                </InputAdornment>
+              ),
+            },
+          }}
+          onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
+        />
+        <GeneralRegistryToolbar
+          fullWidth={false}
+          noGhost={true}
+          group="toolbox"
+        />
+      </Box>
 
       {Object.entries(groupedPaletteItems)
         .filter(([_, items]) => items.some(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase())))

@@ -29,6 +29,7 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import LoadingBar from '@/components/LoadingBar';
+import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import StatusBar from '@/components/StatusBar';
 import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
@@ -702,6 +703,13 @@ function Pipeline() {
 
         {showToolbox && <FloatingStack sx={{ top: 10, left: 12, bottom: 10, overflow: 'auto' }} id="pipeline-toolbox">
           <NodeToolbox />
+        </FloatingStack>}
+        {!showToolbox && <FloatingStack sx={{ top: 10, left: 12, overflow: 'auto' }} id="pipeline-toolbox">
+          <GeneralRegistryToolbar
+            fullWidth={false}
+            noGhost={true}
+            group="toolbox"
+          />
         </FloatingStack>}
 
 
