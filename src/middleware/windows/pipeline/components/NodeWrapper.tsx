@@ -2,7 +2,8 @@ import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeId, useReactFlow } from '@xyflow/react';
-import { Copy, RotateCcw, Trash2 } from 'lucide-react';
+import { Copy, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
@@ -20,6 +21,7 @@ export default function NodeWrapper({
 }: NodeWrapperProps) {
   const nodeId = useNodeId();
   const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
+  const [showHelper, setShowHelper] = useState(false);
 
   const deleteNode = () => {
     if (nodeId) {
@@ -103,6 +105,11 @@ export default function NodeWrapper({
               <Copy size={16} />
             </IconButton>
           </Tooltip>
+          <Tooltip title="Help">
+            <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)}>
+              <HelpCircle size={16} />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Reset node">
             <IconButton size="small" aria-label="Reset node" onClick={resetNode}>
               <RotateCcw size={16} />
@@ -116,7 +123,7 @@ export default function NodeWrapper({
         </Box>
       </NodeToolbar>
 
-      {helper && <NodeToolbar position={Position.Bottom} offset={8}>
+      {showHelper && helper && <NodeToolbar position={Position.Bottom} offset={8}>
         <Box
           className="nodrag nopan"
           sx={{
