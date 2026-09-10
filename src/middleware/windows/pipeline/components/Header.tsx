@@ -17,7 +17,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
 
   return (
     <Box sx={{ p: 2, py: 1.5, bgcolor: 'background.paper', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-      boxShadow: theme => `0px 4px 6px ${theme.palette.divider}`,
+      boxShadow: theme => `0px 4px 4px -2px ${theme.palette.divider}`,
       zIndex: 10 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <img
