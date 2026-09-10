@@ -1,5 +1,5 @@
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, useTheme } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,7 @@ type InformationNodeData = {
 
 function InformationNode({ id, data }: NodeProps<Node<InformationNodeData>>) {
   const { t } = useTranslation();
+  const theme = useTheme();
   const { setNodes } = useReactFlow();
   const size = data.size ?? 'header';
   const content = data.content ?? data[size] ?? '';
@@ -48,6 +49,8 @@ function InformationNode({ id, data }: NodeProps<Node<InformationNodeData>>) {
       </FormControl>
       <textarea
         style={{
+          backgroundColor: 'transparent',
+          color: theme.palette.text.primary,
           border: '0px none',
           fontSize: size === 'header' ? 30 : size === 'description' ? 20 : 16,
           width: '100%',
