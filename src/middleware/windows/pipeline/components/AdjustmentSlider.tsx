@@ -60,7 +60,7 @@ export default function AdjustmentSlider({
         max={max}
         disabled={disabled}
         step={step}
-        sx={{ width: '150px', mx: 1, opacity: disabled ? 0.5 : 1 }}
+        sx={{ width: 'auto', flex: 1, mx: 1, mr: 2, opacity: disabled ? 0.5 : 1 }}
         value={value}
         onChange={(_, nextValue) => {
           const nextAmount = Array.isArray(nextValue) ? nextValue[0] : nextValue;
@@ -69,7 +69,8 @@ export default function AdjustmentSlider({
           schedulePipelineChange();
         }}
       />
-      <SolidChip count={value} />
+
+      <SolidChip count={value} fontSize={14} height={28} minWidth={50} variant="header" />
     </Box>
   );
 }
