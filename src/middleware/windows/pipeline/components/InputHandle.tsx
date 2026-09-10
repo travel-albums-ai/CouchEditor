@@ -32,7 +32,6 @@ export function InputHandle({
       }}>
         <Circle size={10} style={{
           position: 'absolute',
-          top: '0px',
           right: '2px',
           stroke: theme.palette.divider,
           fill: theme.palette.primary.main,

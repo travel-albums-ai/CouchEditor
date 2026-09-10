@@ -42,14 +42,15 @@ function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
       <ToneNodeLayout id={id} type={config.type}>
         {CHANNELS.map(({ key, labelKey, color }) => (
           <label key={key}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <Box sx={{ backgroundColor: color, width: '16px',
-                border: '1px solid',
-                borderColor: 'background.paper',
-                display: 'inline-block', height: '16px', borderRadius: 4, opacity: 0.5 }} />
-              <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0 }}>{t(labelKey)}</Typography>
-            </Box>
+
             <AdjustmentSlider
+              description={<Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Box sx={{ backgroundColor: color, width: '16px',
+                  border: '1px solid',
+                  borderColor: 'background.paper',
+                  display: 'inline-block', height: '16px', borderRadius: 4, opacity: 0.5 }} />
+                <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0 }}>{t(labelKey)}</Typography>
+              </Box>}
               min={config.min}
               max={config.max}
               step={config.step}

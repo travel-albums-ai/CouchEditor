@@ -1,5 +1,5 @@
 import { hdrEffectStage } from '@/lib/utils';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
 import { useState } from 'react';
 import { AdjustmentPreview } from '../components/AdjustmentPreview';
@@ -26,38 +26,34 @@ export default function HdrNode({ id, data }: NodeProps<Node<HdrData>>) {
       tools={<PipelineStageTiming nodeId={id} nodeType="hdr" />}
       helper={<AdjustmentPreview amount={amount} algorithm={(value) => hdrEffectStage(value, radius)} label="HDR" />}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Typography variant="caption" color="textSecondary">Amount</Typography>
-        <AdjustmentSlider
-          min={0}
-          max={100}
-          step={1}
-          value={amount}
-          onChange={(value) => {
-            setNodes((current) => current.map((node) => node.id === id
-              ? { ...node, data: { ...node.data, amount: value } }
-              : node
-            ));
-            setAmount(value);
-          }}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Typography variant="caption" color="textSecondary">Radius</Typography>
-        <AdjustmentSlider
-          min={1}
-          max={50}
-          step={1}
-          value={radius}
-          onChange={(value) => {
-            setNodes((current) => current.map((node) => node.id === id
-              ? { ...node, data: { ...node.data, radius: value } }
-              : node
-            ));
-            setRadius(value);
-          }}
-        />
-      </Box>
+      <AdjustmentSlider
+        description={<Typography variant="caption" color="textSecondary">Amount</Typography>}
+        min={0}
+        max={100}
+        step={1}
+        value={amount}
+        onChange={(value) => {
+          setNodes((current) => current.map((node) => node.id === id
+            ? { ...node, data: { ...node.data, amount: value } }
+            : node
+          ));
+          setAmount(value);
+        }}
+      />
+      <AdjustmentSlider
+        description={<Typography variant="caption" color="textSecondary">Radius</Typography>}
+        min={1}
+        max={50}
+        step={1}
+        value={radius}
+        onChange={(value) => {
+          setNodes((current) => current.map((node) => node.id === id
+            ? { ...node, data: { ...node.data, radius: value } }
+            : node
+          ));
+          setRadius(value);
+        }}
+      />
     </NodeWrapper>
     <OutputHandle id="image" />
   </>;

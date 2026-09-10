@@ -20,8 +20,9 @@ export default function TemperatureTintNode({
 
   return (
     <ToneNodeLayout id={id} type="temperature-tint">
-      <Typography variant="caption" color="textSecondary">{t('pipelineTemperatureTint')}</Typography>
+
       <AdjustmentSlider
+        description={<Typography variant="caption" color="textSecondary">{t('pipelineTemperature')}</Typography>}
         min={-100}
         max={100}
         step={1}
@@ -31,8 +32,8 @@ export default function TemperatureTintNode({
           setTemperature(value);
         }}
       />
-      <Typography variant="caption" color="textSecondary">{t('pipelineTint')}</Typography>
       <AdjustmentSlider
+        description={<Typography variant="caption" color="textSecondary">{t('pipelineTint')}</Typography>}
         min={-100}
         max={100}
         step={1}

@@ -81,10 +81,11 @@ export default function SplitToningNode({
           onChange={(event) => updateTint('highlightTint', event.target.value)}
         />
       </Box>
-      <Typography variant="caption" color="textSecondary">
-        {t('pipelineSplitToningStrength')}
-      </Typography>
+
       <AdjustmentSlider
+        description={<Typography variant="caption" color="textSecondary">
+          {t('pipelineSplitToningStrength')}
+        </Typography>}
         min={0}
         max={100}
         step={1}

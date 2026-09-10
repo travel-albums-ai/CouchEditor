@@ -3,6 +3,7 @@ import { Box, Slider } from '@mui/material';
 import { useCallback, useEffect, useRef } from 'react';
 
 type AdjustmentSliderProps = {
+  description?: React.ReactNode;
   min: number;
   max: number;
   step: number;
@@ -13,6 +14,7 @@ type AdjustmentSliderProps = {
 };
 
 export default function AdjustmentSlider({
+  description,
   min,
   max,
   step,
@@ -53,7 +55,8 @@ export default function AdjustmentSlider({
   }, []);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
+      {description && <Box sx={{ minWidth: 70 }}>{description}</Box>}
       <Slider
         min={min}
         size="small"

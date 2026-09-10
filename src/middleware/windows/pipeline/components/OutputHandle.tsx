@@ -23,7 +23,6 @@ export function OutputHandle({ id, position }: { id: string; position?: Position
       }}>
         <Circle size={10} style={{
           position: 'absolute',
-          top: '0px',
           right: '3px',
           stroke: theme.palette.divider,
           fill: theme.palette.primary.main,
