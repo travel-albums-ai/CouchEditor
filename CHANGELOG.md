@@ -1,3 +1,9 @@
+## [1.18.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.2...v1.18.3) (2026-09-10)
+
+### 🐛 Fixes
+
+* enable fit pane on double-click for improved user experience ([5df5c00](https://github.com/travel-albums-ai/CouchEditor/commit/5df5c001588b5c275f4bb805e08846bbf4485454))
+
 ## [1.18.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.1...v1.18.2) (2026-09-10)
 
 ### 🐛 Fixes
