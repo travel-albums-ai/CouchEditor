@@ -1,3 +1,9 @@
+## [1.17.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.17.0...v1.17.1) (2026-09-10)
+
+### 🐛 Fixes
+
+* adjust padding and margin in Header component for improved layout ([ca130c1](https://github.com/travel-albums-ai/CouchEditor/commit/ca130c1e9622a1d12f6b078b4c26675f02992120))
+
 ## [1.17.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.16.0...v1.17.0) (2026-09-10)
 
 ### ✨ Features
