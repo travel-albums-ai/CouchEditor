@@ -1,3 +1,4 @@
+import GridVirtuoso from '@/components/GridVirtuoso';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
@@ -112,22 +113,9 @@ function ViewerNode({
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         {images.length > 0 ? (
-          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-            {images.map((value, index) => (
-              <img
-                key={index}
-                src={value.src}
-                alt=""
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '300px',
-                  objectFit: 'cover',
-                  borderRadius: '6px',
-                }}
-              />
-            ))}
-          </Box>
+          <GridVirtuoso
+            photos={images.map((file) => ({ name: file.name, src: file.src }))}
+          />
         ) : (
           <NoPhotos />
         )}

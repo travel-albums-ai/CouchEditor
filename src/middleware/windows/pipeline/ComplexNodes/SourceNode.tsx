@@ -1,4 +1,4 @@
-import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import GridVirtuoso from '@/components/GridVirtuoso';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
@@ -131,23 +131,11 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
             </Typography>
           </Box>
         )}
+
         {previewUrls.length > 0 ? (
-          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
-            {previewUrls.map((value, index) => (
-              <AlbumPhotoThumbnailBackgroundNg
-                key={index}
-                photo={{ name: files[index]?.name, src: value}}
-                alt=""
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '300px',
-                  objectFit: 'cover',
-                  borderRadius: '6px',
-                }}
-              />
-            ))}
-          </Box>
+          <GridVirtuoso
+            photos={files.map((file) => ({ name: file.name, src: URL.createObjectURL(file) }))}
+          />
         ) : (
           <NoPhotos />
         )}

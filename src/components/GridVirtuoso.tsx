@@ -1,10 +1,8 @@
+import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import { GalleryPhoto } from '@/lib/galleryData';
 import { Box } from '@mui/material';
 import { useCallback, useMemo, useRef } from 'react';
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';
-
-import { useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import { GalleryPhoto } from '@/lib/galleryData';
-import AlbumPhotoCard from './AlbumPhotoCard';
 
 type Props = {
   photos: GalleryPhoto[];
@@ -13,7 +11,6 @@ type Props = {
 };
 
 const GRID_STYLE = { height: '100%', overflowX: 'visible', borderRadius: '8px' } as const;
-const CARD_STYLE = { gridColumn: 'span 1', gridRow: 'span 1' } as const;
 
 const GridList = ({ style, children, width, gap, ...props }: any) => {
   return (
@@ -33,9 +30,9 @@ const GridList = ({ style, children, width, gap, ...props }: any) => {
   );
 };
 
-export default function AllPhotosGridVirtuoso({ photos, width: propWidth, height: propHeight }: Props) {
-  const width = propWidth ?? useAlbumPhotoCardStoreSelector((state) => state.width);
-  const height = propHeight ?? useAlbumPhotoCardStoreSelector((state) => state.height);
+export default function GridVirtuoso({ photos }: Props) {
+  const width = 300;
+  const height = 300;
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
 
   const itemContent = useCallback(
@@ -44,9 +41,17 @@ export default function AllPhotosGridVirtuoso({ photos, width: propWidth, height
       if (!photo) return null;
 
       return (
-        <AlbumPhotoCard
-          photo={photo}
-          style={CARD_STYLE}
+        <AlbumPhotoThumbnailBackgroundNg
+          key={index}
+          photo={{ name: photo.name, src: photo.src}}
+          alt=""
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '300px',
+            objectFit: 'cover',
+            borderRadius: '6px',
+          }}
         />
       );
     },
