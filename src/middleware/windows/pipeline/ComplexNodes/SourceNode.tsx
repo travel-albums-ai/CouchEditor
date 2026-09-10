@@ -131,7 +131,6 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
             </Typography>
           </Box>
         )}
-
         {previewUrls.length > 0 ? (
           <GridVirtuoso
             photos={files.map((file) => ({ name: file.name, src: URL.createObjectURL(file) }))}
