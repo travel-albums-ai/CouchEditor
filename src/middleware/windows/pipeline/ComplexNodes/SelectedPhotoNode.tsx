@@ -23,11 +23,11 @@ function SelectedPhotoNode({
 
   return (
     <>
-      <InputHandle id="image" position={Position.Top} />
+      <InputHandle id="image" position={Position.Left} />
       <NodeWrapper title="Selected Photo" type="selected-photo">
         <small>{previewPhotoObj ?? 'No photo selected'}</small>
       </NodeWrapper>
-      <OutputHandle id="image" position={Position.Bottom} />
+      <OutputHandle id="image" position={Position.Right} />
     </>
   );
 }
