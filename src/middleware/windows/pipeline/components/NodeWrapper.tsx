@@ -105,11 +105,11 @@ export default function NodeWrapper({
               <Copy size={16} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Help">
+          {helper && <Tooltip title="Help">
             <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)}>
               <HelpCircle size={16} />
             </IconButton>
-          </Tooltip>
+          </Tooltip>}
           <Tooltip title="Reset node">
             <IconButton size="small" aria-label="Reset node" onClick={resetNode}>
               <RotateCcw size={16} />
