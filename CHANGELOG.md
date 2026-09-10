@@ -1,3 +1,9 @@
+## [1.18.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.18.0...v1.18.1) (2026-09-10)
+
+### 🐛 Fixes
+
+* adjust scrollbar colors for improved visibility ([cf14a43](https://github.com/travel-albums-ai/CouchEditor/commit/cf14a431924262b9bba0deeb1a90a6cb2103bf19))
+
 ## [1.18.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.17.1...v1.18.0) (2026-09-10)
 
 ### ✨ Features
