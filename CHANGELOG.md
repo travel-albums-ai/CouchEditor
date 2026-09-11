@@ -1,3 +1,9 @@
+## [1.41.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.40.0...v1.41.0) (2026-09-11)
+
+### ✨ Features
+
+* add 'nowheel' class to prevent scrolling in SourceNode and ViewerNode boxes ([7f10be9](https://github.com/travel-albums-ai/CouchEditor/commit/7f10be959907697ad89147c4aa2e5c638fdeede8))
+
 ## [1.40.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.39.0...v1.40.0) (2026-09-11)
 
 ### ✨ Features
