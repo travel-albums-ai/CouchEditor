@@ -1,3 +1,9 @@
+## [1.43.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.42.0...v1.43.0) (2026-09-11)
+
+### ✨ Features
+
+* add GPS Map node and related localization strings for GPS data visualization ([bb20a17](https://github.com/travel-albums-ai/CouchEditor/commit/bb20a1700b27f1beb98cc266903af604f519cbc3))
+
 ## [1.42.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.41.0...v1.42.0) (2026-09-11)
 
 ### ✨ Features
