@@ -1,13 +1,6 @@
-import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import BYOKCosts from '@/middleware/windows/settings/byok/BYOKCosts';
-import BYOKOpenAi from '@/middleware/windows/settings/byok/BYOKOpenAi';
-import BYOKPersona from '@/middleware/windows/settings/components/BYOKPersona';
-import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
-import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { Box, Button, Typography } from '@mui/material';
-import { Astroid, Key, PersonStanding, Plus, UserKey } from 'lucide-react';
-import { Fragment } from 'react';
+import { Astroid, Key } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const toggleControls = [
@@ -22,7 +15,7 @@ export default function AICostsPopover() {
   const { t } = useTranslation()
 
   return <>
-    <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true} uuid="byok-toggle-ai">
+    {/* <SettingsSection title="AI via Bring Your Own Key (BYOK)" icon={<Key />} transparent={true} uuid="byok-toggle-ai">
       {toggleControls
         .map((control) => (
           <Fragment key={control.key}>
@@ -52,11 +45,11 @@ export default function AICostsPopover() {
       </Box>
     </SettingsSection>
 
-    <BYOKOpenAi />
+    <BYOKOpenAi /> */}
 
     <BYOKCosts />
 
-    <SettingsSection title="AI identifiable personas" icon={<PersonStanding />} uuid="byok-personas">
+    {/* <SettingsSection title="AI identifiable personas" icon={<PersonStanding />} uuid="byok-personas">
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1, justifyContent: 'space-between' }}>
         <Typography variant="subtitle2">Identify personas in photos</Typography>
         <Button variant="outlined" size="small" color="primary" onClick={() => addAdditionalPersona({ name: '', description: '' })}><Plus size={16} /></Button>
@@ -67,7 +60,7 @@ export default function AICostsPopover() {
         {getAdditionalPersonas().map((persona, index) => <BYOKPersona persona={persona} main={false} index={index} key={index} />)}
       </Box>
     </SettingsSection>
-
+ */}
 
   </>
 }

@@ -233,6 +233,8 @@
   "pipelineMaxAIRequests": "Maximum concurrent AI requests",
   "pipelineAICallDelayMs": "Delay between AI requests (ms)",
   "byokSectionTitle": "AI via Bring Your Own Key (BYOK)",
+  "settingsByokCosts": "BYOK Costs",
+  "settingsByokGuidanceCosts": "Configure the costs associated with using BYOK for AI enhanced features",
   "byokEnableAi": "Open AI",
   "byokOpenAiKey": "Open AI Key",
   "byokGetApiKey": "Get your OpenAI API key",

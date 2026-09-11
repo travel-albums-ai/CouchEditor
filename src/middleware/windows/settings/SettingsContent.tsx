@@ -1,5 +1,6 @@
 import SidebarCoreButton from '@/components/SidebarCoreButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import AICostsPopover from '@/middleware/windows/settings/AICostsPopover';
 import BYOKPopover from '@/middleware/windows/settings/BYOKPopover';
 import LayoutPopover from '@/middleware/windows/settings/LayoutPopover';
 import { Box, Tooltip, Typography } from '@mui/material';
@@ -43,6 +44,7 @@ export default function SettingsContent() {
   const sections = useMemo(() => [
     { key: 'layout', titleKey: 'settingsInterfaceTitle', component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
     { key: 'byok', group: 'ai', titleKey: 'settingsByokTitle', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidance') },
+    { key: 'costs', group: 'ai', titleKey: 'settingsByokCosts', component: <AICostsPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidanceCosts') },
   ], [t])
 
   useEffect(() => {

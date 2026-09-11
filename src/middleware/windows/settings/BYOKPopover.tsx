@@ -1,5 +1,6 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
+import BYOKOpenAi from '@/middleware/windows/settings/byok/BYOKOpenAi';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Button } from '@mui/material';
@@ -49,7 +50,7 @@ export default function BYOKPopover() {
       </Box>
     </SettingsSection>
 
-    {/* <BYOKOpenAi /> */}
+    <BYOKOpenAi />
 
   </>
 }
