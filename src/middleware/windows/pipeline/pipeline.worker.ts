@@ -87,6 +87,10 @@ type WorkerImage = {
   cacheKey?: string;
 };
 
+function getImageSetKey(image: WorkerImage): string | ImageBitmap {
+  return image.cacheKey ?? image.name ?? image.bitmap;
+}
+
 // Bounds in-flight image work inside an individual node. The worker-wide
 // task queue below limits how many pipeline nodes can run at once.
 const MAX_CONCURRENT_IMAGE_OPS = Math.max(
@@ -1107,6 +1111,43 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       const image = inputs[selectedInput];
 
       return { image: Array.isArray(image) ? image as WorkerImage[] : [] };
+    },
+  },
+
+  "array-and": {
+    async execute(inputs) {
+      const first = Array.isArray(inputs["image-1"]) ? inputs["image-1"] as WorkerImage[] : [];
+      const second = Array.isArray(inputs["image-2"]) ? inputs["image-2"] as WorkerImage[] : [];
+      const secondKeys = new Set(second.map(getImageSetKey));
+
+      return { image: first.filter((image) => secondKeys.has(getImageSetKey(image))) };
+    },
+  },
+
+  "array-and-not": {
+    async execute(inputs) {
+      const first = Array.isArray(inputs["image-1"]) ? inputs["image-1"] as WorkerImage[] : [];
+      const second = Array.isArray(inputs["image-2"]) ? inputs["image-2"] as WorkerImage[] : [];
+      const secondKeys = new Set(second.map(getImageSetKey));
+
+      return { image: first.filter((image) => !secondKeys.has(getImageSetKey(image))) };
+    },
+  },
+
+  "array-or": {
+    async execute(inputs) {
+      const first = Array.isArray(inputs["image-1"]) ? inputs["image-1"] as WorkerImage[] : [];
+      const second = Array.isArray(inputs["image-2"]) ? inputs["image-2"] as WorkerImage[] : [];
+      const seen = new Set<string | ImageBitmap>();
+      const image = [...first, ...second].filter((item) => {
+        const key = getImageSetKey(item);
+
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      return { image };
     },
   },
 

@@ -37,6 +37,7 @@ import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStac
 import Header from '@/middleware/windows/pipeline/components/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
+import ArraySetOperationNode from "./ComplexNodes/ArraySetOperationNode";
 import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
 import CropNode from "./ComplexNodes/CropNode";
 import ExifSplitNode from "./ComplexNodes/ExifSplitNode";
@@ -98,6 +99,9 @@ const nodeTypes = {
   "google-drive": GoogleDriveNode,
   grouper: GrouperNode,
   "array-switch": ArraySwitchNode,
+  "array-and": ArraySetOperationNode,
+  "array-and-not": ArraySetOperationNode,
+  "array-or": ArraySetOperationNode,
   "exif-split": ExifSplitNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
