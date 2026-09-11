@@ -1,3 +1,9 @@
+## [1.54.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.53.0...v1.54.0) (2026-09-11)
+
+### ✨ Features
+
+* enhance NodeWrapper with connection handling and visual feedback for unconnected handles ([ef2817c](https://github.com/travel-albums-ai/CouchEditor/commit/ef2817c4cbb024d2fea2e7b7dddf14ddce6a6092))
+
 ## [1.53.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.52.1...v1.53.0) (2026-09-11)
 
 ### ✨ Features
