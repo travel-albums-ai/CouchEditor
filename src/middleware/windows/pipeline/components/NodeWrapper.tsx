@@ -1,8 +1,8 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import { NodeToolbar, Position, useNodeId, useReactFlow } from '@xyflow/react';
-import { Copy, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
+import { NodeToolbar, Position, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
+import { Copy, FastForward, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import stc from 'string-to-color';
 
@@ -20,8 +20,10 @@ export default function NodeWrapper({
   tools,
 }: NodeWrapperProps) {
   const nodeId = useNodeId();
+  const nodeData = useNodesData(nodeId ?? '');
   const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
   const [showHelper, setShowHelper] = useState(false);
+  const isSkipping = nodeData?.data?.skip === true;
 
   const deleteNode = () => {
     if (nodeId) {
@@ -84,6 +86,17 @@ export default function NodeWrapper({
     });
   };
 
+  const toggleSkipping = () => {
+    if (!nodeId) return;
+
+    setNodes((current) => current.map((node) =>
+      node.id === nodeId
+        ? { ...node, data: { ...node.data, skip: !isSkipping } }
+        : node
+    ));
+    window.dispatchEvent(new CustomEvent('pipeline:changed'));
+  };
+
   return (
     <>
       <NodeToolbar position={Position.Top} offset={8}>
@@ -110,6 +123,16 @@ export default function NodeWrapper({
               <HelpCircle size={16} />
             </IconButton>
           </Tooltip>}
+          <Tooltip title={isSkipping ? 'Enable node' : 'Skip node'}>
+            <IconButton
+              size="small"
+              aria-label={isSkipping ? 'Enable node' : 'Skip node'}
+              color={isSkipping ? 'warning' : 'default'}
+              onClick={toggleSkipping}
+            >
+              <FastForward size={16} />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Reset node">
             <IconButton size="small" aria-label="Reset node" onClick={resetNode}>
               <RotateCcw size={16} />
@@ -188,6 +211,7 @@ export default function NodeWrapper({
             gap: 2,
             p: 2,
             pr: 1.5,
+            filter: isSkipping ? 'blur(2px) grayscale(75%)' : 'none',
             bgcolor: theme =>
               alpha(theme.palette.background.paper, 1),
           }}

@@ -1991,6 +1991,19 @@ async function runEvaluation(
         ].map((value) => typeof value === "number" ? value : 0);
       }
 
+      if (node.data.skip === true) {
+        console.log(`⏭ skipping ${node.id}`);
+        signatures.set(nodeId, serializeForCache({
+          type: node.type,
+          data: node.data,
+          upstream: upstreamSignatures,
+        }));
+        const firstIncomingArray = inputEntries.find(([, value]) => Array.isArray(value))?.[1];
+        return inputs.image === undefined && firstIncomingArray !== undefined
+          ? { ...inputs, image: firstIncomingArray }
+          : inputs;
+      }
+
       const signature = serializeForCache({
         type: node.type,
         data: node.data,

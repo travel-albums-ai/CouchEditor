@@ -39,6 +39,7 @@ const NODE_DATA_KEYS = [
   "tileWidth",
   "tileHeight",
   "passthru",
+  "skip",
   "apiKey",
   "prompt",
   "scale",
