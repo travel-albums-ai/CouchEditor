@@ -125,6 +125,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
             onChange={(event) => {
               const nextPrompt = event.target.value;
               setPrompt(nextPrompt);
+              setEngaged(false)
               data.prompt = nextPrompt;
               window.dispatchEvent(new CustomEvent("pipeline:changed"));
             }}
