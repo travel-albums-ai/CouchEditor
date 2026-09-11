@@ -1,3 +1,15 @@
+## [1.52.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.52.0...v1.52.1) (2026-09-11)
+
+### 🐛 Fixes
+
+* set sourcemap to true in build configuration ([9aed454](https://github.com/travel-albums-ai/CouchEditor/commit/9aed4543c19bfcba075c6d288ba37c8f91f6679f))
+
+### 🧹 Refactors
+
+* remove deprecated tool discovery and registry components ([f5c1c3c](https://github.com/travel-albums-ai/CouchEditor/commit/f5c1c3c6166e7c687be3765d0960738b6476a84e))
+* remove unused ESLint rules and Product Hunt badge from Header component ([84f53d1](https://github.com/travel-albums-ai/CouchEditor/commit/84f53d16bd1a63c3b88c3a804d0286be0b9b1c2e))
+* replace GeneralRegistryToolbar with ToggleToolbox in NodeToolbox and ReactFlowWrapper; update Header and LayoutPopover to use new components ([a1906e5](https://github.com/travel-albums-ai/CouchEditor/commit/a1906e595793e6cbb594851b65cd45cb35e0ac5b))
+
 ## [1.52.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.51.1...v1.52.0) (2026-09-11)
 
 ### ✨ Features
