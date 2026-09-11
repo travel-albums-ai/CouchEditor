@@ -90,6 +90,15 @@ export type PipelineExifStatsMessage = {
   withoutExif: number;
 };
 
+export type PipelineGpsStatsMessage = {
+  type: "gpsStats";
+  evaluationId: number;
+  nodeId: string;
+  total: number;
+  withGps: number;
+  withoutGps: number;
+};
+
 export type PipelineViewerImagePayload = {
   blob: Blob;
   width: number;
@@ -122,6 +131,7 @@ export type PipelineWorkerOutbound =
   | PipelineStageTimingMessage
   | PipelineStageStartedMessage
   | PipelineExifStatsMessage
+  | PipelineGpsStatsMessage
   | PipelineViewerMessage
   | PipelineDoneMessage
   | PipelineErrorMessage;

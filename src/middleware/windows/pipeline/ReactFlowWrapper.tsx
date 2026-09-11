@@ -43,6 +43,7 @@ import ExifSplitNode from "./ComplexNodes/ExifSplitNode";
 import ExifViewerNode from "./ComplexNodes/ExifViewerNode";
 import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
 import GpsMapNode from "./ComplexNodes/GpsMapNode";
+import GpsSplitNode from "./ComplexNodes/GpsSplitNode";
 import GrouperNode from "./ComplexNodes/GrouperNode";
 import HotFolderReadNode from "./ComplexNodes/HotFolderReadNode";
 import HotFolderWriteNode from "./ComplexNodes/HotFolderWriteNode";
@@ -137,6 +138,7 @@ const nodeTypes = {
   "viewer-single": SinglePhotoViewerNode,
   "exif-viewer": ExifViewerNode,
   "gps-map": GpsMapNode,
+  "gps-split": GpsSplitNode,
   "photo-histogram": PhotoHistogramNode,
   "hot-folder-write": HotFolderWriteNode,
   information: InformationNode,

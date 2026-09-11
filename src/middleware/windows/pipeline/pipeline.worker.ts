@@ -1120,6 +1120,25 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "gps-split": {
+    async execute(inputs) {
+      const images = (inputs.image as WorkerImage[] | undefined) ?? [];
+      const hasCoordinate = (value: unknown): value is number => typeof value === "number" && Number.isFinite(value);
+      const getCoordinate = (image: WorkerImage, key: string) => image.exif?.[key];
+      const withGps = images.filter((image) => {
+        const latitude = getCoordinate(image, "latitude") ?? getCoordinate(image, "GPSLatitude");
+        const longitude = getCoordinate(image, "longitude") ?? getCoordinate(image, "GPSLongitude");
+
+        return hasCoordinate(latitude) && hasCoordinate(longitude)
+          && latitude >= -90 && latitude <= 90
+          && longitude >= -180 && longitude <= 180;
+      });
+      const withoutGps = images.filter((image) => !withGps.includes(image));
+
+      return { withGps, withoutGps };
+    },
+  },
+
   invert: stageNode(invertStage, { kind: "invert" }),
   "black-white": stageNode(blackAndWhiteStage, { kind: "black-white" }),
   sepia: stageNode(sepiaStage, { kind: "sepia" }),
@@ -1835,6 +1854,20 @@ async function runEvaluation(
           total: withExif.length + withoutExif.length,
           withExif: withExif.length,
           withoutExif: withoutExif.length,
+        });
+      }
+
+      if (node.type === "gps-split") {
+        const withGps = result.withGps as WorkerImage[] | undefined ?? [];
+        const withoutGps = result.withoutGps as WorkerImage[] | undefined ?? [];
+
+        workerScope.postMessage({
+          type: "gpsStats",
+          evaluationId,
+          nodeId: node.id,
+          total: withGps.length + withoutGps.length,
+          withGps: withGps.length,
+          withoutGps: withoutGps.length,
         });
       }
 

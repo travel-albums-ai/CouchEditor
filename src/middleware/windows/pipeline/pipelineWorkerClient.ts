@@ -148,6 +148,20 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
       return;
     }
 
+    case "gpsStats": {
+      window.dispatchEvent(
+        new CustomEvent('gps-split:stats', {
+          detail: {
+            nodeId: message.nodeId,
+            total: message.total,
+            withGps: message.withGps,
+            withoutGps: message.withoutGps,
+          },
+        })
+      );
+      return;
+    }
+
     case "viewer": {
       const pending = pendingViewers.get(message.nodeId);
 
