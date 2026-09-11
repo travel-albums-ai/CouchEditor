@@ -128,7 +128,7 @@ export default defineConfig(({ command }) => {
 
     build: {
       chunkSizeWarningLimit: 2000,
-      sourcemap: shouldVisualize,
+      sourcemap: true,
 
       esbuild: {
         legalComments: 'none',
