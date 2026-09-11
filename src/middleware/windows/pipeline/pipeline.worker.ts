@@ -124,6 +124,44 @@ class PipelineTaskQueue {
   }
 }
 
+class AIRequestQueue {
+  private active = 0;
+  private nextStartAt = 0;
+  private readonly waiters: Array<() => void> = [];
+
+  constructor(
+    private readonly limit: number,
+    private readonly delayMs: number
+  ) {}
+
+  async run<T>(evaluationId: number, task: () => Promise<T>): Promise<T> {
+    throwIfStale(evaluationId);
+
+    if (this.active >= this.limit) {
+      await new Promise<void>((resolve) => this.waiters.push(resolve));
+      throwIfStale(evaluationId);
+    }
+
+    this.active += 1;
+
+    try {
+      const now = Date.now();
+      const startAt = Math.max(now, this.nextStartAt);
+      this.nextStartAt = startAt + this.delayMs;
+
+      if (startAt > now) {
+        await new Promise<void>((resolve) => setTimeout(resolve, startAt - now));
+        throwIfStale(evaluationId);
+      }
+
+      return await task();
+    } finally {
+      this.active -= 1;
+      this.waiters.shift()?.();
+    }
+  }
+}
+
 // ============================================================
 // Cooperative cancellation
 // ============================================================
@@ -705,7 +743,9 @@ async function requestOpenAIImageEdit(
   source: WorkerImage,
   apiKey: string,
   prompt: string,
-  signal: AbortSignal
+  signal: AbortSignal,
+  evaluationId: number,
+  requestQueue: AIRequestQueue
 ): Promise<WorkerImage> {
   const blob = await imageValueToBlob(source);
 
@@ -719,14 +759,17 @@ async function requestOpenAIImageEdit(
   formData.append("output_format", "jpeg");
   formData.append("output_compression", "90");
 
-  const response = await fetch(OPENAI_IMAGES_EDIT_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: formData,
-    signal,
-  });
+  const response = await requestQueue.run(
+    evaluationId,
+    () => fetch(OPENAI_IMAGES_EDIT_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: formData,
+      signal,
+    })
+  );
 
   const data = await response.json();
 
@@ -767,7 +810,9 @@ function createAIImageEditNodeDefinition(
     source: WorkerImage,
     apiKey: string,
     editPrompt: string,
-    signal: AbortSignal
+    signal: AbortSignal,
+    evaluationId: number,
+    requestQueue: AIRequestQueue
   ): Promise<WorkerImage> {
     const cacheKey = source.cacheKey ? `${source.cacheKey}:prompt:${editPrompt}` : undefined;
     const cached = cacheKey ? cache.get(cacheKey) : undefined;
@@ -776,7 +821,14 @@ function createAIImageEditNodeDefinition(
       return cached;
     }
 
-    const edited = await requestOpenAIImageEdit(source, apiKey, editPrompt, signal);
+    const edited = await requestOpenAIImageEdit(
+      source,
+      apiKey,
+      editPrompt,
+      signal,
+      evaluationId,
+      requestQueue
+    );
 
     if (cacheKey) {
       cache.set(cacheKey, edited);
@@ -795,6 +847,7 @@ function createAIImageEditNodeDefinition(
       const nodeId = inputs.nodeId as string;
       const evaluationId = inputs.evaluationId as number;
       const signal = inputs.signal as AbortSignal;
+      const requestQueue = inputs.aiRequestQueue as AIRequestQueue;
 
       if (passthru) {
         return { image: sources };
@@ -825,7 +878,14 @@ function createAIImageEditNodeDefinition(
         evaluationId,
         async (source) => {
           try {
-            const edited = await editImage(source, apiKey, editPrompt, signal);
+            const edited = await editImage(
+              source,
+              apiKey,
+              editPrompt,
+              signal,
+              evaluationId,
+              requestQueue
+            );
 
             postProgress(
               nodeType,
@@ -1785,6 +1845,10 @@ async function runEvaluation(
   const taskQueue = new PipelineTaskQueue(
     Math.max(1, Math.min(32, Math.round(message.maxConcurrentTasks) || 5))
   );
+  const aiRequestQueue = new AIRequestQueue(
+    Math.max(1, Math.min(32, Math.round(message.maxAIRequests) || 2)),
+    Math.max(0, Math.min(10000, Math.round(message.aiCallDelayMs) || 0))
+  );
 
   const outputs = new Map<string, Promise<NodeOutputs>>();
   const signatures = new Map<string, string>();
@@ -1943,6 +2007,7 @@ async function runEvaluation(
       // Cancellation plumbing available to every node.
       inputs.evaluationId = evaluationId;
       inputs.signal = signal;
+      inputs.aiRequestQueue = aiRequestQueue;
 
       if (node.type === "source") {
         inputs.sourceProgressTotal = Array.isArray(inputs.files) ? inputs.files.length : 0;

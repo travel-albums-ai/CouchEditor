@@ -337,6 +337,14 @@ export async function evaluatePipeline(
       1,
       Math.min(100, Math.round(getSettingsStore().pipelinePhotoBatchSize) || 10)
     ),
+    maxAIRequests: Math.max(
+      1,
+      Math.min(32, Math.round(getSettingsStore().pipelineMaxAIRequests) || 2)
+    ),
+    aiCallDelayMs: Math.max(
+      0,
+      Math.min(10000, Math.round(getSettingsStore().pipelineAICallDelayMs) || 0)
+    ),
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),
   };

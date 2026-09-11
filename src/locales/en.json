@@ -225,6 +225,8 @@
   "pipelineSettingsSection": "Pipeline",
   "pipelineMaxConcurrentTasks": "Maximum concurrent tasks",
   "pipelinePhotoBatchSize": "Photos per processing batch",
+  "pipelineMaxAIRequests": "Maximum concurrent AI requests",
+  "pipelineAICallDelayMs": "Delay between AI requests (ms)",
   "byokSectionTitle": "AI via Bring Your Own Key (BYOK)",
   "byokEnableAi": "Open AI",
   "byokOpenAiKey": "Open AI Key",

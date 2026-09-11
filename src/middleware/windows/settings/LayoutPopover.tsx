@@ -34,6 +34,8 @@ export default function LayoutPopover() {
   const { setSetting } = useSettings()
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector((state) => state.pipelineMaxConcurrentTasks)
   const pipelinePhotoBatchSize = useSettingsStoreSelector((state) => state.pipelinePhotoBatchSize)
+  const pipelineMaxAIRequests = useSettingsStoreSelector((state) => state.pipelineMaxAIRequests)
+  const pipelineAICallDelayMs = useSettingsStoreSelector((state) => state.pipelineAICallDelayMs)
 
   return <>
     {groups.map((group) => (
@@ -80,6 +82,32 @@ export default function LayoutPopover() {
           setSetting((prev) => ({
             ...prev,
             pipelinePhotoBatchSize: Math.max(1, Math.min(100, parsed)),
+          }))
+        }}
+      />
+      <SettingFieldRow
+        label={t('pipelineMaxAIRequests')}
+        value={String(pipelineMaxAIRequests)}
+        onChange={(value) => {
+          const parsed = Number.parseInt(value, 10)
+          if (Number.isNaN(parsed)) return
+
+          setSetting((prev) => ({
+            ...prev,
+            pipelineMaxAIRequests: Math.max(1, Math.min(32, parsed)),
+          }))
+        }}
+      />
+      <SettingFieldRow
+        label={t('pipelineAICallDelayMs')}
+        value={String(pipelineAICallDelayMs)}
+        onChange={(value) => {
+          const parsed = Number.parseInt(value, 10)
+          if (Number.isNaN(parsed)) return
+
+          setSetting((prev) => ({
+            ...prev,
+            pipelineAICallDelayMs: Math.max(0, Math.min(10000, parsed)),
           }))
         }}
       />

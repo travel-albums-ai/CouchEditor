@@ -51,6 +51,8 @@ export type PipelineEvaluateMessage = {
   evaluationId: number;
   maxConcurrentTasks: number;
   photoBatchSize: number;
+  maxAIRequests: number;
+  aiCallDelayMs: number;
   nodes: PipelineWorkerNode[];
   edges: PipelineWorkerEdge[];
 };
