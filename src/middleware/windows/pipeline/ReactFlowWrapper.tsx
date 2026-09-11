@@ -29,10 +29,10 @@ import {
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import LoadingBar from '@/components/LoadingBar';
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import StatusBar from '@/components/StatusBar';
 import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
 import Header from '@/middleware/windows/pipeline/components/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
@@ -747,7 +747,7 @@ function Pipeline() {
           asIs={!showToolbox}>
           {showToolbox
             ? <NodeToolbox />
-            : <GeneralRegistryToolbar fullWidth={false} noGhost={true} group="toolbox"/>}
+            : <ToggleToolbox />}
         </FloatingStack>
 
         <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-toolbox">

@@ -1,9 +1,13 @@
 import { alpha, Box, Typography, useTheme } from '@mui/material';
 import { GalleryHorizontalEnd, Users2, Workflow } from 'lucide-react';
 
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import SolidChip from '@/components/SolidChip';
 import type { SavedPipeline } from '@/context/pipelineStore';
+import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
+import FullscreenToggle from '@/middleware/tools/ActionTools/FullscreenToggle';
+import SettingsWindowToggle from '@/middleware/tools/ActionTools/SettingsWindowToggle';
+import TutorialToggle from '@/middleware/tools/ActionTools/TutorialToggle';
+import ExtendedMenu from '@/middleware/tools/PopoverTools/ExtendedMenu';
 import PipelineSelector from './PipelineSelector';
 
 type HeaderProps = {
@@ -79,11 +83,11 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-        <GeneralRegistryToolbar
-          fullWidth={false}
-          noGhost={true}
-          group="header"
-        />
+        <SettingsWindowToggle />
+        <DarkLightStatus />
+        <FullscreenToggle />
+        <TutorialToggle />
+        <ExtendedMenu />
         <Box sx={{ mb: -1.5, mt: -1 }}>
           <a href="https://www.producthunt.com/products/coucheditor?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-coucheditor" target="_blank" rel="noopener noreferrer">
             <img alt="CouchEditor - Image editing without the Photoshop headache. 🛋️🎨 | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1244803&amp;theme=neutral&amp;t=1789053328284" />

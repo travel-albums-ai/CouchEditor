@@ -1,6 +1,6 @@
-import GeneralRegistryToolbar from '@/components/registry/GeneralRegistryToolbar';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import NodeToolboxItem from '@/middleware/windows/pipeline/NodeToolboxItem';
 import { Box, InputAdornment, TextField } from '@mui/material';
@@ -52,11 +52,7 @@ export default function NodeToolbox() {
           }}
           onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
         />
-        <GeneralRegistryToolbar
-          fullWidth={false}
-          noGhost={true}
-          group="toolbox"
-        />
+        <ToggleToolbox />
       </Box>
 
       {Object.entries(groupedPaletteItems)

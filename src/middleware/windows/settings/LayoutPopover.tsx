@@ -1,7 +1,9 @@
-import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
+import LocaleToggle from '@/middleware/tools/MixedTools/LocaleToggle';
+import ThemeMenu from '@/middleware/tools/PopoverTools/ThemeMenu';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
@@ -13,15 +15,15 @@ const groups = [
   {
     titleKey: 'layoutLocale',
     controls: [
-      { key: 'locale', labelKey: 'layoutLocale', type: 'toolbar', toolbarComponentId: "localeToggle" },
+      { key: 'locale', labelKey: 'layoutLocale', type: 'component', toolbarComponentId: <LocaleToggle /> },
     ],
     icon: <Languages />,
   },
   {
     titleKey: 'layoutThemeSection',
     controls: [
-      { key: 'theme', labelKey: 'layoutTheme', type: 'toolbar', toolbarComponentId: "themeMenu" },
-      { key: 'darkLightStatus', labelKey: 'toggleThemeName', type: 'toolbar', toolbarComponentId: "darkLightStatus" },
+      { key: 'theme', labelKey: 'layoutTheme', type: 'component', toolbarComponentId: <ThemeMenu /> },
+      { key: 'darkLightStatusAA', labelKey: 'toggleThemeName', type: 'component', toolbarComponentId: <DarkLightStatus /> },
     ],
     icon: <PaintBucket />,
   },
@@ -50,8 +52,8 @@ export default function LayoutPopover() {
                 onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
               />}
 
-              {control.type === 'toolbar' && <SettingsComponentRow label={t(control.labelKey)}>
-                <GeneralRegistryToolRenderer toolId={control.toolbarComponentId} />
+              {control.type === 'component' && <SettingsComponentRow label={t(control.labelKey)}>
+                {control.toolbarComponentId}
               </SettingsComponentRow>}
             </Fragment>
           ))}
