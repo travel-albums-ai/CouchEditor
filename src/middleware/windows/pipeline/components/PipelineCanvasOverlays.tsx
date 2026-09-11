@@ -1,5 +1,5 @@
 import { Box, Stack, TextField } from '@mui/material';
-import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
+import { CirclePlus, Copy, Download, LayoutDashboard, Save, Trash2, Upload } from 'lucide-react';
 import type { ChangeEvent, RefObject } from 'react';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
@@ -22,6 +22,8 @@ type PipelineCanvasOverlaysProps = {
   onUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   onNameChange: (name: string) => void;
   onDelete: () => void;
+  onOrganizeWithAI: () => void;
+  organizingWithAI: boolean;
 };
 
 export default function PipelineCanvasOverlays({
@@ -38,6 +40,8 @@ export default function PipelineCanvasOverlays({
   onUpload,
   onNameChange,
   onDelete,
+  onOrganizeWithAI,
+  organizingWithAI,
 }: PipelineCanvasOverlaysProps) {
   return <>
     <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-status">
@@ -103,6 +107,15 @@ export default function PipelineCanvasOverlays({
             icon: <Upload />,
             onClick: () => pipelineFileInputRef.current?.click(),
             title: 'Import',
+          },
+        ] satisfies GenericToggleButtonProps[]} />
+        <GenericToggleButtonGroup id="pipeline-ai-layout" items={[
+          {
+            tooltip: organizingWithAI ? 'Organizing layout…' : 'Organize layout with AI',
+            icon: <LayoutDashboard />,
+            onClick: onOrganizeWithAI,
+            title: '',
+            disabled: organizingWithAI,
           },
         ] satisfies GenericToggleButtonProps[]} />
         <input

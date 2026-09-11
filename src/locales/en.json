@@ -230,6 +230,8 @@
   "aiPassthru": "Bypass",
   "aiNoOpenAiKey": "No OpenAI key configured",
   "aiIdle": "Idle",
+  "pipelineOrganizeLayoutWithAI": "Organize layout with AI",
+  "pipelineOrganizingLayoutWithAI": "Organizing layout…",
   "layoutLocale": "Locale",
   "layoutThemeSection": "Theme",
   "pipelineSettingsSection": "Pipeline",
