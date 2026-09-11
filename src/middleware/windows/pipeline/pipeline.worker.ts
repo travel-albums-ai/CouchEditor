@@ -202,6 +202,9 @@ async function executeInPhotoBatches(
     for (const key of batchKeys) {
       batchInputs[key] = (inputs[key] as unknown[]).slice(start, start + batchSize);
     }
+    if (nodeType === "source") {
+      batchInputs.sourceProgressOffset = start;
+    }
 
     const result = await taskQueue.run(
       evaluationId,
@@ -962,6 +965,8 @@ function cropImages(
   });
 }
 
+let sourceRunSeq = 0;
+
 const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   information: {
     async execute() {
@@ -976,10 +981,26 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 
       if (!files || files.length === 0) { return { image: [] } }
 
+      const nodeId = inputs.nodeId as string;
+      const evaluationId = inputs.evaluationId as number;
+      const runId = (inputs.sourceProgressRunId as number | undefined) ?? ++sourceRunSeq;
+      const total = (inputs.sourceProgressTotal as number | undefined) ?? files.length;
+      const completedBeforeBatch = (inputs.sourceProgressOffset as number | undefined) ?? 0;
+      let completed = 0;
+
+      postProgress("source", nodeId, evaluationId, runId, completedBeforeBatch, total);
+
       const image = await mapWithConcurrency(
         files,
         inputs.evaluationId as number,
-        loadFileImage
+        async (file) => {
+          try {
+            return await loadFileImage(file);
+          } finally {
+            completed += 1;
+            postProgress("source", nodeId, evaluationId, runId, completedBeforeBatch + completed, total);
+          }
+        }
       );
 
       return { image };
@@ -1594,6 +1615,7 @@ async function runEvaluation(
       // File-backed source nodes get their Files from node.data.
       if (node.type === "source" || node.type === "hot-folder-read" || node.type === "google-drive") {
         inputs.files = node.data.files;
+        inputs.nodeId = node.id;
       }
 
       // Special case:
@@ -1691,6 +1713,11 @@ async function runEvaluation(
       // Cancellation plumbing available to every node.
       inputs.evaluationId = evaluationId;
       inputs.signal = signal;
+
+      if (node.type === "source") {
+        inputs.sourceProgressTotal = Array.isArray(inputs.files) ? inputs.files.length : 0;
+        inputs.sourceProgressRunId = ++sourceRunSeq;
+      }
 
       console.log(`▶ executing ${node.id}`);
 

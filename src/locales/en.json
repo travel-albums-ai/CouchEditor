@@ -73,6 +73,7 @@
   "pipelineGoogleDriveMissingClientId": "Enter a Google OAuth client ID",
   "pipelineGoogleDriveFoundPhotos": "Found {{count}} JPGs",
   "pipelineGoogleDriveFailed": "Could not read Google Drive",
+  "pipelineSourceLoading": "images ready for handover",
   "pipelineGrouper": "Grouper",
   "pipelineArraySwitch": "Array Switch",
   "pipelineInformation": "Information",

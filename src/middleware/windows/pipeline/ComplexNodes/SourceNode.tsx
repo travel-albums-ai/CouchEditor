@@ -3,15 +3,19 @@ import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
-import { Box, Button, Typography } from '@mui/material';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { Box, Button, LinearProgress, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { HardDrive, Images, Upload } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 
-function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
+type Progress = { runId: number; completed: number; total: number };
+
+function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
   const { t } = useTranslation();
   const [files, setFiles] = useState(data.files ?? []);
+  const [progress, setProgress] = useState<Progress | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
   const totalSizeInMb = files.reduce(
     (total, file) => total + (file instanceof File ? file.size : 0),
@@ -41,14 +45,37 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
 
     Reflect.set(data, 'files', selected);
     setFiles(selected);
+    setProgress(null);
 
     window.dispatchEvent(
       new CustomEvent("pipeline:changed")
     );
   };
 
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<Progress & { nodeId: string }>).detail;
+
+      if (!detail || detail.nodeId !== id) return;
+
+      setProgress((current) => {
+        if (current && detail.runId < current.runId) return current;
+        return detail;
+      });
+    };
+
+    window.addEventListener('source:progress', handler);
+
+    return () => window.removeEventListener('source:progress', handler);
+  }, [id]);
+
+  const progressPercent = progress && progress.total > 0
+    ? Math.min(100, (progress.completed / progress.total) * 100)
+    : 0;
+
   return (
-    <NodeWrapper type="source">
+    <NodeWrapper type="source" tools={<PipelineStageTiming nodeId={id} nodeType={'source'} />}>
+
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
           sx={{
@@ -79,6 +106,15 @@ function SourceNode({ data }: NodeProps<Node<{ files?: File[] }>>) {
         <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={150} />
         <SolidChip count={`${totalSizeInMb.toFixed(2)} MB`} label="" fontSize={16} height={38} icon={<HardDrive size={16} />} minWidth={120} />
       </Box>
+
+      {progress && (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1, mb: 1 }}>
+          <LinearProgress variant="determinate" value={progressPercent} />
+          <Typography variant="caption" color="textSecondary">
+            {progress.completed}/{progress.total} {t('pipelineSourceLoading')}
+          </Typography>
+        </Box>
+      )}
 
       <Box
         sx={{
