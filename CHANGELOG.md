@@ -1,3 +1,9 @@
+## [1.51.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.51.0...v1.51.1) (2026-09-11)
+
+### 🐛 Fixes
+
+* reset engagement state when prompt is updated ([0daa1e3](https://github.com/travel-albums-ai/CouchEditor/commit/0daa1e355f908dedeab9f5a32c1a22204d4fb1f6))
+
 ## [1.51.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.50.0...v1.51.0) (2026-09-11)
 
 ### ✨ Features
