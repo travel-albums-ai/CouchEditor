@@ -1,3 +1,9 @@
+## [1.61.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.60.0...v1.61.0) (2026-09-11)
+
+### ✨ Features
+
+* add ImagePickerNode component with selection functionality and update localization for image picker ([e5d46dc](https://github.com/travel-albums-ai/CouchEditor/commit/e5d46dca6b92853cfc149551c4c9368eebd29ef8))
+
 ## [1.60.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.59.0...v1.60.0) (2026-09-11)
 
 ### ✨ Features
