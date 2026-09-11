@@ -3,6 +3,7 @@ import { ConnectionLineType, type Edge, type Node } from '@xyflow/react';
 import AIAsyncColorizerNode from './AIAsyncColorizerNode';
 import AIAsyncDenoiserNode from './AIAsyncDenoiserNode';
 import AIPhotoEditorNode from './AIPhotoEditorNode';
+import AskAINode from './AskAINode';
 import ArraySetOperationNode from './ComplexNodes/ArraySetOperationNode';
 import ArraySwitchNode from './ComplexNodes/ArraySwitchNode';
 import CollageNode from './ComplexNodes/CollageNode';
@@ -77,6 +78,7 @@ export const pipelineNodeTypes = {
   'ai-colorizer': AIAsyncColorizerNode,
   'ai-denoiser': AIAsyncDenoiserNode,
   'ai-photo-editor': AIPhotoEditorNode,
+  'ask-ai': AskAINode,
   invert: InvertNode,
   'black-white': BlackAndWhiteNode,
   sepia: SepiaNode,

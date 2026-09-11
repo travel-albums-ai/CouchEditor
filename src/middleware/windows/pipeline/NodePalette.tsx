@@ -63,6 +63,7 @@ export const paletteItems: Array<{
 
   { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
   { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
+  { type: "ask-ai", labelKey: "pipelineAskAI", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
 
   { type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />, groupKey: "pipelineGroupOutput" },

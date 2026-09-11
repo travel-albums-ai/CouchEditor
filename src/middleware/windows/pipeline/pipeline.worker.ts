@@ -670,6 +670,8 @@ async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerIma
 
 const OPENAI_IMAGES_EDIT_URL = "https://api.openai.com/v1/images/edits";
 const AI_IMAGE_EDIT_MODEL = "gpt-image-2";
+const OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions";
+const AI_ASK_MODEL = "gpt-4o-mini";
 
 // Node types that share the passthru/apiKey data shape.
 const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser", "ai-photo-editor"]);
@@ -741,6 +743,148 @@ async function imageValueToBlob(source: WorkerImage): Promise<Blob> {
   ctx.drawImage(source.bitmap, 0, 0);
 
   return canvas.convertToBlob({ type: "image/jpeg", quality: 0.92 });
+}
+
+async function imageValueToDataUrl(source: WorkerImage): Promise<string> {
+  const blob = await imageValueToBlob(source);
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  let binary = "";
+
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+
+  return `data:image/jpeg;base64,${btoa(binary)}`;
+}
+
+async function requestOpenAIClassification(
+  source: WorkerImage,
+  apiKey: string,
+  question: string,
+  signal: AbortSignal,
+  evaluationId: number,
+  requestQueue: AIRequestQueue
+): Promise<boolean> {
+  const imageUrl = await imageValueToDataUrl(source);
+  const response = await requestQueue.run(
+    evaluationId,
+    () => fetch(OPENAI_CHAT_COMPLETIONS_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: AI_ASK_MODEL,
+        temperature: 0,
+        response_format: { type: "json_object" },
+        messages: [{
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: [
+                "Answer the question about this photo.",
+                "Return only valid JSON in exactly this form: {\"match\": true} or {\"match\": false}.",
+                "Set match to true when the photo positively satisfies the question, otherwise set it to false.",
+                `Question: ${question}`,
+              ].join(" "),
+            },
+            { type: "image_url", image_url: { url: imageUrl, detail: "low" } },
+          ],
+        }],
+      }),
+      signal,
+    })
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.error?.message || `OpenAI classification failed (${response.status})`
+    );
+  }
+
+  const content = data.choices?.[0]?.message?.content;
+
+  if (typeof content !== "string") {
+    throw new Error("OpenAI returned no classification");
+  }
+
+  const result = JSON.parse(content) as { match?: unknown };
+
+  if (typeof result.match !== "boolean") {
+    throw new Error("OpenAI returned an invalid classification");
+  }
+
+  return result.match;
+}
+
+function createAskAINodeDefinition(): PipelineNodeDefinition {
+  let runSeq = 0;
+  const cache = new Map<string, boolean>();
+
+  return {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+
+      if (sources.length === 0) return { positive: [], negative: [] };
+
+      const apiKey = inputs.apiKey as string | undefined;
+      const question = (inputs.question as string | undefined)?.trim() ?? "";
+      const passthru = (inputs.passthru as boolean | undefined) ?? true;
+      const nodeId = inputs.nodeId as string;
+      const evaluationId = inputs.evaluationId as number;
+      const signal = inputs.signal as AbortSignal;
+      const requestQueue = inputs.aiRequestQueue as AIRequestQueue;
+
+      if (passthru) {
+        return { positive: sources, negative: [] };
+      }
+
+      if (!apiKey || !question) {
+        console.error(`Ask AI: missing ${!apiKey ? "OpenAI API key" : "question"}`);
+        return { positive: [], negative: [] };
+      }
+
+      const runId = ++runSeq;
+      const total = sources.length;
+      let completed = 0;
+
+      postProgress("ask-ai", nodeId, evaluationId, runId, completed, total);
+
+      const matches = await mapWithConcurrency(sources, evaluationId, async (source) => {
+        const cacheKey = source.cacheKey
+          ? `${source.cacheKey}:question:${question}`
+          : undefined;
+        let match = cacheKey ? cache.get(cacheKey) : undefined;
+
+        if (match === undefined) {
+          match = await requestOpenAIClassification(
+            source,
+            apiKey,
+            question,
+            signal,
+            evaluationId,
+            requestQueue
+          );
+
+          if (cacheKey) cache.set(cacheKey, match);
+        }
+
+        completed += 1;
+        postProgress("ask-ai", nodeId, evaluationId, runId, completed, total);
+
+        return match;
+      });
+
+      const positive = sources.filter((_, index) => matches[index]);
+      const negative = sources.filter((_, index) => !matches[index]);
+
+      return { positive, negative };
+    },
+  };
 }
 
 async function requestOpenAIImageEdit(
@@ -1539,6 +1683,8 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     (inputs) => (inputs.prompt as string | undefined) ?? ""
   ),
 
+  "ask-ai": createAskAINodeDefinition(),
+
   rescale: {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1963,6 +2109,13 @@ async function runEvaluation(
         inputs.passthru = node.data.passthru;
         inputs.apiKey = node.data.apiKey;
         inputs.prompt = node.data.prompt;
+        inputs.nodeId = node.id;
+      }
+
+      if (node.type === "ask-ai") {
+        inputs.passthru = node.data.passthru;
+        inputs.apiKey = node.data.apiKey;
+        inputs.question = node.data.question;
         inputs.nodeId = node.id;
       }
 

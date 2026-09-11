@@ -42,6 +42,7 @@ const NODE_DATA_KEYS = [
   "skip",
   "apiKey",
   "prompt",
+  "question",
   "scale",
   "top",
   "bottom",
