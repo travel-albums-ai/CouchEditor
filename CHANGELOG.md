@@ -1,3 +1,9 @@
+## [1.51.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.50.0...v1.51.0) (2026-09-11)
+
+### ✨ Features
+
+* add AI Photo Editor node with editable prompt functionality ([1d6b9b1](https://github.com/travel-albums-ai/CouchEditor/commit/1d6b9b1653ddf0a535ac9d8a87795dec5afbbf2c))
+
 ## [1.50.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.49.1...v1.50.0) (2026-09-11)
 
 ### ✨ Features
