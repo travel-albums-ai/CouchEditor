@@ -28,6 +28,8 @@ type BYOKStore = {
   byokOpenAIKey?: string,
   serviceTier?: string,
   model?: string,
+  imageModel?: string,
+  imageQuality?: string,
   mainPersona: Persona,
   additionalPersonas?: Persona[],
   webMcp?: boolean,
@@ -41,6 +43,8 @@ const defaults: BYOKStore = {
   byokOpenAIKey: '',
   serviceTier: 'flex',
   model: 'gpt-5.6-luna',
+  imageModel: 'gpt-image-2',
+  imageQuality: 'low',
   mainPersona: {
     name: '',
     description: '',

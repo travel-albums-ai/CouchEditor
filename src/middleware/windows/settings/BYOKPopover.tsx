@@ -1,10 +1,11 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import BYOKOpenAi from '@/middleware/windows/settings/byok/BYOKOpenAi';
+import BYOKOpenAiImageEditor from '@/middleware/windows/settings/byok/BYOKOpenAiImageEditor';
 import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Box, Button } from '@mui/material';
-import { Astroid, Key, UserKey } from 'lucide-react';
+import { Astroid, Coins, Key, ScrollText, UserKey } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,10 +17,18 @@ const toggleControls = [
 export default function BYOKPopover() {
   const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
-  const { getMainPersona, getAdditionalPersonas, addAdditionalPersona } = useBYOK()
   const { t } = useTranslation()
 
   return <>
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
+      <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+        <Button size="small" startIcon={<ScrollText size={16} />} variant="outlined">Explore the costs</Button>
+      </a>
+      <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+        <Button size="small" startIcon={<Coins size={16} />} variant="outlined">Explore usage</Button>
+      </a>
+    </Box>
+
     <SettingsSection title={t('byokSectionTitle')} icon={<Key />} transparent={true} uuid="byok-toggle-ai">
       {toggleControls
         .map((control) => (
@@ -45,12 +54,15 @@ export default function BYOKPopover() {
 
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
         <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
-          <Button startIcon={<UserKey size={16} />} size="small" color="inherit" variant="outlined">{t('byokGetApiKey')}</Button>
+          <Button startIcon={<UserKey size={16} />} size="small" variant="outlined">{t('byokGetApiKey')}</Button>
         </a>
       </Box>
     </SettingsSection>
 
-    <BYOKOpenAi />
+    {byokStore.enableAI && byokStore.byokOpenAIKey && <>
+      <BYOKOpenAi />
+      <BYOKOpenAiImageEditor />
+    </>}
 
   </>
 }

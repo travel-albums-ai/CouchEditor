@@ -1,8 +1,6 @@
 import { Box, Divider, IconButton, Stack, Typography } from '@mui/material';
-import { alpha } from '@mui/material/styles';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, useState } from 'react';
-import stc from 'string-to-color';
 
 function collapseStorageKey(uuid: string) {
   return `settings-section-${uuid}`;
@@ -21,24 +19,15 @@ export default function SettingsSection({ uuid, title, icon, guidance, children,
 
   return <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 0, m: 0.25, overflow: 'visible' }}>
     <Box sx={{
-      bgcolor: theme =>
-        transparent
-          ? tint
-            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.paper} 90%) 55%, transparent)`
-            : alpha(theme.palette.background.paper, 0.55)
-          : tint
-            ? `color-mix(in srgb, color-mix(in srgb, ${stc(tint)} 10%, ${theme.palette.background.paper} 90%) 55%, transparent)`
-            : `${theme.palette.background.paper}BD`,
-
+      bgcolor: theme => `color-mix(in srgb, color-mix(in srgb, ${theme.palette.primary.main} 5%, ${theme.palette.background.paper} 90%) 55%, transparent)`,
+      // bgcolor: 'action.hover',
       mb: 1,
-      border: '1px solid',
-      borderColor: theme => transparent ? 'transparent' : theme.palette.divider,
       p: 1,
-      borderRadius: transparent ? 3 : 2,
+      borderRadius: 3,
       transition: 'box-shadow 0.2s ease-in-out',
-      boxShadow: transparent ? 2 : 1,
+      boxShadow: 1,
       '&:hover': {
-        boxShadow: transparent ? 4 : 2,
+        boxShadow: 2,
       },
     }}
     >

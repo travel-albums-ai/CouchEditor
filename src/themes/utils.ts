@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
+import { alpha, createTheme } from '@mui/material/styles';
 
 export const generateTheme = (tokens: ThemeOptions) => createTheme({
   ...tokens,
@@ -67,6 +67,7 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: ({ theme }) => ({
+          backgroundColor: alpha(theme.palette.background.paper, 0.85),
           maxHeight: '75vh',
           padding: theme.spacing(2),
           overflowY: 'auto',
