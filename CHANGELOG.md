@@ -1,3 +1,9 @@
+## [1.59.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.58.0...v1.59.0) (2026-09-11)
+
+### ✨ Features
+
+* enhance BYOK settings with image model and quality options; add Open AI Image Editor component ([2aa5312](https://github.com/travel-albums-ai/CouchEditor/commit/2aa5312909a1dd6f9025cbb98e27cf890c4d666c))
+
 ## [1.58.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.57.0...v1.58.0) (2026-09-11)
 
 ### ✨ Features
