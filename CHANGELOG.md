@@ -1,3 +1,9 @@
+## [1.57.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.56.0...v1.57.0) (2026-09-11)
+
+### ✨ Features
+
+* remove GeneralRegistryWindow and related components; add new window components for Lightbox, New Version, Onboarding, and Settings ([6978afa](https://github.com/travel-albums-ai/CouchEditor/commit/6978afacb4e52127d2ca79c684af9830cdac2d0a))
+
 ## [1.56.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.55.0...v1.56.0) (2026-09-11)
 
 ### ✨ Features
