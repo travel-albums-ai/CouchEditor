@@ -52,6 +52,7 @@ import type {
   NodeOutputs,
   PipelineEvaluateMessage,
   PipelineNodeDefinition,
+  PipelineProgressPreview,
   PipelineViewerImagePayload,
   PipelineWorkerOutbound,
 } from "./types";
@@ -660,7 +661,8 @@ function postProgress(
   evaluationId: number,
   runId: number,
   completed: number,
-  total: number
+  total: number,
+  preview?: PipelineProgressPreview
 ) {
   workerScope.postMessage({
     type: "progress",
@@ -670,7 +672,25 @@ function postProgress(
     runId,
     completed,
     total,
+    preview,
   });
+}
+
+async function imageToPreview(source: WorkerImage): Promise<PipelineProgressPreview> {
+  const maxDimension = 480;
+  const scale = Math.min(1, maxDimension / Math.max(source.width, source.height));
+  const width = Math.max(1, Math.round(source.width * scale));
+  const height = Math.max(1, Math.round(source.height * scale));
+  const [canvas, ctx] = createCanvas(width, height);
+
+  ctx.drawImage(source.bitmap, 0, 0, width, height);
+
+  return {
+    blob: await canvas.convertToBlob({ type: "image/jpeg", quality: 0.84 }),
+    width,
+    height,
+    name: source.name,
+  };
 }
 
 async function imageValueToBlob(source: WorkerImage): Promise<Blob> {
@@ -797,7 +817,19 @@ function createAIImageEditNodeDefinition(
         evaluationId,
         async (source) => {
           try {
-            return await editImage(source, apiKey, signal);
+            const edited = await editImage(source, apiKey, signal);
+
+            postProgress(
+              nodeType,
+              nodeId,
+              evaluationId,
+              runId,
+              completed,
+              total,
+              await imageToPreview(edited)
+            );
+
+            return edited;
           } catch (error) {
             // An aborted run is cancellation, not a per-image failure.
             if (signal.aborted) {

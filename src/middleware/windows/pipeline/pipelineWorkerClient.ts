@@ -109,6 +109,14 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
             runId: message.runId,
             completed: message.completed,
             total: message.total,
+            preview: message.preview
+              ? {
+                src: URL.createObjectURL(message.preview.blob),
+                width: message.preview.width,
+                height: message.preview.height,
+                name: message.preview.name,
+              }
+              : undefined,
           },
         })
       );

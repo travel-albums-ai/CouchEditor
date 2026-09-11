@@ -64,6 +64,14 @@ export type PipelineProgressMessage = {
   runId: number;
   completed: number;
   total: number;
+  preview?: PipelineProgressPreview;
+};
+
+export type PipelineProgressPreview = {
+  blob: Blob;
+  width: number;
+  height: number;
+  name?: string;
 };
 
 export type PipelineStageTimingMessage = {

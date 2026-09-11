@@ -5,7 +5,7 @@ import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHan
 import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
 import type { Node, NodeProps } from "@xyflow/react";
 import { Astroid, Sparkles } from 'lucide-react';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from 'react-i18next';
 
 export type AIImageEditNodeConfig = {
@@ -17,6 +17,7 @@ export type AIImageEditNodeConfig = {
 };
 
 type Progress = { runId: number; completed: number; total: number };
+type Preview = { src: string; width: number; height: number; name?: string };
 
 // Builds a node component sharing the same passthru/apiKey sync and
 // progress-bar wiring, used by the AI Colorizer and AI Denoiser nodes.
@@ -30,6 +31,9 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
 
     const [engaged, setEngaged] = useState(data.passthru === false);
     const [progress, setProgress] = useState<Progress | null>(null);
+    const [preview, setPreview] = useState<Preview | null>(null);
+    const latestRunId = useRef(0);
+    const previewUrl = useRef<string | null>(null);
 
     // Mutate data in place (like the slider/selection nodes) so the pipeline
     // engine always reads the latest value, even from a listener bound this render.
@@ -46,10 +50,26 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
     useEffect(() => {
       const handler = (event: Event) => {
         const detail = (event as CustomEvent<
-          { nodeId: string } & Progress
+          { nodeId: string; preview?: Preview } & Progress
         >).detail;
 
         if (!detail || detail.nodeId !== id) return;
+        if (detail.runId < latestRunId.current) return;
+
+        if (detail.runId > latestRunId.current) {
+          latestRunId.current = detail.runId;
+          if (previewUrl.current) {
+            URL.revokeObjectURL(previewUrl.current);
+            previewUrl.current = null;
+          }
+          setPreview(null);
+        }
+
+        if (detail.preview) {
+          if (previewUrl.current) URL.revokeObjectURL(previewUrl.current);
+          previewUrl.current = detail.preview.src;
+          setPreview(detail.preview);
+        }
 
         setProgress((current) => {
           // Ignore updates from a run that's since been superseded.
@@ -62,6 +82,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
 
       return () => {
         window.removeEventListener(`${config.type}:progress`, handler);
+        if (previewUrl.current) URL.revokeObjectURL(previewUrl.current);
       };
     }, [id]);
 
@@ -91,7 +112,22 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
         )}
 
         {engaged && (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 1 }}>
+            {preview && (
+              <Box
+                component="img"
+                src={preview.src}
+                alt={preview.name ?? t(config.actionLabelKey)}
+                sx={{
+                  display: 'block',
+                  width: '100%',
+                  maxHeight: 220,
+                  objectFit: 'contain',
+                  borderRadius: 1,
+                  bgcolor: 'action.hover',
+                }}
+              />
+            )}
             <LinearProgress variant="determinate" value={percent} />
             <Typography variant="caption" color="textSecondary">
               {progress
