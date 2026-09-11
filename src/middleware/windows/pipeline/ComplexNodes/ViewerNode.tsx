@@ -105,7 +105,18 @@ function ViewerNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper type="viewer" tools={<PipelineStageTiming nodeId={id} nodeType={'viewer'} />}>
+
+    <NodeWrapper type="viewer" tools={<>
+      {progress && (
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+          <LinearProgress variant="determinate" value={progressPercent} sx={{ width: '100px', height: 8, borderRadius: 2 }}  />
+          <Typography variant="caption" color="textSecondary">
+            {progress.completed}/{progress.total}
+          </Typography>
+        </Box>
+      )}
+      <PipelineStageTiming nodeId={id} nodeType={'viewer'} />
+    </>}>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
@@ -139,15 +150,6 @@ function ViewerNode({
         </Button>
         <SolidChip count={images.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
       </Box>
-
-      {progress && (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1, mb: 1 }}>
-          <LinearProgress variant="determinate" value={progressPercent} />
-          <Typography variant="caption" color="textSecondary">
-            {progress.completed}/{progress.total} {t('pipelineViewerProcessing')}
-          </Typography>
-        </Box>
-      )}
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }} className="nowheel">
         {images.length > 0 ? (

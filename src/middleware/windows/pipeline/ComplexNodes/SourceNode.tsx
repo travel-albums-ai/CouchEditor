@@ -74,7 +74,17 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
     : 0;
 
   return (
-    <NodeWrapper type="source" tools={<PipelineStageTiming nodeId={id} nodeType={'source'} />}>
+    <NodeWrapper type="source" tools={<>
+      {progress && (
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+          <LinearProgress variant="determinate" value={progressPercent} sx={{ width: '100px', height: 8, borderRadius: 2 }}  />
+          <Typography variant="caption" color="textSecondary">
+            {progress.completed}/{progress.total}
+          </Typography>
+        </Box>
+      )}
+      <PipelineStageTiming nodeId={id} nodeType={'source'} />
+    </>}>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
@@ -106,15 +116,6 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
         <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={150} />
         <SolidChip count={`${totalSizeInMb.toFixed(2)} MB`} label="" fontSize={16} height={38} icon={<HardDrive size={16} />} minWidth={120} />
       </Box>
-
-      {progress && (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1, mb: 1 }}>
-          <LinearProgress variant="determinate" value={progressPercent} />
-          <Typography variant="caption" color="textSecondary">
-            {progress.completed}/{progress.total} {t('pipelineSourceLoading')}
-          </Typography>
-        </Box>
-      )}
 
       <Box
         className="nowheel"

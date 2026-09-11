@@ -1,6 +1,7 @@
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { Box, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import { useEffect, useState } from 'react';
@@ -37,7 +38,7 @@ function ExifSplitNode({ id }: NodeProps<Node>) {
 
   return <>
     <InputHandle id="image" position={Position.Left} />
-    <NodeWrapper type="exif-split">
+    <NodeWrapper type="exif-split" tools={<PipelineStageTiming nodeId={id} nodeType={'exif-split'} />}>
       <Box
         role="progressbar"
         aria-label={t('pipelineExifSplitProgress')}
