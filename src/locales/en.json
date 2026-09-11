@@ -58,6 +58,7 @@
   "pipelineGroupUtility": "utility",
   "pipelineGroupAi": "ai",
   "pipelineGroupColor": "color",
+  "pipelineLogicInput": "logic",
   "pipelineGroupBasics": "basics",
   "pipelineGroupTone": "tone",
   "pipelineGroupAdjustment": "adjustment",

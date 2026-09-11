@@ -11,11 +11,12 @@ export const paletteItems: Array<{
   { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, groupKey: "pipelineGroupInput" },
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
   { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />, groupKey: "pipelineGroupInput" },
   { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />, groupKey: "pipelineGroupInput" },
   { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />, groupKey: "pipelineGroupInput" },
+
+  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineLogicInput" },
+  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />, groupKey: "pipelineLogicInput" },
+  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />, groupKey: "pipelineLogicInput" },
 
   { type: "crop", labelKey: "pipelineCrop", icon: <Crop size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} />, groupKey: "pipelineGroupTransform" },
