@@ -1,3 +1,9 @@
+## [1.39.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.38.0...v1.39.0) (2026-09-11)
+
+### ✨ Features
+
+* add progress tracking for image processing in viewer node ([88287c7](https://github.com/travel-albums-ai/CouchEditor/commit/88287c74a3a5ad470498ccb918dbc23aa6e48b70))
+
 ## [1.38.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.37.0...v1.38.0) (2026-09-11)
 
 ### ✨ Features
