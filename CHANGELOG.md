@@ -1,3 +1,9 @@
+## [1.47.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.46.0...v1.47.0) (2026-09-11)
+
+### ✨ Features
+
+* add GpsSplitNode and related functionality for splitting images by GPS coordinates ([9854de0](https://github.com/travel-albums-ai/CouchEditor/commit/9854de04f06b384585c839d7cf77b6da7a9d2ff3))
+
 ## [1.46.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.45.0...v1.46.0) (2026-09-11)
 
 ### ✨ Features
