@@ -1,3 +1,9 @@
+## [1.52.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.51.1...v1.52.0) (2026-09-11)
+
+### ✨ Features
+
+* add AI request settings with max requests and delay configuration ([3d21c76](https://github.com/travel-albums-ai/CouchEditor/commit/3d21c7608a81392148d204a2b891caa25e6477d8))
+
 ## [1.51.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.51.0...v1.51.1) (2026-09-11)
 
 ### 🐛 Fixes
