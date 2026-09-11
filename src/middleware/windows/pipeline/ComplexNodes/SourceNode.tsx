@@ -117,6 +117,7 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
       )}
 
       <Box
+        className="nowheel"
         sx={{
           height: '900px',
           width: '900px',

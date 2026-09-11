@@ -149,7 +149,7 @@ function ViewerNode({
         </Box>
       )}
 
-      <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
+      <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }} className="nowheel">
         {images.length > 0 ? (
           <GridVirtuoso
             photos={images.map((file) => ({ name: file.name, src: file.src }))}
