@@ -1,3 +1,9 @@
+## [1.38.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.37.0...v1.38.0) (2026-09-11)
+
+### ✨ Features
+
+* add progress tracking for source nodes in pipeline and update UI components ([fbab928](https://github.com/travel-albums-ai/CouchEditor/commit/fbab928c3a06b705433f1148933efcec2f976104))
+
 ## [1.37.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.36.0...v1.37.0) (2026-09-11)
 
 ### ✨ Features
