@@ -1,3 +1,9 @@
+## [1.42.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.41.0...v1.42.0) (2026-09-11)
+
+### ✨ Features
+
+* add 'nowheel' class to ExifViewerNode for improved scrolling behavior ([85ec2e4](https://github.com/travel-albums-ai/CouchEditor/commit/85ec2e480b3f3bab879d537d23909c220e6b83a9))
+
 ## [1.41.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.40.0...v1.41.0) (2026-09-11)
 
 ### ✨ Features
