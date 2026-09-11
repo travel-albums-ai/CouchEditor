@@ -1,4 +1,4 @@
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Moon, Mountain, Palette, Pipette, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -59,6 +59,7 @@ export const paletteItems: Array<{
   { type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "exif-viewer", labelKey: "pipelineExifViewer", icon: <FileImage size={16} />, groupKey: "pipelineGroupOutput" },
+  { type: "gps-map", labelKey: "pipelineGpsMap", icon: <MapPinned size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "photo-histogram", labelKey: "pipelinePhotoHistogram", icon: <ChartColumn size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "hot-folder-write", labelKey: "pipelineHotFolder", icon: <FolderOutput size={16} />, groupKey: "pipelineGroupOutput" },
 ];

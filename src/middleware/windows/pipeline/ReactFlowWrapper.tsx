@@ -41,6 +41,7 @@ import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
 import CropNode from "./ComplexNodes/CropNode";
 import ExifViewerNode from "./ComplexNodes/ExifViewerNode";
 import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
+import GpsMapNode from "./ComplexNodes/GpsMapNode";
 import GrouperNode from "./ComplexNodes/GrouperNode";
 import HotFolderReadNode from "./ComplexNodes/HotFolderReadNode";
 import HotFolderWriteNode from "./ComplexNodes/HotFolderWriteNode";
@@ -133,6 +134,7 @@ const nodeTypes = {
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
   "exif-viewer": ExifViewerNode,
+  "gps-map": GpsMapNode,
   "photo-histogram": PhotoHistogramNode,
   "hot-folder-write": HotFolderWriteNode,
   information: InformationNode,
