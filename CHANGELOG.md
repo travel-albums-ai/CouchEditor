@@ -1,3 +1,9 @@
+## [1.49.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.49.0...v1.49.1) (2026-09-11)
+
+### 🐛 Fixes
+
+* update NodeWrapper to include title and icon for better UI representation ([b9e156c](https://github.com/travel-albums-ai/CouchEditor/commit/b9e156c439ad77b2e1a84f8361d473e537a42817))
+
 ## [1.49.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.48.0...v1.49.0) (2026-09-11)
 
 ### ✨ Features
