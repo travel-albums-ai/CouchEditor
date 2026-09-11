@@ -1,3 +1,9 @@
+## [1.48.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.47.0...v1.48.0) (2026-09-11)
+
+### ✨ Features
+
+* add array set operations (AND, AND NOT, OR) with corresponding UI components and logic ([99218f2](https://github.com/travel-albums-ai/CouchEditor/commit/99218f2e1aa1d109262228eb0ce471e6676e40e5))
+
 ## [1.47.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.46.0...v1.47.0) (2026-09-11)
 
 ### ✨ Features
