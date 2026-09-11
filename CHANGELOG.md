@@ -1,3 +1,9 @@
+## [1.55.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.54.0...v1.55.0) (2026-09-11)
+
+### ✨ Features
+
+* refactor pipeline components and introduce new pipeline API for improved file handling ([4dd29e5](https://github.com/travel-albums-ai/CouchEditor/commit/4dd29e57027305205a99fed80dafc5a5412ef141))
+
 ## [1.54.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.53.0...v1.54.0) (2026-09-11)
 
 ### ✨ Features
