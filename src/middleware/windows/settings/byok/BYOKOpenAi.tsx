@@ -2,14 +2,14 @@ import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedCo
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import SettingsGeneralRow from '@/middleware/windows/settings/components/SettingsGeneralRow';
-import { Astroid, Key, Turtle } from 'lucide-react';
+import { Astroid, TextAlignStart, Turtle } from 'lucide-react';
 
 export default function BYOKOpenAi() {
   const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
 
   return <>
-    <SettingsSection title="Open AI Prompts" icon={<Key />} transparent={true} uuid="byok-openai">
+    <SettingsSection title="Open AI Prompts" icon={<TextAlignStart />} transparent={true} uuid="byok-openai">
       <SettingsGeneralRow icon={<Astroid />} label="Model">
         <SegmentedControl defaultValue={byokStore.model} onChange={(_, value) => setSetting(prev => ({ ...prev, model: value }))}>
           <SegmentedControlItem value="gpt-5.6-luna" >GPT 5.6 Luna</SegmentedControlItem>

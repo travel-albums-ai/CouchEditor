@@ -2,14 +2,14 @@ import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedCo
 import SettingsSection from '@/components/SettingsSection';
 import { useBYOK, useBYOKStoreSelector } from '@/context/byokStore';
 import SettingsGeneralRow from '@/middleware/windows/settings/components/SettingsGeneralRow';
-import { Astroid, Hash, Key } from 'lucide-react';
+import { Astroid, Hash, Image } from 'lucide-react';
 
 export default function BYOKOpenAiImageEditor() {
   const { setSetting } = useBYOK()
   const byokStore = useBYOKStoreSelector((state) => state)
 
   return <>
-    <SettingsSection title="Open AI Image Editor" icon={<Key />} transparent={true} uuid="byok-openai-image-editor">
+    <SettingsSection title="Open AI Image Editor" icon={<Image />} transparent={true} uuid="byok-openai-image-editor">
       <SettingsGeneralRow icon={<Astroid />} label="Editor sModel">
         <SegmentedControl defaultValue={byokStore.imageModel} onChange={(_, value) => setSetting(prev => ({ ...prev, imageModel: value }))}>
           <SegmentedControlItem value="gpt-image-2" >GPT Image 2 $</SegmentedControlItem>
