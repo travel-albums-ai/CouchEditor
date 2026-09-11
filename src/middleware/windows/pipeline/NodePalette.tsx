@@ -1,4 +1,4 @@
-import { Angle, Astroid, ChartColumn, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export const paletteItems: Array<{
   type: string;
@@ -19,6 +19,7 @@ export const paletteItems: Array<{
   { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} />, groupKey: "pipelineLogicInput" },
   { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} />, groupKey: "pipelineLogicInput" },
   { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} />, groupKey: "pipelineLogicInput" },
+  { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} />, groupKey: "pipelineLogicInput" },
   { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />, groupKey: "pipelineLogicInput" },
   { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />, groupKey: "pipelineLogicInput" },
 

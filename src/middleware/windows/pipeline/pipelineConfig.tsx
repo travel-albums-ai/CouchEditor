@@ -16,6 +16,7 @@ import GpsSplitNode from './ComplexNodes/GpsSplitNode';
 import GrouperNode from './ComplexNodes/GrouperNode';
 import HotFolderReadNode from './ComplexNodes/HotFolderReadNode';
 import HotFolderWriteNode from './ComplexNodes/HotFolderWriteNode';
+import ImagePickerNode from './ComplexNodes/ImagePickerNode';
 import LutNode from './ComplexNodes/LutNode';
 import PerspectiveNode from './ComplexNodes/PerspectiveNode';
 import PhotoHistogramNode from './ComplexNodes/PhotoHistogramNode';
@@ -74,6 +75,7 @@ export const pipelineNodeTypes = {
   'array-and': ArraySetOperationNode,
   'array-and-not': ArraySetOperationNode,
   'array-or': ArraySetOperationNode,
+  'image-picker': ImagePickerNode,
   'exif-split': ExifSplitNode,
   'ai-colorizer': AIAsyncColorizerNode,
   'ai-denoiser': AIAsyncDenoiserNode,

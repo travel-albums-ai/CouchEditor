@@ -34,6 +34,7 @@ const NODE_DATA_KEYS = [
   "color",
   "selectedPhotoName",
   "selectedInput",
+  "selectedImageKeys",
   "columns",
   "rows",
   "tileWidth",

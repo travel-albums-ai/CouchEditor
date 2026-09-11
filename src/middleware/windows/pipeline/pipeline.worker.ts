@@ -222,6 +222,10 @@ function getBatchInputKeys(nodeType: string | undefined, inputs: NodeInputs): st
     return [];
   }
 
+  if (nodeType === "image-picker") {
+    return [];
+  }
+
   return BATCH_INPUT_KEYS.filter((key) => Array.isArray(inputs[key]));
 }
 
@@ -1444,6 +1448,20 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "image-picker": {
+    async execute(inputs) {
+      const images = Array.isArray(inputs.image) ? inputs.image as WorkerImage[] : [];
+      const selectedKeys = new Set(
+        Array.isArray(inputs.selectedImageKeys)
+          ? inputs.selectedImageKeys.filter((key): key is string => typeof key === "string")
+          : []
+      );
+      const image = images.filter((item, index) => selectedKeys.has(`${item.name ?? ""}\u0000${index}`));
+
+      return { image, pickerPreview: images };
+    },
+  },
+
   "exif-split": {
     async execute(inputs) {
       const images = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -2072,6 +2090,10 @@ async function runEvaluation(
         inputs.selectedInput = node.data.selectedInput;
       }
 
+      if (node.type === "image-picker") {
+        inputs.selectedImageKeys = node.data.selectedImageKeys;
+      }
+
       // Special case:
       // Slider nodes get their amount from node.data.
       if (SLIDER_NODE_TYPES.has(node.type ?? "")) {
@@ -2263,7 +2285,9 @@ async function runEvaluation(
         .then(async (nodeOutputs) => {
           throwIfStale(evaluationId);
 
-          const images = (nodeOutputs.image as WorkerImage[] | undefined) ?? [];
+          const images = (node.type === "image-picker"
+            ? nodeOutputs.pickerPreview
+            : nodeOutputs.image) as WorkerImage[] | undefined ?? [];
           const payload = await taskQueue.run(
             evaluationId,
             () => encodeImagesForTransport(
