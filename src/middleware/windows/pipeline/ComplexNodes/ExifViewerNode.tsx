@@ -34,7 +34,7 @@ function ExifViewerNode({
   return (<>
     <InputHandle id="image" position={Position.Top} />
     <NodeWrapper type="exif-viewer">
-      <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }}>
+      <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }} className="nowheel">
         {match ? (
           <>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, pb: 1 }}>
