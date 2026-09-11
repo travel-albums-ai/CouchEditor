@@ -153,6 +153,7 @@
   "pipelinePerspectiveDescription": "Move each corner to correct perspective and tilt",
   "pipelinePhotosViewer": "Photos Viewer",
   "pipelinePhotoViewer": "Photo Viewer",
+  "pipelineExifViewer": "EXIF Viewer",
   "pipelinePhotoHistogram": "Photo Histogram",
   "pipelinePhotoArray": "Photo array {{number}}",
   "pipelineGrouperDescription": "Merges up to four connected photo arrays",

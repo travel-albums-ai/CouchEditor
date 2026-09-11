@@ -10,6 +10,7 @@
 // - Every new evaluation cooperatively cancels the previous one: stale
 //   checks run between images and in-flight fetches are aborted.
 
+import { parse } from "exifr";
 import type { GalleryPhoto } from "../../../lib/galleryData";
 import { composeUrl } from "../../../lib/thumbnailService";
 import {
@@ -80,6 +81,7 @@ type WorkerImage = {
   width: number;
   height: number;
   name?: string;
+  exif?: Record<string, unknown>;
   // Stable identity (thumbnail URL / file fingerprint) used as the
   // AI node result-cache key.
   cacheKey?: string;
@@ -231,7 +233,8 @@ async function executeInPhotoBatches(
 async function blobToWorkerImage(
   blob: Blob,
   name?: string,
-  cacheKey?: string
+  cacheKey?: string,
+  exif?: Record<string, unknown>
 ): Promise<WorkerImage> {
   const bitmap = await createImageBitmap(blob);
 
@@ -241,15 +244,24 @@ async function blobToWorkerImage(
     height: bitmap.height,
     name,
     cacheKey,
+    exif,
   };
 }
 
-function loadFileImage(file: File): Promise<WorkerImage> {
-  return blobToWorkerImage(
+async function loadFileImage(file: File): Promise<WorkerImage> {
+  const image = await blobToWorkerImage(
     file,
     file.name,
     `file:${file.name}:${file.size}:${file.lastModified}`
   );
+
+  try {
+    image.exif = await parse(file);
+  } catch {
+    // Some image formats do not contain parseable EXIF data.
+  }
+
+  return image;
 }
 
 async function loadUrlImage(
@@ -263,7 +275,16 @@ async function loadUrlImage(
     throw new Error(`Failed to load image from ${url} (${response.status})`);
   }
 
-  return blobToWorkerImage(await response.blob(), name, url);
+  const blob = await response.blob();
+  const image = await blobToWorkerImage(blob, name, url);
+
+  try {
+    image.exif = await parse(blob);
+  } catch {
+    // Some image formats do not contain parseable EXIF data.
+  }
+
+  return image;
 }
 
 function createCanvas(
@@ -414,6 +435,7 @@ function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerIma
     width: source.width,
     height: source.height,
     name: source.name,
+    exif: source.exif,
   };
 }
 
@@ -449,6 +471,7 @@ function renderImage(
     width: canvas.width,
     height: canvas.height,
     name: source.name,
+    exif: source.exif,
   };
 }
 
@@ -571,6 +594,7 @@ async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerIma
       width,
       height,
       name: source.name,
+      exif: source.exif,
     };
   } catch {
     // Keep a canvas fallback for browsers without bitmap resizing support.
@@ -585,6 +609,7 @@ async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerIma
     width,
     height,
     name: source.name,
+    exif: source.exif,
   };
 }
 
@@ -692,7 +717,9 @@ async function requestOpenAIImageEdit(
   // Decode the base64 payload without the main thread's <img> element.
   const resultResponse = await fetch(`data:image/jpeg;base64,${base64}`);
 
-  return blobToWorkerImage(await resultResponse.blob(), source.name);
+  const image = await blobToWorkerImage(await resultResponse.blob(), source.name);
+  image.exif = source.exif;
+  return image;
 }
 
 // Builds a node definition for an OpenAI image-edit operation (colorize,
@@ -961,6 +988,7 @@ function cropImages(
       width: cropWidth,
       height: cropHeight,
       name: source.name,
+      exif: source.exif,
     };
   });
 }
@@ -1345,6 +1373,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "exif-viewer": {
+    async execute(inputs) {
+      await Promise.resolve();
+
+      return {
+        image: (inputs.image as WorkerImage[] | undefined) ?? [],
+      };
+    },
+  },
+
   "photo-histogram": {
     async execute(inputs) {
       await Promise.resolve();
@@ -1415,6 +1453,7 @@ async function encodeImagesForTransport(
             width: image.width,
             height: image.height,
             name: image.name,
+            exif: image.exif,
           };
         } finally {
           completed += 1;

@@ -39,6 +39,7 @@ import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
 import CropNode from "./ComplexNodes/CropNode";
+import ExifViewerNode from "./ComplexNodes/ExifViewerNode";
 import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
 import GrouperNode from "./ComplexNodes/GrouperNode";
 import HotFolderReadNode from "./ComplexNodes/HotFolderReadNode";
@@ -131,6 +132,7 @@ const nodeTypes = {
   "selected-photo": SelectedPhotoNode,
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
+  "exif-viewer": ExifViewerNode,
   "photo-histogram": PhotoHistogramNode,
   "hot-folder-write": HotFolderWriteNode,
   information: InformationNode,

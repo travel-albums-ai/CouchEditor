@@ -149,6 +149,7 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
         height: payload.height,
         byteSize: payload.blob.size,
         name: payload.name,
+        exif: payload.exif,
       }));
 
       objectUrlsByNode.set(

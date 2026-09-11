@@ -7,6 +7,7 @@ export type ImageValue = {
   height: number;
   byteSize: number;
   name: string;
+  exif?: Record<string, unknown>;
 };
 
 // Every node passes around an array of photos so the whole
@@ -15,7 +16,7 @@ export type ImageArray = ImageValue[];
 
 // Node types whose results are encoded and posted back to the main
 // thread instead of staying as in-worker ImageBitmaps.
-export const VIEWER_NODE_TYPES = new Set(["viewer", "viewer-single", "photo-histogram", "hot-folder-write"]);
+export const VIEWER_NODE_TYPES = new Set(["viewer", "viewer-single", "exif-viewer", "photo-histogram", "hot-folder-write"]);
 
 export type NodeInputs = Record<string, unknown>;
 export type NodeOutputs = Record<string, unknown>;
@@ -85,6 +86,7 @@ export type PipelineViewerImagePayload = {
   width: number;
   height: number;
   name?: string;
+  exif?: Record<string, unknown>;
 };
 
 export type PipelineViewerMessage = {
