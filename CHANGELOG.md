@@ -1,3 +1,13 @@
+## [1.35.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.34.1...v1.35.0) (2026-09-11)
+
+### ✨ Features
+
+* add pipeline max concurrent tasks setting and UI integration ([007c43f](https://github.com/travel-albums-ai/CouchEditor/commit/007c43f5a9ee856d8e7d05e24efd7bf15aad47df))
+
+### 🧹 Refactors
+
+* improve black point adjustment logic in applyBlackPoint function ([2df3cbd](https://github.com/travel-albums-ai/CouchEditor/commit/2df3cbd1d09640db2f36c4eec4ace37ddce9a245))
+
 ## [1.34.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.34.0...v1.34.1) (2026-09-10)
 
 ### 🐛 Fixes
