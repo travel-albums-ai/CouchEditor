@@ -1,3 +1,9 @@
+## [1.49.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.48.0...v1.49.0) (2026-09-11)
+
+### ✨ Features
+
+* add CollageNode and related functionality for creating photo collages with customizable grid settings ([122fa5b](https://github.com/travel-albums-ai/CouchEditor/commit/122fa5bedf85b5879a8cfacdd0d63f6f060b37a0))
+
 ## [1.48.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.47.0...v1.48.0) (2026-09-11)
 
 ### ✨ Features
