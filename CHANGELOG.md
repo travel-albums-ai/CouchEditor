@@ -1,3 +1,9 @@
+## [1.56.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.55.0...v1.56.0) (2026-09-11)
+
+### ✨ Features
+
+* add Ask AI node with classification functionality and integrate into pipeline ([e047e42](https://github.com/travel-albums-ai/CouchEditor/commit/e047e42ce700158fd66c44043fc3e60b102876f5))
+
 ## [1.55.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.54.0...v1.55.0) (2026-09-11)
 
 ### ✨ Features
