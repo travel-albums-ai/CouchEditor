@@ -1,3 +1,9 @@
+## [1.50.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.49.1...v1.50.0) (2026-09-11)
+
+### ✨ Features
+
+* add preview functionality for AI image editing with progress updates ([e75d45b](https://github.com/travel-albums-ai/CouchEditor/commit/e75d45b26163c083cea9846cf44e10d1cd19d85f))
+
 ## [1.49.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.49.0...v1.49.1) (2026-09-11)
 
 ### 🐛 Fixes
