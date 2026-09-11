@@ -1,3 +1,9 @@
+## [1.46.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.45.0...v1.46.0) (2026-09-11)
+
+### ✨ Features
+
+* add logic group to NodePalette and update localization for pipeline logic ([3403a05](https://github.com/travel-albums-ai/CouchEditor/commit/3403a053740de1609a4e1208b594c8b73742c5db))
+
 ## [1.45.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.44.0...v1.45.0) (2026-09-11)
 
 ### ✨ Features
