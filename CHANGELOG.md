@@ -1,3 +1,9 @@
+## [1.53.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.52.1...v1.53.0) (2026-09-11)
+
+### ✨ Features
+
+* add skip functionality to NodeWrapper and pipeline processing ([104f10d](https://github.com/travel-albums-ai/CouchEditor/commit/104f10d25863d284bfe031b54def94159da2e8ce))
+
 ## [1.52.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.52.0...v1.52.1) (2026-09-11)
 
 ### 🐛 Fixes
