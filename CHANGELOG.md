@@ -1,3 +1,9 @@
+## [1.62.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.61.0...v1.62.0) (2026-09-11)
+
+### ✨ Features
+
+* add AI layout organization feature and update UI components for integration ([481f623](https://github.com/travel-albums-ai/CouchEditor/commit/481f623ecf88978523de2118d2a22b9b3acc0c70))
+
 ## [1.61.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.60.0...v1.61.0) (2026-09-11)
 
 ### ✨ Features
