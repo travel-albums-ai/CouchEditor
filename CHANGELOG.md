@@ -1,3 +1,9 @@
+## [1.37.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.36.0...v1.37.0) (2026-09-11)
+
+### ✨ Features
+
+* enhance image preview handling and bitmap management in pipeline worker ([66eba30](https://github.com/travel-albums-ai/CouchEditor/commit/66eba305664b0035a87de96275484a9d252d60dc))
+
 ## [1.36.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.35.0...v1.36.0) (2026-09-11)
 
 ### ✨ Features
