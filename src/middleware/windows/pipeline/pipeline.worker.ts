@@ -1110,6 +1110,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "exif-split": {
+    async execute(inputs) {
+      const images = (inputs.image as WorkerImage[] | undefined) ?? [];
+      const withExif = images.filter((image) => image.exif !== undefined);
+      const withoutExif = images.filter((image) => image.exif === undefined);
+
+      return { withExif, withoutExif };
+    },
+  },
+
   invert: stageNode(invertStage, { kind: "invert" }),
   "black-white": stageNode(blackAndWhiteStage, { kind: "black-white" }),
   sepia: stageNode(sepiaStage, { kind: "sepia" }),
@@ -1813,6 +1823,20 @@ async function runEvaluation(
       throwIfStale(evaluationId);
 
       cachePhaseOutput(signature, result);
+
+      if (node.type === "exif-split") {
+        const withExif = result.withExif as WorkerImage[] | undefined ?? [];
+        const withoutExif = result.withoutExif as WorkerImage[] | undefined ?? [];
+
+        workerScope.postMessage({
+          type: "exifStats",
+          evaluationId,
+          nodeId: node.id,
+          total: withExif.length + withoutExif.length,
+          withExif: withExif.length,
+          withoutExif: withoutExif.length,
+        });
+      }
 
       return result;
     })();

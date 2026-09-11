@@ -2,13 +2,13 @@ import { Box, useTheme } from '@mui/material';
 import { Handle, Position } from "@xyflow/react";
 import { Circle } from 'lucide-react';
 
-export function OutputHandle({ id, position }: { id: string; position?: Position }) {
+export function OutputHandle({ id, position, style }: { id: string; position?: Position; style?: React.CSSProperties }) {
   const theme = useTheme()
 
   return <>
     <Handle
       type="source"
-      style={{ width: '12px', height: '12px', backgroundColor: 'transparent', border: 0 }}
+      style={{ width: '12px', height: '12px', backgroundColor: 'transparent', border: 0, ...style }}
       position={position ?? Position.Right}
       id={id}
     >

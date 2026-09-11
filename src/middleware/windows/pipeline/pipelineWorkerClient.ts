@@ -134,6 +134,20 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
       return;
     }
 
+    case "exifStats": {
+      window.dispatchEvent(
+        new CustomEvent('exif-split:stats', {
+          detail: {
+            nodeId: message.nodeId,
+            total: message.total,
+            withExif: message.withExif,
+            withoutExif: message.withoutExif,
+          },
+        })
+      );
+      return;
+    }
+
     case "viewer": {
       const pending = pendingViewers.get(message.nodeId);
 

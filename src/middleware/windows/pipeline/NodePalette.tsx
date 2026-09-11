@@ -13,6 +13,7 @@ export const paletteItems: Array<{
   { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />, groupKey: "pipelineGroupInput" },
   { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineGroupInput" },
   { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />, groupKey: "pipelineGroupInput" },
+  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />, groupKey: "pipelineGroupInput" },
   { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />, groupKey: "pipelineGroupInput" },
   { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />, groupKey: "pipelineGroupInput" },
 

@@ -81,6 +81,15 @@ export type PipelineStageStartedMessage = {
   nodeId: string;
 };
 
+export type PipelineExifStatsMessage = {
+  type: "exifStats";
+  evaluationId: number;
+  nodeId: string;
+  total: number;
+  withExif: number;
+  withoutExif: number;
+};
+
 export type PipelineViewerImagePayload = {
   blob: Blob;
   width: number;
@@ -112,6 +121,7 @@ export type PipelineWorkerOutbound =
   | PipelineProgressMessage
   | PipelineStageTimingMessage
   | PipelineStageStartedMessage
+  | PipelineExifStatsMessage
   | PipelineViewerMessage
   | PipelineDoneMessage
   | PipelineErrorMessage;
