@@ -74,6 +74,7 @@
   "pipelineGoogleDriveFoundPhotos": "Found {{count}} JPGs",
   "pipelineGoogleDriveFailed": "Could not read Google Drive",
   "pipelineSourceLoading": "images ready for handover",
+  "pipelineViewerProcessing": "images processed",
   "pipelineGrouper": "Grouper",
   "pipelineArraySwitch": "Array Switch",
   "pipelineInformation": "Information",

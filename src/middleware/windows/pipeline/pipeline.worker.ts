@@ -966,6 +966,7 @@ function cropImages(
 }
 
 let sourceRunSeq = 0;
+let viewerRunSeq = 0;
 
 const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   information: {
@@ -1376,9 +1377,15 @@ const MAX_VIEWER_PREVIEW_EDGE = 1600;
 async function encodeImagesForTransport(
   images: WorkerImage[],
   evaluationId: number,
-  batchSize: number
+  batchSize: number,
+  nodeId: string
 ): Promise<PipelineViewerImagePayload[]> {
   const payload: PipelineViewerImagePayload[] = [];
+  const runId = ++viewerRunSeq;
+  const total = images.length;
+  let completed = 0;
+
+  postProgress("viewer", nodeId, evaluationId, runId, completed, total);
 
   for (let start = 0; start < images.length; start += batchSize) {
     throwIfStale(evaluationId);
@@ -1387,27 +1394,32 @@ async function encodeImagesForTransport(
       images.slice(start, start + batchSize),
       evaluationId,
       async (image) => {
-        const scale = Math.min(
-          1,
-          MAX_VIEWER_PREVIEW_EDGE / Math.max(image.width, image.height)
-        );
-        const previewWidth = Math.max(1, Math.round(image.width * scale));
-        const previewHeight = Math.max(1, Math.round(image.height * scale));
-        const [canvas, ctx] = createCanvas(previewWidth, previewHeight);
+        try {
+          const scale = Math.min(
+            1,
+            MAX_VIEWER_PREVIEW_EDGE / Math.max(image.width, image.height)
+          );
+          const previewWidth = Math.max(1, Math.round(image.width * scale));
+          const previewHeight = Math.max(1, Math.round(image.height * scale));
+          const [canvas, ctx] = createCanvas(previewWidth, previewHeight);
 
-        ctx.drawImage(image.bitmap, 0, 0, previewWidth, previewHeight);
+          ctx.drawImage(image.bitmap, 0, 0, previewWidth, previewHeight);
 
-        const blob = await canvas.convertToBlob({
-          type: "image/jpeg",
-          quality: 0.92,
-        });
+          const blob = await canvas.convertToBlob({
+            type: "image/jpeg",
+            quality: 0.92,
+          });
 
-        return {
-          blob,
-          width: image.width,
-          height: image.height,
-          name: image.name,
-        };
+          return {
+            blob,
+            width: image.width,
+            height: image.height,
+            name: image.name,
+          };
+        } finally {
+          completed += 1;
+          postProgress("viewer", nodeId, evaluationId, runId, completed, total);
+        }
       }
     );
 
@@ -1776,7 +1788,8 @@ async function runEvaluation(
             () => encodeImagesForTransport(
               images,
               evaluationId,
-              Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10))
+              Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10)),
+              node.id
             )
           );
 

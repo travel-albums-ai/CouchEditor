@@ -4,13 +4,16 @@ import SolidChip from '@/components/SolidChip';
 import { useSettings } from '@/context/settingsStore';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
-import { Box, Button } from '@mui/material';
+import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { Box, Button, LinearProgress, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import JSZip from 'jszip';
 import { Download, Images } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ImageArray } from "../types";
+
+type Progress = { runId: number; completed: number; total: number };
 
 // Photo titles aren't guaranteed to be filesystem-safe or unique.
 function toSafeFileName(name: string, index: number): string {
@@ -52,12 +55,41 @@ async function downloadAsZip(images: ImageArray) {
 }
 
 function ViewerNode({
+  id,
   data,
 }: NodeProps<Node<{ image?: ImageArray }>>) {
   const { t } = useTranslation();
   const images = data.image ?? [];
+  const [progress, setProgress] = useState<Progress | null>(null);
   const [downloading, setDownloading] = useState(false);
   const { setSetting } = useSettings();
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<Progress & { nodeId: string }>).detail;
+
+      if (!detail || detail.nodeId !== id) return;
+
+      setProgress((current) => {
+        if (current && detail.runId < current.runId) return current;
+        return detail;
+      });
+    };
+
+    window.addEventListener('viewer:progress', handler);
+
+    return () => window.removeEventListener('viewer:progress', handler);
+  }, [id]);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      setProgress(null);
+    }
+  }, [images]);
+
+  const progressPercent = progress && progress.total > 0
+    ? Math.min(100, (progress.completed / progress.total) * 100)
+    : 0;
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -73,7 +105,7 @@ function ViewerNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper type="viewer">
+    <NodeWrapper type="viewer" tools={<PipelineStageTiming nodeId={id} nodeType={'viewer'} />}>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
@@ -107,6 +139,15 @@ function ViewerNode({
         </Button>
         <SolidChip count={images.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
       </Box>
+
+      {progress && (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 1, mb: 1 }}>
+          <LinearProgress variant="determinate" value={progressPercent} />
+          <Typography variant="caption" color="textSecondary">
+            {progress.completed}/{progress.total} {t('pipelineViewerProcessing')}
+          </Typography>
+        </Box>
+      )}
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }}>
         {images.length > 0 ? (
