@@ -1,3 +1,9 @@
+## [1.36.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.35.0...v1.36.0) (2026-09-11)
+
+### ✨ Features
+
+* add pipeline photo batch size setting and UI integration ([d075d88](https://github.com/travel-albums-ai/CouchEditor/commit/d075d88ed9ae10543db2382de69d6ebe42d4d7cd))
+
 ## [1.35.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.34.1...v1.35.0) (2026-09-11)
 
 ### ✨ Features
