@@ -85,12 +85,37 @@ type WorkerImage = {
   cacheKey?: string;
 };
 
-// Bounds in-flight image work. The worker is single-threaded, so this
-// overlaps async gaps (decode/encode/fetch) rather than CPU work.
+// Bounds in-flight image work inside an individual node. The worker-wide
+// task queue below limits how many pipeline nodes can run at once.
 const MAX_CONCURRENT_IMAGE_OPS = Math.max(
   2,
   Math.min(4, navigator.hardwareConcurrency ?? 4)
 );
+
+class PipelineTaskQueue {
+  private active = 0;
+  private readonly waiters: Array<() => void> = [];
+
+  constructor(private readonly limit: number) {}
+
+  async run<T>(evaluationId: number, task: () => Promise<T>): Promise<T> {
+    throwIfStale(evaluationId);
+
+    if (this.active >= this.limit) {
+      await new Promise<void>((resolve) => this.waiters.push(resolve));
+      throwIfStale(evaluationId);
+    }
+
+    this.active += 1;
+
+    try {
+      return await task();
+    } finally {
+      this.active -= 1;
+      this.waiters.shift()?.();
+    }
+  }
+}
 
 // ============================================================
 // Cooperative cancellation
@@ -1371,6 +1396,9 @@ async function runEvaluation(
 ): Promise<void> {
   const { evaluationId, nodes, edges } = message;
   const startedAt = performance.now();
+  const taskQueue = new PipelineTaskQueue(
+    Math.max(1, Math.min(32, Math.round(message.maxConcurrentTasks) || 5))
+  );
 
   const outputs = new Map<string, Promise<NodeOutputs>>();
   const signatures = new Map<string, string>();
@@ -1531,7 +1559,7 @@ async function runEvaluation(
       });
 
       const startedAt = performance.now();
-      const result = await definition.execute(inputs);
+      const result = await taskQueue.run(evaluationId, () => definition.execute(inputs));
       const durationMs = performance.now() - startedAt;
 
       workerScope.postMessage({
@@ -1566,7 +1594,10 @@ async function runEvaluation(
           throwIfStale(evaluationId);
 
           const images = (nodeOutputs.image as WorkerImage[] | undefined) ?? [];
-          const payload = await encodeImagesForTransport(images, evaluationId);
+          const payload = await taskQueue.run(
+            evaluationId,
+            () => encodeImagesForTransport(images, evaluationId)
+          );
 
           throwIfStale(evaluationId);
 

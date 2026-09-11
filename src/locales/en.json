@@ -188,6 +188,8 @@
   "aiIdle": "Idle",
   "layoutLocale": "Locale",
   "layoutThemeSection": "Theme",
+  "pipelineSettingsSection": "Pipeline",
+  "pipelineMaxConcurrentTasks": "Maximum concurrent tasks",
   "byokSectionTitle": "AI via Bring Your Own Key (BYOK)",
   "byokEnableAi": "Open AI",
   "byokOpenAiKey": "Open AI Key",

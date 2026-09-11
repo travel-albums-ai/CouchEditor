@@ -12,6 +12,7 @@
 
 import type { Edge, Node } from "@xyflow/react";
 
+import { getSettingsStore } from "@/context/settingsStore";
 import type {
   ImageArray,
   ImageValue,
@@ -286,6 +287,10 @@ export async function evaluatePipeline(
   const message: PipelineEvaluateMessage = {
     type: "evaluate",
     evaluationId,
+    maxConcurrentTasks: Math.max(
+      1,
+      Math.min(32, Math.round(getSettingsStore().pipelineMaxConcurrentTasks) || 5)
+    ),
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),
   };

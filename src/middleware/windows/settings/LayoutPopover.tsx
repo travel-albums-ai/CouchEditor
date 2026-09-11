@@ -1,9 +1,11 @@
 import GeneralRegistryToolRenderer from '@/components/registry/GeneralRegistryToolRenderer';
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
+import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { Languages, PaintBucket } from 'lucide-react';
+import { Cpu, Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -29,6 +31,8 @@ export default function LayoutPopover() {
   const { setSetting: setCardSetting } = useAlbumPhotoCard()
   const cardSettings = useAlbumPhotoCardStoreSelector((state) => state)
   const { t } = useTranslation()
+  const { setSetting } = useSettings()
+  const pipelineMaxConcurrentTasks = useSettingsStoreSelector((state) => state.pipelineMaxConcurrentTasks)
 
   return <>
     {groups.map((group) => (
@@ -50,6 +54,22 @@ export default function LayoutPopover() {
           ))}
       </SettingsSection>
     ))}
+
+    <SettingsSection title={t('pipelineSettingsSection')} icon={<Cpu />}>
+      <SettingFieldRow
+        label={t('pipelineMaxConcurrentTasks')}
+        value={String(pipelineMaxConcurrentTasks)}
+        onChange={(value) => {
+          const parsed = Number.parseInt(value, 10)
+          if (Number.isNaN(parsed)) return
+
+          setSetting((prev) => ({
+            ...prev,
+            pipelineMaxConcurrentTasks: Math.max(1, Math.min(32, parsed)),
+          }))
+        }}
+      />
+    </SettingsSection>
 
 
   </>

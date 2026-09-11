@@ -48,6 +48,7 @@ export type PipelineWorkerEdge = {
 export type PipelineEvaluateMessage = {
   type: "evaluate";
   evaluationId: number;
+  maxConcurrentTasks: number;
   nodes: PipelineWorkerNode[];
   edges: PipelineWorkerEdge[];
 };

@@ -160,6 +160,7 @@ function Pipeline() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
+  const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
   const theme = useTheme();
 
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
@@ -369,6 +370,12 @@ function Pipeline() {
 
     evaluate();
   }, [nodes, edges, evaluate]);
+
+  useEffect(() => {
+    if (!graphSignatureRef.current) return;
+
+    evaluate();
+  }, [evaluate, pipelineMaxConcurrentTasks]);
 
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
     setIsDirty(true);
