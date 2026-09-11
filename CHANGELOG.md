@@ -1,3 +1,9 @@
+## [1.44.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.43.0...v1.44.0) (2026-09-11)
+
+### ✨ Features
+
+* add ExifSplitNode and related functionality for splitting images by EXIF metadata ([cce66ba](https://github.com/travel-albums-ai/CouchEditor/commit/cce66baf12a030f15e91ac74f7408a399c7c3c5c))
+
 ## [1.43.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.42.0...v1.43.0) (2026-09-11)
 
 ### ✨ Features
