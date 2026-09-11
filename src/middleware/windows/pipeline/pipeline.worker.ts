@@ -1348,6 +1348,8 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 // Transport encoding (viewer output only)
 // ============================================================
 
+const MAX_VIEWER_PREVIEW_EDGE = 1600;
+
 // JPEG keeps the per-image encode fast and the posted payload small
 // for large batches; quality matches the AI upload path.
 async function encodeImagesForTransport(
@@ -1364,9 +1366,15 @@ async function encodeImagesForTransport(
       images.slice(start, start + batchSize),
       evaluationId,
       async (image) => {
-        const [canvas, ctx] = createCanvas(image.width, image.height);
+        const scale = Math.min(
+          1,
+          MAX_VIEWER_PREVIEW_EDGE / Math.max(image.width, image.height)
+        );
+        const previewWidth = Math.max(1, Math.round(image.width * scale));
+        const previewHeight = Math.max(1, Math.round(image.height * scale));
+        const [canvas, ctx] = createCanvas(previewWidth, previewHeight);
 
-        ctx.drawImage(image.bitmap, 0, 0);
+        ctx.drawImage(image.bitmap, 0, 0, previewWidth, previewHeight);
 
         const blob = await canvas.convertToBlob({
           type: "image/jpeg",
@@ -1404,6 +1412,7 @@ type CachedNodeOutput = {
 // lets equivalent phases share the same in-worker ImageBitmaps across runs.
 const MAX_CACHED_PHASES = 64;
 const phaseOutputCache = new Map<string, CachedNodeOutput>();
+const retiredBitmaps = new Set<ImageBitmap>();
 
 function getCachedPhaseOutput(signature: string): NodeOutputs | undefined {
   const cached = phaseOutputCache.get(signature);
@@ -1418,16 +1427,76 @@ function getCachedPhaseOutput(signature: string): NodeOutputs | undefined {
 }
 
 function cachePhaseOutput(signature: string, outputs: NodeOutputs) {
+  const replaced = phaseOutputCache.get(signature);
   phaseOutputCache.delete(signature);
   phaseOutputCache.set(signature, { outputs });
+
+  if (replaced && replaced.outputs !== outputs) {
+    retireBitmaps(replaced.outputs);
+  }
 
   while (phaseOutputCache.size > MAX_CACHED_PHASES) {
     const oldestSignature = phaseOutputCache.keys().next().value;
 
     if (oldestSignature === undefined) break;
 
+    const evicted = phaseOutputCache.get(oldestSignature);
     phaseOutputCache.delete(oldestSignature);
+
+    if (evicted) {
+      retireBitmaps(evicted.outputs);
+    }
   }
+}
+
+function collectBitmaps(
+  value: unknown,
+  bitmaps: Set<ImageBitmap>
+) {
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      collectBitmaps(item, bitmaps);
+    }
+    return;
+  }
+
+  if (value && typeof value === "object" && "bitmap" in value) {
+    const bitmap = (value as { bitmap?: unknown }).bitmap;
+
+    if (bitmap instanceof ImageBitmap) {
+      bitmaps.add(bitmap);
+    }
+  }
+}
+
+function getCachedBitmaps(): Set<ImageBitmap> {
+  const bitmaps = new Set<ImageBitmap>();
+
+  for (const cached of phaseOutputCache.values()) {
+    collectBitmaps(cached.outputs, bitmaps);
+  }
+
+  return bitmaps;
+}
+
+function retireBitmaps(outputs: NodeOutputs) {
+  collectBitmaps(outputs, retiredBitmaps);
+}
+
+function closeRetiredBitmaps(activeOutputs: Iterable<NodeOutputs>) {
+  const activeBitmaps = getCachedBitmaps();
+
+  for (const output of activeOutputs) {
+    collectBitmaps(output, activeBitmaps);
+  }
+
+  for (const bitmap of retiredBitmaps) {
+    if (!activeBitmaps.has(bitmap)) {
+      bitmap.close();
+    }
+  }
+
+  retiredBitmaps.clear();
 }
 
 function serializeForCache(value: unknown): string {
@@ -1709,6 +1778,8 @@ async function runEvaluation(
   // resolves still-pending viewers as empty on "done" and the real
   // results would be dropped.
   await Promise.all(viewerPosts);
+
+  closeRetiredBitmaps(await Promise.all(outputs.values()));
 
   throwIfStale(evaluationId);
 
