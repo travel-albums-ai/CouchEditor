@@ -1,9 +1,9 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import { NodeToolbar, Position, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
+import { NodeToolbar, Position, useNodeConnections, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
 import { Copy, FastForward, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
@@ -21,9 +21,32 @@ export default function NodeWrapper({
 }: NodeWrapperProps) {
   const nodeId = useNodeId();
   const nodeData = useNodesData(nodeId ?? '');
+  const inputConnections = useNodeConnections({ handleType: 'target' });
+  const outputConnections = useNodeConnections({ handleType: 'source' });
   const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
   const [showHelper, setShowHelper] = useState(false);
+  const [hasUnconnectedHandle, setHasUnconnectedHandle] = useState(false);
+  const nodeContentRef = useRef<HTMLDivElement>(null);
   const isSkipping = nodeData?.data?.skip === true;
+
+  useEffect(() => {
+    const nodeElement = nodeContentRef.current?.parentElement;
+    if (!nodeElement) return;
+
+    const handles = [
+      ...nodeElement.querySelectorAll<HTMLElement>('.react-flow__handle.source'),
+      ...nodeElement.querySelectorAll<HTMLElement>('.react-flow__handle.target'),
+    ];
+    const connectedHandleIds = new Set([
+      ...inputConnections.map(connection => connection.targetHandle),
+      ...outputConnections.map(connection => connection.sourceHandle),
+    ]);
+
+    setHasUnconnectedHandle(handles.some(handle => {
+      const handleId = handle.getAttribute('data-handleid');
+      return !handleId || !connectedHandleIds.has(handleId);
+    }));
+  }, [inputConnections, outputConnections]);
 
   const deleteNode = () => {
     if (nodeId) {
@@ -163,6 +186,7 @@ export default function NodeWrapper({
       </NodeToolbar>}
 
       <Box
+        ref={nodeContentRef}
         sx={[
           {
             cursor: 'grab',
@@ -213,7 +237,9 @@ export default function NodeWrapper({
             pr: 1.5,
             filter: isSkipping ? 'blur(2px) grayscale(75%)' : 'none',
             bgcolor: theme =>
-              alpha(theme.palette.background.paper, 1),
+              hasUnconnectedHandle
+                ? alpha(theme.palette.secondary.main, 0.05)
+                : alpha(theme.palette.background.paper, 1),
           }}
         >
           {children}
