@@ -239,8 +239,12 @@ async function executeInPhotoBatches(
     return taskQueue.run(evaluationId, () => definition.execute(inputs));
   }
 
+  const normalizedBatchInputs = batchKeys.map((key) => [
+    key,
+    Array.isArray(inputs[key]) ? inputs[key] as unknown[] : [],
+  ] as const);
   const batchLength = Math.max(
-    ...batchKeys.map((key) => (inputs[key] as unknown[]).length)
+    ...normalizedBatchInputs.map(([, value]) => value.length)
   );
   const merged: NodeOutputs = {};
 
@@ -248,8 +252,8 @@ async function executeInPhotoBatches(
     throwIfStale(evaluationId);
 
     const batchInputs = { ...inputs };
-    for (const key of batchKeys) {
-      batchInputs[key] = (inputs[key] as unknown[]).slice(start, start + batchSize);
+    for (const [key, value] of normalizedBatchInputs) {
+      batchInputs[key] = value.slice(start, start + batchSize);
     }
     if (nodeType === "source") {
       batchInputs.sourceProgressOffset = start;

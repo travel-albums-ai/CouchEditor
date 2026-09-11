@@ -1,8 +1,7 @@
-import { alpha, Box, Stack, TextField, useTheme } from '@mui/material';
+import { alpha, Box, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
-  ConnectionLineType,
   Controls,
   MiniMap,
   ReactFlow,
@@ -18,7 +17,6 @@ import {
 import "@xyflow/react/dist/style.css";
 import './styles.css';
 
-import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import {
   useCallback,
   useEffect,
@@ -26,154 +24,30 @@ import {
   useState,
 } from "react";
 
-import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
-import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import LoadingBar from '@/components/LoadingBar';
-import StatusBar from '@/components/StatusBar';
-import { prepareGraph, usePipelineStore, usePipelineStoreSelector, type PipelineGraph } from '@/context/pipelineStore';
+import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
 import Header from '@/middleware/windows/pipeline/components/Header';
-import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
-import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
-import AIPhotoEditorNode from "./AIPhotoEditorNode";
-import ArraySetOperationNode from "./ComplexNodes/ArraySetOperationNode";
-import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
-import CollageNode from "./ComplexNodes/CollageNode";
-import CropNode from "./ComplexNodes/CropNode";
-import ExifSplitNode from "./ComplexNodes/ExifSplitNode";
-import ExifViewerNode from "./ComplexNodes/ExifViewerNode";
-import GoogleDriveNode from "./ComplexNodes/GoogleDriveNode";
-import GpsMapNode from "./ComplexNodes/GpsMapNode";
-import GpsSplitNode from "./ComplexNodes/GpsSplitNode";
-import GrouperNode from "./ComplexNodes/GrouperNode";
-import HotFolderReadNode from "./ComplexNodes/HotFolderReadNode";
-import HotFolderWriteNode from "./ComplexNodes/HotFolderWriteNode";
-import LutNode from "./ComplexNodes/LutNode";
-import PerspectiveNode from "./ComplexNodes/PerspectiveNode";
-import PhotoHistogramNode from "./ComplexNodes/PhotoHistogramNode";
-import RescaleNode from "./ComplexNodes/RescaleNode";
-import SelectedPhotoNode from "./ComplexNodes/SelectedPhotoNode";
-import SinglePhotoViewerNode from "./ComplexNodes/SinglePhotoViewerNode";
-import SourceNode from "./ComplexNodes/SourceNode";
-import ViewerNode from "./ComplexNodes/ViewerNode";
-import InformationNode from "./InformationNode";
 import NodeToolbox from "./NodeToolbox";
-import BrightnessNode from "./OneBarToggles/BrightnessNode";
-import ContrastNode from "./OneBarToggles/ContrastNode";
-import ExposureNode from "./OneBarToggles/ExposureNode";
-import FadeNode from "./OneBarToggles/FadeNode";
-import GammaNode from "./OneBarToggles/GammaNode";
-import GrainNode from "./OneBarToggles/GrainNode";
-import HdrNode from "./OneBarToggles/HdrNode";
-import HighlightsNode from "./OneBarToggles/HighlightsNode";
-import HueRotationNode from "./OneBarToggles/HueRotationNode";
-import LuminosityNode from "./OneBarToggles/LuminosityNode";
-import PopNode from "./OneBarToggles/PopNode";
+import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
+import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
-  RgbBlackPointNode,
-  RgbMidtonesNode,
-  RgbWhitePointNode,
-} from "./OneBarToggles/RgbChannelsNode";
-import RotateNode from "./OneBarToggles/RotateNode";
-import SaturationNode from "./OneBarToggles/SaturationNode";
-import ShadowsNode from "./OneBarToggles/ShadowsNode";
-import SharpenNode from "./OneBarToggles/SharpenNode";
-import SplitToningNode from "./OneBarToggles/SplitToningNode";
-import TemperatureTintNode from "./OneBarToggles/TemperatureTintNode";
-import VibranceNode from "./OneBarToggles/VibranceNode";
-import VignetteNode from "./OneBarToggles/VignetteNode";
-import WhitesBlacksNode from "./OneBarToggles/WhitesBlacksNode";
+  CONNECTION_LINE_TYPE,
+  INITIAL_EDGES,
+  INITIAL_NODES,
+  LAST_PIPELINE_STORAGE_KEY,
+  PIPELINE_NODE_COUNT_EVENT,
+  PIPELINE_NODE_COUNT_REQUEST_EVENT,
+  pipelineNodeTypes,
+  SNAP_GRID,
+} from './pipelineConfig';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
-import BlackAndWhiteNode from "./SimpleToggles/BlackAndWhiteNode";
-import FlipNode from "./SimpleToggles/FlipNode";
-import InvertNode from "./SimpleToggles/InvertNode";
-import MirrorNode from "./SimpleToggles/MirrorNode";
-import SepiaNode from "./SimpleToggles/SepiaNode";
 import { VIEWER_NODE_TYPES } from "./types";
 
-const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
-
-const nodeTypes = {
-  source: SourceNode,
-  "hot-folder-read": HotFolderReadNode,
-  "google-drive": GoogleDriveNode,
-  grouper: GrouperNode,
-  "array-switch": ArraySwitchNode,
-  "array-and": ArraySetOperationNode,
-  "array-and-not": ArraySetOperationNode,
-  "array-or": ArraySetOperationNode,
-  "exif-split": ExifSplitNode,
-  "ai-colorizer": AIAsyncColorizerNode,
-  "ai-denoiser": AIAsyncDenoiserNode,
-  "ai-photo-editor": AIPhotoEditorNode,
-  invert: InvertNode,
-  "black-white": BlackAndWhiteNode,
-  sepia: SepiaNode,
-  flip: FlipNode,
-  mirror: MirrorNode,
-  rotate: RotateNode,
-  brightness: BrightnessNode,
-  highlights: HighlightsNode,
-  shadows: ShadowsNode,
-  gamma: GammaNode,
-  luminosity: LuminosityNode,
-  lut: LutNode,
-  exposure: ExposureNode,
-  contrast: ContrastNode,
-  crop: CropNode,
-  perspective: PerspectiveNode,
-  saturation: SaturationNode,
-  vibrance: VibranceNode,
-  vignette: VignetteNode,
-  grain: GrainNode,
-  sharpen: SharpenNode,
-  pop: PopNode,
-  hdr: HdrNode,
-  "hue-rotation": HueRotationNode,
-  fade: FadeNode,
-  "whites-blacks": WhitesBlacksNode,
-  "temperature-tint": TemperatureTintNode,
-  "rgb-black-point": RgbBlackPointNode,
-  "rgb-white-point": RgbWhitePointNode,
-  "rgb-midtones": RgbMidtonesNode,
-  "split-toning": SplitToningNode,
-  rescale: RescaleNode,
-  collage: CollageNode,
-  "selected-photo": SelectedPhotoNode,
-  viewer: ViewerNode,
-  "viewer-single": SinglePhotoViewerNode,
-  "exif-viewer": ExifViewerNode,
-  "gps-map": GpsMapNode,
-  "gps-split": GpsSplitNode,
-  "photo-histogram": PhotoHistogramNode,
-  "hot-folder-write": HotFolderWriteNode,
-  information: InformationNode,
-};
-
-const initialNodes: Node[] = [
-];
-
-const initialEdges: Edge[] = [
-];
-
-const SNAP_GRID: [number, number] = [20, 20];
-const LAST_PIPELINE_STORAGE_KEY = 'lastOpenedPipelineId';
-const PIPELINE_FILE_EXTENSION = '.cep';
-const PIPELINE_NODE_COUNT_EVENT = 'pipeline:node-count';
-const PIPELINE_NODE_COUNT_REQUEST_EVENT = 'pipeline:node-count-request';
-
-function isPipelineGraph(value: unknown): value is PipelineGraph & { name?: unknown } {
-  if (!value || typeof value !== 'object') return false;
-
-  const candidate = value as { nodes?: unknown; edges?: unknown };
-  return Array.isArray(candidate.nodes) && Array.isArray(candidate.edges);
-}
-
 function Pipeline() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
@@ -449,19 +323,7 @@ function Pipeline() {
 
   const downloadPipeline = useCallback(() => {
     const name = currentPipelineName.trim() || 'Untitled pipeline';
-    const pipeline = {
-      name,
-      ...prepareGraph({ nodes, edges }),
-    };
-    const blob = new Blob([JSON.stringify(pipeline, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${name.replace(/[\\/:*?"<>|]+/g, '_')}${PIPELINE_FILE_EXTENSION}`;
-    link.click();
-    URL.revokeObjectURL(url);
+    downloadPipelineFile(name, nodes, edges);
   }, [currentPipelineName, edges, nodes]);
 
   const uploadPipeline = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -470,28 +332,15 @@ function Pipeline() {
 
     if (!file) return;
 
-    if (!file.name.toLowerCase().endsWith(PIPELINE_FILE_EXTENSION)) {
-      window.alert('Please choose a .cep pipeline file.');
-      return;
-    }
-
     try {
-      const imported = JSON.parse(await file.text()) as unknown;
-
-      if (!isPipelineGraph(imported)) {
-        throw new Error('Invalid pipeline format');
-      }
-
-      const name = typeof imported.name === 'string'
-        ? imported.name.trim() || file.name.replace(/\.cep$/i, '')
-        : file.name.replace(/\.cep$/i, '');
+      const { name, graph } = await readPipelineFile(file);
       const id = saveNew(name, {
-        nodes: imported.nodes,
-        edges: imported.edges,
+        nodes: graph.nodes,
+        edges: graph.edges,
       });
 
-      setNodes(imported.nodes.map((node) => ({ ...node, data: { ...node.data } })));
-      setEdges(styleEdges(imported.edges));
+      setNodes(graph.nodes.map((node) => ({ ...node, data: { ...node.data } })));
+      setEdges(styleEdges(graph.edges));
       setCurrentPipelineId(id);
       setCurrentPipelineName(name);
       setIsDirty(false);
@@ -527,16 +376,16 @@ function Pipeline() {
     if (!window.confirm(`Delete pipeline "${currentPipelineName}"?`)) return;
 
     deleteById(currentPipelineId);
-    setNodes(initialNodes);
-    setEdges(initialEdges);
+    setNodes(INITIAL_NODES);
+    setEdges(INITIAL_EDGES);
     setCurrentPipelineId('');
     setCurrentPipelineName('');
     setIsDirty(false);
   }, [currentPipelineId, currentPipelineName, deleteById, setEdges, setNodes]);
 
   const clearWorkspace = useCallback(() => {
-    setNodes(initialNodes);
-    setEdges(initialEdges);
+    setNodes(INITIAL_NODES);
+    setEdges(INITIAL_EDGES);
     setCurrentPipelineId('');
     setCurrentPipelineName('');
     setIsDirty(false);
@@ -652,7 +501,7 @@ function Pipeline() {
         "application/reactflow"
       );
 
-      if (!type || !(type in nodeTypes)) {
+      if (!type || !(type in pipelineNodeTypes)) {
         return;
       }
 
@@ -723,7 +572,7 @@ function Pipeline() {
           connectionLineType={CONNECTION_LINE_TYPE}
           defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
           minZoom={0.25}
-          nodeTypes={nodeTypes}
+          nodeTypes={pipelineNodeTypes}
           onNodesChange={handleNodesChange}
           onEdgesChange={handleEdgesChange}
           onConnect={onConnect}
@@ -750,116 +599,24 @@ function Pipeline() {
             : <ToggleToolbox />}
         </FloatingStack>
 
-        <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-toolbox">
-          <Box
-            id="status-bar"
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: 1.5,
-              p: 0.5,
-              py: 0,
-              position: 'relative',
-            }}
-          >
-            <LoadingBar />
-            <StatusBar />
-          </Box>
-        </FloatingStack>
-
-        <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-header-left">
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <GenericToggleButtonGroup id="pipeline-actions" variant="standard" items={[
-              {
-                tooltip: 'New pipeline',
-                icon: <CirclePlus /> ,
-                onClick: () => clearWorkspace(),
-                title: '',
-              },
-            ] satisfies GenericToggleButtonProps[]} />
-            <TextField
-              id="pipeline-name"
-              size="small"
-              value={currentPipelineName}
-              placeholder="Pipeline title..."
-              onChange={(event) => {
-                setCurrentPipelineName(event.target.value);
-                setIsDirty(true);
-              }}
-              sx={{ maxWidth: 400, minWidth: 300 }}
-            />
-            <GenericToggleButtonGroup id="pipeline-actions" items={[
-              {
-                tooltip: 'Save pipeline',
-                icon: <Save /> ,
-                onClick: () => saveCurrent(),
-                title: '',
-              },
-              {
-                tooltip: 'Save as clone',
-                icon: <Copy /> ,
-                onClick: () => saveAsCopy(),
-                title: '',
-              },
-            ] satisfies GenericToggleButtonProps[]} />
-            <GenericToggleButtonGroup id="pipeline-actions" items={[
-              {
-                tooltip: 'Download pipeline',
-                icon: <Download />,
-                onClick: downloadPipeline,
-
-                title: 'Export',
-              },
-              {
-                tooltip: 'Upload pipeline',
-                icon: <Upload />,
-                onClick: () => pipelineFileInputRef.current?.click(),
-                title: 'Import',
-              },
-            ] satisfies GenericToggleButtonProps[]} />
-            <input
-              ref={pipelineFileInputRef}
-              type="file"
-              accept=".cep"
-              hidden
-              onChange={uploadPipeline}
-            />
-
-          </Box>
-        </FloatingStack>
-
-        <Stack id="pipeline-trash"
-          direction="row"
-          spacing={1}
-          sx={{ position: 'absolute', bottom: 16, right: 232, zIndex: 10,
+        <PipelineCanvasOverlays
+          currentPipelineId={currentPipelineId}
+          currentPipelineName={currentPipelineName}
+          performanceMode={performanceMode}
+          trashActive={trashActive}
+          pipelineFileInputRef={pipelineFileInputRef}
+          trashRef={trashRef}
+          onClearWorkspace={clearWorkspace}
+          onSave={saveCurrent}
+          onSaveAsCopy={saveAsCopy}
+          onDownload={downloadPipeline}
+          onUpload={uploadPipeline}
+          onNameChange={(name) => {
+            setCurrentPipelineName(name);
+            setIsDirty(true);
           }}
-        >
-          <Box
-            ref={trashRef}
-            sx={{
-              width: 56,
-              height: 56,
-              borderRadius: 2,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid',
-              borderColor: trashActive ? 'error.main' : 'divider',
-              bgcolor: trashActive ? 'error.main' : 'background.default',
-              color: trashActive ? 'error.contrastText' : 'text.secondary',
-              boxShadow: performanceMode ? 4 : 0,
-              transform: trashActive ? 'scale(1.15)' : 'scale(1)',
-              transition: 'transform 0.15s ease-in-out, background-color 0.15s ease-in-out',
-              cursor: currentPipelineId ? 'pointer' : 'default'
-            }}
-            onClick={deleteCurrent}
-            title={currentPipelineId ? 'Delete current pipeline' : 'No saved pipeline selected'}
-          >
-            <Trash2 size={22} />
-          </Box>
-        </Stack>
+          onDelete={deleteCurrent}
+        />
       </div>
     </Box>
   );
