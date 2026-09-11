@@ -34,7 +34,7 @@ function ArraySetOperationNode({ type }: NodeProps<Node>) {
     <InputHandle id="image-1" position={Position.Left} style={{ top: '35%' }} />
     <InputHandle id="image-2" position={Position.Left} style={{ top: '65%' }} />
 
-    <NodeWrapper title={t(config.labelKey)} icon={config.icon} type={operation}>
+    <NodeWrapper type={operation}>
       <small>{t(config.descriptionKey)}</small>
     </NodeWrapper>
     <OutputHandle id="image" position={Position.Right} />
