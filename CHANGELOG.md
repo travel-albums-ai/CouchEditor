@@ -1,3 +1,9 @@
+## [1.60.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.59.0...v1.60.0) (2026-09-11)
+
+### ✨ Features
+
+* update icons in BYOKOpenAi and BYOKOpenAiImageEditor components for improved UI consistency ([a25c7ca](https://github.com/travel-albums-ai/CouchEditor/commit/a25c7caca4a13707a56fe2a4422f64bcd3c4a3c1))
+
 ## [1.59.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.58.0...v1.59.0) (2026-09-11)
 
 ### ✨ Features
