@@ -1,3 +1,9 @@
+## [1.40.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.39.0...v1.40.0) (2026-09-11)
+
+### ✨ Features
+
+* add EXIF viewer node and integrate EXIF data handling in pipeline ([e3f4bdb](https://github.com/travel-albums-ai/CouchEditor/commit/e3f4bdb477129070f0e9089c9f1dcc314a2af86c))
+
 ## [1.39.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.38.0...v1.39.0) (2026-09-11)
 
 ### ✨ Features
