@@ -630,7 +630,7 @@ const OPENAI_IMAGES_EDIT_URL = "https://api.openai.com/v1/images/edits";
 const AI_IMAGE_EDIT_MODEL = "gpt-image-2";
 
 // Node types that share the passthru/apiKey data shape.
-const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser"]);
+const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser", "ai-photo-editor"]);
 
 const AI_COLORIZER_PROMPT = [
   "Colorize this photograph realistically.",
@@ -758,7 +758,7 @@ async function requestOpenAIImageEdit(
 function createAIImageEditNodeDefinition(
   nodeType: string,
   label: string,
-  prompt: string
+  prompt: string | ((inputs: NodeInputs) => string)
 ): PipelineNodeDefinition {
   let runSeq = 0;
   const cache = new Map<string, WorkerImage>();
@@ -766,16 +766,17 @@ function createAIImageEditNodeDefinition(
   async function editImage(
     source: WorkerImage,
     apiKey: string,
+    editPrompt: string,
     signal: AbortSignal
   ): Promise<WorkerImage> {
-    const cacheKey = source.cacheKey;
+    const cacheKey = source.cacheKey ? `${source.cacheKey}:prompt:${editPrompt}` : undefined;
     const cached = cacheKey ? cache.get(cacheKey) : undefined;
 
     if (cached) {
       return cached;
     }
 
-    const edited = await requestOpenAIImageEdit(source, apiKey, prompt, signal);
+    const edited = await requestOpenAIImageEdit(source, apiKey, editPrompt, signal);
 
     if (cacheKey) {
       cache.set(cacheKey, edited);
@@ -806,6 +807,13 @@ function createAIImageEditNodeDefinition(
         return { image: sources };
       }
 
+      const editPrompt = typeof prompt === "function" ? prompt(inputs) : prompt;
+
+      if (!editPrompt.trim()) {
+        console.error(`${label}: missing edit prompt`);
+        return { image: sources };
+      }
+
       const runId = ++runSeq;
       const total = sources.length;
       let completed = 0;
@@ -817,7 +825,7 @@ function createAIImageEditNodeDefinition(
         evaluationId,
         async (source) => {
           try {
-            const edited = await editImage(source, apiKey, signal);
+            const edited = await editImage(source, apiKey, editPrompt, signal);
 
             postProgress(
               nodeType,
@@ -1461,6 +1469,12 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     AI_DENOISER_PROMPT
   ),
 
+  "ai-photo-editor": createAIImageEditNodeDefinition(
+    "ai-photo-editor",
+    "AI Photo Editor",
+    (inputs) => (inputs.prompt as string | undefined) ?? ""
+  ),
+
   rescale: {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -1880,6 +1894,7 @@ async function runEvaluation(
       if (AI_IMAGE_EDIT_NODE_TYPES.has(node.type ?? "")) {
         inputs.passthru = node.data.passthru;
         inputs.apiKey = node.data.apiKey;
+        inputs.prompt = node.data.prompt;
         inputs.nodeId = node.id;
       }
 

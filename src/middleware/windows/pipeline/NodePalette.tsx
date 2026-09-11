@@ -62,6 +62,7 @@ export const paletteItems: Array<{
   { type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />, groupKey: "pipelineGroupEffects" },
 
   { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
+  { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
 
   { type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />, groupKey: "pipelineGroupOutput" },
   { type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />, groupKey: "pipelineGroupOutput" },

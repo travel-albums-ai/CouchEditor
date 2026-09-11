@@ -37,6 +37,7 @@ import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStac
 import Header from '@/middleware/windows/pipeline/components/Header';
 import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
+import AIPhotoEditorNode from "./AIPhotoEditorNode";
 import ArraySetOperationNode from "./ComplexNodes/ArraySetOperationNode";
 import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
 import CollageNode from "./ComplexNodes/CollageNode";
@@ -106,6 +107,7 @@ const nodeTypes = {
   "exif-split": ExifSplitNode,
   "ai-colorizer": AIAsyncColorizerNode,
   "ai-denoiser": AIAsyncDenoiserNode,
+  "ai-photo-editor": AIPhotoEditorNode,
   invert: InvertNode,
   "black-white": BlackAndWhiteNode,
   sepia: SepiaNode,

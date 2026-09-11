@@ -2,7 +2,7 @@ import { useBYOKStoreSelector } from '@/context/byokStore';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
-import { Alert, Box, Button, LinearProgress, Typography } from '@mui/material';
+import { Alert, Box, Button, LinearProgress, TextField, Typography } from '@mui/material';
 import type { Node, NodeProps } from "@xyflow/react";
 import { Astroid, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
@@ -14,22 +14,26 @@ export type AIImageEditNodeConfig = {
   type: string;
   titleKey: string;
   actionLabelKey: string;
+  editablePrompt?: boolean;
+  promptLabelKey?: string;
+  promptPlaceholderKey?: string;
 };
 
 type Progress = { runId: number; completed: number; total: number };
 type Preview = { src: string; width: number; height: number; name?: string };
 
 // Builds a node component sharing the same passthru/apiKey sync and
-// progress-bar wiring, used by the AI Colorizer and AI Denoiser nodes.
+// progress-bar wiring, used by the AI image-edit nodes.
 export function createAIImageEditNode(config: AIImageEditNodeConfig) {
   function AIImageEditNode({
     id,
     data,
-  }: NodeProps<Node<{ passthru?: boolean; apiKey?: string }>>) {
+  }: NodeProps<Node<{ passthru?: boolean; apiKey?: string; prompt?: string }>>) {
     const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey);
     const { t } = useTranslation();
 
     const [engaged, setEngaged] = useState(data.passthru === false);
+    const [prompt, setPrompt] = useState(data.prompt ?? '');
     const [progress, setProgress] = useState<Progress | null>(null);
     const [preview, setPreview] = useState<Preview | null>(null);
     const latestRunId = useRef(0);
@@ -40,6 +44,7 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
     useEffect(() => {
       data.apiKey = byokOpenAIKey;
       data.passthru = !engaged;
+      if (config.editablePrompt) data.prompt = prompt;
 
       window.dispatchEvent(new CustomEvent("pipeline:changed"));
     }, [data, byokOpenAIKey, engaged]);
@@ -108,6 +113,32 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
         {engaged && !byokOpenAIKey && (
           <Alert severity="warning" sx={{ py: 0, mt: 1 }}>
             {t('aiNoOpenAiKey')}
+          </Alert>
+        )}
+
+        {config.editablePrompt && (
+          <TextField
+            className="nodrag nopan"
+            label={config.promptLabelKey ? t(config.promptLabelKey) : undefined}
+            placeholder={config.promptPlaceholderKey ? t(config.promptPlaceholderKey) : undefined}
+            value={prompt}
+            onChange={(event) => {
+              const nextPrompt = event.target.value;
+              setPrompt(nextPrompt);
+              data.prompt = nextPrompt;
+              window.dispatchEvent(new CustomEvent("pipeline:changed"));
+            }}
+            multiline
+            minRows={3}
+            size="small"
+            fullWidth
+            sx={{ mt: 1 }}
+          />
+        )}
+
+        {config.editablePrompt && engaged && !prompt.trim() && (
+          <Alert severity="info" sx={{ py: 0, mt: 1 }}>
+            {t('aiPromptRequired')}
           </Alert>
         )}
 
