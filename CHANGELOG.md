@@ -1,3 +1,9 @@
+## [1.45.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.44.0...v1.45.0) (2026-09-11)
+
+### ✨ Features
+
+* enhance NodeWrapper with progress display for SourceNode and ViewerNode ([fe5479b](https://github.com/travel-albums-ai/CouchEditor/commit/fe5479b07439bfdfdcb7f76a4d6eae75ffa3cd9a))
+
 ## [1.44.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.43.0...v1.44.0) (2026-09-11)
 
 ### ✨ Features
