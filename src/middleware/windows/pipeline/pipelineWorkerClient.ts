@@ -291,6 +291,10 @@ export async function evaluatePipeline(
       1,
       Math.min(32, Math.round(getSettingsStore().pipelineMaxConcurrentTasks) || 5)
     ),
+    photoBatchSize: Math.max(
+      1,
+      Math.min(100, Math.round(getSettingsStore().pipelinePhotoBatchSize) || 10)
+    ),
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),
   };

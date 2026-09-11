@@ -161,6 +161,7 @@ function Pipeline() {
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
+  const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
   const theme = useTheme();
 
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
@@ -375,7 +376,7 @@ function Pipeline() {
     if (!graphSignatureRef.current) return;
 
     evaluate();
-  }, [evaluate, pipelineMaxConcurrentTasks]);
+  }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize]);
 
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
     setIsDirty(true);

@@ -49,6 +49,7 @@ export type PipelineEvaluateMessage = {
   type: "evaluate";
   evaluationId: number;
   maxConcurrentTasks: number;
+  photoBatchSize: number;
   nodes: PipelineWorkerNode[];
   edges: PipelineWorkerEdge[];
 };

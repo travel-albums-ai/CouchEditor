@@ -33,6 +33,7 @@ export default function LayoutPopover() {
   const { t } = useTranslation()
   const { setSetting } = useSettings()
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector((state) => state.pipelineMaxConcurrentTasks)
+  const pipelinePhotoBatchSize = useSettingsStoreSelector((state) => state.pipelinePhotoBatchSize)
 
   return <>
     {groups.map((group) => (
@@ -66,6 +67,19 @@ export default function LayoutPopover() {
           setSetting((prev) => ({
             ...prev,
             pipelineMaxConcurrentTasks: Math.max(1, Math.min(32, parsed)),
+          }))
+        }}
+      />
+      <SettingFieldRow
+        label={t('pipelinePhotoBatchSize')}
+        value={String(pipelinePhotoBatchSize)}
+        onChange={(value) => {
+          const parsed = Number.parseInt(value, 10)
+          if (Number.isNaN(parsed)) return
+
+          setSetting((prev) => ({
+            ...prev,
+            pipelinePhotoBatchSize: Math.max(1, Math.min(100, parsed)),
           }))
         }}
       />

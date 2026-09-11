@@ -162,6 +162,65 @@ async function mapWithConcurrency<T, R>(
   return results;
 }
 
+const BATCH_INPUT_KEYS = ["image", "image-1", "image-2", "image-3", "image-4"];
+
+function getBatchInputKeys(nodeType: string | undefined, inputs: NodeInputs): string[] {
+  if (nodeType === "source" || nodeType === "hot-folder-read") {
+    return ["files"];
+  }
+
+  if (nodeType === "selection") {
+    return ["photos"];
+  }
+
+  return BATCH_INPUT_KEYS.filter((key) => Array.isArray(inputs[key]));
+}
+
+async function executeInPhotoBatches(
+  definition: PipelineNodeDefinition,
+  nodeType: string | undefined,
+  inputs: NodeInputs,
+  evaluationId: number,
+  batchSize: number,
+  taskQueue: PipelineTaskQueue
+): Promise<NodeOutputs> {
+  const batchKeys = getBatchInputKeys(nodeType, inputs);
+
+  if (batchKeys.length === 0) {
+    return taskQueue.run(evaluationId, () => definition.execute(inputs));
+  }
+
+  const batchLength = Math.max(
+    ...batchKeys.map((key) => (inputs[key] as unknown[]).length)
+  );
+  const merged: NodeOutputs = {};
+
+  for (let start = 0; start < batchLength; start += batchSize) {
+    throwIfStale(evaluationId);
+
+    const batchInputs = { ...inputs };
+    for (const key of batchKeys) {
+      batchInputs[key] = (inputs[key] as unknown[]).slice(start, start + batchSize);
+    }
+
+    const result = await taskQueue.run(
+      evaluationId,
+      () => definition.execute(batchInputs)
+    );
+
+    for (const [key, value] of Object.entries(result)) {
+      if (Array.isArray(value)) {
+        const existing = Array.isArray(merged[key]) ? merged[key] as unknown[] : [];
+        merged[key] = [...existing, ...value];
+      } else {
+        merged[key] = value;
+      }
+    }
+  }
+
+  return merged;
+}
+
 // ============================================================
 // Image loading / rendering primitives (OffscreenCanvas-based)
 // ============================================================
@@ -1293,25 +1352,40 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 // for large batches; quality matches the AI upload path.
 async function encodeImagesForTransport(
   images: WorkerImage[],
-  evaluationId: number
+  evaluationId: number,
+  batchSize: number
 ): Promise<PipelineViewerImagePayload[]> {
-  return mapWithConcurrency(images, evaluationId, async (image) => {
-    const [canvas, ctx] = createCanvas(image.width, image.height);
+  const payload: PipelineViewerImagePayload[] = [];
 
-    ctx.drawImage(image.bitmap, 0, 0);
+  for (let start = 0; start < images.length; start += batchSize) {
+    throwIfStale(evaluationId);
 
-    const blob = await canvas.convertToBlob({
-      type: "image/jpeg",
-      quality: 0.92,
-    });
+    const batch = await mapWithConcurrency(
+      images.slice(start, start + batchSize),
+      evaluationId,
+      async (image) => {
+        const [canvas, ctx] = createCanvas(image.width, image.height);
 
-    return {
-      blob,
-      width: image.width,
-      height: image.height,
-      name: image.name,
-    };
-  });
+        ctx.drawImage(image.bitmap, 0, 0);
+
+        const blob = await canvas.convertToBlob({
+          type: "image/jpeg",
+          quality: 0.92,
+        });
+
+        return {
+          blob,
+          width: image.width,
+          height: image.height,
+          name: image.name,
+        };
+      }
+    );
+
+    payload.push(...batch);
+  }
+
+  return payload;
 }
 
 // ============================================================
@@ -1559,7 +1633,14 @@ async function runEvaluation(
       });
 
       const startedAt = performance.now();
-      const result = await taskQueue.run(evaluationId, () => definition.execute(inputs));
+      const result = await executeInPhotoBatches(
+        definition,
+        node.type,
+        inputs,
+        evaluationId,
+        Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10)),
+        taskQueue
+      );
       const durationMs = performance.now() - startedAt;
 
       workerScope.postMessage({
@@ -1596,7 +1677,11 @@ async function runEvaluation(
           const images = (nodeOutputs.image as WorkerImage[] | undefined) ?? [];
           const payload = await taskQueue.run(
             evaluationId,
-            () => encodeImagesForTransport(images, evaluationId)
+            () => encodeImagesForTransport(
+              images,
+              evaluationId,
+              Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10))
+            )
           );
 
           throwIfStale(evaluationId);
