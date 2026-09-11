@@ -48,7 +48,7 @@ export default function GridVirtuoso({ photos }: Props) {
             display: 'block',
             width: '100%',
             height: '300px',
-            objectFit: 'cover',
+            objectFit: 'contain',
             borderRadius: '8px',
             padding: '1px',
           }}

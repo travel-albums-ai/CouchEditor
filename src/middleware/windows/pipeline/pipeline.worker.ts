@@ -179,6 +179,10 @@ function getBatchInputKeys(nodeType: string | undefined, inputs: NodeInputs): st
     return ["photos"];
   }
 
+  if (nodeType === "collage") {
+    return [];
+  }
+
   return BATCH_INPUT_KEYS.filter((key) => Array.isArray(inputs[key]));
 }
 
@@ -1105,6 +1109,47 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  collage: {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) return { image: [] };
+
+      const columns = Math.max(1, Math.round(Number(inputs.columns) || 5));
+      const rows = Math.max(1, Math.round(Number(inputs.rows) || 5));
+      const tileWidth = Math.max(1, Math.round(Number(inputs.tileWidth) || 200));
+      const tileHeight = Math.max(1, Math.round(Number(inputs.tileHeight) || 200));
+      const groupSize = columns * rows;
+      const image: WorkerImage[] = [];
+
+      for (let start = 0; start < sources.length; start += groupSize) {
+        throwIfStale(inputs.evaluationId as number);
+        const [canvas, ctx] = createCanvas(columns * tileWidth, rows * tileHeight);
+        const group = sources.slice(start, start + groupSize);
+
+        group.forEach((source, index) => {
+          const column = index % columns;
+          const row = Math.floor(index / columns);
+          ctx.drawImage(
+            source.bitmap,
+            column * tileWidth,
+            row * tileHeight,
+            tileWidth,
+            tileHeight
+          );
+        });
+
+        image.push({
+          bitmap: canvas.transferToImageBitmap(),
+          width: canvas.width,
+          height: canvas.height,
+          name: `collage-${Math.floor(start / groupSize) + 1}`,
+        });
+      }
+
+      return { image };
+    },
+  },
+
   "array-switch": {
     async execute(inputs) {
       const selectedInput = Number(inputs.selectedInput) === 2 ? "image-2" : "image-1";
@@ -1810,6 +1855,13 @@ async function runEvaluation(
       // Rescale node gets its scale factor from node.data.
       if (node.type === "rescale") {
         inputs.scale = node.data.scale;
+      }
+
+      if (node.type === "collage") {
+        inputs.columns = node.data.columns;
+        inputs.rows = node.data.rows;
+        inputs.tileWidth = node.data.tileWidth;
+        inputs.tileHeight = node.data.tileHeight;
       }
 
       if (node.type === "crop") {

@@ -39,6 +39,7 @@ import AIAsyncColorizerNode from "./AIAsyncColorizerNode";
 import AIAsyncDenoiserNode from "./AIAsyncDenoiserNode";
 import ArraySetOperationNode from "./ComplexNodes/ArraySetOperationNode";
 import ArraySwitchNode from "./ComplexNodes/ArraySwitchNode";
+import CollageNode from "./ComplexNodes/CollageNode";
 import CropNode from "./ComplexNodes/CropNode";
 import ExifSplitNode from "./ComplexNodes/ExifSplitNode";
 import ExifViewerNode from "./ComplexNodes/ExifViewerNode";
@@ -137,6 +138,7 @@ const nodeTypes = {
   "rgb-midtones": RgbMidtonesNode,
   "split-toning": SplitToningNode,
   rescale: RescaleNode,
+  collage: CollageNode,
   "selected-photo": SelectedPhotoNode,
   viewer: ViewerNode,
   "viewer-single": SinglePhotoViewerNode,
@@ -366,6 +368,10 @@ function Pipeline() {
       arraySwitchValues: nodes
         .filter((node) => node.type === "array-switch")
         .map((node) => `${node.id}:${node.data.selectedInput ?? 1}`)
+        .sort(),
+      collageValues: nodes
+        .filter((node) => node.type === "collage")
+        .map((node) => `${node.id}:${node.data.columns ?? 5}:${node.data.rows ?? 5}:${node.data.tileWidth ?? 200}:${node.data.tileHeight ?? 200}`)
         .sort(),
       edges: edges
         .map(
