@@ -1,3 +1,9 @@
+## [1.58.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.57.0...v1.58.0) (2026-09-11)
+
+### ✨ Features
+
+* add AICostsPopover component and integrate into settings; update localization for BYOK costs ([97ea156](https://github.com/travel-albums-ai/CouchEditor/commit/97ea1568cb4c2ca6d439b7bf37d01d48c33bcdf7))
+
 ## [1.57.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.56.0...v1.57.0) (2026-09-11)
 
 ### ✨ Features
