@@ -1,3 +1,9 @@
+## [1.65.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.64.0...v1.65.0) (2026-09-13)
+
+### ✨ Features
+
+* update NodePalette and slider nodes with new stages and configurations ([e4dc80b](https://github.com/travel-albums-ai/CouchEditor/commit/e4dc80b12539788d91f4f60a41a8c408a7837e90))
+
 ## [1.64.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.63.0...v1.64.0) (2026-09-13)
 
 ### ✨ Features
