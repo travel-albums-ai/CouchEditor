@@ -2,8 +2,6 @@ import AdjustmentSlider from '@/middleware/windows/pipeline/components/Adjustmen
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import ToneNodeLayout from './ToneNodeLayout';
 
 type RgbChannelsData = {
@@ -28,12 +26,6 @@ function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
   }: NodeProps<Node<RgbChannelsData>>) {
     const paletteItem = paletteItemsByType[config.type];
     const { setNodes } = useReactFlow();
-    const { t } = useTranslation();
-    const [values, setValues] = useState({
-      red: data.red ?? config.defaultValue,
-      green: data.green ?? config.defaultValue,
-      blue: data.blue ?? config.defaultValue,
-    });
 
     return (
       <ToneNodeLayout id={id} type={config.type} runningConfig={data}>
