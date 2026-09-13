@@ -1,3 +1,9 @@
+## [1.83.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.82.0...v1.83.0) (2026-09-13)
+
+### ✨ Features
+
+* enhance RgbChannelsNode to utilize dynamic configs for AdjustmentSlider components ([266c64d](https://github.com/travel-albums-ai/CouchEditor/commit/266c64d7feb075e1978610f5fe192e0547bb3ae8))
+
 ## [1.82.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.81.0...v1.82.0) (2026-09-13)
 
 ### ✨ Features
