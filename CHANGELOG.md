@@ -1,3 +1,9 @@
+## [1.74.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.73.1...v1.74.0) (2026-09-13)
+
+### ✨ Features
+
+* update algorithm handling in NodePalette and related components for improved parameter passing ([101e778](https://github.com/travel-albums-ai/CouchEditor/commit/101e7782ed606c712488b88a3f4943a9ec2a9502))
+
 ## [1.73.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.73.0...v1.73.1) (2026-09-13)
 
 ### 🐛 Fixes
