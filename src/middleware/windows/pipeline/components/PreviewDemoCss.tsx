@@ -1,6 +1,7 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
+import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
-import { Box, Slider, Typography, useTheme } from '@mui/material';
+import { Box, Slider, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -72,14 +73,7 @@ export function PreviewDemoCss({ paletteItem, width }: AdjustmentPreviewProps) {
         />
       )}
 
-      {paletteItem.labelDescription && <Typography variant="caption" sx={{ borderTop: '1px solid',
-        borderColor: 'divider',
-        flex: 1,
-        px: 1,
-        py: 1,
-      }} color="textSecondary">
-        {t(paletteItem.labelDescription)}
-      </Typography>}
+      <PreviewDescription paletteItem={paletteItem} />
     </Box>
   );
 }

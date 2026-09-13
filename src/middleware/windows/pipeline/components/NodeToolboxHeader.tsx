@@ -1,7 +1,7 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { paletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography, useTheme } from '@mui/material';
-import { cloneElement, useMemo } from 'react';
+import { cloneElement, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
@@ -16,9 +16,8 @@ export default function NodeToolboxHeader({
   sx,
   children,
 }: NodeHeaderProps) {
-  const performanceMode = useSettingsStoreSelector(
-    s => s.performanceMode
-  );
+  const performanceMode = useSettingsStoreSelector(s => s.performanceMode);
+  const [isHovered, setIsHovered] = useState(false);
 
   const theme = useTheme();
   const { t } = useTranslation();
@@ -72,6 +71,8 @@ export default function NodeToolboxHeader({
 
   return (
     <Box
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       sx={[
         {
           cursor: 'grab',
@@ -127,7 +128,7 @@ export default function NodeToolboxHeader({
         </Typography>
       </Box>
 
-      {children}
+      {isHovered && children}
     </Box>
   );
 }

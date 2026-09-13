@@ -147,7 +147,7 @@ export default function NodeWrapper({
             </IconButton>
           </Tooltip>
           <Tooltip title="Help">
-            <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)}>
+            <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)} sx={{ color: showHelper ? 'primary.main' : 'default' }}>
               <HelpCircle size={16} />
             </IconButton>
           </Tooltip>
@@ -174,7 +174,7 @@ export default function NodeWrapper({
         </Box>
       </NodeToolbar>
 
-      {showHelper && <NodeToolbar position={Position.Bottom} offset={8}>
+      {showHelper && <NodeToolbar position={Position.Top} offset={48}>
         <Box
           className="nodrag nopan"
           sx={{
@@ -183,7 +183,7 @@ export default function NodeWrapper({
             borderColor: 'divider',
             borderRadius: 2,
             bgcolor: 'background.paper',
-            boxShadow: 4,
+            boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
           }}
         >
           {helper || <PreviewDemoStatic paletteItem={paletteItemsByType[type]} />}
