@@ -1,3 +1,9 @@
+## [1.81.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.80.0...v1.81.0) (2026-09-13)
+
+### ✨ Features
+
+* refactor nodes to utilize dynamic configs for parameters in AdjustmentSlider components ([8220b9b](https://github.com/travel-albums-ai/CouchEditor/commit/8220b9b8df0cc0b2550959e2412f16fdc09cf540))
+
 ## [1.80.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.79.0...v1.80.0) (2026-09-13)
 
 ### ✨ Features
