@@ -23,14 +23,14 @@ export type NodeStageItem = {
 
   configs?: NodePaletteConfig[];
 
-  processing?: 'math' | 'css';
+  processing?: 'math' | 'css' | 'static';
 };
 export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
 }
 
 const sourceStages: Array<NodeStageItem> = [
-  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} /> },
+  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, },
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} /> },
   { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} /> },
   { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} /> },
@@ -328,9 +328,18 @@ const effectsStages: Array<NodeStageItem> = [
 ]
 
 const aiStages: Array<NodeStageItem> = [
-  { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} /> },
-  { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} /> },
-  { type: "ask-ai", labelKey: "pipelineAskAI", icon: <Astroid size={16} /> },
+  { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />,
+    processing: 'static',
+    labelDescription: 'Automatically colorizes black and white images using AI.',
+  },
+  { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} />,
+    processing: 'static',
+    labelDescription: 'Provides AI-powered photo editing capabilities.',
+  },
+  { type: "ask-ai", labelKey: "pipelineAskAI", icon: <Astroid size={16} />,
+    processing: 'static',
+    labelDescription: 'Allows users to ask AI for assistance or information related to photo editing.',
+  },
 ]
 
 const outputStages: Array<NodeStageItem> = [

@@ -4,6 +4,7 @@ import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineSt
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { PreviewDemoCss } from '@/middleware/windows/pipeline/components/PreviewDemoCss';
 import { PreviewDemoMath } from '@/middleware/windows/pipeline/components/PreviewDemoMath';
+import { PreviewDemoStatic } from '@/middleware/windows/pipeline/components/PreviewDemoStatic';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown, Info, Pointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -46,7 +47,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 140px)',
+        gridTemplateColumns: 'repeat(2, 440px)',
         gap: 1,
       }}>
         {items
@@ -63,6 +64,9 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
             >
               {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />} */}
               {/* {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
+              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
+              {item.processing === 'static' && <PreviewDemoStatic paletteItem={item} />}
+              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
 
               <NodeToolboxHeader type={item.type}>
                 <Tooltip title={<Box>
@@ -72,14 +76,14 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
 
                   {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
                   {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
+
                 </Box>} key={item.type} arrow placement="left">
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                    {(item.processing === 'css' || item.processing === 'math') && <Info size={16} style={{ color: 'inherit', opacity: 0.5, lineHeight: 0 }} />}
+                    <Info size={16} style={{ color: 'inherit', opacity: 0.15, lineHeight: 0 }} />
                   </span>
                 </Tooltip>
               </NodeToolboxHeader>
             </Box>
-            // </Tooltip>
           ))}
       </Box>}
     </Box>
