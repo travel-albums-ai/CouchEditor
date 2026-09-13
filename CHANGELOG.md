@@ -1,3 +1,9 @@
+## [1.100.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.99.0...v1.100.0) (2026-09-13)
+
+### ✨ Features
+
+* add WebMCPMovePipelineNode component for moving pipeline nodes ([72e7b62](https://github.com/travel-albums-ai/CouchEditor/commit/72e7b62095341a5d686dd887b7fa841dfde1e67e))
+
 ## [1.99.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.98.0...v1.99.0) (2026-09-13)
 
 ### ✨ Features
