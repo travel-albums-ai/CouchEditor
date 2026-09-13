@@ -1,3 +1,9 @@
+## [1.89.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.88.0...v1.89.0) (2026-09-13)
+
+### ✨ Features
+
+* update HelpWindow to use grouped palette items and enhance layout ([18b07ac](https://github.com/travel-albums-ai/CouchEditor/commit/18b07acb804935b45172f3fcb3693691f3bb9552))
+
 ## [1.88.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.87.0...v1.88.0) (2026-09-13)
 
 ### ✨ Features
