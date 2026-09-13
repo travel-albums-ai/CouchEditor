@@ -36,8 +36,11 @@ export function createSliderNode(config: SliderNodeConfig) {
           {/* {config.info && config.info({...config, amount })} */}
           {paletteItem.processing === 'math' && <AdjustmentPreview
             type={config.type}
-            algorithm={() => paletteItem?.algo({ amount })}
-            label="Brightness"
+            algorithm={(imageData) => {
+              const stage = paletteItem.algo?.({ amount });
+              stage?.(imageData);
+            }}
+            label={config.type}
           />}
           {/* {config.defaultValue === undefined && paletteItem.processing === 'css' && <BeforeAfter image2style={{ transform: paletteItem?.algo({ amount: amount !== 0 ? amount : (activeConfig?.max || 1) / 2 }) }} />} */}
           {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo({ amount }) }} />}
