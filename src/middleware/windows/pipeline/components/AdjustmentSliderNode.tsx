@@ -4,6 +4,7 @@ import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { PreviewCss } from '@/middleware/windows/pipeline/components/PreviewCss';
+import { PreviewDemoStatic } from '@/middleware/windows/pipeline/components/PreviewDemoStatic';
 import { PreviewMath } from '@/middleware/windows/pipeline/components/PreviewMath';
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { useReactFlow, type Node, type NodeProps } from "@xyflow/react";
@@ -27,6 +28,7 @@ export function createSliderNode(config: SliderNodeConfig) {
     const [isBusy, setIsBusy] = useState(false);
 
     const helper = <>
+      {paletteItem.processing === 'static' && <PreviewDemoStatic paletteItem={paletteItem} />}
       {paletteItem.processing === 'math' && <PreviewMath paletteItem={paletteItem} data={data} />}
       {paletteItem.processing === 'css' && <PreviewCss paletteItem={paletteItem} image2style={{ ...paletteItem?.algo(data) }} data={data} />}
     </>
@@ -35,7 +37,7 @@ export function createSliderNode(config: SliderNodeConfig) {
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
-        helper={paletteItem.configs?.length !== 0 ? helper : undefined}
+        helper={helper}
       >
         {paletteItem.configs?.length === 0 && helper}
         {(paletteItem.configs || [])

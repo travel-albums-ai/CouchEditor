@@ -1,4 +1,5 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
+import { PreviewDemoStatic } from '@/middleware/windows/pipeline/components/PreviewDemoStatic';
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
@@ -145,11 +146,11 @@ export default function NodeWrapper({
               <Copy size={16} />
             </IconButton>
           </Tooltip>
-          {helper !== undefined && <Tooltip title="Help">
+          <Tooltip title="Help">
             <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)}>
               <HelpCircle size={16} />
             </IconButton>
-          </Tooltip>}
+          </Tooltip>
           <Tooltip title={isSkipping ? 'Enable node' : 'Skip node'}>
             <IconButton
               size="small"
@@ -173,7 +174,7 @@ export default function NodeWrapper({
         </Box>
       </NodeToolbar>
 
-      {showHelper && helper && <NodeToolbar position={Position.Bottom} offset={8}>
+      {showHelper && <NodeToolbar position={Position.Bottom} offset={8}>
         <Box
           className="nodrag nopan"
           sx={{
@@ -185,7 +186,7 @@ export default function NodeWrapper({
             boxShadow: 4,
           }}
         >
-          {helper}
+          {helper || <PreviewDemoStatic paletteItem={paletteItemsByType[type]} />}
         </Box>
       </NodeToolbar>}
 
