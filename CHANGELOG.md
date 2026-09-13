@@ -1,3 +1,9 @@
+## [1.74.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.0...v1.74.1) (2026-09-13)
+
+### 🐛 Fixes
+
+* update algorithm handling in AdjustmentPreview for improved image processing ([41cc01f](https://github.com/travel-albums-ai/CouchEditor/commit/41cc01f40ec26bede4078712fb61c07f47f61e02))
+
 ## [1.74.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.73.1...v1.74.0) (2026-09-13)
 
 ### ✨ Features
