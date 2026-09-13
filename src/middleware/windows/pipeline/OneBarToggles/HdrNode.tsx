@@ -24,7 +24,7 @@ export default function HdrNode({ id, data }: NodeProps<Node<HdrData>>) {
     <NodeWrapper
       type="hdr"
       tools={<PipelineStageTiming nodeId={id} nodeType="hdr" />}
-      helper={<AdjustmentPreview amount={amount} algorithm={(value) => hdrEffectStage(value, radius)} label="HDR" />}
+      helper={<AdjustmentPreview amount={0} algorithm={() => hdrEffectStage(amount, radius)} label="HDR" />}
     >
       <AdjustmentSlider
         description={<Typography variant="caption" color="textSecondary">Amount</Typography>}
