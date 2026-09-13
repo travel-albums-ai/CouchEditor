@@ -66,7 +66,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 }
               >
 
-                {item.processing === 'math' && <AdjustmentPreviewDemo config={item?.config} amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
+                {item.processing === 'math' && <AdjustmentPreviewDemo item={item} config={item?.config} amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
 
                 <NodeToolboxHeader
                   type={item.type}

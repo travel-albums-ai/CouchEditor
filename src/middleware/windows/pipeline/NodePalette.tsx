@@ -11,6 +11,8 @@ export type NodePaletteConfig = {
 export type NodeStageItem = {
   type: string;
   labelKey: string;
+
+  labelDescription?: string;
   icon: React.ReactNode;
   ai?: boolean;
   algo?: any;
@@ -107,7 +109,8 @@ const colorStages: Array<NodeStageItem> = [
   {
     type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />,
     algo: saturationStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
-    processing: 'math'
+    processing: 'math',
+    labelDescription: 'Adjusts the intensity of the color saturation. The algorithm modifies the saturation level of the image colors. It applies the specified adjustment to enhance or reduce the overall color vibrancy.',
   },
   {
     type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />,
