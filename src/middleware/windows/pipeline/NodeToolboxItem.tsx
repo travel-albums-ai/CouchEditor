@@ -1,6 +1,5 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import { highlightsStage } from '@/lib/utils';
 import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
@@ -54,7 +53,9 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
           .map((item, i) => (
             <Tooltip title={<>
               {t('pipelineDragToAdd', { label: t(item.labelKey) })}
-              <AdjustmentPreview amount={80} algorithm={highlightsStage} label="Highlights" />
+              {/* {JSON.stringify(item)}
+              {console.log(item)} */}
+              {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
             </>} key={item.type} arrow placement="top">
               <Box
                 key={item.type}

@@ -15,7 +15,7 @@ export type NodeStageItem = {
   ai?: boolean;
   algo?: any;
   config?: NodePaletteConfig;
-  processing?: 'math';
+  processing?: 'math' | 'css';
 };
 export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
@@ -44,9 +44,19 @@ const transformStages: Array<NodeStageItem> = [
   { type: "crop", labelKey: "pipelineCrop", icon: <Crop size={16} /> },
   { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} /> },
   { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} /> },
-  { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} /> },
-  { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} /> },
-  { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} /> },
+  { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
+    algo: (config: any) => ({ transform: `rotate(${config.amount}deg)` }),
+    config: { min: 0, max: 360, step: 1, defaultValue: 0 },
+    processing: 'css'
+  },
+  { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
+    algo: (config: any) => ({ transform: `rotate(180deg)` }),
+    processing: 'css'
+  },
+  { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
+    algo: (config: any) => ({ transform: `scaleX(-1)` }),
+    processing: 'css'
+  },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} /> },
 ]
 
@@ -109,9 +119,18 @@ const colorStages: Array<NodeStageItem> = [
     algo: hueRotationStage, config: { min: -180, max: 180, step: 1, defaultValue: 0 },
     processing: 'math'
   },
-  { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} /> },
-  { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} /> },
-  { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} /> },
+  { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
+    algo: (config: any) => ({ filter: `grayscale(1)` }),
+    processing: 'css'
+  },
+  { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
+    algo: (config: any) => ({ filter: `sepia(1)` }),
+    processing: 'css'
+  },
+  { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
+    algo: (config: any) => ({ filter: `invert(1)` }),
+    processing: 'css'
+  },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} /> },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} /> },
