@@ -1,3 +1,9 @@
+## [1.95.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.94.0...v1.95.0) (2026-09-13)
+
+### ✨ Features
+
+* add tools for deleting and cloning pipeline nodes, and handle graph updates ([6d84ca5](https://github.com/travel-albums-ai/CouchEditor/commit/6d84ca5063501e5ed52f4a189e4e485f33520ffd))
+
 ## [1.94.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.93.0...v1.94.0) (2026-09-13)
 
 ### ✨ Features
