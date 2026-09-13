@@ -4,6 +4,7 @@ import WebMCPAddPipelineNode from '@/components/WebMCPAddPipelineNode';
 import WebMCPClonePipelineNode from '@/components/WebMCPClonePipelineNode';
 import WebMCPDeletePipelineNode from '@/components/WebMCPDeletePipelineNode';
 import WebMCPGetCurrentPipeline from '@/components/WebMCPGetCurrentPipeline';
+import WebMCPGetPipelineToolbox from '@/components/WebMCPGetPipelineToolbox';
 import WebMCPThemeTool from '@/components/WebMCPThemeTool';
 import WebMCPUpdatePipelineNodeProperties from '@/components/WebMCPUpdatePipelineNodeProperties';
 import HelpWindow from '@/middleware/windows/HelpWindow';
@@ -32,6 +33,7 @@ export default function AppLayout() {
       <WebMCPClonePipelineNode />
       <WebMCPDeletePipelineNode />
       <WebMCPGetCurrentPipeline />
+      <WebMCPGetPipelineToolbox />
       <WebMCPUpdatePipelineNodeProperties />
 
       <ReactFlowWrapper />
