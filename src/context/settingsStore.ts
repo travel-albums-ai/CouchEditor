@@ -24,6 +24,7 @@ type SettingsStore = {
   loading: boolean,
   loadingValue: number | null,
   showSettings: boolean,
+  showHelp: boolean,
   selectMode: boolean,
   locale: SupportedLanguage,
 }
@@ -51,6 +52,7 @@ const defaults: SettingsStore = {
   showSettings: false,
   activeSettingsTab: undefined,
   selectMode: false,
+  showHelp: false,
   locale: 'en',
 } satisfies SettingsStore;
 

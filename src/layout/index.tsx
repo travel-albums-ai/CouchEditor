@@ -1,5 +1,6 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
+import HelpWindow from '@/middleware/windows/HelpWindow';
 import LightboxWindow from '@/middleware/windows/LightboxWindow';
 import NewVersionWindow from '@/middleware/windows/NewVersionWindow';
 import OnboardingWindow from '@/middleware/windows/OnboardingWindow';
@@ -14,6 +15,7 @@ export default function AppLayout() {
       <NewVersionWindow />
       <OnboardingWindow />
       <SettingsWindow />
+      <HelpWindow />
 
       <MainDriver />
       <AiLoadingBar />

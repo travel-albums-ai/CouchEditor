@@ -6,6 +6,7 @@ import SolidChip from '@/components/SolidChip';
 import type { SavedPipeline } from '@/context/pipelineStore';
 import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
 import FullscreenToggle from '@/middleware/tools/ActionTools/FullscreenToggle';
+import HelpToggle from '@/middleware/tools/ActionTools/HelpToggle';
 import SettingsWindowToggle from '@/middleware/tools/ActionTools/SettingsWindowToggle';
 import TutorialToggle from '@/middleware/tools/ActionTools/TutorialToggle';
 import ExtendedMenu from '@/middleware/tools/PopoverTools/ExtendedMenu';
@@ -89,6 +90,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
         <DarkLightStatus />
         <FullscreenToggle />
         <TutorialToggle />
+        <HelpToggle />
         <ExtendedMenu />
       </Box>
     </Box>
