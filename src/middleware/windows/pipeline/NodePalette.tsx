@@ -200,7 +200,8 @@ const colorStages: Array<NodeStageItem> = [
     algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
       splitToningStage(shadowTint[0], shadowTint[1], shadowTint[2], highlightTint[0], highlightTint[1], highlightTint[2], strength),
 
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 50 }],
+    configs: [
+      { min: 0, max: 10, step: 1, defaultValue: 50, labelKey: 'Strength', key: 'strength' }],
     processing: 'complex'
 
   },

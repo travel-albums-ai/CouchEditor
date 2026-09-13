@@ -1,6 +1,7 @@
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
-import { type Node, type NodeProps } from '@xyflow/react';
+import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ToneNodeLayout from './ToneNodeLayout';
@@ -40,14 +41,15 @@ export default function SplitToningNode({
   data,
 }: NodeProps<Node<SplitToningData>>) {
   const { t } = useTranslation();
+  const { setNodes } = useReactFlow();
+  const paletteItem = paletteItemsByType["split-toning"];
+
   const [shadowTint, setShadowTint] = useState(
     data.shadowTint ?? DEFAULT_SHADOW_TINT
   );
   const [highlightTint, setHighlightTint] = useState(
     data.highlightTint ?? DEFAULT_HIGHLIGHT_TINT
   );
-  const [strength, setStrength] = useState(data.strength ?? 50);
-
   const updateTint = (key: 'shadowTint' | 'highlightTint', value: string) => {
     const next = hexToRgb(value);
     Object.assign(data, { [key]: next });
@@ -62,7 +64,7 @@ export default function SplitToningNode({
   };
 
   return (
-    <ToneNodeLayout id={id} type="split-toning" runningConfig={{ shadowTint, highlightTint, strength }}>
+    <ToneNodeLayout id={id} type="split-toning" runningConfig={{ ...data, shadowTint, highlightTint,  }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="caption" color="textSecondary">{t('pipelineShadowTint')}</Typography>
         <input
@@ -82,19 +84,22 @@ export default function SplitToningNode({
         />
       </Box>
 
-      <AdjustmentSlider
-        description={<Typography variant="caption" color="textSecondary">
-          {t('pipelineSplitToningStrength')}
-        </Typography>}
-        min={0}
-        max={100}
-        step={1}
-        value={strength}
-        onChange={(value) => {
-          Object.assign(data, { strength: value });
-          setStrength(value);
-        }}
-      />
+      {paletteItem.configs?.map((config, index) => (
+        <AdjustmentSlider
+          description={<Typography variant="caption" color="textSecondary">{config.labelKey ? config.labelKey : ""}</Typography>}
+          min={config.min ?? 0}
+          max={config.max ?? 100}
+          throttleMs={1000}
+          step={config.step ?? 1}
+          value={data[config.key] ?? 0}
+          onChange={(value) => {
+            setNodes((current) => current.map((node) => node.id === id
+              ? { ...node, data: { ...node.data, [config.key]: value } }
+              : node
+            ));
+          }}
+        />
+      ))}
     </ToneNodeLayout>
   );
 }
