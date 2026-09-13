@@ -23,7 +23,7 @@ export type NodeStageItem = {
 
   configs?: NodePaletteConfig[];
 
-  processing?: 'math' | 'css' | 'complex';
+  processing?: 'math' | 'css';
 };
 export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
@@ -121,7 +121,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Whites', key: 'whites' },
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Blacks', key: 'blacks' }
     ],
-    processing: 'complex'
+    processing: 'math'
   },
   { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbBlackPointStage(red, green, blue),
@@ -194,7 +194,7 @@ const colorStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Temperature', key: 'temperature' },
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Tint', key: 'tint' }
     ],
-    processing: 'complex'
+    processing: 'math'
   },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
     algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
@@ -202,7 +202,7 @@ const colorStages: Array<NodeStageItem> = [
 
     configs: [
       { min: 0, max: 10, step: 1, defaultValue: 50, labelKey: 'Strength', key: 'strength' }],
-    processing: 'complex'
+    processing: 'math'
 
   },
 ]
@@ -229,7 +229,7 @@ const effectsStages: Array<NodeStageItem> = [
     configs: [
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
-    processing: 'complex'
+    processing: 'math'
   },
   {
     type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />,
@@ -243,7 +243,7 @@ const effectsStages: Array<NodeStageItem> = [
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Amount', key: 'amount' },
       { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Radius', key: 'radius' },
     ],
-    processing: 'complex'
+    processing: 'math'
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,

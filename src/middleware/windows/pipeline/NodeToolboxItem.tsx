@@ -60,14 +60,14 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
-              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
-              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
+              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
+              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
 
               <NodeToolboxHeader
                 type={item.type}
               >
                 <Tooltip title={<>
-                  {t('pipelineDragToAdd', { label: t(item.labelKey) })}
+                  {/* {t('pipelineDragToAdd', { label: t(item.labelKey) })} */}
                   {/* {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />} */}
                   {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
                   {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}

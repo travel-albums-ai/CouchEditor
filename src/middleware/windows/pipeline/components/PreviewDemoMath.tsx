@@ -13,32 +13,35 @@ type AdjustmentPreviewProps = {
 
 export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
-  const [amount, setAmount] = useState(0);
+  const [values, setValues] = useState<Record<string, number>>({});
   const theme = useTheme();
   const { t } = useTranslation();
-  const config = paletteItem.configs?.[0] || paletteItem.config;
+  const configs = paletteItem.configs || (paletteItem.config ? [paletteItem.config] : []);
+  const config = configs[0];
+  const amount = config ? values[config.key] ?? config.defaultValue ?? config.min : 0;
 
 
   useEffect(() => {
-    const min = typeof config?.min === 'number' ? config.min : 0;
-    const max = typeof config?.max === 'number' ? config.max : 1;
+    const randomizeValues = () => Object.fromEntries(configs.map((currentConfig) => {
+      const min = currentConfig.min;
+      const max = currentConfig.max;
+      const step = currentConfig.step;
+      const randomValue = min === max ? min : min + Math.random() * (max - min);
+      const value = step
+        ? Math.round((randomValue - min) / step) * step + min
+        : randomValue;
 
-    setAmount(min + (max - min) / 2);
+      return [currentConfig.key, Math.min(max, Math.max(min, value))];
+    }));
+
+    setValues(randomizeValues());
 
     const intervalId = window.setInterval(() => {
-      setAmount((currentAmount) => {
-        const nextAmount = min + Math.random() * (max - min);
-
-        if (nextAmount !== currentAmount || min === max) {
-          return nextAmount;
-        }
-
-        return currentAmount === min ? max : min;
-      });
+      setValues(randomizeValues());
     }, 1000);
 
     return () => window.clearInterval(intervalId);
-  }, [config?.max, config?.min]);
+  }, [paletteItem.config, paletteItem.configs]);
 
   useEffect(() => {
     let cancelled = false;
@@ -54,7 +57,7 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
 
       context.drawImage(image, 0, 0);
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      paletteItem.algo({ amount })(imageData);
+      paletteItem.algo(values)(imageData);
       context.putImageData(imageData, 0, 0);
 
       if (!cancelled) {
@@ -66,7 +69,7 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
     return () => {
       cancelled = true;
     };
-  }, [paletteItem.algo, amount]);
+  }, [paletteItem.algo, values]);
 
   return (
     <Box sx={{
