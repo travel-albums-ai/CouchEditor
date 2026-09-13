@@ -1,3 +1,9 @@
+## [1.74.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.1...v1.74.2) (2026-09-13)
+
+### 🐛 Fixes
+
+* enable rendering of CSS and math previews in NodeToolboxItem ([a337b1f](https://github.com/travel-albums-ai/CouchEditor/commit/a337b1f862cf4109a79c636c5ad016cdcd30cea1))
+
 ## [1.74.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.0...v1.74.1) (2026-09-13)
 
 ### 🐛 Fixes
