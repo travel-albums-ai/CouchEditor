@@ -32,7 +32,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
           alt={t('logoAlt')}
           width={45}
           height={30}
-          style={{ width: 45, height: 30 }}
+          style={{ width: 45, height: 30, filter: 'hue-rotate(250deg)' }}
           fetchPriority="high"
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
