@@ -50,7 +50,8 @@ const logicStages: Array<NodeStageItem> = [
 
 const transformStages: Array<NodeStageItem> = [
   { type: "crop", labelKey: "pipelineCrop", icon: <Crop size={16} />,
-    algo: (crop) => ({ clipPath: `inset(${crop?.top}% ${crop?.right}% ${crop?.bottom}% ${crop?.left}%)` }),
+    algo: (crop: any) => {
+      return { clipPath: `inset(${crop?.top || 0}% ${crop?.right || 0}% ${crop?.bottom || 0}% ${crop?.left || 0}%)` }},
     configs: [
       { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Top', key: 'top' },
       { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Right', key: 'right' },
@@ -63,7 +64,7 @@ const transformStages: Array<NodeStageItem> = [
   { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} /> },
   { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} /> },
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
-    algo: (config: any) => ({ transform: `rotate(${config.amount}deg)` }),
+    algo: (config: any) => ({ transform: `rotate(${config?.amount}deg)` }),
     configs: [
       { min: 0, max: 360, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
@@ -83,8 +84,17 @@ const transformStages: Array<NodeStageItem> = [
     labelDescription: 'Mirrors the image horizontally.',
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} />,
-    algo: () => ({ transform: `perspective(500px)` }),
-    configs: [],
+    algo: (data: any) => ({ clipPath: `polygon(${data?.topLeftx ?? 0}% ${data?.topLefty ?? 0}%, ${data?.topRightx ?? 0}% ${data?.topRighty ?? 0}%, ${data?.bottomRightx ?? 0}% ${data?.bottomRighty ?? 0}%, ${data?.bottomLeftx ?? 0}% ${data?.bottomLefty ?? 0}%)` }),
+    configs: [
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Left X', key: 'topLeftx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Left Y', key: 'topLefty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Right X', key: 'topRightx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Right Y', key: 'topRighty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Left X', key: 'bottomLeftx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Left Y', key: 'bottomLefty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right X', key: 'bottomRightx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right Y', key: 'bottomRighty' },
+    ],
     processing: 'css',
     labelDescription: 'Applies a perspective transformation to the image.',
   },

@@ -17,7 +17,6 @@ import HotFolderReadNode from './ComplexNodes/HotFolderReadNode';
 import HotFolderWriteNode from './ComplexNodes/HotFolderWriteNode';
 import ImagePickerNode from './ComplexNodes/ImagePickerNode';
 import LutNode from './ComplexNodes/LutNode';
-import PerspectiveNode from './ComplexNodes/PerspectiveNode';
 import PhotoHistogramNode from './ComplexNodes/PhotoHistogramNode';
 import RescaleNode from './ComplexNodes/RescaleNode';
 import SelectedPhotoNode from './ComplexNodes/SelectedPhotoNode';
@@ -42,6 +41,7 @@ import HueRotationNode from './SimpleToggles/HueRotationNode';
 import InvertNode from './SimpleToggles/InvertNode';
 import LuminosityNode from './SimpleToggles/LuminosityNode';
 import MirrorNode from './SimpleToggles/MirrorNode';
+import PerspectiveNode from './SimpleToggles/PerspectiveNode';
 import PopNode from './SimpleToggles/PopNode';
 import {
   RgbBlackPointNode,
