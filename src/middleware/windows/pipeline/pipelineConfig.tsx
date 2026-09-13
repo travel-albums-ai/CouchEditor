@@ -26,14 +26,7 @@ import SinglePhotoViewerNode from './ComplexNodes/SinglePhotoViewerNode';
 import SourceNode from './ComplexNodes/SourceNode';
 import ViewerNode from './ComplexNodes/ViewerNode';
 import InformationNode from './InformationNode';
-import HdrNode from './OneBarToggles/HdrNode';
-import {
-  RgbBlackPointNode,
-  RgbMidtonesNode,
-  RgbWhitePointNode,
-} from './OneBarToggles/RgbChannelsNode';
 import SplitToningNode from './OneBarToggles/SplitToningNode';
-import TemperatureTintNode from './OneBarToggles/TemperatureTintNode';
 import VignetteNode from './OneBarToggles/VignetteNode';
 import WhitesBlacksNode from './OneBarToggles/WhitesBlacksNode';
 import BlackAndWhiteNode from './SimpleToggles/BlackAndWhiteNode';
@@ -44,17 +37,24 @@ import FadeNode from './SimpleToggles/FadeNode';
 import FlipNode from './SimpleToggles/FlipNode';
 import GammaNode from './SimpleToggles/GammaNode';
 import GrainNode from './SimpleToggles/GrainNode';
+import HdrNode from './SimpleToggles/HdrNode';
 import HighlightsNode from './SimpleToggles/HighlightsNode';
 import HueRotationNode from './SimpleToggles/HueRotationNode';
 import InvertNode from './SimpleToggles/InvertNode';
 import LuminosityNode from './SimpleToggles/LuminosityNode';
 import MirrorNode from './SimpleToggles/MirrorNode';
 import PopNode from './SimpleToggles/PopNode';
+import {
+  RgbBlackPointNode,
+  RgbMidtonesNode,
+  RgbWhitePointNode,
+} from './SimpleToggles/RgbChannelsNode';
 import RotateNode from './SimpleToggles/RotateNode';
 import SaturationNode from './SimpleToggles/SaturationNode';
 import SepiaNode from './SimpleToggles/SepiaNode';
 import ShadowsNode from './SimpleToggles/ShadowsNode';
 import SharpenNode from './SimpleToggles/SharpenNode';
+import TemperatureTintNode from './SimpleToggles/TemperatureTintNode';
 import VibranceNode from './SimpleToggles/VibranceNode';
 
 export const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
