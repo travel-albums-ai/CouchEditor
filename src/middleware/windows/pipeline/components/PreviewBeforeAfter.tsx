@@ -18,7 +18,6 @@ export function PreviewBeforeAfter({ after, value }: AdjustmentPreviewProps) {
       flexDirection: 'column',
       alignItems: 'center',
       gap: 0.5,
-      p: 2,
       justifyContent: 'center',
       transition: 'opacity 0.25s ease',
       '&:hover': {

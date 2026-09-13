@@ -74,9 +74,9 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'stretch',
       gap: 0.5,
-      p: 2,
+      p: 1,
       justifyContent: 'center',
       transition: 'opacity 0.25s ease',
       '&:hover': {
@@ -97,7 +97,12 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
         step={config?.step ?? 0.01}
       />
 
-      {paletteItem.labelDescription && <Typography variant="caption" sx={{ boxShadow: `inset 0 4px 6px rgba(0, 0, 0, 0.1)`, px: 1, py: 1, borderRadius: 2 }} color="textSecondary">
+      {paletteItem.labelDescription && <Typography variant="caption" sx={{ borderTop: '1px solid',
+        borderColor: 'divider',
+        flex: 1,
+        px: 1,
+        py: 1,
+      }} color="textSecondary">
         {paletteItem.labelDescription}
       </Typography>}
     </Box>
