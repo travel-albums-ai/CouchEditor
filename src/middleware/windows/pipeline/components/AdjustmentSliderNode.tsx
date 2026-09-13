@@ -33,7 +33,7 @@ export function createSliderNode(config: SliderNodeConfig) {
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
-        helper={helper}
+        helper={paletteItem.configs?.length !== 0 ? helper : undefined}
       >
         {paletteItem.configs?.length === 0 && helper}
         {(paletteItem.configs || [])

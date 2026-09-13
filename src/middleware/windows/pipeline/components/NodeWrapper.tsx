@@ -145,7 +145,7 @@ export default function NodeWrapper({
               <Copy size={16} />
             </IconButton>
           </Tooltip>
-          {helper && <Tooltip title="Help">
+          {helper !== undefined && <Tooltip title="Help">
             <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)}>
               <HelpCircle size={16} />
             </IconButton>
@@ -226,7 +226,6 @@ export default function NodeWrapper({
             {tools && tools}
           </NodeHeader>
         )}
-
         <Box
           className="nodrag"
           sx={{
@@ -247,8 +246,6 @@ export default function NodeWrapper({
           }}
         >
           {children}
-          {/* {children === undefined && 'no kids'} */}
-          {/* {helper} */}
         </Box>
       </Box>
     </>
