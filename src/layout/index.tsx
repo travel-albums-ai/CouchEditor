@@ -1,5 +1,6 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
+import WebMCPThemeTool from '@/components/WebMCPThemeTool';
 import HelpWindow from '@/middleware/windows/HelpWindow';
 import LightboxWindow from '@/middleware/windows/LightboxWindow';
 import NewVersionWindow from '@/middleware/windows/NewVersionWindow';
@@ -19,6 +20,9 @@ export default function AppLayout() {
 
       <MainDriver />
       <AiLoadingBar />
+
+      {/* // webMcp */}
+      <WebMCPThemeTool />
 
       <ReactFlowWrapper />
     </>
