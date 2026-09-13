@@ -1,3 +1,9 @@
+## [1.96.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.95.0...v1.96.0) (2026-09-13)
+
+### ✨ Features
+
+* implement WebMCP tools for adding, cloning, and deleting pipeline nodes, and retrieving current pipeline state ([001f2d0](https://github.com/travel-albums-ai/CouchEditor/commit/001f2d080cc5068271fabbbc86ae9b307a1268fa))
+
 ## [1.95.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.94.0...v1.95.0) (2026-09-13)
 
 ### ✨ Features
