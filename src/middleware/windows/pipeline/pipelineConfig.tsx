@@ -28,7 +28,6 @@ import ViewerNode from './ComplexNodes/ViewerNode';
 import InformationNode from './InformationNode';
 import SplitToningNode from './OneBarToggles/SplitToningNode';
 import VignetteNode from './OneBarToggles/VignetteNode';
-import WhitesBlacksNode from './OneBarToggles/WhitesBlacksNode';
 import BlackAndWhiteNode from './SimpleToggles/BlackAndWhiteNode';
 import BrightnessNode from './SimpleToggles/BrightnessNode';
 import ContrastNode from './SimpleToggles/ContrastNode';
@@ -56,6 +55,7 @@ import ShadowsNode from './SimpleToggles/ShadowsNode';
 import SharpenNode from './SimpleToggles/SharpenNode';
 import TemperatureTintNode from './SimpleToggles/TemperatureTintNode';
 import VibranceNode from './SimpleToggles/VibranceNode';
+import WhitesBlacksNode from './SimpleToggles/WhitesBlacksNode';
 
 export const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 export const INITIAL_NODES: Node[] = [];
