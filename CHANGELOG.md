@@ -1,3 +1,13 @@
+## [1.85.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.85.0...v1.85.1) (2026-09-13)
+
+### 🐛 Fixes
+
+* update processing types to remove 'complex' and adjust PreviewDemoMath to handle multiple config values ([3c2ecd5](https://github.com/travel-albums-ai/CouchEditor/commit/3c2ecd57e475fc50792d7c57ef7a9d844db6c92d))
+
+### 🧹 Refactors
+
+* remove commented-out AdjustmentSlider code in createSliderNode function ([6b67954](https://github.com/travel-albums-ai/CouchEditor/commit/6b67954e69faa0af9350e5386f8feb28cd63fa1d))
+
 ## [1.85.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.84.0...v1.85.0) (2026-09-13)
 
 ### ✨ Features
