@@ -1,4 +1,4 @@
-import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
+import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export type NodePaletteConfig = {
@@ -74,7 +74,8 @@ const transformStages: Array<NodeStageItem> = [
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
     algo: () => ({ transform: `rotate(180deg)` }),
     configs: [],
-    processing: 'css',
+    // processing: 'css',
+    processing: 'math',
     labelDescription: 'Flips the image upside down.',
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
@@ -234,21 +235,21 @@ const colorStages: Array<NodeStageItem> = [
     labelDescription: 'Rotates the hue of the image colors by the specified amount.',
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
-    algo: () => ({ filter: `grayscale(1)` }),
+    algo: () => blackAndWhiteStage(),
     configs: [],
-    processing: 'css',
+    processing: 'math',
     labelDescription: 'Converts the image to black and white by applying a grayscale filter.',
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
-    algo: () => ({ filter: `sepia(1)` }),
+    algo: () => sepiaStage(),
     configs: [],
-    processing: 'css',
+    processing: 'math',
     labelDescription: 'Applies a sepia filter to the image, giving it a warm, brownish tone.',
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
-    algo: () => ({ filter: `invert(1)` }),
+    algo: () => invertStage(),
     configs: [],
-    processing: 'css',
+    processing: 'math',
     labelDescription: 'Inverts the colors of the image by applying an invert filter.',
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} />,
