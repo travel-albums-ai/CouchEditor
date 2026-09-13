@@ -1,6 +1,7 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import type { ChangeEvent, RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
@@ -43,6 +44,8 @@ export default function PipelineCanvasOverlays({
   onOrganizeWithAI,
   organizingWithAI,
 }: PipelineCanvasOverlaysProps) {
+  const { t } = useTranslation();
+
   return <>
     <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-status">
       <Box
@@ -67,7 +70,7 @@ export default function PipelineCanvasOverlays({
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <GenericToggleButtonGroup id="pipeline-new" variant="standard" items={[
           {
-            tooltip: 'New pipeline',
+            tooltip: t('newPipeline'),
             icon: <CirclePlus />,
             onClick: onClearWorkspace,
             title: '',
@@ -77,29 +80,29 @@ export default function PipelineCanvasOverlays({
           id="pipeline-name"
           size="small"
           value={currentPipelineName}
-          placeholder="Pipeline title..."
+          placeholder={t('pipelineTitlePlaceholder')}
           onChange={(event) => onNameChange(event.target.value)}
           sx={{ maxWidth: 400, minWidth: 300 }}
         />
         <GenericToggleButtonGroup id="pipeline-save" items={[
           {
-            tooltip: 'Save pipeline',
+            tooltip: t('savePipeline'),
             icon: <Save />,
             onClick: onSave,
             title: '',
           },
           {
-            tooltip: 'Save as clone',
+            tooltip: t('savePipelineAsClone'),
             icon: <Copy />,
             onClick: onSaveAsCopy,
             title: '',
           },
         ] satisfies GenericToggleButtonProps[]} />
         <Button variant="contained" startIcon={<Download size={16} />} onClick={onDownload}>
-          Export
+          {t('export')}
         </Button>
         <Button variant="outlined" startIcon={<Upload size={16} />} onClick={() => pipelineFileInputRef.current?.click()}>
-          Import
+          {t('import')}
         </Button>
         <input
           ref={pipelineFileInputRef}
@@ -136,7 +139,7 @@ export default function PipelineCanvasOverlays({
           cursor: currentPipelineId ? 'pointer' : 'default',
         }}
         onClick={onDelete}
-        title={currentPipelineId ? 'Delete current pipeline' : 'No saved pipeline selected'}
+        title={currentPipelineId ? t('deleteCurrentPipeline') : t('noSavedPipelineSelected')}
       >
         <Trash2 size={22} />
       </Box>

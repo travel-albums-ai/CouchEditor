@@ -7,26 +7,22 @@ import { useTranslation } from 'react-i18next';
 
 const URLS = [
   {
-    tooltip: 'GitHub',
-    title: 'GitHub',
+    key: 'github',
     icon: <Settings />,
     url: 'https://github.com/travel-albums-ai/CouchEditor/blob/main/README.md',
   },
   {
-    tooltip: 'Release Notes',
-    title: 'Release Notes',
+    key: 'releaseNotes',
     icon: <ScrollText />,
     url: 'https://github.com/travel-albums-ai/CouchEditor/releases',
   },
   {
-    tooltip: 'Website',
-    title: 'Website',
+    key: 'website',
     icon: <ScrollText />,
     url: 'https://couch-editor.com/',
   },
   {
-    tooltip: 'Open an issue',
-    title: 'Open an issue',
+    key: 'openIssue',
     icon: <ScrollText />,
     url: 'https://github.com/travel-albums-ai/CouchEditor/issues/new',
   },
@@ -49,7 +45,9 @@ export default function ExtendedMenu() {
               key={item.title}
               items={[
                 {
-                  ...item,
+                  tooltip: t(`extendedMenu${item.key[0].toUpperCase()}${item.key.slice(1)}`),
+                  title: t(`extendedMenu${item.key[0].toUpperCase()}${item.key.slice(1)}`),
+                  icon: item.icon,
                   onClick: () => window.open(item.url, '_blank'),
                 },
               ] satisfies GenericToggleButtonProps[]}
