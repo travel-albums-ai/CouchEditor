@@ -1,6 +1,9 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
-import WebMCPCurrentPipeline from '@/components/WebMCPCurrentPipeline';
+import WebMCPAddPipelineNode from '@/components/WebMCPAddPipelineNode';
+import WebMCPClonePipelineNode from '@/components/WebMCPClonePipelineNode';
+import WebMCPDeletePipelineNode from '@/components/WebMCPDeletePipelineNode';
+import WebMCPGetCurrentPipeline from '@/components/WebMCPGetCurrentPipeline';
 import WebMCPThemeTool from '@/components/WebMCPThemeTool';
 import HelpWindow from '@/middleware/windows/HelpWindow';
 import LightboxWindow from '@/middleware/windows/LightboxWindow';
@@ -24,7 +27,10 @@ export default function AppLayout() {
 
       {/* // webMcp */}
       <WebMCPThemeTool />
-      <WebMCPCurrentPipeline />
+      <WebMCPAddPipelineNode />
+      <WebMCPClonePipelineNode />
+      <WebMCPDeletePipelineNode />
+      <WebMCPGetCurrentPipeline />
 
       <ReactFlowWrapper />
     </>
