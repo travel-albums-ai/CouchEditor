@@ -63,7 +63,6 @@ export default function HelpWindow() {
                   justifyContent: 'center',
                   py: 2 }}>
                   <PreviewDemo paletteItem={paletteItem} />
-                  {/* <NodeToolboxHeader type={paletteItem.type}></NodeToolboxHeader> */}
                 </Box>
               </Box>
             ))}

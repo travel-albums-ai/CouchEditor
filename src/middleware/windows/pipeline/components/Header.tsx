@@ -37,10 +37,13 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography sx={{ fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>{t('couchEditor')}</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+              <Typography sx={{ color: 'primary.main', letterSpacing: -1, fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch</Typography>
+              <Typography sx={{ fontWeight: '600', fontSize: 17, letterSpacing: -1, lineHeight: 1 }}>Editor</Typography>
+            </Box>
             <SolidChip label={t('beta')} variant="header" />
           </Box>
-          <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1 }}>{t('headerTagline')}</Typography>
+          <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1, letterSpacing: 0, }}>{t('headerTagline')}</Typography>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
