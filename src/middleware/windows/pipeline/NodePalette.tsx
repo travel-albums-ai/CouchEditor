@@ -60,13 +60,13 @@ const transformStages: Array<NodeStageItem> = [
     processing: 'css'
   },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
-    algo: (config: any) => ({ transform: `rotate(180deg)` }),
-    configs: [{ min: 0, max: 0 }],
+    algo: () => ({ transform: `rotate(180deg)` }),
+    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'css'
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
-    algo: (config: any) => ({ transform: `scaleX(-1)` }),
-    configs: [{ min: 0, max: 0 }],
+    algo: () => ({ transform: `scaleX(-1)` }),
+    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'css'
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} /> },
@@ -173,18 +173,18 @@ const colorStages: Array<NodeStageItem> = [
     processing: 'math'
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
-    algo: (config: any) => ({ filter: `grayscale(1)` }),
-    configs: [{ min: 0, max: 0 }],
+    algo: () => ({ filter: `grayscale(1)` }),
+    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'css'
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
-    algo: (config: any) => ({ filter: `sepia(1)` }),
-    configs: [{ min: 0, max: 0 }],
+    algo: () => ({ filter: `sepia(1)` }),
+    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'css'
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
-    algo: (config: any) => ({ filter: `invert(1)` }),
-    configs: [{ min: 0, max: 0 }],
+    algo: () => ({ filter: `invert(1)` }),
+    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'css'
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },
