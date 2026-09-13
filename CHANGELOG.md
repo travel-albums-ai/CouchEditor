@@ -1,3 +1,9 @@
+## [1.67.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.66.0...v1.67.0) (2026-09-13)
+
+### ✨ Features
+
+* migrate slider nodes to SimpleToggles for improved organization ([861db0e](https://github.com/travel-albums-ai/CouchEditor/commit/861db0e3761b6e3ce0b2eee801a23a23c7de40a2))
+
 ## [1.66.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.65.0...v1.66.0) (2026-09-13)
 
 ### ✨ Features
