@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
-  amount: number;
-  algorithm: (amount: number) => (image: ImageData) => void;
+  type: string;
+  algorithm: (image: ImageData) => void;
   label: string;
 };
 
-export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPreviewProps) {
+export function AdjustmentPreview({ type, algorithm, label }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const theme = useTheme();
 
@@ -28,7 +28,7 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
 
       context.drawImage(image, 0, 0);
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      algorithm(amount)(imageData);
+      algorithm(imageData);
       context.putImageData(imageData, 0, 0);
 
       if (!cancelled) {
@@ -40,7 +40,7 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
     return () => {
       cancelled = true;
     };
-  }, [algorithm, amount]);
+  }, [algorithm]);
 
   return (
     <Box sx={{
@@ -52,9 +52,9 @@ export function AdjustmentPreview({ amount, algorithm, label }: AdjustmentPrevie
         opacity: 1,
       }
     }}>
-      <img src={previewImageUrl} alt={`${label} preview before`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+      <img src={previewImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
       <MoveRight aria-hidden="true" />
-      <img src={processedImageUrl} alt={`${label} preview after`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+      <img src={processedImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
     </Box>
   );
 }

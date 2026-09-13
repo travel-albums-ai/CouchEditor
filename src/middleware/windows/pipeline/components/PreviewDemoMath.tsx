@@ -54,7 +54,7 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
 
       context.drawImage(image, 0, 0);
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      paletteItem.algo(amount)(imageData);
+      paletteItem.algo({ amount })(imageData);
       context.putImageData(imageData, 0, 0);
 
       if (!cancelled) {
