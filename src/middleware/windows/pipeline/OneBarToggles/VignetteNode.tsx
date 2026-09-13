@@ -1,10 +1,10 @@
-import { vignetteStage } from '@/lib/utils';
 import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
 import { useState } from 'react';
@@ -42,12 +42,18 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
   const [amount, setAmount] = useState(data.amount ?? 0);
   const [color, setColor] = useState(data.color ?? DEFAULT_COLOR);
 
+  const paletteItem = paletteItemsByType["vignette"];
+
   return <>
     <InputHandle id="image" />
     <NodeWrapper
       type="vignette"
       tools={<PipelineStageTiming nodeId={id} nodeType="vignette" />}
-      helper={<AdjustmentPreview amount={amount} algorithm={(value) => vignetteStage(value, color)} label="Vignette" />}
+      helper={<AdjustmentPreview
+        algorithm={(imageData) => {
+          const stage = paletteItem.algo?.({ amount, color });
+          stage?.(imageData);
+        }} />}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="caption" color="textSecondary">Vignette color</Typography>

@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
-  type: string;
+  type?: string;
   algorithm: (image: ImageData) => void;
-  label: string;
+  label?: string;
 };
 
 export function AdjustmentPreview({ type, algorithm, label }: AdjustmentPreviewProps) {

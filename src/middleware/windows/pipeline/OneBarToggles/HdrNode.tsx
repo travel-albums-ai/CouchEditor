@@ -30,8 +30,7 @@ export default function HdrNode({ id, data }: NodeProps<Node<HdrData>>) {
         algorithm={(imageData) => {
           const stage = paletteItem.algo?.({ amount, radius });
           stage?.(imageData);
-        }}
-        label="HDR" />}
+        }} />}
     >
       <AdjustmentSlider
         description={<Typography variant="caption" color="textSecondary">Amount</Typography>}

@@ -1,4 +1,4 @@
-import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, saturationStage, shadowsStage, sharpenStage, vibranceStage } from '@/lib/utils';
+import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, saturationStage, shadowsStage, sharpenStage, vibranceStage, vignetteStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export type NodePaletteConfig = {
@@ -17,7 +17,7 @@ export type NodeStageItem = {
   ai?: boolean;
   algo?: any;
   config?: NodePaletteConfig;
-  processing?: 'math' | 'css';
+  processing?: 'math' | 'css' | 'complex';
 };
 export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
@@ -171,7 +171,11 @@ const detailStages: Array<NodeStageItem> = [
 ]
 
 const effectsStages: Array<NodeStageItem> = [
-  { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} /> },
+  { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} />,
+    algo: ({ amount, color }: { amount: number, color: [number, number, number] }) => vignetteStage(amount, color),
+    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    processing: 'complex'
+  },
   {
     type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />,
     algo: ({ amount }: { amount: number }) => popStage(amount),
@@ -181,7 +185,7 @@ const effectsStages: Array<NodeStageItem> = [
   { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
     algo: ({ amount, radius }: { amount: number, radius: number }) => hdrEffectStage(amount, radius),
     config: { min: 0, max: 100, step: 1, defaultValue: 0 },
-    processing: 'math'
+    processing: 'complex'
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
