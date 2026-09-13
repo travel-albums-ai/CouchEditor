@@ -17,6 +17,9 @@ export type NodeStageItem = {
   ai?: boolean;
   algo?: any;
   config?: NodePaletteConfig;
+
+  configs?: NodePaletteConfig[];
+
   processing?: 'math' | 'css' | 'complex';
 };
 export type NodePaletteItem = NodeStageItem & {
@@ -48,17 +51,19 @@ const transformStages: Array<NodeStageItem> = [
   { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} /> },
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
     algo: (config: any) => ({ transform: `rotate(${config.amount}deg)` }),
-    config: { min: 0, max: 360, step: 1, defaultValue: 0 },
+    configs: [
+      { min: 0, max: 360, step: 1, defaultValue: 0 }
+    ],
     processing: 'css'
   },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
     algo: (config: any) => ({ transform: `rotate(180deg)` }),
-    config: { min: 0, max: 0 },
+    configs: [{ min: 0, max: 0 }],
     processing: 'css'
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
     algo: (config: any) => ({ transform: `scaleX(-1)` }),
-    config: { min: 0, max: 0 },
+    configs: [{ min: 0, max: 0 }],
     processing: 'css'
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} /> },
@@ -68,63 +73,63 @@ const lightStages: Array<NodeStageItem> = [
   {
     type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />,
     algo: ({ amount }: { amount: number }) => exposureStage(amount),
-    config: { min: -3, max: 3, step: 0.1, defaultValue: 0 },
+    configs: [{ min: -3, max: 3, step: 0.1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />,
     algo: ({ amount }: { amount: number }) => brightnessStage(amount),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />,
     algo: ({ amount }: { amount: number }) => contrastStage(amount),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,
     algo: ({ amount }: { amount: number }) => highlightsStage(amount),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />,
     algo: ({ amount }: { amount: number }) => shadowsStage(amount),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />,
     algo: ({ amount }: { amount: number }) => gammaStage(amount),
-    config: {   min: 0.1, max: 3, step: 0.01, defaultValue: 1, },
+    configs: [{   min: 0.1, max: 3, step: 0.01, defaultValue: 1, }],
     processing: 'math'
   },
   {
     type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />,
     algo: ({ amount }: { amount: number }) => luminosityStage(amount),
-    config: { min: 0, max: 2, step: 0.05, defaultValue: 0 },
+    configs: [{ min: 0, max: 2, step: 0.05, defaultValue: 0 }],
     processing: 'math'
   },
   { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
     algo: ({ whites, blacks }: { whites: number, blacks: number }) => whitesBlacksStage(whites, blacks),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'complex'
   },
   { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbBlackPointStage(red, green, blue),
-    config: { min: 0, max: 255, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 255, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbWhitePointStage(red, green, blue),
-    config: { min: 0, max: 255, step: 1, defaultValue: 255 },
+    configs: [{ min: 0, max: 255, step: 1, defaultValue: 255 }],
     processing: 'math'
   },
   { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbMidtonesStage(red, green, blue),
-    config: { min: 0.1, max: 3, step: 0.01, defaultValue: 1 },
+    configs: [{ min: 0.1, max: 3, step: 0.01, defaultValue: 1 }],
     processing: 'math'
   },
 ]
@@ -133,48 +138,48 @@ const colorStages: Array<NodeStageItem> = [
   {
     type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />,
     algo: ({ amount }: { amount: number }) => saturationStage(amount),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math',
     labelDescription: 'Adjusts the intensity of the color saturation. The algorithm modifies the saturation level of the image colors. It applies the specified adjustment to enhance or reduce the overall color vibrancy.',
   },
   {
     type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />,
     algo: ({ amount }: { amount: number }) => vibranceStage(amount),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   {
     type: "hue-rotation", labelKey: "pipelineHueRotation", icon: <Palette size={16} />,
     algo: ({ amount }: { amount: number }) => hueRotationStage(amount),
-    config: { min: -180, max: 180, step: 1, defaultValue: 0 },
+    configs: [{ min: -180, max: 180, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
     algo: (config: any) => ({ filter: `grayscale(1)` }),
-    config: { min: 0, max: 0 },
+    configs: [{ min: 0, max: 0 }],
     processing: 'css'
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
     algo: (config: any) => ({ filter: `sepia(1)` }),
-    config: { min: 0, max: 0 },
+    configs: [{ min: 0, max: 0 }],
     processing: 'css'
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
     algo: (config: any) => ({ filter: `invert(1)` }),
-    config: { min: 0, max: 0 },
+    configs: [{ min: 0, max: 0 }],
     processing: 'css'
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />,
     algo: ({ temperature, tint }: { temperature: number, tint: number }) => temperatureTintStage(temperature, tint),
-    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
     processing: 'complex'
   },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
     algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
       splitToningStage(shadowTint[0], shadowTint[1], shadowTint[2], highlightTint[0], highlightTint[1], highlightTint[2], strength),
 
-    config: { min: 0, max: 100, step: 1, defaultValue: 50 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 50 }],
     processing: 'complex'
 
   },
@@ -184,14 +189,14 @@ const detailStages: Array<NodeStageItem> = [
   {
     type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />,
     algo: ({ amount }: { amount: number }) => sharpenStage(amount),
-    config: { min: 0, max: 1000, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true },
   {
     type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
     algo: ({ amount }: { amount: number }) => grainStage(amount),
-    config: { min: 0, max: 1000, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
 ]
@@ -199,24 +204,24 @@ const detailStages: Array<NodeStageItem> = [
 const effectsStages: Array<NodeStageItem> = [
   { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} />,
     algo: ({ amount, color }: { amount: number, color: [number, number, number] }) => vignetteStage(amount, color),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'complex'
   },
   {
     type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />,
     algo: ({ amount }: { amount: number }) => popStage(amount),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
   { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
     algo: ({ amount, radius }: { amount: number, radius: number }) => hdrEffectStage(amount, radius),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'complex'
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
     algo: ({ amount }: { amount: number }) => fadeStage(amount),
-    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
     processing: 'math'
   },
 ]

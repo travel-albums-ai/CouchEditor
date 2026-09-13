@@ -16,7 +16,7 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
   const [amount, setAmount] = useState(0);
   const theme = useTheme();
   const { t } = useTranslation();
-  const config = paletteItem.config;
+  const config = paletteItem.configs?.[0] || paletteItem.config;
 
 
   useEffect(() => {

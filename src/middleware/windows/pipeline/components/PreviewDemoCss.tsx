@@ -13,7 +13,7 @@ type AdjustmentPreviewProps = {
 export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
   const [amount, setAmount] = useState(0);
   const theme = useTheme();
-  const config = paletteItem.config;
+  const config = paletteItem.configs?.[0] || paletteItem.config;
 
 
   useEffect(() => {

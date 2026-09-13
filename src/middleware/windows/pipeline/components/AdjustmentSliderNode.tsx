@@ -26,28 +26,22 @@ export function createSliderNode(config: SliderNodeConfig) {
     const [isBusy, setIsBusy] = useState(false);
 
 
-    const activeConfig = paletteItem?.config;
+    const activeConfig = paletteItem?.configs?.[0] || paletteItem?.config;
 
     return <>
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
         helper={<>
-          {/* {config.info && config.info({...config, amount })} */}
           {paletteItem.processing === 'math' && <AdjustmentPreview
-            type={config.type}
             algorithm={(imageData) => {
               const stage = paletteItem.algo?.({ amount });
               stage?.(imageData);
             }}
-            label={config.type}
           />}
-          {/* {config.defaultValue === undefined && paletteItem.processing === 'css' && <BeforeAfter image2style={{ transform: paletteItem?.algo({ amount: amount !== 0 ? amount : (activeConfig?.max || 1) / 2 }) }} />} */}
           {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo({ amount }) }} />}
         </>}
       >
-        {/* {config.defaultValue !== undefined && 'OLD CODE'} */}
-
         {activeConfig?.min !== activeConfig?.max && <AdjustmentSlider
           disabled={isBusy}
           min={activeConfig?.min || 0}
@@ -60,6 +54,7 @@ export function createSliderNode(config: SliderNodeConfig) {
             setAmount(newValue);
           }}
         />}
+        dd
 
       </NodeWrapper>
       <OutputHandle id="image" />
