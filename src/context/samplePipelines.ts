@@ -479,7 +479,7 @@ export const samplePipeline = [
           "width": 930,
           "height": 1045
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -577,6 +577,145 @@ export const samplePipeline = [
         },
         "selected": false,
         "dragging": false
+      },
+      {
+        "id": "saturation-1",
+        "type": "saturation",
+        "position": {
+          "x": -2980,
+          "y": -460
+        },
+        "data": {
+          "amount": 90
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": true,
+        "dragging": false
+      },
+      {
+        "id": "vibrance-2",
+        "type": "vibrance",
+        "position": {
+          "x": -2320,
+          "y": -460
+        },
+        "data": {
+          "amount": 71
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "invert-3",
+        "type": "invert",
+        "position": {
+          "x": -2980,
+          "y": 380
+        },
+        "data": {},
+        "measured": {
+          "width": 330,
+          "height": 202
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "temperature-tint-4",
+        "type": "temperature-tint",
+        "position": {
+          "x": -2320,
+          "y": 440
+        },
+        "data": {
+          "temperature": 37
+        },
+        "measured": {
+          "width": 280,
+          "height": 146
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "split-toning-5",
+        "type": "split-toning",
+        "position": {
+          "x": -2360,
+          "y": 1000
+        },
+        "data": {},
+        "measured": {
+          "width": 280,
+          "height": 188
+        }
+      },
+      {
+        "id": "viewer-single-26-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2980,
+          "y": -340
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-26-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2320,
+          "y": -340
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-26-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2320,
+          "y": 600
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-26-copy-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -2980,
+          "y": 600
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
       }
     ],
     "edges": [
@@ -651,6 +790,102 @@ export const samplePipeline = [
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         }
+      },
+      {
+        "type": "smoothstep",
+        "source": "saturation-1",
+        "sourceHandle": "image",
+        "target": "viewer-single-26-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__saturation-1image-viewer-single-26-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-20",
+        "sourceHandle": "image",
+        "target": "saturation-1",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-20image-saturation-1image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "vibrance-2",
+        "sourceHandle": "image",
+        "target": "viewer-single-26-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__vibrance-2image-viewer-single-26-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-20",
+        "sourceHandle": "image",
+        "target": "vibrance-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-20image-vibrance-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "invert-3",
+        "sourceHandle": "image",
+        "target": "viewer-single-26-copy-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__invert-3image-viewer-single-26-copy-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "temperature-tint-4",
+        "sourceHandle": "image",
+        "target": "viewer-single-26-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__temperature-tint-4image-viewer-single-26-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-20",
+        "sourceHandle": "image",
+        "target": "temperature-tint-4",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-20image-temperature-tint-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-20",
+        "sourceHandle": "image",
+        "target": "invert-3",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-20image-invert-3image"
       }
     ],
     "id": "pipeline-1788796110451-nw5zj8",
@@ -2660,5 +2895,1860 @@ export const samplePipeline = [
     ],
     "id": "pipeline-1789043070838-5dq8f2",
     "name": "StressTest"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-1",
+        "type": "source",
+        "position": {
+          "x": -1280,
+          "y": -220
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1044
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-2",
+        "type": "viewer",
+        "position": {
+          "x": 480,
+          "y": -140
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1044
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-3",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": -180
+        },
+        "data": {
+          "amount": 24
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-4",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": -40
+        },
+        "data": {
+          "amount": 4
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-5",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": 100
+        },
+        "data": {
+          "amount": 4
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rescale-6",
+        "type": "rescale",
+        "position": {
+          "x": -320,
+          "y": -400
+        },
+        "data": {
+          "scale": 0.5
+        },
+        "measured": {
+          "width": 476,
+          "height": 143
+        },
+        "selected": true,
+        "dragging": false
+      },
+      {
+        "id": "brightness-7",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": 240
+        },
+        "data": {
+          "amount": 1
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-8",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": 380
+        },
+        "data": {
+          "amount": 7
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-9",
+        "type": "brightness",
+        "position": {
+          "x": -300,
+          "y": 520
+        },
+        "data": {
+          "amount": 10
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10",
+        "type": "contrast",
+        "position": {
+          "x": 120,
+          "y": -180
+        },
+        "data": {
+          "amount": 21
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10-copy",
+        "type": "contrast",
+        "position": {
+          "x": 120,
+          "y": -40
+        },
+        "data": {
+          "amount": 15
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10-copy-copy",
+        "type": "contrast",
+        "position": {
+          "x": 120,
+          "y": 100
+        },
+        "data": {
+          "amount": 4
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10-copy-copy-copy",
+        "type": "contrast",
+        "position": {
+          "x": 120,
+          "y": 240
+        },
+        "data": {
+          "amount": 12
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10-copy-copy-copy-copy",
+        "type": "contrast",
+        "position": {
+          "x": 120,
+          "y": 380
+        },
+        "data": {
+          "amount": 7
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-10-copy-copy-copy-copy-copy",
+        "type": "contrast",
+        "position": {
+          "x": 140,
+          "y": 520
+        },
+        "data": {
+          "amount": 6
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "brightness-3",
+        "sourceHandle": "image",
+        "target": "brightness-4",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-3image-brightness-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-4",
+        "sourceHandle": "image",
+        "target": "brightness-5",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-4image-brightness-5image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-1",
+        "sourceHandle": "image",
+        "target": "rescale-6",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-1image-rescale-6image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-6",
+        "sourceHandle": "image",
+        "target": "brightness-3",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rescale-6image-brightness-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-5",
+        "sourceHandle": "image",
+        "target": "brightness-7",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-5image-brightness-7image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-7",
+        "sourceHandle": "image",
+        "target": "brightness-8",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-7image-brightness-8image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-8",
+        "sourceHandle": "image",
+        "target": "brightness-9",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-8image-brightness-9image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-9",
+        "sourceHandle": "image",
+        "target": "contrast-10",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-9image-contrast-10image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10",
+        "sourceHandle": "image",
+        "target": "contrast-10-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10image-contrast-10-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10-copy",
+        "sourceHandle": "image",
+        "target": "contrast-10-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10-copyimage-contrast-10-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10-copy-copy",
+        "sourceHandle": "image",
+        "target": "contrast-10-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10-copy-copyimage-contrast-10-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10-copy-copy-copy",
+        "sourceHandle": "image",
+        "target": "contrast-10-copy-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10-copy-copy-copyimage-contrast-10-copy-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10-copy-copy-copy-copy",
+        "sourceHandle": "image",
+        "target": "contrast-10-copy-copy-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10-copy-copy-copy-copyimage-contrast-10-copy-copy-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-10-copy-copy-copy-copy-copy",
+        "sourceHandle": "image",
+        "target": "viewer-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-10-copy-copy-copy-copy-copyimage-viewer-2image"
+      }
+    ],
+    "id": "pipeline-1789333682672-m5bubo",
+    "name": "Brightness"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-6",
+        "type": "source",
+        "position": {
+          "x": -1660,
+          "y": -620
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": true,
+        "dragging": false
+      },
+      {
+        "id": "crop-7",
+        "type": "crop",
+        "position": {
+          "x": 1420,
+          "y": -380
+        },
+        "data": {
+          "top": 43,
+          "right": 40,
+          "bottom": 40,
+          "left": 37
+        },
+        "measured": {
+          "width": 280,
+          "height": 234
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rescale-8",
+        "type": "rescale",
+        "position": {
+          "x": 760,
+          "y": -280
+        },
+        "data": {
+          "scale": 0.1
+        },
+        "measured": {
+          "width": 475,
+          "height": 143
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "collage-9",
+        "type": "collage",
+        "position": {
+          "x": 760,
+          "y": 580
+        },
+        "data": {
+          "columns": 5
+        },
+        "measured": {
+          "width": 490,
+          "height": 196
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rotate-10",
+        "type": "rotate",
+        "position": {
+          "x": 1420,
+          "y": 580
+        },
+        "data": {
+          "amount": 211
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "flip-11",
+        "type": "flip",
+        "position": {
+          "x": 80,
+          "y": -360
+        },
+        "data": {},
+        "measured": {
+          "width": 330,
+          "height": 202
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "mirror-12",
+        "type": "mirror",
+        "position": {
+          "x": 80,
+          "y": 580
+        },
+        "data": {},
+        "measured": {
+          "width": 330,
+          "height": 202
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "perspective-13",
+        "type": "perspective",
+        "position": {
+          "x": -640,
+          "y": -580
+        },
+        "data": {
+          "topLeftx": 62,
+          "bottomLeftx": -28
+        },
+        "measured": {
+          "width": 310,
+          "height": 410
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14",
+        "type": "viewer-single",
+        "position": {
+          "x": 1420,
+          "y": -120
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 760,
+          "y": -120
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 1720,
+          "y": 800
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-2",
+        "type": "viewer-single",
+        "position": {
+          "x": 80,
+          "y": -120
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 80,
+          "y": 800
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-15",
+        "type": "viewer",
+        "position": {
+          "x": 760,
+          "y": 800
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-2-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -640,
+          "y": -120
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "crop-7",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-crop-7image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "crop-7",
+        "sourceHandle": "image",
+        "target": "viewer-single-14",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__crop-7image-viewer-single-14image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rescale-8",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rescale-8image-viewer-single-14-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "rescale-8",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-rescale-8image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "collage-9",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-collage-9image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rotate-10",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rotate-10image-viewer-single-14-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "rotate-10",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-rotate-10image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "flip-11",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__flip-11image-viewer-single-14-copy-copy-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "flip-11",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-flip-11image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "mirror-12",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__mirror-12image-viewer-single-14-copy-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "mirror-12",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-mirror-12image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "collage-9",
+        "sourceHandle": "image",
+        "target": "viewer-15",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__collage-9image-viewer-15image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "perspective-13",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-2-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__perspective-13image-viewer-single-14-copy-copy-2-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6",
+        "sourceHandle": "image",
+        "target": "perspective-13",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-perspective-13image"
+      }
+    ],
+    "id": "pipeline-1789337461709-gf4bcm",
+    "name": "Transform"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-6-reset",
+        "type": "source",
+        "position": {
+          "x": -1780,
+          "y": 80
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14",
+        "type": "viewer-single",
+        "position": {
+          "x": 1400,
+          "y": -500
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 720,
+          "y": -500
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -640,
+          "y": 400
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-2",
+        "type": "viewer-single",
+        "position": {
+          "x": 40,
+          "y": -500
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 40,
+          "y": 400
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-2-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": -640,
+          "y": -500
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 720,
+          "y": 400
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "exposure-1",
+        "type": "exposure",
+        "position": {
+          "x": -640,
+          "y": -620
+        },
+        "data": {
+          "amount": 1.3
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "brightness-2",
+        "type": "brightness",
+        "position": {
+          "x": 40,
+          "y": -620
+        },
+        "data": {
+          "amount": 37
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "contrast-3",
+        "type": "contrast",
+        "position": {
+          "x": 720,
+          "y": -620
+        },
+        "data": {
+          "amount": 46
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "highlights-4",
+        "type": "highlights",
+        "position": {
+          "x": 1400,
+          "y": -620
+        },
+        "data": {
+          "amount": 33
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "shadows-5",
+        "type": "shadows",
+        "position": {
+          "x": -640,
+          "y": 260
+        },
+        "data": {
+          "amount": 43
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "gamma-6",
+        "type": "gamma",
+        "position": {
+          "x": 40,
+          "y": 260
+        },
+        "data": {
+          "amount": 1.41
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "luminosity-7",
+        "type": "luminosity",
+        "position": {
+          "x": 720,
+          "y": 260
+        },
+        "data": {
+          "amount": 0.75
+        },
+        "measured": {
+          "width": 280,
+          "height": 102
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "whites-blacks-8",
+        "type": "whites-blacks",
+        "position": {
+          "x": 1400,
+          "y": 220
+        },
+        "data": {
+          "whites": 45,
+          "blacks": 28
+        },
+        "measured": {
+          "width": 280,
+          "height": 146
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-black-point-9",
+        "type": "rgb-black-point",
+        "position": {
+          "x": -640,
+          "y": 1100
+        },
+        "data": {
+          "red": 107
+        },
+        "measured": {
+          "width": 280,
+          "height": 190
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-white-point-10",
+        "type": "rgb-white-point",
+        "position": {
+          "x": 40,
+          "y": 1100
+        },
+        "data": {
+          "red": 110
+        },
+        "measured": {
+          "width": 280,
+          "height": 190
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "rgb-midtones-11",
+        "type": "rgb-midtones",
+        "position": {
+          "x": 720,
+          "y": 1100
+        },
+        "data": {
+          "red": 1.59,
+          "green": 1.26
+        },
+        "measured": {
+          "width": 280,
+          "height": 190
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-copy-2",
+        "type": "viewer-single",
+        "position": {
+          "x": 1400,
+          "y": 400
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "grouper-14",
+        "type": "grouper",
+        "position": {
+          "x": -1220,
+          "y": -620
+        },
+        "data": {},
+        "measured": {
+          "width": 283,
+          "height": 236
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-2",
+        "type": "viewer-single",
+        "position": {
+          "x": -640,
+          "y": 1320
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-2-copy",
+        "type": "viewer-single",
+        "position": {
+          "x": 40,
+          "y": 1320
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-14-copy-copy-copy-copy-3",
+        "type": "viewer-single",
+        "position": {
+          "x": 720,
+          "y": 1320
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "selected-photo-15",
+        "type": "selected-photo",
+        "position": {
+          "x": -1240,
+          "y": -240
+        },
+        "data": {
+          "selectedPhotoName": "20260124_131017.jpg"
+        },
+        "measured": {
+          "width": 280,
+          "height": 92
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "highlights-4",
+        "sourceHandle": "image",
+        "target": "viewer-single-14",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__highlights-4image-viewer-single-14image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "contrast-3",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__contrast-3image-viewer-single-14-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "brightness-2",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__brightness-2image-viewer-single-14-copy-copy-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "exposure-1",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-2-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__exposure-1image-viewer-single-14-copy-copy-2-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "shadows-5",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__shadows-5image-viewer-single-14-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "gamma-6",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__gamma-6image-viewer-single-14-copy-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "luminosity-7",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__luminosity-7image-viewer-single-14-copy-copy-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "whites-blacks-8",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-copy-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__whites-blacks-8image-viewer-single-14-copy-copy-copy-copy-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "exposure-1",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-exposure-1image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "brightness-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-brightness-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "contrast-3",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-contrast-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "highlights-4",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-highlights-4image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "shadows-5",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-shadows-5image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "gamma-6",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-gamma-6image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "luminosity-7",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-luminosity-7image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "whites-blacks-8",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-whites-blacks-8image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rgb-black-point-9",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-2",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rgb-black-point-9image-viewer-single-14-copy-copy-copy-2image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rgb-white-point-10",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-2-copy",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rgb-white-point-10image-viewer-single-14-copy-copy-copy-2-copyimage"
+      },
+      {
+        "type": "smoothstep",
+        "source": "rgb-midtones-11",
+        "sourceHandle": "image",
+        "target": "viewer-single-14-copy-copy-copy-copy-3",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__rgb-midtones-11image-viewer-single-14-copy-copy-copy-copy-3image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "selected-photo-15",
+        "sourceHandle": "image",
+        "target": "grouper-14",
+        "targetHandle": "image-1",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__selected-photo-15image-grouper-14image-1"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-6-reset",
+        "sourceHandle": "image",
+        "target": "selected-photo-15",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-6image-selected-photo-15image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "rgb-black-point-9",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-rgb-black-point-9image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "rgb-white-point-10",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-rgb-white-point-10image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "grouper-14",
+        "sourceHandle": "image",
+        "target": "rgb-midtones-11",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-14image-rgb-midtones-11image"
+      }
+    ],
+    "id": "pipeline-1789337933916-dyplp5",
+    "name": "Light"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-16-reset",
+        "type": "source",
+        "position": {
+          "x": -2280,
+          "y": 300
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "hot-folder-read-17",
+        "type": "hot-folder-read",
+        "position": {
+          "x": -1640,
+          "y": 80
+        },
+        "data": {},
+        "measured": {
+          "width": 300,
+          "height": 163
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "google-drive-18",
+        "type": "google-drive",
+        "position": {
+          "x": -1320,
+          "y": 420
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1080
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-19",
+        "type": "viewer",
+        "position": {
+          "x": -360,
+          "y": 180
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "grouper-20",
+        "type": "grouper",
+        "position": {
+          "x": -780,
+          "y": 160
+        },
+        "data": {},
+        "measured": {
+          "width": 283,
+          "height": 236
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "grouper-20",
+        "sourceHandle": "image",
+        "target": "viewer-19",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__grouper-20image-viewer-19image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "hot-folder-read-17",
+        "sourceHandle": "image",
+        "target": "grouper-20",
+        "targetHandle": "image-1",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__hot-folder-read-17image-grouper-20image-1"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-16-reset",
+        "sourceHandle": "image",
+        "target": "grouper-20",
+        "targetHandle": "image-2",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-16-resetimage-grouper-20image-2"
+      },
+      {
+        "type": "smoothstep",
+        "source": "google-drive-18",
+        "sourceHandle": "image",
+        "target": "grouper-20",
+        "targetHandle": "image-3",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__google-drive-18image-grouper-20image-3"
+      }
+    ],
+    "id": "pipeline-1789338428659-f8fd3w",
+    "name": "Inputs"
+  },
+  {
+    "nodes": [
+      {
+        "id": "source-21-reset",
+        "type": "source",
+        "position": {
+          "x": -1800,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-22",
+        "type": "viewer",
+        "position": {
+          "x": 380,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 930,
+          "height": 1045
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "viewer-single-23",
+        "type": "viewer-single",
+        "position": {
+          "x": -280,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "exif-viewer-24",
+        "type": "exif-viewer",
+        "position": {
+          "x": -280,
+          "y": 1140
+        },
+        "data": {},
+        "measured": {
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "gps-map-25",
+        "type": "gps-map",
+        "position": {
+          "x": -840,
+          "y": 440
+        },
+        "data": {},
+        "measured": {
+          "width": 530,
+          "height": 617
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "photo-histogram-26",
+        "type": "photo-histogram",
+        "position": {
+          "x": -760,
+          "y": 1120
+        },
+        "data": {},
+        "measured": {
+          "width": 430,
+          "height": 293
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "hot-folder-write-27",
+        "type": "hot-folder-write",
+        "position": {
+          "x": -840,
+          "y": 180
+        },
+        "data": {},
+        "measured": {
+          "width": 297,
+          "height": 163
+        },
+        "selected": true,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "viewer-22",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21image-viewer-22image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "viewer-single-23",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21image-viewer-single-23image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "exif-viewer-24",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21image-exif-viewer-24image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "photo-histogram-26",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21image-photo-histogram-26image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "gps-map-25",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21image-gps-map-25image"
+      },
+      {
+        "type": "smoothstep",
+        "source": "source-21-reset",
+        "sourceHandle": "image",
+        "target": "hot-folder-write-27",
+        "targetHandle": "image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        },
+        "id": "xy-edge__source-21-resetimage-hot-folder-write-27image"
+      }
+    ],
+    "id": "pipeline-1789338530777-eb4f2k",
+    "name": "Outputs"
   }
 ]
