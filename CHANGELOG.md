@@ -1,3 +1,49 @@
+## [1.87.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.86.0...v1.87.0) (2026-09-13)
+
+### ✨ Features
+
+* add HelpWindow and HelpToggle for user assistance functionality ([1045750](https://github.com/travel-albums-ai/CouchEditor/commit/1045750eb39aa1b77903fc6bba61f530fdee79b4))
+
+### 🧹 Refactors
+
+* add 'static' processing type to NodeStageItem and implement PreviewDemoStatic component ([fe7c6e6](https://github.com/travel-albums-ai/CouchEditor/commit/fe7c6e6716a9a62b096d45f9eb4515028370481a))
+* add width prop to Preview components for consistent image sizing ([6aecc80](https://github.com/travel-albums-ai/CouchEditor/commit/6aecc80d57032bc3a413db47aa7591870aabd413))
+* adjust JSX structure in PreviewDemoStatic for improved readability ([2889292](https://github.com/travel-albums-ai/CouchEditor/commit/2889292fe176fc1cbe90035ea9420043aa15ab09))
+* clean up NodePalette configs and adjust component styles for consistency ([a134af9](https://github.com/travel-albums-ai/CouchEditor/commit/a134af9e62373b9b8678c4370b87fee56d8489ba))
+* enhance localization by adding new keys and updating existing translations ([9e95e13](https://github.com/travel-albums-ai/CouchEditor/commit/9e95e13a62a4fd77c70f15f974a69e0403e7a209))
+* enhance localization support by integrating translation for pipeline node descriptions and labels ([783b0cd](https://github.com/travel-albums-ai/CouchEditor/commit/783b0cd45b69414a3f36925c3fb368d5220e5759))
+* enhance NodePalette and NodeToolboxItem with static processing type and descriptions ([63343ef](https://github.com/travel-albums-ai/CouchEditor/commit/63343efa4878997dc7fa8d7fccd8ee886deff71a))
+* enhance NodeToolboxItem with SolidChip and update helper visibility in NodeWrapper ([a3af518](https://github.com/travel-albums-ai/CouchEditor/commit/a3af5182b80ac20c3401b34e99106dfe3feb8c86))
+* enhance PreviewCss and PreviewMath components with additional paletteItem prop and improved layout ([a030375](https://github.com/travel-albums-ai/CouchEditor/commit/a030375033b750ab6f5d27ce3044346757781323))
+* enhance PreviewDemoStatic with additional node types and loading skeletons ([cb330e6](https://github.com/travel-albums-ai/CouchEditor/commit/cb330e6207e9e5195109c4031533451d322dcb43))
+* enhance PreviewDemoStatic with additional node types and update tooltip max width ([371214b](https://github.com/travel-albums-ai/CouchEditor/commit/371214b25a92ff19f98ce535da83f0d1901b8089))
+* enhance PreviewDemoStatic with image pairs and before/after rendering ([afd5a1b](https://github.com/travel-albums-ai/CouchEditor/commit/afd5a1b2c4766e535e98ab471153e392744d29f1))
+* enhance PreviewDemoStatic with new node types and update image processing ([63cf2be](https://github.com/travel-albums-ai/CouchEditor/commit/63cf2be8063d3160d114fb5bf47f23c1e93570b1))
+* enhance Romanian localization with additional pipeline node descriptions and tooltips ([b856c8f](https://github.com/travel-albums-ai/CouchEditor/commit/b856c8f087c801f8d901f3539be7ea6bffaa587c))
+* integrate PreviewDemoStatic into AdjustmentSliderNode and NodeWrapper for enhanced static preview support ([729ab2e](https://github.com/travel-albums-ai/CouchEditor/commit/729ab2ec2c8e9c78848c71c56c728a638a046609))
+* introduce PreviewDescription component for consistent label rendering across previews ([23aa1f6](https://github.com/travel-albums-ai/CouchEditor/commit/23aa1f6d6cdae36c9ae15e1ce18734a637b1fcf7))
+* migrate CropNode to SimpleToggles directory using createSliderNode ([c9275f9](https://github.com/travel-albums-ai/CouchEditor/commit/c9275f9617ed9cb25984ae34a501ad0e9201deb7))
+* migrate HdrNode, RgbChannelsNode, and TemperatureTintNode to SimpleToggles directory ([a9225eb](https://github.com/travel-albums-ai/CouchEditor/commit/a9225eb0bb06e6447deb8975736d728a549316f4))
+* migrate PerspectiveNode to SimpleToggles directory and update related configurations ([e36037c](https://github.com/travel-albums-ai/CouchEditor/commit/e36037c20d2e58cb07de15c863b8308bf02f0e84))
+* migrate WhitesBlacksNode to SimpleToggles directory using createSliderNode ([dedadca](https://github.com/travel-albums-ai/CouchEditor/commit/dedadcaabdc14bbfef25be5a8b78d19fb81e6cb7))
+* remove unused dependencies and update button components in PipelineCanvasOverlays ([104f702](https://github.com/travel-albums-ai/CouchEditor/commit/104f70208dac7e692d91ac640265aba4511ffa67))
+* replace AdjustmentPreview with PreviewMath in ToneNodeLayout and VignetteNode components ([d94e354](https://github.com/travel-albums-ai/CouchEditor/commit/d94e35435913888b4c63838ffa6383fdb9a807c6))
+* replace BeforeAfter component with PreviewCss in AdjustmentSliderNode and remove unused BeforeAfter file ([9fd263e](https://github.com/travel-albums-ai/CouchEditor/commit/9fd263ef2b439c1279429caa2f628c6bdf0709f0))
+* simplify description rendering in AdjustmentSlider and related components ([1efab80](https://github.com/travel-albums-ai/CouchEditor/commit/1efab80b2e3a7ce0ad70c6b12a8fa02e8204cc00))
+* simplify HdrNode and TemperatureTintNode by using createSliderNode ([5d31da8](https://github.com/travel-albums-ai/CouchEditor/commit/5d31da8c0b44ae7817a5a588ed7ed338faec1286))
+* streamline PreviewDemo component and enhance NodeToolbox layout ([f7d3a17](https://github.com/travel-albums-ai/CouchEditor/commit/f7d3a179001d7364bbf90e16e769a59c07783c7e))
+* update AdjustmentPreview usage in HdrNode, ToneNodeLayout, VignetteNode, and AdjustmentSliderNode components ([7f77356](https://github.com/travel-albums-ai/CouchEditor/commit/7f77356471843f2e666d52a29f430aad3d3a5a43))
+* update icon colors in PreviewDemoStatic for better visibility ([ce61515](https://github.com/travel-albums-ai/CouchEditor/commit/ce61515bbee700a26015f97e6dedc1f4344ef91f))
+* update image processing stages to use new stage functions and change processing type to 'math' ([fe6cf0a](https://github.com/travel-albums-ai/CouchEditor/commit/fe6cf0af234f3ce34e324dd735e175a477d69dc5))
+* update label description for source stage in NodePalette ([be3e24b](https://github.com/travel-albums-ai/CouchEditor/commit/be3e24b8553845907a2180b306829815414f6b98))
+* update NodeToolboxItem and PreviewDemoStatic for improved layout and image handling ([03c4704](https://github.com/travel-albums-ai/CouchEditor/commit/03c4704ed986a0de1899d75667a9a0bab799c685))
+* update PreviewDemoStatic with new node types and improve image handling ([503d5c9](https://github.com/travel-albums-ai/CouchEditor/commit/503d5c9454c4c8866dce7de2875518b4e6bec22f))
+* update processing type to 'css' in NodePalette and adjust layout in Preview components ([3db9f13](https://github.com/travel-albums-ai/CouchEditor/commit/3db9f133b9e15539f5aa1e5777143217a8530030))
+
+### 🔧 Chore
+
+* update dependencies and devDependencies to latest versions ([4c95790](https://github.com/travel-albums-ai/CouchEditor/commit/4c9579099d9093790428f4e1595900de120fd179))
+
 ## [1.86.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.85.1...v1.86.0) (2026-09-13)
 
 ### ✨ Features
