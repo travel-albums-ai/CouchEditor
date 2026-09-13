@@ -1,3 +1,9 @@
+## [1.85.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.84.0...v1.85.0) (2026-09-13)
+
+### ✨ Features
+
+* update SplitToningNode to utilize dynamic configs for AdjustmentSlider components ([edc9355](https://github.com/travel-albums-ai/CouchEditor/commit/edc9355c79776770c4befe3da586839b76fb71f0))
+
 ## [1.84.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.83.0...v1.84.0) (2026-09-13)
 
 ### ✨ Features
