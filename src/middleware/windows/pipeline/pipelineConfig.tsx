@@ -27,7 +27,6 @@ import SourceNode from './ComplexNodes/SourceNode';
 import ViewerNode from './ComplexNodes/ViewerNode';
 import InformationNode from './InformationNode';
 import HdrNode from './OneBarToggles/HdrNode';
-import HueRotationNode from './OneBarToggles/HueRotationNode';
 import {
   RgbBlackPointNode,
   RgbMidtonesNode,
@@ -46,6 +45,7 @@ import FlipNode from './SimpleToggles/FlipNode';
 import GammaNode from './SimpleToggles/GammaNode';
 import GrainNode from './SimpleToggles/GrainNode';
 import HighlightsNode from './SimpleToggles/HighlightsNode';
+import HueRotationNode from './SimpleToggles/HueRotationNode';
 import InvertNode from './SimpleToggles/InvertNode';
 import LuminosityNode from './SimpleToggles/LuminosityNode';
 import MirrorNode from './SimpleToggles/MirrorNode';
