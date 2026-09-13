@@ -1,3 +1,9 @@
+## [1.98.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.97.0...v1.98.0) (2026-09-13)
+
+### ✨ Features
+
+* add WebMCPGetPipelineToolbox component for retrieving pipeline node types ([98573ae](https://github.com/travel-albums-ai/CouchEditor/commit/98573aea9b6f20d5f8873c01e00047eca48ba85a))
+
 ## [1.97.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.96.0...v1.97.0) (2026-09-13)
 
 ### ✨ Features
