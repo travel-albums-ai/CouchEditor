@@ -1,3 +1,9 @@
+## [1.73.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.72.0...v1.73.0) (2026-09-13)
+
+### ✨ Features
+
+* refactor NodePalette and NodeToolboxItem for improved configuration handling and add PreviewDemoMath component ([42f10a4](https://github.com/travel-albums-ai/CouchEditor/commit/42f10a470fb6c5ca7f3e1dc3e23321aa7edc48c9))
+
 ## [1.72.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.71.0...v1.72.0) (2026-09-13)
 
 ### ✨ Features
