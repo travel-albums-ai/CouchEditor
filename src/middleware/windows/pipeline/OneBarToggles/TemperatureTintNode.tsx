@@ -1,8 +1,7 @@
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Typography } from '@mui/material';
-import { type Node, type NodeProps } from '@xyflow/react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import ToneNodeLayout from './ToneNodeLayout';
 
 type TemperatureTintData = {
@@ -14,35 +13,26 @@ export default function TemperatureTintNode({
   id,
   data,
 }: NodeProps<Node<TemperatureTintData>>) {
-  const { t } = useTranslation();
-  const [temperature, setTemperature] = useState(data.temperature ?? 0);
-  const [tint, setTint] = useState(data.tint ?? 0);
-
+  const { setNodes } = useReactFlow();
+  const paletteItem = paletteItemsByType["temperature-tint"];
   return (
-    <ToneNodeLayout id={id} type="temperature-tint" runningConfig={{ temperature, tint }}>
-
-      <AdjustmentSlider
-        description={<Typography variant="caption" color="textSecondary">{t('pipelineTemperature')}</Typography>}
-        min={-100}
-        max={100}
-        step={1}
-        value={temperature}
-        onChange={(value) => {
-          Object.assign(data, { temperature: value });
-          setTemperature(value);
-        }}
-      />
-      <AdjustmentSlider
-        description={<Typography variant="caption" color="textSecondary">{t('pipelineTint')}</Typography>}
-        min={-100}
-        max={100}
-        step={1}
-        value={tint}
-        onChange={(value) => {
-          Object.assign(data, { tint: value });
-          setTint(value);
-        }}
-      />
+    <ToneNodeLayout id={id} type="temperature-tint" runningConfig={data}>
+      {paletteItem.configs?.map((config) => (
+        <AdjustmentSlider
+          description={config.labelKey ? <Typography variant="caption" color="textSecondary">{config.labelKey}</Typography> : undefined}
+          min={config.min ?? 0}
+          max={config.max ?? 100}
+          throttleMs={1000}
+          step={config.step ?? 1}
+          value={data[config.key] ?? 0}
+          onChange={(value) => {
+            setNodes((current) => current.map((node) => node.id === id
+              ? { ...node, data: { ...node.data, [config.key]: value } }
+              : node
+            ));
+          }}
+        />
+      ))}
     </ToneNodeLayout>
   );
 }

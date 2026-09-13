@@ -7,7 +7,6 @@ import PipelineStageTiming from '@/middleware/windows/pipeline/components/Pipeli
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
-import { useState } from 'react';
 
 type RGB = [number, number, number];
 
@@ -39,9 +38,6 @@ function emitPipelineChange() {
 
 export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>) {
   const { setNodes } = useReactFlow();
-  const [amount, setAmount] = useState(data.amount ?? 0);
-  const [color, setColor] = useState(data.color ?? DEFAULT_COLOR);
-
   const paletteItem = paletteItemsByType["vignette"];
 
   return <>
@@ -51,7 +47,7 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
       tools={<PipelineStageTiming nodeId={id} nodeType="vignette" />}
       helper={<AdjustmentPreview
         algorithm={(imageData) => {
-          const stage = paletteItem.algo?.({ amount, color });
+          const stage = paletteItem.algo?.(data);
           stage?.(imageData);
         }} />}
     >
@@ -60,31 +56,34 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
         <input
           aria-label="Vignette color"
           type="color"
-          value={rgbToHex(color)}
+          value={rgbToHex(data.color ?? DEFAULT_COLOR)}
           onChange={(event) => {
             const nextColor = hexToRgb(event.target.value);
             setNodes((current) => current.map((node) => node.id === id
               ? { ...node, data: { ...node.data, color: nextColor } }
               : node
             ));
-            setColor(nextColor);
             emitPipelineChange();
           }}
         />
       </Box>
-      <AdjustmentSlider
-        min={0}
-        max={100}
-        step={1}
-        value={amount}
-        onChange={(value) => {
-          setNodes((current) => current.map((node) => node.id === id
-            ? { ...node, data: { ...node.data, amount: value } }
-            : node
-          ));
-          setAmount(value);
-        }}
-      />
+
+      {paletteItem.configs?.map((config, index) => (
+        <AdjustmentSlider
+          description={config.labelKey ? <Typography variant="caption" color="textSecondary">{config.labelKey}</Typography> : undefined}
+          min={config.min ?? 0}
+          max={config.max ?? 100}
+          throttleMs={1000}
+          step={config.step ?? 1}
+          value={data[config.key] ?? 0}
+          onChange={(value) => {
+            setNodes((current) => current.map((node) => node.id === id
+              ? { ...node, data: { ...node.data, [config.key]: value } }
+              : node
+            ));
+          }}
+        />
+      ))}
     </NodeWrapper>
     <OutputHandle id="image" />
   </>;

@@ -6,7 +6,7 @@ import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
-import { type Node, type NodeProps } from "@xyflow/react";
+import { useReactFlow, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
 export type SliderNodeConfig = {
@@ -21,12 +21,12 @@ export function createSliderNode(config: SliderNodeConfig) {
     data,
   }: NodeProps<Node<{ amount?: number }>>) {
     const paletteItem = paletteItemsByType[config.type];
-
-    const [amount, setAmount] = useState(data.amount || paletteItem?.config?.defaultValue || 0);
+    const { setNodes } = useReactFlow();
+    // const [amount, setAmount] = useState(data.amount || paletteItem?.config?.defaultValue || 0);
     const [isBusy, setIsBusy] = useState(false);
 
 
-    const activeConfig = paletteItem?.configs?.[0] || paletteItem?.config;
+    // const activeConfig = paletteItem?.configs?.[0] || paletteItem?.config;
 
     return <>
       <InputHandle id="image" />
@@ -35,14 +35,14 @@ export function createSliderNode(config: SliderNodeConfig) {
         helper={<>
           {paletteItem.processing === 'math' && <AdjustmentPreview
             algorithm={(imageData) => {
-              const stage = paletteItem.algo?.({ amount });
+              const stage = paletteItem.algo?.(data);
               stage?.(imageData);
             }}
           />}
-          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo({ amount }) }} />}
+          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} />}
         </>}
       >
-        {activeConfig?.min !== activeConfig?.max && <AdjustmentSlider
+        {/* {activeConfig?.min !== activeConfig?.max && <AdjustmentSlider
           disabled={isBusy}
           min={activeConfig?.min || 0}
           max={activeConfig?.max || 100}
@@ -53,8 +53,27 @@ export function createSliderNode(config: SliderNodeConfig) {
             data.amount = newValue;
             setAmount(newValue);
           }}
-        />}
-        dd
+        />} */}
+
+        {(paletteItem.configs || [])
+          .filter(config => config.min !== config.max)
+          .map((config, index) => (
+            <AdjustmentSlider
+              disabled={isBusy}
+              min={config.min || 0}
+              max={config.max || 100}
+              step={config.step || 1}
+              throttleMs={1000}
+              value={data[config.key] ?? 0}
+              onChange={(value) => {
+                setNodes((current) => current.map((node) => node.id === id
+                  ? { ...node, data: { ...node.data, [config.key]: value } }
+                  : node
+                ));
+              }}
+            />
+          ))}
+
 
       </NodeWrapper>
       <OutputHandle id="image" />

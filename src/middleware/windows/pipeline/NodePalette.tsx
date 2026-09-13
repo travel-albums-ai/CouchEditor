@@ -6,6 +6,9 @@ export type NodePaletteConfig = {
   max: number;
   step?: number;
   defaultValue?: number;
+
+  labelKey?: string;
+  key: string,
 };
 
 export type NodeStageItem = {
@@ -52,7 +55,7 @@ const transformStages: Array<NodeStageItem> = [
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
     algo: (config: any) => ({ transform: `rotate(${config.amount}deg)` }),
     configs: [
-      { min: 0, max: 360, step: 1, defaultValue: 0 }
+      { min: 0, max: 360, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'css'
   },
@@ -73,43 +76,43 @@ const lightStages: Array<NodeStageItem> = [
   {
     type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />,
     algo: ({ amount }: { amount: number }) => exposureStage(amount),
-    configs: [{ min: -3, max: 3, step: 0.1, defaultValue: 0 }],
+    configs: [{ min: -3, max: 3, step: 0.1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />,
     algo: ({ amount }: { amount: number }) => brightnessStage(amount),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />,
     algo: ({ amount }: { amount: number }) => contrastStage(amount),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,
     algo: ({ amount }: { amount: number }) => highlightsStage(amount),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />,
     algo: ({ amount }: { amount: number }) => shadowsStage(amount),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />,
     algo: ({ amount }: { amount: number }) => gammaStage(amount),
-    configs: [{   min: 0.1, max: 3, step: 0.01, defaultValue: 1, }],
+    configs: [{   min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />,
     algo: ({ amount }: { amount: number }) => luminosityStage(amount),
-    configs: [{ min: 0, max: 2, step: 0.05, defaultValue: 0 }],
+    configs: [{ min: 0, max: 2, step: 0.05, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
@@ -138,20 +141,20 @@ const colorStages: Array<NodeStageItem> = [
   {
     type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />,
     algo: ({ amount }: { amount: number }) => saturationStage(amount),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math',
     labelDescription: 'Adjusts the intensity of the color saturation. The algorithm modifies the saturation level of the image colors. It applies the specified adjustment to enhance or reduce the overall color vibrancy.',
   },
   {
     type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />,
     algo: ({ amount }: { amount: number }) => vibranceStage(amount),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   {
     type: "hue-rotation", labelKey: "pipelineHueRotation", icon: <Palette size={16} />,
     algo: ({ amount }: { amount: number }) => hueRotationStage(amount),
-    configs: [{ min: -180, max: 180, step: 1, defaultValue: 0 }],
+    configs: [{ min: -180, max: 180, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
@@ -172,7 +175,10 @@ const colorStages: Array<NodeStageItem> = [
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />,
     algo: ({ temperature, tint }: { temperature: number, tint: number }) => temperatureTintStage(temperature, tint),
-    configs: [{ min: -100, max: 100, step: 1, defaultValue: 0 }],
+    configs: [
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Temperature', key: 'temperature' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Tint', key: 'tint' }
+    ],
     processing: 'complex'
   },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
@@ -189,14 +195,14 @@ const detailStages: Array<NodeStageItem> = [
   {
     type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />,
     algo: ({ amount }: { amount: number }) => sharpenStage(amount),
-    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0 }],
+    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true },
   {
     type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
     algo: ({ amount }: { amount: number }) => grainStage(amount),
-    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0 }],
+    configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
 ]
@@ -204,24 +210,29 @@ const detailStages: Array<NodeStageItem> = [
 const effectsStages: Array<NodeStageItem> = [
   { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} />,
     algo: ({ amount, color }: { amount: number, color: [number, number, number] }) => vignetteStage(amount, color),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
+    ],
     processing: 'complex'
   },
   {
     type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />,
     algo: ({ amount }: { amount: number }) => popStage(amount),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
   { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
     algo: ({ amount, radius }: { amount: number, radius: number }) => hdrEffectStage(amount, radius),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Amount', key: 'amount' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Radius', key: 'radius' },
+    ],
     processing: 'complex'
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
     algo: ({ amount }: { amount: number }) => fadeStage(amount),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math'
   },
 ]
