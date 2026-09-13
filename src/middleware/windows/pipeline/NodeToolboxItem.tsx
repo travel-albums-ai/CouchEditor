@@ -60,8 +60,8 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
-              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />} */}
-              {/* {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
+              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
+              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
 
               <NodeToolboxHeader
                 type={item.type}
