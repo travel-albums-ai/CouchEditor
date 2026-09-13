@@ -247,6 +247,9 @@ export default function NodeWrapper({
           }}
         >
           {children}
+
+
+          {helper}
         </Box>
       </Box>
     </>
