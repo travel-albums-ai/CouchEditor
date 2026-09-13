@@ -563,6 +563,20 @@ function Pipeline() {
     return () => window.removeEventListener('pipeline:changed', handler);
   }, [evaluate]);
 
+  useEffect(() => {
+    const handleGraphUpdated = (event: Event) => {
+      const detail = (event as CustomEvent<{ nodes: Node[]; edges: Edge[] }>).detail;
+      if (!detail?.nodes || !detail.edges) return;
+
+      setNodes(detail.nodes);
+      setEdges(styleEdges(detail.edges));
+      window.dispatchEvent(new CustomEvent('pipeline:changed'));
+    };
+
+    window.addEventListener('pipeline:graph-updated', handleGraphUpdated);
+    return () => window.removeEventListener('pipeline:graph-updated', handleGraphUpdated);
+  }, [setEdges, setNodes, styleEdges]);
+
   const onConnect = useCallback(
     (connection: Connection) => {
       setEdges((current) =>
