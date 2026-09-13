@@ -1,3 +1,9 @@
+## [1.92.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.91.0...v1.92.0) (2026-09-13)
+
+### ✨ Features
+
+* improve typography and layout in Header component ([23b2a27](https://github.com/travel-albums-ai/CouchEditor/commit/23b2a27cf2a2ee7dcad83dc2ff79743d8b20ccfa))
+
 ## [1.91.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.90.0...v1.91.0) (2026-09-13)
 
 ### ✨ Features
