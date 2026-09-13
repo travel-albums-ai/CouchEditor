@@ -117,7 +117,10 @@ const lightStages: Array<NodeStageItem> = [
   },
   { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
     algo: ({ whites, blacks }: { whites: number, blacks: number }) => whitesBlacksStage(whites, blacks),
-    configs: [{ min: 0, max: 100, step: 1, defaultValue: 0 }],
+    configs: [
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Whites', key: 'whites' },
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Blacks', key: 'blacks' }
+    ],
     processing: 'complex'
   },
   { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
