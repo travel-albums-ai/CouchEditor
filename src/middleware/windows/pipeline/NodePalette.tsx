@@ -387,7 +387,9 @@ const colorStages: Array<NodeStageItem> = [
     processing: 'math',
     labelDescription: 'pipelineInvertDescription',
   },
-  { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} />,
+  {
+    type: NodeType.Lut, labelKey: "pipelineLut", icon: <Film size={16} />,
+    processing: 'static',
     labelDescription: 'pipelineLutDescription'
   },
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />,
