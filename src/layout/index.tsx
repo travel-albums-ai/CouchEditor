@@ -2,6 +2,7 @@ import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
 import WebMCPAddPipelineNode from '@/components/WebMCPAddPipelineNode';
 import WebMCPClonePipelineNode from '@/components/WebMCPClonePipelineNode';
+import WebMCPConnectPipelineNodes from '@/components/WebMCPConnectPipelineNodes';
 import WebMCPDeletePipelineNode from '@/components/WebMCPDeletePipelineNode';
 import WebMCPGetCurrentPipeline from '@/components/WebMCPGetCurrentPipeline';
 import WebMCPGetPipelineToolbox from '@/components/WebMCPGetPipelineToolbox';
@@ -31,6 +32,7 @@ export default function AppLayout() {
       <WebMCPThemeTool />
       <WebMCPAddPipelineNode />
       <WebMCPClonePipelineNode />
+      <WebMCPConnectPipelineNodes />
       <WebMCPDeletePipelineNode />
       <WebMCPGetCurrentPipeline />
       <WebMCPGetPipelineToolbox />
