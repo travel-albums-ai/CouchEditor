@@ -1,3 +1,9 @@
+## [1.69.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.68.0...v1.69.0) (2026-09-13)
+
+### ✨ Features
+
+* enhance AdjustmentPreviewDemo with dynamic amount calculation and label description ([74d8324](https://github.com/travel-albums-ai/CouchEditor/commit/74d8324b0c6311c899474711494637e5c0548ad8))
+
 ## [1.68.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.67.0...v1.68.0) (2026-09-13)
 
 ### ✨ Features
