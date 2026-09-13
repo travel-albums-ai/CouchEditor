@@ -3,6 +3,7 @@ import MainDriver from '@/components/tutorial/MainDriver';
 import WebMCPAddPipelineNode from '@/components/WebMCPAddPipelineNode';
 import WebMCPClonePipelineNode from '@/components/WebMCPClonePipelineNode';
 import WebMCPConnectPipelineNodes from '@/components/WebMCPConnectPipelineNodes';
+import WebMCPDeletePipelineEdge from '@/components/WebMCPDeletePipelineEdge';
 import WebMCPDeletePipelineNode from '@/components/WebMCPDeletePipelineNode';
 import WebMCPGetCurrentPipeline from '@/components/WebMCPGetCurrentPipeline';
 import WebMCPGetPipelineToolbox from '@/components/WebMCPGetPipelineToolbox';
@@ -34,6 +35,7 @@ export default function AppLayout() {
       <WebMCPAddPipelineNode />
       <WebMCPClonePipelineNode />
       <WebMCPConnectPipelineNodes />
+      <WebMCPDeletePipelineEdge />
       <WebMCPDeletePipelineNode />
       <WebMCPGetCurrentPipeline />
       <WebMCPGetPipelineToolbox />

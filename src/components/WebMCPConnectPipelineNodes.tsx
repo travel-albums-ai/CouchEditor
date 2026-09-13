@@ -3,6 +3,45 @@ import { addEdge } from '@xyflow/react';
 import { useEffect } from 'react';
 import './webMcpTypes';
 
+const NODE_HANDLES: Record<string, { sources: string[]; targets: string[] }> = {
+  grouper: {
+    sources: ['image'],
+    targets: ['image-1', 'image-2', 'image-3', 'image-4'],
+  },
+  'array-switch': {
+    sources: ['image'],
+    targets: ['image-1', 'image-2'],
+  },
+  'array-and': {
+    sources: ['image'],
+    targets: ['image-1', 'image-2'],
+  },
+  'array-and-not': {
+    sources: ['image'],
+    targets: ['image-1', 'image-2'],
+  },
+  'array-or': {
+    sources: ['image'],
+    targets: ['image-1', 'image-2'],
+  },
+  'exif-split': {
+    sources: ['withExif', 'withoutExif'],
+    targets: ['image'],
+  },
+  'gps-split': {
+    sources: ['withGps', 'withoutGps'],
+    targets: ['image'],
+  },
+  'ask-ai': {
+    sources: ['positive', 'negative'],
+    targets: ['image'],
+  },
+};
+
+function getNodeHandles(node: { type?: string }, direction: 'sources' | 'targets') {
+  return NODE_HANDLES[node.type ?? '']?.[direction] ?? ['image'];
+}
+
 export default function WebMCPConnectPipelineNodes() {
   const { currentPipeline, setCurrentPipeline } = usePipelineStore();
 
@@ -19,7 +58,7 @@ export default function WebMCPConnectPipelineNodes() {
           name: 'connect_pipeline_nodes',
           title: 'Connect Pipeline Nodes',
           description:
-            'Connect two nodes in the current pipeline with an edge. Both handles default to image.',
+            'Connect two nodes in the current pipeline with an edge. Specify handles when a node has multiple inputs or outputs.',
           inputSchema: {
             type: 'object',
             properties: {
@@ -34,12 +73,12 @@ export default function WebMCPConnectPipelineNodes() {
               sourceHandle: {
                 type: 'string',
                 description:
-                  'Optional id of the source handle. Defaults to image.',
+                  'Optional id of the source handle. Defaults to image when the source node has one output.',
               },
               targetHandle: {
                 type: 'string',
                 description:
-                  'Optional id of the target handle. Defaults to image.',
+                  'Optional id of the target handle. Defaults to image when the target node has one input.',
               },
             },
             required: ['sourceNodeId', 'targetNodeId'],
@@ -81,12 +120,39 @@ export default function WebMCPConnectPipelineNodes() {
               return `Target pipeline node not found: ${targetNodeId}`;
             }
 
+            const sourceNode = currentPipeline.nodes.find((node) => node.id === sourceNodeId);
+            const targetNode = currentPipeline.nodes.find((node) => node.id === targetNodeId);
+            const sourceHandles = getNodeHandles(sourceNode!, 'sources');
+            const targetHandles = getNodeHandles(targetNode!, 'targets');
+            const resolvedSourceHandle = sourceHandle ?? (
+              sourceHandles.length === 1 ? sourceHandles[0] : undefined
+            );
+            const resolvedTargetHandle = targetHandle ?? (
+              targetHandles.length === 1 ? targetHandles[0] : undefined
+            );
+
+            if (!resolvedSourceHandle) {
+              return `sourceHandle is required for ${sourceNode?.type ?? 'this'} nodes. Valid handles: ${sourceHandles.join(', ')}`;
+            }
+
+            if (!resolvedTargetHandle) {
+              return `targetHandle is required for ${targetNode?.type ?? 'this'} nodes. Valid handles: ${targetHandles.join(', ')}`;
+            }
+
+            if (!sourceHandles.includes(resolvedSourceHandle)) {
+              return `Invalid sourceHandle for ${sourceNodeId}. Valid handles: ${sourceHandles.join(', ')}`;
+            }
+
+            if (!targetHandles.includes(resolvedTargetHandle)) {
+              return `Invalid targetHandle for ${targetNodeId}. Valid handles: ${targetHandles.join(', ')}`;
+            }
+
             const edges = addEdge(
               {
                 source: sourceNodeId,
                 target: targetNodeId,
-                sourceHandle: sourceHandle ?? 'image',
-                targetHandle: targetHandle ?? 'image',
+                sourceHandle: resolvedSourceHandle,
+                targetHandle: resolvedTargetHandle,
               },
               currentPipeline.edges,
             );
