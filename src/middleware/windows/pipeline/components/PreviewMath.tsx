@@ -1,7 +1,8 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
-import { useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const previewImageUrl = 'sample.jpg';
 
@@ -13,6 +14,7 @@ type AdjustmentPreviewProps = {
 export function PreviewMath({ data, paletteItem }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const runAlgorithm = (imageData: ImageData) => {
     const stage = paletteItem.algo?.(data);
@@ -47,10 +49,30 @@ export function PreviewMath({ data, paletteItem }: AdjustmentPreviewProps) {
     };
   }, [data, paletteItem]);
 
-  return (<>
+  return (<Box sx={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    gap: 2,
+    pt: 1,
+    width: '300px',
+    justifyContent: 'center',
+    transition: 'opacity 0.25s ease',
+    '&:hover': {
+      opacity: 1,
+    }
+  }}>
     <PreviewBeforeAfter
       after={<img src={processedImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />}
       value={data ? Object.values(data)?.[0] : 0}
     />
-  </>);
+
+    {paletteItem.labelDescription && <Typography variant="caption" sx={{ borderTop: '1px solid',
+      borderColor: 'divider',
+      flex: 1,
+      p: 1,
+    }} color="textSecondary">
+      {t(paletteItem.labelDescription)}
+    </Typography>}
+  </Box>);
 }

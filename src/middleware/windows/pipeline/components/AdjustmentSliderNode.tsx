@@ -28,7 +28,7 @@ export function createSliderNode(config: SliderNodeConfig) {
 
     const helper = <>
       {paletteItem.processing === 'math' && <PreviewMath paletteItem={paletteItem} data={data} />}
-      {paletteItem.processing === 'css' && <PreviewCss image2style={{ ...paletteItem?.algo(data) }} data={data} />}
+      {paletteItem.processing === 'css' && <PreviewCss paletteItem={paletteItem} image2style={{ ...paletteItem?.algo(data) }} data={data} />}
     </>
 
     return <>
