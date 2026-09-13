@@ -2,9 +2,7 @@ import SolidChip from '@/components/SolidChip';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
-import { PreviewDemoCss } from '@/middleware/windows/pipeline/components/PreviewDemoCss';
-import { PreviewDemoMath } from '@/middleware/windows/pipeline/components/PreviewDemoMath';
-import { PreviewDemoStatic } from '@/middleware/windows/pipeline/components/PreviewDemoStatic';
+import PreviewDemo from '@/middleware/windows/pipeline/components/PreviewDemo';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown, Info, Pointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +45,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 140px)',
+        gridTemplateColumns: 'repeat(2, 175px)',
         gap: 1,
       }}>
         {items
@@ -62,21 +60,12 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
-              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />} */}
-              {/* {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
-              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
-              {item.processing === 'static' && <PreviewDemoStatic paletteItem={item} />}
-              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
-
               <NodeToolboxHeader type={item.type}>
                 <Tooltip title={<Box>
                   <Box sx={{ mx: 1, mb: 2, mt: 1 }}>
                     <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless variant="header" icon={<Pointer />} />
                   </Box>
-                  {item.processing === 'static' && <PreviewDemoStatic paletteItem={item} />}
-                  {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
-                  {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
-
+                  <PreviewDemo paletteItem={item} />
                 </Box>} key={item.type} arrow placement="left">
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     <Info size={16} style={{ color: 'inherit', opacity: 0.15, lineHeight: 0 }} />

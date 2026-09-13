@@ -7,7 +7,6 @@ import { Box, InputAdornment, TextField } from '@mui/material';
 import { Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-
 export default function NodeToolbox() {
   const enableAI  = useBYOKStoreSelector((state) => state.enableAI)
   const searchTermToolbox = usePipelineStoreSelector((state) => state.searchTermToolbox)
@@ -39,6 +38,7 @@ export default function NodeToolbox() {
       <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
         <TextField
           size="small"
+          fullWidth
           placeholder={t('searchToolbox')}
           value={searchTermToolbox}
           slotProps={{

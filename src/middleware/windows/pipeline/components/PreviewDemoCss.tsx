@@ -14,7 +14,6 @@ export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
   const { t } = useTranslation();
   const config = paletteItem.configs?.[0] || paletteItem.config;
 
-
   useEffect(() => {
     const min = typeof config?.min === 'number' ? config.min : 0;
     const max = typeof config?.max === 'number' ? config.max : 1;
