@@ -110,7 +110,8 @@ const lightStages: Array<NodeStageItem> = [
 const colorStages: Array<NodeStageItem> = [
   {
     type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />,
-    algo: saturationStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    algo: saturationStage,
+    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
     processing: 'math',
     labelDescription: 'Adjusts the intensity of the color saturation. The algorithm modifies the saturation level of the image colors. It applies the specified adjustment to enhance or reduce the overall color vibrancy.',
   },
@@ -147,13 +148,14 @@ const colorStages: Array<NodeStageItem> = [
 const detailStages: Array<NodeStageItem> = [
   {
     type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />,
-    algo: sharpenStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    algo: sharpenStage,
+    config: { min: 0, max: 1000, step: 1, defaultValue: 0 },
     processing: 'math'
   },
   { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true },
   {
     type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
-    algo: grainStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    algo: grainStage, config: { min: 0, max: 1000, step: 1, defaultValue: 0 },
     processing: 'math'
   },
 ]
@@ -165,7 +167,10 @@ const effectsStages: Array<NodeStageItem> = [
     algo: popStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
     processing: 'math'
   },
-  { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} /> },
+  { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
+    // algo: hdrEffectStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    // processing: 'math'
+  },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
     algo: fadeStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },

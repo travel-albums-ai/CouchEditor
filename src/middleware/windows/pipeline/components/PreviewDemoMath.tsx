@@ -11,7 +11,7 @@ type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
 };
 
-export function AdjustmentPreviewDemo({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const [amount, setAmount] = useState(0);
   const theme = useTheme();

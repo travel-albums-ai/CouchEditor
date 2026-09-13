@@ -22,7 +22,7 @@ export function createSliderNode(config: SliderNodeConfig) {
   }: NodeProps<Node<{ amount?: number }>>) {
     const paletteItem = paletteItemsByType[config.type];
 
-    const [amount, setAmount] = useState(data.amount ?? paletteItem?.config);
+    const [amount, setAmount] = useState(data.amount || paletteItem?.config?.defaultValue || 0);
     const [isBusy, setIsBusy] = useState(false);
 
 

@@ -1,10 +1,10 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import { AdjustmentPreviewDemo } from '@/middleware/windows/pipeline/components/AdjustmentPreviewDemo';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { PreviewDemoCss } from '@/middleware/windows/pipeline/components/PreviewDemoCss';
+import { PreviewDemoMath } from '@/middleware/windows/pipeline/components/PreviewDemoMath';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function NodeToolboxItem({ group, items, onDragStart, isSearching } : { group: string, items: any[], onDragStart: (event: React.DragEvent<HTMLDivElement>, nodeType: string) => void, isSearching: boolean }) {
@@ -52,31 +52,34 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
           .filter(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase()))
           .filter(item => enableAI || item.ai === undefined)
           .map((item, i) => (
-            <Tooltip title={<>
-              {t('pipelineDragToAdd', { label: t(item.labelKey) })}
-              {/* {JSON.stringify(item)}
-              {console.log(item)} */}
-              {/* {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />} */}
-              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
-              {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />}
 
-            </>} key={item.type} arrow placement="top">
-              <Box
-                key={item.type}
-                draggable
-                onDragStart={(event) =>
-                  onDragStart(event, item.type)
-                }
+            <Box
+              key={item.type}
+              draggable
+              onDragStart={(event) =>
+                onDragStart(event, item.type)
+              }
+            >
+              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />} */}
+              {/* {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
+
+              <NodeToolboxHeader
+                type={item.type}
               >
+                <Tooltip title={<>
+                  {t('pipelineDragToAdd', { label: t(item.labelKey) })}
+                  {/* {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />} */}
+                  {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
+                  {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
 
-                {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />}
-                {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
-
-                <NodeToolboxHeader
-                  type={item.type}
-                />
-              </Box>
-            </Tooltip>
+                </>} key={item.type} arrow placement="top">
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {(item.processing === 'css' || item.processing === 'math') && <Info size={16} style={{ color: 'inherit', opacity: 0.5, lineHeight: 0 }} />}
+                  </span>
+                </Tooltip>
+              </NodeToolboxHeader>
+            </Box>
+            // </Tooltip>
           ))}
       </Box>}
     </Box>
