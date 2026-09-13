@@ -1,3 +1,9 @@
+## [1.82.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.81.0...v1.82.0) (2026-09-13)
+
+### ✨ Features
+
+* update WhitesBlacksNode to utilize dynamic configs for AdjustmentSlider components ([4a21742](https://github.com/travel-albums-ai/CouchEditor/commit/4a21742b970911f0ced6f3e5fa95e04bc13aaab9))
+
 ## [1.81.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.80.0...v1.81.0) (2026-09-13)
 
 ### ✨ Features
