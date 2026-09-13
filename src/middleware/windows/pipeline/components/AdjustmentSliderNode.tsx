@@ -42,19 +42,6 @@ export function createSliderNode(config: SliderNodeConfig) {
           {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} />}
         </>}
       >
-        {/* {activeConfig?.min !== activeConfig?.max && <AdjustmentSlider
-          disabled={isBusy}
-          min={activeConfig?.min || 0}
-          max={activeConfig?.max || 100}
-          step={activeConfig?.step || 1}
-          value={amount}
-          throttleMs={1000}
-          onChange={(newValue) => {
-            data.amount = newValue;
-            setAmount(newValue);
-          }}
-        />} */}
-
         {(paletteItem.configs || [])
           .filter(config => config.min !== config.max)
           .map((config, index) => (
