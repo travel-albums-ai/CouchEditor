@@ -29,12 +29,12 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
         opacity: 1,
       }
     }}>
-      <Box sx={{ p: 1 }}>
-        {images[paletteItem.type] && <PreviewBeforeAfter
+      {images[paletteItem.type] && <Box sx={{ p: 1 }}>
+        <PreviewBeforeAfter
           width={width ?? 90}
           after={images[paletteItem.type] || <></>}
-        />}
-      </Box>
+        />
+      </Box>}
 
       {paletteItem.labelDescription && <Typography variant="caption" sx={{
         flex: 1,
