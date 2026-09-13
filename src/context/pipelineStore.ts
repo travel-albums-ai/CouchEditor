@@ -14,16 +14,29 @@ export type SavedPipeline = PipelineGraph & {
   name: string
 }
 
+export type CurrentPipeline = PipelineGraph & {
+  id: string
+  name: string
+  isDirty: boolean
+}
+
 type PipelineStore = {
   pipelines: SavedPipeline[]
+  currentPipeline: CurrentPipeline
   showToolbox: boolean
   searchTermToolbox: string
   collapsedToolboxGroups: Record<string, boolean>
 }
 
 const defaults: PipelineStore = {
-  // pipelines: [],
   pipelines: samplePipeline as SavedPipeline[],
+  currentPipeline: {
+    id: '',
+    name: '',
+    nodes: [],
+    edges: [],
+    isDirty: false,
+  },
   showToolbox: true,
   searchTermToolbox: '',
   collapsedToolboxGroups: {}
@@ -65,6 +78,29 @@ export const usePipelineStore = () => {
   return {
     setState,
     pipelines: store.pipelines,
+    currentPipeline: store.currentPipeline,
+    setCurrentPipeline: (currentPipeline: CurrentPipeline | ((prev: CurrentPipeline) => CurrentPipeline)) =>
+      setState((prev) => ({
+        ...prev,
+        currentPipeline: typeof currentPipeline === 'function'
+          ? currentPipeline(prev.currentPipeline)
+          : currentPipeline,
+      })),
+    updateCurrentPipeline: (graph: PipelineGraph, isDirty = true) =>
+      setState((prev) => ({
+        ...prev,
+        currentPipeline: { ...prev.currentPipeline, ...graph, isDirty },
+      })),
+    setCurrentPipelineName: (name: string) =>
+      setState((prev) => ({
+        ...prev,
+        currentPipeline: { ...prev.currentPipeline, name },
+      })),
+    setCurrentPipelineDirty: (isDirty: boolean) =>
+      setState((prev) => ({
+        ...prev,
+        currentPipeline: { ...prev.currentPipeline, isDirty },
+      })),
     toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {
       const pipeline: SavedPipeline = {

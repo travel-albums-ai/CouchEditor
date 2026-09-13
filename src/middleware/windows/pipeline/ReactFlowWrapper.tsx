@@ -63,21 +63,24 @@ function Pipeline() {
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
   const {
     pipelines,
+    currentPipeline,
+    setCurrentPipeline,
+    updateCurrentPipeline,
+    setCurrentPipelineName,
+    setCurrentPipelineDirty,
     saveNew,
     cloneExisting,
     updateById,
     deleteById,
     loadById
   } = usePipelineStore();
+  const currentPipelineId = currentPipeline.id;
+  const currentPipelineName = currentPipeline.name;
+  const isDirty = currentPipeline.isDirty;
   const nodeIdRef = useRef(0);
   const pipelineFileInputRef = useRef<HTMLInputElement>(null);
   const trashRef = useRef<HTMLDivElement>(null);
   const [trashActive, setTrashActive] = useState(false);
-  const [currentPipelineId, setCurrentPipelineId] = useState<string>(() =>
-    localStorage.getItem(LAST_PIPELINE_STORAGE_KEY) ?? ''
-  );
-  const [currentPipelineName, setCurrentPipelineName] = useState('');
-  const [isDirty, setIsDirty] = useState(false);
   const [organizingWithAI, setOrganizingWithAI] = useState(false);
   const restoredPipelineRef = useRef(false);
   const evaluationId = useRef(0);
@@ -131,20 +134,19 @@ function Pipeline() {
 
     restoredPipelineRef.current = true;
 
-    if (!currentPipelineId) return;
+    const pipelineId = localStorage.getItem(LAST_PIPELINE_STORAGE_KEY) ?? '';
+    if (!pipelineId) return;
 
-    const pipeline = loadById(currentPipelineId);
+    const pipeline = loadById(pipelineId);
     if (!pipeline) {
       localStorage.removeItem(LAST_PIPELINE_STORAGE_KEY);
-      setCurrentPipelineId('');
       return;
     }
 
     setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
     setEdges(styleEdges(pipeline.edges));
-    setCurrentPipelineName(pipeline.name);
-    setIsDirty(false);
-  }, [currentPipelineId, loadById, setEdges, setNodes, styleEdges]);
+    setCurrentPipeline({ ...pipeline, isDirty: false });
+  }, [loadById, setCurrentPipeline, setEdges, setNodes, styleEdges]);
 
   useEffect(() => {
     if (currentPipelineId) {
@@ -168,6 +170,7 @@ function Pipeline() {
   useEffect(() => {
     nodesRef.current = nodes;
     edgesRef.current = edges;
+    updateCurrentPipeline({ nodes, edges }, currentPipeline.isDirty);
   }, [edges, nodes]);
 
   const evaluate = useCallback(async () => {
@@ -280,14 +283,14 @@ function Pipeline() {
   }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize, pipelineMaxAIRequests, pipelineAICallDelayMs]);
 
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
-    setIsDirty(true);
+    setCurrentPipelineDirty(true);
     onNodesChange(changes);
-  }, [onNodesChange]);
+  }, [onNodesChange, setCurrentPipelineDirty]);
 
   const handleEdgesChange = useCallback((changes: Parameters<typeof onEdgesChange>[0]) => {
-    setIsDirty(true);
+    setCurrentPipelineDirty(true);
     onEdgesChange(changes);
-  }, [onEdgesChange]);
+  }, [onEdgesChange, setCurrentPipelineDirty]);
 
   const saveCurrent = useCallback(() => {
     const name = currentPipelineName.trim() || window.prompt('Pipeline name', 'Untitled pipeline');
@@ -297,16 +300,13 @@ function Pipeline() {
 
     if (currentPipelineId) {
       updateById(currentPipelineId, normalizedName, { nodes, edges });
-      setCurrentPipelineName(normalizedName);
-      setIsDirty(false);
+      setCurrentPipeline({ ...currentPipeline, name: normalizedName, isDirty: false });
       return;
     }
 
     const id = saveNew(name, { nodes, edges });
-    setCurrentPipelineId(id);
-    setCurrentPipelineName(normalizedName);
-    setIsDirty(false);
-  }, [currentPipelineId, currentPipelineName, edges, nodes, saveNew, updateById]);
+    setCurrentPipeline({ id, name: normalizedName, nodes, edges, isDirty: false });
+  }, [currentPipeline, currentPipelineId, currentPipelineName, edges, nodes, saveNew, setCurrentPipeline, updateById]);
 
   const saveAsCopy = useCallback(() => {
     const name = window.prompt(
@@ -321,10 +321,14 @@ function Pipeline() {
 
     if (!id) return;
 
-    setCurrentPipelineId(id);
-    setCurrentPipelineName(name.trim() || 'Untitled pipeline');
-    setIsDirty(false);
-  }, [cloneExisting, currentPipelineId, currentPipelineName, edges, isDirty, nodes, saveNew]);
+    setCurrentPipeline({
+      id,
+      name: name.trim() || 'Untitled pipeline',
+      nodes,
+      edges,
+      isDirty: false,
+    });
+  }, [cloneExisting, currentPipelineId, currentPipelineName, edges, isDirty, nodes, saveNew, setCurrentPipeline]);
 
   const downloadPipeline = useCallback(() => {
     const name = currentPipelineName.trim() || 'Untitled pipeline';
@@ -346,15 +350,13 @@ function Pipeline() {
 
       setNodes(graph.nodes.map((node) => ({ ...node, data: { ...node.data } })));
       setEdges(styleEdges(graph.edges));
-      setCurrentPipelineId(id);
-      setCurrentPipelineName(name);
-      setIsDirty(false);
+      setCurrentPipeline({ id, name, nodes: graph.nodes, edges: graph.edges, isDirty: false });
       void fitPipelineView();
     } catch (error) {
       console.error('Pipeline import failed:', error);
       window.alert('The selected file is not a valid .cep pipeline.');
     }
-  }, [fitPipelineView, saveNew, setEdges, setNodes, styleEdges]);
+  }, [fitPipelineView, saveNew, setCurrentPipeline, setEdges, setNodes, styleEdges]);
 
   const loadPipeline = useCallback((id: string) => {
     if (!id || id === currentPipelineId) return;
@@ -369,11 +371,9 @@ function Pipeline() {
 
     setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
     setEdges(styleEdges(pipeline.edges));
-    setCurrentPipelineId(pipeline.id);
-    setCurrentPipelineName(pipeline.name);
-    setIsDirty(false);
+    setCurrentPipeline({ ...pipeline, isDirty: false });
     void fitPipelineView();
-  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setEdges, setNodes, styleEdges]);
+  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setCurrentPipeline, setEdges, setNodes, styleEdges]);
 
   const deleteCurrent = useCallback(() => {
     if (!currentPipelineId) return;
@@ -383,19 +383,15 @@ function Pipeline() {
     deleteById(currentPipelineId);
     setNodes(INITIAL_NODES);
     setEdges(INITIAL_EDGES);
-    setCurrentPipelineId('');
-    setCurrentPipelineName('');
-    setIsDirty(false);
-  }, [currentPipelineId, currentPipelineName, deleteById, setEdges, setNodes]);
+    setCurrentPipeline({ id: '', name: '', nodes: INITIAL_NODES, edges: INITIAL_EDGES, isDirty: false });
+  }, [currentPipelineId, currentPipelineName, deleteById, setCurrentPipeline, setEdges, setNodes]);
 
   const clearWorkspace = useCallback(() => {
     setNodes(INITIAL_NODES);
     setEdges(INITIAL_EDGES);
-    setCurrentPipelineId('');
-    setCurrentPipelineName('');
-    setIsDirty(false);
+    setCurrentPipeline({ id: '', name: '', nodes: INITIAL_NODES, edges: INITIAL_EDGES, isDirty: false });
     void fitPipelineView();
-  }, [fitPipelineView, setEdges, setNodes]);
+  }, [fitPipelineView, setCurrentPipeline, setEdges, setNodes]);
 
   const organizeWithAI = useCallback(async () => {
     if (!byokOpenAIKey) {
@@ -545,7 +541,7 @@ function Pipeline() {
         ...node,
         position: positions.get(node.id) ?? node.position,
       })));
-      setIsDirty(true);
+      setCurrentPipelineDirty(true);
       requestAnimationFrame(() => void fitPipelineView());
     } catch (error) {
       console.error('AI layout organization failed:', error);
@@ -553,11 +549,11 @@ function Pipeline() {
     } finally {
       setOrganizingWithAI(false);
     }
-  }, [byokOpenAIKey, edges, fitPipelineView, nodes, setNodes]);
+  }, [byokOpenAIKey, edges, fitPipelineView, nodes, setCurrentPipelineDirty, setNodes]);
 
   useEffect(() => {
     const handler = () => {
-      setIsDirty(true);
+      setCurrentPipelineDirty(true);
       requestAnimationFrame(() => {
         void evaluate();
       });
@@ -776,7 +772,7 @@ function Pipeline() {
           onUpload={uploadPipeline}
           onNameChange={(name) => {
             setCurrentPipelineName(name);
-            setIsDirty(true);
+            setCurrentPipelineDirty(true);
           }}
           onDelete={deleteCurrent}
           onOrganizeWithAI={organizeWithAI}
