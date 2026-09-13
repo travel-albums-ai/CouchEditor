@@ -1,10 +1,7 @@
-import SolidChip from '@/components/SolidChip';
+import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
-import { Box, Divider, Slider, Typography, useTheme } from '@mui/material';
-import { Cpu } from 'lucide-react';
+import { Box, Slider, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-
-const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
@@ -54,19 +51,10 @@ export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
         opacity: 1,
       }
     }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <img src={previewImageUrl} alt={`${paletteItem.labelKey} preview before`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
-
-        <Divider orientation="horizontal" sx={{ width: 16 }} />
-
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: 1, border: `1px solid ${theme.palette.divider}`, borderRadius: 2, p: 0.5, boxShadow: 1  }}>
-          <Cpu size={16} style={{ color: theme.palette.text.secondary, opacity: 0.75 }} />
-          {config?.min !== config?.max && <SolidChip label={`${Math.round(amount * 100) / 100}`} minWidth={45} borderless variant="header" />}
-        </Box>
-
-        <Divider orientation="horizontal" sx={{ width: 16 }} />
-        <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...paletteItem.algo({ amount }) }} />
-      </Box>
+      <PreviewBeforeAfter
+        after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...paletteItem.algo({ amount }) }} />}
+        value={amount}
+      />
 
       {config?.min !== config?.max && (
         <Slider

@@ -247,9 +247,7 @@ export default function NodeWrapper({
           }}
         >
           {children}
-
-
-          {helper}
+          {children === undefined && 'no kids'}
         </Box>
       </Box>
     </>

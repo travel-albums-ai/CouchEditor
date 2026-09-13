@@ -22,30 +22,29 @@ export function createSliderNode(config: SliderNodeConfig) {
   }: NodeProps<Node<{ amount?: number }>>) {
     const paletteItem = paletteItemsByType[config.type];
     const { setNodes } = useReactFlow();
-    // const [amount, setAmount] = useState(data.amount || paletteItem?.config?.defaultValue || 0);
     const [isBusy, setIsBusy] = useState(false);
 
-
-    // const activeConfig = paletteItem?.configs?.[0] || paletteItem?.config;
+    const helper = <>
+      {paletteItem.processing === 'math' && <AdjustmentPreview
+        algorithm={(imageData) => {
+          const stage = paletteItem.algo?.(data);
+          stage?.(imageData);
+        }}
+        data={data}
+      />}
+      {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} data={data} />}
+    </>
 
     return <>
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
-        helper={<>
-          {paletteItem.processing === 'math' && <AdjustmentPreview
-            algorithm={(imageData) => {
-              const stage = paletteItem.algo?.(data);
-              stage?.(imageData);
-            }}
-            data={data}
-          />}
-          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} data={data} />}
-        </>}
+        helper={helper}
       >
+        {paletteItem.configs?.length === 0 && helper}
         {(paletteItem.configs || [])
           .filter(config => config.min !== config.max)
-          .map((config, index) => (
+          .map((config) => (
             <AdjustmentSlider
               disabled={isBusy}
               min={config.min || 0}
@@ -61,8 +60,6 @@ export function createSliderNode(config: SliderNodeConfig) {
               }}
             />
           ))}
-
-
       </NodeWrapper>
       <OutputHandle id="image" />
     </>;

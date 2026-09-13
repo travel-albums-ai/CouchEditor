@@ -5,7 +5,7 @@ export function BeforeAfter({ image2style, data }: { image2style: React.CSSPrope
   const theme = useTheme();
   return  <>
     <PreviewBeforeAfter
-      after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...image2style }} />}
+      after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, ...image2style }} />}
       value={data ? Object.values(data)?.[0] : 0}
     />
   </>;

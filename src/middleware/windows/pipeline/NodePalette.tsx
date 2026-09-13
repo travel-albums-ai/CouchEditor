@@ -61,12 +61,12 @@ const transformStages: Array<NodeStageItem> = [
   },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
     algo: () => ({ transform: `rotate(180deg)` }),
-    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
+    configs: [],
     processing: 'css'
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
     algo: () => ({ transform: `scaleX(-1)` }),
-    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
+    configs: [],
     processing: 'css'
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} /> },
@@ -174,17 +174,17 @@ const colorStages: Array<NodeStageItem> = [
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
     algo: () => ({ filter: `grayscale(1)` }),
-    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
+    configs: [],
     processing: 'css'
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
     algo: () => ({ filter: `sepia(1)` }),
-    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
+    configs: [],
     processing: 'css'
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
     algo: () => ({ filter: `invert(1)` }),
-    configs: [{ min: 0, max: 0, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
+    configs: [],
     processing: 'css'
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },

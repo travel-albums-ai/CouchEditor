@@ -26,7 +26,7 @@ export function PreviewBeforeAfter({ after, value }: AdjustmentPreviewProps) {
       }
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <img src={previewImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src={previewImageUrl} style={{ maxWidth: '90px', borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
 
         <Divider orientation="horizontal" sx={{ width: 16 }} />
 
