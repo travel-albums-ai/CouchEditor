@@ -1,6 +1,71 @@
 import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
+export enum NodeType {
+  Source = 'source',
+  HotFolderRead = 'hot-folder-read',
+  GoogleDrive = 'google-drive',
+  Information = 'information',
+  SelectedPhoto = 'selected-photo',
+  Grouper = 'grouper',
+  ArraySwitch = 'array-switch',
+  ArrayAnd = 'array-and',
+  ArrayAndNot = 'array-and-not',
+  ArrayOr = 'array-or',
+  ImagePicker = 'image-picker',
+  ExifSplit = 'exif-split',
+  GpsSplit = 'gps-split',
+  Crop = 'crop',
+  Rescale = 'rescale',
+  Collage = 'collage',
+  Rotate = 'rotate',
+  Flip = 'flip',
+  Mirror = 'mirror',
+  Perspective = 'perspective',
+  Exposure = 'exposure',
+  Brightness = 'brightness',
+  Contrast = 'contrast',
+  Highlights = 'highlights',
+  Shadows = 'shadows',
+  Gamma = 'gamma',
+  Luminosity = 'luminosity',
+  WhitesBlacks = 'whites-blacks',
+  RgbBlackPoint = 'rgb-black-point',
+  RgbWhitePoint = 'rgb-white-point',
+  RgbMidtones = 'rgb-midtones',
+  Saturation = 'saturation',
+  Vibrance = 'vibrance',
+  HueRotation = 'hue-rotation',
+  BlackWhite = 'black-white',
+  Sepia = 'sepia',
+  Invert = 'invert',
+  Lut = 'lut',
+  TemperatureTint = 'temperature-tint',
+  SplitToning = 'split-toning',
+  Sharpen = 'sharpen',
+  AiDenoiser = 'ai-denoiser',
+  Grain = 'grain',
+  Vignette = 'vignette',
+  Pop = 'pop',
+  Hdr = 'hdr',
+  Fade = 'fade',
+  AiColorizer = 'ai-colorizer',
+  AiPhotoEditor = 'ai-photo-editor',
+  AskAi = 'ask-ai',
+  Viewer = 'viewer',
+  ViewerSingle = 'viewer-single',
+  ExifViewer = 'exif-viewer',
+  GpsMap = 'gps-map',
+  PhotoHistogram = 'photo-histogram',
+  HotFolderWrite = 'hot-folder-write',
+}
+
+export enum NodeProcessing {
+  Math = 'math',
+  Css = 'css',
+  Static = 'static',
+}
+
 export type NodePaletteConfig = {
   min: number;
   max: number;
@@ -12,7 +77,7 @@ export type NodePaletteConfig = {
 };
 
 export type NodeStageItem = {
-  type: string;
+  type: `${NodeType}`;
   labelKey: string;
 
   labelDescription: string;
@@ -23,65 +88,91 @@ export type NodeStageItem = {
 
   configs?: NodePaletteConfig[];
 
-  processing?: 'math' | 'css' | 'static';
+  processing?: `${NodeProcessing}`;
 };
 export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
 }
 
 const sourceStages: Array<NodeStageItem> = [
-  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />,
+  {
+    type: NodeType.Source,
+    labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />,
     processing: 'static',
     labelDescription: 'pipelineLocalStorageDescription',
   },
-  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
+  {
+    type: NodeType.HotFolderRead,
+    labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
     processing: 'static',
     labelDescription: 'pipelineHotFolderDescription',
   },
-  { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />,
+  {
+    type: NodeType.GoogleDrive,
+    labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />,
     processing: 'static',
     labelDescription: 'pipelineGoogleDriveDescription',
   },
-  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />,
+  {
+    type: NodeType.Information,
+    labelKey: "pipelineInformation", icon: <Info size={16} />,
     processing: 'static',
     labelDescription: 'pipelineInformationNodeDescription',
   },
-  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />,
+  {
+    type: NodeType.SelectedPhoto,
+    labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />,
     processing: 'static',
     labelDescription: 'pipelineSelectedPhotoDescription',
   },
 ];
 
 const logicStages: Array<NodeStageItem> = [
-  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />,
+  {
+    type: NodeType.Grouper,
+    labelKey: "pipelineGrouper", icon: <Group size={16} />,
     processing: 'static',
     labelDescription: 'pipelineGrouperNodeDescription',
   },
-  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />,
+  {
+    type: NodeType.ArraySwitch,
+    labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />,
     processing: 'static',
     labelDescription: 'pipelineArraySwitchNodeDescription',
   },
-  { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} />,
+  {
+    type: NodeType.ArrayAnd,
+    labelKey: "pipelineArrayAnd", icon: <GitFork size={16} />,
     processing: 'static',
     labelDescription: 'pipelineArrayAndNodeDescription',
   },
-  { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} />,
+  {
+    type: NodeType.ArrayAndNot,
+    labelKey: "pipelineArrayAndNot", icon: <Minus size={16} />,
     processing: 'static',
     labelDescription: 'pipelineArrayAndNotNodeDescription',
   },
-  { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} />,
+  {
+    type: NodeType.ArrayOr,
+    labelKey: "pipelineArrayOr", icon: <Plus size={16} />,
     processing: 'static',
     labelDescription: 'pipelineArrayOrNodeDescription',
   },
-  { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} />,
+  {
+    type: NodeType.ImagePicker,
+    labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} />,
     processing: 'static',
     labelDescription: 'pipelineImagePickerDescription',
   },
-  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />,
+  {
+    type: NodeType.ExifSplit,
+    labelKey: "pipelineExifSplit", icon: <FileImage size={16} />,
     processing: 'static',
     labelDescription: 'pipelineExifSplitNodeDescription',
   },
-  { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />,
+  {
+    type: NodeType.GpsSplit,
+    labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />,
     processing: 'static',
     labelDescription: 'pipelineGpsSplitNodeDescription',
   },
