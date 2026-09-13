@@ -10,6 +10,7 @@ type AdjustmentPreviewProps = {
   width?: number;
 };
 
+
 export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -81,6 +82,10 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
       before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'grayscale(100%)' }} />,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
+    [NodeType.AiDenoiser]: {
+      before: <img src="aiDenoise.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
     [NodeType.Rescale]: {
       before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
@@ -147,7 +152,7 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
       {imagesPairs[paletteItem.type] && <Box sx={{ p: 1 }}>
         <PreviewBeforeAfter
           width={width ?? 90}
-          after={imagesPairs[paletteItem.type].after || <></>}
+          after={imagesPairs[paletteItem.type].after}
           before={imagesPairs[paletteItem.type].before || <></>}
         />
       </Box>}

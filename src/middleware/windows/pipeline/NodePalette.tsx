@@ -419,7 +419,10 @@ const detailStages: Array<NodeStageItem> = [
     processing: 'math',
     labelDescription: 'pipelineSharpenDescription',
   },
-  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true, labelDescription: 'pipelineAiDenoiserDescription' },
+  { type: NodeType.AiDenoiser,
+    labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true,
+    processing: NodeProcessing.Static,
+    labelDescription: 'pipelineAiDenoiserDescription' },
   {
     type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
     algo: ({ amount }: { amount: number }) => grainStage(amount),
