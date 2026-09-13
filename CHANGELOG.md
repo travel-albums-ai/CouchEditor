@@ -1,3 +1,9 @@
+## [1.97.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.96.0...v1.97.0) (2026-09-13)
+
+### ✨ Features
+
+* add WebMCP tool for updating pipeline node properties ([59de993](https://github.com/travel-albums-ai/CouchEditor/commit/59de99374ee762036aac31f12eedd8b0aa4a329a))
+
 ## [1.96.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.95.0...v1.96.0) (2026-09-13)
 
 ### ✨ Features
