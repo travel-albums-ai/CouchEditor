@@ -1,3 +1,9 @@
+## [1.72.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.71.0...v1.72.0) (2026-09-13)
+
+### ✨ Features
+
+* update NodePalette and NodeToolboxItem to support optional config properties and integrate PreviewDemoCss for CSS processing ([bbb687d](https://github.com/travel-albums-ai/CouchEditor/commit/bbb687d2bc87dbfbd077ddc09098e37bbf7866ed))
+
 ## [1.71.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.70.0...v1.71.0) (2026-09-13)
 
 ### ✨ Features
