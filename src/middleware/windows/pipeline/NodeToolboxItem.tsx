@@ -2,6 +2,7 @@ import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { AdjustmentPreviewDemo } from '@/middleware/windows/pipeline/components/AdjustmentPreviewDemo';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
+import { PreviewDemoCss } from '@/middleware/windows/pipeline/components/PreviewDemoCss';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -67,7 +68,8 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 }
               >
 
-                {/* {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />} */}
+                {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />}
+                {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
 
                 <NodeToolboxHeader
                   type={item.type}

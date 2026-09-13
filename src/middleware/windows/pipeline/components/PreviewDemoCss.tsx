@@ -11,7 +11,7 @@ type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
 };
 
-export function AdjustmentPreviewDemo({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const [amount, setAmount] = useState(0);
   const theme = useTheme();
@@ -40,33 +40,33 @@ export function AdjustmentPreviewDemo({ paletteItem }: AdjustmentPreviewProps) {
     return () => window.clearInterval(intervalId);
   }, [config?.max, config?.min]);
 
-  useEffect(() => {
-    let cancelled = false;
-    const image = new Image();
+  // useEffect(() => {
+  //   let cancelled = false;
+  //   const image = new Image();
 
-    image.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
+  //   image.onload = () => {
+  //     const canvas = document.createElement('canvas');
+  //     canvas.width = image.naturalWidth;
+  //     canvas.height = image.naturalHeight;
 
-      const context = canvas.getContext('2d');
-      if (!context) return;
+  //     const context = canvas.getContext('2d');
+  //     if (!context) return;
 
-      context.drawImage(image, 0, 0);
-      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      paletteItem.algo(amount)(imageData);
-      context.putImageData(imageData, 0, 0);
+  //     context.drawImage(image, 0, 0);
+  //     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  //     paletteItem.algo(amount)(imageData);
+  //     context.putImageData(imageData, 0, 0);
 
-      if (!cancelled) {
-        setProcessedImageUrl(canvas.toDataURL('image/jpeg'));
-      }
-    };
-    image.src = previewImageUrl;
+  //     if (!cancelled) {
+  //       setProcessedImageUrl(canvas.toDataURL('image/jpeg'));
+  //     }
+  //   };
+  //   image.src = previewImageUrl;
 
-    return () => {
-      cancelled = true;
-    };
-  }, [paletteItem.algo, amount]);
+  //   return () => {
+  //     cancelled = true;
+  //   };
+  // }, [paletteItem.algo, amount]);
 
   return (
     <Box sx={{
@@ -92,9 +92,12 @@ export function AdjustmentPreviewDemo({ paletteItem }: AdjustmentPreviewProps) {
         </Box>
 
         <Divider orientation="horizontal" sx={{ width: 16 }} />
-
-        <img src={processedImageUrl} alt={`${paletteItem.labelKey} preview after`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...paletteItem.algo({amount}) }} />
+        {/* <img src={processedImageUrl} alt={`${paletteItem.labelKey} preview after`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} /> */}
       </Box>
+
+      BROKEN
+
 
       <Slider
         disabled
