@@ -1,3 +1,9 @@
+## [1.88.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.87.0...v1.88.0) (2026-09-13)
+
+### ✨ Features
+
+* enhance HelpWindow with informative alerts and improved layout ([70d9d4a](https://github.com/travel-albums-ai/CouchEditor/commit/70d9d4ac16f028d3574fe30f8fc72c1385e238a5))
+
 ## [1.87.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.86.0...v1.87.0) (2026-09-13)
 
 ### ✨ Features
