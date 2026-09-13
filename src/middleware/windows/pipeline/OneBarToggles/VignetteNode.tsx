@@ -7,6 +7,7 @@ import PipelineStageTiming from '@/middleware/windows/pipeline/components/Pipeli
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
+import { useTranslation } from 'react-i18next';
 
 type RGB = [number, number, number];
 
@@ -38,6 +39,7 @@ function emitPipelineChange() {
 
 export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>) {
   const { setNodes } = useReactFlow();
+  const { t } = useTranslation();
   const paletteItem = paletteItemsByType["vignette"];
 
   return <>
@@ -48,9 +50,9 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
       helper={<AdjustmentPreview paletteItem={paletteItem} data={data} />}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="caption" color="textSecondary">Vignette color</Typography>
+        <Typography variant="caption" color="textSecondary">{t('pipelineVignetteColor')}</Typography>
         <input
-          aria-label="Vignette color"
+          aria-label={t('pipelineVignetteColor')}
           type="color"
           value={rgbToHex(data.color ?? DEFAULT_COLOR)}
           onChange={(event) => {
@@ -64,15 +66,17 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
         />
       </Box>
 
-      {paletteItem.configs?.map((config, index) => (
+      {paletteItem.configs?.map((config) => (
         <AdjustmentSlider
           key={config.key}
-          description={config.labelKey ? <Typography variant="caption" color="textSecondary">{config.labelKey}</Typography> : undefined}
+          description={config.labelKey ? <Typography variant="caption" color="textSecondary">{t(config.labelKey)}</Typography> : undefined}
           min={config.min ?? 0}
           max={config.max ?? 100}
           throttleMs={1000}
           step={config.step ?? 1}
-          value={data[config.key] ?? 0}
+          value={typeof data[config.key as keyof VignetteData] === 'number'
+            ? data[config.key as keyof VignetteData] as number
+            : 0}
           onChange={(value) => {
             setNodes((current) => current.map((node) => node.id === id
               ? { ...node, data: { ...node.data, [config.key]: value } }

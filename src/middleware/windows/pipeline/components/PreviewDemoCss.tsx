@@ -2,6 +2,7 @@ import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/Pre
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Slider, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
@@ -10,6 +11,7 @@ type AdjustmentPreviewProps = {
 export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
   const [amount, setAmount] = useState(0);
   const theme = useTheme();
+  const { t } = useTranslation();
   const config = paletteItem.configs?.[0] || paletteItem.config;
 
 
@@ -73,7 +75,7 @@ export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
         px: 1,
         py: 1,
       }} color="textSecondary">
-        {paletteItem.labelDescription}
+        {t(paletteItem.labelDescription)}
       </Typography>}
     </Box>
   );

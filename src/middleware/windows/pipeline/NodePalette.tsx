@@ -32,58 +32,58 @@ export type NodePaletteItem = NodeStageItem & {
 const sourceStages: Array<NodeStageItem> = [
   { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />,
     processing: 'static',
-    labelDescription: 'Loads images from disk from a designated folder',
+    labelDescription: 'pipelineLocalStorageDescription',
   },
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
     processing: 'static',
-    labelDescription: 'Reads images from a designated hot folder.',
+    labelDescription: 'pipelineHotFolderDescription',
   },
   { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />,
     processing: 'static',
-    labelDescription: 'Loads images from Google Drive.',
+    labelDescription: 'pipelineGoogleDriveDescription',
   },
   { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />,
     processing: 'static',
-    labelDescription: 'Displays information about the image.',
+    labelDescription: 'pipelineInformationNodeDescription',
   },
   { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />,
     processing: 'static',
-    labelDescription: 'Uses the currently selected photo.',
+    labelDescription: 'pipelineSelectedPhotoDescription',
   },
 ];
 
 const logicStages: Array<NodeStageItem> = [
   { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />,
     processing: 'static',
-    labelDescription: 'Groups images based on specified criteria.',
+    labelDescription: 'pipelineGrouperNodeDescription',
   },
   { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />,
     processing: 'static',
-    labelDescription: 'Switches between different arrays of images.',
+    labelDescription: 'pipelineArraySwitchNodeDescription',
   },
   { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} />,
     processing: 'static',
-    labelDescription: 'Combines arrays of images using AND logic.',
+    labelDescription: 'pipelineArrayAndNodeDescription',
   },
   { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} />,
     processing: 'static',
-    labelDescription: 'Combines arrays of images using AND NOT logic.',
+    labelDescription: 'pipelineArrayAndNotNodeDescription',
   },
   { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} />,
     processing: 'static',
-    labelDescription: 'Combines arrays of images using OR logic.',
+    labelDescription: 'pipelineArrayOrNodeDescription',
   },
   { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} />,
     processing: 'static',
-    labelDescription: 'Allows selection of a specific image from an array.',
+    labelDescription: 'pipelineImagePickerDescription',
   },
   { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />,
     processing: 'static',
-    labelDescription: 'Splits images based on EXIF metadata.',
+    labelDescription: 'pipelineExifSplitNodeDescription',
   },
   { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />,
     processing: 'static',
-    labelDescription: 'Splits images based on GPS metadata.',
+    labelDescription: 'pipelineGpsSplitNodeDescription',
   },
 ]
 
@@ -92,21 +92,21 @@ const transformStages: Array<NodeStageItem> = [
     algo: (crop: any) => {
       return { clipPath: `inset(${crop?.top || 0}% ${crop?.right || 0}% ${crop?.bottom || 0}% ${crop?.left || 0}%)` }},
     configs: [
-      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Top', key: 'top' },
-      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Right', key: 'right' },
-      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Bottom', key: 'bottom' },
-      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Left', key: 'left' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'pipelineCropTop', key: 'top' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'pipelineCropRight', key: 'right' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'pipelineCropBottom', key: 'bottom' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'pipelineCropLeft', key: 'left' },
     ],
     processing: 'static',
-    labelDescription: 'Crops the image by specifying the inset from each side.',
+    labelDescription: 'pipelineCropDescription',
   },
   { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} />,
     processing: 'static',
-    labelDescription: 'Rescales the image to the specified dimensions.',
+    labelDescription: 'pipelineRescaleDescription',
   },
   { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} />,
     processing: 'static',
-    labelDescription: 'Creates a collage from multiple images.',
+    labelDescription: 'pipelineCollageDescription',
   },
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
     algo: (config: any) => ({ transform: `rotate(${config?.amount}deg)` }),
@@ -114,34 +114,34 @@ const transformStages: Array<NodeStageItem> = [
       { min: 0, max: 360, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'css',
-    labelDescription: 'Rotates the image by the specified amount of degrees.',
+    labelDescription: 'pipelineRotateDescription',
   },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
     algo: () => ({ transform: `rotate(180deg)` }),
     configs: [],
     processing: 'css',
-    labelDescription: 'Flips the image upside down.',
+    labelDescription: 'pipelineFlipDescription',
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
     algo: () => ({ transform: `scaleX(-1)` }),
     configs: [],
     processing: 'css',
-    labelDescription: 'Mirrors the image horizontally.',
+    labelDescription: 'pipelineMirrorDescription',
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} />,
     algo: (data: any) => ({ clipPath: `polygon(${data?.topLeftx ?? 0}% ${data?.topLefty ?? 0}%, ${data?.topRightx ?? 0}% ${data?.topRighty ?? 0}%, ${data?.bottomRightx ?? 0}% ${data?.bottomRighty ?? 0}%, ${data?.bottomLeftx ?? 0}% ${data?.bottomLefty ?? 0}%)` }),
     configs: [
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Left X', key: 'topLeftx' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Left Y', key: 'topLefty' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Right X', key: 'topRightx' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Top Right Y', key: 'topRighty' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Left X', key: 'bottomLeftx' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Left Y', key: 'bottomLefty' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right X', key: 'bottomRightx' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right Y', key: 'bottomRighty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveTopLeftX', key: 'topLeftx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveTopLeftY', key: 'topLefty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveTopRightX', key: 'topRightx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveTopRightY', key: 'topRighty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveBottomLeftX', key: 'bottomLeftx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveBottomLeftY', key: 'bottomLefty' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveBottomRightX', key: 'bottomRightx' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelinePerspectiveBottomRightY', key: 'bottomRighty' },
     ],
     processing: 'static',
-    labelDescription: 'Applies a perspective transformation to the image.',
+    labelDescription: 'pipelinePerspectiveDescription',
   },
 ]
 
@@ -153,7 +153,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: -3, max: 3, step: 0.1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the exposure of the image, making it brighter or darker.',
+    labelDescription: 'pipelineExposureDescription',
   },
   {
     type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />,
@@ -162,7 +162,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the brightness of the image, making it lighter or darker.',
+    labelDescription: 'pipelineBrightnessDescription',
   },
   {
     type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />,
@@ -171,7 +171,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the contrast of the image, making the darks darker and the lights lighter.',
+    labelDescription: 'pipelineContrastDescription',
   },
   {
     type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,
@@ -180,7 +180,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the highlights of the image, affecting the brighter areas.',
+    labelDescription: 'pipelineHighlightsDescription',
   },
   {
     type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />,
@@ -189,7 +189,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the shadows of the image, affecting the darker areas.',
+    labelDescription: 'pipelineShadowsDescription',
   },
   {
     type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />,
@@ -198,7 +198,7 @@ const lightStages: Array<NodeStageItem> = [
       { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Applies gamma correction to the image, affecting the midtones.',
+    labelDescription: 'pipelineGammaDescription',
   },
   {
     type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />,
@@ -207,46 +207,46 @@ const lightStages: Array<NodeStageItem> = [
       { min: 0, max: 2, step: 0.05, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the overall luminosity of the image.',
+    labelDescription: 'pipelineLuminosityDescription',
   },
   { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
     algo: ({ whites, blacks }: { whites: number, blacks: number }) => whitesBlacksStage(whites, blacks),
     configs: [
-      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Whites', key: 'whites' },
-      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Blacks', key: 'blacks' }
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineWhites', key: 'whites' },
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineBlacks', key: 'blacks' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the whites and blacks of the image, affecting the brightest and darkest areas.',
+    labelDescription: 'pipelineWhitesBlacksDescription',
   },
   { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbBlackPointStage(red, green, blue),
     configs: [
-      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Red', key: 'red' },
-      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Green', key: 'green' },
-      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Blue', key: 'blue' }
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'pipelineRed', key: 'red' },
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'pipelineGreen', key: 'green' },
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'pipelineBlue', key: 'blue' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the black point of the RGB channels, affecting the darkest areas of the image.',
+    labelDescription: 'pipelineRgbBlackPointDescription',
   },
   { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbWhitePointStage(red, green, blue),
     configs: [
-      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Red', key: 'red' },
-      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Green', key: 'green' },
-      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Blue', key: 'blue' }
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'pipelineRed', key: 'red' },
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'pipelineGreen', key: 'green' },
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'pipelineBlue', key: 'blue' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the white point of the RGB channels, affecting the brightest areas of the image.',
+    labelDescription: 'pipelineRgbWhitePointDescription',
   },
   { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbMidtonesStage(red, green, blue),
     configs: [
-      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Red', key: 'red' },
-      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Green', key: 'green' },
-      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Blue', key: 'blue' }
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'pipelineRed', key: 'red' },
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'pipelineGreen', key: 'green' },
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'pipelineBlue', key: 'blue' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the midtones of the RGB channels, affecting the middle range of brightness in the image.',
+    labelDescription: 'pipelineRgbMidtonesDescription',
   },
 ]
 
@@ -258,7 +258,7 @@ const colorStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the saturation of the image colors, enhancing or reducing the overall color vibrancy.',
+    labelDescription: 'pipelineSaturationDescription',
   },
   {
     type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />,
@@ -267,7 +267,7 @@ const colorStages: Array<NodeStageItem> = [
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Enhances the vibrancy of the colors in the image while protecting skin tones from oversaturation.',
+    labelDescription: 'pipelineVibranceDescription',
   },
   {
     type: "hue-rotation", labelKey: "pipelineHueRotation", icon: <Palette size={16} />,
@@ -276,47 +276,47 @@ const colorStages: Array<NodeStageItem> = [
       { min: -180, max: 180, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Rotates the hue of the image colors by the specified amount.',
+    labelDescription: 'pipelineHueRotationDescription',
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
     algo: () => blackAndWhiteStage(),
     configs: [],
     processing: 'math',
-    labelDescription: 'Converts the image to black and white by applying a grayscale filter.',
+    labelDescription: 'pipelineBlackAndWhiteDescription',
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
     algo: () => sepiaStage(),
     configs: [],
     processing: 'math',
-    labelDescription: 'Applies a sepia filter to the image, giving it a warm, brownish tone.',
+    labelDescription: 'pipelineSepiaDescription',
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
     algo: () => invertStage(),
     configs: [],
     processing: 'math',
-    labelDescription: 'Inverts the colors of the image by applying an invert filter.',
+    labelDescription: 'pipelineInvertDescription',
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} />,
-    labelDescription: 'Applies a lookup table (LUT) to the image for color grading.'
+    labelDescription: 'pipelineLutDescription'
   },
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />,
     algo: ({ temperature, tint }: { temperature: number, tint: number }) => temperatureTintStage(temperature, tint),
     configs: [
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Temperature', key: 'temperature' },
-      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Tint', key: 'tint' }
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineTemperature', key: 'temperature' },
+      { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineTint', key: 'tint' }
     ],
     processing: 'math',
-    labelDescription: 'Adjusts the temperature and tint of the image, allowing for color balance corrections.',
+    labelDescription: 'pipelineTemperatureTintDescription',
   },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
     algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
       splitToningStage(shadowTint?.[0], shadowTint?.[1], shadowTint?.[2], highlightTint?.[0], highlightTint?.[1], highlightTint?.[2], strength),
 
     configs: [
-      { min: 0, max: 10, step: 1, defaultValue: 50, labelKey: 'Strength', key: 'strength' }
+      { min: 0, max: 10, step: 1, defaultValue: 50, labelKey: 'pipelineSplitToningStrength', key: 'strength' }
     ],
     processing: 'math',
-    labelDescription: 'Applies split toning to the image, allowing separate color adjustments for shadows and highlights.',
+    labelDescription: 'pipelineSplitToningDescription',
   },
 ]
 
@@ -326,15 +326,15 @@ const detailStages: Array<NodeStageItem> = [
     algo: ({ amount }: { amount: number }) => sharpenStage(amount),
     configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math',
-    labelDescription: 'Sharpens the image by enhancing the edges and fine details.',
+    labelDescription: 'pipelineSharpenDescription',
   },
-  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true, labelDescription: 'Reduces noise in the image using AI-based denoising algorithms.' },
+  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true, labelDescription: 'pipelineAiDenoiserDescription' },
   {
     type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
     algo: ({ amount }: { amount: number }) => grainStage(amount),
     configs: [{ min: 0, max: 1000, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math',
-    labelDescription: 'Adds grain to the image, simulating the texture of film photography.',
+    labelDescription: 'pipelineGrainDescription',
   },
 ]
 
@@ -345,72 +345,72 @@ const effectsStages: Array<NodeStageItem> = [
       { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }
     ],
     processing: 'math',
-    labelDescription: 'Applies a vignette effect to the image, darkening the corners and edges.',
+    labelDescription: 'pipelineVignetteDescription',
   },
   {
     type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />,
     algo: ({ amount }: { amount: number }) => popStage(amount),
     configs: [{ min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math',
-    labelDescription: 'Enhances the overall contrast and color vibrancy of the image.',
+    labelDescription: 'pipelinePopDescription',
   },
   { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
     algo: ({ amount, radius }: { amount: number, radius: number }) => hdrEffectStage(amount, radius),
     configs: [
-      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'Amount', key: 'amount' },
-      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Radius', key: 'radius' },
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineAmount', key: 'amount' },
+      { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'pipelineRadius', key: 'radius' },
     ],
     processing: 'math',
-    labelDescription: 'Applies an HDR effect to the image, enhancing details in both shadows and highlights.',
+    labelDescription: 'pipelineHdrEffectDescription',
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
     algo: ({ amount }: { amount: number }) => fadeStage(amount),
     configs: [{ min: 0, max: 100, step: 1, defaultValue: 0, labelKey: '', key: 'amount' }],
     processing: 'math',
-    labelDescription: 'Applies a fade effect to the image, reducing contrast and giving a washed-out look.',
+    labelDescription: 'pipelineFadeDescription',
   },
 ]
 
 const aiStages: Array<NodeStageItem> = [
   { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />,
     processing: 'static',
-    labelDescription: 'Automatically colorizes black and white images using AI.',
+    labelDescription: 'pipelineAiColorizerDescription',
   },
   { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} />,
     processing: 'static',
-    labelDescription: 'Provides AI-powered photo editing capabilities.',
+    labelDescription: 'pipelineAiPhotoEditorDescription',
   },
   { type: "ask-ai", labelKey: "pipelineAskAI", icon: <Astroid size={16} />,
     processing: 'static',
-    labelDescription: 'Allows users to ask AI for assistance or information related to photo editing.',
+    labelDescription: 'pipelineAskAIDescription',
   },
 ]
 
 const outputStages: Array<NodeStageItem> = [
   {
     type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />,
-    processing: 'static', labelDescription: 'Displays multiple photos in a viewer.'
+    processing: 'static', labelDescription: 'pipelinePhotosViewerDescription'
   },
   {
     type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />,
-    processing: 'static', labelDescription: 'Displays a single photo in a viewer.'
+    processing: 'static', labelDescription: 'pipelinePhotoViewerDescription'
   },
   {
     type: "exif-viewer", labelKey: "pipelineExifViewer", icon: <FileImage size={16} />,
-    processing: 'static', labelDescription: 'Displays the EXIF metadata of an image.'
+    processing: 'static', labelDescription: 'pipelineExifViewerDescription'
   },
   {
     type: "gps-map", labelKey: "pipelineGpsMap", icon: <MapPinned size={16} />,
-    processing: 'static', labelDescription: 'Displays the GPS location of an image on a map.'
+    processing: 'static', labelDescription: 'pipelineGpsMapDescription'
   },
   {
     type: "photo-histogram", labelKey: "pipelinePhotoHistogram", icon: <ChartColumn size={16} />,
-    processing: 'static', labelDescription: 'Displays the histogram of an image.'
+    processing: 'static', labelDescription: 'pipelinePhotoHistogramDescription'
   },
   {
     type: "hot-folder-write", labelKey: "pipelineHotFolder", icon: <FolderOutput size={16} />,
-    processing: 'static', labelDescription: 'Writes images to a designated hot folder.' },
+    processing: 'static', labelDescription: 'pipelineHotFolderWriteDescription' },
 ]
 
 export const paletteItems: Array<NodePaletteItem> = [

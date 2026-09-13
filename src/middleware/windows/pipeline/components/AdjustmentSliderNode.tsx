@@ -8,6 +8,7 @@ import PipelineStageTiming from '@/middleware/windows/pipeline/components/Pipeli
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { useReactFlow, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 export type SliderNodeConfig = {
   type: string;
@@ -22,6 +23,7 @@ export function createSliderNode(config: SliderNodeConfig) {
   }: NodeProps<Node<{ amount?: number }>>) {
     const paletteItem = paletteItemsByType[config.type];
     const { setNodes } = useReactFlow();
+    const { t } = useTranslation();
     const [isBusy, setIsBusy] = useState(false);
 
     const helper = <>
@@ -41,7 +43,7 @@ export function createSliderNode(config: SliderNodeConfig) {
           .map((config) => (
             <AdjustmentSlider
               key={config.key}
-              description={config.labelKey}
+              description={config.labelKey ? t(config.labelKey) : undefined}
               disabled={isBusy}
               min={config.min || 0}
               max={config.max || 100}

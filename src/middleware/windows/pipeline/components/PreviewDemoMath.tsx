@@ -103,7 +103,7 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
         px: 1,
         py: 1,
       }} color="textSecondary">
-        {paletteItem.labelDescription}
+        {t(paletteItem.labelDescription)}
       </Typography>}
     </Box>
   );
