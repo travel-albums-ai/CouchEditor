@@ -1,9 +1,9 @@
 import SolidChip from '@/components/SolidChip';
-import { Box, Slider } from '@mui/material';
+import { Box, Slider, Typography } from '@mui/material';
 import { useCallback, useEffect, useRef } from 'react';
 
 type AdjustmentSliderProps = {
-  description?: React.ReactNode;
+  description?: string;
   min: number;
   max: number;
   step: number;
@@ -56,7 +56,8 @@ export default function AdjustmentSlider({
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
-      {description && <Box sx={{ minWidth: 70 }}>{description}</Box>}
+      {/* {description && <Box sx={{ minWidth: 70 }}>{description}</Box>} */}
+      {description && <Typography sx={{ minWidth: 70 }} variant="caption" color="textSecondary">{description}</Typography>}
       <Slider
         min={min}
         size="small"

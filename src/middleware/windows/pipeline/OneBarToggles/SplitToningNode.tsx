@@ -86,7 +86,7 @@ export default function SplitToningNode({
 
       {paletteItem.configs?.map((config, index) => (
         <AdjustmentSlider
-          description={<Typography variant="caption" color="textSecondary">{config.labelKey ? t(config.labelKey) : ""}</Typography>}
+          description={config.labelKey ? t(config.labelKey) : ""}
           min={config.min ?? 0}
           max={config.max ?? 100}
           throttleMs={1000}
