@@ -1,3 +1,9 @@
+## [1.79.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.78.0...v1.79.0) (2026-09-13)
+
+### ✨ Features
+
+* enhance ToneNodeLayout with runningConfig for dynamic adjustments ([5c10d44](https://github.com/travel-albums-ai/CouchEditor/commit/5c10d44390a435beba8e6714b9bd54fc071b6c9c))
+
 ## [1.78.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.77.0...v1.78.0) (2026-09-13)
 
 ### ✨ Features
