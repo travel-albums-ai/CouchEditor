@@ -45,7 +45,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 475px)',
+        gridTemplateColumns: 'repeat(2, 175px)',
         gap: 1,
       }}>
         {items
@@ -60,15 +60,14 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
-              <Box sx={{
+              {/* <Box sx={{
                 boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
                 borderRadius: 2,
                 m: 1,
                 p: 0 }}>
                 <PreviewDemo paletteItem={item} />
-              </Box>
+              </Box> */}
               <NodeToolboxHeader type={item.type}>
-
                 <Tooltip title={<Box>
                   <Box sx={{
                     boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
@@ -82,7 +81,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                     <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless  icon={<Pointer />} variant="header" />
                   </Box>
 
-                </Box>} key={item.type} arrow placement="left">
+                </Box>} key={item.type} arrow placement="right">
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     <Info size={16} style={{ color: 'inherit', opacity: 0.15, lineHeight: 0 }} />
                   </span>

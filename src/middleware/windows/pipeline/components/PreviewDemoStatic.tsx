@@ -10,8 +10,8 @@ type AdjustmentPreviewProps = {
   width?: number;
 };
 
-const FolderImages =  ({ images }: { images: string[] }) => (
-  <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap', p: 0.5, border: 1, borderColor: 'divider', borderRadius: 2 }}>
+const FolderImages =  ({ images, border = true }: { images: string[], border?: boolean }) => (
+  <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap', p: 0.5, border: border ? 1 : 0, borderColor: 'divider', borderRadius: 2 }}>
     {images.map((src, index) => (
       <img key={index} src={src} style={{ width: `20px`, borderRadius: '4px' }} />
     ))}
@@ -30,7 +30,8 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
     [NodeType.HotFolderRead]: {
-      before: <Box sx={{ p: 2, py: 1, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      before: <Box sx={{ p: 2, py: 1, gap: 2, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Folder color={theme.palette.primary.main} />
         <Eye color={theme.palette.primary.main} />
       </Box>,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
@@ -61,9 +62,9 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
   const logicStages = {
     [NodeType.Grouper]: {
       before: <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <FolderImages images={['sample.jpg']} />
         <Plus color={theme.palette.primary.main} />
-        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <FolderImages images={['sample2.jpg']} />
       </Box>,
       after: <Box sx={{ display: 'flex', gap: 1 }}>
         <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
@@ -86,10 +87,91 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
         <Plus color={theme.palette.primary.main} />
         <FolderImages images={['sample3.jpg', 'sample2.jpg']} />
       </Box>,
-      after: <FolderImages images={['sample3.jpg', 'sample2.jpg', 'sample1.jpg']} />
+      after: <FolderImages images={['sample3.jpg', 'sample2.jpg', 'sample.jpg']} />
+    },
+    [NodeType.ArrayOr]: {
+      before: <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+        <FolderImages images={['sample.jpg', 'sample2.jpg']} />
+        <Plus color={theme.palette.primary.main} />
+        <FolderImages images={['sample3.jpg', 'sample2.jpg']} />
+      </Box>,
+      after: <FolderImages images={[ 'sample3.jpg', 'sample.jpg']} />
+    },
+    [NodeType.ArrayAndNot]: {
+      before: <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+        <FolderImages images={['sample.jpg', 'sample2.jpg']} />
+        <Plus color={theme.palette.primary.main} />
+        <FolderImages images={['sample3.jpg', 'sample2.jpg']} />
+      </Box>,
+      after: <FolderImages images={[ 'sample2.jpg']} />
+    },
+    [NodeType.ExifSplit]: {
+      before: <FolderImages images={['sample.jpg', 'sample2.jpg']} />,
+      after: <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <Slash color={theme.palette.primary.main} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>
+    },
+    [NodeType.GpsSplit]: {
+      before: <FolderImages images={['sample.jpg', 'sample2.jpg']} />,
+      after: <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <Slash color={theme.palette.primary.main} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>
     },
 
+  }
 
+  const otherStages = {
+    [NodeType.ImagePicker]: {
+      before: <Box sx={{ display: 'flex', gap: 1 }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.AiColorizer]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'grayscale(100%)' }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.Lut]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'saturate(140%) contrast(150%)' }} />
+    },
+    [NodeType.AiDenoiser]: {
+      before: <img src="aiDenoise.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.Rescale]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${30}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.Crop]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${30}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, clipPath: 'polygon(20% 20%, 80% 20%, 80% 80%, 20% 80%)' }} />
+    },
+    [NodeType.Perspective]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`,        transform: 'perspective(120px) rotateY(-35deg)',
+        transformOrigin: 'center' }} />
+    },
+    [NodeType.Collage]: {
+      before: <FolderImages images={['sample.jpg', 'sample2.jpg']} />,
+      after: <FolderImages images={['sample.jpg', 'sample2.jpg']} border={false} />
+    },
+  }
+
+  const aiStages = {
+    [NodeType.AskAi]: {
+      before: <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample3.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.AiPhotoEditor]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
+      after: <img src="sample3.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
   }
 
   const outputStages = {
@@ -138,42 +220,9 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
   const imagesPairs = {
     ...sourceStages,
     ...logicStages,
-
-
-
-    [NodeType.ImagePicker]: {
-      before: <Box sx={{ display: 'flex', gap: 1 }}>
-        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-      </Box>,
-      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    [NodeType.AiColorizer]: {
-      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'grayscale(100%)' }} />,
-      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    [NodeType.Lut]: {
-      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
-      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'saturate(140%) contrast(150%)' }} />
-    },
-    [NodeType.AskAi]: {
-      before: <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
-      after: <img src="sample3.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    [NodeType.AiPhotoEditor]: {
-      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
-      after: <img src="sample3.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    [NodeType.AiDenoiser]: {
-      before: <img src="aiDenoise.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
-      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    [NodeType.Rescale]: {
-      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
-      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
-    },
-    ...outputStages
-
+    ...aiStages,
+    ...otherStages,
+    ...outputStages,
   } as Record<NodeType, { before: React.ReactNode; after: React.ReactNode }>
 
   return (

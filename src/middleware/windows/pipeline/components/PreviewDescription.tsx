@@ -13,6 +13,7 @@ export function PreviewDescription({ paletteItem }: AdjustmentPreviewProps) {
     <>
       {paletteItem.labelDescription && <Typography variant="caption" sx={{
         flex: 1,
+        width: 300,
         px: 1,
         py: 1,
       }} color="textSecondary">
