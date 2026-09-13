@@ -1,4 +1,4 @@
-import { brightnessStage, contrastStage, exposureStage } from '@/lib/utils';
+import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, highlightsStage, luminosityStage, shadowsStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export type NodePaletteConfig = {
@@ -21,8 +21,28 @@ export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
 }
 
+const sourceStages: Array<NodeStageItem> = [
+  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} /> },
+  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} /> },
+  { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} /> },
+  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} /> },
+  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} /> },
+];
+
+const loginStages: Array<NodeStageItem> = [
+  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} /> },
+  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} /> },
+  { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} /> },
+  { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} /> },
+  { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} /> },
+  { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} /> },
+  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} /> },
+  { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} /> },
+]
+
 const lightStages: Array<NodeStageItem> = [
-  { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />,
+  {
+    type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />,
     algo: exposureStage, config: { min: -3, max: 3, step: 0.1, defaultValue: 0 },
     processing: 'math'
   },
@@ -35,23 +55,65 @@ const lightStages: Array<NodeStageItem> = [
     algo: contrastStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
     processing: 'math'
   },
-  { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,  },
-  { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, },
-  { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, },
-  { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, },
-  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, },
-  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, },
-  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, },
-  { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, },
+  { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,
+    algo: highlightsStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+  { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />,
+    algo: shadowsStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+  {
+    type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />,
+    algo: gammaStage, config: {   min: 0.1, max: 3, step: 0.01, defaultValue: 1, },
+    processing: 'math'
+  },
+  { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />,
+    algo: luminosityStage, config: { min: 0, max: 2, step: 0.05, defaultValue: 0 },
+    processing: 'math'
+  },
+  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
+    // algo: whitesBlacksStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    // processing: 'math'
+  },
+  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
+    // algo: rgbBlackPointStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    // processing: 'math'
+  },
+  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />,
+    // algo: rgbWhitePointStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    // processing: 'math'
+  },
+  { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />,
+    // algo: rgbMidtonesStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    // processing: 'math'
+  },
+]
+
+const detailStages: Array<NodeStageItem> = [
+  { type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} /> },
+  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, ai: true },
+  {
+    type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />,
+    algo: grainStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+]
+
+const effectsStages: Array<NodeStageItem> = [
+  { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} /> },
+  { type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} /> },
+  { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} /> },
+  {
+    type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,
+    algo: fadeStage, config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
 ]
 
 export const paletteItems: Array<NodePaletteItem> = [
-
-  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />, groupKey: "pipelineGroupInput" },
-  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />, groupKey: "pipelineGroupInput" },
+  ...(sourceStages.map(stage => ({ ...stage, groupKey: "pipelineGroupInput" }))),
+  ...(loginStages.map(stage => ({ ...stage, groupKey: "pipelineLogicInput" }))),
 
   { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />, groupKey: "pipelineLogicInput" },
   { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />, groupKey: "pipelineLogicInput" },
@@ -71,17 +133,6 @@ export const paletteItems: Array<NodePaletteItem> = [
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} />, groupKey: "pipelineGroupTransform" },
 
   ...(lightStages.map(stage => ({ ...stage, groupKey: "pipelineGroupLight" }))),
-  // { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />, groupKey: "pipelineGroupLight", algo: exposureStage },
-  // { type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight", algo: brightnessStage },
-  // { type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />, groupKey: "pipelineGroupLight", algo: contrastStage },
-  // { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
-  // { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
 
   { type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />, groupKey: "pipelineGroupColor" },
   { type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />, groupKey: "pipelineGroupColor" },
@@ -93,14 +144,12 @@ export const paletteItems: Array<NodePaletteItem> = [
   { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />, groupKey: "pipelineGroupColor" },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />, groupKey: "pipelineGroupColor" },
 
-  { type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />, groupKey: "pipelineGroupDetail" },
-  { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, groupKey: "pipelineGroupDetail", ai: true },
-  { type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />, groupKey: "pipelineGroupDetail" },
+  // { type: "sharpen", labelKey: "pipelineSharpen", icon: <Slice size={16} />, groupKey: "pipelineGroupDetail" },
+  // { type: "ai-denoiser", labelKey: "pipelineAiDenoiser", icon: <Astroid size={16} />, groupKey: "pipelineGroupDetail", ai: true },
+  // { type: "grain", labelKey: "pipelineGrain", icon: <Wheat size={16} />, groupKey: "pipelineGroupDetail" },
 
-  { type: "vignette", labelKey: "pipelineVignette", icon: <Theater size={16} />, groupKey: "pipelineGroupEffects" },
-  { type: "pop", labelKey: "pipelinePop", icon: <Gem size={16} />, groupKey: "pipelineGroupEffects" },
-  { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />, groupKey: "pipelineGroupEffects" },
-  { type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />, groupKey: "pipelineGroupEffects" },
+  ...(detailStages.map(stage => ({ ...stage, groupKey: "pipelineGroupDetail" }))),
+  ...(effectsStages.map(stage => ({ ...stage, groupKey: "pipelineGroupEffects" }))),
 
   { type: "ai-colorizer", labelKey: "pipelineAiColorizer", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
   { type: "ai-photo-editor", labelKey: "pipelineAiPhotoEditor", icon: <Astroid size={16} />, groupKey: "pipelineGroupAi", ai: true },
