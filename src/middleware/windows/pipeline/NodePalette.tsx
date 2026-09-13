@@ -4,8 +4,8 @@ import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDas
 export type NodePaletteConfig = {
   min: number;
   max: number;
-  step: number;
-  defaultValue: number;
+  step?: number;
+  defaultValue?: number;
 };
 
 export type NodeStageItem = {
@@ -53,10 +53,12 @@ const transformStages: Array<NodeStageItem> = [
   },
   { type: "flip", labelKey: "pipelineFlip", icon: <SquareCenterlineDashedVertical size={16} />,
     algo: (config: any) => ({ transform: `rotate(180deg)` }),
+    config: { min: 0, max: 0 },
     processing: 'css'
   },
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />,
     algo: (config: any) => ({ transform: `scaleX(-1)` }),
+    config: { min: 0, max: 0 },
     processing: 'css'
   },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} /> },
@@ -124,14 +126,17 @@ const colorStages: Array<NodeStageItem> = [
   },
   { type: "black-white", labelKey: "pipelineBlackAndWhite", icon: <Landmark size={16} />,
     algo: (config: any) => ({ filter: `grayscale(1)` }),
+    config: { min: 0, max: 0 },
     processing: 'css'
   },
   { type: "sepia", labelKey: "pipelineSepia", icon: <Palette size={16} />,
     algo: (config: any) => ({ filter: `sepia(1)` }),
+    config: { min: 0, max: 0 },
     processing: 'css'
   },
   { type: "invert", labelKey: "pipelineInvert", icon: <SquaresExclude size={16} />,
     algo: (config: any) => ({ filter: `invert(1)` }),
+    config: { min: 0, max: 0 },
     processing: 'css'
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },

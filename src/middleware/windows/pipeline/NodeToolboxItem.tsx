@@ -57,6 +57,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
               {/* {JSON.stringify(item)}
               {console.log(item)} */}
               {/* {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />} */}
+              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
               {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />}
 
             </>} key={item.type} arrow placement="top">
