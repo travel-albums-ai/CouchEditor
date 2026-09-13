@@ -1,3 +1,9 @@
+## [1.94.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.93.0...v1.94.0) (2026-09-13)
+
+### ✨ Features
+
+* enhance pipeline management with current pipeline state and registration tool ([3d91780](https://github.com/travel-albums-ai/CouchEditor/commit/3d91780db70f1fcf871e7aeb36d6cabfd784b45d))
+
 ## [1.93.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.92.0...v1.93.0) (2026-09-13)
 
 ### ✨ Features
