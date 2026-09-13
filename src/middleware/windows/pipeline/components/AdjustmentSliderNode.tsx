@@ -25,13 +25,7 @@ export function createSliderNode(config: SliderNodeConfig) {
     const [isBusy, setIsBusy] = useState(false);
 
     const helper = <>
-      {paletteItem.processing === 'math' && <AdjustmentPreview
-        algorithm={(imageData) => {
-          const stage = paletteItem.algo?.(data);
-          stage?.(imageData);
-        }}
-        data={data}
-      />}
+      {paletteItem.processing === 'math' && <AdjustmentPreview paletteItem={paletteItem} data={data} />}
       {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} data={data} />}
     </>
 

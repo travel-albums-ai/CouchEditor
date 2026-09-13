@@ -45,11 +45,7 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
     <NodeWrapper
       type="vignette"
       tools={<PipelineStageTiming nodeId={id} nodeType="vignette" />}
-      helper={<AdjustmentPreview
-        algorithm={(imageData) => {
-          const stage = paletteItem.algo?.(data);
-          stage?.(imageData);
-        }} />}
+      helper={<AdjustmentPreview paletteItem={paletteItem} data={data} />}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="caption" color="textSecondary">Vignette color</Typography>

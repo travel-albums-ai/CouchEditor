@@ -23,11 +23,7 @@ export default function ToneNodeLayout({ id, type, children, runningConfig = {} 
       <NodeWrapper
         type={type}
         tools={<PipelineStageTiming nodeId={id} nodeType={type} />}
-        helper={<AdjustmentPreview
-          algorithm={(imageData) => {
-            const stage = paletteItem.algo?.(runningConfig);
-            stage?.(imageData);
-          }} />}
+        helper={<AdjustmentPreview paletteItem={paletteItem} data={runningConfig} />}
       >
         {children}
       </NodeWrapper>

@@ -22,11 +22,7 @@ export default function HdrNode({ id, data }: NodeProps<Node<HdrData>>) {
     <NodeWrapper
       type="hdr"
       tools={<PipelineStageTiming nodeId={id} nodeType="hdr" />}
-      helper={<AdjustmentPreview
-        algorithm={(imageData) => {
-          const stage = paletteItem.algo?.(data);
-          stage?.(imageData);
-        }} />}
+      helper={<AdjustmentPreview paletteItem={paletteItem} data={data} />}
     >
       {paletteItem.configs?.map((config, index) => (
         <AdjustmentSlider

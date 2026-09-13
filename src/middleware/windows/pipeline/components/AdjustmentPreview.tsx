@@ -1,17 +1,23 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
+import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 import { useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
-  algorithm: (image: ImageData) => void;
   data: Record<string, any>;
+  paletteItem: NodePaletteItem;
 };
 
-export function AdjustmentPreview({ algorithm, data }: AdjustmentPreviewProps) {
+export function AdjustmentPreview({ data, paletteItem }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const theme = useTheme();
+
+  const runAlgorithm = (imageData: ImageData) => {
+    const stage = paletteItem.algo?.(data);
+    stage?.(imageData);
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -27,7 +33,7 @@ export function AdjustmentPreview({ algorithm, data }: AdjustmentPreviewProps) {
 
       context.drawImage(image, 0, 0);
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      algorithm(imageData);
+      runAlgorithm(imageData);
       context.putImageData(imageData, 0, 0);
 
       if (!cancelled) {
@@ -39,7 +45,7 @@ export function AdjustmentPreview({ algorithm, data }: AdjustmentPreviewProps) {
     return () => {
       cancelled = true;
     };
-  }, [algorithm]);
+  }, [data, paletteItem]);
 
   return (<>
     <PreviewBeforeAfter
