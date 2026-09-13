@@ -1,7 +1,7 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
 import { useTheme } from '@mui/material';
 
-export function BeforeAfter({ image2style, data }: { image2style: React.CSSProperties, data: Record<string, any> }) {
+export function PreviewCss({ image2style, data }: { image2style: React.CSSProperties, data: Record<string, any> }) {
   const theme = useTheme();
   return  <>
     <PreviewBeforeAfter
