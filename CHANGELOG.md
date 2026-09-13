@@ -1,3 +1,9 @@
+## [1.75.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.2...v1.75.0) (2026-09-13)
+
+### ✨ Features
+
+* add helper rendering to NodeWrapper component ([0c5e317](https://github.com/travel-albums-ai/CouchEditor/commit/0c5e31729c85ee683d61f5a520efefeafcbdef14))
+
 ## [1.74.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.1...v1.74.2) (2026-09-13)
 
 ### 🐛 Fixes
