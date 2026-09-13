@@ -82,7 +82,7 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
         </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
         <SettingsWindowToggle />
         <DarkLightStatus />
         <FullscreenToggle />

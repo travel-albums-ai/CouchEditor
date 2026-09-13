@@ -1,5 +1,5 @@
-import { Box, Stack, TextField } from '@mui/material';
-import { CirclePlus, Copy, Download, LayoutDashboard, Save, Trash2, Upload } from 'lucide-react';
+import { Box, Button, Stack, TextField } from '@mui/material';
+import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import type { ChangeEvent, RefObject } from 'react';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
@@ -95,29 +95,12 @@ export default function PipelineCanvasOverlays({
             title: '',
           },
         ] satisfies GenericToggleButtonProps[]} />
-        <GenericToggleButtonGroup id="pipeline-transfer" items={[
-          {
-            tooltip: 'Download pipeline',
-            icon: <Download />,
-            onClick: onDownload,
-            title: 'Export',
-          },
-          {
-            tooltip: 'Upload pipeline',
-            icon: <Upload />,
-            onClick: () => pipelineFileInputRef.current?.click(),
-            title: 'Import',
-          },
-        ] satisfies GenericToggleButtonProps[]} />
-        <GenericToggleButtonGroup id="pipeline-ai-layout" items={[
-          {
-            tooltip: organizingWithAI ? 'Organizing layout…' : 'Organize layout with AI',
-            icon: <LayoutDashboard />,
-            onClick: onOrganizeWithAI,
-            title: '',
-            disabled: organizingWithAI,
-          },
-        ] satisfies GenericToggleButtonProps[]} />
+        <Button variant="contained" startIcon={<Download size={16} />} onClick={onDownload}>
+          Export
+        </Button>
+        <Button variant="outlined" startIcon={<Upload size={16} />} onClick={() => pipelineFileInputRef.current?.click()}>
+          Import
+        </Button>
         <input
           ref={pipelineFileInputRef}
           type="file"
