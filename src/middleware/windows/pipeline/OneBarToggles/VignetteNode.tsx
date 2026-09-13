@@ -1,9 +1,9 @@
-import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { PreviewMath } from '@/middleware/windows/pipeline/components/PreviewMath';
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
@@ -47,7 +47,7 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
     <NodeWrapper
       type="vignette"
       tools={<PipelineStageTiming nodeId={id} nodeType="vignette" />}
-      helper={<AdjustmentPreview paletteItem={paletteItem} data={data} />}
+      helper={<PreviewMath paletteItem={paletteItem} data={data} />}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="caption" color="textSecondary">{t('pipelineVignetteColor')}</Typography>

@@ -1,10 +1,10 @@
-import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
 import { BeforeAfter } from '@/middleware/windows/pipeline/components/BeforeAfter';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { PreviewMath } from '@/middleware/windows/pipeline/components/PreviewMath';
 import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { useReactFlow, type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export function createSliderNode(config: SliderNodeConfig) {
     const [isBusy, setIsBusy] = useState(false);
 
     const helper = <>
-      {paletteItem.processing === 'math' && <AdjustmentPreview paletteItem={paletteItem} data={data} />}
+      {paletteItem.processing === 'math' && <PreviewMath paletteItem={paletteItem} data={data} />}
       {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} data={data} />}
     </>
 
