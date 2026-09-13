@@ -1,4 +1,4 @@
-import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, highlightsStage, hueRotationStage, luminosityStage, popStage, saturationStage, shadowsStage, sharpenStage, vibranceStage } from '@/lib/utils';
+import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, saturationStage, shadowsStage, sharpenStage, vibranceStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export type NodePaletteConfig = {
@@ -179,6 +179,9 @@ const effectsStages: Array<NodeStageItem> = [
     processing: 'math'
   },
   { type: "hdr", labelKey: "pipelineHdrEffect", icon: <Mountain size={16} />,
+    algo: ({ amount, radius }: { amount: number, radius: number }) => hdrEffectStage(amount, radius),
+    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
   },
   {
     type: "fade", labelKey: "pipelineFade", icon: <EyeDashed size={16} />,

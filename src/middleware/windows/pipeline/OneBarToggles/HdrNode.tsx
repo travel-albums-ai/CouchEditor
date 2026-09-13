@@ -1,4 +1,4 @@
-import { hdrEffectStage } from '@/lib/utils';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
 import { useState } from 'react';
@@ -19,12 +19,19 @@ export default function HdrNode({ id, data }: NodeProps<Node<HdrData>>) {
   const [amount, setAmount] = useState(data.amount ?? 0);
   const [radius, setRadius] = useState(data.radius ?? 12);
 
+  const paletteItem = paletteItemsByType["hdr"];
+
   return <>
     <InputHandle id="image" />
     <NodeWrapper
       type="hdr"
       tools={<PipelineStageTiming nodeId={id} nodeType="hdr" />}
-      helper={<AdjustmentPreview amount={0} algorithm={() => hdrEffectStage(amount, radius)} label="HDR" />}
+      helper={<AdjustmentPreview
+        algorithm={(imageData) => {
+          const stage = paletteItem.algo?.({ amount, radius });
+          stage?.(imageData);
+        }}
+        label="HDR" />}
     >
       <AdjustmentSlider
         description={<Typography variant="caption" color="textSecondary">Amount</Typography>}
