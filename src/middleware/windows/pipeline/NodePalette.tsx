@@ -32,7 +32,7 @@ export type NodePaletteItem = NodeStageItem & {
 const sourceStages: Array<NodeStageItem> = [
   { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />,
     processing: 'static',
-    labelDescription: 'Loads the image from disk.',
+    labelDescription: 'Loads images from disk from a designated folder',
   },
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
     processing: 'static',
