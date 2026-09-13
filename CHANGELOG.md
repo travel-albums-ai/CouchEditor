@@ -1,3 +1,9 @@
+## [1.86.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.85.1...v1.86.0) (2026-09-13)
+
+### ✨ Features
+
+* implement PreviewBeforeAfter component and refactor AdjustmentPreview and BeforeAfter components to use it ([03d8fb2](https://github.com/travel-albums-ai/CouchEditor/commit/03d8fb2a9f2008a10ecd8d4251f68052aa17f28f))
+
 ## [1.85.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.85.0...v1.85.1) (2026-09-13)
 
 ### 🐛 Fixes
