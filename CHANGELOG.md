@@ -1,3 +1,9 @@
+## [1.76.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.75.0...v1.76.0) (2026-09-13)
+
+### ✨ Features
+
+* integrate HDR effect stage into NodePalette and HdrNode components ([a8cbff5](https://github.com/travel-albums-ai/CouchEditor/commit/a8cbff5cb8d2c6c74e67f75365ff9cd1c627b4a4))
+
 ## [1.75.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.74.2...v1.75.0) (2026-09-13)
 
 ### ✨ Features
