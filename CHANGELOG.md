@@ -1,3 +1,9 @@
+## [1.80.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.79.0...v1.80.0) (2026-09-13)
+
+### ✨ Features
+
+* update NodePalette to use configs for parameter settings in AdjustmentSliderNode and preview components ([a6f109d](https://github.com/travel-albums-ai/CouchEditor/commit/a6f109d4204797dce9ee93b346fe7ab30c62ac0d))
+
 ## [1.79.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.78.0...v1.79.0) (2026-09-13)
 
 ### ✨ Features
