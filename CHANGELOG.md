@@ -1,3 +1,9 @@
+## [1.68.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.67.0...v1.68.0) (2026-09-13)
+
+### ✨ Features
+
+* add AdjustmentPreviewDemo component and integrate with NodeToolboxItem ([bd3faf2](https://github.com/travel-albums-ai/CouchEditor/commit/bd3faf21d7f10d9664bc23c8ebb8d4cb194dd9b4))
+
 ## [1.67.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.66.0...v1.67.0) (2026-09-13)
 
 ### ✨ Features
