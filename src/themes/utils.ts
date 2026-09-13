@@ -84,6 +84,7 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
     MuiTooltip: {
       styleOverrides: {
         tooltip: ({ theme }) => ({
+          maxWidth: '500px',
           backgroundColor: `${theme.palette.background.paper}BB`,
           backdropFilter: 'blur(2px)',
           color: `${theme.palette.text.primary}`,

@@ -2,7 +2,7 @@ import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/Pre
 import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import { NodePaletteItem, NodeType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Skeleton, useTheme } from '@mui/material';
-import { ChartColumn, Cloud, Download, Eye, Flame, Folder, Map } from 'lucide-react';
+import { ChartColumn, Cloud, Download, Eye, Flame, Folder, Map, Plus, Slash } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 type AdjustmentPreviewProps = {
@@ -41,7 +41,36 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
       </Box>,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
+    [NodeType.ArraySwitch]: {
+      before: <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, opacity: 0.5 }} />
+        <Slash color={theme.palette.primary.main} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>,
+      after: <Box sx={{ display: 'flex', gap: 1 }}>
+        {/* <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} /> */}
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>
+    },
+    [NodeType.Grouper]: {
+      before: <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <Plus color={theme.palette.primary.main} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>,
+      after: <Box sx={{ display: 'flex', gap: 1 }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>
+    },
     [NodeType.SelectedPhoto]: {
+      before: <Box sx={{ display: 'flex', gap: 1 }}>
+        <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+      </Box>,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
+    [NodeType.ImagePicker]: {
       before: <Box sx={{ display: 'flex', gap: 1 }}>
         <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
         <img src="sample2.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
@@ -96,8 +125,8 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
     [NodeType.HotFolderWrite]: {
       before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
       after: <Box sx={{ p: 2, py: 1, gap: 2, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Folder color={theme.palette.primary.main} />
         <Flame color={theme.palette.primary.main} />
+        <Folder color={theme.palette.primary.main} />
       </Box>,
     },
   } as Record<NodeType, { before: React.ReactNode; after: React.ReactNode }>
