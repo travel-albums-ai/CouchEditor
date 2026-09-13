@@ -1,3 +1,9 @@
+## [1.78.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.77.0...v1.78.0) (2026-09-13)
+
+### ✨ Features
+
+* add vignette processing and update HDR node integration ([e81590e](https://github.com/travel-albums-ai/CouchEditor/commit/e81590e9c237ff5144c1dd0da1878571ba2dbe3e))
+
 ## [1.77.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.76.0...v1.77.0) (2026-09-13)
 
 ### ✨ Features
