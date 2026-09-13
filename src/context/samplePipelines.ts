@@ -102,10 +102,10 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1045
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       },
       {
@@ -117,8 +117,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1045
         },
         "selected": false,
         "dragging": false
@@ -132,8 +132,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 484,
-          "height": 135
+          "width": 479,
+          "height": 143
         },
         "selected": false,
         "dragging": false
@@ -142,13 +142,13 @@ export const samplePipeline = [
         "id": "black-white-8",
         "type": "black-white",
         "position": {
-          "x": 440,
-          "y": 120
+          "x": 320,
+          "y": 40
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -157,15 +157,15 @@ export const samplePipeline = [
         "id": "sepia-9",
         "type": "sepia",
         "position": {
-          "x": 1220,
-          "y": 140
+          "x": 1140,
+          "y": 40
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 330,
+          "height": 202
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
@@ -177,8 +177,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1045
         },
         "selected": false,
         "dragging": false
@@ -191,7 +191,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "rescale-7",
         "targetHandle": "image",
-        "id": "xy-edge__source-5image-rescale-7image"
+        "id": "xy-edge__source-5image-rescale-7image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -199,7 +203,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "sepia-9",
         "targetHandle": "image",
-        "id": "xy-edge__rescale-7image-sepia-9image"
+        "id": "xy-edge__rescale-7image-sepia-9image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -207,7 +215,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "black-white-8",
         "targetHandle": "image",
-        "id": "xy-edge__rescale-7image-black-white-8image"
+        "id": "xy-edge__rescale-7image-black-white-8image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -215,7 +227,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-6",
         "targetHandle": "image",
-        "id": "xy-edge__black-white-8image-viewer-6image"
+        "id": "xy-edge__black-white-8image-viewer-6image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -223,7 +239,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-10",
         "targetHandle": "image",
-        "id": "xy-edge__sepia-9image-viewer-10image"
+        "id": "xy-edge__sepia-9image-viewer-10image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       }
     ],
     "id": "pipeline-1788795881205-3bm4q9",
@@ -240,8 +260,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 934,
-          "height": 1037
+          "width": 930,
+          "height": 1045
         },
         "selected": false,
         "dragging": false
@@ -257,8 +277,8 @@ export const samplePipeline = [
           "scale": 0.25
         },
         "measured": {
-          "width": 480,
-          "height": 135
+          "width": 475,
+          "height": 143
         },
         "selected": false,
         "dragging": false
@@ -268,25 +288,27 @@ export const samplePipeline = [
         "type": "flip",
         "position": {
           "x": -200,
-          "y": -40
+          "y": -80
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
-        }
+          "width": 330,
+          "height": 202
+        },
+        "selected": false,
+        "dragging": false
       },
       {
         "id": "viewer-single-15",
         "type": "viewer-single",
         "position": {
-          "x": 180,
-          "y": 0
+          "x": 200,
+          "y": 60
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -300,8 +322,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 250,
-          "height": 91
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -311,12 +333,12 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": -460,
-          "y": 260
+          "y": 380
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -325,31 +347,33 @@ export const samplePipeline = [
         "id": "rotate-18",
         "type": "rotate",
         "position": {
-          "x": 600,
+          "x": -200,
           "y": -200
         },
         "data": {
           "amount": 204
         },
         "measured": {
-          "width": 250,
+          "width": 280,
           "height": 102
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
         "id": "viewer-single-19",
         "type": "viewer-single",
         "position": {
-          "x": 840,
-          "y": 180
+          "x": 860,
+          "y": -40
         },
         "data": {},
         "measured": {
-          "width": 634,
-          "height": 666
-        }
+          "width": 630,
+          "height": 673
+        },
+        "selected": false,
+        "dragging": false
       }
     ],
     "edges": [
@@ -359,7 +383,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "rescale-13",
         "targetHandle": "image",
-        "id": "xy-edge__source-11image-rescale-13image"
+        "id": "xy-edge__source-11image-rescale-13image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -367,7 +395,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-15",
         "targetHandle": "image",
-        "id": "xy-edge__flip-14image-viewer-single-15image"
+        "id": "xy-edge__flip-14image-viewer-single-15image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -375,7 +407,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "flip-14",
         "targetHandle": "image",
-        "id": "xy-edge__rescale-13image-flip-14image"
+        "id": "xy-edge__rescale-13image-flip-14image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -383,7 +419,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "mirror-16",
         "targetHandle": "image",
-        "id": "xy-edge__rescale-13image-mirror-16image"
+        "id": "xy-edge__rescale-13image-mirror-16image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -391,7 +431,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-17",
         "targetHandle": "image",
-        "id": "xy-edge__mirror-16image-viewer-single-17image"
+        "id": "xy-edge__mirror-16image-viewer-single-17image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -399,7 +443,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "rotate-18",
         "targetHandle": "image",
-        "id": "xy-edge__rescale-13image-rotate-18image"
+        "id": "xy-edge__rescale-13image-rotate-18image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -407,7 +455,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-19",
         "targetHandle": "image",
-        "id": "xy-edge__rotate-18image-viewer-single-19image"
+        "id": "xy-edge__rotate-18image-viewer-single-19image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       }
     ],
     "id": "pipeline-1788796010113-2x2rio",
@@ -419,31 +471,33 @@ export const samplePipeline = [
         "id": "source-20",
         "type": "source",
         "position": {
-          "x": -1580,
+          "x": -1640,
           "y": -180
         },
         "data": {},
         "measured": {
-          "width": 920,
-          "height": 1037
+          "width": 930,
+          "height": 1045
         },
-        "selected": false
+        "selected": true,
+        "dragging": false
       },
       {
         "id": "hue-rotation-21",
         "type": "hue-rotation",
         "position": {
-          "x": -220,
-          "y": -140
+          "x": -200,
+          "y": -260
         },
         "data": {
           "amount": 117
         },
         "measured": {
-          "width": 191,
-          "height": 86
+          "width": 280,
+          "height": 102
         },
-        "selected": false
+        "selected": false,
+        "dragging": false
       },
       {
         "id": "viewer-single-22",
@@ -454,8 +508,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -464,17 +518,18 @@ export const samplePipeline = [
         "id": "highlights-23",
         "type": "highlights",
         "position": {
-          "x": -420,
-          "y": 100
+          "x": -200,
+          "y": 40
         },
         "data": {
           "amount": 100
         },
         "measured": {
-          "width": 208,
-          "height": 121
+          "width": 280,
+          "height": 102
         },
-        "selected": false
+        "selected": false,
+        "dragging": false
       },
       {
         "id": "viewer-single-24",
@@ -485,8 +540,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -496,16 +551,17 @@ export const samplePipeline = [
         "type": "shadows",
         "position": {
           "x": -620,
-          "y": 500
+          "y": 540
         },
         "data": {
           "amount": 77
         },
         "measured": {
-          "width": 191,
-          "height": 121
+          "width": 280,
+          "height": 102
         },
-        "selected": false
+        "selected": false,
+        "dragging": false
       },
       {
         "id": "viewer-single-26",
@@ -516,8 +572,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 620,
-          "height": 666
+          "width": 630,
+          "height": 673
         },
         "selected": false,
         "dragging": false
@@ -530,7 +586,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-26",
         "targetHandle": "image",
-        "id": "xy-edge__shadows-25image-viewer-single-26image"
+        "id": "xy-edge__shadows-25image-viewer-single-26image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -538,7 +598,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-24",
         "targetHandle": "image",
-        "id": "xy-edge__highlights-23image-viewer-single-24image"
+        "id": "xy-edge__highlights-23image-viewer-single-24image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -546,7 +610,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-22",
         "targetHandle": "image",
-        "id": "xy-edge__hue-rotation-21image-viewer-single-22image"
+        "id": "xy-edge__hue-rotation-21image-viewer-single-22image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -554,7 +622,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "highlights-23",
         "targetHandle": "image",
-        "id": "xy-edge__source-20image-highlights-23image"
+        "id": "xy-edge__source-20image-highlights-23image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -562,7 +634,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "shadows-25",
         "targetHandle": "image",
-        "id": "xy-edge__source-20image-shadows-25image"
+        "id": "xy-edge__source-20image-shadows-25image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -570,7 +646,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "hue-rotation-21",
         "targetHandle": "image",
-        "id": "xy-edge__source-20image-hue-rotation-21image"
+        "id": "xy-edge__source-20image-hue-rotation-21image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       }
     ],
     "id": "pipeline-1788796110451-nw5zj8",
@@ -588,7 +668,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 930,
-          "height": 1044
+          "height": 1045
         },
         "selected": false,
         "dragging": false
@@ -598,7 +678,7 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": -220,
-          "y": 1140
+          "y": 1500
         },
         "data": {},
         "measured": {
@@ -613,7 +693,7 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": 440,
-          "y": 1140
+          "y": 1500
         },
         "data": {},
         "measured": {
@@ -628,7 +708,7 @@ export const samplePipeline = [
         "type": "viewer-single",
         "position": {
           "x": 1100,
-          "y": 1140
+          "y": 1500
         },
         "data": {},
         "measured": {
@@ -643,14 +723,14 @@ export const samplePipeline = [
         "type": "vignette",
         "position": {
           "x": 440,
-          "y": 960
+          "y": 1100
         },
         "data": {
           "amount": 81
         },
         "measured": {
           "width": 280,
-          "height": 147
+          "height": 145
         },
         "selected": false,
         "dragging": false
@@ -660,14 +740,14 @@ export const samplePipeline = [
         "type": "hdr",
         "position": {
           "x": -220,
-          "y": 960
+          "y": 1100
         },
         "data": {
           "amount": 68
         },
         "measured": {
           "width": 280,
-          "height": 148
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -676,15 +756,15 @@ export const samplePipeline = [
         "id": "pop-34",
         "type": "pop",
         "position": {
-          "x": 1120,
-          "y": 960
+          "x": 1100,
+          "y": 1100
         },
         "data": {
           "amount": 68
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -708,8 +788,8 @@ export const samplePipeline = [
         "id": "photo-histogram-3",
         "type": "photo-histogram",
         "position": {
-          "x": -1180,
-          "y": 580
+          "x": -600,
+          "y": 620
         },
         "data": {},
         "measured": {
@@ -723,8 +803,8 @@ export const samplePipeline = [
         "id": "photo-histogram-4",
         "type": "photo-histogram",
         "position": {
-          "x": 1460,
-          "y": 820
+          "x": 1520,
+          "y": 1180
         },
         "data": {},
         "measured": {
@@ -738,8 +818,8 @@ export const samplePipeline = [
         "id": "temperature-tint-1",
         "type": "temperature-tint",
         "position": {
-          "x": -700,
-          "y": -400
+          "x": -760,
+          "y": -440
         },
         "data": {
           "temperature": 56,
@@ -756,8 +836,8 @@ export const samplePipeline = [
         "id": "split-toning-2",
         "type": "split-toning",
         "position": {
-          "x": -700,
-          "y": -160
+          "x": -720,
+          "y": -60
         },
         "data": {
           "strength": 100
@@ -773,8 +853,8 @@ export const samplePipeline = [
         "id": "rgb-midtones-3",
         "type": "rgb-midtones",
         "position": {
-          "x": -700,
-          "y": 80
+          "x": -740,
+          "y": -280
         },
         "data": {
           "red": 2.15,
@@ -791,8 +871,8 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy",
         "type": "viewer-single",
         "position": {
-          "x": -360,
-          "y": 240
+          "x": 320,
+          "y": -480
         },
         "data": {},
         "measured": {
@@ -821,8 +901,8 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy-copy-copy",
         "type": "viewer-single",
         "position": {
-          "x": 320,
-          "y": 240
+          "x": 980,
+          "y": -500
         },
         "data": {},
         "measured": {
@@ -836,7 +916,7 @@ export const samplePipeline = [
         "id": "crop-4",
         "type": "crop",
         "position": {
-          "x": -1040,
+          "x": -1120,
           "y": 160
         },
         "data": {
@@ -847,7 +927,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 271
+          "height": 234
         },
         "selected": false,
         "dragging": false
@@ -857,14 +937,14 @@ export const samplePipeline = [
         "type": "rotate",
         "position": {
           "x": -1840,
-          "y": -220
+          "y": -80
         },
         "data": {
           "amount": 213
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -873,13 +953,13 @@ export const samplePipeline = [
         "id": "mirror-6",
         "type": "mirror",
         "position": {
-          "x": -1840,
-          "y": 40
+          "x": -1860,
+          "y": -320
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -888,13 +968,13 @@ export const samplePipeline = [
         "id": "flip-7",
         "type": "flip",
         "position": {
-          "x": -1840,
-          "y": -80
+          "x": -1860,
+          "y": -540
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -908,7 +988,7 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 480,
+          "width": 479,
           "height": 143
         },
         "selected": false,
@@ -933,7 +1013,7 @@ export const samplePipeline = [
         "id": "viewer-single-1-copy-2-copy",
         "type": "viewer-single",
         "position": {
-          "x": -1540,
+          "x": -1500,
           "y": -580
         },
         "data": {},
@@ -956,7 +1036,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 147
+          "height": 145
         },
         "selected": false,
         "dragging": false
@@ -973,7 +1053,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 148
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -990,7 +1070,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1051,10 +1131,10 @@ export const samplePipeline = [
           "content": "Start here !"
         },
         "measured": {
-          "width": 374,
-          "height": 279
+          "width": 380,
+          "height": 277
         },
-        "selected": true,
+        "selected": false,
         "dragging": false
       }
     ],
@@ -1065,7 +1145,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-31",
         "targetHandle": "image",
-        "id": "xy-edge__pop-34image-viewer-single-31image"
+        "id": "xy-edge__pop-34image-viewer-single-31image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -1073,7 +1157,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-30",
         "targetHandle": "image",
-        "id": "xy-edge__vignette-32image-viewer-single-30image"
+        "id": "xy-edge__vignette-32image-viewer-single-30image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -1081,7 +1169,11 @@ export const samplePipeline = [
         "sourceHandle": "image",
         "target": "viewer-single-29",
         "targetHandle": "image",
-        "id": "xy-edge__hdr-33image-viewer-single-29image"
+        "id": "xy-edge__hdr-33image-viewer-single-29image",
+        "style": {
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
+        }
       },
       {
         "type": "smoothstep",
@@ -1090,7 +1182,8 @@ export const samplePipeline = [
         "target": "photo-histogram-4",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__pop-34image-photo-histogram-4image"
       },
@@ -1101,7 +1194,8 @@ export const samplePipeline = [
         "target": "viewer-single-1-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rgb-midtones-3image-viewer-single-1-copyimage"
       },
@@ -1112,7 +1206,8 @@ export const samplePipeline = [
         "target": "viewer-single-1-copy-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__split-toning-2image-viewer-single-1-copy-copyimage"
       },
@@ -1123,7 +1218,8 @@ export const samplePipeline = [
         "target": "viewer-single-1-copy-copy-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__temperature-tint-1image-viewer-single-1-copy-copy-copyimage"
       },
@@ -1134,7 +1230,8 @@ export const samplePipeline = [
         "target": "rescale-8",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__source-27image-rescale-8image"
       },
@@ -1145,7 +1242,8 @@ export const samplePipeline = [
         "target": "viewer-single-1",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-viewer-single-1image"
       },
@@ -1156,7 +1254,8 @@ export const samplePipeline = [
         "target": "photo-histogram-3",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-photo-histogram-3image"
       },
@@ -1167,7 +1266,8 @@ export const samplePipeline = [
         "target": "hdr-33",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-hdr-33image"
       },
@@ -1178,7 +1278,8 @@ export const samplePipeline = [
         "target": "vignette-32",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-vignette-32image"
       },
@@ -1189,7 +1290,8 @@ export const samplePipeline = [
         "target": "pop-34",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-pop-34image"
       },
@@ -1200,7 +1302,8 @@ export const samplePipeline = [
         "target": "rgb-midtones-3",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-rgb-midtones-3image"
       },
@@ -1211,7 +1314,8 @@ export const samplePipeline = [
         "target": "split-toning-2",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-split-toning-2image"
       },
@@ -1222,7 +1326,8 @@ export const samplePipeline = [
         "target": "temperature-tint-1",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-temperature-tint-1image"
       },
@@ -1233,7 +1338,8 @@ export const samplePipeline = [
         "target": "crop-4",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-crop-4image"
       },
@@ -1244,7 +1350,8 @@ export const samplePipeline = [
         "target": "viewer-single-1-copy-2",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__crop-4image-viewer-single-1-copy-2image"
       },
@@ -1255,7 +1362,8 @@ export const samplePipeline = [
         "target": "rotate-5",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-rotate-5image"
       },
@@ -1266,7 +1374,8 @@ export const samplePipeline = [
         "target": "viewer-single-1-copy-2-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rotate-5image-viewer-single-1-copy-2-copyimage"
       },
@@ -1277,7 +1386,8 @@ export const samplePipeline = [
         "target": "vignette-9",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-vignette-9image"
       },
@@ -1288,7 +1398,8 @@ export const samplePipeline = [
         "target": "hdr-10",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-hdr-10image"
       },
@@ -1299,7 +1410,8 @@ export const samplePipeline = [
         "target": "pop-11",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__rescale-8image-pop-11image"
       },
@@ -1310,7 +1422,8 @@ export const samplePipeline = [
         "target": "viewer-single-12-copy-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__vignette-9image-viewer-single-12-copy-copyimage"
       },
@@ -1321,7 +1434,8 @@ export const samplePipeline = [
         "target": "viewer-single-12-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__hdr-10image-viewer-single-12-copyimage"
       },
@@ -1332,7 +1446,8 @@ export const samplePipeline = [
         "target": "viewer-single-12",
         "targetHandle": "image",
         "style": {
-          "opacity": 0.5
+          "strokeWidth": 2,
+          "stroke": "rgba(113, 82, 248, 0.6)"
         },
         "id": "xy-edge__pop-11image-viewer-single-12image"
       }
@@ -1352,7 +1467,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 930,
-          "height": 1044
+          "height": 1045
         },
         "selected": false,
         "dragging": false
@@ -1367,7 +1482,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1377,12 +1492,12 @@ export const samplePipeline = [
         "type": "flip",
         "position": {
           "x": 1260,
-          "y": 1340
+          "y": 1320
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -1392,12 +1507,12 @@ export const samplePipeline = [
         "type": "mirror",
         "position": {
           "x": 1260,
-          "y": 1460
+          "y": 1540
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -1411,8 +1526,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 318,
-          "height": 538
+          "width": 310,
+          "height": 410
         },
         "selected": false,
         "dragging": false
@@ -1426,7 +1541,7 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 284,
+          "width": 283,
           "height": 236
         },
         "selected": false,
@@ -1442,7 +1557,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 271
+          "height": 234
         },
         "selected": false,
         "dragging": false
@@ -1456,7 +1571,7 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 480,
+          "width": 479,
           "height": 143
         },
         "selected": false,
@@ -1505,8 +1620,8 @@ export const samplePipeline = [
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -1515,13 +1630,13 @@ export const samplePipeline = [
         "id": "black-white-14",
         "type": "black-white",
         "position": {
-          "x": 1560,
-          "y": 1200
+          "x": 1620,
+          "y": 1100
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -1530,13 +1645,13 @@ export const samplePipeline = [
         "id": "sepia-15",
         "type": "sepia",
         "position": {
-          "x": 1260,
-          "y": 1220
+          "x": 1620,
+          "y": 1320
         },
         "data": {},
         "measured": {
-          "width": 280,
-          "height": 95
+          "width": 330,
+          "height": 202
         },
         "selected": false,
         "dragging": false
@@ -1566,7 +1681,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1581,7 +1696,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1596,7 +1711,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1611,7 +1726,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1626,7 +1741,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1641,7 +1756,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1656,7 +1771,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1671,7 +1786,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1686,7 +1801,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1701,7 +1816,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1716,7 +1831,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 147
+          "height": 145
         },
         "selected": false,
         "dragging": false
@@ -1731,7 +1846,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1746,7 +1861,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1761,7 +1876,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 148
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -1776,7 +1891,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -1806,7 +1921,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 300,
-          "height": 164
+          "height": 163
         },
         "selected": false,
         "dragging": false
@@ -1822,8 +1937,8 @@ export const samplePipeline = [
           "content": "Hello to Couch Editor"
         },
         "measured": {
-          "width": 374,
-          "height": 279
+          "width": 380,
+          "height": 277
         },
         "selected": false,
         "dragging": false
@@ -1838,7 +1953,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 93
+          "height": 92
         },
         "selected": false,
         "dragging": false
@@ -1853,7 +1968,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 297,
-          "height": 164
+          "height": 163
         },
         "selected": false,
         "dragging": false
@@ -1959,8 +2074,8 @@ export const samplePipeline = [
         "id": "rotate-3",
         "type": "rotate",
         "position": {
-          "x": 640,
-          "y": 300
+          "x": 600,
+          "y": 140
         },
         "data": {
           "amount": 162
@@ -1969,15 +2084,15 @@ export const samplePipeline = [
           "width": 280,
           "height": 104
         },
-        "selected": false,
+        "selected": true,
         "dragging": false
       },
       {
         "id": "flip-4",
         "type": "flip",
         "position": {
-          "x": 640,
-          "y": 440
+          "x": 600,
+          "y": 260
         },
         "data": {},
         "measured": {
@@ -1991,8 +2106,8 @@ export const samplePipeline = [
         "id": "mirror-5",
         "type": "mirror",
         "position": {
-          "x": 640,
-          "y": 580
+          "x": 600,
+          "y": 500
         },
         "data": {},
         "measured": {
@@ -2014,7 +2129,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2031,7 +2146,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2048,7 +2163,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2063,7 +2178,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2080,7 +2195,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2097,7 +2212,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2106,14 +2221,14 @@ export const samplePipeline = [
         "id": "rescale-13",
         "type": "rescale",
         "position": {
-          "x": 80,
+          "x": -60,
           "y": 280
         },
         "data": {
           "scale": 0.5
         },
         "measured": {
-          "width": 476,
+          "width": 475,
           "height": 143
         },
         "selected": false,
@@ -2129,7 +2244,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2144,7 +2259,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2159,7 +2274,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 192
+          "height": 146
         },
         "selected": false,
         "dragging": false
@@ -2189,7 +2304,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2204,7 +2319,7 @@ export const samplePipeline = [
         "data": {},
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2221,7 +2336,7 @@ export const samplePipeline = [
         },
         "measured": {
           "width": 280,
-          "height": 104
+          "height": 102
         },
         "selected": false,
         "dragging": false
@@ -2280,12 +2395,10 @@ export const samplePipeline = [
           "x": -100,
           "y": 160
         },
-        "data": {
-          "selectedPhotoName": "IMG_20220731_133328.jpg"
-        },
+        "data": {},
         "measured": {
           "width": 280,
-          "height": 93
+          "height": 92
         },
         "selected": false,
         "dragging": false
@@ -2299,7 +2412,6 @@ export const samplePipeline = [
         "target": "rotate-3",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2312,7 +2424,6 @@ export const samplePipeline = [
         "target": "flip-4",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2325,7 +2436,6 @@ export const samplePipeline = [
         "target": "mirror-5",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2338,7 +2448,6 @@ export const samplePipeline = [
         "target": "exposure-7",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2351,7 +2460,6 @@ export const samplePipeline = [
         "target": "brightness-8",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2364,7 +2472,6 @@ export const samplePipeline = [
         "target": "contrast-9",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2377,7 +2484,6 @@ export const samplePipeline = [
         "target": "gamma-12",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2390,7 +2496,6 @@ export const samplePipeline = [
         "target": "highlights-10",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2403,7 +2508,6 @@ export const samplePipeline = [
         "target": "shadows-11",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2416,7 +2520,6 @@ export const samplePipeline = [
         "target": "gamma-14",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2429,7 +2532,6 @@ export const samplePipeline = [
         "target": "whites-blacks-16",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2442,7 +2544,6 @@ export const samplePipeline = [
         "target": "rgb-black-point-17",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2455,7 +2556,6 @@ export const samplePipeline = [
         "target": "saturation-18",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2468,7 +2568,6 @@ export const samplePipeline = [
         "target": "vibrance-19",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2481,7 +2580,6 @@ export const samplePipeline = [
         "target": "hue-rotation-20",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2494,7 +2592,6 @@ export const samplePipeline = [
         "target": "temperature-tint-21",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2507,7 +2604,6 @@ export const samplePipeline = [
         "target": "split-toning-22",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2520,7 +2616,6 @@ export const samplePipeline = [
         "target": "viewer-single-23-copy",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2533,7 +2628,6 @@ export const samplePipeline = [
         "target": "luminosity-15",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2546,7 +2640,6 @@ export const samplePipeline = [
         "target": "selected-photo-1",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },
@@ -2559,7 +2652,6 @@ export const samplePipeline = [
         "target": "rescale-13",
         "targetHandle": "image",
         "style": {
-          "opacity": 1,
           "strokeWidth": 2,
           "stroke": "rgba(113, 82, 248, 0.6)"
         },

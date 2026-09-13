@@ -6,6 +6,7 @@ import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeConnections, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
 import { Copy, FastForward, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
@@ -26,6 +27,7 @@ export default function NodeWrapper({
   const inputConnections = useNodeConnections({ handleType: 'target' });
   const outputConnections = useNodeConnections({ handleType: 'source' });
   const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
+  const { t } = useTranslation();
   const [showHelper, setShowHelper] = useState(false);
   const [hasUnconnectedHandle, setHasUnconnectedHandle] = useState(false);
   const nodeContentRef = useRef<HTMLDivElement>(null);
@@ -141,33 +143,33 @@ export default function NodeWrapper({
             boxShadow: 2,
           }}
         >
-          <Tooltip title="Clone node">
-            <IconButton size="small" aria-label="Clone node" onClick={cloneNode}>
+          <Tooltip title={t('nodeClone')}>
+            <IconButton size="small" aria-label={t('nodeClone')} onClick={cloneNode}>
               <Copy size={16} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Help">
-            <IconButton size="small" aria-label="Help" onClick={() => setShowHelper(!showHelper)} sx={{ color: showHelper ? 'primary.main' : 'default' }}>
+          <Tooltip title={t('nodeHelp')}>
+            <IconButton size="small" aria-label={t('nodeHelp')} onClick={() => setShowHelper(!showHelper)} sx={{ color: showHelper ? 'primary.main' : 'default' }}>
               <HelpCircle size={16} />
             </IconButton>
           </Tooltip>
-          <Tooltip title={isSkipping ? 'Enable node' : 'Skip node'}>
+          <Tooltip title={isSkipping ? t('nodeEnable') : t('nodeSkip')}>
             <IconButton
               size="small"
-              aria-label={isSkipping ? 'Enable node' : 'Skip node'}
+              aria-label={isSkipping ? t('nodeEnable') : t('nodeSkip')}
               color={isSkipping ? 'warning' : 'default'}
               onClick={toggleSkipping}
             >
               <FastForward size={16} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Reset node">
-            <IconButton size="small" aria-label="Reset node" onClick={resetNode}>
+          <Tooltip title={t('nodeReset')}>
+            <IconButton size="small" aria-label={t('nodeReset')} onClick={resetNode}>
               <RotateCcw size={16} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Delete node">
-            <IconButton size="small" aria-label="Delete node" onClick={deleteNode}>
+          <Tooltip title={t('nodeDelete')}>
+            <IconButton size="small" aria-label={t('nodeDelete')} onClick={deleteNode}>
               <Trash2 size={16} />
             </IconButton>
           </Tooltip>

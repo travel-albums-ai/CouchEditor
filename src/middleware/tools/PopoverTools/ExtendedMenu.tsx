@@ -42,7 +42,7 @@ export default function ExtendedMenu() {
           <Stack direction="column" spacing={1} divider={<Divider />}>
             {URLS.map((item) => (<GenericToggleButtonGroup
               variant="standard"
-              key={item.title}
+              key={item.key}
               items={[
                 {
                   tooltip: t(`extendedMenu${item.key[0].toUpperCase()}${item.key.slice(1)}`),
