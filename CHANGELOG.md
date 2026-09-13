@@ -1,3 +1,9 @@
+## [1.93.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.92.0...v1.93.0) (2026-09-13)
+
+### ✨ Features
+
+* add perspective coordinates to localization files ([c3beea1](https://github.com/travel-albums-ai/CouchEditor/commit/c3beea190fe8daab53439225f2106203c04a721e))
+
 ## [1.92.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.91.0...v1.92.0) (2026-09-13)
 
 ### ✨ Features
