@@ -1,3 +1,9 @@
+## [1.64.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.63.0...v1.64.0) (2026-09-13)
+
+### ✨ Features
+
+* add new stages and update NodePalette configuration for enhanced functionality ([8af62aa](https://github.com/travel-albums-ai/CouchEditor/commit/8af62aa264fd388983ff11743b5b0eba71450765))
+
 ## [1.63.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.62.0...v1.63.0) (2026-09-13)
 
 ### ✨ Features
