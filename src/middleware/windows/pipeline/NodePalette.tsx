@@ -1,12 +1,51 @@
+import { brightnessStage, contrastStage, exposureStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
-export const paletteItems: Array<{
+export type NodePaletteConfig = {
+  min: number;
+  max: number;
+  step: number;
+  defaultValue: number;
+};
+
+export type NodeStageItem = {
   type: string;
   labelKey: string;
   icon: React.ReactNode;
   ai?: boolean;
+  algo?: any;
+  config?: NodePaletteConfig;
+  processing?: 'math';
+};
+export type NodePaletteItem = NodeStageItem & {
   groupKey: string;
-}> = [
+}
+
+const lightStages: Array<NodeStageItem> = [
+  { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />,
+    algo: exposureStage, config: { min: -3, max: 3, step: 0.1, defaultValue: 0 },
+    processing: 'math'
+  },
+  { type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />,
+    algo: brightnessStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+  {
+    type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />,
+    algo: contrastStage, config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+  { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />,  },
+  { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, },
+  { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, },
+  { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, },
+  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, },
+  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, },
+  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, },
+  { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, },
+]
+
+export const paletteItems: Array<NodePaletteItem> = [
 
   { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, groupKey: "pipelineGroupInput" },
   { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />, groupKey: "pipelineGroupInput" },
@@ -31,17 +70,18 @@ export const paletteItems: Array<{
   { type: "mirror", labelKey: "pipelineMirror", icon: <SquareCenterlineDashedHorizontal size={16} />, groupKey: "pipelineGroupTransform" },
   { type: "perspective", labelKey: "pipelinePerspective", icon: <SquareDashedMousePointer size={16} />, groupKey: "pipelineGroupTransform" },
 
-  { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
-  { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
+  ...(lightStages.map(stage => ({ ...stage, groupKey: "pipelineGroupLight" }))),
+  // { type: "exposure", labelKey: "pipelineExposure", icon: <Sun size={16} />, groupKey: "pipelineGroupLight", algo: exposureStage },
+  // { type: "brightness", labelKey: "pipelineBrightness", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight", algo: brightnessStage },
+  // { type: "contrast", labelKey: "pipelineContrast", icon: <Contrast size={16} />, groupKey: "pipelineGroupLight", algo: contrastStage },
+  // { type: "highlights", labelKey: "pipelineHighlights", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "shadows", labelKey: "pipelineShadows", icon: <Moon size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "gamma", labelKey: "pipelineGamma", icon: <Palette size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "luminosity", labelKey: "pipelineLuminosity", icon: <Lightbulb size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
+  // { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />, groupKey: "pipelineGroupLight" },
 
   { type: "saturation", labelKey: "pipelineSaturation", icon: <SwatchBook size={16} />, groupKey: "pipelineGroupColor" },
   { type: "vibrance", labelKey: "pipelineVibrance", icon:<Pipette size={16} />, groupKey: "pipelineGroupColor" },
@@ -80,4 +120,9 @@ export const groupedPaletteItems = paletteItems.reduce((acc, item) => {
   }
   acc[item.groupKey].push(item);
   return acc;
-}, {} as Record<string, typeof paletteItems>);
+}, {} as Record<string, NodePaletteItem[]>);
+
+export const paletteItemsByType = paletteItems.reduce((acc, item) => {
+  acc[item.type] = item;
+  return acc;
+}, {} as Record<string, NodePaletteItem>);

@@ -1,8 +1,10 @@
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
 import { InputHandle } from '@/middleware/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/middleware/windows/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/middleware/windows/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/middleware/windows/pipeline/components/PipelineStageTiming';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { type Node, type NodeProps } from "@xyflow/react";
 import { JSX, useState } from "react";
 
@@ -27,18 +29,28 @@ export function createSliderNode(config: SliderNodeConfig) {
     const [amount, setAmount] = useState(data.amount ?? config.defaultValue);
     const [isBusy, setIsBusy] = useState(false);
 
+    const paletteItem = paletteItemsByType[config.type];
+    const activeConfig = config.defaultValue ?  config : paletteItem?.config;
+
     return <>
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
-        helper={<>
-          {config.info && config.info({...config, amount })}
-        </>}>
+        // helper={<>
+        //   {config.info && config.info({...config, amount })}
+        // </>}
+      >
+        {config.defaultValue !== undefined && 'OLD CODE'}
+        {config.defaultValue === undefined && <AdjustmentPreview
+          amount={amount !== 0 ? amount : (activeConfig?.max || 1) / 2}
+          algorithm={paletteItem?.algo}
+          label="Brightness"
+        />}
         <AdjustmentSlider
           disabled={isBusy}
-          min={config.min}
-          max={config.max}
-          step={config.step}
+          min={activeConfig?.min || 0}
+          max={activeConfig?.max || 100}
+          step={activeConfig?.step || 1}
           value={amount}
           throttleMs={1000}
           onChange={(newValue) => {

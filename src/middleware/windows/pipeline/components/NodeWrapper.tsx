@@ -1,4 +1,5 @@
 import NodeHeader from '@/middleware/windows/pipeline/components/NodeHeader';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeConnections, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
@@ -69,11 +70,14 @@ export default function NodeWrapper({
       resetId = `${baseId}-${suffix++}`;
     }
 
-    setNodes((current) => current.map((currentNode) =>
-      currentNode.id === nodeId
-        ? { ...currentNode, id: resetId, data: {}, selected: true }
-        : currentNode
-    ));
+    const config = node.type ? paletteItemsByType[node.type]?.config : undefined;
+    const resetData = config ? { amount: config.defaultValue } : {};
+
+    setNodes((current) => current.map((currentNode) => {
+      return currentNode.id === nodeId
+        ? { ...currentNode, id: resetId, data: resetData, selected: true }
+        : currentNode;
+    }));
     setEdges((current) => current.map((edge) => ({
       ...edge,
       source: edge.source === nodeId ? resetId : edge.source,

@@ -1,5 +1,7 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import { highlightsStage } from '@/lib/utils';
+import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
@@ -50,7 +52,10 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
           .filter(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase()))
           .filter(item => enableAI || item.ai === undefined)
           .map((item, i) => (
-            <Tooltip title={t('pipelineDragToAdd', { label: t(item.labelKey) })} key={item.type} arrow placement={i % 2 !== 0 ? "right" : "left"}>
+            <Tooltip title={<>
+              {t('pipelineDragToAdd', { label: t(item.labelKey) })}
+              <AdjustmentPreview amount={80} algorithm={highlightsStage} label="Highlights" />
+            </>} key={item.type} arrow placement="top">
               <Box
                 key={item.type}
                 draggable
