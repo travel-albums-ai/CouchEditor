@@ -5,14 +5,15 @@ import { useTranslation } from 'react-i18next';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
+  width?: number;
 };
 
-export function PreviewDemoStatic({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps) {
   const theme = useTheme();
   const { t } = useTranslation();
 
   const images = {
-    'ai-colorizer': <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />,
+    'ai-colorizer': <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
   }
 
   return (
@@ -28,9 +29,12 @@ export function PreviewDemoStatic({ paletteItem }: AdjustmentPreviewProps) {
         opacity: 1,
       }
     }}>
-      {images[paletteItem.type] && <PreviewBeforeAfter
-        after={images[paletteItem.type] || <></>}
-      />}
+      <Box sx={{ p: 1 }}>
+        {images[paletteItem.type] && <PreviewBeforeAfter
+          width={width ?? 90}
+          after={images[paletteItem.type] || <></>}
+        />}
+      </Box>
 
       {paletteItem.labelDescription && <Typography variant="caption" sx={{
         flex: 1,

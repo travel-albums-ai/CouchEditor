@@ -6,8 +6,8 @@ import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 export default function PreviewDemo({ paletteItem } : { paletteItem: NodePaletteItem }) {
 
   return <>
-    {paletteItem.processing === 'static' && <PreviewDemoStatic paletteItem={paletteItem} />}
-    {paletteItem.processing === 'css' && <PreviewDemoCss paletteItem={paletteItem} />}
-    {paletteItem.processing === 'math' && <PreviewDemoMath paletteItem={paletteItem} />}
+    {paletteItem.processing === 'static' && <PreviewDemoStatic paletteItem={paletteItem} width={70} />}
+    {paletteItem.processing === 'css' && <PreviewDemoCss paletteItem={paletteItem} width={70} />}
+    {paletteItem.processing === 'math' && <PreviewDemoMath paletteItem={paletteItem} width={70} />}
   </>
 }

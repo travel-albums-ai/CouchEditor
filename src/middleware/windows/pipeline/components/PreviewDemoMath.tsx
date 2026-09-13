@@ -8,9 +8,10 @@ const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
+  width?: number;
 };
 
-export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDemoMath({ paletteItem, width = 90 }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const [values, setValues] = useState<Record<string, number>>({});
   const theme = useTheme();
@@ -83,10 +84,13 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
         opacity: 1,
       }
     }}>
-      <PreviewBeforeAfter
-        after={<img src={processedImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />}
-        value={amount}
-      />
+      <Box sx={{ p: 1 }}>
+        <PreviewBeforeAfter
+          width={width}
+          after={<img src={processedImageUrl} style={{ width: `${width}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />}
+          value={amount}
+        />
+      </Box>
 
       <Slider
         disabled

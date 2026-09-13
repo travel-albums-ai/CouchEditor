@@ -6,9 +6,10 @@ import { useTranslation } from 'react-i18next';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
+  width?: number;
 };
 
-export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDemoCss({ paletteItem, width }: AdjustmentPreviewProps) {
   const [amount, setAmount] = useState(0);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -52,10 +53,13 @@ export function PreviewDemoCss({ paletteItem }: AdjustmentPreviewProps) {
         opacity: 1,
       }
     }}>
-      <PreviewBeforeAfter
-        after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...paletteItem.algo({ amount }) }} />}
-        value={amount}
-      />
+      <Box sx={{ p: 1 }}>
+        <PreviewBeforeAfter
+          width={width}
+          after={<img src="sample.jpg" style={{ width: `${width}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, ...paletteItem.algo({ amount }) }} />}
+          value={amount}
+        />
+      </Box>
 
       {config?.min !== config?.max && (
         <Slider

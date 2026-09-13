@@ -62,10 +62,18 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
             >
               <NodeToolboxHeader type={item.type}>
                 <Tooltip title={<Box>
-                  <Box sx={{ mx: 1, mb: 2, mt: 1 }}>
-                    <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless variant="header" icon={<Pointer />} />
+                  <Box sx={{
+                    boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
+                    borderRadius: 2,
+                    m: 1,
+                    p: 0 }}>
+                    <PreviewDemo paletteItem={item} />
                   </Box>
-                  <PreviewDemo paletteItem={item} />
+
+                  <Box sx={{ mx: 1, py: 1 }}>
+                    <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless  icon={<Pointer />} variant="header" />
+                  </Box>
+
                 </Box>} key={item.type} arrow placement="left">
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     <Info size={16} style={{ color: 'inherit', opacity: 0.15, lineHeight: 0 }} />

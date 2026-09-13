@@ -7,9 +7,10 @@ const previewImageUrl = 'sample.jpg';
 type AdjustmentPreviewProps = {
   after: React.ReactNode;
   value?: number;
+  width?: number;
 };
 
-export function PreviewBeforeAfter({ after, value }: AdjustmentPreviewProps) {
+export function PreviewBeforeAfter({ after, value, width = 90 }: AdjustmentPreviewProps) {
   const theme = useTheme();
 
   return (
@@ -25,7 +26,7 @@ export function PreviewBeforeAfter({ after, value }: AdjustmentPreviewProps) {
       }
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <img src={previewImageUrl} style={{ maxWidth: '90px', borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        <img src={previewImageUrl} style={{ width: `${width}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
 
         <Divider orientation="horizontal" sx={{ width: 16 }} />
 
