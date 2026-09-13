@@ -1,3 +1,9 @@
+## [1.70.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.69.0...v1.70.0) (2026-09-13)
+
+### ✨ Features
+
+* update AdjustmentPreviewDemo to use paletteItem and improve rendering logic ([2d046c9](https://github.com/travel-albums-ai/CouchEditor/commit/2d046c9c4449737acddf547e15cbd8d920e21656))
+
 ## [1.69.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.68.0...v1.69.0) (2026-09-13)
 
 ### ✨ Features
