@@ -1,7 +1,6 @@
-import SolidChip from '@/components/SolidChip';
+import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
-import { Box, Divider, Slider, Typography, useTheme } from '@mui/material';
-import { Cpu } from 'lucide-react';
+import { Box, Slider, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -84,20 +83,10 @@ export function PreviewDemoMath({ paletteItem }: AdjustmentPreviewProps) {
         opacity: 1,
       }
     }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <img src={previewImageUrl} alt={`${paletteItem.labelKey} preview before`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
-
-        <Divider orientation="horizontal" sx={{ width: 16 }} />
-
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: 1, border: `1px solid ${theme.palette.divider}`, borderRadius: 2, p: 0.5, boxShadow: 1  }}>
-          <Cpu size={16} style={{ color: theme.palette.text.secondary, opacity: 0.75 }} />
-          <SolidChip label={`${Math.round(amount * 100) / 100}`} minWidth={45} borderless variant="header" />
-        </Box>
-
-        <Divider orientation="horizontal" sx={{ width: 16 }} />
-
-        <img src={processedImageUrl} alt={`${paletteItem.labelKey} preview after`} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
-      </Box>
+      <PreviewBeforeAfter
+        after={<img src={processedImageUrl} style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />}
+        value={amount}
+      />
 
       <Slider
         disabled

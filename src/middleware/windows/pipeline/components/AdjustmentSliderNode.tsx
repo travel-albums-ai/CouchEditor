@@ -38,8 +38,9 @@ export function createSliderNode(config: SliderNodeConfig) {
               const stage = paletteItem.algo?.(data);
               stage?.(imageData);
             }}
+            data={data}
           />}
-          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} />}
+          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo(data) }} data={data} />}
         </>}
       >
         {(paletteItem.configs || [])

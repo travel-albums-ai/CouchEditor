@@ -1,18 +1,12 @@
-import { Box, useTheme } from '@mui/material';
-import { ChevronRight } from 'lucide-react';
+import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
+import { useTheme } from '@mui/material';
 
-export function BeforeAfter({ image2style }: { image2style: React.CSSProperties }) {
+export function BeforeAfter({ image2style, data }: { image2style: React.CSSProperties, data: Record<string, any> }) {
   const theme = useTheme();
-  return  <Box sx={{
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1,
-    px: 0.5,
-    overflow: 'hidden',
-    justifyContent: 'center',
-  }}>
-    <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />
-    <ChevronRight color={theme.palette.text.disabled} style={{ opacity: 0.5 }} />
-    <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...image2style }} />
-  </Box>
+  return  <>
+    <PreviewBeforeAfter
+      after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}`, ...image2style }} />}
+      value={data ? Object.values(data)?.[0] : 0}
+    />
+  </>;
 };
