@@ -21,19 +21,19 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
   const imagesPairs = {
     'source': {
       before: <Box sx={{ p: 2, py: 1, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Folder />
+        <Folder color={theme.palette.primary.main} />
       </Box>,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
     'hot-folder-read': {
       before: <Box sx={{ p: 2, py: 1, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Eye />
+        <Eye color={theme.palette.primary.main} />
       </Box>,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
     'google-drive': {
       before: <Box sx={{ p: 2, py: 1, border: 1, borderColor: theme.palette.divider, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Cloud />
+        <Cloud color={theme.palette.primary.main} />
       </Box>,
       after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
