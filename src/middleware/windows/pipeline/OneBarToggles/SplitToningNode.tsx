@@ -62,7 +62,7 @@ export default function SplitToningNode({
   };
 
   return (
-    <ToneNodeLayout id={id} type="split-toning">
+    <ToneNodeLayout id={id} type="split-toning" runningConfig={{ shadowTint, highlightTint, strength }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="caption" color="textSecondary">{t('pipelineShadowTint')}</Typography>
         <input

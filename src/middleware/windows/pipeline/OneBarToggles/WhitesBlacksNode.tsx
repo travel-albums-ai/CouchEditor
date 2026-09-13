@@ -18,7 +18,7 @@ export default function WhitesBlacksNode({
   const [blacks, setBlacks] = useState(data.blacks ?? 0);
 
   return (
-    <ToneNodeLayout id={id} type="whites-blacks">
+    <ToneNodeLayout id={id} type="whites-blacks" runningConfig={{ whites, blacks }}>
       <label>
         {t('pipelineWhites')}
         <AdjustmentSlider

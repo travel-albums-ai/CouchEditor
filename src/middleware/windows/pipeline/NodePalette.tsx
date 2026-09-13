@@ -1,4 +1,4 @@
-import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, saturationStage, shadowsStage, sharpenStage, vibranceStage, vignetteStage } from '@/lib/utils';
+import { brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export type NodePaletteConfig = {
@@ -107,10 +107,25 @@ const lightStages: Array<NodeStageItem> = [
     config: { min: 0, max: 2, step: 0.05, defaultValue: 0 },
     processing: 'math'
   },
-  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} /> },
-  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} /> },
-  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} /> },
+  { type: "whites-blacks", labelKey: "pipelineWhitesBlacks", icon: <Sun size={16} />,
+    algo: ({ whites, blacks }: { whites: number, blacks: number }) => whitesBlacksStage(whites, blacks),
+    config: { min: 0, max: 100, step: 1, defaultValue: 0 },
+    processing: 'complex'
+  },
+  { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
+    algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbBlackPointStage(red, green, blue),
+    config: { min: 0, max: 255, step: 1, defaultValue: 0 },
+    processing: 'math'
+  },
+  { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />,
+    algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbWhitePointStage(red, green, blue),
+    config: { min: 0, max: 255, step: 1, defaultValue: 255 },
+    processing: 'math'
+  },
   { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />,
+    algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbMidtonesStage(red, green, blue),
+    config: { min: 0.1, max: 3, step: 0.01, defaultValue: 1 },
+    processing: 'math'
   },
 ]
 
@@ -150,8 +165,19 @@ const colorStages: Array<NodeStageItem> = [
     processing: 'css'
   },
   { type: "lut", labelKey: "pipelineLut", icon: <Film size={16} /> },
-  { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} /> },
-  { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} /> },
+  { type: "temperature-tint", labelKey: "pipelineTemperatureTint", icon: <Thermometer size={16} />,
+    algo: ({ temperature, tint }: { temperature: number, tint: number }) => temperatureTintStage(temperature, tint),
+    config: { min: -100, max: 100, step: 1, defaultValue: 0 },
+    processing: 'complex'
+  },
+  { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
+    algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
+      splitToningStage(shadowTint[0], shadowTint[1], shadowTint[2], highlightTint[0], highlightTint[1], highlightTint[2], strength),
+
+    config: { min: 0, max: 100, step: 1, defaultValue: 50 },
+    processing: 'complex'
+
+  },
 ]
 
 const detailStages: Array<NodeStageItem> = [

@@ -39,7 +39,7 @@ function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
     });
 
     return (
-      <ToneNodeLayout id={id} type={config.type}>
+      <ToneNodeLayout id={id} type={config.type} runningConfig={values}>
         {CHANNELS.map(({ key, labelKey, color }) => (
           <label key={key}>
 

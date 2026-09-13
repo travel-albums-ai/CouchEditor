@@ -19,7 +19,7 @@ export default function TemperatureTintNode({
   const [tint, setTint] = useState(data.tint ?? 0);
 
   return (
-    <ToneNodeLayout id={id} type="temperature-tint">
+    <ToneNodeLayout id={id} type="temperature-tint" runningConfig={{ temperature, tint }}>
 
       <AdjustmentSlider
         description={<Typography variant="caption" color="textSecondary">{t('pipelineTemperature')}</Typography>}
