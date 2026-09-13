@@ -1,3 +1,9 @@
+## [1.77.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.76.0...v1.77.0) (2026-09-13)
+
+### ✨ Features
+
+* move HueRotationNode to SimpleToggles directory ([4b69b0d](https://github.com/travel-albums-ai/CouchEditor/commit/4b69b0d4af10b0aca66f902dcc6bb753eb95d1fe))
+
 ## [1.76.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.75.0...v1.76.0) (2026-09-13)
 
 ### ✨ Features
