@@ -10,14 +10,7 @@ import { type Node, type NodeProps } from "@xyflow/react";
 import { useState } from "react";
 
 export type SliderNodeConfig = {
-  // min: number;
-  // max: number;
-  // step: number;
-  // defaultValue: number;
   type: string;
-  // label?: string;
-  // icon?: JSX.Element;
-  // info?: (config: SliderNodeConfig & { amount: number }) => JSX.Element;
 };
 
 // Builds a single-slider node component sharing the same
@@ -27,29 +20,32 @@ export function createSliderNode(config: SliderNodeConfig) {
     id,
     data,
   }: NodeProps<Node<{ amount?: number }>>) {
-    const [amount, setAmount] = useState(data.amount ?? config.defaultValue);
+    const paletteItem = paletteItemsByType[config.type];
+
+    const [amount, setAmount] = useState(data.amount ?? paletteItem?.config);
     const [isBusy, setIsBusy] = useState(false);
 
-    const paletteItem = paletteItemsByType[config.type];
-    const activeConfig = config.defaultValue ?  config : paletteItem?.config;
+
+    const activeConfig = paletteItem?.config;
 
     return <>
       <InputHandle id="image" />
       <NodeWrapper type={config.type}
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
-        // helper={<>
-        //   {config.info && config.info({...config, amount })}
-        // </>}
+        helper={<>
+          {/* {config.info && config.info({...config, amount })} */}
+          {paletteItem.processing === 'math' && <AdjustmentPreview
+            amount={amount}
+            // amount={amount !== 0 ? amount : (activeConfig?.max || 1) / 2}
+            algorithm={paletteItem?.algo}
+            label="Brightness"
+          />}
+          {/* {config.defaultValue === undefined && paletteItem.processing === 'css' && <BeforeAfter image2style={{ transform: paletteItem?.algo({ amount: amount !== 0 ? amount : (activeConfig?.max || 1) / 2 }) }} />} */}
+          {paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo({ amount }) }} />}
+        </>}
       >
-        {config.defaultValue !== undefined && 'OLD CODE'}
-        {config.defaultValue === undefined && paletteItem.processing === 'math' && <AdjustmentPreview
-          amount={amount}
-          // amount={amount !== 0 ? amount : (activeConfig?.max || 1) / 2}
-          algorithm={paletteItem?.algo}
-          label="Brightness"
-        />}
-        {/* {config.defaultValue === undefined && paletteItem.processing === 'css' && <BeforeAfter image2style={{ transform: paletteItem?.algo({ amount: amount !== 0 ? amount : (activeConfig?.max || 1) / 2 }) }} />} */}
-        {config.defaultValue === undefined && paletteItem.processing === 'css' && <BeforeAfter image2style={{ ...paletteItem?.algo({ amount }) }} />}
+        {/* {config.defaultValue !== undefined && 'OLD CODE'} */}
+
         {activeConfig?.min !== activeConfig?.max && <AdjustmentSlider
           disabled={isBusy}
           min={activeConfig?.min || 0}

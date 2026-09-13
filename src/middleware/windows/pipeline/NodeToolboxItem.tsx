@@ -1,6 +1,7 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
+import { AdjustmentPreviewDemo } from '@/middleware/windows/pipeline/components/AdjustmentPreviewDemo';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
@@ -44,7 +45,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 140px)',
+        gridTemplateColumns: 'repeat(2, 340px)',
         gap: 1,
       }}>
         {items
@@ -64,6 +65,9 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                   onDragStart(event, item.type)
                 }
               >
+
+                {item.processing === 'math' && <AdjustmentPreviewDemo config={item?.config} amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
+
                 <NodeToolboxHeader
                   type={item.type}
                 />
