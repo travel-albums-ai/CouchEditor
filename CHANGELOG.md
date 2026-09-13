@@ -1,3 +1,9 @@
+## [1.99.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.98.0...v1.99.0) (2026-09-13)
+
+### ✨ Features
+
+* add WebMCPConnectPipelineNodes component for connecting pipeline nodes ([5c8aae3](https://github.com/travel-albums-ai/CouchEditor/commit/5c8aae300d1b4ea630660caa9f7e794e2ed8bc31))
+
 ## [1.98.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.97.0...v1.98.0) (2026-09-13)
 
 ### ✨ Features
