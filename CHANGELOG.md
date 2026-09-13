@@ -1,3 +1,9 @@
+## [1.71.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.70.0...v1.71.0) (2026-09-13)
+
+### ✨ Features
+
+* add PreviewDemoCss component and integrate with NodeToolboxItem for CSS processing ([b4261da](https://github.com/travel-albums-ai/CouchEditor/commit/b4261dac3d873de5aa5a3fb938edb9c65346aa07))
+
 ## [1.70.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.69.0...v1.70.0) (2026-09-13)
 
 ### ✨ Features
