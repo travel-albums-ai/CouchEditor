@@ -5,12 +5,13 @@ import { Cpu } from 'lucide-react';
 const previewImageUrl = 'sample.jpg';
 
 type AdjustmentPreviewProps = {
+  before?: React.ReactNode;
   after: React.ReactNode;
   value?: number;
   width?: number;
 };
 
-export function PreviewBeforeAfter({ after, value, width = 90 }: AdjustmentPreviewProps) {
+export function PreviewBeforeAfter({ before, after, value, width = 90 }: AdjustmentPreviewProps) {
   const theme = useTheme();
 
   return (
@@ -26,7 +27,7 @@ export function PreviewBeforeAfter({ after, value, width = 90 }: AdjustmentPrevi
       }
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <img src={previewImageUrl} style={{ width: `${width}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+        {before || <img src={previewImageUrl} style={{ width: `${width}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />}
 
         <Divider orientation="horizontal" sx={{ width: 16 }} />
 

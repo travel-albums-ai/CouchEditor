@@ -45,7 +45,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 175px)',
+        gridTemplateColumns: 'repeat(2, 475px)',
         gap: 1,
       }}>
         {items
@@ -60,7 +60,15 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
+              <Box sx={{
+                boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
+                borderRadius: 2,
+                m: 1,
+                p: 0 }}>
+                <PreviewDemo paletteItem={item} />
+              </Box>
               <NodeToolboxHeader type={item.type}>
+
                 <Tooltip title={<Box>
                   <Box sx={{
                     boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
