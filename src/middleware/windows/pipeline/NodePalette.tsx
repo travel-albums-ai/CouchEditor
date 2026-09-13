@@ -15,7 +15,7 @@ export type NodeStageItem = {
   type: string;
   labelKey: string;
 
-  labelDescription?: string;
+  labelDescription: string;
   icon: React.ReactNode;
   ai?: boolean;
   algo?: any;
@@ -30,22 +30,61 @@ export type NodePaletteItem = NodeStageItem & {
 }
 
 const sourceStages: Array<NodeStageItem> = [
-  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />, },
-  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} /> },
-  { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} /> },
-  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} /> },
-  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} /> },
+  { type: "source", labelKey: "pipelineLocalStorage", icon: <HardDrive size={16} />,
+    processing: 'static',
+    labelDescription: 'Loads the image from disk.',
+  },
+  { type: "hot-folder-read", labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
+    processing: 'static',
+    labelDescription: 'Reads images from a designated hot folder.',
+  },
+  { type: "google-drive", labelKey: "pipelineGoogleDrive", icon: <Cloud size={16} />,
+    processing: 'static',
+    labelDescription: 'Loads images from Google Drive.',
+  },
+  { type: "information", labelKey: "pipelineInformation", icon: <Info size={16} />,
+    processing: 'static',
+    labelDescription: 'Displays information about the image.',
+  },
+  { type: "selected-photo", labelKey: "pipelineSelectedPhoto", icon: <Image size={16} />,
+    processing: 'static',
+    labelDescription: 'Uses the currently selected photo.',
+  },
 ];
 
 const logicStages: Array<NodeStageItem> = [
-  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} /> },
-  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} /> },
-  { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} /> },
-  { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} /> },
-  { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} /> },
-  { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} /> },
-  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} /> },
-  { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} /> },
+  { type: "grouper", labelKey: "pipelineGrouper", icon: <Group size={16} />,
+    processing: 'static',
+    labelDescription: 'Groups images based on specified criteria.',
+  },
+  { type: "array-switch", labelKey: "pipelineArraySwitch", icon: <GitFork size={16} />,
+    processing: 'static',
+    labelDescription: 'Switches between different arrays of images.',
+  },
+  { type: "array-and", labelKey: "pipelineArrayAnd", icon: <GitFork size={16} />,
+    processing: 'static',
+    labelDescription: 'Combines arrays of images using AND logic.',
+  },
+  { type: "array-and-not", labelKey: "pipelineArrayAndNot", icon: <Minus size={16} />,
+    processing: 'static',
+    labelDescription: 'Combines arrays of images using AND NOT logic.',
+  },
+  { type: "array-or", labelKey: "pipelineArrayOr", icon: <Plus size={16} />,
+    processing: 'static',
+    labelDescription: 'Combines arrays of images using OR logic.',
+  },
+  { type: "image-picker", labelKey: "pipelineImagePicker", icon: <CheckSquare size={16} />,
+    processing: 'static',
+    labelDescription: 'Allows selection of a specific image from an array.',
+  },
+  { type: "exif-split", labelKey: "pipelineExifSplit", icon: <FileImage size={16} />,
+    processing: 'static',
+    labelDescription: 'Splits images based on EXIF metadata.',
+  },
+  { type: "gps-split", labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />,
+    processing: 'static',
+    labelDescription: 'Splits images based on GPS metadata.',
+  },
 ]
 
 const transformStages: Array<NodeStageItem> = [
@@ -58,11 +97,17 @@ const transformStages: Array<NodeStageItem> = [
       { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Bottom', key: 'bottom' },
       { min: 0, max: 90, step: 1, defaultValue: 0, labelKey: 'Left', key: 'left' },
     ],
-    processing: 'css',
-    labelDescription: 'Crops the image by rotating it 180 degrees.',
+    processing: 'static',
+    labelDescription: 'Crops the image by specifying the inset from each side.',
   },
-  { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} /> },
-  { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} /> },
+  { type: "rescale", labelKey: "pipelineRescale", icon: <ImageUpscale size={16} />,
+    processing: 'static',
+    labelDescription: 'Rescales the image to the specified dimensions.',
+  },
+  { type: "collage", labelKey: "pipelineCollage", icon: <Images size={16} />,
+    processing: 'static',
+    labelDescription: 'Creates a collage from multiple images.',
+  },
   { type: "rotate", labelKey: "pipelineRotate", icon: <Angle size={16} />,
     algo: (config: any) => ({ transform: `rotate(${config?.amount}deg)` }),
     configs: [
@@ -95,7 +140,7 @@ const transformStages: Array<NodeStageItem> = [
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right X', key: 'bottomRightx' },
       { min: -100, max: 100, step: 1, defaultValue: 0, labelKey: 'Bottom Right Y', key: 'bottomRighty' },
     ],
-    processing: 'css',
+    processing: 'static',
     labelDescription: 'Applies a perspective transformation to the image.',
   },
 ]
@@ -265,7 +310,7 @@ const colorStages: Array<NodeStageItem> = [
   },
   { type: "split-toning", labelKey: "pipelineSplitToning", icon: <Palette size={16} />,
     algo: ({ shadowTint, highlightTint, strength }: { shadowTint: [number, number, number], highlightTint: [number, number, number], strength: number }) =>
-      splitToningStage(shadowTint[0], shadowTint[1], shadowTint[2], highlightTint[0], highlightTint[1], highlightTint[2], strength),
+      splitToningStage(shadowTint?.[0], shadowTint?.[1], shadowTint?.[2], highlightTint?.[0], highlightTint?.[1], highlightTint?.[2], strength),
 
     configs: [
       { min: 0, max: 10, step: 1, defaultValue: 50, labelKey: 'Strength', key: 'strength' }
@@ -343,12 +388,29 @@ const aiStages: Array<NodeStageItem> = [
 ]
 
 const outputStages: Array<NodeStageItem> = [
-  { type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} /> },
-  { type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} /> },
-  { type: "exif-viewer", labelKey: "pipelineExifViewer", icon: <FileImage size={16} /> },
-  { type: "gps-map", labelKey: "pipelineGpsMap", icon: <MapPinned size={16} /> },
-  { type: "photo-histogram", labelKey: "pipelinePhotoHistogram", icon: <ChartColumn size={16} /> },
-  { type: "hot-folder-write", labelKey: "pipelineHotFolder", icon: <FolderOutput size={16} /> },
+  {
+    type: "viewer", labelKey: "pipelinePhotosViewer", icon:<Images size={16} />,
+    processing: 'static', labelDescription: 'Displays multiple photos in a viewer.'
+  },
+  {
+    type: "viewer-single", labelKey: "pipelinePhotoViewer", icon: <Image size={16} />,
+    processing: 'static', labelDescription: 'Displays a single photo in a viewer.'
+  },
+  {
+    type: "exif-viewer", labelKey: "pipelineExifViewer", icon: <FileImage size={16} />,
+    processing: 'static', labelDescription: 'Displays the EXIF metadata of an image.'
+  },
+  {
+    type: "gps-map", labelKey: "pipelineGpsMap", icon: <MapPinned size={16} />,
+    processing: 'static', labelDescription: 'Displays the GPS location of an image on a map.'
+  },
+  {
+    type: "photo-histogram", labelKey: "pipelinePhotoHistogram", icon: <ChartColumn size={16} />,
+    processing: 'static', labelDescription: 'Displays the histogram of an image.'
+  },
+  {
+    type: "hot-folder-write", labelKey: "pipelineHotFolder", icon: <FolderOutput size={16} />,
+    processing: 'static', labelDescription: 'Writes images to a designated hot folder.' },
 ]
 
 export const paletteItems: Array<NodePaletteItem> = [

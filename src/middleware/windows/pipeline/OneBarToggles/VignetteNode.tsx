@@ -66,6 +66,7 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
 
       {paletteItem.configs?.map((config, index) => (
         <AdjustmentSlider
+          key={config.key}
           description={config.labelKey ? <Typography variant="caption" color="textSecondary">{config.labelKey}</Typography> : undefined}
           min={config.min ?? 0}
           max={config.max ?? 100}

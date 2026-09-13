@@ -241,7 +241,7 @@ export default function NodeWrapper({
             filter: isSkipping ? 'blur(2px) grayscale(75%)' : 'none',
             bgcolor: theme =>
               hasUnconnectedHandle
-                ? alpha(theme.palette.secondary.main, 0.05)
+                ? `color-mix(in srgb, ${theme.palette.primary.light} 10%, ${theme.palette.background.paper} 85%)`
                 : alpha(theme.palette.background.paper, 1),
           }}
         >

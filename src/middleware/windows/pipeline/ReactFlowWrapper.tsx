@@ -747,7 +747,7 @@ function Pipeline() {
           deleteKeyCode={["Backspace", "Delete"]}
           zoomOnDoubleClick={false}
         >
-          <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.divider} />
+          <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.primary} />
           <Controls position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
           <MiniMap />
         </ReactFlow>

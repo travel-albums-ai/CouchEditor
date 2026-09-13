@@ -40,6 +40,7 @@ export function createSliderNode(config: SliderNodeConfig) {
           .filter(config => config.min !== config.max)
           .map((config) => (
             <AdjustmentSlider
+              key={config.key}
               description={config.labelKey}
               disabled={isBusy}
               min={config.min || 0}

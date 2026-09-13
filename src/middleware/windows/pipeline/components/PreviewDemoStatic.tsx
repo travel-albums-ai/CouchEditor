@@ -10,9 +10,7 @@ export function PreviewDemoStatic({ paletteItem }: AdjustmentPreviewProps) {
   const theme = useTheme();
 
   const images = {
-    'ask-ai': undefined,
     'ai-colorizer': <img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '4px', border: `1px solid ${theme.palette.divider}` }} />,
-    'ai-photo-editor': undefined,
   }
 
   return (
@@ -32,11 +30,8 @@ export function PreviewDemoStatic({ paletteItem }: AdjustmentPreviewProps) {
         after={images[paletteItem.type] || <></>}
       />}
 
-      {paletteItem.labelDescription && <Typography variant="caption" sx={{ borderTop: '1px solid',
-        borderColor: 'divider',
+      {paletteItem.labelDescription && <Typography variant="caption" sx={{
         flex: 1,
-        px: 1,
-        py: 1,
       }} color="textSecondary">
         {paletteItem.labelDescription}
       </Typography>}

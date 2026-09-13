@@ -47,7 +47,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         display: 'grid',
         alignContent: 'start',
         mb: 2,
-        gridTemplateColumns: 'repeat(2, 440px)',
+        gridTemplateColumns: 'repeat(2, 140px)',
         gap: 1,
       }}>
         {items
@@ -64,16 +64,16 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
             >
               {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />} */}
               {/* {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
-              {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
+              {/* {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
               {item.processing === 'static' && <PreviewDemoStatic paletteItem={item} />}
-              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
+              {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />} */}
 
               <NodeToolboxHeader type={item.type}>
                 <Tooltip title={<Box>
                   <Box sx={{ mx: 1, mb: 2, mt: 1 }}>
                     <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless variant="header" icon={<Pointer />} />
                   </Box>
-
+                  {item.processing === 'static' && <PreviewDemoStatic paletteItem={item} />}
                   {item.processing === 'css' && <PreviewDemoCss paletteItem={item} />}
                   {item.processing === 'math' && <PreviewDemoMath paletteItem={item} />}
 
