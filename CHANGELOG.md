@@ -1,3 +1,9 @@
+## [1.84.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.83.0...v1.84.0) (2026-09-13)
+
+### ✨ Features
+
+* update transform and color stages to use static configs for parameters in AdjustmentSlider components ([8e27f14](https://github.com/travel-albums-ai/CouchEditor/commit/8e27f14a770709e3d6bafe067b4ebc8552dc788c))
+
 ## [1.83.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.82.0...v1.83.0) (2026-09-13)
 
 ### ✨ Features
