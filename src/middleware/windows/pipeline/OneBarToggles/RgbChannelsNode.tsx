@@ -1,6 +1,7 @@
 import AdjustmentSlider from '@/middleware/windows/pipeline/components/AdjustmentSlider';
-import { Box, Typography } from '@mui/material';
-import { type Node, type NodeProps } from '@xyflow/react';
+import { paletteItemsByType } from '@/middleware/windows/pipeline/NodePalette';
+import { Typography } from '@mui/material';
+import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ToneNodeLayout from './ToneNodeLayout';
@@ -20,17 +21,13 @@ type RgbChannelsNodeConfig = {
   defaultValue: number;
 };
 
-const CHANNELS = [
-  { key: 'red', labelKey: 'pipelineRed', color: 'red' },
-  { key: 'green', labelKey: 'pipelineGreen', color: 'green' },
-  { key: 'blue', labelKey: 'pipelineBlue', color: 'blue' },
-] as const;
-
 function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
   function RgbChannelsNode({
     id,
     data,
   }: NodeProps<Node<RgbChannelsData>>) {
+    const paletteItem = paletteItemsByType[config.type];
+    const { setNodes } = useReactFlow();
     const { t } = useTranslation();
     const [values, setValues] = useState({
       red: data.red ?? config.defaultValue,
@@ -39,28 +36,22 @@ function createRgbChannelsNode(config: RgbChannelsNodeConfig) {
     });
 
     return (
-      <ToneNodeLayout id={id} type={config.type} runningConfig={values}>
-        {CHANNELS.map(({ key, labelKey, color }) => (
-          <label key={key}>
-
-            <AdjustmentSlider
-              description={<Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <Box sx={{ backgroundColor: color, width: '16px',
-                  border: '1px solid',
-                  borderColor: 'background.paper',
-                  display: 'inline-block', height: '16px', borderRadius: 4, opacity: 0.5 }} />
-                <Typography variant="caption" color="textSecondary" sx={{ lineHeight: 0 }}>{t(labelKey)}</Typography>
-              </Box>}
-              min={config.min}
-              max={config.max}
-              step={config.step}
-              value={values[key]}
-              onChange={(value) => {
-                Object.assign(data, { [key]: value });
-                setValues((current) => ({ ...current, [key]: value }));
-              }}
-            />
-          </label>
+      <ToneNodeLayout id={id} type={config.type} runningConfig={data}>
+        {paletteItem.configs?.map((config, index) => (
+          <AdjustmentSlider
+            description={<Typography variant="caption" color="textSecondary">{config.labelKey ? config.labelKey : ""}</Typography>}
+            min={config.min ?? 0}
+            max={config.max ?? 100}
+            throttleMs={1000}
+            step={config.step ?? 1}
+            value={data[config.key] ?? 0}
+            onChange={(value) => {
+              setNodes((current) => current.map((node) => node.id === id
+                ? { ...node, data: { ...node.data, [config.key]: value } }
+                : node
+              ));
+            }}
+          />
         ))}
       </ToneNodeLayout>
     );

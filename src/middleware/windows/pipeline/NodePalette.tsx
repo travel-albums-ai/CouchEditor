@@ -125,17 +125,29 @@ const lightStages: Array<NodeStageItem> = [
   },
   { type: "rgb-black-point", labelKey: "pipelineRgbBlackPoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbBlackPointStage(red, green, blue),
-    configs: [{ min: 0, max: 255, step: 1, defaultValue: 0 }],
+    configs: [
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Red', key: 'red' },
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Green', key: 'green' },
+      { min: 0, max: 255, step: 1, defaultValue: 0, labelKey: 'Blue', key: 'blue' }
+    ],
     processing: 'math'
   },
   { type: "rgb-white-point", labelKey: "pipelineRgbWhitePoint", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbWhitePointStage(red, green, blue),
-    configs: [{ min: 0, max: 255, step: 1, defaultValue: 255 }],
+    configs: [
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Red', key: 'red' },
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Green', key: 'green' },
+      { min: 0, max: 255, step: 1, defaultValue: 255, labelKey: 'Blue', key: 'blue' }
+    ],
     processing: 'math'
   },
   { type: "rgb-midtones", labelKey: "pipelineRgbMidtones", icon: <SlidersHorizontal size={16} />,
     algo: ({ red, green, blue }: { red: number, green: number, blue: number }) => rgbMidtonesStage(red, green, blue),
-    configs: [{ min: 0.1, max: 3, step: 0.01, defaultValue: 1 }],
+    configs: [
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Red', key: 'red' },
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Green', key: 'green' },
+      { min: 0.1, max: 3, step: 0.01, defaultValue: 1, labelKey: 'Blue', key: 'blue' }
+    ],
     processing: 'math'
   },
 ]
