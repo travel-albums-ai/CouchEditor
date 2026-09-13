@@ -1,3 +1,9 @@
+## [1.91.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.90.0...v1.91.0) (2026-09-13)
+
+### ✨ Features
+
+* add hue-rotate filter to logo image in Header component ([4c5c70f](https://github.com/travel-albums-ai/CouchEditor/commit/4c5c70f3e115ea81fbb698d371e5f22f84929b66))
+
 ## [1.90.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.89.0...v1.90.0) (2026-09-13)
 
 ### ✨ Features
