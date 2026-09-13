@@ -93,14 +93,14 @@ export function PreviewDemoMath({ paletteItem, width = 90 }: AdjustmentPreviewPr
         />
       </Box>
 
-      <Slider
+      {config?.max !== config?.min && <Slider
         disabled
         size="small"
         value={amount}
         min={typeof config?.min === 'number' ? config.min : 0}
         max={typeof config?.max === 'number' ? config.max : 1}
         step={config?.step ?? 0.01}
-      />
+      />}
 
       <PreviewDescription paletteItem={paletteItem} />
     </Box>
