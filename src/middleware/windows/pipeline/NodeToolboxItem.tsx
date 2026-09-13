@@ -1,6 +1,5 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import { AdjustmentPreview } from '@/middleware/windows/pipeline/components/AdjustmentPreview';
 import { AdjustmentPreviewDemo } from '@/middleware/windows/pipeline/components/AdjustmentPreviewDemo';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import { Box, Tooltip, Typography } from '@mui/material';
@@ -56,7 +55,9 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
               {t('pipelineDragToAdd', { label: t(item.labelKey) })}
               {/* {JSON.stringify(item)}
               {console.log(item)} */}
-              {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
+              {/* {item.processing === 'math' && <AdjustmentPreview amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />} */}
+              {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />}
+
             </>} key={item.type} arrow placement="top">
               <Box
                 key={item.type}
@@ -66,7 +67,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 }
               >
 
-                {item.processing === 'math' && <AdjustmentPreviewDemo item={item} config={item?.config} amount={(item?.config?.max || 1) / 2} algorithm={item.algo} label="Highlights" />}
+                {/* {item.processing === 'math' && <AdjustmentPreviewDemo paletteItem={item} />} */}
 
                 <NodeToolboxHeader
                   type={item.type}
