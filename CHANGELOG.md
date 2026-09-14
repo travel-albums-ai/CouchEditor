@@ -1,3 +1,9 @@
+## [1.104.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.103.0...v1.104.0) (2026-09-14)
+
+### ✨ Features
+
+* add issue templates for bug reports, general feedback, and new field requests ([c038d83](https://github.com/travel-albums-ai/CouchEditor/commit/c038d834f2014fa0d226004bb477bde084532a28))
+
 ## [1.103.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.102.0...v1.103.0) (2026-09-14)
 
 ### ✨ Features
