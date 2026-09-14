@@ -1,3 +1,9 @@
+## [1.107.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.106.0...v1.107.0) (2026-09-14)
+
+### ✨ Features
+
+* wrap SolidChip in Tooltip for enhanced user feedback on processing time ([07000b2](https://github.com/travel-albums-ai/CouchEditor/commit/07000b26f38287cf9452c213061d86b290be3edf))
+
 ## [1.106.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.105.0...v1.106.0) (2026-09-14)
 
 ### ✨ Features
