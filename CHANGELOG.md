@@ -1,3 +1,9 @@
+## [1.101.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.100.0...v1.101.0) (2026-09-14)
+
+### ✨ Features
+
+* add PerformanceSettings component for managing pipeline settings ([cb47055](https://github.com/travel-albums-ai/CouchEditor/commit/cb47055900e18ba1a1e90074ee2f325c4272ba82))
+
 ## [1.100.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.99.0...v1.100.0) (2026-09-13)
 
 ### ✨ Features
