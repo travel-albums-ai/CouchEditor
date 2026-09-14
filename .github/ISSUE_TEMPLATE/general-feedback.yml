@@ -1,0 +1,66 @@
+name: Share general feedback
+description: Share an idea, observation, or suggestion about your CouchEditor experience.
+title: "[Feedback]: "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We would love to hear what is working well and what could feel better. For a specific new field or a reproducible bug, please use the more focused form instead.
+
+  - type: dropdown
+    id: feedback-type
+    attributes:
+      label: Type of feedback
+      options:
+        - User experience
+        - Documentation or onboarding
+        - Performance
+        - Accessibility
+        - Localization
+        - Feature direction
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Your feedback
+      description: What would you like the CouchEditor team to know?
+      placeholder: Tell us what you noticed, liked, or found confusing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What were you trying to accomplish, and who would benefit from an improvement here?
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does this matter to you?
+      options:
+        - Every time I use CouchEditor
+        - Often
+        - Occasionally
+        - This is a one-time observation
+
+  - type: textarea
+    id: suggestions
+    attributes:
+      label: Suggested improvement
+      description: If you have an idea for a better experience, describe it here.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues for related feedback.
+          required: true
+        - label: I have removed private information from screenshots, files, and examples.
+          required: true

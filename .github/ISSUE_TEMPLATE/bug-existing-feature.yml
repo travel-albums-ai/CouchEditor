@@ -1,0 +1,95 @@
+name: Report a bug in an existing feature
+description: Tell us about a feature that is not behaving as expected.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please include enough detail for someone else to reproduce it.
+
+  - type: dropdown
+    id: feature-area
+    attributes:
+      label: Affected feature
+      options:
+        - Photo input or thumbnails
+        - Pipeline canvas or connections
+        - Editing node
+        - Viewer or export
+        - Saved pipelines or .cep files
+        - Settings or appearance
+        - AI feature
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: CouchEditor version
+      description: Include the version shown by the application or the release you are using.
+      placeholder: "For example, 1.102.0"
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and operating system
+      placeholder: "For example, Firefox 142 on Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the smallest set of steps that reliably shows the problem.
+      placeholder: |
+        1. Open...
+        2. Add...
+        3. Select...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include any error messages.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction file or additional details
+      description: If relevant, attach a minimal .cep file or describe the photo format and pipeline setup. Do not attach private photos or secrets.
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or screen recording
+      description: Add visual evidence if it helps explain the problem.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues for a duplicate.
+          required: true
+        - label: This report is about an existing feature that is not working correctly.
+          required: true
+        - label: I have removed private information from attachments and logs.
+          required: true

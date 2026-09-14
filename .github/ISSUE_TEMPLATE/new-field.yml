@@ -1,0 +1,73 @@
+name: Request a new field
+description: Suggest a field or parameter that would make CouchEditor more useful.
+title: "[Field]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve CouchEditor. Please search existing issues before opening a new request.
+
+  - type: input
+    id: field-name
+    attributes:
+      label: Field or parameter name
+      description: What should the new field be called?
+      placeholder: For example, "Output quality"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where should this field appear?
+      options:
+        - Pipeline node
+        - Pipeline settings
+        - Photo or album metadata
+        - Export or output
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What workflow or limitation would this field address?
+      placeholder: Describe what is difficult or impossible today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-behavior
+    attributes:
+      label: Proposed behavior
+      description: Explain what the field should control and how it should work.
+      placeholder: Describe the expected input, default value, and effect.
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example use case
+      description: Share a concrete editing workflow where this field would help.
+      placeholder: "For example: when exporting web images, I would use this to..."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What workarounds or related features have you tried?
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues for a similar request.
+          required: true
+        - label: This request is about adding a field or parameter, not reporting a bug.
+          required: true
