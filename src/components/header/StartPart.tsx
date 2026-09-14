@@ -1,5 +1,6 @@
 import SolidChip from '@/components/SolidChip';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
+import { PartyPopper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function StartPart() {
@@ -25,6 +26,13 @@ export default function StartPart() {
         </Box>
         <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1, letterSpacing: -0.35, }}>{t('headerTagline')}</Typography>
       </Box>
+      <Tooltip title={'Share feedback with the developer'} arrow>
+        <a href="https://github.com/travel-albums-ai/CouchEditor/issues/new?template=general-feedback.yml" target="_blank" rel="noopener noreferrer">
+          <Button color="secondary" sx={{ minWidth: 'unset' }} >
+            <PartyPopper  />
+          </Button>
+        </a>
+      </Tooltip>
     </Box>
   );
 }
