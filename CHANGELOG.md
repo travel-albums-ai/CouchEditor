@@ -1,3 +1,9 @@
+## [1.105.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.104.0...v1.105.0) (2026-09-14)
+
+### ✨ Features
+
+* enhance EndPart and StartPart with issue reporting and feedback buttons ([d008c9c](https://github.com/travel-albums-ai/CouchEditor/commit/d008c9c378b4766583b75b3e07c502ab51e60bca))
+
 ## [1.104.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.103.0...v1.104.0) (2026-09-14)
 
 ### ✨ Features
