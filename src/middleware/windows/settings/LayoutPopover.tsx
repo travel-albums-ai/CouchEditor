@@ -1,13 +1,11 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
 import LocaleToggle from '@/middleware/tools/MixedTools/LocaleToggle';
 import ThemeMenu from '@/middleware/tools/PopoverTools/ThemeMenu';
-import SettingFieldRow from '@/middleware/windows/settings/components/SettingFieldRow';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
-import { Cpu, Languages, PaintBucket } from 'lucide-react';
+import { Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -33,11 +31,6 @@ export default function LayoutPopover() {
   const { setSetting: setCardSetting } = useAlbumPhotoCard()
   const cardSettings = useAlbumPhotoCardStoreSelector((state) => state)
   const { t } = useTranslation()
-  const { setSetting } = useSettings()
-  const pipelineMaxConcurrentTasks = useSettingsStoreSelector((state) => state.pipelineMaxConcurrentTasks)
-  const pipelinePhotoBatchSize = useSettingsStoreSelector((state) => state.pipelinePhotoBatchSize)
-  const pipelineMaxAIRequests = useSettingsStoreSelector((state) => state.pipelineMaxAIRequests)
-  const pipelineAICallDelayMs = useSettingsStoreSelector((state) => state.pipelineAICallDelayMs)
 
   return <>
     {groups.map((group) => (
@@ -59,62 +52,5 @@ export default function LayoutPopover() {
           ))}
       </SettingsSection>
     ))}
-
-    <SettingsSection title={t('pipelineSettingsSection')} icon={<Cpu />}>
-      <SettingFieldRow
-        label={t('pipelineMaxConcurrentTasks')}
-        value={String(pipelineMaxConcurrentTasks)}
-        onChange={(value) => {
-          const parsed = Number.parseInt(value, 10)
-          if (Number.isNaN(parsed)) return
-
-          setSetting((prev) => ({
-            ...prev,
-            pipelineMaxConcurrentTasks: Math.max(1, Math.min(32, parsed)),
-          }))
-        }}
-      />
-      <SettingFieldRow
-        label={t('pipelinePhotoBatchSize')}
-        value={String(pipelinePhotoBatchSize)}
-        onChange={(value) => {
-          const parsed = Number.parseInt(value, 10)
-          if (Number.isNaN(parsed)) return
-
-          setSetting((prev) => ({
-            ...prev,
-            pipelinePhotoBatchSize: Math.max(1, Math.min(100, parsed)),
-          }))
-        }}
-      />
-      <SettingFieldRow
-        label={t('pipelineMaxAIRequests')}
-        value={String(pipelineMaxAIRequests)}
-        onChange={(value) => {
-          const parsed = Number.parseInt(value, 10)
-          if (Number.isNaN(parsed)) return
-
-          setSetting((prev) => ({
-            ...prev,
-            pipelineMaxAIRequests: Math.max(1, Math.min(32, parsed)),
-          }))
-        }}
-      />
-      <SettingFieldRow
-        label={t('pipelineAICallDelayMs')}
-        value={String(pipelineAICallDelayMs)}
-        onChange={(value) => {
-          const parsed = Number.parseInt(value, 10)
-          if (Number.isNaN(parsed)) return
-
-          setSetting((prev) => ({
-            ...prev,
-            pipelineAICallDelayMs: Math.max(0, Math.min(10000, parsed)),
-          }))
-        }}
-      />
-    </SettingsSection>
-
-
   </>
 }

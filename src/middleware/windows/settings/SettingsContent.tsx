@@ -3,8 +3,9 @@ import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import AICostsPopover from '@/middleware/windows/settings/AICostsPopover';
 import BYOKPopover from '@/middleware/windows/settings/BYOKPopover';
 import LayoutPopover from '@/middleware/windows/settings/LayoutPopover';
+import PerformanceSettings from '@/middleware/windows/settings/PerformanceSettings';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { Astroid, Brain, Bug, Dock, GalleryVerticalEnd, Info, Proportions, Shapes } from 'lucide-react';
+import { Astroid, Brain, Bug, Dock, GalleryVerticalEnd, Info, Proportions, Shapes, Turtle } from 'lucide-react';
 import { cloneElement, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -43,6 +44,7 @@ export default function SettingsContent() {
 
   const sections = useMemo(() => [
     { key: 'layout', titleKey: 'settingsInterfaceTitle', component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
+    { key: 'performance', titleKey: 'settingsPerformanceTitle', component: <PerformanceSettings />, icon: <Turtle size={16} />, guidance: t('performanceGuidance') },
     { key: 'byok', group: 'ai', titleKey: 'settingsByokTitle', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidance') },
     { key: 'costs', group: 'ai', titleKey: 'settingsByokCosts', component: <AICostsPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidanceCosts') },
   ], [t])
