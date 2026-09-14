@@ -1,3 +1,9 @@
+## [1.103.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.102.0...v1.103.0) (2026-09-14)
+
+### ✨ Features
+
+* add button to open issue in EndPart component ([e0056c6](https://github.com/travel-albums-ai/CouchEditor/commit/e0056c61ff8b2417ea8393747674fbc082220666))
+
 ## [1.102.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.101.0...v1.102.0) (2026-09-14)
 
 ### ✨ Features
