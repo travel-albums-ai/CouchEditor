@@ -1,3 +1,9 @@
+## [1.102.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.101.0...v1.102.0) (2026-09-14)
+
+### ✨ Features
+
+* refactor Header component into StartPart, MiddlePart, and EndPart subcomponents ([c184ad7](https://github.com/travel-albums-ai/CouchEditor/commit/c184ad7d76af1cecf331505d28f93effa97aa780))
+
 ## [1.101.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.100.0...v1.101.0) (2026-09-14)
 
 ### ✨ Features
