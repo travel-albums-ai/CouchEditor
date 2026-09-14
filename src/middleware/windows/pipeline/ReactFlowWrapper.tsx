@@ -24,12 +24,12 @@ import {
   useState,
 } from "react";
 
+import Header from '@/components/Header';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
-import Header from '@/middleware/windows/pipeline/components/Header';
 import NodeToolbox from "./NodeToolbox";
 import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
