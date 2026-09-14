@@ -1,3 +1,9 @@
+## [1.108.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.107.0...v1.108.0) (2026-09-14)
+
+### ✨ Features
+
+* add CouchEditor WebMCP Inspector agent and skill documentation ([3d6e966](https://github.com/travel-albums-ai/CouchEditor/commit/3d6e9667cdf1f47c353eccdbe8dadf722fd9bb5a))
+
 ## [1.107.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.106.0...v1.107.0) (2026-09-14)
 
 ### ✨ Features
