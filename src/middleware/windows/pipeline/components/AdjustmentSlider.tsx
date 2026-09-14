@@ -64,7 +64,23 @@ export default function AdjustmentSlider({
         max={max}
         disabled={disabled}
         step={step}
-        sx={{ width: 'auto', flex: 1, mx: 1, mr: 2, opacity: disabled ? 0.5 : 1 }}
+        sx={{
+          width: 'auto', flex: 1, mx: 1, mr: 2, opacity: disabled ? 0.5 : 1,
+          '& .MuiSlider-thumb': {
+            width: 20,
+            height: 16,
+            borderRadius: 4,
+          },
+          '& .MuiSlider-track': {
+            border: 'none',
+            height: 8,
+          },
+          '& .MuiSlider-rail': {
+            height: 8,
+            opacity: 0.2
+          },
+
+        }}
         value={value}
         onChange={(_, nextValue) => {
           const nextAmount = Array.isArray(nextValue) ? nextValue[0] : nextValue;
