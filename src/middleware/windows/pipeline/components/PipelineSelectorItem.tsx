@@ -35,17 +35,22 @@ export default function PipelineSelectorItem({
           <Typography
             variant="caption"
             color="inherit"
-            sx={{ overflow: 'hidden', width: '80px', textOverflow: 'ellipsis', fontWeight: 'bold', whiteSpace: 'wrap', flex: 1, cursor: 'default' }}
+            sx={{ overflow: 'hidden', width: '80px', textOverflow: 'ellipsis', whiteSpace: 'wrap', flex: 1, cursor: 'default' }}
           >
             {pipeline.name}
           </Typography>
           <Tooltip title="Open selected pipeline" arrow>
-            <Button variant="contained" sx={{
+            <Button variant="contained" disableElevation sx={{
               minWidth: 'unset',
+              boxShadow: 0,
               borderRadius: 10,
-              padding: '4px',
+              padding: 1,
               bgcolor: theme => alpha(theme.palette.primary.main, 0.1),
               color: theme => theme.palette.primary.main,
+              '&:hover': {
+                bgcolor: theme => alpha(theme.palette.primary.main, 0.2),
+                boxShadow: 1,
+              }
             }} onClick={onClick}>
               <ArrowRight size={16} />
             </Button>

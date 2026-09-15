@@ -127,6 +127,8 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
         paper: ({ theme }) => ({
           backgroundColor: `${theme.palette.background.paper}BD`,
           backdropFilter: 'blur(16px)',
+          borderRadius: Number(theme.shape.borderRadius) * 3,
+          boxShadow: `0px 3px 12px -3px ${theme.palette.primary.main}`,
         }),
       },
     },

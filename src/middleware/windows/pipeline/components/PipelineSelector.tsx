@@ -27,6 +27,30 @@ export default function PipelineSelector({
     setAnchorEl(null);
   };
 
+  const pipelineGroupings = [
+    {
+      name: 'Sample & Starters',
+      description: "Ready to use pipelines for common workflows",
+      icon: <Astroid />,
+      data: pipelines.length > 0 && pipelines
+        .filter(p => p.type === 'sample')
+    },
+    {
+      name: 'Instagram-like Inspirations',
+      description: "Pipelines inspired by Instagram's style",
+      icon: <Camera />,
+      data: pipelines.length > 0 && pipelines
+        .filter(p => p.type === 'instagram')
+    },
+    {
+      name: 'User-Created Pipelines',
+      description: "Pipelines created by users",
+      icon: <User />,
+      data: pipelines.length > 0 && pipelines
+        .filter(p => p.type === 'user')
+    }
+  ]
+
   return (
     <>
       <ButtonBase
@@ -114,29 +138,18 @@ export default function PipelineSelector({
               </Box>
             </Box>
 
-            <PipelineSelectorItems title="Sample Pipelines" icon={<Astroid />} description="Ready to use pipelines for common workflows">
-              {pipelines.length > 0 && pipelines
-                .filter(p => p.type === 'sample')
-                .map((pipeline) => (
+            {pipelineGroupings.map((grouping) => (
+              <PipelineSelectorItems
+                key={grouping.name}
+                title={grouping.name}
+                icon={grouping.icon}
+                description={grouping.description}
+              >
+                {grouping.data.map((pipeline) => (
                   <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
                 ))}
-            </PipelineSelectorItems>
-
-            <PipelineSelectorItems title="Instagram-Like Pipelines" icon={<Camera />} description="Pipelines inspired by Instagram's style">
-              {pipelines.length > 0 && pipelines
-                .filter(p => p.type === 'instagram')
-                .map((pipeline) => (
-                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
-                ))}
-            </PipelineSelectorItems>
-
-            <PipelineSelectorItems title="User Pipelines" icon={<User />} description="Pipelines created by the user">
-              {pipelines.length > 0 && pipelines
-                .filter(p => p.type !== 'sample' && p.type !== 'instagram')
-                .map((pipeline) => (
-                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
-                ))}
-            </PipelineSelectorItems>
+              </PipelineSelectorItems>
+            ))}
           </Box>
         </Box>
       </Popover>

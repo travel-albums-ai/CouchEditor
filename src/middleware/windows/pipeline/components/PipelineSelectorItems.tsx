@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Chip, Typography, useTheme } from '@mui/material';
 import { cloneElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -26,8 +26,7 @@ export default function PipelineSelectorItems({
         display: 'flex', flexDirection: 'column', gap: 0
       }}
     >
-
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1, pb: 1.5 }} onClick={() => setCollapse(!collapse)}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1, pb: 1.5 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {icon && cloneElement(icon as any, { color: theme.palette.primary.main })}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -39,9 +38,12 @@ export default function PipelineSelectorItems({
             </Typography>}
           </Box>
         </Box>
-        <Button variant="outlined" size="small">
-          View All
-        </Button>
+        <Chip
+          onClick={() => setCollapse(!collapse)}
+          color="primary"
+          label="View All"
+          variant="outlined"
+        />
       </Box>
 
       {!collapse && <>
