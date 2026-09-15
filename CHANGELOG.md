@@ -1,3 +1,9 @@
+## [1.125.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.124.0...v1.125.0) (2026-09-15)
+
+### ✨ Features
+
+* implement PipelineStageProgress component and update RenderingProgress to use it ([4bff655](https://github.com/travel-albums-ai/CouchEditor/commit/4bff6555479be0ddb8dd8b61910bc5d93e7cea19))
+
 ## [1.124.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.123.0...v1.124.0) (2026-09-15)
 
 ### ✨ Features
