@@ -1,3 +1,9 @@
+## [1.131.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.130.0...v1.131.0) (2026-09-15)
+
+### ✨ Features
+
+* update onboarding screens with new layout and styling enhancements ([2788a7f](https://github.com/travel-albums-ai/CouchEditor/commit/2788a7fccaeb8d790fa17d6ae8a9aae11d239f14))
+
 ## [1.130.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.129.0...v1.130.0) (2026-09-15)
 
 ### ✨ Features
