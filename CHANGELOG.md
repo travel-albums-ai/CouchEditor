@@ -1,3 +1,9 @@
+## [1.122.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.121.0...v1.122.0) (2026-09-15)
+
+### ✨ Features
+
+* update NodeToolbox and NodeHeaderGrid styles for improved layout and spacing ([478aa5f](https://github.com/travel-albums-ai/CouchEditor/commit/478aa5f847d05fb8ae316cd5f126ee412c947da4))
+
 ## [1.121.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.120.0...v1.121.0) (2026-09-15)
 
 ### ✨ Features
