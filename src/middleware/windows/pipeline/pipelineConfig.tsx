@@ -17,6 +17,7 @@ import HotFolderReadNode from './ComplexNodes/HotFolderReadNode';
 import HotFolderWriteNode from './ComplexNodes/HotFolderWriteNode';
 import ImagePickerNode from './ComplexNodes/ImagePickerNode';
 import LutNode from './ComplexNodes/LutNode';
+import MergeChannelsNode from './ComplexNodes/MergeChannelsNode';
 import PhotoHistogramNode from './ComplexNodes/PhotoHistogramNode';
 import RescaleNode from './ComplexNodes/RescaleNode';
 import SelectedPhotoNode from './ComplexNodes/SelectedPhotoNode';
@@ -122,6 +123,7 @@ export const pipelineNodeTypes = {
   'gps-map': GpsMapNode,
   'gps-split': GpsSplitNode,
   'split-channels': SplitChannelsNode,
+  'merge-channels': MergeChannelsNode,
   'photo-histogram': PhotoHistogramNode,
   'hot-folder-write': HotFolderWriteNode,
   information: InformationNode,

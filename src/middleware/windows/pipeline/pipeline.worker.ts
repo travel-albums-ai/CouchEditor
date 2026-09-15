@@ -600,6 +600,56 @@ function splitChannels(
   }));
 }
 
+function mergeChannels(
+  channelInputs: Record<"red" | "green" | "blue" | "alpha", WorkerImage[]>,
+  evaluationId: number
+): Promise<WorkerImage[]> {
+  const channelNames = ["red", "green", "blue", "alpha"] as const;
+  const imageCount = Math.max(...channelNames.map((channel) => channelInputs[channel].length));
+
+  return mapWithConcurrency(
+    Array.from({ length: imageCount }, (_, index) => index),
+    evaluationId,
+    async (index) => {
+      const channelImages = channelNames.map((channel) => channelInputs[channel][index]);
+      const base = channelImages.find((image): image is WorkerImage => image !== undefined);
+
+      if (!base) {
+        throw new Error("Cannot merge an empty channel set");
+      }
+
+      const channelPixels = channelImages.map((image) => {
+        if (!image) return undefined;
+
+        const [, channelContext] = createCanvas(base.width, base.height);
+        channelContext.drawImage(image.bitmap, 0, 0, base.width, base.height);
+        return channelContext.getImageData(0, 0, base.width, base.height).data;
+      });
+      const imageData = new Uint8ClampedArray(base.width * base.height * 4);
+
+      for (let pixel = 0; pixel < imageData.length; pixel += 4) {
+        imageData[pixel] = channelPixels[0]?.[pixel] ?? 0;
+        imageData[pixel + 1] = channelPixels[1]?.[pixel + 1] ?? 0;
+        imageData[pixel + 2] = channelPixels[2]?.[pixel + 2] ?? 0;
+        imageData[pixel + 3] = channelPixels[3]?.[pixel] ?? 255;
+      }
+
+      const [canvas, context] = createCanvas(base.width, base.height);
+      const output = context.createImageData(base.width, base.height);
+      output.data.set(imageData);
+      context.putImageData(output, 0, 0);
+
+      return {
+        bitmap: canvas.transferToImageBitmap(),
+        width: base.width,
+        height: base.height,
+        name: base.name?.replace(/-(red|green|blue|alpha)$/, "") ?? "image",
+        exif: base.exif,
+      };
+    }
+  );
+}
+
 type Point = { x: number; y: number };
 
 function drawTriangle(
@@ -1423,6 +1473,25 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       }
 
       return splitChannels(sources, inputs.evaluationId as number);
+    },
+  },
+
+  "merge-channels": {
+    async execute(inputs) {
+      const channelInputs = {
+        red: Array.isArray(inputs.red) ? inputs.red as WorkerImage[] : [],
+        green: Array.isArray(inputs.green) ? inputs.green as WorkerImage[] : [],
+        blue: Array.isArray(inputs.blue) ? inputs.blue as WorkerImage[] : [],
+        alpha: Array.isArray(inputs.alpha) ? inputs.alpha as WorkerImage[] : [],
+      };
+
+      if (Object.values(channelInputs).every((images) => images.length === 0)) {
+        return { image: [] };
+      }
+
+      return {
+        image: await mergeChannels(channelInputs, inputs.evaluationId as number),
+      };
     },
   },
 

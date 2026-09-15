@@ -16,6 +16,7 @@ export enum NodeType {
   ExifSplit = 'exif-split',
   GpsSplit = 'gps-split',
   SplitChannels = 'split-channels',
+  MergeChannels = 'merge-channels',
   Crop = 'crop',
   Rescale = 'rescale',
   Collage = 'collage',
@@ -182,6 +183,12 @@ const logicStages: Array<NodeStageItem> = [
     labelKey: "pipelineSplitChannels", icon: <Slice size={16} />,
     processing: 'static',
     labelDescription: 'pipelineSplitChannelsNodeDescription',
+  },
+  {
+    type: NodeType.MergeChannels,
+    labelKey: "pipelineMergeChannels", icon: <Slice size={16} />,
+    processing: 'static',
+    labelDescription: 'pipelineMergeChannelsNodeDescription',
   },
 ]
 
