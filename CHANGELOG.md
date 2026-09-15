@@ -1,3 +1,9 @@
+## [1.121.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.120.0...v1.121.0) (2026-09-15)
+
+### ✨ Features
+
+* implement NodeHeaderGrid component and integrate with NodeToolboxItem for grid layout support ([b85322f](https://github.com/travel-albums-ai/CouchEditor/commit/b85322f2d52698c39124a66b75edff526cd4cb39))
+
 ## [1.120.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.119.0...v1.120.0) (2026-09-15)
 
 ### ✨ Features
