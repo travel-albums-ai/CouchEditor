@@ -46,10 +46,10 @@ export default function BYOKPopover() {
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', opacity: 0.5 }}>
           <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">
-            <Button color="inherit" size="small" startIcon={<ScrollText size={16} />} variant="outlined">Costs</Button>
+            <Button sx={{ color: 'text.primary'}} size="small" startIcon={<ScrollText size={16} />} variant="text">Costs</Button>
           </a>
           <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer">
-            <Button color="inherit" size="small" startIcon={<Coins size={16} />} variant="outlined">Usage</Button>
+            <Button sx={{ color: 'text.primary'}} size="small" startIcon={<Coins size={16} />} variant="text">Usage</Button>
           </a>
         </Box>
         <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
