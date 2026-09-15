@@ -32,11 +32,11 @@ export default function SectionHeader({
         backgroundPosition: 'right',
         backgroundRepeat: 'no-repeat',
       }}>
-        <Box sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', ...sx }}>
+        <Box sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'flex-start', ...sx }}>
           {icon && createElement(icon, { size: iconSize, color: theme.palette.primary.main })}
           <Box sx={{ borderRadius: 4, display: 'flex', flexDirection: 'column', gap: 0.25 }}>
             <Typography color="textPrimary" variant="h6">{title}</Typography>
-            <Typography color="textSecondary" variant="caption" sx={{ whiteSpace: 'wrap', width: '400px', display: 'block' }}>{subTitle}</Typography>
+            <Typography color="textSecondary" variant="caption" sx={{ whiteSpace: 'wrap', maxWidth: '400px', display: 'block' }}>{subTitle}</Typography>
           </Box>
         </Box>
       </Box>

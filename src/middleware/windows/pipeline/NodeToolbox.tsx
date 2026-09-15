@@ -39,9 +39,9 @@ export default function NodeToolbox() {
       p: 1,
     }}>
       <SectionHeader
-        sx={{ m: 0, p: 0, mb: 2, py: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}
+        sx={{ m: 0, p: 0, mb: 2, py: 2 }}
         image="header_toolbox.png"
-        bgSize="345px"
+        bgSize="305px"
         icon={GripVertical}
         iconSize={32}
         title="Add a node"
