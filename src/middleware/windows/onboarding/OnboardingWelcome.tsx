@@ -1,5 +1,4 @@
 import OnboardingPhasesListHorizontal from '@/middleware/windows/onboarding/OnboardingPhasesListHorizontal';
-import OnboardingWrapper from '@/middleware/windows/onboarding/OnboardingWrapper';
 import { Box, Typography } from '@mui/material';
 import { Astroid, GlobeOff, Save, Workflow } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -35,30 +34,26 @@ export default function OnboardingWelcome() {
   const { t } = useTranslation();
 
   return (<>
-    <OnboardingWrapper>
-      <img
-        src="./couchLogoMedium.png"
-        alt={t('logoAlt')}
-        fetchPriority="high"
-        width={340}
-        height={226}
-        style={{
-          width: 340,
-          height: 226,
-          margin: 20
-        }}
-      />
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, mb: 1 }}>
-        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)', fontFamily: 'cursive' }} variant="h6" color="textPrimary">
-          {t('couchEditor')}
-        </Typography>
-        <Typography sx={{ textAlign: 'center', userSelect: 'none', textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }} variant="body1" color="textPrimary">
-          {t('couchEditorTagline')}
-        </Typography>
+    <Box sx={{
+      position: 'relative',
+      backgroundImage: `url(./welcome.png)`,
+      backgroundSize: '400px',
+      backgroundPosition: 'right',
+      backgroundRepeat: 'no-repeat',
+    }}>
+      <Box sx={{ py: 6, pl: 4, display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
+        <Box sx={{ borderRadius: 4, display: 'flex', flexDirection: 'column', gap: 0.25 }}>
+          <Typography color="textSecondary" variant="subtitle2" sx={{ pb: 2 }}>WELCOME TO</Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5 }}>
+            <Typography color="textPrimary" variant="h3" sx={{ fontWeight: 'bold' }}>Couch</Typography>
+            <Typography color="primary" variant="h3" sx={{ fontWeight: 'bold' }}>Editor</Typography>
+          </Box>
+          <Typography color="textSecondary" variant="h6" sx={{ whiteSpace: 'wrap', width: '300px', display: 'block' }}>{t('couchEditorTagline')}</Typography>
+          <Typography color="textDisabled" variant="caption" sx={{ whiteSpace: 'wrap', width: '300px', mt: 2, display: 'block' }}>A powerfull, offline-first photo editor that runs locally on your computer. No uploads, no limits. Just creativity</Typography>
+        </Box>
       </Box>
-    </OnboardingWrapper>
+    </Box>
 
     <OnboardingPhasesListHorizontal phaseSteps={phaseSteps} />
-
   </>)
 }
