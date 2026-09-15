@@ -1,3 +1,9 @@
+## [1.126.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.126.0...v1.126.1) (2026-09-15)
+
+### 🐛 Fixes
+
+* adjust SectionHeader styles and background size in NodeToolbox ([57cfdae](https://github.com/travel-albums-ai/CouchEditor/commit/57cfdae0dcfb20408c44d10c45ab8eea9938732f))
+
 ## [1.126.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.125.0...v1.126.0) (2026-09-15)
 
 ### ✨ Features
