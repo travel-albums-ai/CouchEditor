@@ -45,7 +45,7 @@ export default function OnboardingWelcome() {
         <Box sx={{ borderRadius: 4, display: 'flex', flexDirection: 'column', gap: 0.25 }}>
           <Typography color="textSecondary" variant="subtitle2" sx={{ pb: 2 }}>WELCOME TO</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5 }}>
-            <Typography color="textPrimary" variant="h3" sx={{ fontWeight: 'bold' }}>Couch</Typography>
+            <Typography color="textPrimary" variant="h3" sx={{ }}>Couch</Typography>
             <Typography color="primary" variant="h3" sx={{ fontWeight: 'bold' }}>Editor</Typography>
           </Box>
           <Typography color="textSecondary" variant="h6" sx={{ whiteSpace: 'wrap', width: '300px', display: 'block' }}>{t('couchEditorTagline')}</Typography>

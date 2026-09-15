@@ -19,8 +19,8 @@ export default function StartPart() {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
-            <Typography sx={{ color: 'primary.main', letterSpacing: -1, fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch</Typography>
-            <Typography color="textSecondary" sx={{ fontSize: 17, letterSpacing: -1, lineHeight: 1 }}>Editor</Typography>
+            <Typography color="textSecondary" sx={{ letterSpacing: -1,  fontSize: 17, lineHeight: 1 }}>Couch</Typography>
+            <Typography color="primary" sx={{ fontSize: 17, letterSpacing: -1, lineHeight: 1, fontWeight: 'bold', }}>Editor</Typography>
           </Box>
           <SolidChip label={t('beta')} variant="important" />
         </Box>
