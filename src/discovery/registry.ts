@@ -1,5 +1,3 @@
-import type { ComponentType } from 'react';
-
 export class BaseRegistry<T extends { id: string }> {
   protected items = new Map<string, T>();
 
@@ -36,44 +34,5 @@ export class BaseRegistry<T extends { id: string }> {
 
   all() {
     return [...this.items.values()];
-  }
-}
-
-export class AsyncComponentRegistry<T extends { loader: () => Promise<{ default: ComponentType }> }> extends BaseRegistry<T> {
-  private componentCache = new WeakMap<T['loader'], ComponentType>();
-  private preloadCache = new WeakMap<T['loader'], Promise<ComponentType>>();
-
-  async preload(meta: T) {
-    const cached = this.componentCache.get(meta.loader);
-
-    if (cached) {
-      return cached;
-    }
-
-    const inFlight = this.preloadCache.get(meta.loader);
-
-    if (inFlight) {
-      return inFlight;
-    }
-
-    const loading = meta.loader()
-      .then((mod) => {
-        this.componentCache.set(meta.loader, mod.default);
-        return mod.default;
-      })
-      .finally(() => {
-        this.preloadCache.delete(meta.loader);
-      });
-
-    this.preloadCache.set(meta.loader, loading);
-    return loading;
-  }
-
-  preloadAll(metas: T[]) {
-    return Promise.all(metas.map((meta) => this.preload(meta)));
-  }
-
-  resolve(meta: T) {
-    return this.componentCache.get(meta.loader) ?? null;
   }
 }
