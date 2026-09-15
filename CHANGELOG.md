@@ -1,3 +1,9 @@
+## [1.133.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.132.0...v1.133.0) (2026-09-15)
+
+### ✨ Features
+
+* update button styles in BYOKPopover for improved visibility ([8952e0e](https://github.com/travel-albums-ai/CouchEditor/commit/8952e0e8c862d77e04b8cbb80684a27189a2ca22))
+
 ## [1.132.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.131.0...v1.132.0) (2026-09-15)
 
 ### ✨ Features
