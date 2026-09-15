@@ -29,7 +29,8 @@ export type CurrentPipeline = PipelineGraph & {
 type PipelineStore = {
   pipelines: SavedPipeline[]
   currentPipeline: CurrentPipeline
-  showToolbox: boolean
+  showToolbox: boolean,
+  toolboxAsGrid: boolean,
   searchTermToolbox: string
   collapsedToolboxGroups: Record<string, boolean>
 }
@@ -59,6 +60,7 @@ const defaults: PipelineStore = {
     isDirty: false,
   },
   showToolbox: true,
+  toolboxAsGrid: false,
   searchTermToolbox: '',
   collapsedToolboxGroups: {}
 }
@@ -102,6 +104,7 @@ export const usePipelineStore = () => {
 
   return {
     setState,
+    toolboxAsGrid: store.toolboxAsGrid,
     pipelines: store.pipelines,
     currentPipeline: store.currentPipeline,
     setCurrentPipeline: (currentPipeline: CurrentPipeline | ((prev: CurrentPipeline) => CurrentPipeline)) =>
