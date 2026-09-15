@@ -1,3 +1,9 @@
+## [1.126.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.125.0...v1.126.0) (2026-09-15)
+
+### ✨ Features
+
+* add SectionHeader component for displaying section titles with background images and icons ([87ba069](https://github.com/travel-albums-ai/CouchEditor/commit/87ba06937fad4e65ce5e3a138f9a9b593e288272))
+
 ## [1.125.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.124.0...v1.125.0) (2026-09-15)
 
 ### ✨ Features
