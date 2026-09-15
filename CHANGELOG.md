@@ -1,3 +1,9 @@
+## [1.128.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.127.0...v1.128.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance HelpContent with SectionHeader and dynamic group selection for improved user experience ([1070eb9](https://github.com/travel-albums-ai/CouchEditor/commit/1070eb9d03f59c250962a7e29bf85f1300e9ee89))
+
 ## [1.127.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.126.1...v1.127.0) (2026-09-15)
 
 ### ✨ Features
