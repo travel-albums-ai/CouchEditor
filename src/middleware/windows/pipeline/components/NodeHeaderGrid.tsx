@@ -62,6 +62,9 @@ function NodeHeaderGrid({
           gap: 0.25,
           p: 0.65,
           bgcolor: `color-mix(in srgb, color-mix(in srgb, ${stc(paletteItem?.type)} 100%, ${stc(paletteItem?.groupKey)} 20%) 8%, transparent 0%)`,
+          '&:hover': {
+            bgcolor: `color-mix(in srgb, color-mix(in srgb, ${stc(paletteItem?.type)} 100%, ${stc(paletteItem?.groupKey)} 20%) 12%, transparent 0%)`,
+          },
         },
         sx,
       ]}

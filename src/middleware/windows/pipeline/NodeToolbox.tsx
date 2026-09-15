@@ -4,8 +4,8 @@ import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import ToggleToolboxShape from '@/middleware/tools/ActionTools/ToggleToolboxShape';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import NodeToolboxItem from '@/middleware/windows/pipeline/NodeToolboxItem';
-import { Box, InputAdornment, TextField, Typography } from '@mui/material';
-import { Search } from 'lucide-react';
+import { Box, InputAdornment, TextField, Typography, useTheme } from '@mui/material';
+import { GripVertical, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function NodeToolbox() {
@@ -13,6 +13,7 @@ export default function NodeToolbox() {
   const searchTermToolbox = usePipelineStoreSelector((state) => state.searchTermToolbox)
   const { setState } = usePipelineStore()
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
@@ -36,12 +37,17 @@ export default function NodeToolbox() {
       overflow: 'hidden',
       p: 1,
     }}>
-      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-          <Typography color="textPrimary" sx={{ fontWeight: 'bold', fontSize: 18, letterSpacing: -0.5, lineHeight: 1 }}>Add a node</Typography>
-          <Typography variant="caption" color="textSecondary">Drag to the canvas to add it</Typography>
+      <Box sx={{ mb: 2, py: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between',
+        backgroundImage: 'url(header_toolbox.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center', }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5, alignItems: 'center' }}>
+          <GripVertical size={32} color={theme.palette.primary.main} />
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+            <Typography color="textPrimary" variant="h6" sx={{ letterSpacing: -0.5, lineHeight: 1 }}>Add a node</Typography>
+            <Typography variant="caption" color="textSecondary">Drag to the canvas to add it</Typography>
+          </Box>
         </Box>
-        <ToggleToolboxShape />
       </Box>
       <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
         <TextField
@@ -61,6 +67,7 @@ export default function NodeToolbox() {
           onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
         />
         <ToggleToolbox />
+        <ToggleToolboxShape />
       </Box>
 
       <Box sx={{ overflow: 'auto' }}>
