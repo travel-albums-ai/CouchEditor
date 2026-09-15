@@ -1,3 +1,9 @@
+## [1.111.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.110.0...v1.111.0) (2026-09-15)
+
+### ✨ Features
+
+* add Merge Channels node for image processing pipeline ([c12b7ae](https://github.com/travel-albums-ai/CouchEditor/commit/c12b7ae56fe7e092ca13d24d306af7f0e5d13291))
+
 ## [1.110.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.109.1...v1.110.0) (2026-09-15)
 
 ### ✨ Features
