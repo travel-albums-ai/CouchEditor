@@ -1,3 +1,9 @@
+## [1.113.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.112.0...v1.113.0) (2026-09-15)
+
+### ✨ Features
+
+* migrate Split Toning and Vignette nodes to ComplexNodes directory ([b02d017](https://github.com/travel-albums-ai/CouchEditor/commit/b02d0172a266c7f71c0485f4f842358626d2b0af))
+
 ## [1.112.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.111.0...v1.112.0) (2026-09-15)
 
 ### ✨ Features
