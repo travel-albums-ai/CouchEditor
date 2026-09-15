@@ -1,3 +1,9 @@
+## [1.134.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.133.0...v1.134.0) (2026-09-15)
+
+### ✨ Features
+
+* update tooltip button labels for clarity and consistency ([a27ef80](https://github.com/travel-albums-ai/CouchEditor/commit/a27ef8070e8a3c9116ba8ec4588a8a15621cac3e))
+
 ## [1.133.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.132.0...v1.133.0) (2026-09-15)
 
 ### ✨ Features
