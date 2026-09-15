@@ -1,8 +1,6 @@
 import SectionHeader from '@/components/SectionHeader';
 import SidebarCoreButton from '@/components/SidebarCoreButton';
-import PreviewDemo from '@/middleware/windows/pipeline/components/PreviewDemo';
-import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
-import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
+import HelpItem from '@/middleware/windows/help/HelpItem';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import { Box } from '@mui/material';
 import { BookOpen, SquareDashedText } from 'lucide-react';
@@ -54,25 +52,7 @@ export default function HelpContent() {
                   mb: 4,
                 }}>
                   {group.map(paletteItem => (
-                    <Box key={paletteItem.type} sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Box sx={{
-                        borderRadius: 2,
-                        border: '1px dotted',
-                        borderColor: 'divider',
-                        display: 'flex',
-                        flex: 1,
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        py: 2
-                      }}>
-                        <Box sx={{ height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <PreviewDemo paletteItem={paletteItem} />
-                        </Box>
-                        <PreviewTitle paletteItem={paletteItem} />
-                        <PreviewDescription paletteItem={paletteItem} />
-                      </Box>
-                    </Box>
+                    <HelpItem paletteItem={paletteItem} />
                   ))}
                 </Box>
               </Box>
