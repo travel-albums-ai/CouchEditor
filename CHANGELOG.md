@@ -1,3 +1,13 @@
+## [1.114.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.113.0...v1.114.0) (2026-09-15)
+
+### ✨ Features
+
+* add Instagram pipeline support and enhance pipeline management ([1c1ea82](https://github.com/travel-albums-ai/CouchEditor/commit/1c1ea82b98c52925f1b76eb3d99ae9ab2e0a1872))
+
+### 🧹 Refactors
+
+* remove unused component-related types and AsyncComponentRegistry class ([8133319](https://github.com/travel-albums-ai/CouchEditor/commit/8133319bbdeca05775c4debbd547dd8f86f1b211))
+
 ## [1.113.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.112.0...v1.113.0) (2026-09-15)
 
 ### ✨ Features
