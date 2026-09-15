@@ -1,3 +1,9 @@
+## [1.120.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.119.0...v1.120.0) (2026-09-15)
+
+### ✨ Features
+
+* add toolbox view toggle functionality with grid and table options ([ab1b85a](https://github.com/travel-albums-ai/CouchEditor/commit/ab1b85a53bdd87d9682be991f08ea1f3f76cbea0))
+
 ## [1.119.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.118.0...v1.119.0) (2026-09-15)
 
 ### ✨ Features
