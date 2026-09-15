@@ -1,3 +1,9 @@
+## [1.109.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.109.0...v1.109.1) (2026-09-15)
+
+### 🐛 Fixes
+
+* update Background color in Pipeline component for better visibility ([f46dcd0](https://github.com/travel-albums-ai/CouchEditor/commit/f46dcd0653c642178bba427d28277373aa33ce8e))
+
 ## [1.109.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.108.0...v1.109.0) (2026-09-15)
 
 ### ✨ Features
