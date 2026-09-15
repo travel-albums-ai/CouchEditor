@@ -1,3 +1,9 @@
+## [1.132.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.131.0...v1.132.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance UI components with improved styling and layout adjustments ([4c19565](https://github.com/travel-albums-ai/CouchEditor/commit/4c19565e4b4e9fe26bde176d8f07c675cbf4ec34))
+
 ## [1.131.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.130.0...v1.131.0) (2026-09-15)
 
 ### ✨ Features
