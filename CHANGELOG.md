@@ -1,3 +1,9 @@
+## [1.123.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.122.0...v1.123.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance preview components with title and description options ([94c77de](https://github.com/travel-albums-ai/CouchEditor/commit/94c77dea89f4ac38725f43ad67c9deff1bdad693))
+
 ## [1.122.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.121.0...v1.122.0) (2026-09-15)
 
 ### ✨ Features
