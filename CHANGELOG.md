@@ -1,3 +1,9 @@
+## [1.127.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.126.1...v1.127.0) (2026-09-15)
+
+### ✨ Features
+
+* refactor HelpWindow to use HelpContent component for improved structure ([a0d9201](https://github.com/travel-albums-ai/CouchEditor/commit/a0d92010058d1957232d7cf0ddad00049ba13a4b))
+
 ## [1.126.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.126.0...v1.126.1) (2026-09-15)
 
 ### 🐛 Fixes
