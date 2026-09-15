@@ -64,20 +64,20 @@ export default function HelpContent() {
     <>
       <SectionHeader
         sx={{ py: 2, px: 1, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
-        image="settings_header.png"
-        bgSize="645px"
+        image="manuals_header.png"
+        bgSize="500px"
         icon={BookOpen}
         iconSize={48}
         title="Manual"
         subTitle="Learn how to use the each node feature in the pipeline effectively."
       />
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2 }} id="settings-content">
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2, overflow: 'hidden' }} id="settings-content">
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, flex: '0 0 250px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
           {Object.entries(groupedPaletteItems).map(([groupName, _]) => (<>
             <SidebarCoreButton
               key={groupName}
-              title={t(groupName)}
+              title={t(groupName).toString().charAt(0).toUpperCase() + t(groupName).toString().slice(1)}
               icon={<SquareDashedText />}
               isActive={activeGroup === groupName}
               onClick={() => setActiveGroup(groupName)}
@@ -113,20 +113,17 @@ export default function HelpContent() {
                         justifyContent: 'center',
                         py: 2
                       }}>
-
-                        <PreviewDemo paletteItem={paletteItem} />
+                        <Box sx={{ height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <PreviewDemo paletteItem={paletteItem} />
+                        </Box>
                         <PreviewTitle paletteItem={paletteItem} />
                         <PreviewDescription paletteItem={paletteItem} />
-
-
                       </Box>
                     </Box>
                   ))}
                 </Box>
               </Box>
             ))}
-
-
         </Box>
       </Box>
     </>

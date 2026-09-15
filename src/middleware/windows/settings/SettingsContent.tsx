@@ -79,7 +79,7 @@ export default function SettingsContent() {
       title="Settings"
       subTitle="Configure your application settings to tailor the experience to your needs."
     />
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2 }} id="settings-content">
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2, overflow: 'hidden' }} id="settings-content">
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
         {Object.entries(groupedSections).map(([group, groupSections], index) => (
