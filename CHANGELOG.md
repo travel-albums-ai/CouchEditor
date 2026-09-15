@@ -1,3 +1,9 @@
+## [1.117.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.116.0...v1.117.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance PipelineSelector with search functionality and improved filtering options ([8b0f19f](https://github.com/travel-albums-ai/CouchEditor/commit/8b0f19fb149e90fc113aa1bc1945fcd5ab33c6f0))
+
 ## [1.116.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.115.0...v1.116.0) (2026-09-15)
 
 ### ✨ Features
