@@ -1,3 +1,9 @@
+## [1.115.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.114.0...v1.115.0) (2026-09-15)
+
+### ✨ Features
+
+* add PipelineSelectorItem and PipelineSelectorItems components ([2a2c736](https://github.com/travel-albums-ai/CouchEditor/commit/2a2c7364893dab1255b26278e14532f8098e2c99))
+
 ## [1.114.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.113.0...v1.114.0) (2026-09-15)
 
 ### ✨ Features
