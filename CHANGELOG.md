@@ -1,3 +1,9 @@
+## [1.112.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.111.0...v1.112.0) (2026-09-15)
+
+### ✨ Features
+
+* reorder Split and Merge Channels nodes in color stages for improved organization ([f590315](https://github.com/travel-albums-ai/CouchEditor/commit/f5903151181829ce4141c1d4a4354c5c587f48b5))
+
 ## [1.111.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.110.0...v1.111.0) (2026-09-15)
 
 ### ✨ Features
