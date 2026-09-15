@@ -14,14 +14,14 @@ export default function EndPart() {
       <Tooltip title={'Report a bug. Please provide detailed information.'} arrow>
         <a href="https://github.com/travel-albums-ai/CouchEditor/issues/new?template=bug-existing-feature.yml" target="_blank" rel="noopener noreferrer">
           <Button variant="outlined" startIcon={<Bug size={16} />} color="primary">
-            Open an issue
+            Report issue
           </Button>
         </a>
       </Tooltip>
       <Tooltip title={'Propose a new component. Please provide detailed information and your use case.'} arrow>
         <a href="https://github.com/travel-albums-ai/CouchEditor/issues/new?template=new-field.yml" target="_blank" rel="noopener noreferrer">
           <Button variant="outlined" startIcon={<Lightbulb size={16} />} color="primary">
-            Propose component
+            Propose
           </Button>
         </a>
       </Tooltip>
