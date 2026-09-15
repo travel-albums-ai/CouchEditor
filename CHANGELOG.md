@@ -1,3 +1,9 @@
+## [1.136.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.135.0...v1.136.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance NodeHeader and NodeWrapper styles for improved UI consistency ([e6df8bc](https://github.com/travel-albums-ai/CouchEditor/commit/e6df8bccfb769e1fdb8fe4dae132b8d7c1a725c1))
+
 ## [1.135.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.134.0...v1.135.0) (2026-09-15)
 
 ### ✨ Features
