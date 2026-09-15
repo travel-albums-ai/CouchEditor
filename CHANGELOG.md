@@ -1,3 +1,9 @@
+## [1.124.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.123.0...v1.124.0) (2026-09-15)
+
+### ✨ Features
+
+* add RenderingProgress component and integrate it into StatusBar ([4ab6227](https://github.com/travel-albums-ai/CouchEditor/commit/4ab6227db0a3a268ae700f8324730604e84fa0f3))
+
 ## [1.123.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.122.0...v1.123.0) (2026-09-15)
 
 ### ✨ Features
