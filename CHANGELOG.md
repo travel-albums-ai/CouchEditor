@@ -1,3 +1,9 @@
+## [1.130.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.129.0...v1.130.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance SolidChip variant handling and improve RenderingProgress null check ([9420223](https://github.com/travel-albums-ai/CouchEditor/commit/94202235dee609d24504817424eb712a1d1287bf))
+
 ## [1.129.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.128.0...v1.129.0) (2026-09-15)
 
 ### ✨ Features
