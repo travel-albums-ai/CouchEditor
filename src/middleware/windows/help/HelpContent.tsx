@@ -1,11 +1,12 @@
 import SectionHeader from '@/components/SectionHeader';
+import SidebarCoreButton from '@/components/SidebarCoreButton';
 import PreviewDemo from '@/middleware/windows/pipeline/components/PreviewDemo';
 import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
-import { Box, Typography } from '@mui/material';
-import { Brain, Bug, Cog, Dock, GalleryVerticalEnd, Proportions } from 'lucide-react';
-import { Fragment, useState } from 'react';
+import { Box } from '@mui/material';
+import { BookOpen, Brain, Bug, Dock, GalleryVerticalEnd, Proportions, SquareDashedText } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const sectionsMetadata = {
@@ -65,31 +66,29 @@ export default function HelpContent() {
         sx={{ py: 2, px: 1, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
         image="settings_header.png"
         bgSize="645px"
-        icon={Cog}
+        icon={BookOpen}
         iconSize={48}
-        title="Settings"
-        subTitle="Configure your application settings to tailor the experience to your needs."
+        title="Manual"
+        subTitle="Learn how to use the each node feature in the pipeline effectively."
       />
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2 }} id="settings-content">
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
-        menu {activeGroup}
-          {Object.entries(groupedPaletteItems).map(([groupName, groupSections], index) => (
-            <Fragment key={groupName}>
-              <Box
-                onClick={() => setActiveGroup(groupName)}
-                sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px dotted', mt: index === 0 ? 0 : 4, borderColor: 'divider', p: 1, gap: 1, justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 0, justifyContent: 'flex-start' }}>
-                  <Typography variant="caption" color="textPrimary" sx={{ textTransform: 'capitalize', flex: 1 }}>{t(groupName)}</Typography>
-                </Box>
-              </Box>
-            </Fragment>
-          ))}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, flex: '0 0 250px' }}>
+          {Object.entries(groupedPaletteItems).map(([groupName, _]) => (<>
+            <SidebarCoreButton
+              key={groupName}
+              title={t(groupName)}
+              icon={<SquareDashedText />}
+              isActive={activeGroup === groupName}
+              onClick={() => setActiveGroup(groupName)}
+              noCounts={true}
+            />
+          </>))}
         </Box>
 
         <Box sx={{ p: 1, display: 'flex', flexDirection: 'column', gap: 1, flexGrow: 1, overflow: 'auto'  }}>
           {Object.entries(groupedPaletteItems)
-            .filter(([groupName, group]) => groupName === activeGroup)
+            .filter(([groupName, _]) => groupName === activeGroup)
             .map(([groupName, group]) => (
               <Box key={groupName} sx={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -105,7 +104,7 @@ export default function HelpContent() {
                     <Box key={paletteItem.type} sx={{ display: 'flex', flexDirection: 'column' }}>
                       <Box sx={{
                         borderRadius: 2,
-                        border: '1px solid',
+                        border: '1px dotted',
                         borderColor: 'divider',
                         display: 'flex',
                         flex: 1,
@@ -114,9 +113,10 @@ export default function HelpContent() {
                         justifyContent: 'center',
                         py: 2
                       }}>
+
+                        <PreviewDemo paletteItem={paletteItem} />
                         <PreviewTitle paletteItem={paletteItem} />
                         <PreviewDescription paletteItem={paletteItem} />
-                        <PreviewDemo paletteItem={paletteItem} />
 
 
                       </Box>
