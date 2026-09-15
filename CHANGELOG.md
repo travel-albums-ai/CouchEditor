@@ -1,3 +1,9 @@
+## [1.116.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.115.0...v1.116.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance PipelineSelector with grouped pipeline categories and improve UI components ([c273998](https://github.com/travel-albums-ai/CouchEditor/commit/c27399881513986498a8adc4d8879d38c781d4e3))
+
 ## [1.115.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.114.0...v1.115.0) (2026-09-15)
 
 ### ✨ Features
