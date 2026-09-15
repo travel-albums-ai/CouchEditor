@@ -1,3 +1,9 @@
+## [1.138.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.137.0...v1.138.0) (2026-09-15)
+
+### ✨ Features
+
+* refactor HelpContent to use HelpItem component for better code organization ([5424104](https://github.com/travel-albums-ai/CouchEditor/commit/54241041da7a25d195d91e3f648c7dac874fbc60))
+
 ## [1.137.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.136.0...v1.137.0) (2026-09-15)
 
 ### ✨ Features
