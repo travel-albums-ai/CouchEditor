@@ -1,4 +1,4 @@
-import { Box, LinearProgress } from '@mui/material';
+import { Box, LinearProgress, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 type StageTimingDetail = {
@@ -52,10 +52,12 @@ export default function PipelineStageProgress({
   }, [nodeId, nodeType]);
 
   return <Box sx={{ flex: 1 }}>
-    <LinearProgress
-      variant={isProcessing ? 'indeterminate' : 'determinate'}
-      value={100}
-      sx={{ height: 4, borderRadius: 1, opacity: isProcessing ? 1 : 0.4 }}
-    />
+    <Tooltip title={isProcessing ? nodeType + ' - Processing...' : `${nodeType} - Last duration: ${Math.round(durationMs * 100) / 100 / 1000 ?? 0} s`} arrow placement="top">
+      <LinearProgress
+        variant={isProcessing ? 'indeterminate' : 'determinate'}
+        value={100}
+        sx={{ height: 4, borderRadius: 1, opacity: isProcessing ? 1 : 0.4 }}
+      />
+    </Tooltip>
   </Box>;
 }
