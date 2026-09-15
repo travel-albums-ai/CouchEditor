@@ -1,3 +1,9 @@
+## [1.129.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.128.0...v1.129.0) (2026-09-15)
+
+### ✨ Features
+
+* update HelpContent layout and enhance descriptions for better user guidance ([e8a1c09](https://github.com/travel-albums-ai/CouchEditor/commit/e8a1c091874bec247e9e3a810c53fb11015f0729))
+
 ## [1.128.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.127.0...v1.128.0) (2026-09-15)
 
 ### ✨ Features
