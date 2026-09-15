@@ -1,3 +1,9 @@
+## [1.119.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.118.0...v1.119.0) (2026-09-15)
+
+### ✨ Features
+
+* update tooltip styles with improved background color and border radius ([511b70b](https://github.com/travel-albums-ai/CouchEditor/commit/511b70b4d3aeb251955c4513d045000bbb42eb4a))
+
 ## [1.118.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.117.0...v1.118.0) (2026-09-15)
 
 ### ✨ Features
