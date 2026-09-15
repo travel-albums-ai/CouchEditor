@@ -68,33 +68,85 @@ export default function PipelineSelector({
             maxWidth: 'min(760px, calc(100vw - 32px))',
           }}
         >
-          {pipelines.length > 0 ? pipelines.map((pipeline) => (
-            <ButtonBase
-              key={pipeline.id}
-              onClick={() => handleSelect(pipeline.id)}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                gap: 1,
-                minHeight: 66,
-                p: 1,
-                borderRadius: 2,
-                textAlign: 'left',
-                '&:hover': {
-                  bgcolor: 'action.hover',
-                },
-              }}
-            >
-              <MinimapPipeline pipeline={pipeline} />
-              <Typography
-                variant="body2"
-                sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+          {pipelines.length > 0 ? pipelines
+            .filter(p => p.type === 'sample')
+            .map((pipeline) => (
+              <ButtonBase
+                key={pipeline.id}
+                onClick={() => handleSelect(pipeline.id)}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  gap: 1,
+                  minHeight: 66,
+                  p: 1,
+                  borderRadius: 2,
+                  textAlign: 'left',
+                  '&:hover': {
+                    bgcolor: 'action.hover',
+                  },
+                }}
               >
-                {pipeline.name}
-              </Typography>
-            </ButtonBase>
-          )) : (
+                <MinimapPipeline pipeline={pipeline} />
+                <Typography
+                  variant="body2"
+                  sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                >
+                  {pipeline.name}
+                </Typography>
+              </ButtonBase>
+            )) : (
+            <Typography variant="body2" color="text.secondary" sx={{ gridColumn: '1 / -1', p: 1 }}>
+              No saved pipelines
+            </Typography>
+          )}
+        </Box>
+
+
+        <Typography variant="subtitle2" sx={{ p: 1 }}>
+          Instagram-Like Pipelines
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            // gridTemplateColumns: 'repeat(auto-fit, 1fr)',
+            gap: 1,
+            p: 1.5,
+            maxWidth: 'min(760px, calc(100vw - 32px))',
+          }}
+        >
+          {pipelines.length > 0 ? pipelines
+            .filter(p => p.type === 'instagram')
+            .map((pipeline) => (
+              <ButtonBase
+                key={pipeline.id}
+                onClick={() => handleSelect(pipeline.id)}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  gap: 1,
+                  minHeight: 66,
+                  p: 1,
+                  borderRadius: 2,
+                  textAlign: 'left',
+                  '&:hover': {
+                    bgcolor: 'action.hover',
+                  },
+                }}
+              >
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5 }}>
+                  <MinimapPipeline pipeline={pipeline} />
+                  <Typography
+                    variant="body2"
+                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  >
+                    {pipeline.name}
+                  </Typography>
+                </Box>
+              </ButtonBase>
+            )) : (
             <Typography variant="body2" color="text.secondary" sx={{ gridColumn: '1 / -1', p: 1 }}>
               No saved pipelines
             </Typography>

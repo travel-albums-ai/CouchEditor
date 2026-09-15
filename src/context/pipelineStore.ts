@@ -1,3 +1,4 @@
+import { instagramPipeline } from '@/context/instagramPipelines';
 import { samplePipeline } from '@/context/samplePipelines';
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 import type { Edge, Node } from '@xyflow/react';
@@ -7,11 +8,16 @@ export type PipelineGraph = {
   edges: Edge[]
 }
 
+export type PipelineType = 'sample' | 'instagram' | 'user' | 'community'
 
 
 export type SavedPipeline = PipelineGraph & {
   id: string
   name: string
+  isDeletable: boolean
+  dateUpdated: string
+  dateCreated: string
+  type: PipelineType
 }
 
 export type CurrentPipeline = PipelineGraph & {
@@ -29,7 +35,22 @@ type PipelineStore = {
 }
 
 const defaults: PipelineStore = {
-  pipelines: samplePipeline as SavedPipeline[],
+  pipelines: [
+    ...samplePipeline.map((pipeline) => ({
+      ...pipeline,
+      isDeletable: false,
+      dateUpdated: '2026-01-01T00:00:00.000Z',
+      dateCreated: '2026-01-01T00:00:00.000Z',
+      type: 'sample' as const,
+    })),
+    ...instagramPipeline.map((pipeline) => ({
+      ...pipeline,
+      isDeletable: false,
+      dateUpdated: '2026-01-01T00:00:00.000Z',
+      dateCreated: '2026-01-01T00:00:00.000Z',
+      type: 'instagram' as const,
+    }))
+  ],
   currentPipeline: {
     id: '',
     name: '',
@@ -51,6 +72,10 @@ const {
 
 function createPipelineId() {
   return `pipeline-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+}
+
+function createPipelineDate() {
+  return new Date().toISOString()
 }
 
 export function prepareGraph({ nodes, edges }: PipelineGraph): PipelineGraph {
@@ -103,10 +128,15 @@ export const usePipelineStore = () => {
       })),
     toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {
+      const date = createPipelineDate()
       const pipeline: SavedPipeline = {
         ...prepareGraph(graph),
         id: createPipelineId(),
-        name: name.trim() || 'Untitled pipeline'
+        name: name.trim() || 'Untitled pipeline',
+        isDeletable: true,
+        dateUpdated: date,
+        dateCreated: date,
+        type: 'user',
       }
 
       setState((prev) => ({
@@ -120,10 +150,15 @@ export const usePipelineStore = () => {
       const existing = store.pipelines.find((pipeline) => pipeline.id === id)
       if (!existing) return undefined
 
+      const date = createPipelineDate()
       const clone: SavedPipeline = {
         ...prepareGraph(existing),
         id: createPipelineId(),
-        name: name?.trim() || `${existing.name} copy`
+        name: name?.trim() || `${existing.name} copy`,
+        isDeletable: true,
+        dateUpdated: date,
+        dateCreated: date,
+        type: 'user',
       }
 
       setState((prev) => ({
@@ -137,7 +172,11 @@ export const usePipelineStore = () => {
       const pipeline: SavedPipeline = {
         ...prepareGraph(graph),
         id,
-        name: name.trim() || 'Untitled pipeline'
+        name: name.trim() || 'Untitled pipeline',
+        isDeletable: store.pipelines.find((item) => item.id === id)?.isDeletable ?? true,
+        dateUpdated: createPipelineDate(),
+        dateCreated: store.pipelines.find((item) => item.id === id)?.dateCreated ?? createPipelineDate(),
+        type: store.pipelines.find((item) => item.id === id)?.type ?? 'user',
       }
 
       setState((prev) => {
