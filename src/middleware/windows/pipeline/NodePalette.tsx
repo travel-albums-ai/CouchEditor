@@ -1,5 +1,5 @@
 import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
-import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export enum NodeType {
   Source = 'source',
@@ -178,18 +178,7 @@ const logicStages: Array<NodeStageItem> = [
     processing: 'static',
     labelDescription: 'pipelineGpsSplitNodeDescription',
   },
-  {
-    type: NodeType.SplitChannels,
-    labelKey: "pipelineSplitChannels", icon: <Slice size={16} />,
-    processing: 'static',
-    labelDescription: 'pipelineSplitChannelsNodeDescription',
-  },
-  {
-    type: NodeType.MergeChannels,
-    labelKey: "pipelineMergeChannels", icon: <Slice size={16} />,
-    processing: 'static',
-    labelDescription: 'pipelineMergeChannelsNodeDescription',
-  },
+
 ]
 
 const transformStages: Array<NodeStageItem> = [
@@ -424,6 +413,18 @@ const colorStages: Array<NodeStageItem> = [
     ],
     processing: 'math',
     labelDescription: 'pipelineSplitToningDescription',
+  },
+  {
+    type: NodeType.SplitChannels,
+    labelKey: "pipelineSplitChannels", icon: <Split size={16} />,
+    processing: 'static',
+    labelDescription: 'pipelineSplitChannelsNodeDescription',
+  },
+  {
+    type: NodeType.MergeChannels,
+    labelKey: "pipelineMergeChannels", icon: <Merge size={16} />,
+    processing: 'static',
+    labelDescription: 'pipelineMergeChannelsNodeDescription',
   },
 ]
 
