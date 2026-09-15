@@ -21,6 +21,8 @@ export default function PipelineSelector({
   const selectedPipeline = pipelines.find((pipeline) => pipeline.id === currentPipelineId);
   const isOpen = Boolean(anchorEl);
   const theme = useTheme()
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedView, setSelectedView] = useState('all');
 
   const handleSelect = (pipelineId: string) => {
     loadPipeline(pipelineId);
@@ -32,23 +34,41 @@ export default function PipelineSelector({
       name: 'Sample & Starters',
       description: "Ready to use pipelines for common workflows",
       icon: <Astroid />,
-      data: pipelines.length > 0 && pipelines
+      type: 'sample',
+      data: pipelines
         .filter(p => p.type === 'sample')
     },
     {
+      type: 'instagram',
       name: 'Instagram-like Inspirations',
       description: "Pipelines inspired by Instagram's style",
       icon: <Camera />,
-      data: pipelines.length > 0 && pipelines
+      data: pipelines
         .filter(p => p.type === 'instagram')
     },
     {
+      type: 'user',
       name: 'User-Created Pipelines',
       description: "Pipelines created by users",
       icon: <User />,
-      data: pipelines.length > 0 && pipelines
+      data: pipelines
         .filter(p => p.type === 'user')
     }
+  ]
+
+  const chips = [
+    {
+      label: 'All', value: 'all'
+    },
+    {
+      label: 'Sample', value: 'sample'
+    },
+    {
+      label: 'Instagram', value: 'instagram'
+    },
+    {
+      label: 'User', value: 'user'
+    },
   ]
 
   return (
@@ -91,7 +111,7 @@ export default function PipelineSelector({
             flexDirection: 'column',
             gap: 1,
             maxHeight: '60vh',
-            maxWidth: '850px',
+            width: '850px',
             overflowY: 'hidden',
           }}
         >
@@ -110,46 +130,51 @@ export default function PipelineSelector({
             </Box>
           </Box>
 
-          <Box sx={{ overflowY: 'auto', }}>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', p: 1 }}>
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search pipelines..."
-                sx={{ flex: 1 }}
-              />
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', px: 2, py: 1 }}>
+            <TextField
+              autoFocus
+              color="primary"
+              variant="outlined"
+              size="small"
+              placeholder="Search pipelines..."
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+              sx={{ flex: 1 }}
+            />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+              {chips.map((chip) => (
                 <Chip
-                  label="All"
-                  variant="outlined"
+                  key={chip.value}
+                  label={chip.label}
+                  color={selectedView === chip.value ? 'primary' : 'default'}
+                  onClick={() => setSelectedView(chip.value)}
+                  variant={selectedView === chip.value ? 'filled' : 'outlined'}
                 />
-                <Chip
-                  label="Sample"
-                  variant="outlined"
-                />
-                <Chip
-                  label="Instagram"
-                  variant="outlined"
-                />
-                <Chip
-                  label="User"
-                  variant="outlined"
-                />
-              </Box>
+              ))}
             </Box>
+          </Box>
 
-            {pipelineGroupings.map((grouping) => (
-              <PipelineSelectorItems
-                key={grouping.name}
-                title={grouping.name}
-                icon={grouping.icon}
-                description={grouping.description}
-              >
-                {grouping.data.map((pipeline) => (
-                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
-                ))}
-              </PipelineSelectorItems>
-            ))}
+          <Box sx={{ overflowY: 'auto', }}>
+            {pipelineGroupings
+              .filter((grouping) => selectedView === 'all' || grouping.type === selectedView)
+              .filter((grouping) => grouping.data.some((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase())))
+              .map((grouping) => (
+                <PipelineSelectorItems
+                  key={grouping.name}
+                  title={grouping.name}
+                  icon={grouping.icon}
+                  description={grouping.description}
+                  isSelected={grouping.type === selectedView}
+                  onClick={() => setSelectedView(grouping.type)}
+                >
+                  {grouping.data
+                    .filter((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                    .filter((_, index) => grouping.type !== selectedView ? index < 9 : true)
+                    .map((pipeline) => (
+                      <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} key={pipeline.id} />
+                    ))}
+                </PipelineSelectorItems>
+              ))}
           </Box>
         </Box>
       </Popover>
