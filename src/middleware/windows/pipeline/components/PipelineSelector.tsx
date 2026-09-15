@@ -1,9 +1,10 @@
-import { alpha, Box, ButtonBase, Popover, Typography } from '@mui/material';
+import { alpha, Box, ButtonBase, Chip, Popover, TextField, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
 
 import type { SavedPipeline } from '@/context/pipelineStore';
-import { ChevronsDown } from 'lucide-react';
-import { MinimapPipeline } from './MinimapPipeline';
+import PipelineSelectorItem from '@/middleware/windows/pipeline/components/PipelineSelectorItem';
+import PipelineSelectorItems from '@/middleware/windows/pipeline/components/PipelineSelectorItems';
+import { Astroid, Camera, ChevronsDown, GalleryHorizontalEnd, User } from 'lucide-react';
 
 type PipelineSelectorProps = {
   currentPipelineId: string;
@@ -19,6 +20,7 @@ export default function PipelineSelector({
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const selectedPipeline = pipelines.find((pipeline) => pipeline.id === currentPipelineId);
   const isOpen = Boolean(anchorEl);
+  const theme = useTheme()
 
   const handleSelect = (pipelineId: string) => {
     loadPipeline(pipelineId);
@@ -61,96 +63,81 @@ export default function PipelineSelector({
       >
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, minmax(180px, 1fr))',
-            gap: 1,
-            p: 1.5,
-            maxWidth: 'min(760px, calc(100vw - 32px))',
-          }}
-        >
-          {pipelines.length > 0 ? pipelines
-            .filter(p => p.type === 'sample')
-            .map((pipeline) => (
-              <ButtonBase
-                key={pipeline.id}
-                onClick={() => handleSelect(pipeline.id)}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  gap: 1,
-                  minHeight: 66,
-                  p: 1,
-                  borderRadius: 2,
-                  textAlign: 'left',
-                  '&:hover': {
-                    bgcolor: 'action.hover',
-                  },
-                }}
-              >
-                <MinimapPipeline pipeline={pipeline} />
-                <Typography
-                  variant="body2"
-                  sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                >
-                  {pipeline.name}
-                </Typography>
-              </ButtonBase>
-            )) : (
-            <Typography variant="body2" color="text.secondary" sx={{ gridColumn: '1 / -1', p: 1 }}>
-              No saved pipelines
-            </Typography>
-          )}
-        </Box>
-
-
-        <Typography variant="subtitle2" sx={{ p: 1 }}>
-          Instagram-Like Pipelines
-        </Typography>
-        <Box
-          sx={{
             display: 'flex',
-            // gridTemplateColumns: 'repeat(auto-fit, 1fr)',
+            flexDirection: 'column',
             gap: 1,
-            p: 1.5,
-            maxWidth: 'min(760px, calc(100vw - 32px))',
+            maxHeight: '60vh',
+            maxWidth: '850px',
+            overflowY: 'hidden',
           }}
         >
-          {pipelines.length > 0 ? pipelines
-            .filter(p => p.type === 'instagram')
-            .map((pipeline) => (
-              <ButtonBase
-                key={pipeline.id}
-                onClick={() => handleSelect(pipeline.id)}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  gap: 1,
-                  minHeight: 66,
-                  p: 1,
-                  borderRadius: 2,
-                  textAlign: 'left',
-                  '&:hover': {
-                    bgcolor: 'action.hover',
-                  },
-                }}
-              >
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5 }}>
-                  <MinimapPipeline pipeline={pipeline} />
-                  <Typography
-                    variant="body2"
-                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                  >
-                    {pipeline.name}
-                  </Typography>
-                </Box>
-              </ButtonBase>
-            )) : (
-            <Typography variant="body2" color="text.secondary" sx={{ gridColumn: '1 / -1', p: 1 }}>
-              No saved pipelines
-            </Typography>
-          )}
+          <Box sx={{ position: 'relative',
+            backgroundImage: 'url(couceditor_header_background_850px.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+
+          }}>
+            <Box sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}>
+              <GalleryHorizontalEnd  size={64} color={theme.palette.primary.main} />
+              <Box sx={{ borderRadius: 4, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography color="textPrimary" variant="h6">Pipeline Templates</Typography>
+                <Typography color="textSecondary" variant="caption" sx={{ whiteSpace: 'wrap', width: '400px', display: 'block' }}>Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own.</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box sx={{ overflowY: 'auto', }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', p: 1 }}>
+              <TextField
+                variant="outlined"
+                size="small"
+                placeholder="Search pipelines..."
+                sx={{ flex: 1 }}
+              />
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+                <Chip
+                  label="All"
+                  variant="outlined"
+                />
+                <Chip
+                  label="Sample"
+                  variant="outlined"
+                />
+                <Chip
+                  label="Instagram"
+                  variant="outlined"
+                />
+                <Chip
+                  label="User"
+                  variant="outlined"
+                />
+              </Box>
+            </Box>
+
+            <PipelineSelectorItems title="Sample Pipelines" icon={<Astroid />} description="Ready to use pipelines for common workflows">
+              {pipelines.length > 0 && pipelines
+                .filter(p => p.type === 'sample')
+                .map((pipeline) => (
+                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
+                ))}
+            </PipelineSelectorItems>
+
+            <PipelineSelectorItems title="Instagram-Like Pipelines" icon={<Camera />} description="Pipelines inspired by Instagram's style">
+              {pipelines.length > 0 && pipelines
+                .filter(p => p.type === 'instagram')
+                .map((pipeline) => (
+                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
+                ))}
+            </PipelineSelectorItems>
+
+            <PipelineSelectorItems title="User Pipelines" icon={<User />} description="Pipelines created by the user">
+              {pipelines.length > 0 && pipelines
+                .filter(p => p.type !== 'sample' && p.type !== 'instagram')
+                .map((pipeline) => (
+                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} />
+                ))}
+            </PipelineSelectorItems>
+          </Box>
         </Box>
       </Popover>
     </>

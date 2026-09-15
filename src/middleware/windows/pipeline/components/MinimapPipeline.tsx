@@ -11,8 +11,9 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
     return null;
   }
 
-  const SIZE = 100;
-  const PADDING = 5;
+  const WIDTH = 100;
+  const HEIGHT = 80;
+  const PADDING = 2;
 
   const getNodeWidth = (node: typeof nodes[number]) =>
     node.measured?.width ?? node.width ?? 150;
@@ -35,8 +36,8 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
   const contentWidth = Math.max(maxX - minX, 1);
   const contentHeight = Math.max(maxY - minY, 1);
 
-  const availableWidth = SIZE - PADDING * 2;
-  const availableHeight = SIZE - PADDING * 2;
+  const availableWidth = WIDTH - PADDING * 2;
+  const availableHeight = HEIGHT - PADDING * 2;
 
   // One uniform scale keeps the pipeline's proportions intact.
   const scale = Math.min(
@@ -48,23 +49,22 @@ export function MinimapPipeline({ pipeline }: { pipeline: SavedPipeline }) {
   const renderedHeight = contentHeight * scale;
 
   // Center the complete pipeline in the minimap.
-  const offsetX = (SIZE - renderedWidth) / 2;
-  const offsetY = (SIZE - renderedHeight) / 2;
+  const offsetX = (WIDTH - renderedWidth) / 2;
+  const offsetY = (HEIGHT - renderedHeight) / 2;
 
   return (
     <Box
       sx={{
-        width: SIZE,
-        height: SIZE,
+        width: WIDTH,
+        height: HEIGHT,
         position: 'relative',
         overflow: 'hidden',
-        opacity: 0.5,
-        border: '1px solid',
-        borderColor: theme.palette.divider,
-        borderRadius: 2,
-        transition: 'opacity 0.25s ease',
+        opacity: 0.35,
+        filter: 'grayscale(15%)',
+        transition: 'opacity 0.25s ease, filter 0.25s ease',
         '&:hover': {
           opacity: 1,
+          filter: 'grayscale(0%)',
         },
 
       }}
