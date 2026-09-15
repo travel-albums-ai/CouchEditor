@@ -39,7 +39,11 @@ export function createSliderNode(config: SliderNodeConfig) {
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
         helper={helper}
       >
-        {paletteItem.configs?.length === 0 && helper}
+        {paletteItem.configs?.length === 0 && <>
+          {paletteItem.processing === 'static' && <PreviewDemoStatic paletteItem={paletteItem} showText={false} />}
+          {paletteItem.processing === 'math' && <PreviewMath paletteItem={paletteItem} data={data} showText={false} />}
+          {paletteItem.processing === 'css' && <PreviewCss paletteItem={paletteItem} image2style={{ ...paletteItem?.algo(data) }} data={data} showText={false} />}
+        </>}
         {(paletteItem.configs || [])
           .filter(config => config.min !== config.max)
           .map((config) => (

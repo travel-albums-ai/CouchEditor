@@ -188,7 +188,7 @@ export default function NodeWrapper({
             boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
           }}
         >
-          {helper || <PreviewDemoStatic paletteItem={paletteItemsByType[type]} />}
+          {helper || <PreviewDemoStatic paletteItem={paletteItemsByType[type]}  showText={true} />}
         </Box>
       </NodeToolbar>}
 

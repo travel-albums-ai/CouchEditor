@@ -1,5 +1,6 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
 import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -10,9 +11,10 @@ const previewImageUrl = 'sample.jpg';
 type AdjustmentPreviewProps = {
   data: Record<string, any>;
   paletteItem: NodePaletteItem;
+  showText?: boolean;
 };
 
-export function PreviewMath({ data, paletteItem }: AdjustmentPreviewProps) {
+export function PreviewMath({ data, paletteItem, showText = true }: AdjustmentPreviewProps) {
   const [processedImageUrl, setProcessedImageUrl] = useState(previewImageUrl);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -54,7 +56,7 @@ export function PreviewMath({ data, paletteItem }: AdjustmentPreviewProps) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    gap: 2,
+    gap: 0,
     pt: 1,
     width: '300px',
     justifyContent: 'center',
@@ -68,6 +70,11 @@ export function PreviewMath({ data, paletteItem }: AdjustmentPreviewProps) {
       value={data ? Object.values(data)?.[0] : 0}
     />
 
-    <PreviewDescription paletteItem={paletteItem} />
+    {showText && (
+      <>
+        <PreviewTitle paletteItem={paletteItem} />
+        <PreviewDescription paletteItem={paletteItem} />
+      </>
+    )}
   </Box>);
 }

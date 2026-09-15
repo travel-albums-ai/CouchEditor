@@ -1,4 +1,6 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
+import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
 import { NodePaletteItem, NodeType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ChartColumn, Cloud, Download, Eye, Flame, Folder, Map, Plus, Slash } from 'lucide-react';
@@ -7,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
   width?: number;
+  showText?: boolean;
 };
 
 const FolderImages =  ({ images, border = true }: { images: string[], border?: boolean }) => (
@@ -17,7 +20,7 @@ const FolderImages =  ({ images, border = true }: { images: string[], border?: b
   </Box>
 );
 
-export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps) {
+export function PreviewDemoStatic({ paletteItem, width, showText = false }: AdjustmentPreviewProps) {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -244,6 +247,13 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
           before={imagesPairs[paletteItem.type].before || <></>}
         />
       </Box>}
+
+      {showText && (
+        <>
+          <PreviewTitle paletteItem={paletteItem} />
+          <PreviewDescription paletteItem={paletteItem} />
+        </>
+      )}
     </Box>
   );
 }
