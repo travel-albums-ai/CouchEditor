@@ -1,3 +1,9 @@
+## [1.135.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.134.0...v1.135.0) (2026-09-15)
+
+### ✨ Features
+
+* add tooltip to LinearProgress for enhanced user feedback ([8affbac](https://github.com/travel-albums-ai/CouchEditor/commit/8affbacfeff7a7d32d0051822a71160860074e26))
+
 ## [1.134.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.133.0...v1.134.0) (2026-09-15)
 
 ### ✨ Features
