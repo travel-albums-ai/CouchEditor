@@ -201,16 +201,16 @@ export default function NodeWrapper({
             flexDirection: 'column',
             alignItems: 'stretch',
             minWidth: 280,
-            borderRadius: 2,
-            border: 1,
-
+            borderRadius: 4,
+            overflow: 'hidden',
+            border: 2,
             borderColor: 'divider',
             boxShadow: theme => `0 0 8px 0px ${theme.palette.divider}`,
             transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
 
             '&:hover': {
-              borderColor: theme => `color-mix(in srgb, ${stc(type)} 45%, ${theme.palette.divider} 75%)`,
-              boxShadow: theme => `0 0 12px 2px ${theme.palette.divider}`,
+              borderColor: theme => `color-mix(in srgb, ${stc(type)} 45%, transparent 75%)`,
+              boxShadow: theme => `0 0 12px -1px ${alpha(theme.palette.primary.main, 0.5)}`,
             },
           },
         ]}

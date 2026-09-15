@@ -1,7 +1,8 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
 import { paletteItems } from '@/middleware/windows/pipeline/NodePalette';
-import { Box, Typography, useTheme } from '@mui/material';
-import { cloneElement, useMemo } from 'react';
+import { Box, useTheme } from '@mui/material';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
@@ -11,7 +12,7 @@ type NodeHeaderProps = {
   children?: React.ReactNode;
 };
 
-function NodeHeader({
+export default function NodeHeader({
   type,
   sx,
   children,
@@ -39,14 +40,6 @@ function NodeHeader({
   );
 
   const isDark = theme.palette.mode === 'dark';
-
-  const iconColor = useMemo(
-    () =>
-      isDark
-        ? `color-mix(in srgb, ${typeColor} 55%, ${groupColor} 100%)`
-        : `color-mix(in srgb, ${typeColor} 100%, ${groupColor} 20%)`,
-    [isDark, typeColor, groupColor]
-  );
 
   const hoverBackground = useMemo(
     () => {
@@ -80,47 +73,19 @@ function NodeHeader({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: 1,
-          p: 1,
+          gap: 2,
+          // p: 1,
           bgcolor: 'background.paper',
 
           '&:hover': {
             background: hoverBackground,
           },
+          pr: 1,
         },
-        sx,
       ]}
     >
-      {paletteItem?.icon &&
-          cloneElement(paletteItem.icon, {
-            size: 20,
-            style: {
-              color: iconColor,
-            },
-          })}
-
-      <Typography
-        variant="caption"
-        color="textPrimary"
-        sx={{
-          flex: 1,
-          fontSize: 14,
-          fontWeight: 600,
-          opacity: 0.87,
-          '&:hover': {
-            opacity: 1,
-          },
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-        }}
-      >
-        {paletteItem && t(paletteItem.labelKey)}
-      </Typography>
-
+      {paletteItem && <PreviewTitle paletteItem={paletteItem} />}
       {children}
     </Box>
   );
 }
-
-export default NodeHeader;
