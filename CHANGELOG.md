@@ -1,3 +1,9 @@
+## [1.137.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.136.0...v1.137.0) (2026-09-15)
+
+### ✨ Features
+
+* swap color properties for Typography components in StartPart and OnboardingWelcome for improved readability ([38034d2](https://github.com/travel-albums-ai/CouchEditor/commit/38034d201b871dee38740da33d404a4df0bddf0d))
+
 ## [1.136.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.135.0...v1.136.0) (2026-09-15)
 
 ### ✨ Features
