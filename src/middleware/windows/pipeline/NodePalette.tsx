@@ -15,6 +15,7 @@ export enum NodeType {
   ImagePicker = 'image-picker',
   ExifSplit = 'exif-split',
   GpsSplit = 'gps-split',
+  SplitChannels = 'split-channels',
   Crop = 'crop',
   Rescale = 'rescale',
   Collage = 'collage',
@@ -175,6 +176,12 @@ const logicStages: Array<NodeStageItem> = [
     labelKey: "pipelineGpsSplit", icon: <MapPinned size={16} />,
     processing: 'static',
     labelDescription: 'pipelineGpsSplitNodeDescription',
+  },
+  {
+    type: NodeType.SplitChannels,
+    labelKey: "pipelineSplitChannels", icon: <Slice size={16} />,
+    processing: 'static',
+    labelDescription: 'pipelineSplitChannelsNodeDescription',
   },
 ]
 

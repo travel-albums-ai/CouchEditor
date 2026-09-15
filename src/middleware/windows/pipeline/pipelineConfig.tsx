@@ -22,6 +22,7 @@ import RescaleNode from './ComplexNodes/RescaleNode';
 import SelectedPhotoNode from './ComplexNodes/SelectedPhotoNode';
 import SinglePhotoViewerNode from './ComplexNodes/SinglePhotoViewerNode';
 import SourceNode from './ComplexNodes/SourceNode';
+import SplitChannelsNode from './ComplexNodes/SplitChannelsNode';
 import ViewerNode from './ComplexNodes/ViewerNode';
 import InformationNode from './InformationNode';
 import SplitToningNode from './OneBarToggles/SplitToningNode';
@@ -120,6 +121,7 @@ export const pipelineNodeTypes = {
   'exif-viewer': ExifViewerNode,
   'gps-map': GpsMapNode,
   'gps-split': GpsSplitNode,
+  'split-channels': SplitChannelsNode,
   'photo-histogram': PhotoHistogramNode,
   'hot-folder-write': HotFolderWriteNode,
   information: InformationNode,

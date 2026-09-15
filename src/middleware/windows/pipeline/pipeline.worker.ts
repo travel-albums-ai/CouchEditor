@@ -49,6 +49,7 @@ import {
 } from "./gpuShader";
 import { lutStage, parseCubeLut } from "./lut";
 import type {
+  NodeInputs,
   NodeOutputs,
   PipelineEvaluateMessage,
   PipelineNodeDefinition,
@@ -544,6 +545,59 @@ function renderImages(
   return mapWithConcurrency(sources, evaluationId, (source) =>
     Promise.resolve(renderImage(source, draw, transformPixels, gpuOperation))
   );
+}
+
+function splitChannels(
+  sources: WorkerImage[],
+  evaluationId: number
+): Promise<Record<"red" | "green" | "blue" | "alpha", WorkerImage[]>> {
+  return mapWithConcurrency(sources, evaluationId, async (source) => {
+    const [, ctx] = createCanvas(source.width, source.height);
+    ctx.drawImage(source.bitmap, 0, 0);
+    const pixels = ctx.getImageData(0, 0, source.width, source.height).data;
+    const channels = {
+      red: new Uint8ClampedArray(pixels.length),
+      green: new Uint8ClampedArray(pixels.length),
+      blue: new Uint8ClampedArray(pixels.length),
+      alpha: new Uint8ClampedArray(pixels.length),
+    };
+
+    for (let index = 0; index < pixels.length; index += 4) {
+      channels.red[index] = pixels[index];
+      channels.green[index + 1] = pixels[index + 1];
+      channels.blue[index + 2] = pixels[index + 2];
+      channels.alpha[index] = channels.alpha[index + 1] = channels.alpha[index + 2] = pixels[index + 3];
+      channels.red[index + 3] = channels.green[index + 3] = channels.blue[index + 3] = channels.alpha[index + 3] = 255;
+    }
+
+    const createChannelImage = (channel: Uint8ClampedArray, name: string): WorkerImage => {
+      const channelCanvas = new OffscreenCanvas(source.width, source.height);
+      const channelContext = channelCanvas.getContext("2d");
+      if (!channelContext) throw new Error("Could not create canvas context");
+      const imageData = channelContext.createImageData(source.width, source.height);
+      imageData.data.set(channel);
+      channelContext.putImageData(imageData, 0, 0);
+      return {
+        bitmap: channelCanvas.transferToImageBitmap(),
+        width: source.width,
+        height: source.height,
+        name: `${source.name ?? "image"}-${name}`,
+        exif: source.exif,
+      };
+    };
+
+    return Promise.resolve({
+      red: [createChannelImage(channels.red, "red")],
+      green: [createChannelImage(channels.green, "green")],
+      blue: [createChannelImage(channels.blue, "blue")],
+      alpha: [createChannelImage(channels.alpha, "alpha")],
+    });
+  }).then((channelSets) => ({
+    red: channelSets.flatMap((channels) => channels.red),
+    green: channelSets.flatMap((channels) => channels.green),
+    blue: channelSets.flatMap((channels) => channels.blue),
+    alpha: channelSets.flatMap((channels) => channels.alpha),
+  }));
 }
 
 type Point = { x: number; y: number };
@@ -1358,6 +1412,17 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       });
 
       return { image };
+    },
+  },
+
+  "split-channels": {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) {
+        return { red: [], green: [], blue: [], alpha: [] };
+      }
+
+      return splitChannels(sources, inputs.evaluationId as number);
     },
   },
 
