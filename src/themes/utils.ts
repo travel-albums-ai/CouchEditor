@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@mui/material';
-import { alpha, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 export const generateTheme = (tokens: ThemeOptions) => createTheme({
   ...tokens,
@@ -67,17 +67,18 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: ({ theme }) => ({
-          backgroundColor: alpha(theme.palette.background.paper, 0.85),
+          backgroundColor: `${theme.palette.background.paper}DB`,
           maxHeight: '75vh',
           padding: theme.spacing(2),
           overflowY: 'auto',
-          borderRadius: Number(theme.shape.borderRadius) * 4,
-          backdropFilter: 'blur(4px)',
-          border: `2px solid ${theme.palette.divider}`,
-          boxShadow: theme.shadows[12],
+          border: `1px solid ${theme.palette.primary.main}42`,
+          backdropFilter: 'blur(16px)',
+          borderRadius: Number(theme.shape.borderRadius) * 3,
+          boxShadow: `0px 3px 12px -3px ${theme.palette.primary.main}`,
         }),
         backdrop: ({ theme }) => ({
           backdropFilter: 'blur(1px)',
+          backgroundColor: `${theme.palette.background.paper}42`,
         }),
       },
     },

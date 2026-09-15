@@ -1,6 +1,7 @@
-import { alpha, Box, ButtonBase, Chip, Popover, TextField, Typography, useTheme } from '@mui/material';
+import { alpha, Box, ButtonBase, Chip, Popover, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
 
+import SectionHeader from '@/components/SectionHeader';
 import type { SavedPipeline } from '@/context/pipelineStore';
 import PipelineSelectorItem from '@/middleware/windows/pipeline/components/PipelineSelectorItem';
 import PipelineSelectorItems from '@/middleware/windows/pipeline/components/PipelineSelectorItems';
@@ -121,13 +122,14 @@ export default function PipelineSelector({
             backgroundPosition: 'center',
 
           }}>
-            <Box sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}>
-              <GalleryHorizontalEnd  size={64} color={theme.palette.primary.main} />
-              <Box sx={{ borderRadius: 4, display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Typography color="textPrimary" variant="h6">Pipeline Templates</Typography>
-                <Typography color="textSecondary" variant="caption" sx={{ whiteSpace: 'wrap', width: '400px', display: 'block' }}>Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own.</Typography>
-              </Box>
-            </Box>
+            <SectionHeader
+              sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
+              image="couceditor_header_background_850px.png"
+              icon={GalleryHorizontalEnd}
+              iconSize={64}
+              title="Pipeline Templates"
+              subTitle="Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own."
+            />
           </Box>
 
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', px: 2, py: 1 }}>

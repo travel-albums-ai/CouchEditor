@@ -1,10 +1,11 @@
+import SectionHeader from '@/components/SectionHeader';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
 import ToggleToolboxShape from '@/middleware/tools/ActionTools/ToggleToolboxShape';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import NodeToolboxItem from '@/middleware/windows/pipeline/NodeToolboxItem';
-import { Box, InputAdornment, TextField, Typography, useTheme } from '@mui/material';
+import { Box, InputAdornment, TextField, useTheme } from '@mui/material';
 import { GripVertical, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -37,18 +38,16 @@ export default function NodeToolbox() {
       overflow: 'hidden',
       p: 1,
     }}>
-      <Box sx={{ mb: 2, py: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between',
-        backgroundImage: 'url(header_toolbox.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center', }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.5, alignItems: 'center' }}>
-          <GripVertical size={32} color={theme.palette.primary.main} />
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-            <Typography color="textPrimary" variant="h6" sx={{ letterSpacing: -0.5, lineHeight: 1 }}>Add a node</Typography>
-            <Typography variant="caption" color="textSecondary">Drag to the canvas to add it</Typography>
-          </Box>
-        </Box>
-      </Box>
+      <SectionHeader
+        sx={{ m: 0, p: 0, mb: 2, py: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}
+        image="header_toolbox.png"
+        bgSize="345px"
+        icon={GripVertical}
+        iconSize={32}
+        title="Add a node"
+        subTitle="Drag to the canvas to add it"
+      />
+
       <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
         <TextField
           size="small"
