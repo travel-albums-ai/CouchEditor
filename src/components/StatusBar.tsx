@@ -1,15 +1,24 @@
+import RenderingProgress from '@/components/RenderingProgress';
+import { usePipelineStore } from '@/context/pipelineStore';
 import DomCountStatus from '@/middleware/base/DomCountStatus';
 import KeyboardMenu from '@/middleware/base/KeyboardMenu';
 import PipelineNodeCountStatus from '@/middleware/base/PipelineNodeCountStatus';
 import PipelineTotalTimeStatus from '@/middleware/base/PipelineTotalTimeStatus';
 import VersionStatus from '@/middleware/base/VersionStatus';
 import {
+  Box,
   Divider,
   Stack
 } from '@mui/material';
 
 export default function StatusBar() {
-  return <>
+  const {
+    currentPipeline,
+  } = usePipelineStore();
+
+
+  return <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <RenderingProgress />
     <Stack sx={{ ...wrapperSx, width: '100%' }} direction="row" id="header">
       <Stack direction="row" data-side="left" divider={<Divider orientation="vertical" flexItem />} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         <PipelineNodeCountStatus />
@@ -21,7 +30,7 @@ export default function StatusBar() {
         <VersionStatus />
       </Stack>
     </Stack>
-  </>
+  </Box>
 }
 
 const wrapperSx = {
