@@ -1,3 +1,9 @@
+## [1.110.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.109.1...v1.110.0) (2026-09-15)
+
+### ✨ Features
+
+* add Split Channels node for image processing pipeline ([ec60bde](https://github.com/travel-albums-ai/CouchEditor/commit/ec60bde2e3ba34ab90cd37cb99d8f14262aa80cb))
+
 ## [1.109.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.109.0...v1.109.1) (2026-09-15)
 
 ### 🐛 Fixes
