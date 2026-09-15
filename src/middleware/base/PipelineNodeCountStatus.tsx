@@ -28,7 +28,7 @@ export default function PipelineNodeCountStatus() {
       count={count}
       icon={<Workflow />}
       label={"Nodes"}
-      variant="text"
+      variant={count > 0 ? 'important' : 'text'}
       minWidth={120}
       fontSize={14}
       height={30}

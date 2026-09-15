@@ -59,6 +59,8 @@ export default function RenderingProgress() {
     ? sortNodesByPipelineOrder(currentPipeline.nodes, currentPipeline.edges)
     : [];
 
+  if (orderedNodes.length === 0) return null;
+
   return <>
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 0, justifyContent: 'space-between', flex: 1 }}>
       {orderedNodes.map(node => (

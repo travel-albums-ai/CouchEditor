@@ -1,10 +1,10 @@
-import { Box, Tooltip, Typography } from '@mui/material';
+import { alpha, Box, Tooltip, Typography } from '@mui/material';
 import { cloneElement, useEffect, useRef, useState } from 'react';
 
 interface SidebarCoreButtonProps {
   icon?: React.ReactNode;
   count?: number | string;
-  variant?: 'text' | 'header';
+  variant?: 'text' | 'header' | 'important';
   minWidth?: number;
   height?: number;
   fontSize?: number;
@@ -54,7 +54,11 @@ export default function SolidChip({
       alignItems: 'center',
       justifyContent: 'center',
       opacity: variant === 'header' ? 0.5 : 0.7,
-      bgcolor: variant === 'header' ? 'action.selected' : 'transparent',
+      bgcolor: theme => variant === 'header'
+        ? theme.palette.action.selected
+        : variant === 'important'
+          ? alpha(theme.palette.primary.main, 0.35)
+          : 'transparent',
       border: borderless ? 'none' : '1px solid',
       borderColor: 'divider',
       borderRadius: 1,

@@ -5,60 +5,13 @@ import { PreviewDescription } from '@/middleware/windows/pipeline/components/Pre
 import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import { Box } from '@mui/material';
-import { BookOpen, Brain, Bug, Dock, GalleryVerticalEnd, Proportions, SquareDashedText } from 'lucide-react';
+import { BookOpen, SquareDashedText } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-const sectionsMetadata = {
-  ai: {
-    icon: <Brain size={16} />,
-    titleKey: 'settingsAiTitle',
-    guidanceKey: 'settingsAiGuidance',
-  },
-  features: {
-    icon: <Dock size={16} />,
-    titleKey: 'settingsFeaturesTitle',
-    guidanceKey: 'settingsFeaturesGuidance',
-  },
-  default: {
-    icon: <Proportions size={16} />,
-    titleKey: 'settingsLayoutTitle',
-    guidanceKey: 'settingsLayoutGuidance',
-  },
-  indexer: {
-    icon: <GalleryVerticalEnd size={16} />,
-    titleKey: 'settingsIndexerTitle',
-    guidanceKey: 'settingsIndexerGuidance',
-  },
-  debug: {
-    icon: <Bug size={16} />,
-    titleKey: 'settingsDebugTitle',
-    guidanceKey: 'settingsDebugGuidance',
-  },
-};
 
 export default function HelpContent() {
   const { t } = useTranslation();
   const [activeGroup, setActiveGroup] = useState('default');
-
-  // const sections = useMemo(() => [
-  //   { key: 'layout', titleKey: 'settingsInterfaceTitle', component: <LayoutPopover />, icon: <Shapes size={16} />, guidance: t('layoutGuidance') },
-  //   { key: 'performance', titleKey: 'settingsPerformanceTitle', component: <PerformanceSettings />, icon: <Turtle size={16} />, guidance: t('settingsPerformanceGuidance') },
-  //   { key: 'byok', group: 'ai', titleKey: 'settingsByokTitle', component: <BYOKPopover />, icon: <Astroid size={16} />, guidance: t('settingsByokGuidance') },
-  //   { key: 'costs', group: 'ai', titleKey: 'settingsByokCosts', component: <AICostsPopover />, icon: <Coins size={16} />, guidance: t('settingsByokGuidanceCosts') },
-  // ], [t])
-
-  // const groupedSections = useMemo(() => {
-  //   const groups: Record<string, typeof sections> = {};
-  //   sections.forEach((section) => {
-  //     const group = section.group || 'default';
-  //     if (!groups[group]) {
-  //       groups[group] = [];
-  //     }
-  //     groups[group].push(section);
-  //   });
-  //   return groups;
-  // }, [sections]);
 
   return (
     <>

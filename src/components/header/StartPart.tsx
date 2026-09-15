@@ -22,7 +22,7 @@ export default function StartPart() {
             <Typography sx={{ color: 'primary.main', letterSpacing: -1, fontWeight: 'bold', fontSize: 17, lineHeight: 1 }}>Couch</Typography>
             <Typography color="textSecondary" sx={{ fontSize: 17, letterSpacing: -1, lineHeight: 1 }}>Editor</Typography>
           </Box>
-          <SolidChip label={t('beta')} variant="header" />
+          <SolidChip label={t('beta')} variant="important" />
         </Box>
         <Typography variant="caption" color="textDisabled" sx={{ lineHeight: 1, letterSpacing: -0.35, }}>{t('headerTagline')}</Typography>
       </Box>
