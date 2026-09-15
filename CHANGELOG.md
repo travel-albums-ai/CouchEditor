@@ -1,3 +1,9 @@
+## [1.118.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.117.0...v1.118.0) (2026-09-15)
+
+### ✨ Features
+
+* enhance NodeToolboxItem and related components with improved UI and new PreviewTitle component ([d4dea1b](https://github.com/travel-albums-ai/CouchEditor/commit/d4dea1bc817ee3b1be37168fa6942abf3f70fd2d))
+
 ## [1.117.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.116.0...v1.117.0) (2026-09-15)
 
 ### ✨ Features
