@@ -85,10 +85,12 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
       styleOverrides: {
         tooltip: ({ theme }) => ({
           maxWidth: '500px',
-          backgroundColor: `${theme.palette.background.paper}BB`,
+          borderRadius: Number(theme.shape.borderRadius) * 2,
+          backgroundColor: `${theme.palette.background.paper}DB`,
           backdropFilter: 'blur(2px)',
           color: `${theme.palette.text.primary}`,
           boxShadow: theme.shadows[4],
+
         }),
         arrow: ({ theme }) => ({
           color: `${theme.palette.background.paper}BB`,
