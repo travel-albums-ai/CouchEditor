@@ -21,7 +21,7 @@ const phaseSteps = [
 export default function OnboardingTakeout() {
 
   return (<>
-    <Box sx={{ display: 'flex', justifyContent: 'stretch', flexDirection: 'column', p: 2 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'stretch', flexDirection: 'column', p: 1.5 }}>
       <LayoutPopover />
     </Box>
     <OnboardingPhasesListHorizontal phaseSteps={phaseSteps} />

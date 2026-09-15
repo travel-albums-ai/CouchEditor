@@ -20,15 +20,6 @@ export default function BYOKPopover() {
   const { t } = useTranslation()
 
   return <>
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
-      <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
-        <Button size="small" startIcon={<ScrollText size={16} />} variant="outlined">Explore the costs</Button>
-      </a>
-      <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
-        <Button size="small" startIcon={<Coins size={16} />} variant="outlined">Explore usage</Button>
-      </a>
-    </Box>
-
     <SettingsSection title={t('byokSectionTitle')} icon={<Key />} transparent={true} uuid="byok-toggle-ai">
       {toggleControls
         .map((control) => (
@@ -52,8 +43,16 @@ export default function BYOKPopover() {
           </Fragment>
         ))}
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignSelf: 'flex-end', justifyContent: 'flex-end' }}>
-        <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ marginTop: '8px', alignSelf: 'flex-start', color: 'inherit' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, flex: 1, alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', opacity: 0.5 }}>
+          <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">
+            <Button color="inherit" size="small" startIcon={<ScrollText size={16} />} variant="outlined">Costs</Button>
+          </a>
+          <a href="https://platform.openai.com/usage" target="_blank" rel="noopener noreferrer">
+            <Button color="inherit" size="small" startIcon={<Coins size={16} />} variant="outlined">Usage</Button>
+          </a>
+        </Box>
+        <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
           <Button startIcon={<UserKey size={16} />} size="small" variant="outlined">{t('byokGetApiKey')}</Button>
         </a>
       </Box>

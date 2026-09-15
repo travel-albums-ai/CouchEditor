@@ -25,7 +25,7 @@ export default function Onboarding() {
     <Box sx={{ display: 'flex', flexDirection: 'column', pt: 2 }}>
 
 
-      <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto', pb: 2 }}>
         {onboardingStep === 0 && <OnboardingWelcome />}
         {onboardingStep === 1 && <OnboardingTakeout />}
         {onboardingStep === 2 && <OnboardingAI />}
