@@ -25,7 +25,6 @@ export function PreviewCss({ image2style, data, paletteItem }: { image2style: Re
       after={<img src="sample.jpg" style={{ maxWidth: '90px', borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, ...image2style }} />}
       value={data ? Object.values(data)?.[0] : 0}
     />
-
     <PreviewDescription paletteItem={paletteItem} />
   </Box >;
 };

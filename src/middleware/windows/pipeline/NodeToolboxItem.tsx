@@ -1,9 +1,10 @@
-import SolidChip from '@/components/SolidChip';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeToolboxHeader';
 import PreviewDemo from '@/middleware/windows/pipeline/components/PreviewDemo';
-import { Box, Tooltip, Typography } from '@mui/material';
+import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
+import { Box, Chip, Tooltip, Typography, useTheme } from '@mui/material';
 import { ChevronDown, Info, Pointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -13,6 +14,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
   const collapse = usePipelineStoreSelector((state) => state.collapsedToolboxGroups[group] ?? false)
   const { setState } = usePipelineStore()
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return <>
     <Box
@@ -52,7 +54,6 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
           .filter(item => t(item.labelKey).toLowerCase().includes(searchTermToolbox.toLowerCase()))
           .filter(item => enableAI || item.ai === undefined)
           .map((item, i) => (
-
             <Box
               key={item.type}
               draggable
@@ -60,25 +61,22 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
                 onDragStart(event, item.type)
               }
             >
-              {/* <Box sx={{
-                boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
-                borderRadius: 2,
-                m: 1,
-                p: 0 }}>
-                <PreviewDemo paletteItem={item} />
-              </Box> */}
+
               <NodeToolboxHeader type={item.type}>
-                <Tooltip title={<Box>
+                <Tooltip title={<Box sx={{ bgcolor: 'background.paper' }}>
+                  <PreviewTitle paletteItem={item} />
+                  <PreviewDescription paletteItem={item} />
+
                   <Box sx={{
-                    boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
+                    boxShadow: theme => `inset 0 0 4px 0px ${theme.palette.divider}`,
                     borderRadius: 2,
-                    m: 1,
+                    my: 1,
                     p: 0 }}>
                     <PreviewDemo paletteItem={item} />
                   </Box>
 
-                  <Box sx={{ mx: 1, py: 1 }}>
-                    <SolidChip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} borderless  icon={<Pointer />} variant="header" />
+                  <Box sx={{ mx: 1, py: 2, display: 'flex', justifyContent: 'center' }}>
+                    <Chip label={t('pipelineDragToAdd', { label: t(item.labelKey) })} icon={<Pointer size={16} />} size="small" variant="outlined" sx={{ py: 1.5, px: 1, fontSize: 12 }} color="primary" />
                   </Box>
 
                 </Box>} key={item.type} arrow placement="right">

@@ -1,5 +1,4 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
-import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Slider, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -72,8 +71,6 @@ export function PreviewDemoCss({ paletteItem, width }: AdjustmentPreviewProps) {
           step={config?.step ?? 0.01}
         />
       )}
-
-      <PreviewDescription paletteItem={paletteItem} />
     </Box>
   );
 }

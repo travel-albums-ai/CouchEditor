@@ -1,5 +1,4 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
-import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Slider, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -101,8 +100,6 @@ export function PreviewDemoMath({ paletteItem, width = 90 }: AdjustmentPreviewPr
         max={typeof config?.max === 'number' ? config.max : 1}
         step={config?.step ?? 0.01}
       />}
-
-      <PreviewDescription paletteItem={paletteItem} />
     </Box>
   );
 }

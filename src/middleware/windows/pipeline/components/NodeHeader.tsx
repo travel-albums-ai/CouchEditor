@@ -34,8 +34,8 @@ function NodeHeader({
   );
 
   const groupColor = useMemo(
-    () => stc(paletteItem?.group ?? ''),
-    [paletteItem?.group]
+    () => stc(paletteItem?.groupKey ?? ''),
+    [paletteItem?.groupKey]
   );
 
   const isDark = theme.palette.mode === 'dark';

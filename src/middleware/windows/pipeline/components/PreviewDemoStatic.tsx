@@ -1,5 +1,4 @@
 import { PreviewBeforeAfter } from '@/middleware/windows/pipeline/components/PreviewBeforeAfter';
-import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import { NodePaletteItem, NodeType } from '@/middleware/windows/pipeline/NodePalette';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ChartColumn, Cloud, Download, Eye, Flame, Folder, Map, Plus, Slash } from 'lucide-react';
@@ -245,8 +244,6 @@ export function PreviewDemoStatic({ paletteItem, width }: AdjustmentPreviewProps
           before={imagesPairs[paletteItem.type].before || <></>}
         />
       </Box>}
-
-      <PreviewDescription paletteItem={paletteItem} />
     </Box>
   );
 }
