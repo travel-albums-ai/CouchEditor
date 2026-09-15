@@ -5,7 +5,7 @@ import NodeToolboxHeader from '@/middleware/windows/pipeline/components/NodeTool
 import PreviewDemo from '@/middleware/windows/pipeline/components/PreviewDemo';
 import { PreviewDescription } from '@/middleware/windows/pipeline/components/PreviewDescription';
 import PreviewTitle from '@/middleware/windows/pipeline/components/PreviewTitle';
-import { Box, Chip, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Chip, Tooltip, Typography } from '@mui/material';
 import { ChevronDown, Pointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,10 +15,8 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
   const collapse = usePipelineStoreSelector((state) => state.collapsedToolboxGroups[group] ?? false)
   const { setState } = usePipelineStore()
   const { t } = useTranslation();
-  const theme = useTheme();
 
   const toolboxAsGrid = usePipelineStoreSelector((state) => state.toolboxAsGrid)
-  const NodeHeaderDecision = toolboxAsGrid ? NodeHeaderGrid : NodeToolboxHeader;
 
   return <>
     <Box
@@ -53,6 +51,7 @@ export default function NodeToolboxItem({ group, items, onDragStart, isSearching
         alignContent: 'stretch',
         justifyContent: 'stretch',
         mb: 2,
+        mr: 1,
         gridTemplateColumns: toolboxAsGrid ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
         gap: 1,
       }}>

@@ -59,8 +59,8 @@ function NodeHeaderGrid({
           alignItems: 'center',
           borderRadius: 2,
           justifyContent: 'center',
-          gap: 0.5,
-          p: 0.75,
+          gap: 0.25,
+          p: 0.65,
           bgcolor: `color-mix(in srgb, color-mix(in srgb, ${stc(paletteItem?.type)} 100%, ${stc(paletteItem?.groupKey)} 20%) 8%, transparent 0%)`,
         },
         sx,
@@ -68,7 +68,7 @@ function NodeHeaderGrid({
     >
       {paletteItem?.icon &&
           cloneElement(paletteItem.icon, {
-            size: 24,
+            size: 20,
             style: {
               color: iconColor,
             },

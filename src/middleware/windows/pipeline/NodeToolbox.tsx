@@ -39,7 +39,7 @@ export default function NodeToolbox() {
       <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
           <Typography color="textPrimary" sx={{ fontWeight: 'bold', fontSize: 18, letterSpacing: -0.5, lineHeight: 1 }}>Add a node</Typography>
-          <Typography variant="body2" color="textSecondary">Drag to the canvas to add it</Typography>
+          <Typography variant="caption" color="textSecondary">Drag to the canvas to add it</Typography>
         </Box>
         <ToggleToolboxShape />
       </Box>
