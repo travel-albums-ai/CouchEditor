@@ -1,3 +1,9 @@
+## [1.150.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.150.0...v1.150.1) (2026-09-16)
+
+### 🐛 Fixes
+
+* update Box overflow style in PipelineCanvasOverlays for better layout ([e34d15b](https://github.com/travel-albums-ai/CouchEditor/commit/e34d15b817b89a662656b2dd650ba2e8b2c1cede))
+
 ## [1.150.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.149.0...v1.150.0) (2026-09-16)
 
 ### ✨ Features
