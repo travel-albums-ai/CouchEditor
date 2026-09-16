@@ -1,3 +1,9 @@
+## [1.145.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.144.0...v1.145.0) (2026-09-16)
+
+### ✨ Features
+
+* refactor Header and ToolsBar components, remove MiddlePart, and add PipelineTemplates and TemplatesToggle ([2e729da](https://github.com/travel-albums-ai/CouchEditor/commit/2e729da43f63484f862c4b36618761033a6e8fce))
+
 ## [1.144.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.143.0...v1.144.0) (2026-09-16)
 
 ### ✨ Features
