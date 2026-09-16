@@ -1,3 +1,13 @@
+## [1.141.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.140.0...v1.141.0) (2026-09-16)
+
+### ✨ Features
+
+* add LLM-readable project information and improve service worker routing ([489a44a](https://github.com/travel-albums-ai/CouchEditor/commit/489a44ac954efb53a9d8520f2973616bcfd96d1c))
+
+### 🔧 Chore
+
+* update dependencies and service worker to latest versions ([4b5572f](https://github.com/travel-albums-ai/CouchEditor/commit/4b5572faeea851a8e0b77cc25add4b47a443ab22))
+
 ## [1.140.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.139.0...v1.140.0) (2026-09-16)
 
 ### ✨ Features
