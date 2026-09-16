@@ -1,3 +1,9 @@
+## [1.142.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.141.0...v1.142.0) (2026-09-16)
+
+### ✨ Features
+
+* enhance popover and toolbar components with customizable positioning options ([2ee2276](https://github.com/travel-albums-ai/CouchEditor/commit/2ee22769efc2dd0b3e5464dfc1e0b40cac11bd9a))
+
 ## [1.141.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.140.0...v1.141.0) (2026-09-16)
 
 ### ✨ Features
