@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import Header from '@/components/Header';
+import EndPart from '@/components/header/EndPart';
+import StartPart from '@/components/header/StartPart';
 import LoadingBar from '@/components/LoadingBar';
 import StatusBar from '@/components/StatusBar';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
@@ -48,20 +49,14 @@ export default function PipelineCanvasOverlays({
   const { t } = useTranslation();
 
   return <>
-    <Header
-    />
-
-    <Box sx={{ bottom: 12, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
+    <Box sx={{ left: 12, top: 12, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <FloatingToolbar sx={{
-        minWidth: '900px',
-        maxWidth: '1200px'
+        display: 'flex',
+        flexDirection: 'row',
       }}>
-        <LoadingBar />
-        <StatusBar />
+        <StartPart />
       </FloatingToolbar>
-    </Box>
 
-    <Box sx={{ top: 12, right: 12, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-actions">
       <FloatingToolbar>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <GenericToggleButtonGroup id="pipeline-new" items={[
@@ -114,6 +109,22 @@ export default function PipelineCanvasOverlays({
             onChange={onUpload}
           />
         </Box>
+      </FloatingToolbar>
+    </Box>
+
+    <Box sx={{ bottom: 12, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
+      <FloatingToolbar sx={{
+        minWidth: '900px',
+        maxWidth: '1200px'
+      }}>
+        <LoadingBar />
+        <StatusBar />
+      </FloatingToolbar>
+    </Box>
+
+    <Box sx={{ top: 12, right: 12, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-actions">
+      <FloatingToolbar>
+        <EndPart />
       </FloatingToolbar>
     </Box>
 
