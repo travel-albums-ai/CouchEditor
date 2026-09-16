@@ -1,3 +1,9 @@
+## [1.149.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.148.0...v1.149.0) (2026-09-16)
+
+### ✨ Features
+
+* integrate ExtendedMenu into StartPart and EndPart, update Header layout with FloatingToolbar ([87d9c8c](https://github.com/travel-albums-ai/CouchEditor/commit/87d9c8c9cb9e1aded5822f2e8a1f6a3f273a1967))
+
 ## [1.148.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.147.0...v1.148.0) (2026-09-16)
 
 ### ✨ Features
