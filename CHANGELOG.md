@@ -1,3 +1,9 @@
+## [1.143.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.142.0...v1.143.0) (2026-09-16)
+
+### ✨ Features
+
+* refactor GenericToggleButton and ToolsBar for customizable positioning ([c8613ae](https://github.com/travel-albums-ai/CouchEditor/commit/c8613aecd585d6c8bd58fc8586999c6731865f24))
+
 ## [1.142.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.141.0...v1.142.0) (2026-09-16)
 
 ### ✨ Features
