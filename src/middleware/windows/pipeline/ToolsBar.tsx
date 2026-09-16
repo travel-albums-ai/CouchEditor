@@ -6,7 +6,7 @@ import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingTo
 import PipelineTemplates from '@/middleware/windows/pipeline/components/PipelineTemplates';
 import { Box, Divider } from '@mui/material';
 import "@xyflow/react/dist/style.css";
-import { GalleryHorizontalEnd, GitFork, Hand, HardDrive, Heart, ImageUpscale, MousePointer2, Plus } from 'lucide-react';
+import { GalleryHorizontalEnd, Hand, MousePointer2, Plus } from 'lucide-react';
 import NodeToolbox from "./NodeToolbox";
 import './styles.css';
 
@@ -16,20 +16,6 @@ interface ToolsBarProps {
   loadPipeline: (id: string) => void;
 }
 
-
-const pipelineIcons = {
-
-  "pipelineGroupInput": <HardDrive />,
-  "pipelineLogicInput": <GitFork />,
-  "pipelineGroupTransform": <ImageUpscale />,
-  "pipelineGroupLight": <Plus />,
-  "pipelineGroupColor": <Plus />,
-  "pipelineGroupDetail": <Plus />,
-  "pipelineGroupEffects": <Plus />,
-  'pipelineGroupAi': <Heart />,
-  "pipelineGroupOutput": <Plus />,
-}
-
 export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline }: ToolsBarProps) {
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const {
@@ -37,12 +23,7 @@ export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline }:
     disableReactflow,
   } = usePipelineStore();
   return (
-    <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
-
-
-
-
-
+    <>
       <Box sx={{ bottom: 0, left: 16, top: 0, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <FloatingToolbar sx={{
           display: 'flex',
@@ -135,6 +116,6 @@ export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline }:
           </Box>
         </FloatingToolbar>
       </Box>
-    </Box>
+    </>
   );
 }

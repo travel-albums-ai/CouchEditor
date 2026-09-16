@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import type { ChangeEvent, RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +47,7 @@ export default function PipelineCanvasOverlays({
   const { t } = useTranslation();
 
   return <>
-    <Box sx={{ bottom: 10, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
+    <Box sx={{ bottom: 12, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
       <FloatingToolbar sx={{
         minWidth: '900px',
         maxWidth: '1200px'
@@ -60,11 +60,17 @@ export default function PipelineCanvasOverlays({
     <Box sx={{ top: 12, right: 12, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-actions">
       <FloatingToolbar>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <GenericToggleButtonGroup id="pipeline-new" variant="standard" items={[
+          <GenericToggleButtonGroup id="pipeline-new" items={[
             {
               tooltip: t('newPipeline'),
               icon: <CirclePlus />,
               onClick: onClearWorkspace,
+              title: '',
+            },
+            {
+              tooltip: t('import'),
+              icon: <Upload />,
+              onClick: () => pipelineFileInputRef.current?.click(),
               title: '',
             },
           ] satisfies GenericToggleButtonProps[]} />
@@ -89,13 +95,13 @@ export default function PipelineCanvasOverlays({
               onClick: onSaveAsCopy,
               title: '',
             },
+            {
+              tooltip: t('export'),
+              icon: <Download />,
+              onClick: onDownload,
+              title: '',
+            }
           ] satisfies GenericToggleButtonProps[]} />
-          <Button variant="contained" startIcon={<Download size={16} />} onClick={onDownload}>
-            {t('export')}
-          </Button>
-          <Button variant="outlined" startIcon={<Upload size={16} />} onClick={() => pipelineFileInputRef.current?.click()}>
-            {t('import')}
-          </Button>
           <input
             ref={pipelineFileInputRef}
             type="file"
