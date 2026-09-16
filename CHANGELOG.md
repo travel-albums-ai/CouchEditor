@@ -1,3 +1,9 @@
+## [1.147.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.146.0...v1.147.0) (2026-09-16)
+
+### ✨ Features
+
+* simplify ToolsBar and PipelineCanvasOverlays by removing unused icons and redundant components ([61c6f38](https://github.com/travel-albums-ai/CouchEditor/commit/61c6f38143dfa7ba681263758a3f9a69d1662d85))
+
 ## [1.146.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.145.0...v1.146.0) (2026-09-16)
 
 ### ✨ Features
