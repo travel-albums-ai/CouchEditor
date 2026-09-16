@@ -1,3 +1,9 @@
+## [1.148.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.147.0...v1.148.0) (2026-09-16)
+
+### ✨ Features
+
+* remove unused TemplatesToggle, FloatingStack, and PipelineSelector components ([008d53b](https://github.com/travel-albums-ai/CouchEditor/commit/008d53b9ec9301ec46b101ace8cd9198ba8976e8))
+
 ## [1.147.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.146.0...v1.147.0) (2026-09-16)
 
 ### ✨ Features
