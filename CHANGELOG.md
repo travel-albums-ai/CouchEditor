@@ -1,3 +1,9 @@
+## [1.144.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.143.0...v1.144.0) (2026-09-16)
+
+### ✨ Features
+
+* enhance ExtendedMenu and ToolsBar with new functionality and improved locking mechanism ([1deb41e](https://github.com/travel-albums-ai/CouchEditor/commit/1deb41ec657b12d147435b6f0a3d1bd074fb7ef6))
+
 ## [1.143.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.142.0...v1.143.0) (2026-09-16)
 
 ### ✨ Features
