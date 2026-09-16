@@ -1,3 +1,9 @@
+## [1.140.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.139.0...v1.140.0) (2026-09-16)
+
+### ✨ Features
+
+* remove OnboardingWrapper component to streamline onboarding process ([a418408](https://github.com/travel-albums-ai/CouchEditor/commit/a41840857a7b4e0e17b756e9118054f5fe3f6a1d))
+
 ## [1.139.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.138.0...v1.139.0) (2026-09-16)
 
 ### ✨ Features
