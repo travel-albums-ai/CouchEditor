@@ -1,3 +1,9 @@
+## [1.146.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.145.0...v1.146.0) (2026-09-16)
+
+### ✨ Features
+
+* update FloatingToolbar styles and replace FloatingStack with new layout in PipelineCanvasOverlays ([1ac08e6](https://github.com/travel-albums-ai/CouchEditor/commit/1ac08e6e0bb0218545958a3a1f20892fe72b3b51))
+
 ## [1.145.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.144.0...v1.145.0) (2026-09-16)
 
 ### ✨ Features
