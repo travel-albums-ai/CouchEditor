@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import Header from '@/components/Header';
 import LoadingBar from '@/components/LoadingBar';
 import StatusBar from '@/components/StatusBar';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
@@ -47,6 +48,9 @@ export default function PipelineCanvasOverlays({
   const { t } = useTranslation();
 
   return <>
+    <Header
+    />
+
     <Box sx={{ bottom: 12, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
       <FloatingToolbar sx={{
         minWidth: '900px',

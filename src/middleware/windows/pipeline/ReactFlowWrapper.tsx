@@ -24,7 +24,6 @@ import {
   useState,
 } from "react";
 
-import Header from '@/components/Header';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
@@ -726,8 +725,6 @@ function Pipeline() {
 
   return (
     <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
-      <Header
-      />
       <div
         className="reactflow-canvas"
         onDragOver={onDragOver}
@@ -762,15 +759,11 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-
-
         <ToolsBar
           currentPipelineId={currentPipelineId}
           pipelines={pipelines}
           loadPipeline={loadPipeline}
         />
-
-
 
         <PipelineCanvasOverlays
           currentPipelineId={currentPipelineId}

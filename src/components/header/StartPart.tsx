@@ -1,4 +1,5 @@
 import SolidChip from '@/components/SolidChip';
+import ExtendedMenu from '@/middleware/tools/PopoverTools/ExtendedMenu';
 import { Box, Button, Tooltip, Typography } from '@mui/material';
 import { PartyPopper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ export default function StartPart() {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <ExtendedMenu />
       <img
         src="./couchLogoMini.png"
         alt={t('logoAlt')}

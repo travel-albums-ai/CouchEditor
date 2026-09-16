@@ -1,7 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { Divider, Stack } from '@mui/material';
-import { Bug, EllipsisVertical, Home, Lightbulb, ScrollText, Settings } from 'lucide-react';
+import { Bug, Home, Lightbulb, Menu, ScrollText, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const URLS = [
@@ -48,10 +48,14 @@ export default function ExtendedMenu() {
   return <GenericToggleButtonGroup
     id="extended-menu-toggle"
     variant="standard"
+    anchorHorizontal="center"
+    anchorVertical="bottom"
+    transformHorizontal="center"
+    transformVertical="top"
     items={[
       {
         tooltip: t('openSectionsSettings'),
-        icon: <EllipsisVertical />,
+        icon: <Menu />,
         popover: <>
           <Stack direction="column" spacing={1} divider={<Divider />}>
             {URLS.map((item) => (<GenericToggleButtonGroup
