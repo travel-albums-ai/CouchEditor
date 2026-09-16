@@ -727,9 +727,6 @@ function Pipeline() {
   return (
     <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
       <Header
-        currentPipelineId={currentPipelineId}
-        pipelines={pipelines}
-        loadPipeline={loadPipeline}
       />
       <div
         className="reactflow-canvas"
@@ -767,7 +764,11 @@ function Pipeline() {
 
 
 
-        <ToolsBar />
+        <ToolsBar
+          currentPipelineId={currentPipelineId}
+          pipelines={pipelines}
+          loadPipeline={loadPipeline}
+        />
 
 
 

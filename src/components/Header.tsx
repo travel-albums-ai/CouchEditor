@@ -1,17 +1,10 @@
 import { Box } from '@mui/material';
 
 import EndPart from '@/components/header/EndPart';
-import MiddlePart from '@/components/header/MiddlePart';
 import StartPart from '@/components/header/StartPart';
-import type { SavedPipeline } from '@/context/pipelineStore';
 
-type HeaderProps = {
-  currentPipelineId: string;
-  pipelines: SavedPipeline[];
-  loadPipeline: (id: string) => void;
-};
 
-export default function Header({ currentPipelineId, pipelines, loadPipeline }: HeaderProps) {
+export default function Header() {
 
   return (
     <Box sx={{
@@ -22,11 +15,6 @@ export default function Header({ currentPipelineId, pipelines, loadPipeline }: H
       zIndex: 10
     }}>
       <StartPart />
-      <MiddlePart
-        currentPipelineId={currentPipelineId}
-        pipelines={pipelines}
-        loadPipeline={loadPipeline}
-      />
       <EndPart />
     </Box>
   );

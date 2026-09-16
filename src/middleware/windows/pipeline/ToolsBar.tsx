@@ -1,15 +1,20 @@
-import { Box, Divider } from '@mui/material';
-import "@xyflow/react/dist/style.css";
-import './styles.css';
-
-
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import HelpToggle from '@/middleware/tools/ActionTools/HelpToggle';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
-import { GitFork, Hand, HardDrive, Heart, ImageUpscale, MousePointer2, Plus } from 'lucide-react';
+import PipelineTemplates from '@/middleware/windows/pipeline/components/PipelineTemplates';
+import { Box, Divider } from '@mui/material';
+import "@xyflow/react/dist/style.css";
+import { GalleryHorizontalEnd, GitFork, Hand, HardDrive, Heart, ImageUpscale, MousePointer2, Plus } from 'lucide-react';
 import NodeToolbox from "./NodeToolbox";
+import './styles.css';
+
+interface ToolsBarProps {
+  currentPipelineId: string;
+  pipelines: any[];
+  loadPipeline: (id: string) => void;
+}
 
 
 const pipelineIcons = {
@@ -25,7 +30,7 @@ const pipelineIcons = {
   "pipelineGroupOutput": <Plus />,
 }
 
-export default function ToolsBar() {
+export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline }: ToolsBarProps) {
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const {
     enableReactflow,
@@ -84,6 +89,31 @@ export default function ToolsBar() {
             <Divider />
 
             <HelpToggle />
+
+            <Divider />
+
+            <GenericToggleButtonGroup
+              id="extended-menu-toggle"
+              variant="standard"
+              anchorHorizontal="right"
+              anchorVertical="center"
+              transformHorizontal="left"
+              transformVertical="center"
+              items={[
+                {
+                  tooltip: 'Open templates',
+                  icon: <GalleryHorizontalEnd />,
+                  noArrow: true,
+                  popover: <Box sx={{ maxHeight: '80vh', overflow: 'auto' }} >
+                    <PipelineTemplates
+                      currentPipelineId={currentPipelineId}
+                      pipelines={pipelines}
+                      loadPipeline={loadPipeline}
+                    />
+                  </Box>,
+                },
+              ] satisfies GenericToggleButtonProps[]}
+            />
             <GenericToggleButtonGroup
               id="extended-menu-toggle"
               variant="standard"

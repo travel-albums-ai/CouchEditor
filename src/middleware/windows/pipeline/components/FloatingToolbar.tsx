@@ -22,6 +22,7 @@ export default function FloatingToolbar({
       spacing={1}
       sx={[
         {
+          m: 0.5,
           bgcolor: theme => alpha(theme.palette.background.paper, 0.9),
           border: asIs ? 0 : 1,
           borderColor: 'divider',

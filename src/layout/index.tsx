@@ -30,7 +30,6 @@ export default function AppLayout() {
       <MainDriver />
       <AiLoadingBar />
 
-      {/* // webMcp */}
       <WebMCPThemeTool />
       <WebMCPAddPipelineNode />
       <WebMCPClonePipelineNode />
