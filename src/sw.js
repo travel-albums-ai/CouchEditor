@@ -27,9 +27,10 @@ if (self.workbox) {
     })
   );
 
+  const appShellHandler = wb.precaching.createHandlerBoundToURL('/index.html');
+
   wb.routing.registerRoute(
-    ({ request }) => request.mode === 'navigate',
-    new wb.strategies.NetworkFirst({ cacheName: 'pages' })
+    new wb.routing.NavigationRoute(appShellHandler)
   );
 
   self.addEventListener('activate', (event) => {

@@ -1,0 +1,38 @@
+# CouchEditor
+
+> CouchEditor is a browser-based visual photo editor for building reusable editing pipelines and exporting photo recipes.
+
+CouchEditor lets people select photos, arrange editing steps on a visual canvas, preview the results, and save or share the recipe as a `.cep` pipeline file. It runs in the browser and keeps the original photo files unchanged while the pipeline describes the edits to apply.
+
+## Core capabilities
+
+- Select JPEG, PNG, and WebP photos from a local computer.
+- Build pipelines by connecting input, editing, and output steps on a canvas.
+- Transform photos with crop, resize, rotate, flip, mirror, and perspective correction.
+- Adjust light with exposure, brightness, contrast, highlights, shadows, gamma, and luminosity controls.
+- Adjust color with saturation, vibrance, hue, black and white, sepia, inversion, and LUT presets.
+- Apply detail and effects such as sharpening, denoising, grain, vignette, pop, HDR, and fade.
+- Use optional AI colorizing and denoising tools when enabled and configured.
+- Preview one photo or a complete set of results, inspect histograms, and download output images as a ZIP.
+- Save recipes locally in the browser, clone existing recipes, and import or export `.cep` pipeline files.
+
+## How it works
+
+A pipeline normally contains an input step, one or more editing steps, and an output step. Connect the steps in order, select photos in the input step, adjust the editing controls, and inspect the output in a viewer step. Pipeline files contain the recipe and settings, not the original photos; anyone opening a shared recipe must select their own source photos.
+
+## Important behavior
+
+- CouchEditor is a client-side web application and requires JavaScript.
+- Saved pipelines are stored in the current browser. Clearing browser storage or switching browsers can remove access to locally saved recipes.
+- AI tools are optional and may require provider settings or an API key.
+- The public application is free to access.
+
+## Resources
+
+- [CouchEditor](https://couch-editor.com/): Open the application.
+- [Project README](https://github.com/travel-albums-ai/CouchEditor/blob/main/README.md): Read the user and developer documentation.
+- [Sitemap](https://couch-editor.com/sitemap.xml): Discover the public site URL.
+
+## Technical notes
+
+CouchEditor is built with React and Vite. Its editing pipeline is represented as a connected graph of source, transform, AI, and viewer nodes. The application performs processing in the browser; local photos are not required to be uploaded to use the standard editing workflow.
