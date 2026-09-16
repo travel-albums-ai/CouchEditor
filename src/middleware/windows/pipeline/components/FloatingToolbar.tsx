@@ -22,17 +22,18 @@ export default function FloatingToolbar({
       spacing={1}
       sx={[
         {
-          m: 0.5,
-          bgcolor: theme => alpha(theme.palette.background.paper, 0.9),
+          m: 0.75,
+          bgcolor: theme => alpha(theme.palette.background.paper, 0.8),
           border: asIs ? 0 : 1,
           borderColor: 'divider',
           p: asIs ? 0 : 1,
           borderRadius: 2,
           boxShadow: 2,
           backdropFilter: 'blur(4px)',
-          transition: 'box-shadow 0.35s ease',
+          transition: 'box-shadow 0.35s ease, background-color 0.35s ease',
           '&:hover': {
-            boxShadow: 4,
+            bgcolor: theme => alpha(theme.palette.background.paper, 0.95),
+            boxShadow: theme => `0 2px 10px -2px ${alpha(theme.palette.primary.main, 0.65)}`,
           },
         },
         sx,

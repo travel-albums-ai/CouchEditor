@@ -1,4 +1,4 @@
-import { Box, Button, Stack, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { CirclePlus, Copy, Download, Save, Trash2, Upload } from 'lucide-react';
 import type { ChangeEvent, RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,6 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import LoadingBar from '@/components/LoadingBar';
 import StatusBar from '@/components/StatusBar';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
-import FloatingStack from './FloatingStack';
 
 type PipelineCanvasOverlaysProps = {
   currentPipelineId: string;
@@ -48,7 +47,7 @@ export default function PipelineCanvasOverlays({
   const { t } = useTranslation();
 
   return <>
-    <Box sx={{ bottom: 10, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }}>
+    <Box sx={{ bottom: 10, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
       <FloatingToolbar sx={{
         minWidth: '900px',
         maxWidth: '1200px'
@@ -58,60 +57,58 @@ export default function PipelineCanvasOverlays({
       </FloatingToolbar>
     </Box>
 
+    <Box sx={{ top: 12, right: 12, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-actions">
+      <FloatingToolbar>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <GenericToggleButtonGroup id="pipeline-new" variant="standard" items={[
+            {
+              tooltip: t('newPipeline'),
+              icon: <CirclePlus />,
+              onClick: onClearWorkspace,
+              title: '',
+            },
+          ] satisfies GenericToggleButtonProps[]} />
+          <TextField
+            id="pipeline-name"
+            size="small"
+            value={currentPipelineName}
+            placeholder={t('pipelineTitlePlaceholder')}
+            onChange={(event) => onNameChange(event.target.value)}
+            sx={{ maxWidth: 400, minWidth: 300 }}
+          />
+          <GenericToggleButtonGroup id="pipeline-save" items={[
+            {
+              tooltip: t('savePipeline'),
+              icon: <Save />,
+              onClick: onSave,
+              title: '',
+            },
+            {
+              tooltip: t('savePipelineAsClone'),
+              icon: <Copy />,
+              onClick: onSaveAsCopy,
+              title: '',
+            },
+          ] satisfies GenericToggleButtonProps[]} />
+          <Button variant="contained" startIcon={<Download size={16} />} onClick={onDownload}>
+            {t('export')}
+          </Button>
+          <Button variant="outlined" startIcon={<Upload size={16} />} onClick={() => pipelineFileInputRef.current?.click()}>
+            {t('import')}
+          </Button>
+          <input
+            ref={pipelineFileInputRef}
+            type="file"
+            accept=".cep"
+            hidden
+            onChange={onUpload}
+          />
+        </Box>
+      </FloatingToolbar>
+    </Box>
 
-
-    <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-actions">
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <GenericToggleButtonGroup id="pipeline-new" variant="standard" items={[
-          {
-            tooltip: t('newPipeline'),
-            icon: <CirclePlus />,
-            onClick: onClearWorkspace,
-            title: '',
-          },
-        ] satisfies GenericToggleButtonProps[]} />
-        <TextField
-          id="pipeline-name"
-          size="small"
-          value={currentPipelineName}
-          placeholder={t('pipelineTitlePlaceholder')}
-          onChange={(event) => onNameChange(event.target.value)}
-          sx={{ maxWidth: 400, minWidth: 300 }}
-        />
-        <GenericToggleButtonGroup id="pipeline-save" items={[
-          {
-            tooltip: t('savePipeline'),
-            icon: <Save />,
-            onClick: onSave,
-            title: '',
-          },
-          {
-            tooltip: t('savePipelineAsClone'),
-            icon: <Copy />,
-            onClick: onSaveAsCopy,
-            title: '',
-          },
-        ] satisfies GenericToggleButtonProps[]} />
-        <Button variant="contained" startIcon={<Download size={16} />} onClick={onDownload}>
-          {t('export')}
-        </Button>
-        <Button variant="outlined" startIcon={<Upload size={16} />} onClick={() => pipelineFileInputRef.current?.click()}>
-          {t('import')}
-        </Button>
-        <input
-          ref={pipelineFileInputRef}
-          type="file"
-          accept=".cep"
-          hidden
-          onChange={onUpload}
-        />
-      </Box>
-    </FloatingStack>
-
-    <Stack
+    <Box
       id="pipeline-trash"
-      direction="row"
-      spacing={1}
       sx={{ position: 'absolute', bottom: 16, right: 232, zIndex: 10 }}
     >
       <Box
@@ -137,6 +134,6 @@ export default function PipelineCanvasOverlays({
       >
         <Trash2 size={22} />
       </Box>
-    </Stack>
+    </Box>
   </>;
 }
