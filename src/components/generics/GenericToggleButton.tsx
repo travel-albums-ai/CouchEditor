@@ -135,10 +135,10 @@ export default memo(function GenericToggleButton({
 
   return popover ? (
     <PopoverButtonSimple trigger={<span>{content}</span>}
-      anchorHorizontal="right"
-      anchorVertical="top"
-      transformHorizontal="left"
-      transformVertical="bottom"
+      anchorHorizontal={anchorHorizontal}
+      anchorVertical={anchorVertical}
+      transformHorizontal={transformHorizontal}
+      transformVertical={transformVertical}
     >
       {popover}
     </PopoverButtonSimple>
