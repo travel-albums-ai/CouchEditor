@@ -1,8 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import LocaleToggle from '@/middleware/tools/MixedTools/LocaleToggle';
 import { Divider, Stack } from '@mui/material';
-import { EllipsisVertical, ScrollText, Settings } from 'lucide-react';
+import { Bug, EllipsisVertical, Home, Lightbulb, ScrollText, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const URLS = [
@@ -26,6 +25,21 @@ const URLS = [
     icon: <ScrollText />,
     url: 'https://github.com/travel-albums-ai/CouchEditor/issues/new',
   },
+  {
+    key: 'homepage',
+    icon: <Home />,
+    url: 'http://homepage.couch-editor.com/',
+  },
+  {
+    key: 'bugReport',
+    icon: <Bug />,
+    url: 'https://github.com/travel-albums-ai/CouchEditor/issues/new?template=bug-existing-feature.yml',
+  },
+  {
+    key: 'newComponent',
+    icon: <Lightbulb />,
+    url: 'https://github.com/travel-albums-ai/CouchEditor/issues/new?template=new-field.yml',
+  }
 ];
 
 export default function ExtendedMenu() {
@@ -52,7 +66,6 @@ export default function ExtendedMenu() {
                 },
               ] satisfies GenericToggleButtonProps[]}
             />))}
-            <LocaleToggle />
           </Stack>
         </>,
       },

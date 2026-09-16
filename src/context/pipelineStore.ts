@@ -27,11 +27,12 @@ export type CurrentPipeline = PipelineGraph & {
 }
 
 type PipelineStore = {
-  pipelines: SavedPipeline[]
-  currentPipeline: CurrentPipeline
+  pipelines: SavedPipeline[],
+  currentPipeline: CurrentPipeline,
+  lockReactflow: boolean,
   showToolbox: boolean,
   toolboxAsGrid: boolean,
-  searchTermToolbox: string
+  searchTermToolbox: string,
   collapsedToolboxGroups: Record<string, boolean>
 }
 
@@ -59,6 +60,7 @@ const defaults: PipelineStore = {
     edges: [],
     isDirty: false,
   },
+  lockReactflow: false,
   showToolbox: true,
   toolboxAsGrid: false,
   searchTermToolbox: '',
@@ -119,6 +121,9 @@ export const usePipelineStore = () => {
         ...prev,
         currentPipeline: { ...prev.currentPipeline, ...graph, isDirty },
       })),
+    toggleLockReactflow: () => setState((prev) => ({ ...prev, lockReactflow: !prev.lockReactflow })),
+    enableReactflow: () => setState((prev) => ({ ...prev, lockReactflow: false })),
+    disableReactflow: () => setState((prev) => ({ ...prev, lockReactflow: true })),
     setCurrentPipelineName: (name: string) =>
       setState((prev) => ({
         ...prev,

@@ -12,7 +12,7 @@ import {
   useReactFlow,
   type Connection,
   type Edge,
-  type Node,
+  type Node
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import './styles.css';
@@ -48,6 +48,7 @@ function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
+  const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
   const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
@@ -66,6 +67,7 @@ function Pipeline() {
     updateCurrentPipeline,
     setCurrentPipelineName,
     setCurrentPipelineDirty,
+    toggleLockReactflow,
     saveNew,
     cloneExisting,
     updateById,
@@ -744,6 +746,9 @@ function Pipeline() {
           defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
           minZoom={0.25}
           nodeTypes={pipelineNodeTypes}
+          nodesDraggable={!lockReactflow}
+          nodesConnectable={!lockReactflow}
+          elementsSelectable={!lockReactflow}
           onNodesChange={handleNodesChange}
           onEdgesChange={handleEdgesChange}
           onConnect={onConnect}
@@ -756,7 +761,7 @@ function Pipeline() {
           zoomOnDoubleClick={false}
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.disabled} />
-          <Controls position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
+          <Controls showInteractive={false} position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
           <MiniMap />
         </ReactFlow>
 
