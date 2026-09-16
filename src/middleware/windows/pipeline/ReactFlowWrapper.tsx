@@ -28,9 +28,7 @@ import Header from '@/components/Header';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
-import FloatingStack from '@/middleware/windows/pipeline/components/FloatingStack';
-import NodeToolbox from "./NodeToolbox";
+import ToolsBar from '@/middleware/windows/pipeline/ToolsBar';
 import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
@@ -762,15 +760,11 @@ function Pipeline() {
           <MiniMap />
         </ReactFlow>
 
-        <FloatingStack
-          sx={{ top: 10, left: 12, bottom: showToolbox ? 10 : 'auto', overflow: 'auto' }}
-          id="pipeline-toolbox"
-          key={`pipeline-toolbox-${showToolbox ? 'visible' : 'hidden'}`}
-          asIs={!showToolbox}>
-          {showToolbox
-            ? <NodeToolbox />
-            : <ToggleToolbox />}
-        </FloatingStack>
+
+
+        <ToolsBar />
+
+
 
         <PipelineCanvasOverlays
           currentPipelineId={currentPipelineId}

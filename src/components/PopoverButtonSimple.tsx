@@ -5,12 +5,20 @@ interface PopoverButtonProps {
   children: ReactNode;
   trigger?: ReactNode;
   preOpen?: boolean;
+  anchorHorizontal?: 'left' | 'center' | 'right';
+  anchorVertical?: 'top' | 'center' | 'bottom';
+  transformHorizontal?: 'left' | 'center' | 'right';
+  transformVertical?: 'top' | 'center' | 'bottom';
 }
 
 export default function PopoverButtonSimple({
   trigger,
   children,
   preOpen = false,
+  anchorHorizontal = 'right',
+  anchorVertical = 'top',
+  transformHorizontal = 'left',
+  transformVertical = 'bottom',
 }: PopoverButtonProps) {
   const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
 
@@ -38,12 +46,12 @@ export default function PopoverButtonSimple({
         anchorEl={anchor}
         transitionDuration={0}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: anchorVertical,
+          horizontal: anchorHorizontal,
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: transformVertical,
+          horizontal: transformHorizontal,
         }}
         onClose={() => setAnchor(null)}
         slotProps={{

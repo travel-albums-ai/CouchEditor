@@ -7,6 +7,7 @@ import { cloneElement, memo, ReactElement, ReactNode } from 'react';
 
 export interface GenericToggleButtonProps {
   id?: string;
+  noArrow?: boolean;
   webMcp?: boolean;
   group?: string[];
   tooltip: string;
@@ -32,6 +33,10 @@ interface Props {
   variant?: 'standard' | 'outlined';
   size?: number;
   dropShadow?: boolean;
+  anchorHorizontal?: 'left' | 'center' | 'right';
+  anchorVertical?: 'top' | 'center' | 'bottom';
+  transformHorizontal?: 'left' | 'center' | 'right';
+  transformVertical?: 'top' | 'center' | 'bottom';
 }
 
 export default memo(function GenericToggleButton({
@@ -39,6 +44,10 @@ export default memo(function GenericToggleButton({
   variant = 'standard',
   size = 16,
   dropShadow = false,
+  anchorHorizontal="right",
+  anchorVertical="top",
+  transformHorizontal="left",
+  transformVertical="bottom",
 }: Props) {
   const theme = useTheme();
   const {
@@ -95,7 +104,7 @@ export default memo(function GenericToggleButton({
         </Typography>
       )}
 
-      {popover &&
+      {(popover && !item.noArrow) &&
         (upsideDown ? (
           <ChevronUp size={12} color={textColor} />
         ) : (
@@ -125,7 +134,12 @@ export default memo(function GenericToggleButton({
   );
 
   return popover ? (
-    <PopoverButtonSimple trigger={<span>{content}</span>}>
+    <PopoverButtonSimple trigger={<span>{content}</span>}
+      anchorHorizontal="right"
+      anchorVertical="top"
+      transformHorizontal="left"
+      transformVertical="bottom"
+    >
       {popover}
     </PopoverButtonSimple>
   ) : (

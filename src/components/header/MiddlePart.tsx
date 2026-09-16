@@ -1,5 +1,5 @@
 import { alpha, Box, Typography, useTheme } from '@mui/material';
-import { GalleryHorizontalEnd, Home, Workflow } from 'lucide-react';
+import { GalleryHorizontalEnd } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import type { SavedPipeline } from '@/context/pipelineStore';
@@ -18,23 +18,6 @@ export default function MiddlePart({ currentPipelineId, pipelines, loadPipeline 
   return (
 
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-      <a href="https://homepage.couch-editor.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1,
-          // color: 'text.disabled',
-          borderRadius: 2, p: 2, height: 42,
-          bgcolor: alpha(theme.palette.primary.main, 0.2),
-          color: 'primary.main',
-        }}>
-          <Home size={16} />
-          <Typography variant="subtitle2">Homepage</Typography>
-        </Box>
-      </a>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.disabled', borderRadius: 2, p: 2, height: 42,
-        bgcolor: alpha(theme.palette.divider, 0.03),
-      }}>
-        <Workflow size={16} />
-        <Typography variant="subtitle2">{t('editor')}</Typography>
-      </Box>
       <Box sx={{
         display: 'flex', alignItems: 'center', gap: 1, color: 'primary.main', borderRadius: 2, p: 2, height: 42,
         bgcolor: 'background.paper',

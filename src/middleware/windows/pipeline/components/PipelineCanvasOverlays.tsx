@@ -7,6 +7,7 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import LoadingBar from '@/components/LoadingBar';
 import StatusBar from '@/components/StatusBar';
+import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 import FloatingStack from './FloatingStack';
 
 type PipelineCanvasOverlaysProps = {
@@ -47,24 +48,17 @@ export default function PipelineCanvasOverlays({
   const { t } = useTranslation();
 
   return <>
-    <FloatingStack sx={{ bottom: 10, left: '30%', right: '30%', overflow: 'auto' }} id="pipeline-status">
-      <Box
-        id="status-bar"
-        sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: 1.5,
-          p: 0.5,
-          py: 0,
-          position: 'relative',
-        }}
-      >
+    <Box sx={{ bottom: 10, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }}>
+      <FloatingToolbar sx={{
+        minWidth: '900px',
+        maxWidth: '1200px'
+      }}>
         <LoadingBar />
         <StatusBar />
-      </Box>
-    </FloatingStack>
+      </FloatingToolbar>
+    </Box>
+
+
 
     <FloatingStack sx={{ top: 12, right: 12 }} id="pipeline-actions">
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
