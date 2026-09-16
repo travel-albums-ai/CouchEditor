@@ -1,3 +1,9 @@
+## [1.139.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.138.0...v1.139.0) (2026-09-16)
+
+### ✨ Features
+
+* add Homepage link with icon to MiddlePart for improved navigation ([e6e9cc0](https://github.com/travel-albums-ai/CouchEditor/commit/e6e9cc0b0065b8b6db14db3ffdf8ff2b2277af60))
+
 ## [1.138.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.137.0...v1.138.0) (2026-09-15)
 
 ### ✨ Features
