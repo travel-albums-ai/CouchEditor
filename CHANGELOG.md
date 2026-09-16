@@ -1,3 +1,9 @@
+## [1.150.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.149.0...v1.150.0) (2026-09-16)
+
+### ✨ Features
+
+* replace Header component with StartPart and EndPart in PipelineCanvasOverlays ([5bdc8b8](https://github.com/travel-albums-ai/CouchEditor/commit/5bdc8b8fc2683925128057349ee1f2ef1347c773))
+
 ## [1.149.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.148.0...v1.149.0) (2026-09-16)
 
 ### ✨ Features
