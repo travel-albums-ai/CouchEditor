@@ -1,3 +1,9 @@
+## [1.159.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.158.0...v1.159.0) (2026-09-17)
+
+### ✨ Features
+
+* implement PipelineTrash context and provider for enhanced trash management ([90afee2](https://github.com/travel-albums-ai/CouchEditor/commit/90afee23523a04572c002db71cba7240fc6fcc5d))
+
 ## [1.158.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.157.0...v1.158.0) (2026-09-17)
 
 ### ✨ Features
