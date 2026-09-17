@@ -21,11 +21,18 @@ import TutorialToggle from '@/toolbars/tools/TutorialToggle';
 import ViewerReactflowToggle from '@/toolbars/tools/ViewerReactflowToggle';
 import { Box, Divider } from '@mui/material';
 
+type ToolbarItem = {
+  sx: Record<string, any>;
+  floatingSx?: Record<string, any>;
+  groups: React.ReactNode[];
+};
+
 export default function Toolbars() {
 
   const toolbarItems = {
     'toolbox': {
       sx: { bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', justifyContent: 'center', alignItems: 'center' },
+      floatingSx: { },
       groups: [
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
           <PointerReactflowToggle />
@@ -52,6 +59,7 @@ export default function Toolbars() {
     },
     'others': {
       sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', justifyContent: 'center' },
+      floatingSx: { },
       groups: [
         <>
           <SettingsWindowToggle />
@@ -63,6 +71,7 @@ export default function Toolbars() {
     },
     'start': {
       sx: { left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' },
+      floatingSx: { },
       groups: [
         <>
           <ExtendedMenu />
@@ -77,14 +86,14 @@ export default function Toolbars() {
         </>,
       ],
     },
-  };
+  } satisfies Record<string, ToolbarItem>;
 
   return (
     <>
-      {Object.entries(toolbarItems).map(([key, { sx, floatingSx, groups }]) => (
-        <Box key={key} sx={{...sx, position: 'absolute', display: 'flex'}} id={`toolbar-${key}`}>
-          {groups && groups.map((group, index) => (
-            <FloatingToolbar key={index} sx={floatingSx}>
+      {Object.entries(toolbarItems).map(([key, item]) => (
+        <Box key={key} sx={{...item.sx, position: 'absolute', display: 'flex'}} id={`toolbar-${key}`}>
+          {item.groups && item.groups.map((group, index) => (
+            <FloatingToolbar key={index} sx={item.floatingSx as any}>
               {group}
             </FloatingToolbar>
           ))}
