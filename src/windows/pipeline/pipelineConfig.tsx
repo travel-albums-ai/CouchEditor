@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { ConnectionLineType, type Edge, type Node } from '@xyflow/react';
 
 import AIAsyncColorizerNode from './AIAsyncColorizerNode';
@@ -28,36 +29,13 @@ import SplitToningNode from './ComplexNodes/SplitToningNode';
 import ViewerNode from './ComplexNodes/ViewerNode';
 import VignetteNode from './ComplexNodes/VignetteNode';
 import InformationNode from './InformationNode';
-import BlackAndWhiteNode from './SimpleToggles/BlackAndWhiteNode';
-import BrightnessNode from './SimpleToggles/BrightnessNode';
-import ContrastNode from './SimpleToggles/ContrastNode';
-import CropNode from './SimpleToggles/CropNode';
-import ExposureNode from './SimpleToggles/ExposureNode';
-import FadeNode from './SimpleToggles/FadeNode';
-import FlipNode from './SimpleToggles/FlipNode';
-import GammaNode from './SimpleToggles/GammaNode';
-import GrainNode from './SimpleToggles/GrainNode';
-import HdrNode from './SimpleToggles/HdrNode';
-import HighlightsNode from './SimpleToggles/HighlightsNode';
-import HueRotationNode from './SimpleToggles/HueRotationNode';
-import InvertNode from './SimpleToggles/InvertNode';
-import LuminosityNode from './SimpleToggles/LuminosityNode';
-import MirrorNode from './SimpleToggles/MirrorNode';
-import PerspectiveNode from './SimpleToggles/PerspectiveNode';
-import PopNode from './SimpleToggles/PopNode';
 import {
-  RgbBlackPointNode,
-  RgbMidtonesNode,
-  RgbWhitePointNode,
-} from './SimpleToggles/RgbChannelsNode';
-import RotateNode from './SimpleToggles/RotateNode';
-import SaturationNode from './SimpleToggles/SaturationNode';
-import SepiaNode from './SimpleToggles/SepiaNode';
-import ShadowsNode from './SimpleToggles/ShadowsNode';
-import SharpenNode from './SimpleToggles/SharpenNode';
-import TemperatureTintNode from './SimpleToggles/TemperatureTintNode';
-import VibranceNode from './SimpleToggles/VibranceNode';
-import WhitesBlacksNode from './SimpleToggles/WhitesBlacksNode';
+  BlackAndWhiteNode, BrightnessNode, ContrastNode, CropNode, ExposureNode,
+  FadeNode, FlipNode, GammaNode, GrainNode, HdrNode, HighlightsNode,
+  HueRotationNode, InvertNode, LuminosityNode, MirrorNode, PerspectiveNode, PopNode,
+  RgbBlackPointNode, RgbMidtonesNode, RgbWhitePointNode, RotateNode, SaturationNode,
+  SepiaNode, ShadowsNode, SharpenNode, TemperatureTintNode, VibranceNode, WhitesBlacksNode,
+} from './SimpleToggles';
 
 export const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 export const INITIAL_NODES: Node[] = [];
@@ -69,62 +47,62 @@ export const PIPELINE_NODE_COUNT_EVENT = 'pipeline:node-count';
 export const PIPELINE_NODE_COUNT_REQUEST_EVENT = 'pipeline:node-count-request';
 
 export const pipelineNodeTypes = {
-  source: SourceNode,
-  'hot-folder-read': HotFolderReadNode,
-  'google-drive': GoogleDriveNode,
-  grouper: GrouperNode,
-  'array-switch': ArraySwitchNode,
-  'array-and': ArraySetOperationNode,
-  'array-and-not': ArraySetOperationNode,
-  'array-or': ArraySetOperationNode,
-  'image-picker': ImagePickerNode,
-  'exif-split': ExifSplitNode,
   'ai-colorizer': AIAsyncColorizerNode,
   'ai-denoiser': AIAsyncDenoiserNode,
   'ai-photo-editor': AIPhotoEditorNode,
+  'array-and-not': ArraySetOperationNode,
+  'array-and': ArraySetOperationNode,
+  'array-or': ArraySetOperationNode,
+  'array-switch': ArraySwitchNode,
   'ask-ai': AskAINode,
-  invert: InvertNode,
   'black-white': BlackAndWhiteNode,
-  sepia: SepiaNode,
-  flip: FlipNode,
-  mirror: MirrorNode,
-  rotate: RotateNode,
-  brightness: BrightnessNode,
-  highlights: HighlightsNode,
-  shadows: ShadowsNode,
-  gamma: GammaNode,
-  luminosity: LuminosityNode,
-  lut: LutNode,
-  exposure: ExposureNode,
-  contrast: ContrastNode,
-  crop: CropNode,
-  perspective: PerspectiveNode,
-  saturation: SaturationNode,
-  vibrance: VibranceNode,
-  vignette: VignetteNode,
-  grain: GrainNode,
-  sharpen: SharpenNode,
-  pop: PopNode,
-  hdr: HdrNode,
-  'hue-rotation': HueRotationNode,
-  fade: FadeNode,
-  'whites-blacks': WhitesBlacksNode,
-  'temperature-tint': TemperatureTintNode,
-  'rgb-black-point': RgbBlackPointNode,
-  'rgb-white-point': RgbWhitePointNode,
-  'rgb-midtones': RgbMidtonesNode,
-  'split-toning': SplitToningNode,
-  rescale: RescaleNode,
-  collage: CollageNode,
-  'selected-photo': SelectedPhotoNode,
-  viewer: ViewerNode,
-  'viewer-single': SinglePhotoViewerNode,
+  'exif-split': ExifSplitNode,
   'exif-viewer': ExifViewerNode,
+  'google-drive': GoogleDriveNode,
   'gps-map': GpsMapNode,
   'gps-split': GpsSplitNode,
-  'split-channels': SplitChannelsNode,
+  'hot-folder-read': HotFolderReadNode,
+  'hot-folder-write': HotFolderWriteNode,
+  'hue-rotation': HueRotationNode,
+  'image-picker': ImagePickerNode,
   'merge-channels': MergeChannelsNode,
   'photo-histogram': PhotoHistogramNode,
-  'hot-folder-write': HotFolderWriteNode,
+  'rgb-black-point': RgbBlackPointNode,
+  'rgb-midtones': RgbMidtonesNode,
+  'rgb-white-point': RgbWhitePointNode,
+  'selected-photo': SelectedPhotoNode,
+  'split-channels': SplitChannelsNode,
+  'split-toning': SplitToningNode,
+  'temperature-tint': TemperatureTintNode,
+  'viewer-single': SinglePhotoViewerNode,
+  'whites-blacks': WhitesBlacksNode,
+  brightness: BrightnessNode,
+  collage: CollageNode,
+  contrast: ContrastNode,
+  crop: CropNode,
+  exposure: ExposureNode,
+  fade: FadeNode,
+  flip: FlipNode,
+  gamma: GammaNode,
+  grain: GrainNode,
+  grouper: GrouperNode,
+  hdr: HdrNode,
+  highlights: HighlightsNode,
   information: InformationNode,
+  invert: InvertNode,
+  luminosity: LuminosityNode,
+  lut: LutNode,
+  mirror: MirrorNode,
+  perspective: PerspectiveNode,
+  pop: PopNode,
+  rescale: RescaleNode,
+  rotate: RotateNode,
+  saturation: SaturationNode,
+  sepia: SepiaNode,
+  shadows: ShadowsNode,
+  sharpen: SharpenNode,
+  source: SourceNode,
+  vibrance: VibranceNode,
+  viewer: ViewerNode,
+  vignette: VignetteNode,
 };
