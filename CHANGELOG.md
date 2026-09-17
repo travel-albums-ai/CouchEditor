@@ -1,3 +1,9 @@
+## [1.166.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.165.0...v1.166.0) (2026-09-17)
+
+### ✨ Features
+
+* update HelpContent to use dynamic icons for sidebar buttons ([c109a70](https://github.com/travel-albums-ai/CouchEditor/commit/c109a7022bade34701b5119259c0673ba502e2ca))
+
 ## [1.165.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.164.0...v1.165.0) (2026-09-17)
 
 ### ✨ Features
