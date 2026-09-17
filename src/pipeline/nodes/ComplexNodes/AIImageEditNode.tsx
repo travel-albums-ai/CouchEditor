@@ -1,6 +1,7 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { InputHandle } from '@/pipeline/components/InputHandle';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Alert, Box, Button, LinearProgress, TextField, Typography } from '@mui/material';
 import type { Node, NodeProps } from "@xyflow/react";
 import { Astroid, Sparkles } from 'lucide-react';

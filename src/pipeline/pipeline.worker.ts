@@ -782,7 +782,7 @@ const OPENAI_CHAT_COMPLETIONS_URL = "https://api.openai.com/v1/chat/completions"
 const AI_ASK_MODEL = "gpt-4o-mini";
 
 // Node types that share the passthru/apiKey data shape.
-const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser", "ai-photo-editor"]);
+const AI_IMAGE_EDIT_NODE_TYPES = new Set(["ai-colorizer", "ai-denoiser", "ai-negative-converter", "ai-photo-editor"]);
 
 const AI_COLORIZER_PROMPT = [
   "Colorize this photograph realistically.",
@@ -806,6 +806,31 @@ const AI_DENOISER_PROMPT = [
   "Preserve the original composition, geometry, identity, facial features, expressions, poses, objects, lighting, tonal relationships, and photographic character.",
   "The result should look like the same photograph captured or scanned with less distracting degradation, not like a newly generated image.",
 ].join(" ");
+
+function negativeConversionPrompt(source: WorkerImage): string {
+  const [, context] = createCanvas(96, 96);
+  context.drawImage(source.bitmap, 0, 0, 96, 96);
+  const base = detectFilmBaseColor(context.getImageData(0, 0, 96, 96));
+  const metadata = Object.entries(source.exif ?? {})
+    .filter(([, value]) => value !== undefined && value !== null && typeof value !== "object")
+    .map(([key, value]) => `${key}=${String(value)}`)
+    .join(", ")
+    .slice(0, 1600);
+
+  return [
+    "Convert this scanned film negative into a natural, technically correct positive photograph.",
+    "First determine whether it is a color negative, black-and-white negative, or another negative process.",
+    `The measured lightest-area film base is approximately RGB(${Math.round(base[0])}, ${Math.round(base[1])}, ${Math.round(base[2])}); use it as a guide for the base mask, not as a literal subject color.`,
+    metadata ? `Available roll or scan metadata: ${metadata}.` : "No reliable roll metadata is available; infer the film process from the image.",
+    "Identify the film stock or process from the base color, emulsion behavior, and roll metadata when possible, then apply the appropriate workflow for that stock.",
+    "For color negatives, remove the orange, amber, pink, cyan, or other film-base mask before inverting each channel, then correct density, white balance, contrast, and color crossover for the detected stock.",
+    "For black-and-white negatives, remove the base veil and invert the density into a neutral positive while preserving the characteristic tonal response and grain.",
+    "Recover realistic colors and neutral whites without clipping highlights, crushing shadows, or adding an artificial cinematic grade.",
+    "Preserve the original composition, camera angle, perspective, geometry, identity, facial features, expressions, poses, clothing, objects, architecture, and background exactly.",
+    "Do not add or remove people or objects, invent detail, or clean away authentic film grain unless it is clearly a scan artifact.",
+    "The result should look like a properly exposed darkroom or professional scan of the same frame, not like a newly generated image.",
+  ].join(" ");
+}
 
 function postProgress(
   nodeType: string,
@@ -1057,7 +1082,7 @@ async function requestOpenAIImageEdit(
 function createAIImageEditNodeDefinition(
   nodeType: string,
   label: string,
-  prompt: string | ((inputs: NodeInputs) => string)
+  prompt: string | ((inputs: NodeInputs, source: WorkerImage) => string)
 ): PipelineNodeDefinition {
   let runSeq = 0;
   const cache = new Map<string, WorkerImage>();
@@ -1116,13 +1141,6 @@ function createAIImageEditNodeDefinition(
         return { image: sources };
       }
 
-      const editPrompt = typeof prompt === "function" ? prompt(inputs) : prompt;
-
-      if (!editPrompt.trim()) {
-        console.error(`${label}: missing edit prompt`);
-        return { image: sources };
-      }
-
       const runId = ++runSeq;
       const total = sources.length;
       let completed = 0;
@@ -1134,6 +1152,12 @@ function createAIImageEditNodeDefinition(
         evaluationId,
         async (source) => {
           try {
+            const editPrompt = typeof prompt === "function" ? prompt(inputs, source) : prompt;
+            if (!editPrompt.trim()) {
+              console.error(`${label}: missing edit prompt`);
+              return source;
+            }
+
             const edited = await editImage(
               source,
               apiKey,
@@ -1857,6 +1881,12 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     "ai-colorizer",
     "AI Colorizer",
     AI_COLORIZER_PROMPT
+  ),
+
+  "ai-negative-converter": createAIImageEditNodeDefinition(
+    "ai-negative-converter",
+    "AI Negative Converter",
+    (_inputs, source) => negativeConversionPrompt(source)
   ),
 
   "ai-denoiser": createAIImageEditNodeDefinition(

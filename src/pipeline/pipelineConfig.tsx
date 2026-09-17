@@ -10,6 +10,7 @@ import {
 } from '@/pipeline/nodes';
 import AIAsyncColorizerNode from '@/pipeline/nodes/ComplexNodes/AIAsyncColorizerNode';
 import AIAsyncDenoiserNode from '@/pipeline/nodes/ComplexNodes/AIAsyncDenoiserNode';
+import AINegativeConverterNode from '@/pipeline/nodes/ComplexNodes/AINegativeConverterNode';
 import AIPhotoEditorNode from '@/pipeline/nodes/ComplexNodes/AIPhotoEditorNode';
 import ArraySetOperationNode from '@/pipeline/nodes/ComplexNodes/ArraySetOperationNode';
 import ArraySwitchNode from '@/pipeline/nodes/ComplexNodes/ArraySwitchNode';
@@ -50,6 +51,7 @@ export const PIPELINE_NODE_COUNT_REQUEST_EVENT = 'pipeline:node-count-request';
 export const pipelineNodeTypes = {
   'ai-colorizer': AIAsyncColorizerNode,
   'ai-denoiser': AIAsyncDenoiserNode,
+  'ai-negative-converter': AINegativeConverterNode,
   'ai-photo-editor': AIPhotoEditorNode,
   'array-and-not': ArraySetOperationNode,
   'array-and': ArraySetOperationNode,
