@@ -1,3 +1,9 @@
+## [1.176.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.175.0...v1.176.0) (2026-09-17)
+
+### ✨ Features
+
+* add AI Negative Converter node and related functionality ([b8dfcc7](https://github.com/travel-albums-ai/CouchEditor/commit/b8dfcc7fbf7b1ca524492ffe1b31baf6e9562594))
+
 ## [1.175.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.174.0...v1.175.0) (2026-09-17)
 
 ### ✨ Features
