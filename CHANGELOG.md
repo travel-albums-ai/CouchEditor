@@ -1,3 +1,9 @@
+## [1.154.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.153.0...v1.154.0) (2026-09-17)
+
+### ✨ Features
+
+* add DialogCloseButton component and integrate it into HelpWindow, SettingsWindow, and TemplatesWindow for improved user experience ([71bff6e](https://github.com/travel-albums-ai/CouchEditor/commit/71bff6e292ef72a2c844e1aabd17713a0a131ea1))
+
 ## [1.153.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.152.0...v1.153.0) (2026-09-17)
 
 ### ✨ Features
