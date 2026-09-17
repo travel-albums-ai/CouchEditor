@@ -29,8 +29,7 @@ import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineSt
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import OthersToolbar from '@/layout/OthersToolbar';
 import StatusToolbar from '@/layout/StatusToolbar';
-import DeleteButton from '@/middleware/windows/pipeline/components/DeleteButton';
-import ToolsBar from '@/middleware/windows/pipeline/ToolsBar';
+import ToolboxToolbar from '@/layout/ToolboxToolbar';
 import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
@@ -770,9 +769,6 @@ function Pipeline() {
 
       </div>
 
-      <ToolsBar>
-        <DeleteButton />
-      </ToolsBar>
 
       <PipelineCanvasOverlays
         currentPipelineName={currentPipelineName}
@@ -791,6 +787,7 @@ function Pipeline() {
         organizingWithAI={organizingWithAI}
       />
 
+      <ToolboxToolbar />
       <OthersToolbar />
       <StatusToolbar />
     </Box>
