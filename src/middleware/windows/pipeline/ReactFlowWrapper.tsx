@@ -27,6 +27,7 @@ import {
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import DeleteButton from '@/middleware/windows/pipeline/components/DeleteButton';
 import ToolsBar from '@/middleware/windows/pipeline/ToolsBar';
 import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
@@ -755,23 +756,26 @@ function Pipeline() {
           zoomOnDoubleClick={false}
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.disabled} />
-          <Controls showInteractive={false} position="bottom-right" orientation="horizontal" style={{ bottom: 164 }} />
-          <MiniMap />
+          <Controls showInteractive={false} position="top-right" orientation="horizontal" style={{ top: 230 }} />
+          <MiniMap position="top-right" style={{ top: 70 }} />
         </ReactFlow>
 
         <ToolsBar
           currentPipelineId={currentPipelineId}
           pipelines={pipelines}
           loadPipeline={loadPipeline}
-        />
+        >
+          <DeleteButton
+            currentPipelineId={currentPipelineId}
+            trashActive={trashActive}
+            trashRef={trashRef}
+            onDelete={deleteCurrent}
+          />
+        </ToolsBar>
 
         <PipelineCanvasOverlays
-          currentPipelineId={currentPipelineId}
           currentPipelineName={currentPipelineName}
-          performanceMode={performanceMode}
-          trashActive={trashActive}
           pipelineFileInputRef={pipelineFileInputRef}
-          trashRef={trashRef}
           onClearWorkspace={clearWorkspace}
           onSave={saveCurrent}
           onSaveAsCopy={saveAsCopy}
