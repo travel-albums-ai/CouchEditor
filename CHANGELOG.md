@@ -1,3 +1,9 @@
+## [1.167.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.166.0...v1.167.0) (2026-09-17)
+
+### ✨ Features
+
+* refactor toolbar structure and consolidate toolbar components ([db6ebfe](https://github.com/travel-albums-ai/CouchEditor/commit/db6ebfe17484e8259c2aed520df14bf343e8dd7b))
+
 ## [1.166.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.165.0...v1.166.0) (2026-09-17)
 
 ### ✨ Features
