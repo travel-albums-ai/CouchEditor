@@ -64,7 +64,6 @@ export default function PopoverButtonSimple({
             <Box sx={{
               overflow: 'visible',
               border: 1,
-              p: 1,
               borderColor: 'divider',
               backgroundColor: 'background.paper',
               borderRadius: 2,
