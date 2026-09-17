@@ -1,22 +1,24 @@
 import { Box } from '@mui/material';
 import { Trash2 } from 'lucide-react';
-import type { RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 
-type PipelineCanvasOverlaysProps = {
-  currentPipelineId: string;
-  trashActive: boolean;
-  trashRef: RefObject<HTMLDivElement | null>;
-  onDelete: () => void;
-};
+import { usePipelineStore } from '@/context/pipelineStore';
+import { INITIAL_EDGES, INITIAL_NODES } from '../pipelineConfig';
+import { usePipelineTrash } from '../usePipelineTrash';
 
-export default function DeleteButton({
-  currentPipelineId,
-  trashActive,
-  trashRef,
-  onDelete,
-}: PipelineCanvasOverlaysProps) {
+export default function DeleteButton() {
   const { t } = useTranslation();
+  const { currentPipeline, deleteById, setCurrentPipeline } = usePipelineStore();
+  const { trashActive, trashRef } = usePipelineTrash();
+  const currentPipelineId = currentPipeline.id;
+
+  const onDelete = () => {
+    if (!currentPipelineId) return;
+    if (!window.confirm(`Delete pipeline "${currentPipeline.name}"?`)) return;
+
+    deleteById(currentPipelineId);
+    setCurrentPipeline({ id: '', name: '', nodes: INITIAL_NODES, edges: INITIAL_EDGES, isDirty: false });
+  };
 
   return <>
     <Box

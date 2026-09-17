@@ -43,8 +43,10 @@ import {
   pipelineNodeTypes,
   SNAP_GRID,
 } from './pipelineConfig';
+import { PipelineTrashProvider } from './PipelineTrashProvider';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import { VIEWER_NODE_TYPES } from "./types";
+import { usePipelineTrash } from './usePipelineTrash';
 
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
@@ -62,6 +64,7 @@ function Pipeline() {
   const theme = useTheme();
 
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
+  const { trashRef, setTrashActive } = usePipelineTrash();
   const {
     currentPipeline,
     setCurrentPipeline,
@@ -80,8 +83,6 @@ function Pipeline() {
   const isDirty = currentPipeline.isDirty;
   const nodeIdRef = useRef(0);
   const pipelineFileInputRef = useRef<HTMLInputElement>(null);
-  const trashRef = useRef<HTMLDivElement>(null);
-  const [trashActive, setTrashActive] = useState(false);
   const [organizingWithAI, setOrganizingWithAI] = useState(false);
   const restoredPipelineRef = useRef(false);
   const evaluationId = useRef(0);
@@ -362,7 +363,16 @@ function Pipeline() {
   const previousPipelineIdRef = useRef(currentPipelineId);
 
   useEffect(() => {
-    if (!currentPipelineId || previousPipelineIdRef.current === currentPipelineId) return;
+    if (!currentPipelineId) {
+      if (previousPipelineIdRef.current) {
+        previousPipelineIdRef.current = '';
+        setNodes(INITIAL_NODES);
+        setEdges(INITIAL_EDGES);
+      }
+      return;
+    }
+
+    if (previousPipelineIdRef.current === currentPipelineId) return;
 
     const pipeline = loadById(currentPipelineId);
     if (!pipeline) return;
@@ -761,12 +771,7 @@ function Pipeline() {
       </div>
 
       <ToolsBar>
-        <DeleteButton
-          currentPipelineId={currentPipelineId}
-          trashActive={trashActive}
-          trashRef={trashRef}
-          onDelete={deleteCurrent}
-        />
+        <DeleteButton />
       </ToolsBar>
 
       <PipelineCanvasOverlays
@@ -795,7 +800,9 @@ function Pipeline() {
 export default function ReactFlowWrapper() {
   return (
     <ReactFlowProvider>
-      <Pipeline />
+      <PipelineTrashProvider>
+        <Pipeline />
+      </PipelineTrashProvider>
     </ReactFlowProvider>
   );
 }
