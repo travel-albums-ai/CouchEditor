@@ -1,46 +1,28 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import HelpToggle from '@/middleware/tools/HelpToggle';
+import PointerReactflowToggle from '@/middleware/tools/PointerReactflowToggle';
 import TemplatesToggle from '@/middleware/tools/TemplatesToggle';
+import ViewerReactflowToggle from '@/middleware/tools/ViewerReactflowToggle';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 import { TOOLBAR_GAP } from '@/middleware/windows/pipeline/components/PipelineCanvasOverlays';
 import { Box, Divider } from '@mui/material';
 import "@xyflow/react/dist/style.css";
-import { Hand, MousePointer2, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import NodeToolbox from "./NodeToolbox";
 import './styles.css';
 
 export default function ToolsBar({ children }: { children?: React.ReactNode }) {
-  const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
-  const {
-    enableReactflow,
-    disableReactflow,
-  } = usePipelineStore();
 
   const menu = {
-    'pointer': {
-      type: 'toggle',
-      data: {
-        tooltip: 'Interactive mode',
-        icon: <MousePointer2 />,
-        onClick: () => {
-          enableReactflow();
-        },
-        selected: !lockReactflow,
-      }
+    'pointerToggle': {
+      type: 'component',
+      data: <PointerReactflowToggle />,
     },
-    "hand": {
-      type: 'toggle',
-      data: {
-        tooltip: 'Viewer mode',
-        icon: <Hand />,
-        onClick: () => {
-          disableReactflow();
-        },
-        selected: lockReactflow,
-      }
+    "handToggle": {
+      type: 'component',
+      data: <ViewerReactflowToggle />,
     },
     "divider1": {
       type: 'divider',
