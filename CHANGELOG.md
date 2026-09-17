@@ -1,3 +1,9 @@
+## [1.151.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.150.1...v1.151.0) (2026-09-17)
+
+### ✨ Features
+
+* add DeleteButton component and integrate it into ToolsBar for pipeline management ([74c9b21](https://github.com/travel-albums-ai/CouchEditor/commit/74c9b215c8e94111b2796a8662e806632d6d580c))
+
 ## [1.150.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.150.0...v1.150.1) (2026-09-16)
 
 ### 🐛 Fixes
