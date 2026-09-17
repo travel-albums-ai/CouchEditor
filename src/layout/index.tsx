@@ -16,6 +16,7 @@ import NewVersionWindow from '@/middleware/windows/NewVersionWindow';
 import OnboardingWindow from '@/middleware/windows/OnboardingWindow';
 import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import SettingsWindow from '@/middleware/windows/SettingsWindow';
+import TemplatesWindow from '@/middleware/windows/TemplatesWindow';
 
 export default function AppLayout() {
 
@@ -25,6 +26,7 @@ export default function AppLayout() {
       <NewVersionWindow />
       <OnboardingWindow />
       <SettingsWindow />
+      <TemplatesWindow />
       <HelpWindow />
 
       <MainDriver />

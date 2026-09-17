@@ -1,4 +1,4 @@
-import { Box, Chip, TextField, useTheme } from '@mui/material';
+import { Box, Chip, TextField } from '@mui/material';
 import { useState } from 'react';
 
 import SectionHeader from '@/components/SectionHeader';
@@ -8,10 +8,7 @@ import PipelineSelectorItems from '@/middleware/windows/pipeline/components/Pipe
 import { Astroid, Camera, GalleryHorizontalEnd, User } from 'lucide-react';
 
 export default function PipelineTemplates() {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const { pipelines, loadById, setCurrentPipeline } = usePipelineStore();
-  const isOpen = Boolean(anchorEl);
-  const theme = useTheme()
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedView, setSelectedView] = useState('all');
 
@@ -20,7 +17,6 @@ export default function PipelineTemplates() {
     if (!pipeline) return;
 
     setCurrentPipeline({ ...pipeline, isDirty: false });
-    setAnchorEl(null);
   };
 
   const pipelineGroupings = [
@@ -74,7 +70,7 @@ export default function PipelineTemplates() {
           flexDirection: 'column',
           gap: 1,
           maxHeight: '60vh',
-          width: '850px',
+          // width: '850px',
           overflowY: 'hidden',
         }}
       >

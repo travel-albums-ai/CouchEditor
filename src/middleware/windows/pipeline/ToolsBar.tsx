@@ -2,12 +2,12 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import HelpToggle from '@/middleware/tools/ActionTools/HelpToggle';
+import TemplatesToggle from '@/middleware/tools/ActionTools/TemplatesToggle';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 import { TOOLBAR_GAP } from '@/middleware/windows/pipeline/components/PipelineCanvasOverlays';
-import PipelineTemplates from '@/middleware/windows/pipeline/components/PipelineTemplates';
 import { Box, Divider } from '@mui/material';
 import "@xyflow/react/dist/style.css";
-import { GalleryHorizontalEnd, Hand, MousePointer2, Plus } from 'lucide-react';
+import { Hand, MousePointer2, Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import NodeToolbox from "./NodeToolbox";
 import './styles.css';
@@ -52,17 +52,9 @@ export default function ToolsBar({ children }: { children?: React.ReactNode }) {
     "divider2": {
       type: 'divider',
     },
-    "openTemplates": {
-      type: 'toggle',
-      data: {
-        tooltip: 'Open templates',
-        icon: <GalleryHorizontalEnd />,
-        noArrow: true,
-        popover: <Box sx={{ maxHeight: '80vh', overflow: 'auto' }} >
-          <PipelineTemplates
-          />
-        </Box>,
-      }
+    "templatesToggle": {
+      type: 'component',
+      data: <TemplatesToggle />,
     },
     "openToolbox": {
       type: 'toggle',
