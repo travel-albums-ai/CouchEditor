@@ -7,10 +7,7 @@ import OnboardingWindow from '@/middleware/windows/OnboardingWindow';
 import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import SettingsWindow from '@/middleware/windows/SettingsWindow';
 import TemplatesWindow from '@/middleware/windows/TemplatesWindow';
-import OthersToolbar from '@/toolbars/OthersToolbar';
-import StartToolbar from '@/toolbars/StartToolbar';
-import StatusToolbar from '@/toolbars/StatusToolbar';
-import ToolboxToolbar from '@/toolbars/ToolboxToolbar';
+import Toolbars from '@/toolbars';
 import WebMCPAddPipelineNode from '@/webmcp/WebMCPAddPipelineNode';
 import WebMCPClonePipelineNode from '@/webmcp/WebMCPClonePipelineNode';
 import WebMCPConnectPipelineNodes from '@/webmcp/WebMCPConnectPipelineNodes';
@@ -42,10 +39,13 @@ export default function AppLayout() {
       <AiLoadingBar />
 
       {/* toolbars */}
-      <StartToolbar />
+      <Toolbars />
+
+
+      {/* <StartToolbar />
       <ToolboxToolbar />
       <OthersToolbar />
-      <StatusToolbar />
+      <StatusToolbar /> */}
 
       {/* webmcp */}
       <WebMCPThemeTool />
