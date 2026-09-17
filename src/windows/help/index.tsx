@@ -19,7 +19,7 @@ const helpIcons = {
   "pipelineGroupOutput": <FolderOutput />,
 }
 
-export default function HelpContent() {
+export default function Help() {
   const { t } = useTranslation();
   const [activeGroup, setActiveGroup] = useState('pipelineGroupInput');
 

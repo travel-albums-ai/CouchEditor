@@ -31,7 +31,7 @@ export default function SidebarCoreButton({
   onClick,
   variant = 'text',
   beforeSlot,
-  height = 28,
+  height = 32,
   direct = true,
   sx
 }: SidebarCoreButtonProps) {

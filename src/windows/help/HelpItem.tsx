@@ -18,16 +18,15 @@ export default function HelpItem({ paletteItem }: { paletteItem: any }) {
           alignItems: 'center',
           justifyContent: 'center',
           py: 2,
+          px: 2,
           bgcolor: theme => theme.palette.background.paper,
           boxShadow: theme => `0 0 16px -3px ${theme.palette.divider}`,
         }}>
           <Box sx={{ height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <PreviewDemo paletteItem={paletteItem} />
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1, flex: 1 }}>
-            <PreviewTitle paletteItem={paletteItem} />
-            <PreviewDescription paletteItem={paletteItem} />
-          </Box>
+          <PreviewTitle paletteItem={paletteItem} />
+          <PreviewDescription paletteItem={paletteItem} textAlign="center" />
         </Box>
       </Box>
     </>

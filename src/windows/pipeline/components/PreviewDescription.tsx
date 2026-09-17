@@ -1,12 +1,13 @@
-import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
+import { NodePaletteItem } from '@/windows/pipeline/NodePalette';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 type AdjustmentPreviewProps = {
   paletteItem: NodePaletteItem;
+  textAlign?: 'left' | 'center' | 'right';
 };
 
-export function PreviewDescription({ paletteItem }: AdjustmentPreviewProps) {
+export function PreviewDescription({ paletteItem, textAlign }: AdjustmentPreviewProps) {
   const { t } = useTranslation();
 
   return (
@@ -16,6 +17,7 @@ export function PreviewDescription({ paletteItem }: AdjustmentPreviewProps) {
         width: 300,
         px: 1,
         py: 1,
+        textAlign: textAlign ?? 'left',
       }} color="textSecondary">
         {t(paletteItem.labelDescription)}
       </Typography>}

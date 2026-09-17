@@ -1,11 +1,12 @@
 import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import HelpContent from '@/windows/help/HelpContent';
+import Help from '@/windows/help';
 import { Dialog } from '@mui/material';
 
 export default function HelpWindow() {
   const showHelp = useSettingsStoreSelector(s => s.showHelp)
   const { setSetting } = useSettings()
+
   const showWindow = showHelp === true
 
   if (!showWindow) return null
@@ -36,7 +37,7 @@ export default function HelpWindow() {
         title="Close help"
         onClick={() => setSetting(prev => ({ ...prev, showHelp: false }))}
       />
-      <HelpContent />
+      <Help />
     </Dialog>
   )
 }
