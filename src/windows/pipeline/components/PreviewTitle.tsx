@@ -1,4 +1,4 @@
-import { NodePaletteItem } from '@/middleware/windows/pipeline/NodePalette';
+import { NodePaletteItem } from '@/windows/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { cloneElement } from 'react';
 import { useTranslation } from 'react-i18next';

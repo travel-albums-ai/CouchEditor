@@ -14,96 +14,156 @@
 
 
 
-
-.flexlayout__tab {
-  border: 0px none;
-  border-radius: 0px;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
-.flexlayout__border, .flexlayout__layout {
-  background-color: transparent;
+body {
+  font-family: system-ui, sans-serif;
 }
 
-.flexlayout__layout, .flexlayout__border {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+.app {
+  width: 100%;
+  height: 100%;
+  /* background: #111; */
+
+  display: flex;
 }
 
-.flexlayout__border {
+.toolbox {
+  width: 180px;
+  flex-shrink: 0;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  background: #1a1a1a;
+  border-right: 1px solid #333;
+  color: #eee;
+}
+
+.toolbox-item {
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+  color: #111;
+  border: 1px solid #ccc;
+  cursor: grab;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbox-item:active {
+  cursor: grabbing;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-overlay) !important;
+  border: 1px solid var(--divider) !important;
+  color: var(--text) !important;
+  border-radius: 4px !important;
+  height: 32px !important;
+  width: 32px !important;
+}
+
+.reactflow-canvas {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.node {
+  min-width: 180px;
+  padding: 14px;
+  border-radius: 12px;
+  background: white;
+  color: #111;
+  border: 1px solid #ccc;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node strong {
   font-size: 14px;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tabset_tab_divider_selected_before, .flexlayout__tabset_tab_divider_selected_before, .flexlayout__theme_alpha_dark .flexlayout__tabset_tab_divider_selected_after, .flexlayout__tabset_tab_divider_selected_after {
-  background-color: transparent;
+.node small {
+  color: #666;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tab_button, .flexlayout__tab_button {
-  padding: 2px 12px;
-  margin-top: 4px;
-  margin-bottom: 0px;
+.node input {
+  max-width: 180px;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tab, .flexlayout__tab {
+.viewer {
+  width: 340px;
+}
+
+.source {
+  width: 4px;
+}
+
+.viewer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.viewer-grid img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.empty {
+  height: 150px;
+
+  display: grid;
+  place-items: center;
+
+  background: #eee;
   border-radius: 8px;
-  background-color: transparent;
-  border: 0px none;
+  color: #888;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tab_border, .flexlayout__tab_border {
-  background-color: transparent;
-  padding: 0px;
-  padding-bottom: 8px;
+.react-flow__controls-button {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  border-radius: 4px;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__splitter_horz, .flexlayout__splitter_horz {
-  width: 2px;
-  min-width: 2px;
+.react-flow__controls {
+  gap: 4px;
+  box-shadow: none;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tab_button--selected, .flexlayout__tab_button--selected {
-  font-weight: normal;
+.react-flow__minimap {
+  background: var(--bg-overlay);
+  border: 1px solid var(--divider);
   border-radius: 8px;
+  overflow: hidden;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__tab_button--unselected, .flexlayout__tab_button--unselected {
-  font-weight: normal;
+.react-flow__minimap-node {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 16px;
 }
 
-.flexlayout__theme_alpha_dark .flexlayout__border_tab_contents, .flexlayout__border_tab_contents {
-  background-color: var(--bg-default);
-  border-radius: var(--border-radius);
-}
-
-.flexlayout__border_button--unselected {
-  background-color: var(--bg-paper);
-  color: var(--text);
-  border-radius: var(--border-radius);
-}
-
-.flexlayout__border_button--selected, .flexlayout__theme_alpha_dark .flexlayout__border_button, .flexlayout__tab_button--selected {
-  background-color: var(--bg-default);
-  color: var(--text);
-  border-radius: var(--border-radius);
-}
-
-.flexlayout__tab_button--unselected {
-  border-radius: var(--border-radius);
-  color: var(--text-secondary);
-}
-
-.flexlayout__theme_alpha_dark .flexlayout__tabset_tabbar_outer_top .flexlayout__tab_button--selected {
-  border-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-}
-
-.flexlayout__theme_alpha_dark .flexlayout__tabset_tab_divider_selected_before, .flexlayout__theme_alpha_dark .flexlayout__tabset_tab_divider_selected_after {
-  width: 0px;
-}
-
-.flexlayout__theme_alpha_dark .flexlayout__tabset_tab_spacer {
-  width: 0px;
-}
-
-.flexlayout__tabset, .flexlayout__tabset-selected {
-  background-color: transparent;
+.react-flow__minimap-mask {
+  fill: var(--bg-overlay);
 }

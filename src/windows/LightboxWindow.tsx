@@ -1,6 +1,6 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { Dialog } from '@mui/material';
-import LightboxWindowInner from './lightbox/LightboxWindow';
+import LightboxWindowInner from './lightbox';
 
 export default function LightboxWindow() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);

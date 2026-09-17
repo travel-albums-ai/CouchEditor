@@ -7,7 +7,7 @@ import LightboxViewer from '@/windows/lightbox/LightboxViewer';
 import { Box } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-export default function LightboxWindow() {
+export default function Lightbox() {
   const lightboxOpen = useSettingsStoreSelector(s => s.lightboxOpen);
   const lightboxImages = useSettingsStoreSelector(s => s.lightboxImages);
   const previewPhotoObj: string | undefined = useSettingsStoreSelector(s => s.previewPhotoObj);

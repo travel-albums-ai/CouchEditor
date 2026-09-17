@@ -1,6 +1,6 @@
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 import type { SupportedLanguage } from '@/lib/i18n';
-import { ImageArray } from '@/middleware/windows/pipeline/types';
+import { ImageArray } from '@/types/types';
 
 type SettingsStore = {
   onboarding: boolean,

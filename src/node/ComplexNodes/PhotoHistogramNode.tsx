@@ -1,11 +1,11 @@
 import Histogram from '@/components/Histogram';
 import NoPhotos from '@/components/NoPhotos';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import type { ImageArray } from '@/types/types';
 import { InputHandle } from '@/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
-import type { ImageArray } from '../../../types/types';
 
 function PhotoHistogramNode({
   data,

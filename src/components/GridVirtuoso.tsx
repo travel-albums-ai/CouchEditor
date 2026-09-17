@@ -1,5 +1,5 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
-import { ImageValue } from '@/middleware/windows/pipeline/types';
+import { ImageValue } from '@/types/types';
 import { Box } from '@mui/material';
 import { useCallback, useMemo, useRef } from 'react';
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';

@@ -2,6 +2,7 @@ import GridVirtuoso from '@/components/GridVirtuoso';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useSettings } from '@/context/settingsStore';
+import type { ImageArray } from '@/types/types';
 import { InputHandle } from '@/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import PipelineStageTiming from '@/windows/pipeline/components/PipelineStageTiming';
@@ -11,7 +12,6 @@ import JSZip from 'jszip';
 import { Download, Images } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ImageArray } from "../../../types/types";
 
 type Progress = { runId: number; completed: number; total: number };
 

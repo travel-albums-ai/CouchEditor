@@ -1,5 +1,5 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import { ImageValue } from '@/middleware/windows/pipeline/types';
+import { ImageValue } from '@/types/types';
 import { useTheme } from '@mui/material';
 import React from 'react';
 

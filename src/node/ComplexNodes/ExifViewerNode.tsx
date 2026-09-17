@@ -1,12 +1,12 @@
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { ImageArray } from '@/types/types';
 import { InputHandle } from '@/windows/pipeline/components/InputHandle';
 import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box, Stack, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import { HardDrive, RulerDimensionLine } from 'lucide-react';
-import type { ImageArray } from '../../../types/types';
 
 function formatMegabytes(byteSize: number): string {
   return `${(byteSize / (1024 * 1024)).toFixed(2)} MB`;

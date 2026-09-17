@@ -13,8 +13,6 @@ import {
   type Edge,
   type Node
 } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
-import './styles.css';
 
 import {
   useCallback,

@@ -1,5 +1,5 @@
 import HelpWindow from '@/windows/HelpWindow';
-import LightboxWindow from '@/windows/lightbox/LightboxWindow';
+import LightboxWindow from '@/windows/LightboxWindow';
 import NewVersionWindow from '@/windows/NewVersionWindow';
 import OnboardingWindow from '@/windows/OnboardingWindow';
 import SettingsWindow from '@/windows/SettingsWindow';
