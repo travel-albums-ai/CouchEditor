@@ -5,7 +5,7 @@ export default function DialogCloseButton({ title, onClick } : { title: string, 
   return (
     <Box sx={{ zIndex: 1, position: 'absolute', right: -16, top: -16 }}>
       <Tooltip title={title} placement="top" arrow>
-        <Button onClick={onClick} variant="contained" size="large" sx={{ minWidth: "unset", p: 2 }}>
+        <Button onClick={onClick} variant="contained" size="large" sx={{ minWidth: "unset", p: 2, borderRadius: 10 }}>
           <X size={16} />
         </Button>
       </Tooltip>
