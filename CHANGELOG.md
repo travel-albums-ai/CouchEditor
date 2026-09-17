@@ -1,3 +1,9 @@
+## [1.172.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.171.0...v1.172.0) (2026-09-17)
+
+### ✨ Features
+
+* add SplitChannels node to PreviewDemoStatic with before and after image states ([529698e](https://github.com/travel-albums-ai/CouchEditor/commit/529698e3c0ef04619be4b24a9368db5f5fa3c983))
+
 ## [1.171.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.170.0...v1.171.0) (2026-09-17)
 
 ### ✨ Features
