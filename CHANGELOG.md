@@ -1,3 +1,13 @@
+## [1.153.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.152.0...v1.153.0) (2026-09-17)
+
+### ✨ Features
+
+* add TemplatesToggle and TemplatesWindow components for managing template visibility in the ToolsBar ([3aec7ff](https://github.com/travel-albums-ai/CouchEditor/commit/3aec7ff376cac1b57172817a994e52e591379261))
+
+### 🧹 Refactors
+
+* simplify ToolsBar and PipelineTemplates components by removing unused props and improving state management ([670b9ac](https://github.com/travel-albums-ai/CouchEditor/commit/670b9ac142eed8624471b8fd4ee80406e1c692f9))
+
 ## [1.152.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.151.0...v1.152.0) (2026-09-17)
 
 ### ✨ Features
