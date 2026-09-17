@@ -27,6 +27,8 @@ import {
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import OthersToolbar from '@/layout/OthersToolbar';
+import StatusToolbar from '@/layout/StatusToolbar';
 import DeleteButton from '@/middleware/windows/pipeline/components/DeleteButton';
 import ToolsBar from '@/middleware/windows/pipeline/ToolsBar';
 import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
@@ -756,32 +758,36 @@ function Pipeline() {
           <MiniMap position="top-right" style={{ top: 70 }} />
         </ReactFlow>
 
-        <ToolsBar>
-          <DeleteButton
-            currentPipelineId={currentPipelineId}
-            trashActive={trashActive}
-            trashRef={trashRef}
-            onDelete={deleteCurrent}
-          />
-        </ToolsBar>
-
-        <PipelineCanvasOverlays
-          currentPipelineName={currentPipelineName}
-          pipelineFileInputRef={pipelineFileInputRef}
-          onClearWorkspace={clearWorkspace}
-          onSave={saveCurrent}
-          onSaveAsCopy={saveAsCopy}
-          onDownload={downloadPipeline}
-          onUpload={uploadPipeline}
-          onNameChange={(name) => {
-            setCurrentPipelineName(name);
-            setCurrentPipelineDirty(true);
-          }}
-          onDelete={deleteCurrent}
-          onOrganizeWithAI={organizeWithAI}
-          organizingWithAI={organizingWithAI}
-        />
       </div>
+
+      <ToolsBar>
+        <DeleteButton
+          currentPipelineId={currentPipelineId}
+          trashActive={trashActive}
+          trashRef={trashRef}
+          onDelete={deleteCurrent}
+        />
+      </ToolsBar>
+
+      <PipelineCanvasOverlays
+        currentPipelineName={currentPipelineName}
+        pipelineFileInputRef={pipelineFileInputRef}
+        onClearWorkspace={clearWorkspace}
+        onSave={saveCurrent}
+        onSaveAsCopy={saveAsCopy}
+        onDownload={downloadPipeline}
+        onUpload={uploadPipeline}
+        onNameChange={(name) => {
+          setCurrentPipelineName(name);
+          setCurrentPipelineDirty(true);
+        }}
+        onDelete={deleteCurrent}
+        onOrganizeWithAI={organizeWithAI}
+        organizingWithAI={organizingWithAI}
+      />
+
+      <OthersToolbar />
+      <StatusToolbar />
     </Box>
   );
 }

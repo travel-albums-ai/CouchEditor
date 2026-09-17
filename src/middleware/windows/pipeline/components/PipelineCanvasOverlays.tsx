@@ -5,10 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import EndPart from '@/components/header/EndPart';
-import StartPart from '@/components/header/StartPart';
-import LoadingBar from '@/components/LoadingBar';
-import StatusBar from '@/components/StatusBar';
+import StartPart from '@/layout/StartPart';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 
 export const TOOLBAR_GAP = 4;
@@ -100,22 +97,6 @@ export default function PipelineCanvasOverlays({
             onChange={onUpload}
           />
         </Box>
-      </FloatingToolbar>
-    </Box>
-
-    <Box sx={{ bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-overlays">
-      <FloatingToolbar sx={{
-        minWidth: '900px',
-        maxWidth: '1200px'
-      }}>
-        <LoadingBar />
-        <StatusBar />
-      </FloatingToolbar>
-    </Box>
-
-    <Box sx={{ top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }} id="pipeline-actions">
-      <FloatingToolbar>
-        <EndPart />
       </FloatingToolbar>
     </Box>
   </>;

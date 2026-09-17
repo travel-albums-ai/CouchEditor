@@ -43,6 +43,8 @@ export default function AppLayout() {
       <WebMCPMovePipelineNode />
       <WebMCPUpdatePipelineNodeProperties />
 
+
+
       <ReactFlowWrapper />
     </>
   );
