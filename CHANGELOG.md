@@ -1,3 +1,9 @@
+## [1.164.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.163.0...v1.164.0) (2026-09-17)
+
+### ✨ Features
+
+* refactor toolbars to improve structure and introduce new upload and save functionalities ([7eaf3db](https://github.com/travel-albums-ai/CouchEditor/commit/7eaf3db2af4e5863dae024e77c2e737d5e4a745d))
+
 ## [1.163.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.162.0...v1.163.0) (2026-09-17)
 
 ### ✨ Features
