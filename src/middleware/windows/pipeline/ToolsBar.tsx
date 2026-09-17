@@ -1,8 +1,8 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import HelpToggle from '@/middleware/tools/ActionTools/HelpToggle';
-import TemplatesToggle from '@/middleware/tools/ActionTools/TemplatesToggle';
+import HelpToggle from '@/middleware/tools/HelpToggle';
+import TemplatesToggle from '@/middleware/tools/TemplatesToggle';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 import { TOOLBAR_GAP } from '@/middleware/windows/pipeline/components/PipelineCanvasOverlays';
 import { Box, Divider } from '@mui/material';

@@ -1,8 +1,8 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
-import LocaleToggle from '@/middleware/tools/MixedTools/LocaleToggle';
-import ThemeMenu from '@/middleware/tools/PopoverTools/ThemeMenu';
+import DarkLightStatus from '@/middleware/tools/DarkLightStatus';
+import LocaleToggle from '@/middleware/tools/LocaleToggle';
+import ThemeMenu from '@/middleware/tools/ThemeMenu';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
 import { Languages, PaintBucket } from 'lucide-react';

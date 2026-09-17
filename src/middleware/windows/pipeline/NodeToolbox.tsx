@@ -1,8 +1,8 @@
 import SectionHeader from '@/components/SectionHeader';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import ToggleToolbox from '@/middleware/tools/ActionTools/ToggleToolbox';
-import ToggleToolboxShape from '@/middleware/tools/ActionTools/ToggleToolboxShape';
+import ToggleToolbox from '@/middleware/tools/ToggleToolbox';
+import ToggleToolboxShape from '@/middleware/tools/ToggleToolboxShape';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import NodeToolboxItem from '@/middleware/windows/pipeline/NodeToolboxItem';
 import { Box, InputAdornment, TextField } from '@mui/material';

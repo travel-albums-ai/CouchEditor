@@ -1,5 +1,5 @@
 import SolidChip from '@/components/SolidChip';
-import ExtendedMenu from '@/middleware/tools/PopoverTools/ExtendedMenu';
+import ExtendedMenu from '@/middleware/tools/ExtendedMenu';
 import { Box, Button, Tooltip, Typography } from '@mui/material';
 import { PartyPopper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

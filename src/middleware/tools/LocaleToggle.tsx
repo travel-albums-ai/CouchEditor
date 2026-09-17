@@ -10,7 +10,6 @@ const FLAG_COUNTRY_OVERRIDES: Partial<Record<string, string>> = {
 
 const languageDisplayNames = new Intl.DisplayNames(['en'], { type: 'language' });
 
-
 export default function LocaleToggle() {
   const { setSetting } = useSettings();
   const locale = useSettingsStoreSelector((state) => state.locale);

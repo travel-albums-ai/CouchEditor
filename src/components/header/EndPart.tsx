@@ -1,7 +1,7 @@
-import DarkLightStatus from '@/middleware/tools/ActionTools/DarkLightStatus';
-import FullscreenToggle from '@/middleware/tools/ActionTools/FullscreenToggle';
-import SettingsWindowToggle from '@/middleware/tools/ActionTools/SettingsWindowToggle';
-import TutorialToggle from '@/middleware/tools/ActionTools/TutorialToggle';
+import DarkLightStatus from '@/middleware/tools/DarkLightStatus';
+import FullscreenToggle from '@/middleware/tools/FullscreenToggle';
+import SettingsWindowToggle from '@/middleware/tools/SettingsWindowToggle';
+import TutorialToggle from '@/middleware/tools/TutorialToggle';
 import { Box } from '@mui/material';
 
 export default function EndPart() {
