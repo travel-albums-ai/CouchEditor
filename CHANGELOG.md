@@ -1,3 +1,9 @@
+## [1.163.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.162.0...v1.163.0) (2026-09-17)
+
+### ✨ Features
+
+* enhance AppLayout with new pipeline components and toolbars for improved functionality ([d8191ef](https://github.com/travel-albums-ai/CouchEditor/commit/d8191ef2b7f96758d21b81ae0497429b985a3eff))
+
 ## [1.162.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.161.0...v1.162.0) (2026-09-17)
 
 ### ✨ Features
