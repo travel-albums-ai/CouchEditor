@@ -1,4 +1,4 @@
-import { paletteItems } from '@/windows/pipeline/NodePalette';
+import { paletteItems } from '@/pipeline/NodePalette';
 import { useEffect } from 'react';
 import './webMcpTypes';
 

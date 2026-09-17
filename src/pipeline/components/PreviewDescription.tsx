@@ -1,4 +1,4 @@
-import { NodePaletteItem } from '@/windows/pipeline/NodePalette';
+import { NodePaletteItem } from '@/pipeline/NodePalette';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 

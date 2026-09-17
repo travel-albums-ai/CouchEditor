@@ -2,9 +2,9 @@ import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBac
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import type { ImageArray } from '@/types/types';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { HardDrive, RulerDimensionLine } from 'lucide-react';

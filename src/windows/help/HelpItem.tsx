@@ -1,6 +1,6 @@
-import PreviewDemo from '@/windows/pipeline/components/PreviewDemo';
-import { PreviewDescription } from '@/windows/pipeline/components/PreviewDescription';
-import PreviewTitle from '@/windows/pipeline/components/PreviewTitle';
+import PreviewDemo from '@/pipeline/components/PreviewDemo';
+import { PreviewDescription } from '@/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/pipeline/components/PreviewTitle';
 import { Box } from '@mui/material';
 
 export default function HelpItem({ paletteItem }: { paletteItem: any }) {

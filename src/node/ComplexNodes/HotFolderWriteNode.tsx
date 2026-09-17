@@ -1,7 +1,7 @@
 import SolidChip from '@/components/SolidChip';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import type { ImageArray } from '@/types/types';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box, Button, Typography } from '@mui/material';
 import type { Node, NodeProps } from '@xyflow/react';
 import { FolderOutput, Images } from 'lucide-react';

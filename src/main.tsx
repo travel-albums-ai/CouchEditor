@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { createRoot, Root } from 'react-dom/client';
 import AppProviders from './context/AppProviders';
 
-import { PipelineTrashProvider } from '@/windows/pipeline/PipelineTrashProvider';
+import { PipelineTrashProvider } from '@/pipeline/PipelineTrashProvider';
 import "@xyflow/react/dist/style.css";
 import "driver.js/dist/driver.css";
 import 'uplot/dist/uPlot.min.css';

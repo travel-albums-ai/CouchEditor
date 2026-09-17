@@ -10,10 +10,10 @@
 // - Every new evaluation cooperatively cancels the previous one: stale
 //   checks run between images and in-flight fetches are aborted.
 
-import { parse } from "exifr";
-import type { GalleryPhoto } from "../../lib/galleryData";
-import { lutStage, parseCubeLut } from "../../lib/lut";
-import { composeUrl } from "../../lib/thumbnailService";
+import type { Stage } from "@/interface/adjustments/types";
+import type { GalleryPhoto } from "@/lib/galleryData";
+import { lutStage, parseCubeLut } from "@/lib/lut";
+import { composeUrl } from "@/lib/thumbnailService";
 import {
   blackAndWhiteStage,
   brightnessStage,
@@ -40,7 +40,7 @@ import {
   vibranceStage,
   vignetteStage,
   whitesBlacksStage,
-} from "../../lib/utils";
+} from "@/lib/utils";
 import type {
   NodeInputs,
   NodeOutputs,
@@ -49,9 +49,9 @@ import type {
   PipelineProgressPreview,
   PipelineViewerImagePayload,
   PipelineWorkerOutbound,
-} from "../../types/types";
-import { VIEWER_NODE_TYPES } from "../../types/types";
-import type { Stage } from "../interface/adjustments/types";
+} from "@/types/types";
+import { VIEWER_NODE_TYPES } from "@/types/types";
+import { parse } from "exifr";
 import {
   gpuFragmentShader,
   gpuOperationIds,

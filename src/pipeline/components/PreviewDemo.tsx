@@ -1,7 +1,7 @@
-import { PreviewDemoCss } from '@/windows/pipeline/components/PreviewDemoCss';
-import { PreviewDemoMath } from '@/windows/pipeline/components/PreviewDemoMath';
-import { PreviewDemoStatic } from '@/windows/pipeline/components/PreviewDemoStatic';
-import { NodePaletteItem, NodeProcessing } from '@/windows/pipeline/NodePalette';
+import { PreviewDemoCss } from '@/pipeline/components/PreviewDemoCss';
+import { PreviewDemoMath } from '@/pipeline/components/PreviewDemoMath';
+import { PreviewDemoStatic } from '@/pipeline/components/PreviewDemoStatic';
+import { NodePaletteItem, NodeProcessing } from '@/pipeline/NodePalette';
 
 export default function PreviewDemo({ paletteItem } : { paletteItem: NodePaletteItem }) {
 

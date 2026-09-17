@@ -1,6 +1,6 @@
 import SectionHeader from '@/components/SectionHeader';
 import { usePipelineStore } from '@/context/pipelineStore';
-import PipelineSelectorItems from '@/windows/pipeline/components/PipelineSelectorItems';
+import PipelineSelectorItems from '@/pipeline/components/PipelineSelectorItems';
 import PipelineSelectorItem from '@/windows/templates/PipelineSelectorItem';
 import { Box, Chip, TextField } from '@mui/material';
 import { Astroid, Camera, GalleryHorizontalEnd, User } from 'lucide-react';

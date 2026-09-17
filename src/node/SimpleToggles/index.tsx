@@ -1,4 +1,4 @@
-import { createSliderNode } from '@/windows/pipeline/components/AdjustmentSliderNode';
+import { createSliderNode } from '@/pipeline/components/AdjustmentSliderNode';
 
 export const BlackAndWhiteNode = createSliderNode({
   type: "black-white",

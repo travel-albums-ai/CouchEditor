@@ -1,7 +1,7 @@
-import { NodePaletteItem, NodeType } from '@/windows/pipeline/NodePalette';
-import { PreviewBeforeAfter } from '@/windows/pipeline/components/PreviewBeforeAfter';
-import { PreviewDescription } from '@/windows/pipeline/components/PreviewDescription';
-import PreviewTitle from '@/windows/pipeline/components/PreviewTitle';
+import { NodePaletteItem, NodeType } from '@/pipeline/NodePalette';
+import { PreviewBeforeAfter } from '@/pipeline/components/PreviewBeforeAfter';
+import { PreviewDescription } from '@/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/pipeline/components/PreviewTitle';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ChartColumn, Cloud, Download, Eye, Flame, Folder, Map, Plus, Slash } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

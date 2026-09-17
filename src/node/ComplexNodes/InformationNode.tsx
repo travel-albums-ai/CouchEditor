@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { useTheme } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { Heading1, Heading5, Newspaper } from 'lucide-react';

@@ -1,6 +1,6 @@
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Box, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import { Combine } from 'lucide-react';

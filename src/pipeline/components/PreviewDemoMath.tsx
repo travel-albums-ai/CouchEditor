@@ -1,5 +1,5 @@
-import { PreviewBeforeAfter } from '@/windows/pipeline/components/PreviewBeforeAfter';
-import { NodePaletteItem } from '@/windows/pipeline/NodePalette';
+import { PreviewBeforeAfter } from '@/pipeline/components/PreviewBeforeAfter';
+import { NodePaletteItem } from '@/pipeline/NodePalette';
 import { Box, Slider, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

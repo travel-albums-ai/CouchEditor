@@ -1,7 +1,7 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import { useEffect } from 'react';
 

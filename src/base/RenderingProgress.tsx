@@ -1,5 +1,5 @@
 import { usePipelineStore } from '@/context/pipelineStore';
-import PipelineStageProgress from '@/windows/pipeline/components/PipelineStageProgress';
+import PipelineStageProgress from '@/pipeline/components/PipelineStageProgress';
 import {
   Box
 } from '@mui/material';

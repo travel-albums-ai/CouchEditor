@@ -1,8 +1,8 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Box, Button, Typography } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { Cloud, Images, LogIn, RefreshCw } from 'lucide-react';

@@ -1,5 +1,5 @@
 import { usePipelineStore } from '@/context/pipelineStore';
-import { paletteItemsByType } from '@/windows/pipeline/NodePalette';
+import { paletteItemsByType } from '@/pipeline/NodePalette';
 import { useEffect } from 'react';
 import './webMcpTypes';
 

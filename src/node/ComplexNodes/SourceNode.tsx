@@ -1,9 +1,9 @@
 import GridVirtuoso from '@/components/GridVirtuoso';
 import NoPhotos from '@/components/NoPhotos';
 import SolidChip from '@/components/SolidChip';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
-import PipelineStageTiming from '@/windows/pipeline/components/PipelineStageTiming';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
 import { Box, Button, LinearProgress, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { HardDrive, Images, Upload } from 'lucide-react';

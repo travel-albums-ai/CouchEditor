@@ -1,10 +1,10 @@
-import AdjustmentSlider from '@/windows/pipeline/components/AdjustmentSlider';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
-import PipelineStageTiming from '@/windows/pipeline/components/PipelineStageTiming';
-import { PreviewMath } from '@/windows/pipeline/components/PreviewMath';
-import { paletteItemsByType } from '@/windows/pipeline/NodePalette';
+import AdjustmentSlider from '@/pipeline/components/AdjustmentSlider';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
+import { PreviewMath } from '@/pipeline/components/PreviewMath';
+import { paletteItemsByType } from '@/pipeline/NodePalette';
 import { Box, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
 import { useTranslation } from 'react-i18next';

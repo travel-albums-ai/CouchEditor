@@ -3,7 +3,7 @@ import { Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { usePipelineStore } from '@/context/pipelineStore';
-import { usePipelineTrash } from '../../../hooks/usePipelineTrash';
+import { usePipelineTrash } from '@/hooks/usePipelineTrash';
 import { INITIAL_EDGES, INITIAL_NODES } from '../pipelineConfig';
 
 export default function DeleteButton() {

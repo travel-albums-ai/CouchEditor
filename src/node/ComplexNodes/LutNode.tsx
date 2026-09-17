@@ -1,7 +1,7 @@
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
-import PipelineStageTiming from '@/windows/pipeline/components/PipelineStageTiming';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
 import { Button, Typography } from '@mui/material';
 import { type Node, type NodeProps } from '@xyflow/react';
 import { Upload } from 'lucide-react';

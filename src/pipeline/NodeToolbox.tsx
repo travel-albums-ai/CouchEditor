@@ -1,9 +1,9 @@
 import SectionHeader from '@/components/SectionHeader';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
+import { groupedPaletteItems } from '@/pipeline/NodePalette';
+import NodeToolboxItem from '@/pipeline/NodeToolboxItem';
 import ToggleToolboxShape from '@/toolbars/tools/ToggleToolboxShape';
-import { groupedPaletteItems } from '@/windows/pipeline/NodePalette';
-import NodeToolboxItem from '@/windows/pipeline/NodeToolboxItem';
 import { Box, InputAdornment, TextField } from '@mui/material';
 import { GripVertical, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

@@ -1,8 +1,8 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
-import { OutputHandle } from '@/windows/pipeline/components/OutputHandle';
-import PipelineStageTiming from '@/windows/pipeline/components/PipelineStageTiming';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
+import { OutputHandle } from '@/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
 import { Alert, Box, Button, LinearProgress, TextField, Typography } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { Sparkles } from 'lucide-react';

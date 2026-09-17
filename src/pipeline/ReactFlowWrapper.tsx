@@ -24,9 +24,9 @@ import {
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import { usePipelineCanvas } from '../../hooks/usePipelineCanvas';
-import { usePipelineTrash } from '../../hooks/usePipelineTrash';
-import { VIEWER_NODE_TYPES } from "../../types/types";
+import { usePipelineCanvas } from '@/hooks/usePipelineCanvas';
+import { usePipelineTrash } from '@/hooks/usePipelineTrash';
+import { VIEWER_NODE_TYPES } from "@/types/types";
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
   CONNECTION_LINE_TYPE,

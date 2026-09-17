@@ -1,7 +1,7 @@
 
-import NodeHeader from '@/windows/pipeline/components/NodeHeader';
-import { PreviewDemoStatic } from '@/windows/pipeline/components/PreviewDemoStatic';
-import { paletteItemsByType } from '@/windows/pipeline/NodePalette';
+import NodeHeader from '@/pipeline/components/NodeHeader';
+import { PreviewDemoStatic } from '@/pipeline/components/PreviewDemoStatic';
+import { paletteItemsByType } from '@/pipeline/NodePalette';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { NodeToolbar, Position, useNodeConnections, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';

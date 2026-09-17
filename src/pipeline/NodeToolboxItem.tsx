@@ -1,10 +1,10 @@
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import NodeHeaderGrid from '@/windows/pipeline/components/NodeHeaderGrid';
-import NodeToolboxHeader from '@/windows/pipeline/components/NodeToolboxHeader';
-import PreviewDemo from '@/windows/pipeline/components/PreviewDemo';
-import { PreviewDescription } from '@/windows/pipeline/components/PreviewDescription';
-import PreviewTitle from '@/windows/pipeline/components/PreviewTitle';
+import NodeHeaderGrid from '@/pipeline/components/NodeHeaderGrid';
+import NodeToolboxHeader from '@/pipeline/components/NodeToolboxHeader';
+import PreviewDemo from '@/pipeline/components/PreviewDemo';
+import { PreviewDescription } from '@/pipeline/components/PreviewDescription';
+import PreviewTitle from '@/pipeline/components/PreviewTitle';
 import { Box, Chip, Tooltip, Typography } from '@mui/material';
 import { ChevronDown, Pointer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

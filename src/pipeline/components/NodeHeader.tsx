@@ -1,6 +1,6 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import PreviewTitle from '@/windows/pipeline/components/PreviewTitle';
-import { paletteItems } from '@/windows/pipeline/NodePalette';
+import PreviewTitle from '@/pipeline/components/PreviewTitle';
+import { paletteItems } from '@/pipeline/NodePalette';
 import { Box, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';

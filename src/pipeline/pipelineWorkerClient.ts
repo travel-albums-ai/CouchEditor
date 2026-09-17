@@ -10,8 +10,6 @@
 // - supersedes the in-flight run when a new evaluation starts and
 //   respawns the worker if it ever crashes.
 
-import type { Edge, Node } from "@xyflow/react";
-
 import { getSettingsStore } from "@/context/settingsStore";
 import type {
   ImageArray,
@@ -20,8 +18,9 @@ import type {
   PipelineWorkerEdge,
   PipelineWorkerNode,
   PipelineWorkerOutbound,
-} from "../../types/types";
-import { VIEWER_NODE_TYPES } from "../../types/types";
+} from "@/types/types";
+import { VIEWER_NODE_TYPES } from "@/types/types";
+import type { Edge, Node } from "@xyflow/react";
 
 // node.data keys the engine reads. Everything else (viewer results,
 // React Flow internals) stays on the main thread.

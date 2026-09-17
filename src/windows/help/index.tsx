@@ -1,7 +1,7 @@
 import SectionHeader from '@/components/SectionHeader';
 import SidebarCoreButton from '@/components/SidebarCoreButton';
+import { groupedPaletteItems } from '@/pipeline/NodePalette';
 import HelpItem from '@/windows/help/HelpItem';
-import { groupedPaletteItems } from '@/windows/pipeline/NodePalette';
 import { Box } from '@mui/material';
 import { Astroid, BookOpen, Crop, FolderInput, FolderOutput, Gem, GitFork, Lightbulb, Slice, SwatchBook } from 'lucide-react';
 import { useState } from 'react';

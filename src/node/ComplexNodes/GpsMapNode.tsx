@@ -1,7 +1,7 @@
 import NoPhotos from '@/components/NoPhotos';
+import { InputHandle } from '@/pipeline/components/InputHandle';
+import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import type { ImageArray } from '@/types/types';
-import { InputHandle } from '@/windows/pipeline/components/InputHandle';
-import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box, Typography } from '@mui/material';
 import { Position, type Node, type NodeProps } from '@xyflow/react';
 import L from 'leaflet';

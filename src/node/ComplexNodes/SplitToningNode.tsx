@@ -1,5 +1,5 @@
-import { paletteItemsByType } from '@/windows/pipeline/NodePalette';
-import AdjustmentSlider from '@/windows/pipeline/components/AdjustmentSlider';
+import { paletteItemsByType } from '@/pipeline/NodePalette';
+import AdjustmentSlider from '@/pipeline/components/AdjustmentSlider';
 import { Box, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { useState } from 'react';
