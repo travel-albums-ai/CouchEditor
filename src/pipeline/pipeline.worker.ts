@@ -818,17 +818,35 @@ function negativeConversionPrompt(source: WorkerImage): string {
     .slice(0, 1600);
 
   return [
-    "Convert this scanned film negative into a natural, technically correct positive photograph.",
-    "First determine whether it is a color negative, black-and-white negative, or another negative process.",
-    `The measured lightest-area film base is approximately RGB(${Math.round(base[0])}, ${Math.round(base[1])}, ${Math.round(base[2])}); use it as a guide for the base mask, not as a literal subject color.`,
-    metadata ? `Available roll or scan metadata: ${metadata}.` : "No reliable roll metadata is available; infer the film process from the image.",
-    "Identify the film stock or process from the base color, emulsion behavior, and roll metadata when possible, then apply the appropriate workflow for that stock.",
-    "For color negatives, remove the orange, amber, pink, cyan, or other film-base mask before inverting each channel, then correct density, white balance, contrast, and color crossover for the detected stock.",
-    "For black-and-white negatives, remove the base veil and invert the density into a neutral positive while preserving the characteristic tonal response and grain.",
-    "Recover realistic colors and neutral whites without clipping highlights, crushing shadows, or adding an artificial cinematic grade.",
-    "Preserve the original composition, camera angle, perspective, geometry, identity, facial features, expressions, poses, clothing, objects, architecture, and background exactly.",
-    "Do not add or remove people or objects, invent detail, or clean away authentic film grain unless it is clearly a scan artifact.",
-    "The result should look like a properly exposed darkroom or professional scan of the same frame, not like a newly generated image.",
+    "Perform a faithful photographic inversion of this scanned film negative.",
+
+    "Treat the input as an existing photograph that must be transformed, not recreated.",
+
+    "Determine the negative process visible in the scan. If it is a color negative, account for its film-base mask and dye-layer characteristics. If it is a black-and-white negative, account for its base veil and density response. Do not assume that the mask is orange.",
+
+    `The measured film-base color is approximately RGB(${Math.round(base[0])}, ${Math.round(base[1])}, ${Math.round(base[2])}). Use this measurement as an estimate of the unexposed film base and remove its contribution before reconstructing the positive image.`,
+
+    metadata
+      ? `Scan metadata that may describe the film or capture process: ${metadata}. Treat this metadata as evidence, not as certainty.`
+      : "No reliable film metadata is available. Infer only what can reasonably be determined from the scan.",
+
+    "Perform the transformation in this conceptual order: remove the film-base density and color cast, invert the negative density into positive density, then reconstruct neutral color and tonal response.",
+
+    "For color negatives, correct the three color channels independently because the film mask and dye layers are not neutral and are not necessarily separable by a simple RGB inversion.",
+
+    "Preserve the photographic density relationships. Recover shadow, midtone, and highlight detail from the negative without clipping or artificially expanding dynamic range.",
+
+    "Produce natural neutral whites, believable skin tones, and physically plausible colors consistent with the captured negative.",
+
+    "Do not apply a cinematic look, creative color grade, HDR effect, excessive contrast, artificial saturation, or modern digital sharpening.",
+
+    "Preserve the original frame exactly: composition, geometry, perspective, people, faces, identities, expressions, poses, clothing, objects, architecture, vegetation, sky, and background.",
+
+    "Do not add, remove, replace, redraw, beautify, repair, or hallucinate photographic content.",
+
+    "Preserve authentic film grain and photographic texture. Only remove artifacts that are clearly caused by the scanning or capture process.",
+
+    "The output must be the same photograph represented as a correctly exposed positive print or professional film scan.",
   ].join(" ");
 }
 
