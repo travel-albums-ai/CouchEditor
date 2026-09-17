@@ -1,6 +1,6 @@
 import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import Templates from '@/windows/pipeline';
+import Templates from '@/windows/templates';
 import { Dialog } from '@mui/material';
 
 export default function TemplatesWindow() {

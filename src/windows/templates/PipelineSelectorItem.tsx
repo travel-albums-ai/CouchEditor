@@ -2,7 +2,7 @@ import { alpha, Box, Button, Tooltip, Typography } from '@mui/material';
 
 import type { SavedPipeline } from '@/context/pipelineStore';
 import { ArrowRight } from 'lucide-react';
-import { MinimapPipeline } from './MinimapPipeline';
+import { MinimapPipeline } from '../pipeline/components/MinimapPipeline';
 
 type PipelineSelectorProps = {
   pipeline: SavedPipeline;

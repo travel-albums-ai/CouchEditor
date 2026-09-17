@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { PipelineTrashContext } from './pipelineTrashContext';
+import { PipelineTrashContext } from '../windows/pipeline/pipelineTrashContext';
 
 export function usePipelineTrash() {
   const context = useContext(PipelineTrashContext);

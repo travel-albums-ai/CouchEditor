@@ -26,6 +26,8 @@ import {
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { usePipelineCanvas } from '../../hooks/usePipelineCanvas';
+import { usePipelineTrash } from '../../hooks/usePipelineTrash';
 import { VIEWER_NODE_TYPES } from "../../types/types";
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
@@ -39,8 +41,6 @@ import {
   SNAP_GRID,
 } from './pipelineConfig';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
-import { usePipelineCanvas } from './usePipelineCanvas';
-import { usePipelineTrash } from './usePipelineTrash';
 
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
