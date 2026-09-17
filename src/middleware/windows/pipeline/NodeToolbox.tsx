@@ -1,7 +1,6 @@
 import SectionHeader from '@/components/SectionHeader';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
-import ToggleToolbox from '@/middleware/tools/ToggleToolbox';
 import ToggleToolboxShape from '@/middleware/tools/ToggleToolboxShape';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import NodeToolboxItem from '@/middleware/windows/pipeline/NodeToolboxItem';
@@ -64,7 +63,7 @@ export default function NodeToolbox({ onlyGroup }: { onlyGroup?: string }) {
           }}
           onChange={(e) => setState((prev) => ({ ...prev, searchTermToolbox: e.target.value }))}
         />
-        <ToggleToolbox />
+        {/* <ToggleToolbox /> */}
         <ToggleToolboxShape />
       </Box>
 
