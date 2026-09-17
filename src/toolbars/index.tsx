@@ -1,10 +1,10 @@
-import StatusBar from '@/base';
+import StatusBar from '@/base/_index';
+import FloatingToolbar from '@/components/FloatingToolbar';
 import LoadingBar from '@/components/LoadingBar';
 import { TOOLBAR_GAP } from '@/lib/utils';
-import DeleteButton from '@/pipeline/components/DeleteButton';
-import FloatingToolbar from '@/pipeline/components/FloatingToolbar';
 import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
+import DeleteButton from '@/toolbars/tools/DeleteButton';
 import ExtendedMenu from '@/toolbars/tools/ExtendedMenu';
 import FullscreenToggle from '@/toolbars/tools/FullscreenToggle';
 import HelpToggle from '@/toolbars/tools/HelpToggle';

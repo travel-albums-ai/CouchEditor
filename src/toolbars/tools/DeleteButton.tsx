@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { usePipelineStore } from '@/context/pipelineStore';
 import { usePipelineTrash } from '@/hooks/usePipelineTrash';
-import { INITIAL_EDGES, INITIAL_NODES } from '../pipelineConfig';
+import { INITIAL_EDGES, INITIAL_NODES } from '../../pipeline/pipelineConfig';
 
 export default function DeleteButton() {
   const { t } = useTranslation();
