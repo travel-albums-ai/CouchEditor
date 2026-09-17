@@ -1,6 +1,6 @@
 import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import SettingsContent from '@/windows/settings/SettingsContent';
+import Settings from '@/windows/settings';
 import { Dialog } from '@mui/material';
 
 export default function SettingsWindow() {
@@ -27,7 +27,6 @@ export default function SettingsWindow() {
             position: 'relative',
             overflow: 'visible',
             display: 'flex',
-            flexDirection: 'column',
             gap: 2,
           },
         },
@@ -37,7 +36,7 @@ export default function SettingsWindow() {
         title="Close settings"
         onClick={() => setSetting(prev => ({ ...prev, showSettings: false }))}
       />
-      <SettingsContent />
+      <Settings />
     </Dialog>
   )
 }

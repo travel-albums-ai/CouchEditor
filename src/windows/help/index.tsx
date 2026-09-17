@@ -35,10 +35,9 @@ export default function Help() {
         title="Manual"
         subTitle="Learn how to use the each node feature in the pipeline effectively."
       />
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }}>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }} id="settings-content">
-
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 20%' }}>
           {Object.entries(groupedPaletteItems).map(([groupName, _]) => (<>
             <SidebarCoreButton
               key={groupName}

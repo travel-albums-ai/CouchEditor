@@ -1,11 +1,10 @@
-import { alpha, Box, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Typography } from '@mui/material';
 import { cloneElement, JSX, } from 'react';
 import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
 export default function OnboardingPhasesListHorizontal({ phaseSteps } : { phaseSteps: { key: string, icon: JSX.Element, titleKey: string, descriptionKey: string, children?: JSX.Element }[] }) {
   const { t } = useTranslation();
-  const theme = useTheme();
 
   return (<Box sx={{
     display: 'grid',

@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ConnectionLineType, type Edge, type Node } from '@xyflow/react';
 
-import AIAsyncColorizerNode from './AIAsyncColorizerNode';
-import AIAsyncDenoiserNode from './AIAsyncDenoiserNode';
-import AIPhotoEditorNode from './AIPhotoEditorNode';
-import AskAINode from './AskAINode';
+import AIAsyncColorizerNode from './ComplexNodes/AIAsyncColorizerNode';
+import AIAsyncDenoiserNode from './ComplexNodes/AIAsyncDenoiserNode';
+import AIPhotoEditorNode from './ComplexNodes/AIPhotoEditorNode';
 import ArraySetOperationNode from './ComplexNodes/ArraySetOperationNode';
 import ArraySwitchNode from './ComplexNodes/ArraySwitchNode';
+import AskAINode from './ComplexNodes/AskAINode';
 import CollageNode from './ComplexNodes/CollageNode';
 import ExifSplitNode from './ComplexNodes/ExifSplitNode';
 import ExifViewerNode from './ComplexNodes/ExifViewerNode';
@@ -17,6 +17,7 @@ import GrouperNode from './ComplexNodes/GrouperNode';
 import HotFolderReadNode from './ComplexNodes/HotFolderReadNode';
 import HotFolderWriteNode from './ComplexNodes/HotFolderWriteNode';
 import ImagePickerNode from './ComplexNodes/ImagePickerNode';
+import InformationNode from './ComplexNodes/InformationNode';
 import LutNode from './ComplexNodes/LutNode';
 import MergeChannelsNode from './ComplexNodes/MergeChannelsNode';
 import PhotoHistogramNode from './ComplexNodes/PhotoHistogramNode';
@@ -28,7 +29,6 @@ import SplitChannelsNode from './ComplexNodes/SplitChannelsNode';
 import SplitToningNode from './ComplexNodes/SplitToningNode';
 import ViewerNode from './ComplexNodes/ViewerNode';
 import VignetteNode from './ComplexNodes/VignetteNode';
-import InformationNode from './InformationNode';
 import {
   BlackAndWhiteNode, BrightnessNode, ContrastNode, CropNode, ExposureNode,
   FadeNode, FlipNode, GammaNode, GrainNode, HdrNode, HighlightsNode,

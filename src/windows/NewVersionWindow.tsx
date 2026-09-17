@@ -1,5 +1,5 @@
 import { useSettingsStoreSelector } from '@/context/settingsStore';
-import NewVersion from '@/windows/newVersion/NewVersionWindow';
+import NewVersion from '@/windows/newVersion';
 import { Dialog } from '@mui/material';
 
 export default function NewVersionWindow() {

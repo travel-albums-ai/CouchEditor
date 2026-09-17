@@ -1,18 +1,14 @@
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import OnboardingAI from '@/windows/onboarding/OnboardingAI';
-import OnboardingTakeout from '@/windows/onboarding/OnboardingTakeout';
+import OnboardingSettings from '@/windows/onboarding/OnboardingSettings';
 import OnboardingWelcome from '@/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Step, StepLabel, Stepper } from '@mui/material';
 import { ChevronLeft, ChevronsRight, CircleX } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 export default function Onboarding() {
   const { setSetting } = useSettings()
   const serverOnline = useSettingsStoreSelector((s) => s.serverOnline)
   const onboardingStep = useSettingsStoreSelector((s) => s.onboardingStep)
-
-  // const [activeStep, setActiveStep] = useState(0);
-  const { t } = useTranslation();
 
   const steps = [
     "Welcome",
@@ -20,14 +16,13 @@ export default function Onboarding() {
     "AI Tools",
   ];
 
-
   return (<>
     <Box sx={{ display: 'flex', flexDirection: 'column', pt: 2 }}>
 
 
       <Box sx={{ height: '675px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto', pb: 2 }}>
         {onboardingStep === 0 && <OnboardingWelcome />}
-        {onboardingStep === 1 && <OnboardingTakeout />}
+        {onboardingStep === 1 && <OnboardingSettings />}
         {onboardingStep === 2 && <OnboardingAI />}
       </Box>
 
@@ -37,7 +32,7 @@ export default function Onboarding() {
         display: 'flex',
         width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between',
         gap: 1,
       }}>
@@ -55,7 +50,7 @@ export default function Onboarding() {
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'stretch' }}>
           <Button
-            size="large"
+            sx={{ borderRadius: 4 }}
             disabled={onboardingStep === 0}
             onClick={() => {
               if (onboardingStep > 0) {
@@ -65,7 +60,7 @@ export default function Onboarding() {
             <ChevronLeft size={16} />
           </Button>
           <Button
-            size="large"
+            sx={{ borderRadius: 4 }}
             disabled={onboardingStep === 2 && !serverOnline}
             onClick={() => {
               if (onboardingStep < steps.length - 1) {

@@ -1,4 +1,4 @@
-import { createAIImageEditNode } from "./AIImageEditNode";
+import { createAIImageEditNode } from "../ComplexNodes/AIImageEditNode";
 
 export default createAIImageEditNode({
   type: "ai-photo-editor",

@@ -6,7 +6,7 @@ import { Box, Chip, TextField } from '@mui/material';
 import { Astroid, Camera, GalleryHorizontalEnd, User } from 'lucide-react';
 import { useState } from 'react';
 
-export default function PipelineTemplates() {
+export default function Templates() {
   const { pipelines, loadById, setCurrentPipeline } = usePipelineStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedView, setSelectedView] = useState('all');

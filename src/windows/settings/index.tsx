@@ -80,9 +80,10 @@ export default function SettingsContent() {
       title="Settings"
       subTitle="Configure your application settings to tailor the experience to your needs."
     />
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", overflow: 'hidden' }} id="settings-content">
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }}>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 20%' }}>
         {Object.entries(groupedSections).map(([group, groupSections], index) => (
           <Fragment key={group}>
             <Box sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px dotted', mt: index === 0 ? 0 : 4, borderColor: 'divider', p: 1, gap: 1, justifyContent: 'space-between' }}>
@@ -122,6 +123,7 @@ export default function SettingsContent() {
             </Box>
           </Fragment>))}
       </Box>
+
     </Box>
   </>)
 }

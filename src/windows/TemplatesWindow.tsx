@@ -1,6 +1,6 @@
 import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
-import PipelineTemplates from '@/windows/pipeline/components/PipelineTemplates';
+import Templates from '@/windows/pipeline';
 import { Dialog } from '@mui/material';
 
 export default function TemplatesWindow() {
@@ -37,7 +37,7 @@ export default function TemplatesWindow() {
         title="Close templates"
         onClick={() => setSetting(prev => ({ ...prev, templatesOpen: false }))}
       />
-      <PipelineTemplates />
+      <Templates />
     </Dialog>
   )
 }
