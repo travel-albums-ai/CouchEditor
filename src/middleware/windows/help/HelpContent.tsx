@@ -29,12 +29,14 @@ export default function HelpContent() {
         sx={{ py: 2, px: 1, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
         image="manuals_header.png"
         bgSize="500px"
+        bgPosition="650px center"
         icon={BookOpen}
-        iconSize={48}
+        iconSize={64}
         title="Manual"
         subTitle="Learn how to use the each node feature in the pipeline effectively."
       />
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, height: "100%", borderTop: '1px solid', borderColor: 'divider', pt: 2, mt: 2, overflow: 'hidden' }} id="settings-content">
+
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }} id="settings-content">
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, flex: '0 0 250px' }}>
           {Object.entries(groupedPaletteItems).map(([groupName, _]) => (<>

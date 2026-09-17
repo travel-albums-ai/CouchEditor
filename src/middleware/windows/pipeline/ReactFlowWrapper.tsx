@@ -769,7 +769,7 @@ function Pipeline() {
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.disabled} />
           <Controls showInteractive={false} position="top-right" orientation="horizontal" style={{ top: 230 }} />
-          <MiniMap position="top-right" style={{ top: 70 }} />
+          <MiniMap position="top-right" style={{ top: 64 }} />
         </ReactFlow>
 
       </div>

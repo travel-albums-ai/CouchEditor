@@ -6,6 +6,7 @@ type PipelineSelectorProps = {
   sx?: object;
   image: string;
   bgSize?: 'contain' | 'cover' | 'auto' | string;
+  bgPosition?: 'left' | 'right' | 'center' | string;
   icon: React.ElementType;
   iconSize: number;
   title: string;
@@ -16,6 +17,7 @@ export default function SectionHeader({
   sx,
   image,
   bgSize = 'contain',
+  bgPosition = 'right',
   icon,
   iconSize,
   title,
@@ -29,7 +31,7 @@ export default function SectionHeader({
       <Box sx={{ position: 'relative',
         backgroundImage: `url(${image})`,
         backgroundSize: bgSize,
-        backgroundPosition: 'right',
+        backgroundPosition: bgPosition,
         backgroundRepeat: 'no-repeat',
       }}>
         <Box sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', justifyContent: 'flex-start', ...sx }}>

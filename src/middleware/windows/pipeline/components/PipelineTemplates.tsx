@@ -63,79 +63,62 @@ export default function PipelineTemplates() {
 
   return (
     <>
+      <SectionHeader
+        sx={{ py: 2, px: 1, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
+        image="templates_header.png"
+        icon={GalleryHorizontalEnd}
+        iconSize={64}
+        bgSize="500px"
+        bgPosition="650px center"
+        title="Pipeline Templates"
+        subTitle="Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own."
+      />
 
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1,
-          maxHeight: '60vh',
-          // width: '850px',
-          overflowY: 'hidden',
-        }}
-      >
-        <Box sx={{ position: 'relative',
-          backgroundImage: 'url(couceditor_header_background_850px.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-
-        }}>
-          <SectionHeader
-            sx={{ py: 5, pl: 4, display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', }}
-            image="couceditor_header_background_850px.png"
-            icon={GalleryHorizontalEnd}
-            iconSize={64}
-            title="Pipeline Templates"
-            subTitle="Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own."
-          />
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', px: 2, py: 1 }}>
+        <TextField
+          autoFocus
+          color="primary"
+          variant="outlined"
+          size="small"
+          placeholder="Search pipelines..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchQuery}
+          sx={{ flex: 1 }}
+        />
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+          {chips.map((chip) => (
+            <Chip
+              key={chip.value}
+              label={chip.label}
+              color={selectedView === chip.value ? 'primary' : 'default'}
+              onClick={() => setSelectedView(chip.value)}
+              variant={selectedView === chip.value ? 'filled' : 'outlined'}
+            />
+          ))}
         </Box>
+      </Box>
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', px: 2, py: 1 }}>
-          <TextField
-            autoFocus
-            color="primary"
-            variant="outlined"
-            size="small"
-            placeholder="Search pipelines..."
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-            sx={{ flex: 1 }}
-          />
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
-            {chips.map((chip) => (
-              <Chip
-                key={chip.value}
-                label={chip.label}
-                color={selectedView === chip.value ? 'primary' : 'default'}
-                onClick={() => setSelectedView(chip.value)}
-                variant={selectedView === chip.value ? 'filled' : 'outlined'}
-              />
-            ))}
-          </Box>
-        </Box>
-
-        <Box sx={{ overflowY: 'auto', }}>
-          {pipelineGroupings
-            .filter((grouping) => selectedView === 'all' || grouping.type === selectedView)
-            .filter((grouping) => grouping.data.some((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase())))
-            .map((grouping) => (
-              <PipelineSelectorItems
-                key={grouping.name}
-                title={grouping.name}
-                icon={grouping.icon}
-                description={grouping.description}
-                isSelected={grouping.type === selectedView}
-                onClick={() => setSelectedView(grouping.type)}
-              >
-                {grouping.data
-                  .filter((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                  .filter((_, index) => grouping.type !== selectedView ? index < 9 : true)
-                  .map((pipeline) => (
-                    <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} key={pipeline.id} />
-                  ))}
-              </PipelineSelectorItems>
-            ))}
-        </Box>
+      <Box sx={{ overflowY: 'auto' }}>
+        {pipelineGroupings
+          .filter((grouping) => selectedView === 'all' || grouping.type === selectedView)
+          .filter((grouping) => grouping.data.some((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase())))
+          .map((grouping) => (
+            <PipelineSelectorItems
+              key={grouping.name}
+              title={grouping.name}
+              icon={grouping.icon}
+              description={grouping.description}
+              isSelected={grouping.type === selectedView}
+              onClick={() => setSelectedView(grouping.type)}
+            >
+              {grouping.data
+                .filter((pipeline) => pipeline.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                .filter((_, index) => grouping.type !== selectedView ? index < 9 : true)
+                .map((pipeline) => (
+                  <PipelineSelectorItem pipeline={pipeline} onClick={() => handleSelect(pipeline.id)} key={pipeline.id} />
+                ))}
+            </PipelineSelectorItems>
+          ))}
       </Box>
     </>
   );

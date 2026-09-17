@@ -24,7 +24,10 @@ export default function HelpWindow() {
             maxWidth: 'none',
             maxHeight: 'none',
             position: 'relative',
-            overflow: 'visible'
+            overflow: 'visible',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
           },
         },
       }}
