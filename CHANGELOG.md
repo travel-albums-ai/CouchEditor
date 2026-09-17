@@ -1,3 +1,9 @@
+## [1.152.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.151.0...v1.152.0) (2026-09-17)
+
+### ✨ Features
+
+* enhance GenericToggleButton and HelpToggle with tooltip placement support in ToolsBar ([2450748](https://github.com/travel-albums-ai/CouchEditor/commit/2450748d4c036aafac0416c5481d5e3787cd680e))
+
 ## [1.151.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.150.1...v1.151.0) (2026-09-17)
 
 ### ✨ Features
