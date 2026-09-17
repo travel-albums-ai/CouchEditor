@@ -102,8 +102,8 @@ function Pipeline() {
     if (!fitted) return;
 
     const viewport = getViewport();
-    setViewport({ ...viewport, x: viewport.x + (showToolbox ? 170 : 0), zoom: viewport.zoom - 0.05 });
-  }, [fitView, getViewport, setViewport, showToolbox]);
+    setViewport({ ...viewport, x: viewport.x + 0, zoom: viewport.zoom });
+  }, [fitView, getViewport, setViewport]);
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodes.length }));

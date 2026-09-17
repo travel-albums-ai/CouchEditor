@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-export default function NoPhotos({ isEmpty = true, isLoading = false, isError = false }: { isEmpty?: boolean, isLoading?: boolean, isError?: boolean }) {
+export default function NoPhotos() {
   return (
     <Box
       sx={{
@@ -15,10 +15,10 @@ export default function NoPhotos({ isEmpty = true, isLoading = false, isError = 
       }}
     >
       <img
-        src="./couchLogoMini.png"
+        src="./couch-editor-purple-128x128.png"
         alt="Logo"
-        width={90}
-        height={60}
+        width={128}
+        height={128}
         fetchPriority="high"
         style={{
           opacity: 0.3,
