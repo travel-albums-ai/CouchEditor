@@ -16,6 +16,7 @@ import {
   blackAndWhiteStage,
   brightnessStage,
   contrastStage,
+  detectFilmBaseColor,
   exposureStage,
   fadeStage,
   filmBaseRemoverStage,
@@ -1808,14 +1809,30 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       const strength = (inputs.strength as number | undefined) ?? 100;
       const densityCompensation = (inputs.densityCompensation as number | undefined) ?? 0;
       const filmAge = (inputs.filmAge as number | undefined) ?? 0;
-      return {
-        image: await renderImages(
-          sources,
-          inputs.evaluationId as number,
+      const autoDetectBase = inputs.autoDetectBase === true;
+
+      const image = await mapWithConcurrency(sources, inputs.evaluationId as number, async (source) => {
+        let activeMask = mask;
+        if (autoDetectBase) {
+          const [, context] = createCanvas(source.width, source.height);
+          context.drawImage(source.bitmap, 0, 0);
+          activeMask = detectFilmBaseColor(context.getImageData(0, 0, source.width, source.height));
+        }
+
+        const operation = {
+          kind: "film-base-remover" as const,
+          params: [activeMask[0], activeMask[1], activeMask[2], strength / 100, densityCompensation, filmAge] as [number, number, number, number, number, number],
+        };
+        return renderImage(
+          source,
           drawSource,
-          filmBaseRemoverStage(mask[0], mask[1], mask[2], strength, densityCompensation, filmAge),
-          { kind: "film-base-remover", params: [mask[0], mask[1], mask[2], strength / 100, densityCompensation, filmAge] }
-        ),
+          filmBaseRemoverStage(activeMask[0], activeMask[1], activeMask[2], strength, densityCompensation, filmAge),
+          operation
+        );
+      });
+
+      return {
+        image,
       };
     },
   },
@@ -2262,6 +2279,7 @@ async function runEvaluation(
         inputs.strength = node.data.strength;
         inputs.densityCompensation = node.data.densityCompensation;
         inputs.filmAge = node.data.filmAge;
+        inputs.autoDetectBase = node.data.autoDetectBase;
       }
 
       if (node.type === "hdr") {

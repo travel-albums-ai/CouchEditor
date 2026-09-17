@@ -5,7 +5,7 @@ import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
 import { PreviewMath } from '@/pipeline/components/PreviewMath';
 import { paletteItemsByType } from '@/pipeline/NodePalette';
-import { Box, Typography } from '@mui/material';
+import { Box, FormControlLabel, Switch, Typography } from '@mui/material';
 import { type Node, type NodeProps, useReactFlow } from '@xyflow/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,7 @@ type FilmBaseRemoverData = {
   strength?: number;
   densityCompensation?: number;
   filmAge?: number;
+  autoDetectBase?: boolean;
 };
 
 const DEFAULT_MASK_COLOR: RGB = [255, 128, 48];
@@ -47,6 +48,7 @@ export default function FilmBaseRemoverNode({ id, data }: NodeProps<Node<FilmBas
   const paletteItem = paletteItemsByType['film-base-remover'];
   const [maskColor, setMaskColor] = useState(data.maskColor ?? DEFAULT_MASK_COLOR);
   const strength = data.strength ?? DEFAULT_STRENGTH;
+  const autoDetectBase = data.autoDetectBase ?? false;
 
   const updateMaskColor = (value: string) => {
     const nextColor = hexToRgb(value);
@@ -71,10 +73,25 @@ export default function FilmBaseRemoverNode({ id, data }: NodeProps<Node<FilmBas
           <input
             aria-label={t('pipelineFilmBaseMaskColor')}
             type="color"
+            disabled={autoDetectBase}
             value={rgbToHex(maskColor)}
             onChange={(event) => updateMaskColor(event.target.value)}
           />
         </Box>
+        <FormControlLabel
+          control={<Switch
+            size="small"
+            checked={autoDetectBase}
+            onChange={(_, checked) => {
+              setNodes((current) => current.map((node) => node.id === id
+                ? { ...node, data: { ...node.data, autoDetectBase: checked } }
+                : node
+              ));
+              emitPipelineChange();
+            }}
+          />}
+          label={t('pipelineFilmBaseAutoDetect')}
+        />
         {paletteItem.configs?.map((config) => (
           <AdjustmentSlider
             key={config.key}

@@ -392,7 +392,7 @@ const colorStages: Array<NodeStageItem> = [
     labelDescription: 'pipelineInvertDescription',
   },
   { type: NodeType.FilmBaseRemover, labelKey: "pipelineFilmBaseRemover", icon: <Film size={16} />,
-    algo: ({ maskColor, strength, densityCompensation, filmAge }: { maskColor: [number, number, number], strength: number, densityCompensation: number, filmAge: number }) =>
+    algo: ({ maskColor, strength, densityCompensation, filmAge }: { maskColor: [number, number, number], strength: number, densityCompensation: number, filmAge: number, autoDetectBase?: boolean }) =>
       filmBaseRemoverStage(maskColor?.[0] ?? 255, maskColor?.[1] ?? 128, maskColor?.[2] ?? 48, strength ?? 100, densityCompensation ?? 0, filmAge ?? 0),
     configs: [
       { min: 0, max: 100, step: 1, defaultValue: 100, labelKey: 'pipelineFilmBaseStrength', key: 'strength' },

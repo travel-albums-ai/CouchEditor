@@ -175,6 +175,7 @@
     "pipelineFilmBaseStrength": "Strength",
     "pipelineFilmBaseDensityCompensation": "Density compensation",
     "pipelineFilmBaseAge": "Film age",
+    "pipelineFilmBaseAutoDetect": "Auto-detect",
   "pipelineShadowTint": "Shadow tint",
   "pipelineHighlightTint": "Highlight tint",
   "pipelineSplitToningStrength": "Strength",
