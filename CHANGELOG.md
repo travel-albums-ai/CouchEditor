@@ -1,3 +1,9 @@
+## [1.165.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.164.0...v1.165.0) (2026-09-17)
+
+### ✨ Features
+
+* add border radius to DialogCloseButton for improved aesthetics ([c81e56c](https://github.com/travel-albums-ai/CouchEditor/commit/c81e56cb285b95a883ed293c4908d091fcb8054a))
+
 ## [1.164.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.163.0...v1.164.0) (2026-09-17)
 
 ### ✨ Features
