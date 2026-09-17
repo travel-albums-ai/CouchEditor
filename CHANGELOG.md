@@ -1,3 +1,9 @@
+## [1.162.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.161.0...v1.162.0) (2026-09-17)
+
+### ✨ Features
+
+* refactor StartToolbar to use pipeline context and streamline toolbar actions ([c8b36a9](https://github.com/travel-albums-ai/CouchEditor/commit/c8b36a9230bf49aee81bd40fc35f2bc77c0acf22))
+
 ## [1.161.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.160.0...v1.161.0) (2026-09-17)
 
 ### ✨ Features
