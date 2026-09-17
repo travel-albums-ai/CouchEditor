@@ -1,3 +1,9 @@
+## [1.156.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.155.0...v1.156.0) (2026-09-17)
+
+### ✨ Features
+
+* add PointerReactflowToggle and ViewerReactflowToggle components for enhanced interaction modes in ToolsBar ([5698c61](https://github.com/travel-albums-ai/CouchEditor/commit/5698c61278e978bd98312e6b262a3e1df17138b5))
+
 ## [1.155.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.154.0...v1.155.0) (2026-09-17)
 
 ### ✨ Features
