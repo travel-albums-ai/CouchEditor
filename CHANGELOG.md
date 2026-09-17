@@ -1,3 +1,9 @@
+## [1.177.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.176.0...v1.177.0) (2026-09-17)
+
+### ✨ Features
+
+* enhance negative conversion prompt for improved accuracy and detail ([bdc81cf](https://github.com/travel-albums-ai/CouchEditor/commit/bdc81cf364b94550f00878a5effb3a60bdac90fc))
+
 ## [1.176.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.175.0...v1.176.0) (2026-09-17)
 
 ### ✨ Features
