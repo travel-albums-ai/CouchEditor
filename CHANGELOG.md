@@ -1,3 +1,9 @@
+## [1.161.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.160.0...v1.161.0) (2026-09-17)
+
+### ✨ Features
+
+* introduce PipelineCanvas context and hooks for improved pipeline management ([e0b5636](https://github.com/travel-albums-ai/CouchEditor/commit/e0b56364c4875b91d5fc80f4a40892394b389c51))
+
 ## [1.160.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.159.0...v1.160.0) (2026-09-17)
 
 ### ✨ Features
