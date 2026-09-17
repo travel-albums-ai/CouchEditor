@@ -2,31 +2,24 @@ import { Box, Chip, TextField, useTheme } from '@mui/material';
 import { useState } from 'react';
 
 import SectionHeader from '@/components/SectionHeader';
-import type { SavedPipeline } from '@/context/pipelineStore';
+import { usePipelineStore } from '@/context/pipelineStore';
 import PipelineSelectorItem from '@/middleware/windows/pipeline/components/PipelineSelectorItem';
 import PipelineSelectorItems from '@/middleware/windows/pipeline/components/PipelineSelectorItems';
 import { Astroid, Camera, GalleryHorizontalEnd, User } from 'lucide-react';
 
-type PipelineSelectorProps = {
-  currentPipelineId: string;
-  pipelines: SavedPipeline[];
-  loadPipeline: (id: string) => void;
-};
-
-export default function PipelineTemplates({
-  currentPipelineId,
-  pipelines,
-  loadPipeline,
-}: PipelineSelectorProps) {
+export default function PipelineTemplates() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const selectedPipeline = pipelines.find((pipeline) => pipeline.id === currentPipelineId);
+  const { pipelines, loadById, setCurrentPipeline } = usePipelineStore();
   const isOpen = Boolean(anchorEl);
   const theme = useTheme()
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedView, setSelectedView] = useState('all');
 
   const handleSelect = (pipelineId: string) => {
-    loadPipeline(pipelineId);
+    const pipeline = loadById(pipelineId);
+    if (!pipeline) return;
+
+    setCurrentPipeline({ ...pipeline, isDirty: false });
     setAnchorEl(null);
   };
 

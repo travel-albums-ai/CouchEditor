@@ -61,7 +61,6 @@ function Pipeline() {
 
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
   const {
-    pipelines,
     currentPipeline,
     setCurrentPipeline,
     updateCurrentPipeline,
@@ -358,22 +357,19 @@ function Pipeline() {
     }
   }, [fitPipelineView, saveNew, setCurrentPipeline, setEdges, setNodes, styleEdges]);
 
-  const loadPipeline = useCallback((id: string) => {
-    if (!id || id === currentPipelineId) return;
+  const previousPipelineIdRef = useRef(currentPipelineId);
 
-    // if (isDirty) {
-    //   window.alert('Save the current pipeline before loading another one.');
-    //   return;
-    // }
+  useEffect(() => {
+    if (!currentPipelineId || previousPipelineIdRef.current === currentPipelineId) return;
 
-    const pipeline = loadById(id);
+    const pipeline = loadById(currentPipelineId);
     if (!pipeline) return;
 
+    previousPipelineIdRef.current = currentPipelineId;
     setNodes(pipeline.nodes.map((node) => ({ ...node, data: { ...node.data } })));
     setEdges(styleEdges(pipeline.edges));
-    setCurrentPipeline({ ...pipeline, isDirty: false });
     void fitPipelineView();
-  }, [currentPipelineId, fitPipelineView, isDirty, loadById, setCurrentPipeline, setEdges, setNodes, styleEdges]);
+  }, [currentPipelineId, fitPipelineView, loadById, setEdges, setNodes, styleEdges]);
 
   const deleteCurrent = useCallback(() => {
     if (!currentPipelineId) return;
@@ -760,11 +756,7 @@ function Pipeline() {
           <MiniMap position="top-right" style={{ top: 70 }} />
         </ReactFlow>
 
-        <ToolsBar
-          currentPipelineId={currentPipelineId}
-          pipelines={pipelines}
-          loadPipeline={loadPipeline}
-        >
+        <ToolsBar>
           <DeleteButton
             currentPipelineId={currentPipelineId}
             trashActive={trashActive}

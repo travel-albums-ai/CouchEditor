@@ -12,14 +12,7 @@ import { Fragment } from 'react';
 import NodeToolbox from "./NodeToolbox";
 import './styles.css';
 
-interface ToolsBarProps {
-  currentPipelineId: string;
-  pipelines: any[];
-  loadPipeline: (id: string) => void;
-  children?: React.ReactNode;
-}
-
-export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline, children }: ToolsBarProps) {
+export default function ToolsBar({ children }: { children?: React.ReactNode }) {
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const {
     enableReactflow,
@@ -67,9 +60,6 @@ export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline, c
         noArrow: true,
         popover: <Box sx={{ maxHeight: '80vh', overflow: 'auto' }} >
           <PipelineTemplates
-            currentPipelineId={currentPipelineId}
-            pipelines={pipelines}
-            loadPipeline={loadPipeline}
           />
         </Box>,
       }
