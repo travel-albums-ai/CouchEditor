@@ -4,9 +4,11 @@ import '@/lib/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { ReactFlowProvider } from '@xyflow/react';
 import 'leaflet/dist/leaflet.css';
 import { createRoot, Root } from 'react-dom/client';
 import AppProviders from './context/AppProviders';
+import { PipelineTrashProvider } from './middleware/windows/pipeline/PipelineTrashProvider';
 
 import "driver.js/dist/driver.css";
 import 'flexlayout-react/style/alpha_dark.css';
@@ -32,7 +34,11 @@ root.render(
     <SpeedInsights />
     <Analytics />
     <AppProviders>
-      <AppLayout />
+      <ReactFlowProvider>
+        <PipelineTrashProvider>
+          <AppLayout />
+        </PipelineTrashProvider>
+      </ReactFlowProvider>
     </AppProviders>
   </QueryClientProvider>,
 )
