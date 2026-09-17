@@ -74,40 +74,38 @@ export default function ToolsBar({ children }: { children?: React.ReactNode }) {
   }
 
   return (
-    <>
-      <Box sx={{ bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <FloatingToolbar sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'visible',
-        }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
-            {Object.entries(menu)
-              .filter(([key, item]) => item.type !== 'divider' || item.visible !== false)
-              .map(([key, item], index) => <Fragment key={key}>
-                {item.type === 'toggle' && <GenericToggleButtonGroup
-                  key={index}
-                  id={`menu-toggle-${index}`}
-                  variant="standard"
-                  anchorHorizontal="right"
-                  anchorVertical="center"
-                  transformHorizontal="left"
-                  transformVertical="center"
-                  items={[
-                    {
-                      ...item?.data,
-                      tooltipPlacement: 'right',
-                    }] satisfies GenericToggleButtonProps[]
-                  }
-                />}
-                {item.type === 'divider' && <Divider />}
-                {item.type === 'component' && item?.data}
-              </Fragment>
-              )}
-            {children}
-          </Box>
-        </FloatingToolbar>
-      </Box>
-    </>
+    <Box sx={{ bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <FloatingToolbar sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'visible',
+      }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
+          {Object.entries(menu)
+            .filter(([key, item]) => item.type !== 'divider' || item.visible !== false)
+            .map(([key, item], index) => <Fragment key={key}>
+              {item.type === 'toggle' && <GenericToggleButtonGroup
+                key={index}
+                id={`menu-toggle-${index}`}
+                variant="standard"
+                anchorHorizontal="right"
+                anchorVertical="center"
+                transformHorizontal="left"
+                transformVertical="center"
+                items={[
+                  {
+                    ...item?.data,
+                    tooltipPlacement: 'right',
+                  }] satisfies GenericToggleButtonProps[]
+                }
+              />}
+              {item.type === 'divider' && <Divider />}
+              {item.type === 'component' && item?.data}
+            </Fragment>
+            )}
+          {children}
+        </Box>
+      </FloatingToolbar>
+    </Box>
   );
 }

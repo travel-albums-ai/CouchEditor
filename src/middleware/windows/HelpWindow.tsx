@@ -1,3 +1,4 @@
+import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import HelpContent from '@/middleware/windows/help/HelpContent';
 import { Dialog } from '@mui/material';
@@ -22,10 +23,16 @@ export default function HelpWindow() {
             height: 850,
             maxWidth: 'none',
             maxHeight: 'none',
+            position: 'relative',
+            overflow: 'visible'
           },
         },
       }}
     >
+      <DialogCloseButton
+        title="Close help"
+        onClick={() => setSetting(prev => ({ ...prev, showHelp: false }))}
+      />
       <HelpContent />
     </Dialog>
   )
