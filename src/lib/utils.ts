@@ -1,5 +1,7 @@
 import { Stage } from '@/middleware/interface/adjustments/types';
 
+export const TOOLBAR_GAP = 4;
+
 const LUM_R = 0.2126, LUM_G = 0.7152, LUM_B = 0.0722;
 const INV_255_SQ = 1 / (255 * 255);
 type RGB = { r: number; g: number; b: number };

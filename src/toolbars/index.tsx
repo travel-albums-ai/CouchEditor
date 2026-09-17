@@ -1,6 +1,6 @@
 import StatusBar from '@/base';
 import LoadingBar from '@/components/LoadingBar';
-import { TOOLBAR_GAP } from '@/layout';
+import { TOOLBAR_GAP } from '@/lib/utils';
 import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
 import ExtendedMenu from '@/toolbars/tools/ExtendedMenu';
