@@ -11,6 +11,7 @@ export interface GenericToggleButtonProps {
   webMcp?: boolean;
   group?: string[];
   tooltip: string;
+  tooltipPlacement?: 'top' | 'bottom' | 'left' | 'right';
   kbd?: string;
   icon: ReactNode;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -125,7 +126,7 @@ export default memo(function GenericToggleButton({
             {kbd && !disabled && <KeyboardChip shortcut={kbd} />}
           </Box>
         }
-        placement="bottom"
+        placement={item.tooltipPlacement ?? "bottom"}
         arrow
       >
         <span>{button}</span>

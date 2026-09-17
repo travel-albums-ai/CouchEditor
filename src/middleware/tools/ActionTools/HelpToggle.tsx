@@ -24,6 +24,7 @@ export default function HelpToggle() {
           group: t('toolsGroup')
         },
         tooltip: "Open the manual for guidance.",
+        tooltipPlacement: 'right',
         icon: <BookOpenText size={16} />,
         onClick: () => handleHelpToggle(),
         selected: help,

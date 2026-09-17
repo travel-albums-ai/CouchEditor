@@ -93,10 +93,11 @@ export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline, c
 
   return (
     <>
-      <Box sx={{ bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Box sx={{ bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <FloatingToolbar sx={{
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'visible',
         }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
             {Object.entries(menu)
@@ -110,7 +111,12 @@ export default function ToolsBar({ currentPipelineId, pipelines, loadPipeline, c
                   anchorVertical="center"
                   transformHorizontal="left"
                   transformVertical="center"
-                  items={[item?.data] satisfies GenericToggleButtonProps[]}
+                  items={[
+                    {
+                      ...item?.data,
+                      tooltipPlacement: 'right',
+                    }] satisfies GenericToggleButtonProps[]
+                  }
                 />}
                 {item.type === 'divider' && <Divider />}
                 {item.type === 'component' && item?.data}
