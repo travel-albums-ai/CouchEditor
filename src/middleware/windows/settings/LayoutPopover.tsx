@@ -1,10 +1,10 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
-import DarkLightStatus from '@/middleware/tools/DarkLightStatus';
-import LocaleToggle from '@/middleware/tools/LocaleToggle';
-import ThemeMenu from '@/middleware/tools/ThemeMenu';
 import SettingsComponentRow from '@/middleware/windows/settings/components/SettingsComponentRow';
 import SettingToggleRow from '@/middleware/windows/settings/components/SettingToggleRow';
+import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
+import LocaleToggle from '@/toolbars/tools/LocaleToggle';
+import ThemeMenu from '@/toolbars/tools/ThemeMenu';
 import { Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
