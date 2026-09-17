@@ -1,3 +1,9 @@
+## [1.160.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.159.0...v1.160.0) (2026-09-17)
+
+### ✨ Features
+
+* replace ToolsBar with ToolboxToolbar and introduce StartToolbar for improved UI functionality ([8c3decf](https://github.com/travel-albums-ai/CouchEditor/commit/8c3decfa00c8fadea91a097be00777e303388227))
+
 ## [1.159.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.158.0...v1.159.0) (2026-09-17)
 
 ### ✨ Features
