@@ -22,6 +22,7 @@ import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
 import SettingsWindow from '@/middleware/windows/SettingsWindow';
 import TemplatesWindow from '@/middleware/windows/TemplatesWindow';
 
+export const TOOLBAR_GAP = 4;
 export default function AppLayout() {
 
   return (
