@@ -25,7 +25,7 @@ export default function Toolbars() {
 
   const toolbarItems = {
     'toolbox': {
-      sx: { bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' },
+      sx: { bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', justifyContent: 'center', alignItems: 'center' },
       groups: [
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
           <PointerReactflowToggle />
@@ -41,7 +41,7 @@ export default function Toolbars() {
       ]
     },
     'status': {
-      sx: { bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' },
+      sx: { bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', justifyContent: 'center' },
       floatingSx: { minWidth: '900px', maxWidth: '1200px' },
       groups: [
         <>
@@ -51,7 +51,7 @@ export default function Toolbars() {
       ],
     },
     'others': {
-      sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' },
+      sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', justifyContent: 'center' },
       groups: [
         <>
           <SettingsWindowToggle />
@@ -62,7 +62,7 @@ export default function Toolbars() {
       ],
     },
     'start': {
-      sx: { left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' },
+      sx: { left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' },
       groups: [
         <>
           <ExtendedMenu />
@@ -81,8 +81,8 @@ export default function Toolbars() {
 
   return (
     <>
-      {Object.entries(toolbarItems).map(([key, { sx, components, floatingSx, groups }]) => (
-        <Box key={key} sx={sx} id={`toolbar-${key}`}>
+      {Object.entries(toolbarItems).map(([key, { sx, floatingSx, groups }]) => (
+        <Box key={key} sx={{...sx, position: 'absolute', display: 'flex'}} id={`toolbar-${key}`}>
           {groups && groups.map((group, index) => (
             <FloatingToolbar key={index} sx={floatingSx}>
               {group}
