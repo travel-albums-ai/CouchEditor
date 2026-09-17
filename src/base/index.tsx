@@ -1,9 +1,9 @@
-import RenderingProgress from '@/components/RenderingProgress';
-import DomCountStatus from '@/middleware/base/DomCountStatus';
-import KeyboardMenu from '@/middleware/base/KeyboardMenu';
-import PipelineNodeCountStatus from '@/middleware/base/PipelineNodeCountStatus';
-import PipelineTotalTimeStatus from '@/middleware/base/PipelineTotalTimeStatus';
-import VersionStatus from '@/middleware/base/VersionStatus';
+import DomCountStatus from '@/base/DomCountStatus';
+import KeyboardMenu from '@/base/KeyboardMenu';
+import PipelineNodeCountStatus from '@/base/PipelineNodeCountStatus';
+import PipelineTotalTimeStatus from '@/base/PipelineTotalTimeStatus';
+import RenderingProgress from '@/base/RenderingProgress';
+import VersionStatus from '@/base/VersionStatus';
 import {
   Box,
   Divider,

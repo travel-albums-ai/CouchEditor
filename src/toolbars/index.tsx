@@ -1,5 +1,5 @@
+import StatusBar from '@/base';
 import LoadingBar from '@/components/LoadingBar';
-import StatusBar from '@/components/StatusBar';
 import { TOOLBAR_GAP } from '@/layout';
 import DeleteButton from '@/middleware/windows/pipeline/components/DeleteButton';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';

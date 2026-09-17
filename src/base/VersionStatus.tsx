@@ -1,6 +1,6 @@
 import SolidChip from '@/components/SolidChip';
 import { useTranslation } from 'react-i18next';
-import packageJson from '../../../package.json';
+import packageJson from '../../package.json';
 
 export default function VersionStatus() {
   const { t } = useTranslation();
