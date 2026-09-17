@@ -1,3 +1,9 @@
+## [1.155.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.154.0...v1.155.0) (2026-09-17)
+
+### ✨ Features
+
+* refactor middleware tools structure by consolidating ActionTools and MixedTools components for improved organization and maintainability ([52c38fb](https://github.com/travel-albums-ai/CouchEditor/commit/52c38fbdf3f47c8feabaf979c178cc6802d09951))
+
 ## [1.154.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.153.0...v1.154.0) (2026-09-17)
 
 ### ✨ Features
