@@ -11,7 +11,7 @@ import JSZip from 'jszip';
 import { Download, Images } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ImageArray } from "../types";
+import type { ImageArray } from "../../../types/types";
 
 type Progress = { runId: number; completed: number; total: number };
 

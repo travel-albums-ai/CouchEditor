@@ -6,7 +6,7 @@ import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { CheckSquare, Image as ImageIcon, Square, XSquare } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { ImageArray } from '../types';
+import type { ImageArray } from '../../../types/types';
 
 type ImagePickerData = {
   image?: ImageArray;

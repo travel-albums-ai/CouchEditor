@@ -20,8 +20,8 @@ import type {
   PipelineWorkerEdge,
   PipelineWorkerNode,
   PipelineWorkerOutbound,
-} from "./types";
-import { VIEWER_NODE_TYPES } from "./types";
+} from "../../types/types";
+import { VIEWER_NODE_TYPES } from "../../types/types";
 
 // node.data keys the engine reads. Everything else (viewer results,
 // React Flow internals) stays on the main thread.

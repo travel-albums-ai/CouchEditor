@@ -12,6 +12,7 @@
 
 import { parse } from "exifr";
 import type { GalleryPhoto } from "../../lib/galleryData";
+import { lutStage, parseCubeLut } from "../../lib/lut";
 import { composeUrl } from "../../lib/thumbnailService";
 import {
   blackAndWhiteStage,
@@ -40,14 +41,6 @@ import {
   vignetteStage,
   whitesBlacksStage,
 } from "../../lib/utils";
-import type { Stage } from "../interface/adjustments/types";
-import {
-  gpuFragmentShader,
-  gpuOperationIds,
-  gpuVertexShader,
-  type GpuOperation,
-} from "./gpuShader";
-import { lutStage, parseCubeLut } from "./lut";
 import type {
   NodeInputs,
   NodeOutputs,
@@ -56,8 +49,15 @@ import type {
   PipelineProgressPreview,
   PipelineViewerImagePayload,
   PipelineWorkerOutbound,
-} from "./types";
-import { VIEWER_NODE_TYPES } from "./types";
+} from "../../types/types";
+import { VIEWER_NODE_TYPES } from "../../types/types";
+import type { Stage } from "../interface/adjustments/types";
+import {
+  gpuFragmentShader,
+  gpuOperationIds,
+  gpuVertexShader,
+  type GpuOperation,
+} from "./gpuShader";
 
 // ============================================================
 // Worker scope

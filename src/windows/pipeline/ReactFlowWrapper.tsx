@@ -26,6 +26,7 @@ import {
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
+import { VIEWER_NODE_TYPES } from "../../types/types";
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
   CONNECTION_LINE_TYPE,
@@ -38,7 +39,6 @@ import {
   SNAP_GRID,
 } from './pipelineConfig';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
-import { VIEWER_NODE_TYPES } from "./types";
 import { usePipelineCanvas } from './usePipelineCanvas';
 import { usePipelineTrash } from './usePipelineTrash';
 

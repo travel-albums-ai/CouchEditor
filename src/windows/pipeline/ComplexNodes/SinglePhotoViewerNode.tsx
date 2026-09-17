@@ -7,7 +7,7 @@ import NodeWrapper from '@/windows/pipeline/components/NodeWrapper';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Position, type Node, type NodeProps } from "@xyflow/react";
 import { HardDrive, RulerDimensionLine } from 'lucide-react';
-import type { ImageArray } from "../types";
+import type { ImageArray } from "../../../types/types";
 
 function formatMegabytes(byteSize: number): string {
   return `${(byteSize / (1024 * 1024)).toFixed(2)} MB`;
