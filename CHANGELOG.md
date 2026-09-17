@@ -1,3 +1,9 @@
+## [1.173.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.172.0...v1.173.0) (2026-09-17)
+
+### ✨ Features
+
+* enhance PopoverButtonSimple and GenericToggleButton with non-modal popover support ([84e3a0d](https://github.com/travel-albums-ai/CouchEditor/commit/84e3a0da9182a78112090063bdcd0b80ddef2a41))
+
 ## [1.172.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.171.0...v1.172.0) (2026-09-17)
 
 ### ✨ Features
