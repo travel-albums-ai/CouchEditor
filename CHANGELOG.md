@@ -1,3 +1,23 @@
+## [1.168.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.167.0...v1.168.0) (2026-09-17)
+
+### ✨ Features
+
+* Add new complex nodes for image processing and manipulation ([b1106d0](https://github.com/travel-albums-ai/CouchEditor/commit/b1106d0cfe3425a29e171ee42003f2158634a76c))
+
+### 🧹 Refactors
+
+* consolidate SimpleToggles components into a single index file and remove unused nodes ([c1258b4](https://github.com/travel-albums-ai/CouchEditor/commit/c1258b4924e395d149d64bc7e62011360113a27c))
+* enhance toolbar item structure with floating styles and improve mapping logic ([60922a7](https://github.com/travel-albums-ai/CouchEditor/commit/60922a71b7651118a766d84a935e5b352c8c4191))
+* migrate components to base directory and update imports ([8240520](https://github.com/travel-albums-ai/CouchEditor/commit/8240520a850c07847e0f4f4a5eee4dff02d283e0))
+* move WebMCP components to a dedicated index file and simplify imports ([a99b5f0](https://github.com/travel-albums-ai/CouchEditor/commit/a99b5f0defd4a2c496362a820277e9ddea74738d))
+* remove unused toolbar components and simplify toolbar structure ([9cc7038](https://github.com/travel-albums-ai/CouchEditor/commit/9cc7038312d01fb9cedb68890a07922ff6e53c48))
+* remove unused variable from SaveCloneUploadToggle and clean up ViewerReactflowToggle ([50376e4](https://github.com/travel-albums-ai/CouchEditor/commit/50376e46a628294b92e067599a704ab67593e73c))
+* reorganize and simplify component imports across multiple windows ([e7ba919](https://github.com/travel-albums-ai/CouchEditor/commit/e7ba9197348bfceda1a144b4a905e22d13f821d7))
+* reorganize window components into a dedicated Windows component and update imports ([2bad3f6](https://github.com/travel-albums-ai/CouchEditor/commit/2bad3f67df6bc6dabd20d6e15a64d9c3a3130242))
+* replace HelpContent with Help component and update related imports ([e795945](https://github.com/travel-albums-ai/CouchEditor/commit/e7959452f4ea029577a68a2863c13be7432993c3))
+* restructure toolbar items to use groups for better organization ([b60d9f3](https://github.com/travel-albums-ai/CouchEditor/commit/b60d9f35262832d572507ae8e802429e25c4391c))
+* update import paths for ImageArray type and reorganize related files ([2515acc](https://github.com/travel-albums-ai/CouchEditor/commit/2515acc2e5bfc222d4c27e6e25bf115158e05dc1))
+
 ## [1.167.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.166.0...v1.167.0) (2026-09-17)
 
 ### ✨ Features
