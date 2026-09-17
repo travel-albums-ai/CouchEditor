@@ -1,37 +1,20 @@
 import { Box, TextField } from '@mui/material';
 import { CirclePlus, Copy, Download, Save, Upload } from 'lucide-react';
-import type { ChangeEvent, RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
+import { usePipelineStore } from '@/context/pipelineStore';
 import StartPart from '@/layout/StartPart';
 import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
+import { usePipelineCanvas } from '@/middleware/windows/pipeline/usePipelineCanvas';
 
 export const TOOLBAR_GAP = 4;
 
-type StartToolbarProps = {
-  currentPipelineName: string;
-  pipelineFileInputRef: RefObject<HTMLInputElement | null>;
-  onClearWorkspace: () => void;
-  onSave: () => void;
-  onSaveAsCopy: () => void;
-  onDownload: () => void;
-  onUpload: (event: ChangeEvent<HTMLInputElement>) => void;
-  onNameChange: (name: string) => void;
-};
-
-export default function StartToolbar({
-  currentPipelineName,
-  pipelineFileInputRef,
-  onClearWorkspace,
-  onSave,
-  onSaveAsCopy,
-  onDownload,
-  onUpload,
-  onNameChange,
-}: StartToolbarProps) {
+export default function StartToolbar() {
   const { t } = useTranslation();
+  const { currentPipeline, setCurrentPipelineName, setCurrentPipelineDirty } = usePipelineStore();
+  const { pipelineFileInputRef, actionsRef } = usePipelineCanvas();
 
   return <>
     <Box sx={{ left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' }}>
@@ -48,7 +31,7 @@ export default function StartToolbar({
             {
               tooltip: t('newPipeline'),
               icon: <CirclePlus />,
-              onClick: onClearWorkspace,
+              onClick: () => actionsRef.current.clearWorkspace(),
               title: '',
             },
             {
@@ -61,28 +44,31 @@ export default function StartToolbar({
           <TextField
             id="pipeline-name"
             size="small"
-            value={currentPipelineName}
+            value={currentPipeline.name}
             placeholder={t('pipelineTitlePlaceholder')}
-            onChange={(event) => onNameChange(event.target.value)}
+            onChange={(event) => {
+              setCurrentPipelineName(event.target.value);
+              setCurrentPipelineDirty(true);
+            }}
             sx={{ maxWidth: 400, minWidth: 300 }}
           />
           <GenericToggleButtonGroup id="pipeline-save" items={[
             {
               tooltip: t('savePipeline'),
               icon: <Save />,
-              onClick: onSave,
+              onClick: () => actionsRef.current.saveCurrent(),
               title: '',
             },
             {
               tooltip: t('savePipelineAsClone'),
               icon: <Copy />,
-              onClick: onSaveAsCopy,
+              onClick: () => actionsRef.current.saveAsCopy(),
               title: '',
             },
             {
               tooltip: t('export'),
               icon: <Download />,
-              onClick: onDownload,
+              onClick: () => actionsRef.current.downloadPipeline(),
               title: '',
             }
           ] satisfies GenericToggleButtonProps[]} />
@@ -91,7 +77,7 @@ export default function StartToolbar({
             type="file"
             accept=".cep"
             hidden
-            onChange={onUpload}
+            onChange={(event) => actionsRef.current.uploadPipeline(event)}
           />
         </Box>
       </FloatingToolbar>

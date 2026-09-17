@@ -24,13 +24,23 @@ import {
   useState,
 } from "react";
 
+import WebMCPAddPipelineNode from '@/components/WebMCPAddPipelineNode';
+import WebMCPClonePipelineNode from '@/components/WebMCPClonePipelineNode';
+import WebMCPConnectPipelineNodes from '@/components/WebMCPConnectPipelineNodes';
+import WebMCPDeletePipelineEdge from '@/components/WebMCPDeletePipelineEdge';
+import WebMCPDeletePipelineNode from '@/components/WebMCPDeletePipelineNode';
+import WebMCPGetCurrentPipeline from '@/components/WebMCPGetCurrentPipeline';
+import WebMCPGetPipelineToolbox from '@/components/WebMCPGetPipelineToolbox';
+import WebMCPMovePipelineNode from '@/components/WebMCPMovePipelineNode';
+import WebMCPThemeTool from '@/components/WebMCPThemeTool';
+import WebMCPUpdatePipelineNodeProperties from '@/components/WebMCPUpdatePipelineNodeProperties';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { usePipelineStore, usePipelineStoreSelector } from '@/context/pipelineStore';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import OthersToolbar from '@/layout/OthersToolbar';
+import StartToolbar from '@/layout/StartToolbar';
 import StatusToolbar from '@/layout/StatusToolbar';
 import ToolboxToolbar from '@/layout/ToolboxToolbar';
-import PipelineCanvasOverlays from './components/PipelineCanvasOverlays';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
   CONNECTION_LINE_TYPE,
@@ -779,13 +789,6 @@ function Pipeline() {
         </ReactFlow>
 
       </div>
-
-
-      <PipelineCanvasOverlays />
-
-      <ToolboxToolbar />
-      <OthersToolbar />
-      <StatusToolbar />
     </Box>
   );
 }
@@ -795,6 +798,22 @@ export default function ReactFlowWrapper() {
     <ReactFlowProvider>
       <PipelineTrashProvider>
         <Pipeline />
+        <StartToolbar />
+        <ToolboxToolbar />
+        <OthersToolbar />
+        <StatusToolbar />
+
+        {/* webmcp */}
+        <WebMCPThemeTool />
+        <WebMCPAddPipelineNode />
+        <WebMCPClonePipelineNode />
+        <WebMCPConnectPipelineNodes />
+        <WebMCPDeletePipelineEdge />
+        <WebMCPDeletePipelineNode />
+        <WebMCPGetCurrentPipeline />
+        <WebMCPGetPipelineToolbox />
+        <WebMCPMovePipelineNode />
+        <WebMCPUpdatePipelineNodeProperties />
       </PipelineTrashProvider>
     </ReactFlowProvider>
   );
