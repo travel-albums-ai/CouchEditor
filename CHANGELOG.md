@@ -1,3 +1,14 @@
+## [1.171.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.170.0...v1.171.0) (2026-09-17)
+
+### ✨ Features
+
+* enhance PreviewDemoStatic with new MergeChannels node and update service worker registration ([d3f651a](https://github.com/travel-albums-ai/CouchEditor/commit/d3f651ad51db8c40d223967db700d974a34db7e6))
+
+### 🧹 Refactors
+
+* reorganize and migrate components; remove unused files ([26adff0](https://github.com/travel-albums-ai/CouchEditor/commit/26adff09c8c7b507c43b65fcf2186dfd5706a420))
+* simplify NoPhotos component and update image source; adjust viewport settings in Pipeline ([a7f235e](https://github.com/travel-albums-ai/CouchEditor/commit/a7f235e15a1ab252cf7e11ac4173d531c1b70fad))
+
 ## [1.170.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.169.0...v1.170.0) (2026-09-17)
 
 ### ✨ Features
