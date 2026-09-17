@@ -70,7 +70,12 @@ if (import.meta.env.PROD && typeof window !== 'undefined' && 'serviceWorker' in 
         window.location.reload();
       });
 
-      wb.register();
+      wb.register({ updateViaCache: 'none' }).then((registration) => {
+        // Check for a freshly deployed worker immediately, even when the app was already open.
+        return registration?.update();
+      }).catch((err) => {
+        console.warn('SW update check failed', err);
+      });
     } catch (err) {
       console.warn('SW registration failed', err);
     }
