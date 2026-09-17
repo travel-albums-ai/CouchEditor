@@ -1,5 +1,5 @@
 import { usePipelineStore } from '@/context/pipelineStore';
-import { pipelineNodeTypes } from '@/middleware/windows/pipeline/pipelineConfig';
+import { pipelineNodeTypes } from '@/windows/pipeline/pipelineConfig';
 import { useEffect } from 'react';
 import './webMcpTypes';
 

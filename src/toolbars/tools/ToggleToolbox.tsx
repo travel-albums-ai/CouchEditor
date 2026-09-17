@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import NodeToolbox from '@/middleware/windows/pipeline/NodeToolbox';
+import NodeToolbox from '@/windows/pipeline/NodeToolbox';
 import { Box } from '@mui/material';
 import { Plus } from 'lucide-react';
 

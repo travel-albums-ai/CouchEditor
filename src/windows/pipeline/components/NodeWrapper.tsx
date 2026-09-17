@@ -1,0 +1,257 @@
+
+import NodeHeader from '@/windows/pipeline/components/NodeHeader';
+import { PreviewDemoStatic } from '@/windows/pipeline/components/PreviewDemoStatic';
+import { paletteItemsByType } from '@/windows/pipeline/NodePalette';
+import { Box, IconButton, Tooltip } from '@mui/material';
+import { alpha } from '@mui/material/styles';
+import { NodeToolbar, Position, useNodeConnections, useNodeId, useNodesData, useReactFlow } from '@xyflow/react';
+import { Copy, FastForward, HelpCircle, RotateCcw, Trash2 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import stc from 'string-to-color';
+
+type NodeWrapperProps = {
+  children: React.ReactNode;
+  type: string;
+  helper?: React.ReactNode;
+  tools?: React.ReactNode;
+};
+
+export default function NodeWrapper({
+  children,
+  type,
+  helper,
+  tools,
+}: NodeWrapperProps) {
+  const nodeId = useNodeId();
+  const nodeData = useNodesData(nodeId ?? '');
+  const inputConnections = useNodeConnections({ handleType: 'target' });
+  const outputConnections = useNodeConnections({ handleType: 'source' });
+  const { addNodes, deleteElements, getNode, getNodes, setEdges, setNodes } = useReactFlow();
+  const { t } = useTranslation();
+  const [showHelper, setShowHelper] = useState(false);
+  const [hasUnconnectedHandle, setHasUnconnectedHandle] = useState(false);
+  const nodeContentRef = useRef<HTMLDivElement>(null);
+  const isSkipping = nodeData?.data?.skip === true;
+
+  useEffect(() => {
+    const nodeElement = nodeContentRef.current?.parentElement;
+    if (!nodeElement) return;
+
+    const handles = [
+      ...nodeElement.querySelectorAll<HTMLElement>('.react-flow__handle.source'),
+      ...nodeElement.querySelectorAll<HTMLElement>('.react-flow__handle.target'),
+    ];
+    const connectedHandleIds = new Set([
+      ...inputConnections.map(connection => connection.targetHandle),
+      ...outputConnections.map(connection => connection.sourceHandle),
+    ]);
+
+    setHasUnconnectedHandle(handles.some(handle => {
+      const handleId = handle.getAttribute('data-handleid');
+      return !handleId || !connectedHandleIds.has(handleId);
+    }));
+  }, [inputConnections, outputConnections]);
+
+  const deleteNode = () => {
+    if (nodeId) {
+      void deleteElements({ nodes: [{ id: nodeId }] });
+    }
+  };
+
+  const resetNode = () => {
+    if (!nodeId) return;
+
+    const node = getNode(nodeId);
+    if (!node) return;
+
+    const existingIds = new Set(getNodes().map(existingNode => existingNode.id));
+    const baseId = `${nodeId}-reset`;
+    let resetId = baseId;
+    let suffix = 2;
+
+    while (existingIds.has(resetId)) {
+      resetId = `${baseId}-${suffix++}`;
+    }
+
+    const config = node.type ? paletteItemsByType[node.type]?.config : undefined;
+    const resetData = config ? { amount: config.defaultValue } : {};
+
+    setNodes((current) => current.map((currentNode) => {
+      return currentNode.id === nodeId
+        ? { ...currentNode, id: resetId, data: resetData, selected: true }
+        : currentNode;
+    }));
+    setEdges((current) => current.map((edge) => ({
+      ...edge,
+      source: edge.source === nodeId ? resetId : edge.source,
+      target: edge.target === nodeId ? resetId : edge.target,
+    })));
+    window.dispatchEvent(new CustomEvent('pipeline:changed'));
+  };
+
+  const cloneNode = () => {
+    if (!nodeId) return;
+
+    const node = getNode(nodeId);
+    if (!node) return;
+
+    const existingIds = new Set(getNodes().map(existingNode => existingNode.id));
+    const baseId = `${node.id}-copy`;
+    let cloneId = baseId;
+    let suffix = 2;
+
+    while (existingIds.has(cloneId)) {
+      cloneId = `${baseId}-${suffix++}`;
+    }
+
+    addNodes({
+      ...node,
+      id: cloneId,
+      position: {
+        x: node.position.x + 540,
+        y: node.position.y + 40,
+      },
+      data: { ...node.data },
+      selected: true,
+    });
+  };
+
+  const toggleSkipping = () => {
+    if (!nodeId) return;
+
+    setNodes((current) => current.map((node) =>
+      node.id === nodeId
+        ? { ...node, data: { ...node.data, skip: !isSkipping } }
+        : node
+    ));
+    window.dispatchEvent(new CustomEvent('pipeline:changed'));
+  };
+
+  return (
+    <>
+      <NodeToolbar position={Position.Top} offset={8}>
+        <Box
+          className="nodrag nopan"
+          sx={{
+            display: 'flex',
+            gap: 0.5,
+            p: 0.25,
+            border: 1,
+            borderColor: 'divider',
+            borderRadius: 1,
+            bgcolor: 'background.paper',
+            boxShadow: 2,
+          }}
+        >
+          <Tooltip title={t('nodeClone')}>
+            <IconButton size="small" aria-label={t('nodeClone')} onClick={cloneNode}>
+              <Copy size={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('nodeHelp')}>
+            <IconButton size="small" aria-label={t('nodeHelp')} onClick={() => setShowHelper(!showHelper)} sx={{ color: showHelper ? 'primary.main' : 'default' }}>
+              <HelpCircle size={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={isSkipping ? t('nodeEnable') : t('nodeSkip')}>
+            <IconButton
+              size="small"
+              aria-label={isSkipping ? t('nodeEnable') : t('nodeSkip')}
+              color={isSkipping ? 'warning' : 'default'}
+              onClick={toggleSkipping}
+            >
+              <FastForward size={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('nodeReset')}>
+            <IconButton size="small" aria-label={t('nodeReset')} onClick={resetNode}>
+              <RotateCcw size={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('nodeDelete')}>
+            <IconButton size="small" aria-label={t('nodeDelete')} onClick={deleteNode}>
+              <Trash2 size={16} />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </NodeToolbar>
+
+      {showHelper && <NodeToolbar position={Position.Top} offset={48}>
+        <Box
+          className="nodrag nopan"
+          sx={{
+            p: 1,
+            border: 1,
+            borderColor: 'divider',
+            borderRadius: 2,
+            bgcolor: 'background.paper',
+            boxShadow: theme => `inset 0 0 8px 0px ${theme.palette.divider}`,
+          }}
+        >
+          {helper || <PreviewDemoStatic paletteItem={paletteItemsByType[type]}  showText={true} />}
+        </Box>
+      </NodeToolbar>}
+
+      <Box
+        ref={nodeContentRef}
+        sx={[
+          {
+            cursor: 'grab',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            minWidth: 280,
+            borderRadius: 4,
+            overflow: 'hidden',
+            border: 2,
+            borderColor: 'divider',
+            boxShadow: theme => `0 0 8px 0px ${theme.palette.divider}`,
+            transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+
+            '&:hover': {
+              borderColor: theme => `color-mix(in srgb, ${stc(type)} 45%, transparent 75%)`,
+              boxShadow: theme => `0 0 12px -1px ${alpha(theme.palette.primary.main, 0.5)}`,
+            },
+          },
+        ]}
+      >
+        {type && (
+          <NodeHeader
+            type={type}
+            sx={{
+              width: '100%',
+              border: 0,
+              borderRadius: 2,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
+          >
+            {tools && tools}
+          </NodeHeader>
+        )}
+        <Box
+          className="nodrag"
+          sx={{
+            display: 'flex',
+            cursor: 'default',
+            flexDirection: 'column',
+            borderRadius: 2,
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            gap: 2,
+            p: 2,
+            pr: 1.5,
+            filter: isSkipping ? 'blur(2px) grayscale(75%)' : 'none',
+            bgcolor: theme =>
+              hasUnconnectedHandle
+                ? `color-mix(in srgb, ${theme.palette.primary.light} 10%, ${theme.palette.background.paper} 85%)`
+                : alpha(theme.palette.background.paper, 1),
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
+    </>
+  );
+}

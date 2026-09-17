@@ -1,6 +1,6 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
-import { usePipelineCanvas } from '@/middleware/windows/pipeline/usePipelineCanvas';
+import { usePipelineCanvas } from '@/windows/pipeline/usePipelineCanvas';
 import { CirclePlus, Upload } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

@@ -1,8 +1,6 @@
 import StatusBar from '@/base';
 import LoadingBar from '@/components/LoadingBar';
 import { TOOLBAR_GAP } from '@/layout';
-import DeleteButton from '@/middleware/windows/pipeline/components/DeleteButton';
-import FloatingToolbar from '@/middleware/windows/pipeline/components/FloatingToolbar';
 import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
 import ExtendedMenu from '@/toolbars/tools/ExtendedMenu';
@@ -19,6 +17,8 @@ import TemplatesToggle from '@/toolbars/tools/TemplatesToggle';
 import ToggleToolbox from '@/toolbars/tools/ToggleToolbox';
 import TutorialToggle from '@/toolbars/tools/TutorialToggle';
 import ViewerReactflowToggle from '@/toolbars/tools/ViewerReactflowToggle';
+import DeleteButton from '@/windows/pipeline/components/DeleteButton';
+import FloatingToolbar from '@/windows/pipeline/components/FloatingToolbar';
 import { Box, Divider } from '@mui/material';
 
 type ToolbarItem = {

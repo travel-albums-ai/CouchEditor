@@ -1,12 +1,5 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
-import HelpWindow from '@/middleware/windows/HelpWindow';
-import LightboxWindow from '@/middleware/windows/LightboxWindow';
-import NewVersionWindow from '@/middleware/windows/NewVersionWindow';
-import OnboardingWindow from '@/middleware/windows/OnboardingWindow';
-import ReactFlowWrapper from '@/middleware/windows/pipeline/ReactFlowWrapper';
-import SettingsWindow from '@/middleware/windows/SettingsWindow';
-import TemplatesWindow from '@/middleware/windows/TemplatesWindow';
 import Toolbars from '@/toolbars';
 import WebMCPAddPipelineNode from '@/webmcp/WebMCPAddPipelineNode';
 import WebMCPClonePipelineNode from '@/webmcp/WebMCPClonePipelineNode';
@@ -18,6 +11,13 @@ import WebMCPGetPipelineToolbox from '@/webmcp/WebMCPGetPipelineToolbox';
 import WebMCPMovePipelineNode from '@/webmcp/WebMCPMovePipelineNode';
 import WebMCPThemeTool from '@/webmcp/WebMCPThemeTool';
 import WebMCPUpdatePipelineNodeProperties from '@/webmcp/WebMCPUpdatePipelineNodeProperties';
+import HelpWindow from '@/windows/HelpWindow';
+import LightboxWindow from '@/windows/LightboxWindow';
+import NewVersionWindow from '@/windows/NewVersionWindow';
+import OnboardingWindow from '@/windows/OnboardingWindow';
+import ReactFlowWrapper from '@/windows/pipeline/ReactFlowWrapper';
+import SettingsWindow from '@/windows/SettingsWindow';
+import TemplatesWindow from '@/windows/TemplatesWindow';
 
 export const TOOLBAR_GAP = 4;
 export default function AppLayout() {

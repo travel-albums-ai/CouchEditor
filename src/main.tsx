@@ -8,8 +8,8 @@ import { ReactFlowProvider } from '@xyflow/react';
 import 'leaflet/dist/leaflet.css';
 import { createRoot, Root } from 'react-dom/client';
 import AppProviders from './context/AppProviders';
-import { PipelineTrashProvider } from './middleware/windows/pipeline/PipelineTrashProvider';
 
+import { PipelineTrashProvider } from '@/windows/pipeline/PipelineTrashProvider';
 import "driver.js/dist/driver.css";
 import 'flexlayout-react/style/alpha_dark.css';
 import 'flexlayout-react/style/combined.css';
