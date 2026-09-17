@@ -1,41 +1,41 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ConnectionLineType, type Edge, type Node } from '@xyflow/react';
 
-import AIAsyncColorizerNode from './ComplexNodes/AIAsyncColorizerNode';
-import AIAsyncDenoiserNode from './ComplexNodes/AIAsyncDenoiserNode';
-import AIPhotoEditorNode from './ComplexNodes/AIPhotoEditorNode';
-import ArraySetOperationNode from './ComplexNodes/ArraySetOperationNode';
-import ArraySwitchNode from './ComplexNodes/ArraySwitchNode';
-import AskAINode from './ComplexNodes/AskAINode';
-import CollageNode from './ComplexNodes/CollageNode';
-import ExifSplitNode from './ComplexNodes/ExifSplitNode';
-import ExifViewerNode from './ComplexNodes/ExifViewerNode';
-import GoogleDriveNode from './ComplexNodes/GoogleDriveNode';
-import GpsMapNode from './ComplexNodes/GpsMapNode';
-import GpsSplitNode from './ComplexNodes/GpsSplitNode';
-import GrouperNode from './ComplexNodes/GrouperNode';
-import HotFolderReadNode from './ComplexNodes/HotFolderReadNode';
-import HotFolderWriteNode from './ComplexNodes/HotFolderWriteNode';
-import ImagePickerNode from './ComplexNodes/ImagePickerNode';
-import InformationNode from './ComplexNodes/InformationNode';
-import LutNode from './ComplexNodes/LutNode';
-import MergeChannelsNode from './ComplexNodes/MergeChannelsNode';
-import PhotoHistogramNode from './ComplexNodes/PhotoHistogramNode';
-import RescaleNode from './ComplexNodes/RescaleNode';
-import SelectedPhotoNode from './ComplexNodes/SelectedPhotoNode';
-import SinglePhotoViewerNode from './ComplexNodes/SinglePhotoViewerNode';
-import SourceNode from './ComplexNodes/SourceNode';
-import SplitChannelsNode from './ComplexNodes/SplitChannelsNode';
-import SplitToningNode from './ComplexNodes/SplitToningNode';
-import ViewerNode from './ComplexNodes/ViewerNode';
-import VignetteNode from './ComplexNodes/VignetteNode';
+import AIAsyncColorizerNode from '@/node/ComplexNodes/AIAsyncColorizerNode';
+import AIAsyncDenoiserNode from '@/node/ComplexNodes/AIAsyncDenoiserNode';
+import AIPhotoEditorNode from '@/node/ComplexNodes/AIPhotoEditorNode';
+import ArraySetOperationNode from '@/node/ComplexNodes/ArraySetOperationNode';
+import ArraySwitchNode from '@/node/ComplexNodes/ArraySwitchNode';
+import AskAINode from '@/node/ComplexNodes/AskAINode';
+import CollageNode from '@/node/ComplexNodes/CollageNode';
+import ExifSplitNode from '@/node/ComplexNodes/ExifSplitNode';
+import ExifViewerNode from '@/node/ComplexNodes/ExifViewerNode';
+import GoogleDriveNode from '@/node/ComplexNodes/GoogleDriveNode';
+import GpsMapNode from '@/node/ComplexNodes/GpsMapNode';
+import GpsSplitNode from '@/node/ComplexNodes/GpsSplitNode';
+import GrouperNode from '@/node/ComplexNodes/GrouperNode';
+import HotFolderReadNode from '@/node/ComplexNodes/HotFolderReadNode';
+import HotFolderWriteNode from '@/node/ComplexNodes/HotFolderWriteNode';
+import ImagePickerNode from '@/node/ComplexNodes/ImagePickerNode';
+import InformationNode from '@/node/ComplexNodes/InformationNode';
+import LutNode from '@/node/ComplexNodes/LutNode';
+import MergeChannelsNode from '@/node/ComplexNodes/MergeChannelsNode';
+import PhotoHistogramNode from '@/node/ComplexNodes/PhotoHistogramNode';
+import RescaleNode from '@/node/ComplexNodes/RescaleNode';
+import SelectedPhotoNode from '@/node/ComplexNodes/SelectedPhotoNode';
+import SinglePhotoViewerNode from '@/node/ComplexNodes/SinglePhotoViewerNode';
+import SourceNode from '@/node/ComplexNodes/SourceNode';
+import SplitChannelsNode from '@/node/ComplexNodes/SplitChannelsNode';
+import SplitToningNode from '@/node/ComplexNodes/SplitToningNode';
+import ViewerNode from '@/node/ComplexNodes/ViewerNode';
+import VignetteNode from '@/node/ComplexNodes/VignetteNode';
 import {
   BlackAndWhiteNode, BrightnessNode, ContrastNode, CropNode, ExposureNode,
   FadeNode, FlipNode, GammaNode, GrainNode, HdrNode, HighlightsNode,
   HueRotationNode, InvertNode, LuminosityNode, MirrorNode, PerspectiveNode, PopNode,
   RgbBlackPointNode, RgbMidtonesNode, RgbWhitePointNode, RotateNode, SaturationNode,
   SepiaNode, ShadowsNode, SharpenNode, TemperatureTintNode, VibranceNode, WhitesBlacksNode,
-} from './SimpleToggles';
+} from '@/node/SimpleToggles';
 
 export const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 export const INITIAL_NODES: Node[] = [];
