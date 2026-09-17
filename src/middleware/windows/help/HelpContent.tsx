@@ -3,13 +3,25 @@ import SidebarCoreButton from '@/components/SidebarCoreButton';
 import HelpItem from '@/middleware/windows/help/HelpItem';
 import { groupedPaletteItems } from '@/middleware/windows/pipeline/NodePalette';
 import { Box } from '@mui/material';
-import { BookOpen, SquareDashedText } from 'lucide-react';
+import { Astroid, BookOpen, Crop, FolderInput, FolderOutput, Gem, GitFork, Lightbulb, Slice, SwatchBook } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+const helpIcons = {
+  "pipelineGroupInput": <FolderInput />,
+  "pipelineLogicInput": <GitFork />,
+  "pipelineGroupTransform": <Crop />,
+  "pipelineGroupLight": <Lightbulb />,
+  "pipelineGroupColor": <SwatchBook />,
+  "pipelineGroupDetail": <Slice />,
+  "pipelineGroupEffects": <Gem />,
+  "pipelineGroupAi": <Astroid />,
+  "pipelineGroupOutput": <FolderOutput />,
+}
+
 export default function HelpContent() {
   const { t } = useTranslation();
-  const [activeGroup, setActiveGroup] = useState('default');
+  const [activeGroup, setActiveGroup] = useState('pipelineGroupInput');
 
   return (
     <>
@@ -29,7 +41,7 @@ export default function HelpContent() {
             <SidebarCoreButton
               key={groupName}
               title={t(groupName).toString().charAt(0).toUpperCase() + t(groupName).toString().slice(1)}
-              icon={<SquareDashedText />}
+              icon={helpIcons[groupName]}
               isActive={activeGroup === groupName}
               onClick={() => setActiveGroup(groupName)}
               noCounts={true}
