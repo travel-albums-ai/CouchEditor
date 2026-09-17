@@ -1,3 +1,9 @@
+## [1.170.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.169.0...v1.170.0) (2026-09-17)
+
+### ✨ Features
+
+* Add new complex nodes for image processing pipeline ([e676cea](https://github.com/travel-albums-ai/CouchEditor/commit/e676cea97363b2056d20e49e4b6e1b83a55e55ed))
+
 ## [1.169.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.168.0...v1.169.0) (2026-09-17)
 
 ### ✨ Features
