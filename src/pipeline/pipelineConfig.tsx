@@ -17,6 +17,7 @@ import AskAINode from '@/pipeline/nodes/ComplexNodes/AskAINode';
 import CollageNode from '@/pipeline/nodes/ComplexNodes/CollageNode';
 import ExifSplitNode from '@/pipeline/nodes/ComplexNodes/ExifSplitNode';
 import ExifViewerNode from '@/pipeline/nodes/ComplexNodes/ExifViewerNode';
+import FilmBaseRemoverNode from '@/pipeline/nodes/ComplexNodes/FilmBaseRemoverNode';
 import GoogleDriveNode from '@/pipeline/nodes/ComplexNodes/GoogleDriveNode';
 import GpsMapNode from '@/pipeline/nodes/ComplexNodes/GpsMapNode';
 import GpsSplitNode from '@/pipeline/nodes/ComplexNodes/GpsSplitNode';
@@ -58,6 +59,7 @@ export const pipelineNodeTypes = {
   'black-white': BlackAndWhiteNode,
   'exif-split': ExifSplitNode,
   'exif-viewer': ExifViewerNode,
+  'film-base-remover': FilmBaseRemoverNode,
   'google-drive': GoogleDriveNode,
   'gps-map': GpsMapNode,
   'gps-split': GpsSplitNode,

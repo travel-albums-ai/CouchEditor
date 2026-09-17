@@ -40,6 +40,7 @@ type OperationParamsMap = {
   "rgb-white-point": [r: number, g: number, b: number];
   "rgb-midtones": [r: number, g: number, b: number];
   "hue-rotation": [degrees: number];
+  "film-base-remover": [maskR: number, maskG: number, maskB: number, strength: number, densityCompensation: number, filmAge: number];
 };
 
 export type GpuOperation = {
@@ -87,6 +88,7 @@ export const gpuOperationIds = {
   sharpen: 23,
   hdr: 24,
   "hue-rotation": 25,
+  "film-base-remover": 26,
 } as const satisfies Record<GpuOperation["kind"], number>;
 
 function toDefineName(kind: string): string {
@@ -372,6 +374,21 @@ void main() {
     }
     case OP_HUE_ROTATION: {
       rgb = applyHslRotation(rgb, amount / 360.0);
+      break;
+    }
+    case OP_FILM_BASE_REMOVER: {
+      float maskLuminance = dot(vec3(uParams[0], uParams[1], uParams[2]), vec3(LUM_R, LUM_G, LUM_B));
+      float blend = clamp(uParams[3], 0.0, 1.0);
+      vec3 correction = maskLuminance / max(vec3(1.0 / 255.0), vec3(uParams[0], uParams[1], uParams[2]));
+      float densityFactor = pow(2.0, clamp(uParams[4], 0.0, 100.0) / 100.0);
+      float ageBlend = clamp(uParams[5], 0.0, 100.0) / 100.0;
+      rgb *= mix(vec3(1.0), correction, blend) * densityFactor;
+      float pixelLuminance = lum(rgb);
+      rgb = mix(
+        rgb * vec3(1.0 + 0.08 * ageBlend, 1.0 + 0.02 * ageBlend, 1.0 - 0.08 * ageBlend) * (1.0 - ageBlend),
+        vec3(pixelLuminance),
+        ageBlend
+      );
       break;
     }
   }

@@ -18,6 +18,7 @@ import {
   contrastStage,
   exposureStage,
   fadeStage,
+  filmBaseRemoverStage,
   gammaStage,
   grainStage,
   hdrEffectStage,
@@ -1798,6 +1799,26 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
   "hue-rotation": amountStageNode(hueRotationStage, 0, (amount) => ({ kind: "hue-rotation", params: [amount] })),
+  "film-base-remover": {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      if (sources.length === 0) return { image: [] };
+
+      const mask = (inputs.maskColor as [number, number, number] | undefined) ?? [255, 128, 48];
+      const strength = (inputs.strength as number | undefined) ?? 100;
+      const densityCompensation = (inputs.densityCompensation as number | undefined) ?? 0;
+      const filmAge = (inputs.filmAge as number | undefined) ?? 0;
+      return {
+        image: await renderImages(
+          sources,
+          inputs.evaluationId as number,
+          drawSource,
+          filmBaseRemoverStage(mask[0], mask[1], mask[2], strength, densityCompensation, filmAge),
+          { kind: "film-base-remover", params: [mask[0], mask[1], mask[2], strength / 100, densityCompensation, filmAge] }
+        ),
+      };
+    },
+  },
   fade: amountStageNode(fadeStage, 0, (amount) => ({ kind: "fade", params: [amount] })),
   "whites-blacks": twoAmountStageNode(whitesBlacksStage, "whites", "blacks", (whites, blacks) => ({ kind: "whites-blacks", params: [whites, blacks] })),
   "temperature-tint": twoAmountStageNode(temperatureTintStage, "temperature", "tint", (temperature, tint) => ({ kind: "temperature-tint", params: [temperature, tint] })),
@@ -2234,6 +2255,13 @@ async function runEvaluation(
 
       if (node.type === "vignette") {
         inputs.color = node.data.color;
+      }
+
+      if (node.type === "film-base-remover") {
+        inputs.maskColor = node.data.maskColor;
+        inputs.strength = node.data.strength;
+        inputs.densityCompensation = node.data.densityCompensation;
+        inputs.filmAge = node.data.filmAge;
       }
 
       if (node.type === "hdr") {

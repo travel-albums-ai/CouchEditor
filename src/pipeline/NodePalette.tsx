@@ -1,4 +1,4 @@
-import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
+import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, filmBaseRemoverStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
 import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export enum NodeType {
@@ -44,6 +44,7 @@ export enum NodeType {
   Lut = 'lut',
   TemperatureTint = 'temperature-tint',
   SplitToning = 'split-toning',
+    FilmBaseRemover = 'film-base-remover',
   Sharpen = 'sharpen',
   AiDenoiser = 'ai-denoiser',
   Grain = 'grain',
@@ -389,6 +390,17 @@ const colorStages: Array<NodeStageItem> = [
     configs: [],
     processing: 'math',
     labelDescription: 'pipelineInvertDescription',
+  },
+  { type: NodeType.FilmBaseRemover, labelKey: "pipelineFilmBaseRemover", icon: <Film size={16} />,
+    algo: ({ maskColor, strength, densityCompensation, filmAge }: { maskColor: [number, number, number], strength: number, densityCompensation: number, filmAge: number }) =>
+      filmBaseRemoverStage(maskColor?.[0] ?? 255, maskColor?.[1] ?? 128, maskColor?.[2] ?? 48, strength ?? 100, densityCompensation ?? 0, filmAge ?? 0),
+    configs: [
+      { min: 0, max: 100, step: 1, defaultValue: 100, labelKey: 'pipelineFilmBaseStrength', key: 'strength' },
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineFilmBaseDensityCompensation', key: 'densityCompensation' },
+      { min: 0, max: 100, step: 1, defaultValue: 0, labelKey: 'pipelineFilmBaseAge', key: 'filmAge' },
+    ],
+    processing: 'math',
+    labelDescription: 'pipelineFilmBaseRemoverDescription',
   },
   {
     type: NodeType.Lut, labelKey: "pipelineLut", icon: <Film size={16} />,

@@ -522,6 +522,37 @@ export const splitToningStage = (
   };
 };
 
+export const filmBaseRemoverStage = (
+  maskR: number,
+  maskG: number,
+  maskB: number,
+  strength: number,
+  densityCompensation: number,
+  filmAge: number,
+): Stage => {
+  const maskLuminance = Math.max(1, LUM_R * maskR + LUM_G * maskG + LUM_B * maskB);
+  const correctionR = maskLuminance / Math.max(1, maskR);
+  const correctionG = maskLuminance / Math.max(1, maskG);
+  const correctionB = maskLuminance / Math.max(1, maskB);
+  const blend = Math.max(0, Math.min(1, strength / 100));
+  const densityFactor = 2 ** (Math.max(0, Math.min(100, densityCompensation)) / 100);
+  const ageBlend = Math.max(0, Math.min(1, filmAge / 100));
+
+  return (img) => {
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const red = d[i] * (1 + (correctionR - 1) * blend) * densityFactor;
+      const green = d[i + 1] * (1 + (correctionG - 1) * blend) * densityFactor;
+      const blue = d[i + 2] * (1 + (correctionB - 1) * blend) * densityFactor;
+      const luminance = LUM_R * red + LUM_G * green + LUM_B * blue;
+
+      d[i] = clamp(red * (1 + 0.08 * ageBlend) * (1 - ageBlend) + luminance * ageBlend);
+      d[i + 1] = clamp(green * (1 + 0.02 * ageBlend) * (1 - ageBlend) + luminance * ageBlend);
+      d[i + 2] = clamp(blue * (1 - 0.08 * ageBlend) * (1 - ageBlend) + luminance * ageBlend);
+    }
+  };
+};
+
 export const rgbBlackPointStage = (
   blackR: number,
   blackG: number,
