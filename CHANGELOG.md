@@ -1,3 +1,14 @@
+## [1.169.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.168.0...v1.169.0) (2026-09-17)
+
+### ✨ Features
+
+* **pipeline:** add pipeline API, context, and worker for enhanced graph handling ([ae3f2ca](https://github.com/travel-albums-ai/CouchEditor/commit/ae3f2ca3564284df388884b370e93e2f071d2223))
+
+### 🧹 Refactors
+
+* update import paths for ImageArray and reorganize related components; remove unused styles and files ([043d8e3](https://github.com/travel-albums-ai/CouchEditor/commit/043d8e3b20e7b7a1c8f9c3f2ea3c0f7a038c53f3))
+* update import paths for usePipelineCanvas and usePipelineTrash, and reorganize related components ([178e583](https://github.com/travel-albums-ai/CouchEditor/commit/178e5836a3838db76fcfba5b5f60cc00eec9306f))
+
 ## [1.168.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.167.0...v1.168.0) (2026-09-17)
 
 ### ✨ Features
