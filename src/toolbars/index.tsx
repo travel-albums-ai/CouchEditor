@@ -26,118 +26,70 @@ export default function Toolbars() {
   const toolbarItems = {
     'toolbox': {
       sx: { bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' },
-      components: <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
-        <PointerReactflowToggle />
-        <ViewerReactflowToggle />
-        <Divider />
-        <HelpToggle />
-        <Divider />
-        <TemplatesToggle />
-        <ToggleToolbox />
-        <Divider />
-        <DeleteButton />
-      </Box>
+      groups: [
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
+          <PointerReactflowToggle />
+          <ViewerReactflowToggle />
+          <Divider />
+          <HelpToggle />
+          <Divider />
+          <TemplatesToggle />
+          <ToggleToolbox />
+          <Divider />
+          <DeleteButton />
+        </Box>
+      ]
     },
     'status': {
       sx: { bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' },
       floatingSx: { minWidth: '900px', maxWidth: '1200px' },
-      components: <>
-        <LoadingBar />
-        <StatusBar />
-      </>
+      groups: [
+        <>
+          <LoadingBar />
+          <StatusBar />
+        </>,
+      ],
     },
     'others': {
       sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' },
-      components: <>
-        <SettingsWindowToggle />
-        <DarkLightStatus />
-        <FullscreenToggle />
-        <TutorialToggle />
-      </>
-    },
-    // 'start': {
-    //   sx: { bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' },
-    //   floatingSx: { minWidth: '900px', maxWidth: '1200px' },
-    //   components: <>
-    //     <ExtendedMenu />
-    //     <Logo />
-    //     <AppName />
-    //     <ShareFeedback />
-    //   </>
-    // },
-  };
-
-  return (
-    <>
-      {Object.entries(toolbarItems).map(([key, { sx, components, floatingSx }]) => (
-        <Box key={key} sx={sx} id={`toolbar-${key}`}>
-          <FloatingToolbar sx={floatingSx}>
-            {components}
-          </FloatingToolbar>
-        </Box>
-      ))}
-
-
-      {/* <Box sx={{ bottom: 0, left: TOOLBAR_GAP, top: 0, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <FloatingToolbar>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, position: 'relative' }}>
-            <PointerReactflowToggle />
-            <ViewerReactflowToggle />
-            <Divider />
-            <HelpToggle />
-            <Divider />
-            <TemplatesToggle />
-            <ToggleToolbox />
-            <Divider />
-            <DeleteButton />
-          </Box>
-        </FloatingToolbar>
-      </Box> */}
-
-      {/* <Box
-        sx={{ bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }}
-        id="pipeline-overlays"
-      >
-        <FloatingToolbar
-          sx={{
-            minWidth: '900px',
-            maxWidth: '1200px'
-          }}>
-          <LoadingBar />
-          <StatusBar />
-        </FloatingToolbar>
-      </Box> */}
-
-      <Box
-        sx={{ left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' }}
-      >
-        <FloatingToolbar>
-          <ExtendedMenu />
-          <Logo />
-          <AppName />
-          <ShareFeedback />
-        </FloatingToolbar>
-
-        <FloatingToolbar>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <NewUploadToggle />
-            <PipelineName />
-            <SaveCloneUploadToggle />
-          </Box>
-        </FloatingToolbar>
-      </Box>
-
-      {/* <Box
-        sx={{ top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', position: 'absolute', display: 'flex', justifyContent: 'center' }}
-        id="pipeline-actions"
-      >
-        <FloatingToolbar >
+      groups: [
+        <>
           <SettingsWindowToggle />
           <DarkLightStatus />
           <FullscreenToggle />
           <TutorialToggle />
-        </FloatingToolbar>
-      </Box> */}
+        </>,
+      ],
+    },
+    'start': {
+      sx: { left: TOOLBAR_GAP, top: TOOLBAR_GAP, overflow: 'visible', position: 'absolute', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexWrap: 'wrap', maxWidth: '70%' },
+      groups: [
+        <>
+          <ExtendedMenu />
+          <Logo />
+          <AppName />
+          <ShareFeedback />
+        </>,
+        <>
+          <NewUploadToggle />
+          <PipelineName />
+          <SaveCloneUploadToggle />
+        </>,
+      ],
+    },
+  };
+
+  return (
+    <>
+      {Object.entries(toolbarItems).map(([key, { sx, components, floatingSx, groups }]) => (
+        <Box key={key} sx={sx} id={`toolbar-${key}`}>
+          {groups && groups.map((group, index) => (
+            <FloatingToolbar key={index} sx={floatingSx}>
+              {group}
+            </FloatingToolbar>
+          ))}
+        </Box>
+      ))}
     </>
   );
 }
