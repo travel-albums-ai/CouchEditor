@@ -1,3 +1,9 @@
+## [1.175.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.174.0...v1.175.0) (2026-09-17)
+
+### ✨ Features
+
+* implement auto-detect feature for film base color in FilmBaseRemover node ([a22cf82](https://github.com/travel-albums-ai/CouchEditor/commit/a22cf82cffa4cab834d2e4479a95703d7c942e08))
+
 ## [1.174.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.173.1...v1.174.0) (2026-09-17)
 
 ### ✨ Features
