@@ -1,7 +1,7 @@
 import KeyboardChip from '@/components/KeyboardChip';
 import PopoverButtonSimple from '@/components/PopoverButtonSimple';
 import GenericHotkey from '@/components/generics/GenericHotkey';
-import { Box, ToggleButton, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, PopoverProps, ToggleButton, Tooltip, Typography, useTheme } from '@mui/material';
 import { Astroid, ChevronDown, ChevronUp } from 'lucide-react';
 import { cloneElement, memo, ReactElement, ReactNode } from 'react';
 
@@ -21,6 +21,8 @@ export interface GenericToggleButtonProps {
   disabled?: boolean;
   upsideDown?: boolean;
   popover?: ReactNode;
+  popoverProps?: Partial<PopoverProps>;
+  nonModalPopover?: boolean;
   meta?: {
     name: string;
     description: string;
@@ -63,6 +65,8 @@ export default memo(function GenericToggleButton({
     upsideDown,
     webMcp,
     onClick,
+    popoverProps,
+    nonModalPopover,
   } = item;
 
   const textColor = theme.palette.text.primary;
@@ -140,6 +144,8 @@ export default memo(function GenericToggleButton({
       anchorVertical={anchorVertical}
       transformHorizontal={transformHorizontal}
       transformVertical={transformVertical}
+      popoverProps={popoverProps}
+      nonModal={nonModalPopover}
     >
       {popover}
     </PopoverButtonSimple>

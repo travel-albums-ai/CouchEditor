@@ -19,6 +19,7 @@ export default function ToggleToolbox() {
           icon: <Plus />,
           noArrow: true,
           tooltipPlacement: 'right',
+          nonModalPopover: true,
           popover: <Box sx={{ maxHeight: '80vh', overflow: 'auto' }} >
             <NodeToolbox />
           </Box>,
