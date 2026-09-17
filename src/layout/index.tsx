@@ -1,16 +1,7 @@
 import AiLoadingBar from '@/components/AiLoadingBar';
 import MainDriver from '@/components/tutorial/MainDriver';
 import Toolbars from '@/toolbars';
-import WebMCPAddPipelineNode from '@/webmcp/WebMCPAddPipelineNode';
-import WebMCPClonePipelineNode from '@/webmcp/WebMCPClonePipelineNode';
-import WebMCPConnectPipelineNodes from '@/webmcp/WebMCPConnectPipelineNodes';
-import WebMCPDeletePipelineEdge from '@/webmcp/WebMCPDeletePipelineEdge';
-import WebMCPDeletePipelineNode from '@/webmcp/WebMCPDeletePipelineNode';
-import WebMCPGetCurrentPipeline from '@/webmcp/WebMCPGetCurrentPipeline';
-import WebMCPGetPipelineToolbox from '@/webmcp/WebMCPGetPipelineToolbox';
-import WebMCPMovePipelineNode from '@/webmcp/WebMCPMovePipelineNode';
-import WebMCPThemeTool from '@/webmcp/WebMCPThemeTool';
-import WebMCPUpdatePipelineNodeProperties from '@/webmcp/WebMCPUpdatePipelineNodeProperties';
+import WebMCP from '@/webmcp';
 import HelpWindow from '@/windows/HelpWindow';
 import LightboxWindow from '@/windows/LightboxWindow';
 import NewVersionWindow from '@/windows/NewVersionWindow';
@@ -38,26 +29,8 @@ export default function AppLayout() {
       <MainDriver />
       <AiLoadingBar />
 
-      {/* toolbars */}
       <Toolbars />
-
-
-      {/* <StartToolbar />
-      <ToolboxToolbar />
-      <OthersToolbar />
-      <StatusToolbar /> */}
-
-      {/* webmcp */}
-      <WebMCPThemeTool />
-      <WebMCPAddPipelineNode />
-      <WebMCPClonePipelineNode />
-      <WebMCPConnectPipelineNodes />
-      <WebMCPDeletePipelineEdge />
-      <WebMCPDeletePipelineNode />
-      <WebMCPGetCurrentPipeline />
-      <WebMCPGetPipelineToolbox />
-      <WebMCPMovePipelineNode />
-      <WebMCPUpdatePipelineNodeProperties />
+      <WebMCP />
     </>
   );
 }
