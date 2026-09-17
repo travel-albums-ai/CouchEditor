@@ -1,3 +1,9 @@
+## [1.158.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.157.0...v1.158.0) (2026-09-17)
+
+### ✨ Features
+
+* restructure header components and add new toolbars for enhanced UI organization ([98d19d8](https://github.com/travel-albums-ai/CouchEditor/commit/98d19d8ed2680b962c8e5b70091bc48e27d849eb))
+
 ## [1.157.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.156.0...v1.157.0) (2026-09-17)
 
 ### ✨ Features
