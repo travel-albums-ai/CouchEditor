@@ -1,3 +1,9 @@
+## [1.173.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.173.0...v1.173.1) (2026-09-17)
+
+### 🐛 Fixes
+
+* remove padding from Box in PopoverButtonSimple component ([4a61a58](https://github.com/travel-albums-ai/CouchEditor/commit/4a61a580b2c00bdd2a7380426acc944e4945fb9c))
+
 ## [1.173.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.172.0...v1.173.0) (2026-09-17)
 
 ### ✨ Features
