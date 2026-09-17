@@ -7,7 +7,7 @@ type PipelineTimingDetail = {
   durationMs: number;
 };
 
-export default function PipelineTotalTimeStatus() {
+export default function PipelineTotalTime() {
   const [durationMs, setDurationMs] = useState<number | null>(null)
   const { t } = useTranslation()
 

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const countDomElements = () => document.getElementsByTagName('*').length
 
-export default function DomCountStatus() {
+export default function DomCounter() {
   const [count, setCount] = useState(() => countDomElements())
   const { t } = useTranslation()
 

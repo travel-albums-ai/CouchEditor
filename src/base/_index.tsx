@@ -1,8 +1,8 @@
-import DomCountStatus from '@/base/DomCountStatus';
+import DomCounter from '@/base/DomCounter';
 import KeyboardMenu from '@/base/KeyboardMenu';
-import PipelineNodeCountStatus from '@/base/PipelineNodeCountStatus';
-import PipelineTotalTimeStatus from '@/base/PipelineTotalTimeStatus';
-import RenderingProgress from '@/base/RenderingProgress';
+import PipelineNodeCounter from '@/base/PipelineNodeCounter';
+import PipelineTotalTime from '@/base/PipelineTotalTime';
+import RenderingProgressBars from '@/base/RenderingProgressBars';
 import VersionStatus from '@/base/VersionStatus';
 import {
   Box,
@@ -13,14 +13,14 @@ import {
 export default function StatusBar() {
 
   return <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 1 }}>
-    <RenderingProgress />
+    <RenderingProgressBars />
     <Stack sx={{ ...wrapperSx, width: '100%' }} direction="row" id="header">
       <Stack direction="row" data-side="left" divider={<Divider orientation="vertical" flexItem />} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
-        <PipelineNodeCountStatus />
-        <PipelineTotalTimeStatus />
+        <PipelineNodeCounter />
+        <PipelineTotalTime />
       </Stack>
       <Stack direction="row" data-side="right" divider={<Divider orientation="vertical" flexItem />} sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <DomCountStatus />
+        <DomCounter />
         <KeyboardMenu />
         <VersionStatus />
       </Stack>

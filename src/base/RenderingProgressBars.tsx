@@ -50,7 +50,7 @@ function sortNodesByPipelineOrder(nodes: Node[], edges: Edge[]) {
   });
 }
 
-export default function RenderingProgress() {
+export default function RenderingProgressBars() {
   const {
     currentPipeline,
   } = usePipelineStore();

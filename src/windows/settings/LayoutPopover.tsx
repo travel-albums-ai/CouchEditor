@@ -1,10 +1,8 @@
 import SettingsSection from '@/components/SettingsSection';
-import { useAlbumPhotoCard, useAlbumPhotoCardStoreSelector } from '@/context/albumPhotoCardStore';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
 import LocaleToggle from '@/toolbars/tools/LocaleToggle';
 import ThemeMenu from '@/toolbars/tools/ThemeMenu';
 import SettingsComponentRow from '@/windows/settings/components/SettingsComponentRow';
-import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Languages, PaintBucket } from 'lucide-react';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,8 +26,6 @@ const groups = [
 ]
 
 export default function LayoutPopover() {
-  const { setSetting: setCardSetting } = useAlbumPhotoCard()
-  const cardSettings = useAlbumPhotoCardStoreSelector((state) => state)
   const { t } = useTranslation()
 
   return <>
@@ -38,12 +34,6 @@ export default function LayoutPopover() {
         {group.controls
           .map((control) => (
             <Fragment key={control.key}>
-              {control.type === 'boolean' && <SettingToggleRow
-                key={control.key}
-                label={t(control.labelKey)}
-                selected={cardSettings[control.key]}
-                onChange={() => setCardSetting((prev) => ({ ...prev, [control.key]: !cardSettings[control.key] }))}
-              />}
 
               {control.type === 'component' && <SettingsComponentRow label={t(control.labelKey)}>
                 {control.toolbarComponentId}

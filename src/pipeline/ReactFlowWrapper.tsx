@@ -45,7 +45,6 @@ function Pipeline() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
-  const performanceMode = useSettingsStoreSelector(s => s.performanceMode)
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
   const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
   const pipelineMaxAIRequests = useSettingsStoreSelector(s => s.pipelineMaxAIRequests)

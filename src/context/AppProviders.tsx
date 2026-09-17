@@ -1,7 +1,5 @@
 import { BYOKProvider } from '@/context/byokStore';
-import { NotificationsProvider } from '@/context/notificationsProvider';
 import React from 'react';
-import { AlbumPhotoCardProvider } from './albumPhotoCardStore';
 import { PipelineProvider } from './pipelineStore';
 import { SettingsProvider } from './settingsStore';
 import { ThemeContextProvider } from './ThemeContext';
@@ -12,15 +10,11 @@ export default function AppProviders({ children }: Props) {
   return (
     <SettingsProvider>
       <ThemeContextProvider>
-        <NotificationsProvider>
-          <BYOKProvider>
-            <PipelineProvider>
-              <AlbumPhotoCardProvider>
-                {children}
-              </AlbumPhotoCardProvider>
-            </PipelineProvider>
-          </BYOKProvider>
-        </NotificationsProvider>
+        <BYOKProvider>
+          <PipelineProvider>
+            {children}
+          </PipelineProvider>
+        </BYOKProvider>
       </ThemeContextProvider>
     </SettingsProvider>
   );

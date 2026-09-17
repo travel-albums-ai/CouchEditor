@@ -1,5 +1,5 @@
-import { instagramPipeline } from '@/context/instagramPipelines';
-import { samplePipeline } from '@/context/samplePipelines';
+import { instagramPipeline } from '@/context/samples/instagramPipelines';
+import { samplePipeline } from '@/context/samples/samplePipelines';
 import { createLocalStorageStoreNg } from '@/lib/createLocalStorageStoreNg';
 import type { Edge, Node } from '@xyflow/react';
 

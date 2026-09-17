@@ -11,9 +11,7 @@
 //   checks run between images and in-flight fetches are aborted.
 
 import type { Stage } from "@/interface/adjustments/types";
-import type { GalleryPhoto } from "@/lib/galleryData";
 import { lutStage, parseCubeLut } from "@/lib/lut";
-import { composeUrl } from "@/lib/thumbnailService";
 import {
   blackAndWhiteStage,
   brightnessStage,
@@ -1434,7 +1432,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 
   selection: {
     async execute(inputs) {
-      const photos = inputs.photos as GalleryPhoto[] | undefined;
+      const photos = inputs.photos as undefined;
 
       if (!photos || photos.length === 0) { return { image: [] } }
 
@@ -1443,7 +1441,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
       const image = await mapWithConcurrency(
         photos,
         inputs.evaluationId as number,
-        (photo) => loadUrlImage(composeUrl(photo), photo.title, signal)
+        (photo) => loadUrlImage(photo, photo.title, signal)
       );
 
       return { image };

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const PIPELINE_NODE_COUNT_EVENT = 'pipeline:node-count';
 const PIPELINE_NODE_COUNT_REQUEST_EVENT = 'pipeline:node-count-request';
 
-export default function PipelineNodeCountStatus() {
+export default function PipelineNodeCounter() {
   const [count, setCount] = useState(0)
   const { t } = useTranslation()
 

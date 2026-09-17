@@ -1,5 +1,4 @@
 import { setSettingsStore } from '@/context/settingsStore';
-import AppLayout from '@/layout';
 import '@/lib/i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from "@vercel/analytics/react";
@@ -9,7 +8,13 @@ import 'leaflet/dist/leaflet.css';
 import { createRoot, Root } from 'react-dom/client';
 import AppProviders from './context/AppProviders';
 
+import AiLoadingBar from '@/components/AiLoadingBar';
+import MainDriver from '@/components/tutorial/MainDriver';
 import { PipelineTrashProvider } from '@/pipeline/PipelineTrashProvider';
+import ReactFlowWrapper from '@/pipeline/ReactFlowWrapper';
+import Toolbars from '@/toolbars';
+import WebMCP from '@/webmcp';
+import Windows from '@/windows';
 import "@xyflow/react/dist/style.css";
 import "driver.js/dist/driver.css";
 import 'uplot/dist/uPlot.min.css';
@@ -35,7 +40,12 @@ root.render(
     <AppProviders>
       <ReactFlowProvider>
         <PipelineTrashProvider>
-          <AppLayout />
+          <ReactFlowWrapper />
+          <MainDriver />
+          <AiLoadingBar />
+          <Windows />
+          <Toolbars />
+          <WebMCP />
         </PipelineTrashProvider>
       </ReactFlowProvider>
     </AppProviders>
