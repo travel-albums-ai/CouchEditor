@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function SaveCloneUploadToggle() {
   const { t } = useTranslation();
-  const { pipelineFileInputRef, actionsRef } = usePipelineCanvas();
+  const { actionsRef } = usePipelineCanvas();
 
   return <>
     <GenericToggleButtonGroup id="pipeline-save" items={[

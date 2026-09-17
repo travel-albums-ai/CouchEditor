@@ -7,7 +7,6 @@ export default function ViewerReactflowToggle() {
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const { disableReactflow } = usePipelineStore();
 
-
   return <>
     <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
       {
