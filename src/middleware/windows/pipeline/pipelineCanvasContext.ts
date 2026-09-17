@@ -1,0 +1,16 @@
+import { createContext, type ChangeEvent, type MutableRefObject, type RefObject } from 'react';
+
+export type PipelineCanvasActions = {
+  clearWorkspace: () => void;
+  saveCurrent: () => void;
+  saveAsCopy: () => void;
+  downloadPipeline: () => void;
+  uploadPipeline: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type PipelineCanvasContextValue = {
+  pipelineFileInputRef: RefObject<HTMLInputElement | null>;
+  actionsRef: MutableRefObject<PipelineCanvasActions>;
+};
+
+export const PipelineCanvasContext = createContext<PipelineCanvasContextValue | null>(null);

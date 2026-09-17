@@ -45,6 +45,7 @@ import {
 import { PipelineTrashProvider } from './PipelineTrashProvider';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 import { VIEWER_NODE_TYPES } from "./types";
+import { usePipelineCanvas } from './usePipelineCanvas';
 import { usePipelineTrash } from './usePipelineTrash';
 
 function Pipeline() {
@@ -64,6 +65,7 @@ function Pipeline() {
 
   const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
   const { trashRef, setTrashActive } = usePipelineTrash();
+  const { pipelineFileInputRef, actionsRef } = usePipelineCanvas();
   const {
     currentPipeline,
     setCurrentPipeline,
@@ -81,7 +83,6 @@ function Pipeline() {
   const currentPipelineName = currentPipeline.name;
   const isDirty = currentPipeline.isDirty;
   const nodeIdRef = useRef(0);
-  const pipelineFileInputRef = useRef<HTMLInputElement>(null);
   const [organizingWithAI, setOrganizingWithAI] = useState(false);
   const restoredPipelineRef = useRef(false);
   const evaluationId = useRef(0);
@@ -731,6 +732,16 @@ function Pipeline() {
     [fitPipelineView, getViewport, setViewport]
   );
 
+  useEffect(() => {
+    actionsRef.current = {
+      clearWorkspace,
+      saveCurrent,
+      saveAsCopy,
+      downloadPipeline,
+      uploadPipeline,
+    };
+  }, [actionsRef, clearWorkspace, downloadPipeline, saveAsCopy, saveCurrent, uploadPipeline]);
+
   return (
     <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>
       <div
@@ -770,22 +781,7 @@ function Pipeline() {
       </div>
 
 
-      <PipelineCanvasOverlays
-        currentPipelineName={currentPipelineName}
-        pipelineFileInputRef={pipelineFileInputRef}
-        onClearWorkspace={clearWorkspace}
-        onSave={saveCurrent}
-        onSaveAsCopy={saveAsCopy}
-        onDownload={downloadPipeline}
-        onUpload={uploadPipeline}
-        onNameChange={(name) => {
-          setCurrentPipelineName(name);
-          setCurrentPipelineDirty(true);
-        }}
-        onDelete={deleteCurrent}
-        onOrganizeWithAI={organizeWithAI}
-        organizingWithAI={organizingWithAI}
-      />
+      <PipelineCanvasOverlays />
 
       <ToolboxToolbar />
       <OthersToolbar />
