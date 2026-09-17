@@ -1,3 +1,9 @@
+## [1.174.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.173.1...v1.174.0) (2026-09-17)
+
+### ✨ Features
+
+* add FilmBaseRemover node with adjustable parameters for film base removal ([a4453ac](https://github.com/travel-albums-ai/CouchEditor/commit/a4453ac30dbe7add38c33c1ede1635023d655ddf))
+
 ## [1.173.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.173.0...v1.173.1) (2026-09-17)
 
 ### 🐛 Fixes
