@@ -22,7 +22,7 @@ export default function ToggleToolbox() {
           noArrow: true,
           tooltipPlacement: 'right',
           nonModalPopover: true,
-          popover: <Box sx={{ maxHeight: '80vh', overflow: 'auto' }} >
+          popover: <Box id="toolbox-wrapper" sx={{ maxHeight: '80vh', overflow: 'auto' }} >
             <NodeToolbox />
           </Box>,
         }

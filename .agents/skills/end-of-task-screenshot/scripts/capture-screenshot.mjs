@@ -34,10 +34,23 @@ const helpOutputPath = path.join(
   screenshotsDirectory,
   `couch-editor-${timestamp}-help.png`,
 );
+const toolboxOutputPath = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-toolbox.png`,
+);
+const stableToolboxOutputPath = path.join(screenshotsDirectory, 'couch-editor-toolbox.png');
 const stableOutputPath = path.join(screenshotsDirectory, 'couch-editor.png');
 const stableSettingsOutputPath = path.join(
   screenshotsDirectory,
   'couch-editor-settings.png',
+);
+const settingsOnboardingThemes = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-settings-onboarding-themes.png`,
+);
+const settingsOnboardingAI = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-settings-onboarding-ai.png`,
 );
 const stableTemplatesOutputPath = path.join(
   screenshotsDirectory,
@@ -54,21 +67,47 @@ try {
   await page.screenshot({ path: outputPath, fullPage: true });
   await copyFile(outputPath, stableOutputPath);
   console.log(`Screenshot captured: ${outputPath}`);
+
+  await page.locator('#onboarding-next-button').click();
+  await page.screenshot({ path: settingsOnboardingThemes, fullPage: true });
+  await copyFile(settingsOnboardingThemes, stableSettingsOutputPath);
+  console.log(`Settings screenshot captured: ${settingsOnboardingThemes}`);
+
+  await page.locator('#onboarding-next-button').click();
+  await page.screenshot({ path: settingsOnboardingAI, fullPage: true });
+  await copyFile(settingsOnboardingAI, stableSettingsOutputPath);
+  console.log(`Settings screenshot captured: ${settingsOnboardingAI}`);
+
   await page.keyboard.press('Escape');
+
   await page.locator('#settings-toggle').click();
   await page.screenshot({ path: settingsOutputPath, fullPage: true });
   await copyFile(settingsOutputPath, stableSettingsOutputPath);
   console.log(`Settings screenshot captured: ${settingsOutputPath}`);
+
   await page.keyboard.press('Escape');
+
   await page.locator('#templates-toggle').click();
   await page.screenshot({ path: templatesOutputPath, fullPage: true });
   await copyFile(templatesOutputPath, stableTemplatesOutputPath);
   console.log(`Templates screenshot captured: ${templatesOutputPath}`);
+
   await page.keyboard.press('Escape');
+
   await page.locator('#help-toggle').click();
   await page.screenshot({ path: helpOutputPath, fullPage: true });
   await copyFile(helpOutputPath, stableHelpOutputPath);
   console.log(`Help screenshot captured: ${helpOutputPath}`);
+
+  await page.keyboard.press('Escape');
+
+  await page.locator('#toggle-toolbox-toggle').click();
+  await page.locator('#toolbox-wrapper').evaluate((element) => {
+    element.style.maxHeight = 'unset';
+  });
+  await page.locator('#toolbox').screenshot({ path: toolboxOutputPath });
+  await copyFile(toolboxOutputPath, stableToolboxOutputPath);
+  console.log(`Toolbox screenshot captured: ${toolboxOutputPath}`);
 } finally {
   await browser.close();
 }

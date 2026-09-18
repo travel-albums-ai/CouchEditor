@@ -26,16 +26,18 @@ export default function NodeToolbox({ onlyGroup }: { onlyGroup?: string }) {
   };
 
   return <>
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 0,
-      m: 1,
-      my: 1.5,
-      borderRadius: 2,
-      overflow: 'hidden',
-      p: 1,
-    }}>
+    <Box
+      id="toolbox"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 0,
+        m: 1,
+        my: 1.5,
+        borderRadius: 2,
+        overflow: 'hidden',
+        p: 1,
+      }}>
       <SectionHeader
         sx={{ m: 0, p: 0, mb: 2, py: 2 }}
         image="header_toolbox.png"

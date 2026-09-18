@@ -52,6 +52,7 @@ export default function Onboarding() {
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'stretch' }}>
           <Button
+            id="onboarding-back-button"
             sx={{ borderRadius: 4 }}
             disabled={onboardingStep === 0}
             onClick={() => {
@@ -62,6 +63,7 @@ export default function Onboarding() {
             <ChevronLeft size={16} />
           </Button>
           <Button
+            id="onboarding-next-button"
             sx={{ borderRadius: 4 }}
             onClick={() => {
               if (onboardingStep < steps.length - 1) {
