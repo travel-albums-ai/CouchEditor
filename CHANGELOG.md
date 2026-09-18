@@ -1,3 +1,13 @@
+## [1.183.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.182.0...v1.183.0) (2026-09-18)
+
+### ✨ Features
+
+* add knip-after-process workflow documentation ([5f640a2](https://github.com/travel-albums-ai/CouchEditor/commit/5f640a2e523a15ebc43ca55ed9332db4f2aa0c05))
+
+### 🧹 Refactors
+
+* update import paths and remove unused components ([cfbbba4](https://github.com/travel-albums-ai/CouchEditor/commit/cfbbba4641a10bdeb23f0c5f4b1641f86be4bd10))
+
 ## [1.182.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.181.1...v1.182.0) (2026-09-18)
 
 ### ✨ Features
