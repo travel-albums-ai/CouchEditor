@@ -19,6 +19,7 @@
   "exitFullscreen": "Wyjdź z pełnego ekranu",
   "performanceModeName": "Tryb wydajności",
   "pipelineSequentialMode": "Tryb przetwarzania sekwencyjnego",
+  "pipelineJpegQuality": "Jakość JPEG (%)",
   "performanceModeDescription": "Włącz lub wyłącz tryb wydajności",
   "togglePerformanceTooltip": "Przełącz tryb wydajności",
   "settingsName": "Ustawienia",

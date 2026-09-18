@@ -19,6 +19,7 @@
   "exitFullscreen": "फ़ुलस्क्रीन से बाहर निकलें",
   "performanceModeName": "प्रदर्शन मोड",
   "pipelineSequentialMode": "क्रमिक प्रोसेसिंग मोड",
+  "pipelineJpegQuality": "JPEG गुणवत्ता (%)",
   "performanceModeDescription": "प्रदर्शन मोड चालू या बंद करें",
   "togglePerformanceTooltip": "प्रदर्शन मोड बदलें",
   "settingsName": "सेटिंग्स",

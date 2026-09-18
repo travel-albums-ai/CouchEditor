@@ -19,6 +19,7 @@
   "exitFullscreen": "Tam ekrandan çık",
   "performanceModeName": "Performans Modu",
   "pipelineSequentialMode": "Sıralı işleme modu",
+  "pipelineJpegQuality": "JPEG kalitesi (%)",
   "performanceModeDescription": "Performans modunu aç veya kapat",
   "togglePerformanceTooltip": "Performans modunu değiştir",
   "settingsName": "Ayarlar",

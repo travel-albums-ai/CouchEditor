@@ -19,6 +19,7 @@
   "exitFullscreen": "Esci dallo schermo intero",
   "performanceModeName": "Modalità prestazioni",
   "pipelineSequentialMode": "Modalità di elaborazione sequenziale",
+  "pipelineJpegQuality": "Qualità JPEG (%)",
   "performanceModeDescription": "Attiva o disattiva la modalità prestazioni",
   "togglePerformanceTooltip": "Cambia modalità prestazioni",
   "settingsName": "Impostazioni",

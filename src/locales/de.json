@@ -19,6 +19,7 @@
   "exitFullscreen": "Vollbild verlassen",
   "performanceModeName": "Leistungsmodus",
   "pipelineSequentialMode": "Sequentieller Verarbeitungsmodus",
+  "pipelineJpegQuality": "JPEG-Qualität (%)",
   "performanceModeDescription": "Leistungsmodus umschalten",
   "togglePerformanceTooltip": "Leistungsmodus umschalten",
   "settingsName": "Einstellungen",

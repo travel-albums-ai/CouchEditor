@@ -19,6 +19,7 @@
   "exitFullscreen": "退出全屏",
   "performanceModeName": "性能模式",
   "pipelineSequentialMode": "串行处理模式",
+  "pipelineJpegQuality": "JPEG 质量 (%)",
   "performanceModeDescription": "切换性能模式",
   "togglePerformanceTooltip": "切换性能模式",
   "settingsName": "设置",

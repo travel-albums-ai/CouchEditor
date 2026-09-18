@@ -19,6 +19,7 @@
   "exitFullscreen": "全画面を終了",
   "performanceModeName": "パフォーマンスモード",
   "pipelineSequentialMode": "逐次処理モード",
+  "pipelineJpegQuality": "JPEG品質 (%)",
   "performanceModeDescription": "パフォーマンスモードを切り替える",
   "togglePerformanceTooltip": "パフォーマンスモードを切り替える",
   "settingsName": "設定",

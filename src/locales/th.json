@@ -19,6 +19,7 @@
   "exitFullscreen": "ออกจากโหมดเต็มหน้าจอ",
   "performanceModeName": "โหมดประสิทธิภาพ",
   "pipelineSequentialMode": "โหมดประมวลผลตามลำดับ",
+  "pipelineJpegQuality": "คุณภาพ JPEG (%)",
   "performanceModeDescription": "เปิดหรือปิดโหมดประสิทธิภาพ",
   "togglePerformanceTooltip": "สลับโหมดประสิทธิภาพ",
   "settingsName": "การตั้งค่า",

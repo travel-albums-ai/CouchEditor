@@ -19,6 +19,7 @@
   "exitFullscreen": "Thoát toàn màn hình",
   "performanceModeName": "Chế độ hiệu năng",
   "pipelineSequentialMode": "Chế độ xử lý tuần tự",
+  "pipelineJpegQuality": "Chất lượng JPEG (%)",
   "performanceModeDescription": "Bật hoặc tắt chế độ hiệu năng",
   "togglePerformanceTooltip": "Chuyển chế độ hiệu năng",
   "settingsName": "Cài đặt",

@@ -302,6 +302,7 @@
   "pipelinePhotoBatchSize": "Photos per processing batch",
   "pipelineMaxAIRequests": "Maximum concurrent AI requests",
   "pipelineAICallDelayMs": "Delay between AI requests (ms)",
+  "pipelineJpegQuality": "JPEG quality (%)",
   "byokSectionTitle": "AI via Bring Your Own Key (BYOK)",
   "settingsByokCosts": "Billing & Costs",
   "settingsByokGuidanceCosts": "Configure the costs associated with using BYOK for AI enhanced features",

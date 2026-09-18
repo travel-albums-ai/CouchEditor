@@ -2163,7 +2163,8 @@ async function encodeImagesForTransport(
   images: WorkerImage[],
   evaluationId: number,
   batchSize: number,
-  nodeId: string
+  nodeId: string,
+  jpegQuality: number
 ): Promise<PipelineViewerImagePayload[]> {
   const payload: PipelineViewerImagePayload[] = [];
   const runId = ++viewerRunSeq;
@@ -2192,7 +2193,7 @@ async function encodeImagesForTransport(
 
           const blob = await canvas.convertToBlob({
             type: "image/jpeg",
-            quality: 0.92,
+            quality: jpegQuality,
           });
 
           return {
@@ -2760,7 +2761,8 @@ async function runEvaluation(
           images,
           evaluationId,
           Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10)),
-          node.id
+          node.id,
+          Math.max(0.1, Math.min(1, message.jpegQuality))
         )
       );
 

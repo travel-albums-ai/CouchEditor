@@ -19,6 +19,7 @@
   "exitFullscreen": "Выйти из полноэкранного режима",
   "performanceModeName": "Режим производительности",
   "pipelineSequentialMode": "Последовательный режим обработки",
+  "pipelineJpegQuality": "Качество JPEG (%)",
   "performanceModeDescription": "Включить или выключить режим производительности",
   "togglePerformanceTooltip": "Переключить режим производительности",
   "settingsName": "Настройки",

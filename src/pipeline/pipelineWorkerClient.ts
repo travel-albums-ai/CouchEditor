@@ -406,6 +406,10 @@ export async function evaluatePipeline(
       0,
       Math.min(10000, Math.round(getSettingsStore().pipelineAICallDelayMs) || 0)
     ),
+    jpegQuality: Math.max(
+      0.1,
+      Math.min(1, (Math.round(getSettingsStore().pipelineJpegQuality) || 92) / 100)
+    ),
     sequentialMode: getSettingsStore().pipelineSequentialMode,
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),

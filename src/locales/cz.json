@@ -19,6 +19,7 @@
   "exitFullscreen": "Opustit celou obrazovku",
   "performanceModeName": "Režim výkonu",
   "pipelineSequentialMode": "Sekvenční režim zpracování",
+  "pipelineJpegQuality": "Kvalita JPEG (%)",
   "performanceModeDescription": "Zapnout nebo vypnout režim výkonu",
   "togglePerformanceTooltip": "Přepnout režim výkonu",
   "settingsName": "Nastavení",

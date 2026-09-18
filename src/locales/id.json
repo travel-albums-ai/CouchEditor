@@ -19,6 +19,7 @@
   "exitFullscreen": "Keluar dari layar penuh",
   "performanceModeName": "Mode performa",
   "pipelineSequentialMode": "Mode pemrosesan berurutan",
+  "pipelineJpegQuality": "Kualitas JPEG (%)",
   "performanceModeDescription": "Aktifkan atau nonaktifkan mode performa",
   "togglePerformanceTooltip": "Ganti mode performa",
   "settingsName": "Pengaturan",

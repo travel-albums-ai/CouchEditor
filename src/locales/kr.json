@@ -19,6 +19,7 @@
   "exitFullscreen": "전체 화면 종료",
   "performanceModeName": "성능 모드",
   "pipelineSequentialMode": "순차 처리 모드",
+  "pipelineJpegQuality": "JPEG 품질 (%)",
   "performanceModeDescription": "성능 모드 전환",
   "togglePerformanceTooltip": "성능 모드 전환",
   "settingsName": "설정",

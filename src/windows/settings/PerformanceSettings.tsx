@@ -12,6 +12,7 @@ export default function PerformanceSettings() {
   const pipelinePhotoBatchSize = useSettingsStoreSelector((state) => state.pipelinePhotoBatchSize)
   const pipelineMaxAIRequests = useSettingsStoreSelector((state) => state.pipelineMaxAIRequests)
   const pipelineAICallDelayMs = useSettingsStoreSelector((state) => state.pipelineAICallDelayMs)
+  const pipelineJpegQuality = useSettingsStoreSelector((state) => state.pipelineJpegQuality)
   const pipelineSequentialMode = useSettingsStoreSelector((state) => state.pipelineSequentialMode)
 
   return <>
@@ -65,6 +66,19 @@ export default function PerformanceSettings() {
           setSetting((prev) => ({
             ...prev,
             pipelineAICallDelayMs: Math.max(0, Math.min(10000, parsed)),
+          }))
+        }}
+      />
+      <SettingFieldRow
+        label={t('pipelineJpegQuality')}
+        value={String(pipelineJpegQuality)}
+        onChange={(value) => {
+          const parsed = Number.parseInt(value, 10)
+          if (Number.isNaN(parsed)) return
+
+          setSetting((prev) => ({
+            ...prev,
+            pipelineJpegQuality: Math.max(10, Math.min(100, parsed)),
           }))
         }}
       />
