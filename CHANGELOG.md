@@ -1,3 +1,9 @@
+## [1.186.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.185.1...v1.186.0) (2026-09-18)
+
+### ✨ Features
+
+* add CPU load monitoring component and integrate into toolbars ([7e1d3fc](https://github.com/travel-albums-ai/CouchEditor/commit/7e1d3fca2592ac927d046a7f2164c825525f44f5))
+
 ## [1.185.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.185.0...v1.185.1) (2026-09-18)
 
 ### 🐛 Fixes
