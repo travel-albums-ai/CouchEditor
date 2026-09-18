@@ -84,6 +84,7 @@ type WorkerImage = {
   height: number;
   name?: string;
   exif?: Record<string, unknown>;
+  exifSegment?: Uint8Array;
   // Stable identity (thumbnail URL / file fingerprint) used as the
   // AI node result-cache key.
   cacheKey?: string;
@@ -298,6 +299,7 @@ async function blobToWorkerImage(
   exif?: Record<string, unknown>
 ): Promise<WorkerImage> {
   const bitmap = await createImageBitmap(blob);
+  const exifSegment = await extractExifSegment(blob);
 
   return {
     bitmap,
@@ -306,7 +308,67 @@ async function blobToWorkerImage(
     name,
     cacheKey,
     exif,
+    exifSegment,
   };
+}
+
+async function extractExifSegment(blob: Blob): Promise<Uint8Array | undefined> {
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+
+  if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return undefined;
+
+  let offset = 2;
+
+  while (offset + 4 <= bytes.length) {
+    if (bytes[offset] !== 0xff) {
+      offset += 1;
+      continue;
+    }
+
+    const marker = bytes[offset + 1];
+    if (marker === 0xda || marker === 0xd9) break;
+
+    if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) {
+      offset += 2;
+      continue;
+    }
+
+    const segmentLength = (bytes[offset + 2] << 8) | bytes[offset + 3];
+    const segmentEnd = offset + 2 + segmentLength;
+
+    if (segmentEnd > bytes.length) break;
+
+    if (
+      marker === 0xe1 &&
+      segmentLength >= 8 &&
+      bytes[offset + 4] === 0x45 &&
+      bytes[offset + 5] === 0x78 &&
+      bytes[offset + 6] === 0x69 &&
+      bytes[offset + 7] === 0x66 &&
+      bytes[offset + 8] === 0x00 &&
+      bytes[offset + 9] === 0x00
+    ) {
+      return bytes.slice(offset, segmentEnd);
+    }
+
+    offset = segmentEnd;
+  }
+
+  return undefined;
+}
+
+async function addExifSegment(blob: Blob, exifSegment: Uint8Array | undefined): Promise<Blob> {
+  if (!exifSegment) return blob;
+
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+
+  if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return blob;
+
+  return new Blob([
+    bytes.slice(0, 2),
+    exifSegment,
+    bytes.slice(2),
+  ], { type: "image/jpeg" });
 }
 
 async function loadFileImage(file: File): Promise<WorkerImage> {
@@ -510,6 +572,7 @@ function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerIma
     height: source.height,
     name: source.name,
     exif: source.exif,
+    exifSegment: source.exifSegment,
   };
 }
 
@@ -564,6 +627,7 @@ async function renderImage(
         height: tileHeight,
         name: source.name,
         exif: source.exif,
+        exifSegment: source.exifSegment,
       };
 
       try {
@@ -589,6 +653,7 @@ async function renderImage(
       height: source.height,
       name: source.name,
       exif: source.exif,
+      exifSegment: source.exifSegment,
     };
   }
 
@@ -613,6 +678,7 @@ async function renderImage(
     height: canvas.height,
     name: source.name,
     exif: source.exif,
+    exifSegment: source.exifSegment,
   };
 }
 
@@ -676,6 +742,7 @@ function splitChannels(
         height: source.height,
         name: `${source.name ?? "image"}-${name}`,
         exif: source.exif,
+        exifSegment: source.exifSegment,
       };
     };
 
@@ -738,6 +805,7 @@ function mergeChannels(
         height: base.height,
         name: base.name?.replace(/-(red|green|blue|alpha)$/, "") ?? "image",
         exif: base.exif,
+        exifSegment: base.exifSegment,
       };
     }
   );
@@ -847,6 +915,7 @@ async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerIma
       height,
       name: source.name,
       exif: source.exif,
+      exifSegment: source.exifSegment,
     };
   } catch {
     // Keep a canvas fallback for browsers without bitmap resizing support.
@@ -862,6 +931,7 @@ async function scaleImage(source: WorkerImage, scale: number): Promise<WorkerIma
     height,
     name: source.name,
     exif: source.exif,
+    exifSegment: source.exifSegment,
   };
 }
 
@@ -1182,6 +1252,7 @@ async function requestOpenAIImageEdit(
 
   const image = await blobToWorkerImage(await resultResponse.blob(), source.name);
   image.exif = source.exif;
+  image.exifSegment = source.exifSegment;
   return image;
 }
 
@@ -1489,6 +1560,7 @@ function cropImages(
       height: cropHeight,
       name: source.name,
       exif: source.exif,
+      exifSegment: source.exifSegment,
     };
   });
 }
@@ -2191,10 +2263,11 @@ async function encodeImagesForTransport(
 
           ctx.drawImage(image.bitmap, 0, 0, previewWidth, previewHeight);
 
-          const blob = await canvas.convertToBlob({
+          const encodedBlob = await canvas.convertToBlob({
             type: "image/jpeg",
             quality: jpegQuality,
           });
+          const blob = await addExifSegment(encodedBlob, image.exifSegment);
 
           return {
             blob,

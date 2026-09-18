@@ -14,7 +14,7 @@ function toSafeFileName(name: string, index: number): string {
 }
 
 function getFileName(name: string | undefined, index: number): string {
-  return `${toSafeFileName(name ?? `photo-${index + 1}`, index)}.jpg`;
+  return toSafeFileName(name ?? `photo-${index + 1}`, index);
 }
 
 async function emptyDirectory(directory: FileSystemDirectoryHandle) {
@@ -36,7 +36,7 @@ async function writeImages(
     let fileName = getFileName(image.name, index);
 
     while (usedNames.has(fileName)) {
-      fileName = `${toSafeFileName(image.name ?? `photo-${index + 1}`, index)}-${index + 1}.jpg`;
+      fileName = `${toSafeFileName(image.name ?? `photo-${index + 1}`, index)}-${index + 1}`;
     }
 
     usedNames.add(fileName);
