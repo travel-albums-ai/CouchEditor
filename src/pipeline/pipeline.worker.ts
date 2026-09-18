@@ -357,6 +357,13 @@ function createCanvas(
   return [canvas, ctx];
 }
 
+const IMAGE_TILE_SIZE = 1024;
+const NON_TILE_SAFE_GPU_OPERATIONS = new Set<GpuOperation["kind"]>([
+  "vignette",
+  "sharpen",
+  "hdr",
+]);
+
 type GpuRenderer = {
   canvas: OffscreenCanvas;
   gl: WebGL2RenderingContext;
@@ -497,7 +504,7 @@ function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerIma
 
 // Renders a source image, optionally applying a per-pixel transform,
 // and hands back the canvas backing store as an ImageBitmap (no copy).
-function renderImage(
+async function renderImage(
   source: WorkerImage,
   draw: (
     ctx: OffscreenCanvasRenderingContext2D,
@@ -505,8 +512,68 @@ function renderImage(
     source: WorkerImage
   ) => void,
   transformPixels?: Stage,
-  gpuOperation?: GpuOperation
-): WorkerImage {
+  gpuOperation?: GpuOperation,
+  tileSafe = false
+): Promise<WorkerImage> {
+  if (
+    tileSafe &&
+    (source.width > IMAGE_TILE_SIZE || source.height > IMAGE_TILE_SIZE)
+  ) {
+    const [canvas, ctx] = createCanvas(source.width, source.height);
+    const tiles: Array<Promise<void>> = [];
+
+    for (let y = 0; y < source.height; y += IMAGE_TILE_SIZE) {
+      for (let x = 0; x < source.width; x += IMAGE_TILE_SIZE) {
+        const tileX = x;
+        const tileY = y;
+        const tileWidth = Math.min(IMAGE_TILE_SIZE, source.width - tileX);
+        const tileHeight = Math.min(IMAGE_TILE_SIZE, source.height - tileY);
+
+        tiles.push((async () => {
+          const [tileCanvas, tileContext] = createCanvas(tileWidth, tileHeight);
+          tileContext.drawImage(
+            source.bitmap,
+            tileX,
+            tileY,
+            tileWidth,
+            tileHeight,
+            0,
+            0,
+            tileWidth,
+            tileHeight
+          );
+          const tileSource: WorkerImage = {
+            bitmap: tileCanvas.transferToImageBitmap(),
+            width: tileWidth,
+            height: tileHeight,
+            name: source.name,
+            exif: source.exif,
+          };
+          const tile = await renderImage(
+            tileSource,
+            draw,
+            transformPixels,
+            undefined,
+            false
+          );
+
+          ctx.drawImage(tile.bitmap, tileX, tileY);
+          tile.bitmap.close();
+        })());
+      }
+    }
+
+    await Promise.all(tiles);
+
+    return {
+      bitmap: canvas.transferToImageBitmap(),
+      width: source.width,
+      height: source.height,
+      name: source.name,
+      exif: source.exif,
+    };
+  }
+
   if (gpuOperation) {
     const gpuImage = renderGpuImage(source, gpuOperation);
     if (gpuImage) return gpuImage;
@@ -543,7 +610,14 @@ function renderImages(
   gpuOperation?: GpuOperation
 ): Promise<WorkerImage[]> {
   return mapWithConcurrency(sources, evaluationId, (source) =>
-    Promise.resolve(renderImage(source, draw, transformPixels, gpuOperation))
+    renderImage(
+      source,
+      draw,
+      transformPixels,
+      gpuOperation,
+      Boolean(transformPixels || gpuOperation) &&
+        !NON_TILE_SAFE_GPU_OPERATIONS.has(gpuOperation?.kind as GpuOperation["kind"])
+    )
   );
 }
 
