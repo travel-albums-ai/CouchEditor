@@ -10,7 +10,7 @@ export default function ZoomTo100Button() {
   const { t } = useTranslation();
 
   return (
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="zoom-to-100-toggle" items={[
       {
         tooltip: t('zoomTo100ToggleTooltip'),
         icon: <Scan size={16} />,

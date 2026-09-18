@@ -10,7 +10,7 @@ export default function ZoomOutButton() {
   const { t } = useTranslation();
 
   return (
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="zoom-out-toggle" items={[
       {
         tooltip: t('zoomOutToggleTooltip'),
         icon: <ZoomOut size={16} />,

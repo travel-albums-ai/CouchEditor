@@ -2,6 +2,7 @@ import { alpha, Box, Tooltip, Typography } from '@mui/material';
 import { cloneElement, useEffect, useRef, useState } from 'react';
 
 interface SidebarCoreButtonProps {
+  ariaLabel?: string;
   icon?: React.ReactNode;
   count?: number | string;
   variant?: 'text' | 'important';
@@ -19,6 +20,7 @@ export default function NewChip({
   icon,
   count,
   label,
+  ariaLabel,
   variant = 'text',
   fontSize = 10,
   borderless = false,
@@ -44,6 +46,7 @@ export default function NewChip({
 
   const content = (
     <Box
+      component={"span"}
       sx={{
         fontSize,
         px: 1.5,
@@ -81,7 +84,6 @@ export default function NewChip({
 
         transition: 'background-color 250ms ease',
 
-        // Avoid transition when the component is disabled.
         ...(disabled && {
           transition: 'none',
         }),
@@ -95,8 +97,8 @@ export default function NewChip({
             marginRight: 4,
           },
         })}
-
       <Typography
+        component={"span"}
         variant="body2"
         sx={{
           fontSize,
@@ -104,7 +106,7 @@ export default function NewChip({
           textWrap: 'nowrap',
         }}
       >
-        {count} {label}
+        {count + ' ' + label}
       </Typography>
     </Box>
   );

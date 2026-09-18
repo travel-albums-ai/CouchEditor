@@ -10,7 +10,7 @@ export default function ZoomInButton() {
   const { t } = useTranslation();
 
   return (
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="zoom-in-toggle" items={[
       {
         tooltip: t('zoomInToggleTooltip'),
         icon: <ZoomIn size={16} />,

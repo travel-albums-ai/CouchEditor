@@ -10,7 +10,7 @@ export default function ViewerReactflowToggle() {
   const { t } = useTranslation()
 
   return <>
-    <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
+    <GenericToggleButtonGroup variant="standard" id="viewer-reactflow-toggle" items={[
       {
         tooltip: t('viewerMode'),
         tooltipPlacement: 'right',

@@ -19,9 +19,7 @@ export default function GenericToggleButtonGroup({
   transformVertical?: 'top' | 'center' | 'bottom',
 }) {
 
-  const Wrapper = ToggleButtonGroup;
-
-  return <Wrapper id={id}>
+  return <ToggleButtonGroup id={id} aria-label={id}>
     {items.map((item) => <GenericToggleButton
       key={item.tooltip}
       item={item}
@@ -30,5 +28,5 @@ export default function GenericToggleButtonGroup({
       anchorVertical={anchorVertical}
       transformHorizontal={transformHorizontal}
       transformVertical={transformVertical} />)}
-  </Wrapper>
+  </ToggleButtonGroup>
 }

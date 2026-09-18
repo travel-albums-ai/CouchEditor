@@ -2,6 +2,7 @@ import { alpha, Box, Tooltip, Typography } from '@mui/material';
 import { cloneElement, useEffect, useRef, useState } from 'react';
 
 interface SidebarCoreButtonProps {
+  ariaLabel?: string;
   icon?: React.ReactNode;
   count?: number | string;
   variant?: 'text' | 'header' | 'important';
@@ -16,6 +17,7 @@ interface SidebarCoreButtonProps {
 export default function SolidChip({
   icon,
   count,
+  ariaLabel,
   label,
   variant = 'text',
   minWidth = 30,
@@ -45,6 +47,7 @@ export default function SolidChip({
   }, [count]);
 
   const domContent = <Box
+    aria-label={ariaLabel}
     sx={{
       height,
       fontSize,

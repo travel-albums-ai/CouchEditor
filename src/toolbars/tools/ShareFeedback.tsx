@@ -8,7 +8,7 @@ export default function ShareFeedback() {
   return <>
     <Tooltip title={t('shareFeedbackTooltip')} arrow>
       <a href="https://github.com/travel-albums-ai/CouchEditor/issues/new?template=general-feedback.yml" target="_blank" rel="noopener noreferrer">
-        <Button color="secondary" sx={{ minWidth: 'unset' }} >
+        <Button color="secondary" aria-label="Share Feedback" sx={{ minWidth: 'unset' }} >
           <PartyPopper  />
         </Button>
       </a>

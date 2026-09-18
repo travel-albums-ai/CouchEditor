@@ -9,9 +9,15 @@ export default function SaveCloneUploadToggle() {
   const { actionsRef } = usePipelineCanvas();
 
   return <>
-    <GenericToggleButtonGroup id="pipeline-save" items={[
+    <GenericToggleButtonGroup id="pipeline-save-toggle" items={[
       {
         tooltip: t('savePipeline'),
+        meta: {
+          name: 'saveCurrent',
+          description: 'Save the current pipeline',
+          icon: <Save />,
+          group: 'pipeline',
+        },
         icon: <Save />,
         onClick: () => actionsRef.current.saveCurrent(),
         title: '',

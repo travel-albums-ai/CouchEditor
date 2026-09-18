@@ -10,7 +10,7 @@ export default function PointerReactflowToggle() {
   const { t } = useTranslation()
 
   return <>
-    <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
+    <GenericToggleButtonGroup variant="standard" id="pointer-reactflow-toggle" items={[
       {
         tooltip: t('interactiveMode'),
         icon: <MousePointer2 />,

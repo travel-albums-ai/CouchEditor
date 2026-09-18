@@ -27,6 +27,7 @@ export default function ZoomLevel() {
       label=""
       fontSize={12}
       borderless
+      ariaLabel="Zoom level"
     />
   );
 }

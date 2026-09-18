@@ -14,7 +14,7 @@ export default function TutorialToggle() {
   }
 
   return <>
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="tutorial-toggle" items={[
       {
         kbd: 'Alt+h',
         meta: {

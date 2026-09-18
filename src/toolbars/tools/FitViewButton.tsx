@@ -9,7 +9,7 @@ export default function FitViewButton() {
   const { t } = useTranslation();
 
   return (
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="fit-view-button" items={[
       {
         tooltip: t('fitViewToggleTooltip'),
         icon: <Maximize2 size={16} />,

@@ -77,6 +77,8 @@ export default memo(function GenericToggleButton({
       selected={!disabled && selected}
       disabled={disabled}
       onClick={onClick}
+      aria-label={tooltip}
+      aria-keyshortcuts={kbd}
       sx={{
         display: 'flex',
         alignItems: 'center',
