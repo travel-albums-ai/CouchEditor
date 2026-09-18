@@ -1,3 +1,9 @@
+## [1.179.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.178.0...v1.179.0) (2026-09-18)
+
+### ✨ Features
+
+* add internationalization support for various components ([a8bcabd](https://github.com/travel-albums-ai/CouchEditor/commit/a8bcabdf983b49c2d6e7b663ad11166968790164))
+
 ## [1.178.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.177.0...v1.178.0) (2026-09-18)
 
 ### ✨ Features
