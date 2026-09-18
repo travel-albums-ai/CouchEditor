@@ -1,164 +1,172 @@
-# 🛋️ CouchEditor
+# CouchEditor
 
 ![CouchEditor](https://img.shields.io/badge/CouchEditor-Visual%20photo%20editing-ff6b6b?style=for-the-badge)
 ![Pipelines](https://img.shields.io/badge/Pipelines-Drag%20%26%20drop-4ecdc4?style=for-the-badge)
 ![Format](https://img.shields.io/badge/Recipes-.cep-45b7d1?style=for-the-badge)
 
-> 🎨 Build your own photo-editing recipes by arranging colorful editing steps on a visual canvas.
+> Build reusable photo-editing recipes by arranging steps on a visual canvas.
 
-Instead of applying the same edits one photo at a time, you can arrange a set of editing steps on a canvas, connect them together, and preview the result. Save the recipe for later or share it as a `.cep` pipeline file.
+CouchEditor lets you select photos, connect editing steps, preview the result, and save the workflow as a reusable `.cep` pipeline. The pipeline describes the edits; it does not alter your original files.
 
-![CouchEditor Screenshot](./assets/fullToolbox.png)
-<!-- IMAGE PLACEHOLDER: Add a welcoming screenshot of CouchEditor with a small example pipeline visible. -->
+![CouchEditor workspace](./screenshots/couch-editor.png)
 
-## ✨ What can I do with CouchEditor?
+## What can I do with CouchEditor?
 
-![CouchEditor Screenshot](./assets/easyOnboarding.png)
+- Choose JPEG, PNG, or WebP photos from your computer.
+- Arrange transforms, light and color adjustments, details, effects, and optional AI steps.
+- Preview one photo or a complete set of photos.
+- Inspect metadata, GPS information, and histograms where those outputs are useful.
+- Download processed photos from a viewer or write them to a configured folder.
+- Save a recipe in the browser, then export or import it as a `.cep` file.
 
-- 📸 Choose photos from your computer.
-- 🧩 Arrange editing steps such as crop, resize, rotate, brightness, contrast, color, sharpening, and effects.
-- 👀 Preview one photo or a complete set of photos.
-- 🤖 Use optional AI tools such as colorizing and denoising when AI features are enabled.
-- 📦 Download the finished photos from a viewer step.
-- 💾 Save your editing recipe in CouchEditor.
-- 🔁 Export a recipe as a `.cep` file and import it on another computer or browser.
+## How it works
 
+A pipeline is a set of connected steps:
 
-- ...btw: we probably speak your language..
+1. An **input** step provides photos or supporting information.
+2. **Logic**, transform, and editing steps process or route that information.
+3. An **output** step previews, inspects, or writes the result.
 
-![CouchEditor Screenshot](./assets/languages.png)
+A typical pipeline looks like this:
 
-## 🧠 The basic idea
+`Photos -> Crop -> Brightness -> Viewer`
 
-A CouchEditor project is made from **steps** connected on a canvas:
+The safest way to begin is to connect a photo input directly to a viewer. Once the photos appear, add one editing step at a time and check the result after each change.
 
-1. 📥 An **input** step provides photos.
-2. 🎛️ **Editing** steps change the photos.
-3. 📤 An **output** step displays or exports the result.
-
-For example:
-
-`📸 Photos → ✂️ Crop → ☀️ Brightness → 🖼️ Viewer`
-
-The steps do not change your original files. They describe what should happen to the photos while you work.
-
-> 💡 **A friendly place to start:** connect a photo input directly to a viewer first. Once you can see your photos, add editing steps between them one at a time.
-
-## 🚀 Getting started
+## Getting started
 
 1. Open CouchEditor.
-2. Open the toolbox on the left side of the canvas if it is hidden.
-3. Drag a photo input step onto the canvas.
-4. Choose the photos you want to edit.
-5. Drag an editing step onto the canvas.
-6. Drag an output step onto the canvas.
-7. Connect the steps by dragging from one circular connector to the next.
-8. Adjust the controls in the editing step and review the result in the output step.
+2. Open the toolbox on the left if it is hidden.
+3. Drag a photo input onto the canvas.
+4. Select the photos you want to edit.
+5. Drag an editing or transform step onto the canvas.
+6. Drag a viewer onto the canvas.
+7. Connect steps by dragging from an output connector to the next input connector.
+8. Adjust the step controls and review the result in the viewer.
 
-<!-- IMAGE PLACEHOLDER: Add a screenshot showing the toolbox, a photo input, one edit, and a viewer connected together. -->
-![CouchEditor Screenshot](./assets/blackAndWhite.png)
-![CouchEditor Screenshot](./assets/decorative.png)
+The toolbox includes a search field and supports dragging nodes onto the canvas. AI nodes are shown when AI features are enabled.
 
-### 📸 Choosing photos
+![CouchEditor toolbox](./screenshots/couch-editor-toolbox.png)
 
-Use the photo input step to select JPEG, PNG, or WebP images from your computer. The number of selected photos appears on the step, and thumbnails appear below it.
+### Choosing photos
 
-### 🎛️ Adding an edit
+Use the local photo input to select images from your computer. The selected photo count and thumbnails are shown on the node. Other input nodes can provide a hot folder, Google Drive, selected-photo, information, or metadata-based workflow when those integrations fit your setup.
 
-The toolbox groups available steps by purpose:
+### Connecting and changing steps
 
-- 🟢 **Input**: bring photos or other information into the pipeline.
-- 🔵 **Transform**: crop, resize, rotate, flip, mirror, or correct perspective.
-- 🟡 **Light**: adjust exposure, brightness, contrast, highlights, shadows, gamma, or luminosity.
-- 🟣 **Color**: adjust saturation, vibrance, hue, black and white, sepia, inversion, or LUT color presets.
-- 🟠 **Detail**: sharpen, remove noise, or add grain.
-- 🔴 **Effects**: add vignette, pop, HDR, or fade effects.
-- ✨ **AI**: use optional AI-powered editing tools.
-- ⚪ **Output**: preview a photo, preview a group of photos, view a histogram, or write to a folder.
+Connect steps in the order you want them applied. To change a connection, drag its endpoint to another connector. To remove a connection, double-click it. To remove a node, drag it to the trash area or select it and press `Delete`.
 
-### 🔗 Connecting steps
+## Available toolkit
 
-Connect steps in the order you want them applied. A step can only use the result of a step connected before it.
+The toolbox groups nodes by purpose. Exact labels can vary with the active language and enabled features.
 
-To change a connection, drag its endpoint to another connector. To remove a connection, double-click it. To remove a step, drag it to the trash area or select it and press `Delete`.
+- **Input**: local storage, hot-folder input, Google Drive, information, and selected-photo sources.
+- **Logic**: grouping, array switching and boolean operations, image picking, EXIF splitting, GPS splitting, and channel splitting or merging.
+- **Transform**: crop, rescale, collage, rotate, flip, mirror, and perspective correction.
+- **Light**: exposure, brightness, contrast, highlights, shadows, gamma, luminosity, whites and blacks, and RGB point controls.
+- **Color**: saturation, vibrance, hue rotation, black and white, sepia, inversion, LUTs, temperature and tint, split toning, and film-base removal.
+- **Detail**: sharpening, denoising, and grain.
+- **Effects**: vignette, pop, HDR, and fade.
+- **AI**: denoising, colorizing, negative conversion, AI photo editing, and Ask AI when AI is enabled and configured.
+- **Output**: single-photo and multi-photo viewers, EXIF viewer, GPS map, histogram, and hot-folder output.
 
-![CouchEditor Connection Screenshot](./assets/colors.png)
-<!-- IMAGE PLACEHOLDER: Add a close-up screenshot showing the connection points and a connected editing chain. -->
+## Common usage flows
 
-## 💾 Saving your work
+### Quick edit
 
-The pipeline title field is in the top-left corner.
+Use this for a one-off adjustment:
 
-- 🆕 **New** clears the current canvas so you can start another recipe.
-- 💾 **Save** stores the current recipe in CouchEditor.
-- 🧬 **Save as clone** creates a separate copy while keeping the original recipe.
-- 📂 The pipeline selector in the top-right loads a recipe you saved earlier.
-- 🗑️ The trash button removes the currently selected saved recipe.
+`Local photos -> Transform or adjustment -> Single-photo viewer`
 
-CouchEditor keeps saved recipes in the browser where you are using it. Clearing browser storage or changing browsers may remove access to those saved recipes, so export important recipes as `.cep` files.
+Connect a multi-photo viewer as well when you need to check the whole set before downloading it.
 
-## 📤 Sharing a pipeline
+### Repeatable recipe
 
-### ⬇️ Download a pipeline
+Use this when the same look or export process will be reused:
 
-1. Give the pipeline a useful title.
-2. Select the **Download pipeline** button in the top-left toolbar.
-3. CouchEditor downloads a file with the pipeline title and the `.cep` extension.
+1. Build and test the pipeline.
+2. Enter a descriptive pipeline title.
+3. Select **Save** to store it in CouchEditor.
+4. Use **Save as clone** before experimenting with a variation.
+5. Use **Download pipeline** to export the recipe as a `.cep` file.
+6. Use **Upload pipeline** to import the recipe on another browser or computer.
+7. Select photos in the imported pipeline before running it.
 
-The downloaded file contains the editing recipe, not the original photos. This keeps the file small and makes it safe to share. The person opening it will need to select their own photos.
+The `.cep` file contains the recipe, not the original photos. Anyone importing it must provide their own source photos.
 
-### ⬆️ Upload a pipeline
+![CouchEditor templates](./screenshots/couch-editor-templates.png)
 
-1. Select the **Upload pipeline** button in the top-left toolbar.
-2. Choose a `.cep` file.
-3. CouchEditor opens the recipe as a new saved pipeline.
-4. Select photos in the photo input step before running it.
+### Inspect and understand a photo
 
-<!-- IMAGE PLACEHOLDER: Add a screenshot with the Download pipeline and Upload pipeline buttons highlighted. -->
+Connect a source to the output that matches the question you are asking:
 
-## 🖼️ Viewing and downloading results
+- Use a single-photo viewer to compare one result.
+- Use a multi-photo viewer to review a complete set and download results together.
+- Use the histogram to inspect tonal distribution.
+- Use the EXIF viewer to inspect image metadata.
+- Use the GPS map when the selected photos contain usable location data.
 
+### Optional AI editing
 
-Connect a viewer step to the end of your pipeline.
+Enable AI features in the relevant settings and configure the required provider or key before adding AI nodes. AI availability depends on the installation and configuration. The AI onboarding screen shows the available setup state.
 
-- 🔍 A single-photo viewer is useful for checking one result.
-- 🖼️ A multi-photo viewer shows the complete output set.
-- 📦 The multi-photo viewer can open the results in a larger view or download them together as a ZIP file.
-- 📊 A histogram step helps inspect the tonal distribution of a photo.
+![CouchEditor AI settings](./screenshots/couch-editor-settings-onboarding-ai.png)
 
-## 🤖 AI editing
+## Saving and sharing
 
-AI steps are optional. If they are enabled in your installation, they appear in the AI section of the toolbox. AI features may require provider settings or an API key before they can be used.
+Saved pipelines live in the browser where they were created. Clearing browser storage or switching browsers can remove access to them, so export important recipes as `.cep` files.
 
-<!-- IMAGE PLACEHOLDER: Add a screenshot of the AI settings or an AI editing step, if this is part of the public user experience. -->
+- **New** clears the current canvas for another recipe.
+- **Save** stores the current recipe.
+- **Save as clone** creates a separate copy while keeping the original.
+- The pipeline selector loads a saved recipe.
+- The trash action removes the selected saved recipe.
+- **Download pipeline** exports the current recipe.
+- **Upload pipeline** imports a `.cep` recipe.
 
-## 🌈 Tips for a comfortable workflow
+## Settings, themes, and help
 
-- 🧪 Start with a viewer connected directly to your photo input, then add edits between them.
-- 🎯 Keep one pipeline focused on one look or task.
-- 🏷️ Give saved pipelines names that describe the result, such as `Warm family photos` or `Web-size exports`.
-- 🛟 Save before experimenting with a large change, or use **Save as clone** first.
-- 📤 Export recipes you want to keep or share.
+Settings contain application configuration and available personalization options. The built-in help view is useful when a control or workflow is unclear.
 
+![CouchEditor settings](./screenshots/couch-editor-settings.png)
 
-## 🧰 For developers
+![CouchEditor themes](./screenshots/couch-editor-settings-onboarding-themes.png)
+
+![CouchEditor help](./screenshots/couch-editor-help.png)
+
+## Tips
+
+- Start with a viewer connected directly to the photo input, then insert edits between them.
+- Keep one pipeline focused on one look or task.
+- Use names such as `Warm family photos` or `Web-size exports` for saved recipes.
+- Save before a large experiment, or clone the recipe first.
+- Export recipes that need to survive browser storage cleanup or be shared with someone else.
+
+## For developers
 
 CouchEditor is a Vite and React application.
+
+Install dependencies and start the development server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-The development server will show the local address to open in a browser.
-
 Useful commands:
 
 ```bash
-npm run build   # Create a production build
-npm run lint    # Check the source code
+npm run build    # Create a production build
+npm run preview  # Build and serve a production preview
+npm run lint     # Check the source code
 ```
 
-## 📄 License
+The screenshot refresh command used by maintainers is:
+
+```bash
+npm run snaphot
+```
+
+## License
 
 See [LICENSE](LICENSE) for licensing information.
