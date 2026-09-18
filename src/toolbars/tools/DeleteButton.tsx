@@ -25,11 +25,12 @@ export default function DeleteButton() {
       <span>
         <Button
           type="button"
+          fullWidth={true}
           aria-label={currentPipelineId ? t('deleteCurrentPipeline') : t('noSavedPipelineSelected')}
           disabled={!currentPipelineId}
           ref={trashRef}
           sx={{
-            p: 1,
+            minWidth: 'unset',
             py: 2,
             borderRadius: 2,
             display: 'flex',
