@@ -31,7 +31,6 @@
     "@xyflow/react": "^12.11.6",
     "driver.js": "^1.8.0",
     "exifr": "^7.1.3",
-    "flexlayout-react": "^0.11.0",
     "i18next": "^26.4.2",
     "jszip": "^3.10.2",
     "leaflet": "^1.9.4",

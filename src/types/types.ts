@@ -14,6 +14,8 @@ export type ImageValue = {
 // pipeline can process a batch in parallel.
 export type ImageArray = ImageValue[];
 
+export type Stage = (image: ImageData) => void;
+
 // Node types whose results are encoded and posted back to the main
 // thread instead of staying as in-worker ImageBitmaps.
 export const VIEWER_NODE_TYPES = new Set(["viewer", "viewer-single", "exif-viewer", "gps-map", "photo-histogram", "hot-folder-write", "image-picker"]);

@@ -1,4 +1,4 @@
-import type { Stage } from "../interface/adjustments/types";
+import type { Stage } from "../types/types";
 
 type Dimension = 1 | 3;
 

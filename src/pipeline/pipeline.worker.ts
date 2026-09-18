@@ -10,7 +10,6 @@
 // - Every new evaluation cooperatively cancels the previous one: stale
 //   checks run between images and in-flight fetches are aborted.
 
-import type { Stage } from "@/interface/adjustments/types";
 import { lutStage, parseCubeLut } from "@/lib/lut";
 import {
   blackAndWhiteStage,
@@ -49,6 +48,7 @@ import type {
   PipelineProgressPreview,
   PipelineViewerImagePayload,
   PipelineWorkerOutbound,
+  Stage,
 } from "@/types/types";
 import { VIEWER_NODE_TYPES } from "@/types/types";
 import { parse } from "exifr";

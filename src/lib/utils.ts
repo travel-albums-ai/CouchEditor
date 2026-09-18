@@ -1,4 +1,4 @@
-import { Stage } from '@/middleware/interface/adjustments/types';
+import type { Stage } from '@/types/types';
 
 export const TOOLBAR_GAP = 5;
 

@@ -9,7 +9,7 @@
   ],
 
   "ignore": [
-    "src/**/*.d.ts"
+    "src/themes/debug.ts"
   ],
 
   "ignoreDependencies": [
