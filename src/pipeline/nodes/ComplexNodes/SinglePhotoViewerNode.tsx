@@ -42,7 +42,7 @@ function SinglePhotoViewerNode({
               <NewChip label={`${formatMegabytes(match.byteSize)}`} fontSize={16} sx={{ height: 38 }} icon={<HardDrive />} />
             </Box>
             <AlbumPhotoThumbnailBackgroundNg
-              photo={{ name: match.name, src: match.src}}
+              photo={match}
               alt=""
               style={{
                 display: 'block',

@@ -177,7 +177,7 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
             isBusy={isBusy}
             photos={files
               .filter((file): file is File => file instanceof File)
-              .map((file, index) => ({ name: file.name, src: previewUrls[index] }))}
+              .map((file, index) => ({ name: file.name, src: previewUrls[index], byteSize: file.size }))}
           />
         ) : (
           <NoPhotos />

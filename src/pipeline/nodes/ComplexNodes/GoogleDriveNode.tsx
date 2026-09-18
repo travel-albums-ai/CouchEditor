@@ -183,7 +183,7 @@ function GoogleDriveNode({ id, data }: NodeProps<Node<GoogleDriveData>>) {
             {previewUrls.map((src, index) => (
               <AlbumPhotoThumbnailBackgroundNg
                 key={src}
-                photo={{ name: files[index]?.name, src }}
+                photo={{ name: files[index]?.name ?? '', src, byteSize: files[index]?.size }}
                 alt=""
                 style={{
                   display: 'block',
