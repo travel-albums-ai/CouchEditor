@@ -1,8 +1,9 @@
-import SolidChip from '@/components/SolidChip';
+import NewChip from '@/components/NewChip';
 import { usePipelineStore } from '@/context/pipelineStore';
 import { deleteHotFolderReadHandle, loadHotFolderReadHandle, saveHotFolderReadHandle } from '@/lib/hotFolderHandleStore';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
+import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
 import { Box, Button, IconButton, MenuItem, TextField, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { FolderInput, Images, Trash2 } from 'lucide-react';
@@ -65,6 +66,7 @@ function HotFolderReadNode({
   const directoryRef = useRef<HotFolderDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
   const snapshotRef = useRef<string | null>(null);
+  const [isBusy, setIsBusy] = useState(false);
   const selectedHotFolderIdRef = useRef(data.selectedHotFolderId);
   const [directoryName, setDirectoryName] = useState<string>();
   const [fileCount, setFileCount] = useState(data.files?.length ?? 0);
@@ -198,9 +200,10 @@ function HotFolderReadNode({
 
   return (
     <>
-      <NodeWrapper type="hot-folder-read">
+      <NodeWrapper type="hot-folder-read" tools={<PipelineStageTiming nodeId={id} nodeType={'hot-folder-read'} isBusy={setIsBusy} />}>
         <TextField
           select
+          disabled={isBusy}
           size="small"
           label={t('pipelineHotFolder')}
           value={selectedHotFolder?.id ?? ''}
@@ -232,13 +235,14 @@ function HotFolderReadNode({
         </TextField>
         <Button
           variant="outlined"
+          disabled={isBusy}
           startIcon={<FolderInput size={14} />}
           onClick={() => void chooseFolder()}
         >
           {directoryName ?? t('pipelineChooseFolder')}
         </Button>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <SolidChip count={fileCount} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+          <NewChip count={fileCount} label={t('pipelinePhotos')} fontSize={18} icon={<Images size={16} />} sx={{ py: 1.5 }} />
           <Typography variant="caption" color="text.secondary">{status}</Typography>
         </Box>
       </NodeWrapper>
