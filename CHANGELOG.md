@@ -1,3 +1,9 @@
+## [1.178.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.177.0...v1.178.0) (2026-09-18)
+
+### ✨ Features
+
+* add color prop to InputHandle and OutputHandle components; update styles and add new demo for AiNegativeConverter ([159b70c](https://github.com/travel-albums-ai/CouchEditor/commit/159b70c84a6fd862d32130904b2bfa3c25127875))
+
 ## [1.177.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.176.0...v1.177.0) (2026-09-17)
 
 ### ✨ Features
