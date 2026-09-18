@@ -39,6 +39,7 @@ import SplitChannelsNode from '@/pipeline/nodes/ComplexNodes/SplitChannelsNode';
 import SplitToningNode from '@/pipeline/nodes/ComplexNodes/SplitToningNode';
 import ViewerNode from '@/pipeline/nodes/ComplexNodes/ViewerNode';
 import VignetteNode from '@/pipeline/nodes/ComplexNodes/VignetteNode';
+import WebcamNode from '@/pipeline/nodes/ComplexNodes/WebcamNode';
 
 export const CONNECTION_LINE_TYPE = ConnectionLineType.SmoothStep;
 export const INITIAL_NODES: Node[] = [];
@@ -67,6 +68,7 @@ export const pipelineNodeTypes = {
   'gps-map': GpsMapNode,
   'gps-split': GpsSplitNode,
   'hot-folder-read': HotFolderReadNode,
+  webcam: WebcamNode,
   'hot-folder-write': HotFolderWriteNode,
   'hue-rotation': HueRotationNode,
   'image-picker': ImagePickerNode,

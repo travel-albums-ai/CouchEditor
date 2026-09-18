@@ -211,7 +211,7 @@ async function mapWithConcurrency<T, R>(
 const BATCH_INPUT_KEYS = ["image", "image-1", "image-2", "image-3", "image-4"];
 
 function getBatchInputKeys(nodeType: string | undefined, inputs: NodeInputs): string[] {
-  if (nodeType === "source" || nodeType === "hot-folder-read") {
+  if (nodeType === "source" || nodeType === "hot-folder-read" || nodeType === "webcam") {
     return ["files"];
   }
 
@@ -1538,6 +1538,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  webcam: {
+    async execute(inputs) {
+      const files = inputs.files as File[] | undefined;
+
+      if (!files || files.length === 0) return { image: [] };
+
+      return { image: [await loadFileImage(files[0])] };
+    },
+  },
+
   "google-drive": {
     async execute(inputs) {
       const files = inputs.files as File[] | undefined;
@@ -2405,7 +2415,7 @@ async function runEvaluation(
 
       // Special case:
       // File-backed source nodes get their Files from node.data.
-      if (node.type === "source" || node.type === "hot-folder-read" || node.type === "google-drive") {
+      if (node.type === "source" || node.type === "hot-folder-read" || node.type === "webcam" || node.type === "google-drive") {
         inputs.files = node.data.files;
         inputs.nodeId = node.id;
       }

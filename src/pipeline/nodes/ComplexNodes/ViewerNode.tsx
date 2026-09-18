@@ -156,7 +156,7 @@ function ViewerNode({
         {images.length > 0 ? (
           <GridVirtuoso
             photos={images.map((file) => ({ name: file.name, src: file.src }))}
-            isBusy={isBusy || progress?.completed !== progress?.total}
+            // isBusy={isBusy || progress?.completed !== progress?.total}
           />
         ) : (
           <NoPhotos />

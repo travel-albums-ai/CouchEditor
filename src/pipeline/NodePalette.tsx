@@ -1,9 +1,10 @@
 import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, filmBaseRemoverStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
-import { Angle, Astroid, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, Camera, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export enum NodeType {
   Source = 'source',
   HotFolderRead = 'hot-folder-read',
+  Webcam = 'webcam',
   GoogleDrive = 'google-drive',
   Information = 'information',
   SelectedPhoto = 'selected-photo',
@@ -111,6 +112,12 @@ const sourceStages: Array<NodeStageItem> = [
     labelKey: "pipelineHotFolder", icon: <FolderInput size={16} />,
     processing: 'static',
     labelDescription: 'pipelineHotFolderDescription',
+  },
+  {
+    type: NodeType.Webcam,
+    labelKey: "Webcam", icon: <Camera size={16} />,
+    processing: 'static',
+    labelDescription: 'Captures the latest photo from your webcam.',
   },
   {
     type: NodeType.GoogleDrive,

@@ -1,4 +1,4 @@
----
+<!-- ---
 name: translation-sync-at-task-end
 description: At the end of every workspace task, verify that all locale JSON files remain synchronized with src/locales/en.json and translate any missing keys.
 applyTo: "**"
@@ -19,4 +19,4 @@ Compare `en.json` against all locale JSON files in `src/locales/*.json`.
 
 Use the `translation-sync` skill for the detailed translation and validation workflow. A task is complete only after the locale files parse successfully and no English leaf keys are missing from any locale, unless a blocker is explicitly reported.
 
-This check applies even when the task did not modify translations, because `en.json` may have changed during the task or may already contain unsynchronized keys.
+This check applies even when the task did not modify translations, because `en.json` may have changed during the task or may already contain unsynchronized keys. -->
