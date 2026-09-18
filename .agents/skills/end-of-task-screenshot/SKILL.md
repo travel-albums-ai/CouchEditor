@@ -30,8 +30,8 @@ After completing every workspace task, capture the current application state wit
 - Use Playwright with Chromium.
 - Wait for the page to reach a stable load state before capturing.
 - Capture the full page as a PNG.
-- Name files `couch-editor-YYYY-MM-DD-HH-mm-ss.png` using the local current date and time.
-- Never overwrite an existing screenshot; the timestamped name should identify each task capture.
+- Name files `couch-editor-YYYY-MM-DD.png` using the local current date only.
+- Date-based captures are refreshed when the task runs again on the same day.
 - Also refresh the stable aliases `couch-editor.png`, `couch-editor-settings.png`, `couch-editor-templates.png`, and `couch-editor-help.png`; these files intentionally overwrite the previous run's aliases.
 - If the app cannot be started or reached, report the failure instead of claiming a screenshot was created.
 

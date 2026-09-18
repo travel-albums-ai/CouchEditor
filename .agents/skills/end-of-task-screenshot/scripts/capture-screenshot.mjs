@@ -20,7 +20,7 @@ const timestamp = [
   now.getFullYear(),
   pad(now.getMonth() + 1),
   pad(now.getDate()),
-].join('-') + `-${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+].join('-');
 const outputPath = path.join(screenshotsDirectory, `couch-editor-${timestamp}.png`);
 const settingsOutputPath = path.join(
   screenshotsDirectory,
