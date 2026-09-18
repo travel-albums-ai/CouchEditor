@@ -13,6 +13,13 @@ Maintain `README.md` as the user-facing guide for CouchEditor. Keep the writing 
 - Do not change application code, localization files, or generated screenshots as part of a README update.
 - Preserve useful existing explanations and improve or replace stale sections instead of duplicating them.
 
+## Writing Style
+
+- Add emojis where they improve recognition or scanning, especially in section headings and short feature lists.
+- Choose emojis that match the subject, such as a camera for photos, a puzzle piece for pipeline steps, or a wrench for development.
+- Use them sparingly and consistently; do not add one to every sentence, command, filename, or code sample.
+- Keep the underlying text clear so the README remains useful in plain-text and assistive reading contexts.
+
 ## Source of Truth
 
 Before editing, inspect the smallest relevant sources:

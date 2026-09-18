@@ -10,7 +10,7 @@ CouchEditor lets you select photos, connect editing steps, preview the result, a
 
 ![CouchEditor workspace](./screenshots/couch-editor.png)
 
-## What can I do with CouchEditor?
+## 📸 What can I do with CouchEditor?
 
 - Choose JPEG, PNG, or WebP photos from your computer.
 - Arrange transforms, light and color adjustments, details, effects, and optional AI steps.
@@ -19,7 +19,7 @@ CouchEditor lets you select photos, connect editing steps, preview the result, a
 - Download processed photos from a viewer or write them to a configured folder.
 - Save a recipe in the browser, then export or import it as a `.cep` file.
 
-## How it works
+## 🧩 How it works
 
 A pipeline is a set of connected steps:
 
@@ -33,7 +33,7 @@ A typical pipeline looks like this:
 
 The safest way to begin is to connect a photo input directly to a viewer. Once the photos appear, add one editing step at a time and check the result after each change.
 
-## Getting started
+## 🚀 Getting started
 
 1. Open CouchEditor.
 2. Open the toolbox on the left if it is hidden.
@@ -56,7 +56,7 @@ Use the local photo input to select images from your computer. The selected phot
 
 Connect steps in the order you want them applied. To change a connection, drag its endpoint to another connector. To remove a connection, double-click it. To remove a node, drag it to the trash area or select it and press `Delete`.
 
-## Available toolkit
+## 🧰 Available toolkit
 
 The toolbox groups nodes by purpose. Exact labels can vary with the active language and enabled features.
 
@@ -70,9 +70,9 @@ The toolbox groups nodes by purpose. Exact labels can vary with the active langu
 - **AI**: denoising, colorizing, negative conversion, AI photo editing, and Ask AI when AI is enabled and configured.
 - **Output**: single-photo and multi-photo viewers, EXIF viewer, GPS map, histogram, and hot-folder output.
 
-## Common usage flows
+## 🔄 Common usage flows
 
-### Quick edit
+### ⚡ Quick edit
 
 Use this for a one-off adjustment:
 
@@ -80,7 +80,7 @@ Use this for a one-off adjustment:
 
 Connect a multi-photo viewer as well when you need to check the whole set before downloading it.
 
-### Repeatable recipe
+### 💾 Repeatable recipe
 
 Use this when the same look or export process will be reused:
 
@@ -96,7 +96,7 @@ The `.cep` file contains the recipe, not the original photos. Anyone importing i
 
 ![CouchEditor templates](./screenshots/couch-editor-templates.png)
 
-### Inspect and understand a photo
+### 🔍 Inspect and understand a photo
 
 Connect a source to the output that matches the question you are asking:
 
@@ -106,13 +106,13 @@ Connect a source to the output that matches the question you are asking:
 - Use the EXIF viewer to inspect image metadata.
 - Use the GPS map when the selected photos contain usable location data.
 
-### Optional AI editing
+### 🤖 Optional AI editing
 
 Enable AI features in the relevant settings and configure the required provider or key before adding AI nodes. AI availability depends on the installation and configuration. The AI onboarding screen shows the available setup state.
 
 ![CouchEditor AI settings](./screenshots/couch-editor-settings-onboarding-ai.png)
 
-## Saving and sharing
+## 💾 Saving and sharing
 
 Saved pipelines live in the browser where they were created. Clearing browser storage or switching browsers can remove access to them, so export important recipes as `.cep` files.
 
@@ -124,7 +124,7 @@ Saved pipelines live in the browser where they were created. Clearing browser st
 - **Download pipeline** exports the current recipe.
 - **Upload pipeline** imports a `.cep` recipe.
 
-## Settings, themes, and help
+## ⚙️ Settings, themes, and help
 
 Settings contain application configuration and available personalization options. The built-in help view is useful when a control or workflow is unclear.
 
@@ -134,7 +134,7 @@ Settings contain application configuration and available personalization options
 
 ![CouchEditor help](./screenshots/couch-editor-help.png)
 
-## Tips
+## 💡 Tips
 
 - Start with a viewer connected directly to the photo input, then insert edits between them.
 - Keep one pipeline focused on one look or task.
@@ -142,7 +142,7 @@ Settings contain application configuration and available personalization options
 - Save before a large experiment, or clone the recipe first.
 - Export recipes that need to survive browser storage cleanup or be shared with someone else.
 
-## For developers
+## 🛠️ For developers
 
 CouchEditor is a Vite and React application.
 
@@ -167,6 +167,6 @@ The screenshot refresh command used by maintainers is:
 npm run snaphot
 ```
 
-## License
+## 📄 License
 
 See [LICENSE](LICENSE) for licensing information.
