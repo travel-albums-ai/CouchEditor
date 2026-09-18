@@ -1,4 +1,5 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import { ImageValue } from '@/types/types';
 import { Box } from '@mui/material';
 import { useCallback, useMemo, useRef } from 'react';
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso';
@@ -72,7 +73,7 @@ export default function GridVirtuoso({ photos, isBusy = false }: Props) {
       overscan={{ main: height * 2, reverse: height * 2 }}
       style={GRID_STYLE}
       totalCount={photos.length}
-      computeItemKey={(index) => photos[index]?.id ?? index}
+      computeItemKey={(index) => photos[index]?.name ?? index}
       components={{ List }}
       itemContent={itemContent}
     />
