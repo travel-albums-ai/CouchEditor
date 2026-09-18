@@ -1,3 +1,9 @@
+## [1.183.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.183.0...v1.183.1) (2026-09-18)
+
+### 🐛 Fixes
+
+* add margin to PopoverButtonSimple and remove unused showToolbox selector ([d185307](https://github.com/travel-albums-ai/CouchEditor/commit/d185307b0a05c0a6eb114f953c0e6c4f43d31fef))
+
 ## [1.183.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.182.0...v1.183.0) (2026-09-18)
 
 ### ✨ Features
