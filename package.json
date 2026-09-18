@@ -17,7 +17,8 @@
     "knip": "knip",
     "next": "semantic-release",
     "package": "npm run prepare:build",
-    "preview": "npm run build && vite preview"
+    "preview": "npm run build && vite preview",
+    "snaphot": "PLAYWRIGHT_BASE_URL=http://localhost:5173 node .agents/skills/end-of-task-screenshot/scripts/capture-screenshot.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -61,6 +62,7 @@
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.12.0",
     "knip": "^6.35.1",
+    "playwright": "^1.63.0",
     "rollup-plugin-visualizer": "latest",
     "semantic-release": "^24.2.9",
     "typescript": "^6.0.3",

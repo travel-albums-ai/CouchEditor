@@ -11,7 +11,7 @@ try {
   );
 }
 
-const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 const screenshotsDirectory = path.join(repositoryRoot, 'screenshots');
 const baseUrl = process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:5173';
 const now = new Date();
@@ -27,7 +27,7 @@ await mkdir(screenshotsDirectory, { recursive: true });
 
 const browser = await chromium.launch();
 try {
-  const page = await browser.newPage();
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await page.goto(baseUrl, { waitUntil: 'networkidle' });
   await page.screenshot({ path: outputPath, fullPage: true });
   console.log(`Screenshot captured: ${outputPath}`);
