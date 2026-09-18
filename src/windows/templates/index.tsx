@@ -1,5 +1,6 @@
 import SectionHeader from '@/components/SectionHeader';
 import { usePipelineStore } from '@/context/pipelineStore';
+import { useSettings } from '@/context/settingsStore';
 import PipelineSelectorItems from '@/pipeline/components/PipelineSelectorItems';
 import PipelineSelectorItem from '@/windows/templates/PipelineSelectorItem';
 import { Box, Chip, TextField } from '@mui/material';
@@ -12,12 +13,14 @@ export default function Templates() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedView, setSelectedView] = useState('all');
   const { t } = useTranslation();
+  const { setSetting } = useSettings()
 
   const handleSelect = (pipelineId: string) => {
     const pipeline = loadById(pipelineId);
     if (!pipeline) return;
 
     setCurrentPipeline({ ...pipeline, isDirty: false });
+    setSetting(prev => ({ ...prev, templatesOpen: false }))
   };
 
   const pipelineGroupings = [
