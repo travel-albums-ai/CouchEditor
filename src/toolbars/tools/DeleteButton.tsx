@@ -21,7 +21,7 @@ export default function DeleteButton() {
   };
 
   return <>
-    <Tooltip title={t('deletePipelineTooltip')} placement="right">
+    <Tooltip title={currentPipelineId ? t('deleteCurrentPipeline') : t('noSavedPipelineSelected')} placement="right">
       <Box
         ref={trashRef}
         sx={{
@@ -40,7 +40,6 @@ export default function DeleteButton() {
           cursor: currentPipelineId ? 'pointer' : 'default',
         }}
         onClick={onDelete}
-        title={currentPipelineId ? t('deleteCurrentPipeline') : t('noSavedPipelineSelected')}
       >
         <Trash2 size={16} />
       </Box>

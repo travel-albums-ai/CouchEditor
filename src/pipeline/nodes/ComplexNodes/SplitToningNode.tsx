@@ -86,6 +86,7 @@ export default function SplitToningNode({
 
       {paletteItem.configs?.map((config, index) => (
         <AdjustmentSlider
+          key={config.labelKey}
           description={config.labelKey ? t(config.labelKey) : ""}
           min={config.min ?? 0}
           max={config.max ?? 100}

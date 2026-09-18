@@ -14,7 +14,7 @@ export default function TemplatesToggle() {
   return <>
     <GenericToggleButtonGroup variant="standard" id="templates-toggle" items={[
       {
-        kbd: 'Alt+s',
+        kbd: 'Alt+t',
         tooltip: t('templatesToggle'),
         tooltipPlacement: 'right',
         icon: <GalleryHorizontalEnd />,
