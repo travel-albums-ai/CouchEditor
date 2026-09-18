@@ -22,15 +22,23 @@ const timestamp = [
   pad(now.getDate()),
 ].join('-') + `-${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
 const outputPath = path.join(screenshotsDirectory, `couch-editor-${timestamp}.png`);
+const settingsOutputPath = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-settings.png`,
+);
 
 await mkdir(screenshotsDirectory, { recursive: true });
 
 const browser = await chromium.launch();
 try {
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const page = await browser.newPage({ viewport: { width: 1600, height: 1200 } });
   await page.goto(baseUrl, { waitUntil: 'networkidle' });
   await page.screenshot({ path: outputPath, fullPage: true });
   console.log(`Screenshot captured: ${outputPath}`);
+  await page.keyboard.press('Escape');
+  await page.locator('#settings-toggle').click();
+  await page.screenshot({ path: settingsOutputPath, fullPage: true });
+  console.log(`Settings screenshot captured: ${settingsOutputPath}`);
 } finally {
   await browser.close();
 }
