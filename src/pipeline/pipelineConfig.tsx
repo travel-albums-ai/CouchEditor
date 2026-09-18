@@ -31,6 +31,7 @@ import LutNode from '@/pipeline/nodes/ComplexNodes/LutNode';
 import MergeChannelsNode from '@/pipeline/nodes/ComplexNodes/MergeChannelsNode';
 import PhotoHistogramNode from '@/pipeline/nodes/ComplexNodes/PhotoHistogramNode';
 import RescaleNode from '@/pipeline/nodes/ComplexNodes/RescaleNode';
+import ResizeLimitNode from '@/pipeline/nodes/ComplexNodes/ResizeLimitNode';
 import SelectedPhotoNode from '@/pipeline/nodes/ComplexNodes/SelectedPhotoNode';
 import SinglePhotoViewerNode from '@/pipeline/nodes/ComplexNodes/SinglePhotoViewerNode';
 import SourceNode from '@/pipeline/nodes/ComplexNodes/SourceNode';
@@ -100,6 +101,7 @@ export const pipelineNodeTypes = {
   perspective: PerspectiveNode,
   pop: PopNode,
   rescale: RescaleNode,
+  'resize-limit': ResizeLimitNode,
   rotate: RotateNode,
   saturation: SaturationNode,
   sepia: SepiaNode,

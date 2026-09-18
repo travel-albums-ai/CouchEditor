@@ -2017,6 +2017,31 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "resize-limit": {
+    async execute(inputs) {
+      const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
+      const maxDimension = (inputs.maxDimension as number | undefined) ?? 4096;
+
+      if (sources.length === 0) { return { image: [] }; }
+
+      const image = await mapWithConcurrency(
+        sources,
+        inputs.evaluationId as number,
+        (source) => {
+          const longestSide = Math.max(source.width, source.height);
+
+          if (longestSide <= maxDimension) {
+            return Promise.resolve(source);
+          }
+
+          return scaleImage(source, maxDimension / longestSide);
+        }
+      );
+
+      return { image };
+    },
+  },
+
   "selected-photo": {
     async execute(inputs) {
       const sources = (inputs.image as WorkerImage[] | undefined) ?? [];
@@ -2445,6 +2470,10 @@ async function runEvaluation(
       // Rescale node gets its scale factor from node.data.
       if (node.type === "rescale") {
         inputs.scale = node.data.scale;
+      }
+
+      if (node.type === "resize-limit") {
+        inputs.maxDimension = node.data.maxDimension;
       }
 
       if (node.type === "collage") {

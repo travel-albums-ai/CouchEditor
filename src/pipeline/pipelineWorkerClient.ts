@@ -48,6 +48,7 @@ const NODE_DATA_KEYS = [
   "prompt",
   "question",
   "scale",
+  "maxDimension",
   "top",
   "bottom",
   "left",

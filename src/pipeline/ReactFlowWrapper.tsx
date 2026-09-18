@@ -252,6 +252,10 @@ function Pipeline() {
         .filter((node) => node.type === "collage")
         .map((node) => `${node.id}:${node.data.columns ?? 5}:${node.data.rows ?? 5}:${node.data.tileWidth ?? 200}:${node.data.tileHeight ?? 200}`)
         .sort(),
+      resizeLimitValues: nodes
+        .filter((node) => node.type === "resize-limit")
+        .map((node) => `${node.id}:${node.data.maxDimension ?? 4096}`)
+        .sort(),
       edges: edges
         .map(
           (edge) =>
