@@ -124,7 +124,7 @@ function ViewerNode({
           variant="outlined"
           fullWidth
           startIcon={<Download size={14} />}
-          disabled={isBusy || progress?.completed !== progress?.total || images.length === 0 || downloading}
+          disabled={images.length === 0 || downloading}
           onClick={() => {
             setSetting(prev => ({ ...prev,
               lightboxOpen: true,
@@ -144,7 +144,7 @@ function ViewerNode({
           variant="contained"
           fullWidth
           startIcon={<Download size={14} />}
-          disabled={isBusy || progress?.completed !== progress?.total || images.length === 0 || downloading}
+          disabled={images.length === 0 || downloading}
           onClick={handleDownload}
         >
           {downloading ? t('pipelineViewerZipping') : t('pipelineViewerDownloadAll')}
@@ -156,7 +156,6 @@ function ViewerNode({
         {images.length > 0 ? (
           <GridVirtuoso
             photos={images.map((file) => ({ name: file.name, src: file.src }))}
-            // isBusy={isBusy || progress?.completed !== progress?.total}
           />
         ) : (
           <NoPhotos />

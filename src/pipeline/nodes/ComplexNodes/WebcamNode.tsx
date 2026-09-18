@@ -1,11 +1,12 @@
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Slider, Typography } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { Camera, CircleStop } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-const CAPTURE_INTERVAL_MS = 16;
+const MIN_CAPTURE_INTERVAL_MS = 16;
+const MAX_CAPTURE_INTERVAL_MS = 1000;
 
 type WebcamNodeData = {
   files?: File[];
@@ -21,6 +22,17 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
   const [isRunning, setIsRunning] = useState(false);
   const [status, setStatus] = useState('Camera is stopped');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [captureIntervalMs, setCaptureIntervalMs] = useState(MAX_CAPTURE_INTERVAL_MS);
+
+  const scheduleCapture = (intervalMs: number) => {
+    if (captureTimerRef.current !== null) {
+      window.clearInterval(captureTimerRef.current);
+    }
+
+    if (streamRef.current) {
+      captureTimerRef.current = window.setInterval(() => void captureFrame(), intervalMs);
+    }
+  };
 
   const stopCamera = () => {
     if (captureTimerRef.current !== null) {
@@ -87,7 +99,7 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
       setIsRunning(true);
       setStatus('Capturing latest photo');
       await captureFrame();
-      captureTimerRef.current = window.setInterval(() => void captureFrame(), CAPTURE_INTERVAL_MS);
+      scheduleCapture(captureIntervalMs);
     } catch (error: unknown) {
       console.error('Failed to start webcam:', error);
       stopCamera();
@@ -118,6 +130,24 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
           {previewUrl && (
             <img src={previewUrl} alt="Latest webcam capture" style={{ width: '100px', aspectRatio: '4 / 3', objectFit: 'cover' }} />
           )}
+          <Box sx={{ px: 1 }}>
+            <Typography variant="caption" color="text.secondary">
+              Capture interval: {captureIntervalMs}ms
+            </Typography>
+            <Slider
+              aria-label="Capture interval"
+              min={MIN_CAPTURE_INTERVAL_MS}
+              max={MAX_CAPTURE_INTERVAL_MS}
+              step={1}
+              value={captureIntervalMs}
+              onChange={(_, value) => {
+                const nextIntervalMs = Array.isArray(value) ? value[0] : value;
+                setCaptureIntervalMs(nextIntervalMs);
+                if (streamRef.current) scheduleCapture(nextIntervalMs);
+              }}
+              valueLabelDisplay="auto"
+            />
+          </Box>
           <Button
             variant={isRunning ? 'outlined' : 'contained'}
             color={isRunning ? 'error' : 'primary'}
