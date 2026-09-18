@@ -44,6 +44,14 @@ const stableSettingsOutputPath = path.join(
   screenshotsDirectory,
   'couch-editor-settings.png',
 );
+const stableSettingsOnboardingThemesPath = path.join(
+  screenshotsDirectory,
+  'couch-editor-settings-onboarding-themes.png',
+);
+const stableSettingsOnboardingAIPath = path.join(
+  screenshotsDirectory,
+  'couch-editor-settings-onboarding-ai.png',
+);
 const settingsOnboardingThemes = path.join(
   screenshotsDirectory,
   `couch-editor-${timestamp}-settings-onboarding-themes.png`,
@@ -70,12 +78,12 @@ try {
 
   await page.locator('#onboarding-next-button').click();
   await page.screenshot({ path: settingsOnboardingThemes, fullPage: true });
-  await copyFile(settingsOnboardingThemes, stableSettingsOutputPath);
+  await copyFile(settingsOnboardingThemes, stableSettingsOnboardingThemesPath);
   console.log(`Settings screenshot captured: ${settingsOnboardingThemes}`);
 
   await page.locator('#onboarding-next-button').click();
   await page.screenshot({ path: settingsOnboardingAI, fullPage: true });
-  await copyFile(settingsOnboardingAI, stableSettingsOutputPath);
+  await copyFile(settingsOnboardingAI, stableSettingsOnboardingAIPath);
   console.log(`Settings screenshot captured: ${settingsOnboardingAI}`);
 
   await page.keyboard.press('Escape');

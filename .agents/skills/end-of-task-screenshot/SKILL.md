@@ -32,9 +32,10 @@ After completing every workspace task, capture the current application state wit
 - Capture the full page as a PNG.
 - Name files `couch-editor-YYYY-MM-DD.png` using the local current date only.
 - Date-based captures are refreshed when the task runs again on the same day.
-- Also refresh the stable aliases `couch-editor.png`, `couch-editor-settings.png`, `couch-editor-templates.png`, and `couch-editor-help.png`; these files intentionally overwrite the previous run's aliases.
+- Capture the onboarding themes and onboarding AI states as `couch-editor-YYYY-MM-DD-settings-onboarding-themes.png` and `couch-editor-YYYY-MM-DD-settings-onboarding-ai.png`.
+- Also refresh the stable aliases `couch-editor.png`, `couch-editor-settings.png`, `couch-editor-settings-onboarding-themes.png`, `couch-editor-settings-onboarding-ai.png`, `couch-editor-templates.png`, `couch-editor-help.png`, and `couch-editor-toolbox.png`; these files intentionally overwrite the previous run's aliases.
 - If the app cannot be started or reached, report the failure instead of claiming a screenshot was created.
 
 ## Validation
 
-The bundled script creates `screenshots/` when needed, launches Chromium, navigates to the configured URL, captures the page, writes both timestamped captures and stable aliases, and prints the absolute output paths. Playwright must be available in the environment, either from the repository dependencies or the agent's configured Node runtime.
+The bundled script creates `screenshots/` when needed, launches Chromium, navigates to the configured URL, captures the initial, onboarding, settings, templates, help, and toolbox states, writes both date-based captures and stable aliases, and prints the absolute output paths. Playwright must be available in the environment, either from the repository dependencies or the agent's configured Node runtime.
