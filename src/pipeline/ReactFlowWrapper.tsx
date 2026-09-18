@@ -772,6 +772,7 @@ function Pipeline() {
           connectionLineType={CONNECTION_LINE_TYPE}
           defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
           minZoom={0.25}
+          maxZoom={4}
           nodeTypes={pipelineNodeTypes}
           nodesDraggable={!lockReactflow}
           nodesConnectable={!lockReactflow}
