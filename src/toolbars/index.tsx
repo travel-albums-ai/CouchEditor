@@ -1,6 +1,11 @@
-import StatusBar from '@/base/_index';
+import DomCounter from '@/base/DomCounter';
+import KeyboardMenu from '@/base/KeyboardMenu';
+import PipelineCacheMemory from '@/base/PipelineCacheMemory';
+import PipelineNodeCounter from '@/base/PipelineNodeCounter';
+import PipelineTotalTime from '@/base/PipelineTotalTime';
+import RenderingProgressBars from '@/base/RenderingProgressBars';
+import VersionStatus from '@/base/VersionStatus';
 import FloatingToolbar from '@/components/FloatingToolbar';
-import LoadingBar from '@/components/LoadingBar';
 import { TOOLBAR_GAP } from '@/lib/utils';
 import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
@@ -48,12 +53,27 @@ export default function Toolbars() {
       ]
     },
     'status': {
-      sx: { bottom: TOOLBAR_GAP, left: '0%', right: '0%', overflow: 'auto', justifyContent: 'center' },
-      floatingSx: { minWidth: '900px', maxWidth: '1200px' },
+      sx: { bottom: TOOLBAR_GAP * 1.5, left: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', justifyContent: 'center', flexWrap: 'wrap', },
+      floatingSx: {  },
       groups: [
         <>
-          <LoadingBar />
-          <StatusBar />
+          <PipelineNodeCounter />
+          <PipelineTotalTime />
+          <PipelineCacheMemory />
+        </>,
+        <>
+          <DomCounter />
+          <KeyboardMenu />
+          <VersionStatus />
+        </>,
+      ],
+    },
+    'loadingBars': {
+      sx: { bottom: 0, left: '0%', right: '0%', overflow: 'auto', justifyContent: 'center' },
+      floatingSx: { width: '100%', border: 'unset', p: 0, m: 0 },
+      groups: [
+        <>
+          <RenderingProgressBars />
         </>,
       ],
     },
