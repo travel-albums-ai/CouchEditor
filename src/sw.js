@@ -15,11 +15,6 @@ if (self.workbox) {
   });
 
   wb.routing.registerRoute(
-    ({ request }) => request.destination === 'script' || request.destination === 'style',
-    new wb.strategies.StaleWhileRevalidate()
-  );
-
-  wb.routing.registerRoute(
     ({ request }) => request.destination === 'image',
     new wb.strategies.CacheFirst({
       cacheName: 'images',

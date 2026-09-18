@@ -66,15 +66,14 @@ if (import.meta.env.PROD && typeof window !== 'undefined' && 'serviceWorker' in 
         }
       });
 
-      wb.addEventListener('controlling', () => {
-        window.location.reload();
+      wb.addEventListener('controlling', (event) => {
+        if (event.isUpdate) {
+          window.location.reload();
+        }
       });
 
-      wb.register({ updateViaCache: 'none' }).then((registration) => {
-        // Check for a freshly deployed worker immediately, even when the app was already open.
-        return registration?.update();
-      }).catch((err) => {
-        console.warn('SW update check failed', err);
+      wb.register({ updateViaCache: 'none' }).catch((err) => {
+        console.warn('SW registration failed', err);
       });
     } catch (err) {
       console.warn('SW registration failed', err);
