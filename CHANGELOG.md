@@ -1,3 +1,13 @@
+## [1.182.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.181.1...v1.182.0) (2026-09-18)
+
+### ✨ Features
+
+* add section for seeking collaborators and contributions ([1c6e86c](https://github.com/travel-albums-ai/CouchEditor/commit/1c6e86c9276a13dcc62094dd97dd516a6e50a3b5))
+
+### 📝 Docs
+
+* add semantic-release commit message guidelines ([0e34555](https://github.com/travel-albums-ai/CouchEditor/commit/0e34555d9ebecfe4e801fc26834b38244545aacb))
+
 ## [1.181.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.181.0...v1.181.1) (2026-09-18)
 
 ### 🐛 Fixes
