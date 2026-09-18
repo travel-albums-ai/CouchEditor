@@ -11,6 +11,7 @@ import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
 import DeleteButton from '@/toolbars/tools/DeleteButton';
 import ExtendedMenu from '@/toolbars/tools/ExtendedMenu';
+import FitViewButton from '@/toolbars/tools/FitViewButton';
 import FullscreenToggle from '@/toolbars/tools/FullscreenToggle';
 import HelpToggle from '@/toolbars/tools/HelpToggle';
 import Logo from '@/toolbars/tools/Logo';
@@ -24,6 +25,10 @@ import TemplatesToggle from '@/toolbars/tools/TemplatesToggle';
 import ToggleToolbox from '@/toolbars/tools/ToggleToolbox';
 import TutorialToggle from '@/toolbars/tools/TutorialToggle';
 import ViewerReactflowToggle from '@/toolbars/tools/ViewerReactflowToggle';
+import ZoomInButton from '@/toolbars/tools/ZoomInButton';
+import ZoomLevel from '@/toolbars/tools/ZoomLevel';
+import ZoomOutButton from '@/toolbars/tools/ZoomOutButton';
+import ZoomTo100Button from '@/toolbars/tools/ZoomTo100Button';
 import { Box, Divider } from '@mui/material';
 
 type ToolbarItem = {
@@ -82,6 +87,14 @@ export default function Toolbars() {
       floatingSx: { },
       groups: [
         <>
+          <Divider />
+          <ZoomOutButton />
+          <ZoomLevel />
+          <ZoomInButton />
+          <FitViewButton />
+          <ZoomTo100Button />
+
+
           <SettingsWindowToggle />
           <DarkLightStatus />
           <FullscreenToggle />

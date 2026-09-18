@@ -13,6 +13,11 @@ export function PipelineTrashProvider({ children }: { children: ReactNode }) {
     saveAsCopy: () => {},
     downloadPipeline: () => {},
     uploadPipeline: () => {},
+    zoomIn: () => {},
+    zoomOut: () => {},
+    fitView: () => {},
+    zoomTo100: () => {},
+    getZoom: () => 1,
   });
 
   return (

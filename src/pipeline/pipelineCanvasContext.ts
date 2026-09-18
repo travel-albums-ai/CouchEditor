@@ -7,6 +7,11 @@ export type PipelineCanvasActions = {
   downloadPipeline: () => void;
   openPipelineFile: (file: File) => Promise<void>;
   uploadPipeline: (event: ChangeEvent<HTMLInputElement>) => void;
+  zoomIn: () => void;
+  zoomOut: () => void;
+  fitView: () => void;
+  zoomTo100: () => void;
+  getZoom: () => number;
 };
 
 export type PipelineCanvasContextValue = {

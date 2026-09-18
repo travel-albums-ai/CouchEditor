@@ -2,7 +2,6 @@ import { alpha, Box, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
-  Controls,
   MiniMap,
   ReactFlow,
   reconnectEdge,
@@ -78,7 +77,7 @@ function Pipeline() {
   const byokServiceTier = useBYOKStoreSelector((state) => state.serviceTier);
   const theme = useTheme();
 
-  const { screenToFlowPosition, fitView, getViewport, setViewport } = useReactFlow();
+  const { screenToFlowPosition, fitView, getViewport, setViewport, zoomIn, zoomOut } = useReactFlow();
   const { trashRef, setTrashActive } = usePipelineTrash();
   const { pipelineFileInputRef, actionsRef } = usePipelineCanvas();
   const {
@@ -128,6 +127,20 @@ function Pipeline() {
     const viewport = getViewport();
     setViewport({ ...viewport, x: viewport.x + 0, zoom: viewport.zoom });
   }, [fitView, getViewport, setViewport]);
+
+  const zoomInCanvas = useCallback(() => {
+    void zoomIn();
+  }, [zoomIn]);
+
+  const zoomOutCanvas = useCallback(() => {
+    void zoomOut();
+  }, [zoomOut]);
+
+  const zoomTo100 = useCallback(() => {
+    setViewport({ ...getViewport(), zoom: 1 });
+  }, [getViewport, setViewport]);
+
+  const getZoom = useCallback(() => getViewport().zoom, [getViewport]);
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent(PIPELINE_NODE_COUNT_EVENT, { detail: nodes.length }));
@@ -778,8 +791,13 @@ function Pipeline() {
       downloadPipeline,
       openPipelineFile,
       uploadPipeline,
+      zoomIn: zoomInCanvas,
+      zoomOut: zoomOutCanvas,
+      fitView: () => void fitPipelineView(),
+      zoomTo100,
+      getZoom,
     };
-  }, [actionsRef, clearWorkspace, downloadPipeline, openPipelineFile, saveAsCopy, saveCurrent, uploadPipeline]);
+  }, [actionsRef, clearWorkspace, downloadPipeline, fitPipelineView, getZoom, openPipelineFile, saveAsCopy, saveCurrent, uploadPipeline, zoomInCanvas, zoomOutCanvas, zoomTo100]);
 
   useEffect(() => {
     const launchQueue = (window as Window & {
@@ -828,11 +846,13 @@ function Pipeline() {
           onEdgeDoubleClick={onEdgeDoubleClick}
           onNodeDrag={onNodeDrag}
           onNodeDragStop={onNodeDragStop}
+          onMove={(_, viewport) => {
+            window.dispatchEvent(new CustomEvent('pipeline:zoom-changed', { detail: viewport.zoom }));
+          }}
           deleteKeyCode={["Backspace", "Delete"]}
           zoomOnDoubleClick={false}
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.disabled} />
-          <Controls showInteractive={false} position="top-right" orientation="horizontal" style={{ top: 230 }} />
           <MiniMap position="top-right" style={{ top: 64 }} />
         </ReactFlow>
 
