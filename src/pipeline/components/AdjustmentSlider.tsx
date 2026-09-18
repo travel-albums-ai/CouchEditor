@@ -1,5 +1,5 @@
 import SolidChip from '@/components/SolidChip';
-import { Box, Slider, Typography } from '@mui/material';
+import { Box, Slider, Typography, useTheme } from '@mui/material';
 import { useCallback, useEffect, useRef } from 'react';
 
 type AdjustmentSliderProps = {
@@ -25,6 +25,7 @@ export default function AdjustmentSlider({
 }: AdjustmentSliderProps) {
   const lastChangeAt = useRef(0);
   const pendingChange = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const theme = useTheme()
 
   const dispatchPipelineChange = useCallback(() => {
     window.dispatchEvent(new CustomEvent('pipeline:changed'));
@@ -56,7 +57,6 @@ export default function AdjustmentSlider({
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
-      {/* {description && <Box sx={{ minWidth: 70 }}>{description}</Box>} */}
       {description && <Typography sx={{ minWidth: 70 }} variant="caption" color="textSecondary">{description}</Typography>}
       <Slider
         min={min}
@@ -77,7 +77,7 @@ export default function AdjustmentSlider({
           },
           '& .MuiSlider-rail': {
             height: 8,
-            opacity: 0.2
+            opacity: 0.2,
           },
 
         }}

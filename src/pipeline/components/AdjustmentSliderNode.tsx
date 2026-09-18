@@ -39,12 +39,7 @@ export function createSliderNode(config: SliderNodeConfig) {
         tools={<PipelineStageTiming nodeId={id} nodeType={config.type} isBusy={setIsBusy} />}
         helper={helper}
       >
-        {paletteItem.configs?.length === 0 && <>
-          {paletteItem.processing === 'static' && <PreviewDemoStatic paletteItem={paletteItem} showText={false} />}
-          {paletteItem.processing === 'math' && <PreviewMath paletteItem={paletteItem} data={data} showText={false} />}
-          {paletteItem.processing === 'css' && <PreviewCss paletteItem={paletteItem} image2style={{ ...paletteItem?.algo(data) }} data={data} showText={false} />}
-        </>}
-        {(paletteItem.configs || [])
+        {paletteItem.configs?.length >  0 ? (paletteItem.configs || [])
           .filter(config => config.min !== config.max)
           .map((config) => (
             <AdjustmentSlider
@@ -63,7 +58,7 @@ export function createSliderNode(config: SliderNodeConfig) {
                 ));
               }}
             />
-          ))}
+          )) : null}
       </NodeWrapper>
       <OutputHandle id="image" />
     </>;

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import stc from 'string-to-color';
 
 type NodeWrapperProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   type: string;
   helper?: React.ReactNode;
   tools?: React.ReactNode;
@@ -230,8 +230,9 @@ export default function NodeWrapper({
             {tools && tools}
           </NodeHeader>
         )}
-        <Box
+        {(children !== null && children !== undefined) && <Box
           className="nodrag"
+          id="node-children"
           sx={{
             display: 'flex',
             cursor: 'default',
@@ -250,7 +251,7 @@ export default function NodeWrapper({
           }}
         >
           {children}
-        </Box>
+        </Box>}
       </Box>
     </>
   );
