@@ -2,10 +2,12 @@ import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import Settings from '@/windows/settings';
 import { Dialog } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsWindow() {
   const showSettings = useSettingsStoreSelector(s => s.showSettings)
   const { setSetting } = useSettings()
+  const { t } = useTranslation();
 
   const showWindow = showSettings === true
 
@@ -33,7 +35,7 @@ export default function SettingsWindow() {
       }}
     >
       <DialogCloseButton
-        title="Close settings"
+        title={t('closeSettings')}
         onClick={() => setSetting(prev => ({ ...prev, showSettings: false }))}
       />
       <Settings />

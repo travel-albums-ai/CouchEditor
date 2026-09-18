@@ -2,10 +2,12 @@ import { GenericToggleButtonProps } from '@/components/generics/GenericToggleBut
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import { GalleryHorizontalEnd } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function TemplatesToggle() {
   const { setSetting } = useSettings()
   const showTemplates = useSettingsStoreSelector((state) => state.templatesOpen);
+  const { t } = useTranslation()
 
   const handleOnChange = () => setSetting((prev) => ({ ...prev, templatesOpen: !prev.templatesOpen}));
 
@@ -13,7 +15,7 @@ export default function TemplatesToggle() {
     <GenericToggleButtonGroup variant="standard" id="templates-toggle" items={[
       {
         kbd: 'Alt+s',
-        tooltip: "Toggle Templates",
+        tooltip: t('templatesToggle'),
         tooltipPlacement: 'right',
         icon: <GalleryHorizontalEnd />,
         onClick: () => handleOnChange(),

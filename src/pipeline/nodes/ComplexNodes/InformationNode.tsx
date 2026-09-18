@@ -37,24 +37,24 @@ function InformationNode({ id, data }: NodeProps<Node<InformationNodeData>>) {
     <NodeWrapper type="information">
       <GenericToggleButtonGroup id="pipeline-actions" items={[
         {
-          tooltip: 'Header',
+          tooltip: t('informationHeader'),
           icon: <Heading1 /> ,
           onClick: () => updateNode({ size: 'header' }),
-          title: size === 'header' ? 'Header' : '',
+          title: size === 'header' ? t('informationHeader') : '',
           selected: size === 'header',
         },
         {
-          tooltip: 'Description',
+          tooltip: t('informationDescription'),
           icon: <Heading5 /> ,
           onClick: () => updateNode({ size: 'description' }),
-          title: size === 'description' ? 'Description' : '',
+          title: size === 'description' ? t('informationDescription') : '',
           selected: size === 'description',
         },
         {
-          tooltip: 'Notes',
+          tooltip: t('informationNotes'),
           icon: <Newspaper /> ,
           onClick: () => updateNode({ size: 'notes' }),
-          title: size === 'notes' ? 'Notes' : '',
+          title: size === 'notes' ? t('informationNotes') : '',
           selected: size === 'notes',
         },
       ] satisfies GenericToggleButtonProps[]} />

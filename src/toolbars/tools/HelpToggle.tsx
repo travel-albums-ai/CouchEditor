@@ -18,12 +18,12 @@ export default function HelpToggle() {
       {
         kbd: 'Alt+m',
         meta: {
-          name: "Manual",
-          description: "Open the manual for guidance.",
+          name: t('manualName'),
+          description: t('manualDescription'),
           icon: <BookOpenText />,
           group: t('toolsGroup')
         },
-        tooltip: "Open the manual for guidance.",
+        tooltip: t('manualDescription'),
         tooltipPlacement: 'right',
         icon: <BookOpenText size={16} />,
         onClick: () => handleHelpToggle(),

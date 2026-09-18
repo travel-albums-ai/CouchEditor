@@ -77,8 +77,8 @@ export default function SettingsContent() {
       bgPosition="650px center"
       icon={Cog}
       iconSize={64}
-      title="Settings"
-      subTitle="Configure your application settings to tailor the experience to your needs."
+      title={t('settingsWindowTitle')}
+      subTitle={t('settingsWindowDescription')}
     />
 
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }}>

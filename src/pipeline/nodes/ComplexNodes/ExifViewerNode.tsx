@@ -46,7 +46,7 @@ function ExifViewerNode({
             </Box>
             <Box sx={{ p: 1 }}>
               {metadataEntries.length === 0 ? (
-                <Typography variant="body2" color="text.secondary">No EXIF data found.</Typography>
+                <Typography variant="body2" color="text.secondary">{t('pipelineNoExifData')}</Typography>
               ) : (
                 <Stack spacing={0.5}>
                   {metadataEntries.map(([key, value]) => (

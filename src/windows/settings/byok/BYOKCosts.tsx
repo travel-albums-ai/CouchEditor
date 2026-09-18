@@ -4,10 +4,12 @@ import SolidChip from '@/components/SolidChip';
 import { useBYOKStoreSelector } from '@/context/byokStore';
 import { Box, Typography } from '@mui/material';
 import { Astroid, BoxIcon, Clock, Coins, FileQuestionMark, LogIn, LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 
 export default function BYOKCosts() {
   const { usageStats } = useBYOKStoreSelector((state) => state)
+  const { t } = useTranslation();
 
   const totalInputTokens = usageStats?.reduce((acc, stat) => acc + (stat.usage.input_tokens || 0), 0) || 0;
   const totalOutputTokens = usageStats?.reduce((acc, stat) => acc + (stat.usage.output_tokens || 0), 0) || 0;
@@ -19,7 +21,7 @@ export default function BYOKCosts() {
   };
 
   return <>
-    <SettingsSection title="Costs estimation" icon={<Coins />} transparent={true} uuid="byok-costs">
+    <SettingsSection title={t('byokCostsEstimation')} icon={<Coins />} transparent={true} uuid="byok-costs">
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, p: 1, justifyContent: 'flex-start', height: '300px', overflowY: 'auto' }}>
 
@@ -32,10 +34,10 @@ export default function BYOKCosts() {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
-              <SolidChip label={`${usageStat.model} model`} icon={<Astroid size={16} />}  />
+              <SolidChip label={t('byokModelLabel', { model: usageStat.model })} icon={<Astroid size={16} />}  />
               {usageStat.service_tier && <SolidChip label={`${usageStat.service_tier}`} icon={<Coins size={16} />} />}
               <SolidChip label={`${convertToHumanReadable(Number(usageStat.created_at))}`} icon={<Clock size={16} />} borderless  />
-              <SolidChip count={usageStat.usage.total_tokens / 1000} label={`M tokens`} icon={<BoxIcon size={16} />} fontSize={13} minWidth={140} />
+              <SolidChip count={usageStat.usage.total_tokens / 1000} label={t('byokMillionTokens')} icon={<BoxIcon size={16} />} fontSize={13} minWidth={140} />
             </Box>
           </Box>
         ))}

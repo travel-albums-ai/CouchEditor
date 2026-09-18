@@ -32,8 +32,8 @@ export default function Help() {
         bgPosition="650px center"
         icon={BookOpen}
         iconSize={64}
-        title="Manual"
-        subTitle="Learn how to use the each node feature in the pipeline effectively."
+        title={t('helpManualTitle')}
+        subTitle={t('helpManualDescription')}
       />
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, px: 1, height: "100%", overflow: 'hidden' }}>
 

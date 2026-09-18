@@ -42,8 +42,8 @@ export default function NodeToolbox({ onlyGroup }: { onlyGroup?: string }) {
         bgSize="305px"
         icon={GripVertical}
         iconSize={32}
-        title="Add a node"
-        subTitle="Drag to the canvas to add it"
+        title={t('toolboxAddNode')}
+        subTitle={t('toolboxAddNodeDescription')}
       />
 
       <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>

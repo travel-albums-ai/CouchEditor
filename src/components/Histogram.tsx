@@ -1,5 +1,6 @@
 import { Box, Tooltip } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface HistogramProps {
   imageUrl?: string;
@@ -56,6 +57,7 @@ export default function RGBHistogram({
   width = 200,
   height = 200,
 }: HistogramProps) {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const histogramRef = useRef<HistogramData | null>(null);
@@ -394,15 +396,15 @@ export default function RGBHistogram({
               fontFamily: 'monospace',
             }}
           >
-            <span>Level</span>
+            <span>{t('histogramLevel')}</span>
             <strong>{hoverInfo.level}</strong>
 
-            <span>Pixels</span>
+            <span>{t('histogramPixels')}</span>
             <strong>
               {hoverInfo.pixels.toLocaleString()}
             </strong>
 
-            <span>Relative</span>
+            <span>{t('histogramRelative')}</span>
             <strong>
               {hoverInfo.percentage.toFixed(2)}%
             </strong>

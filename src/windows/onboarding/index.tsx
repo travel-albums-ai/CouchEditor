@@ -4,16 +4,18 @@ import OnboardingSettings from '@/windows/onboarding/OnboardingSettings';
 import OnboardingWelcome from '@/windows/onboarding/OnboardingWelcome';
 import { Box, Button, Step, StepLabel, Stepper } from '@mui/material';
 import { ChevronLeft, ChevronsRight, CircleX } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Onboarding() {
   const { setSetting } = useSettings()
   const serverOnline = useSettingsStoreSelector((s) => s.serverOnline)
   const onboardingStep = useSettingsStoreSelector((s) => s.onboardingStep)
+  const { t } = useTranslation();
 
   const steps = [
-    "Welcome",
-    "Themes & Locales",
-    "AI Tools",
+    t('onboardingWelcomeStep'),
+    t('onboardingThemesStep'),
+    t('onboardingAiToolsStep'),
   ];
 
   return (<>

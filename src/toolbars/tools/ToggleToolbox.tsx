@@ -3,8 +3,10 @@ import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonG
 import NodeToolbox from '@/pipeline/NodeToolbox';
 import { Box } from '@mui/material';
 import { Plus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function ToggleToolbox() {
+  const { t } = useTranslation()
 
   return <>
     <GenericToggleButtonGroup id="toggle-toolbox-toggle"
@@ -15,7 +17,7 @@ export default function ToggleToolbox() {
       transformVertical="center"
       items={[
         {
-          tooltip: 'Open toolbox',
+          tooltip: t('toolboxOpen'),
           icon: <Plus />,
           noArrow: true,
           tooltipPlacement: 'right',

@@ -46,7 +46,7 @@ export default function PipelineSelectorItems({
             onClick?.();
           }}
           color="primary"
-          label="View All"
+          label={t('pipelineViewAll')}
           variant={isSelected ? 'filled' : 'outlined'}
         />
       </Box>
@@ -58,7 +58,7 @@ export default function PipelineSelectorItems({
       </Box>}
 
       {!children && <Typography variant="body2" color="text.secondary" sx={{ p: 1 }}>
-        No items available
+        {t('pipelineNoItems')}
       </Typography>}
     </Box>
   </>

@@ -286,10 +286,10 @@ function Pipeline() {
   }, [onEdgesChange, setCurrentPipelineDirty]);
 
   const saveCurrent = useCallback(() => {
-    const name = currentPipelineName.trim() || window.prompt('Pipeline name', 'Untitled pipeline');
+    const name = currentPipelineName.trim() || window.prompt(t('pipelineNamePrompt'), t('untitledPipeline'));
     if (name === null) return;
 
-    const normalizedName = name.trim() || 'Untitled pipeline';
+    const normalizedName = name.trim() || t('untitledPipeline');
 
     if (currentPipelineId) {
       updateById(currentPipelineId, normalizedName, { nodes, edges });
@@ -303,8 +303,8 @@ function Pipeline() {
 
   const saveAsCopy = useCallback(() => {
     const name = window.prompt(
-      'Copy name',
-      `${currentPipelineName || 'Untitled pipeline'} copy`
+      t('copyNamePrompt'),
+      `${currentPipelineName || t('untitledPipeline')} copy`
     );
     if (name === null) return;
 
@@ -316,7 +316,7 @@ function Pipeline() {
 
     setCurrentPipeline({
       id,
-      name: name.trim() || 'Untitled pipeline',
+      name: name.trim() || t('untitledPipeline'),
       nodes,
       edges,
       isDirty: false,
@@ -324,7 +324,7 @@ function Pipeline() {
   }, [cloneExisting, currentPipelineId, currentPipelineName, edges, isDirty, nodes, saveNew, setCurrentPipeline]);
 
   const downloadPipeline = useCallback(() => {
-    const name = currentPipelineName.trim() || 'Untitled pipeline';
+    const name = currentPipelineName.trim() || t('untitledPipeline');
     downloadPipelineFile(name, nodes, edges);
   }, [currentPipelineName, edges, nodes]);
 
@@ -347,7 +347,7 @@ function Pipeline() {
       void fitPipelineView();
     } catch (error) {
       console.error('Pipeline import failed:', error);
-      window.alert('The selected file is not a valid .cep pipeline.');
+      window.alert(t('invalidPipelineFile'));
     }
   }, [fitPipelineView, saveNew, setCurrentPipeline, setEdges, setNodes, styleEdges]);
 
@@ -377,7 +377,7 @@ function Pipeline() {
   const deleteCurrent = useCallback(() => {
     if (!currentPipelineId) return;
 
-    if (!window.confirm(`Delete pipeline "${currentPipelineName}"?`)) return;
+    if (!window.confirm(t('deletePipelineConfirm', { name: currentPipelineName }))) return;
 
     deleteById(currentPipelineId);
     setNodes(INITIAL_NODES);
@@ -394,7 +394,7 @@ function Pipeline() {
 
   const organizeWithAI = useCallback(async () => {
     if (!byokOpenAIKey) {
-      window.alert('No OpenAI key configured.');
+      window.alert(t('noOpenAIKeyConfigured'));
       return;
     }
 
@@ -544,7 +544,7 @@ function Pipeline() {
       requestAnimationFrame(() => void fitPipelineView());
     } catch (error) {
       console.error('AI layout organization failed:', error);
-      window.alert(error instanceof Error ? error.message : 'Could not organize the layout with AI.');
+      window.alert(error instanceof Error ? error.message : t('aiLayoutFailed'));
     } finally {
       setOrganizingWithAI(false);
     }

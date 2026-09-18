@@ -3,6 +3,7 @@ import { alpha, Box, Button, Tooltip, Typography } from '@mui/material';
 import type { SavedPipeline } from '@/context/pipelineStore';
 import { MinimapPipeline } from '@/pipeline/components/MinimapPipeline';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 type PipelineSelectorProps = {
   pipeline: SavedPipeline;
@@ -13,6 +14,7 @@ export default function PipelineSelectorItem({
   pipeline,
   onClick,
 }: PipelineSelectorProps) {
+  const { t } = useTranslation();
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function PipelineSelectorItem({
           >
             {pipeline.name}
           </Typography>
-          <Tooltip title="Open selected pipeline" arrow>
+          <Tooltip title={t('pipelineOpenSelected')} arrow>
             <Button variant="contained" disableElevation sx={{
               minWidth: 'unset',
               boxShadow: 0,

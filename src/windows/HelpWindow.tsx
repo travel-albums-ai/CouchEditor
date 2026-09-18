@@ -2,10 +2,12 @@ import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import Help from '@/windows/help';
 import { Dialog } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function HelpWindow() {
   const showHelp = useSettingsStoreSelector(s => s.showHelp)
   const { setSetting } = useSettings()
+  const { t } = useTranslation();
 
   const showWindow = showHelp === true
 
@@ -34,7 +36,7 @@ export default function HelpWindow() {
       }}
     >
       <DialogCloseButton
-        title="Close help"
+        title={t('closeHelp')}
         onClick={() => setSetting(prev => ({ ...prev, showHelp: false }))}
       />
       <Help />

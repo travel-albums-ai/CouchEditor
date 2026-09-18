@@ -5,11 +5,13 @@ import PipelineSelectorItem from '@/windows/templates/PipelineSelectorItem';
 import { Box, Chip, TextField } from '@mui/material';
 import { Astroid, Camera, GalleryHorizontalEnd, User } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Templates() {
   const { pipelines, loadById, setCurrentPipeline } = usePipelineStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedView, setSelectedView] = useState('all');
+  const { t } = useTranslation();
 
   const handleSelect = (pipelineId: string) => {
     const pipeline = loadById(pipelineId);
@@ -20,8 +22,8 @@ export default function Templates() {
 
   const pipelineGroupings = [
     {
-      name: 'Sample & Starters',
-      description: "Ready to use pipelines for common workflows",
+      name: 'templatesSampleName',
+      description: 'templatesSampleDescription',
       icon: <Astroid />,
       type: 'sample',
       data: pipelines
@@ -29,16 +31,16 @@ export default function Templates() {
     },
     {
       type: 'instagram',
-      name: 'Instagram-like Inspirations',
-      description: "Pipelines inspired by Instagram's style",
+      name: 'templatesInstagramName',
+      description: 'templatesInstagramDescription',
       icon: <Camera />,
       data: pipelines
         .filter(p => p.type === 'instagram')
     },
     {
       type: 'user',
-      name: 'User-Created Pipelines',
-      description: "Pipelines created by users",
+      name: 'templatesUserName',
+      description: 'templatesUserDescription',
       icon: <User />,
       data: pipelines
         .filter(p => p.type === 'user')
@@ -47,16 +49,16 @@ export default function Templates() {
 
   const chips = [
     {
-      label: 'All', value: 'all'
+      label: 'templatesFilterAll', value: 'all'
     },
     {
-      label: 'Sample', value: 'sample'
+      label: 'templatesFilterSample', value: 'sample'
     },
     {
-      label: 'Instagram', value: 'instagram'
+      label: 'templatesFilterInstagram', value: 'instagram'
     },
     {
-      label: 'User', value: 'user'
+      label: 'templatesFilterUser', value: 'user'
     },
   ]
 
@@ -69,8 +71,8 @@ export default function Templates() {
         iconSize={64}
         bgSize="500px"
         bgPosition="650px center"
-        title="Pipeline Templates"
-        subTitle="Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own."
+        title={t('templatesTitle')}
+        subTitle={t('templatesDescription')}
       />
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 0, justifyContent: 'space-between', px: 2, py: 1 }}>
@@ -79,7 +81,7 @@ export default function Templates() {
           color="primary"
           variant="outlined"
           size="small"
-          placeholder="Search pipelines..."
+          placeholder={t('templatesSearchPlaceholder')}
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
           sx={{ flex: 1 }}
@@ -88,7 +90,7 @@ export default function Templates() {
           {chips.map((chip) => (
             <Chip
               key={chip.value}
-              label={chip.label}
+              label={t(chip.label)}
               color={selectedView === chip.value ? 'primary' : 'default'}
               onClick={() => setSelectedView(chip.value)}
               variant={selectedView === chip.value ? 'filled' : 'outlined'}
@@ -104,9 +106,9 @@ export default function Templates() {
           .map((grouping) => (
             <PipelineSelectorItems
               key={grouping.name}
-              title={grouping.name}
+              title={t(grouping.name)}
               icon={grouping.icon}
-              description={grouping.description}
+              description={t(grouping.description)}
               isSelected={grouping.type === selectedView}
               onClick={() => setSelectedView(grouping.type)}
             >

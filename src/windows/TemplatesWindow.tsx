@@ -2,10 +2,12 @@ import DialogCloseButton from '@/components/DialogCloseButton';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import Templates from '@/windows/templates';
 import { Dialog } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function TemplatesWindow() {
   const showTemplates = useSettingsStoreSelector(s => s.templatesOpen)
   const { setSetting } = useSettings()
+  const { t } = useTranslation();
 
   const showWindow = showTemplates === true
 
@@ -34,7 +36,7 @@ export default function TemplatesWindow() {
       }}
     >
       <DialogCloseButton
-        title="Close templates"
+        title={t('closeTemplates')}
         onClick={() => setSetting(prev => ({ ...prev, templatesOpen: false }))}
       />
       <Templates />

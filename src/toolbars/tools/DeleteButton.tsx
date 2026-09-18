@@ -14,14 +14,14 @@ export default function DeleteButton() {
 
   const onDelete = () => {
     if (!currentPipelineId) return;
-    if (!window.confirm(`Delete pipeline "${currentPipeline.name}"?`)) return;
+    if (!window.confirm(t('deletePipelineConfirm', { name: currentPipeline.name }))) return;
 
     deleteById(currentPipelineId);
     setCurrentPipeline({ id: '', name: '', nodes: INITIAL_NODES, edges: INITIAL_EDGES, isDirty: false });
   };
 
   return <>
-    <Tooltip title={'Delete a pipeline by click or a pipeline element by drag&drop'} placement="right">
+    <Tooltip title={t('deletePipelineTooltip')} placement="right">
       <Box
         ref={trashRef}
         sx={{
