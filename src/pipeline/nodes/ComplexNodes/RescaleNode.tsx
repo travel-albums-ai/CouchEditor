@@ -24,13 +24,15 @@ function RescaleNode({
 }: NodeProps<Node<{ scale?: number }>>) {
   const { t } = useTranslation();
   const [scale, setScale] = useState(String(data.scale ?? 1));
+  const [isBusy, setIsBusy] = useState(false);
 
   return (<>
     <InputHandle id="image" />
-    <NodeWrapper  tools={<PipelineStageTiming nodeId={id} nodeType={'rescale'} />}
+    <NodeWrapper  tools={<PipelineStageTiming nodeId={id} nodeType={'rescale'} isBusy={setIsBusy} />}
       type="rescale">
 
       <SegmentedControl
+
         value={scale}
         onChange={(_, value) => {
           data.scale = Number(value);
@@ -43,7 +45,7 @@ function RescaleNode({
         fullWidth
       >
         {SCALE_PRESETS.map((preset) => (
-          <SegmentedControlItem key={preset.value} value={preset.value}>
+          <SegmentedControlItem key={preset.value} disabled={isBusy} value={preset.value}>
             {t(preset.labelKey)}
           </SegmentedControlItem>
         ))}
