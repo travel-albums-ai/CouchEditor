@@ -201,7 +201,7 @@ function HotFolderReadNode({
   return (
     <>
       <NodeWrapper type="hot-folder-read" tools={<PipelineStageTiming nodeId={id} nodeType={'hot-folder-read'} isBusy={setIsBusy} />}>
-        <TextField
+        {hotFolderReads.length > 0 && <TextField
           select
           disabled={isBusy}
           size="small"
@@ -232,7 +232,7 @@ function HotFolderReadNode({
               </Box>
             </MenuItem>
           ))}
-        </TextField>
+        </TextField>}
         <Button
           variant="outlined"
           disabled={isBusy}
