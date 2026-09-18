@@ -1,11 +1,11 @@
 import SolidChip from '@/components/SolidChip';
 import { usePipelineStore } from '@/context/pipelineStore';
-import { loadHotFolderReadHandle, saveHotFolderReadHandle } from '@/lib/hotFolderHandleStore';
+import { deleteHotFolderReadHandle, loadHotFolderReadHandle, saveHotFolderReadHandle } from '@/lib/hotFolderHandleStore';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, MenuItem, TextField, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
-import { FolderInput, Images } from 'lucide-react';
+import { FolderInput, Images, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -60,7 +60,7 @@ function HotFolderReadNode({
   data,
 }: NodeProps<Node<HotFolderReadData>>) {
   const { setNodes } = useReactFlow();
-  const { hotFolderReads, addHotFolderRead, updateHotFolderRead } = usePipelineStore();
+  const { hotFolderReads, addHotFolderRead, updateHotFolderRead, removeHotFolderRead } = usePipelineStore();
   const { t } = useTranslation();
   const directoryRef = useRef<HotFolderDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
@@ -177,6 +177,25 @@ function HotFolderReadNode({
     }
   };
 
+  const deleteFolder = async (folderId: string) => {
+    await deleteHotFolderReadHandle(folderId);
+    removeHotFolderRead(folderId);
+
+    if (selectedHotFolder?.id !== folderId) return;
+
+    directoryRef.current = null;
+    snapshotRef.current = null;
+    setDirectoryName(undefined);
+    setFileCount(0);
+    setStatus(t('pipelineChooseFolderToWatch'));
+    setNodes((current) => current.map((node) =>
+      node.id === id
+        ? { ...node, data: { ...node.data, selectedHotFolderId: undefined, files: [] } }
+        : node
+    ));
+    window.dispatchEvent(new CustomEvent('pipeline:changed'));
+  };
+
   return (
     <>
       <NodeWrapper type="hot-folder-read">
@@ -193,7 +212,22 @@ function HotFolderReadNode({
           fullWidth
         >
           {hotFolderReads.map((folder) => (
-            <MenuItem key={folder.id} value={folder.id}>{folder.directory ?? folder.id}</MenuItem>
+            <MenuItem key={folder.id} value={folder.id}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                {folder.directory ?? folder.id}
+                <IconButton
+                  size="small"
+                  aria-label="Delete hot folder"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    void deleteFolder(folder.id);
+                  }}
+                  onMouseDown={(event) => event.stopPropagation()}
+                >
+                  <Trash2 size={15} />
+                </IconButton>
+              </Box>
+            </MenuItem>
           ))}
         </TextField>
         <Button

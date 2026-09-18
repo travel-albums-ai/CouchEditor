@@ -38,3 +38,16 @@ export async function loadHotFolderReadHandle(id: string): Promise<FileSystemDir
   database.close();
   return handle ?? null;
 }
+
+export async function deleteHotFolderReadHandle(id: string): Promise<void> {
+  const database = await openDatabase();
+
+  await new Promise<void>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, 'readwrite');
+    transaction.objectStore(STORE_NAME).delete(id);
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+
+  database.close();
+}

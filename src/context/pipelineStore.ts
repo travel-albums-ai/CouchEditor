@@ -154,6 +154,11 @@ export const usePipelineStore = () => {
         ...prev,
         hotFolderReads: prev.hotFolderReads.map((item) => item.id === id ? { ...item, ...update } : item),
       })),
+    removeHotFolderRead: (id: string) =>
+      setState((prev) => ({
+        ...prev,
+        hotFolderReads: prev.hotFolderReads.filter((item) => item.id !== id),
+      })),
     toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {
       const date = createPipelineDate()
