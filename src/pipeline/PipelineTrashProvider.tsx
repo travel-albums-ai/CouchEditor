@@ -4,7 +4,7 @@ import { PipelineCanvasContext, type PipelineCanvasActions } from './pipelineCan
 import { PipelineTrashContext } from './pipelineTrashContext';
 
 export function PipelineTrashProvider({ children }: { children: ReactNode }) {
-  const trashRef = useRef<HTMLDivElement>(null);
+  const trashRef = useRef<HTMLElement>(null);
   const [trashActive, setTrashActive] = useState(false);
   const pipelineFileInputRef = useRef<HTMLInputElement>(null);
   const actionsRef = useRef<PipelineCanvasActions>({
