@@ -64,7 +64,8 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
       const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.9));
       if (!blob || !streamRef.current) return;
 
-      const file = new File([blob], `webcam-${Date.now()}.jpg`, { type: 'image/jpeg' });
+      // const file = new File([blob], `webcam-${Date.now()}.jpg`, { type: 'image/jpeg' });
+      const file = new File([blob], `webcam.jpg`, { type: 'image/jpeg' });
       setNodes((current) => current.map((node) =>
         node.id === id ? { ...node, data: { ...node.data, files: [file] } } : node
       ));
