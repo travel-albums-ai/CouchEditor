@@ -13,6 +13,7 @@ export default function PointerReactflowToggle() {
       {
         tooltip: 'Interactive mode',
         icon: <MousePointer2 />,
+        tooltipPlacement: 'right',
         onClick: () => {
           enableReactflow();
         },

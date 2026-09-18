@@ -2,7 +2,7 @@ import { Box, useTheme } from '@mui/material';
 import { Handle, Position } from "@xyflow/react";
 import { Circle } from 'lucide-react';
 
-export function OutputHandle({ id, position, style }: { id: string; position?: Position; style?: React.CSSProperties }) {
+export function OutputHandle({ id, position, style, color }: { id: string; position?: Position; style?: React.CSSProperties; color?: string }) {
   const theme = useTheme()
 
   return <>
@@ -25,7 +25,7 @@ export function OutputHandle({ id, position, style }: { id: string; position?: P
           position: 'absolute',
           right: '2px',
           stroke: theme.palette.divider,
-          fill: theme.palette.primary.main,
+          fill: color || theme.palette.primary.main,
         }} />
       </Box>
     </Handle>

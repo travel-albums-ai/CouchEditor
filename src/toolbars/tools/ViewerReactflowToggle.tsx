@@ -11,6 +11,7 @@ export default function ViewerReactflowToggle() {
     <GenericToggleButtonGroup variant="standard" id="dark-light-toggle" items={[
       {
         tooltip: 'Viewer mode',
+        tooltipPlacement: 'right',
         icon: <Hand />,
         onClick: () => {
           disableReactflow();

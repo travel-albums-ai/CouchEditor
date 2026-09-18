@@ -191,6 +191,10 @@ export function PreviewDemoStatic({ paletteItem, width, showText = false }: Adju
       before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />,
       after: <img src="sample3.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
     },
+    [NodeType.AiNegativeConverter]: {
+      before: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}`, filter: 'invert(100%) grayscale(50%)' }} />,
+      after: <img src="sample.jpg" style={{ width: `${width ?? 90}px`, borderRadius: '8px', border: `1px solid ${theme.palette.divider}` }} />
+    },
   }
 
   const outputStages = {

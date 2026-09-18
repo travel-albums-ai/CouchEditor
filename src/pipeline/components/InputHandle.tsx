@@ -7,10 +7,12 @@ export function InputHandle({
   id,
   position,
   style,
+  color
 }: {
   id: string;
   position?: Position;
   style?: CSSProperties;
+  color?: string;
 }) {
   const theme = useTheme()
 
@@ -34,7 +36,7 @@ export function InputHandle({
           position: 'absolute',
           right: '-1px',
           stroke: theme.palette.divider,
-          fill: theme.palette.primary.main,
+          fill: color || theme.palette.primary.main,
         }} />
       </Box>
     </Handle>

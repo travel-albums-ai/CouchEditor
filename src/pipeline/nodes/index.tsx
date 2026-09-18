@@ -48,20 +48,22 @@ export const HueRotationNode = createSliderNode({
   type: "hue-rotation",
 });
 
-////
-
 export const InvertNode = createSliderNode({
   type: "invert",
 });
+
 export const LuminosityNode = createSliderNode({
   type: "luminosity",
 });
+
 export const MirrorNode = createSliderNode({
   type: "mirror",
 });
+
 export const PerspectiveNode = createSliderNode({
   type: "perspective",
 });
+
 export const PopNode = createSliderNode({
   type: "pop",
 });

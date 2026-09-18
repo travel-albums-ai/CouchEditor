@@ -61,7 +61,6 @@ export default function Onboarding() {
           </Button>
           <Button
             sx={{ borderRadius: 4 }}
-            disabled={onboardingStep === 2 && !serverOnline}
             onClick={() => {
               if (onboardingStep < steps.length - 1) {
                 setSetting(prev => ({ ...prev, onboardingStep: prev.onboardingStep + 1 }))

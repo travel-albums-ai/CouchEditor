@@ -73,7 +73,7 @@ export default function Templates() {
         subTitle="Kickstart your work with ready-made templates, and save time on repetitive tasks. Pick a template, customize it, and make it your own."
       />
 
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 1, justifyContent: 'space-between', px: 2, py: 1 }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, flex: 0, justifyContent: 'space-between', px: 2, py: 1 }}>
         <TextField
           autoFocus
           color="primary"
