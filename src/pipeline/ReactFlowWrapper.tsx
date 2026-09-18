@@ -65,7 +65,6 @@ function Pipeline() {
   const { t } = useTranslation();
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
-  const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
   const lockReactflow = usePipelineStoreSelector(state => state.lockReactflow);
   const pipelineMaxConcurrentTasks = useSettingsStoreSelector(s => s.pipelineMaxConcurrentTasks)
   const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
