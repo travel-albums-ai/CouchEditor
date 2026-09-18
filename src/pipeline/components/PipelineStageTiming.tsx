@@ -110,6 +110,7 @@ export default function PipelineStageTiming({
         <NewChip
           fontSize={18}
           sx={{ width: '100px'}}
+          label="s"
           count={displayInSeconds}
           icon={<Timer size={16} />}
           borderless/>
