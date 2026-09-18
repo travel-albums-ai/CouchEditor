@@ -328,12 +328,7 @@ function Pipeline() {
     downloadPipelineFile(name, nodes, edges);
   }, [currentPipelineName, edges, nodes]);
 
-  const uploadPipeline = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-
-    if (!file) return;
-
+  const openPipelineFile = useCallback(async (file: File) => {
     try {
       const { name, graph } = await readPipelineFile(file);
       const id = saveNew(name, {
@@ -350,6 +345,15 @@ function Pipeline() {
       window.alert(t('invalidPipelineFile'));
     }
   }, [fitPipelineView, saveNew, setCurrentPipeline, setEdges, setNodes, styleEdges]);
+
+  const uploadPipeline = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+
+    if (file) {
+      await openPipelineFile(file);
+    }
+  }, [openPipelineFile]);
 
   const previousPipelineIdRef = useRef(currentPipelineId);
 
@@ -729,9 +733,28 @@ function Pipeline() {
       saveCurrent,
       saveAsCopy,
       downloadPipeline,
+      openPipelineFile,
       uploadPipeline,
     };
-  }, [actionsRef, clearWorkspace, downloadPipeline, saveAsCopy, saveCurrent, uploadPipeline]);
+  }, [actionsRef, clearWorkspace, downloadPipeline, openPipelineFile, saveAsCopy, saveCurrent, uploadPipeline]);
+
+  useEffect(() => {
+    const launchQueue = (window as Window & {
+      launchQueue?: {
+        setConsumer: (consumer: (params: { files: FileSystemFileHandle[] }) => Promise<void>) => void;
+      };
+    }).launchQueue;
+
+    if (!launchQueue) return;
+
+    launchQueue.setConsumer(async ({ files }) => {
+      const fileHandle = files[0];
+
+      if (fileHandle) {
+        await actionsRef.current.openPipelineFile(await fileHandle.getFile());
+      }
+    });
+  }, [actionsRef]);
 
   return (
     <Box className="app" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'background.paper' }}>

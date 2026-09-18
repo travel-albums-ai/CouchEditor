@@ -1,17 +1,20 @@
 {
-  "name": "Couch Editor",
-  "short_name": "Couch Editor",
-  "description": "Build reusable photo-editing recipes on a visual canvas and export them as .cep pipeline files.",
-  "id": "/",
-  "start_url": "/",
-  "scope": "/",
-  "display": "fullscreen",
+  "name": "CouchEditor",
+  "short_name": "CouchEditor",
+  "description": "CouchEditor is a browser-based visual photo editor for building reusable editing pipelines and exporting photo recipes.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
   "display_override": [
     "window-controls-overlay",
-    "fullscreen",
     "standalone",
+    "fullscreen",
     "minimal-ui"
   ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "orientation": "any",
   "background_color": "#0b1118",
   "theme_color": "#0b1118",
@@ -23,12 +26,40 @@
     "design"
   ],
   "prefer_related_applications": false,
+  "file_handlers": [
+    {
+      "action": "./",
+      "accept": {
+        "application/json": [
+          ".cep"
+        ]
+      }
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Homepage",
+      "short_name": "Homepage",
+      "url": "./"
+    },
+    {
+      "name": "GitHub",
+      "short_name": "GitHub",
+      "url": "https://github.com/travel-albums-ai/CouchEditor"
+    }
+  ],
   "icons": [
     {
-      "src": "/couchLogoMini.png",
-      "sizes": "48x48",
+      "src": "/couch-editor-purple-128x128.png",
+      "sizes": "128x128",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/couch-editor-purple-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

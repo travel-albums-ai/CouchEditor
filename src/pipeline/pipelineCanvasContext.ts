@@ -5,6 +5,7 @@ export type PipelineCanvasActions = {
   saveCurrent: () => void;
   saveAsCopy: () => void;
   downloadPipeline: () => void;
+  openPipelineFile: (file: File) => Promise<void>;
   uploadPipeline: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
