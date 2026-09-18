@@ -5,7 +5,7 @@ import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react
 import { Camera, CircleStop } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-const MIN_CAPTURE_INTERVAL_MS = 16;
+const MIN_CAPTURE_INTERVAL_MS = 1;
 const MAX_CAPTURE_INTERVAL_MS = 1000;
 
 type WebcamNodeData = {
@@ -118,45 +118,58 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
 
   return (
     <>
-      <NodeWrapper type="webcam">
+      <NodeWrapper type="webcam" tools={<>
+        <Button
+          variant={isRunning ? 'outlined' : 'contained'}
+          color={isRunning ? 'error' : 'primary'}
+          startIcon={isRunning ? <CircleStop size={16} /> : <Camera size={16} />}
+          onClick={() => (isRunning ? stopCamera() : void startCamera())}
+        >
+          {isRunning ? 'Stop' : 'Start'}
+        </Button>
+      </>}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <video
-            ref={videoRef}
-            muted
-            autoPlay
-            playsInline
-            style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', background: '#111' }}
-          />
-          {previewUrl && (
-            <img src={previewUrl} alt="Latest webcam capture" style={{ width: '100px', aspectRatio: '4 / 3', objectFit: 'cover' }} />
-          )}
-          <Box sx={{ px: 1 }}>
-            <Typography variant="caption" color="text.secondary">
-              Capture interval: {captureIntervalMs}ms
-            </Typography>
-            <Slider
-              aria-label="Capture interval"
-              min={MIN_CAPTURE_INTERVAL_MS}
-              max={MAX_CAPTURE_INTERVAL_MS}
-              step={1}
-              value={captureIntervalMs}
-              onChange={(_, value) => {
-                const nextIntervalMs = Array.isArray(value) ? value[0] : value;
-                setCaptureIntervalMs(nextIntervalMs);
-                if (streamRef.current) scheduleCapture(nextIntervalMs);
-              }}
-              valueLabelDisplay="auto"
+          <Box sx={{ borderRadius: 8, overflow: 'hidden', mb: 1 }}>
+            <video
+              ref={videoRef}
+              muted
+              autoPlay
+              playsInline
+              style={{ width: '500px', aspectRatio: '4 / 3', objectFit: 'cover' }}
             />
           </Box>
-          <Button
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            {previewUrl && (
+              <img src={previewUrl} alt="Latest webcam capture" style={{ width: '80px', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: '8px' }} />
+            )}
+            <Box sx={{ px: 1, flex: 1 }}>
+              <Typography variant="caption" color="text.secondary">
+              Capture interval: {captureIntervalMs}ms
+              </Typography>
+              <Slider
+                aria-label="Capture interval"
+                min={MIN_CAPTURE_INTERVAL_MS}
+                max={MAX_CAPTURE_INTERVAL_MS}
+                step={1}
+                value={captureIntervalMs}
+                onChange={(_, value) => {
+                  const nextIntervalMs = Array.isArray(value) ? value[0] : value;
+                  setCaptureIntervalMs(nextIntervalMs);
+                  if (streamRef.current) scheduleCapture(nextIntervalMs);
+                }}
+                valueLabelDisplay="auto"
+              />
+            </Box>
+            {/* <Button
             variant={isRunning ? 'outlined' : 'contained'}
             color={isRunning ? 'error' : 'primary'}
             startIcon={isRunning ? <CircleStop size={16} /> : <Camera size={16} />}
             onClick={() => (isRunning ? stopCamera() : void startCamera())}
           >
             {isRunning ? 'Stop' : 'Start'}
-          </Button>
-          <Typography variant="caption" color="text.secondary">{status}</Typography>
+          </Button> */}
+          </Box>
+          {/* <Typography variant="caption" color="text.secondary">{status}</Typography> */}
         </Box>
       </NodeWrapper>
       <OutputHandle id="image" position={Position.Right} />

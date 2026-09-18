@@ -27,6 +27,7 @@ import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { usePipelineCanvas } from '@/hooks/usePipelineCanvas';
 import { usePipelineTrash } from '@/hooks/usePipelineTrash';
 import { VIEWER_NODE_TYPES } from "@/types/types";
+import { useTranslation } from 'react-i18next';
 import { downloadPipelineFile, readPipelineFile } from './pipelineApi';
 import {
   CONNECTION_LINE_TYPE,
@@ -62,6 +63,7 @@ function getBlobBytes(value: unknown, seen = new Set<object>()): number {
 }
 
 function Pipeline() {
+  const { t } = useTranslation();
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
   const showToolbox = usePipelineStoreSelector(state => state.showToolbox);
