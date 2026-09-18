@@ -66,7 +66,10 @@ const stableTemplatesOutputPath = path.join(
 );
 const stableHelpOutputPath = path.join(screenshotsDirectory, 'couch-editor-help.png');
 
+const helpScreenshotsDirectory = path.join(screenshotsDirectory, 'help');
+
 await mkdir(screenshotsDirectory, { recursive: true });
+await mkdir(helpScreenshotsDirectory, { recursive: true });
 
 const browser = await chromium.launch();
 try {
@@ -109,7 +112,29 @@ try {
   console.log(`Help screenshot captured: ${helpOutputPath}`);
 
   await page.locator('#help-independent-switch').click();
-  await page.locator('#help-next-independent-item').click();
+  const nextHelpItemButton = page.locator('#help-next-independent-item');
+  const capturedHelpItems = new Set();
+
+  await nextHelpItemButton.click();
+
+  while (true) {
+    const helpItem = page.locator('[id^="help-item-"]').first();
+    await helpItem.waitFor({ state: 'visible' });
+    const helpItemId = await helpItem.getAttribute('id');
+
+    if (!helpItemId || capturedHelpItems.has(helpItemId)) {
+      break;
+    }
+
+    await helpItem.screenshot({
+      path: path.join(helpScreenshotsDirectory, `${helpItemId}.png`),
+    });
+    capturedHelpItems.add(helpItemId);
+
+    await nextHelpItemButton.click();
+  }
+
+  console.log(`Help item screenshots captured: ${capturedHelpItems.size}`);
 
   await page.keyboard.press('Escape');
 

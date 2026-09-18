@@ -130,7 +130,9 @@ export default function Help() {
             .filter(item => item.labelKey+item.groupKey === activeGroup)
             .map(item => (
               <Box key={item.labelKey+item.groupKey} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-                <HelpItem paletteItem={item} />
+                <Box id={`help-item-${item.labelKey+item.groupKey}`} sx={{ p: 1 }}>
+                  <HelpItem paletteItem={item} />
+                </Box>
               </Box>
             ))}
         </Box>
