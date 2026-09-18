@@ -26,6 +26,7 @@ type SettingsStore = {
   loadingValue: number | null,
   showSettings: boolean,
   showHelp: boolean,
+  helpIndependent: boolean,
   locale: SupportedLanguage,
 }
 
@@ -33,6 +34,7 @@ const defaults: SettingsStore = {
   onboarding: true,
   onboardingStep: 0,
   newVersion: false,
+  helpIndependent: false,
   performanceMode: false,
   templatesOpen: false,
   lightboxOpen: false,
