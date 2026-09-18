@@ -27,6 +27,7 @@ export type CurrentPipeline = PipelineGraph & {
 }
 
 export type HotFolderReadState = {
+  id: string
   directory: string | null
   permission: PermissionState
   claim: boolean
@@ -35,7 +36,7 @@ export type HotFolderReadState = {
 type PipelineStore = {
   pipelines: SavedPipeline[],
   currentPipeline: CurrentPipeline,
-  hotFolderRead: HotFolderReadState,
+  hotFolderReads: HotFolderReadState[],
   lockReactflow: boolean,
   showToolbox: boolean,
   toolboxAsGrid: boolean,
@@ -67,11 +68,7 @@ const defaults: PipelineStore = {
     edges: [],
     isDirty: false,
   },
-  hotFolderRead: {
-    directory: null,
-    permission: 'prompt',
-    claim: false,
-  },
+  hotFolderReads: [],
   lockReactflow: false,
   showToolbox: true,
   toolboxAsGrid: false,
@@ -121,7 +118,7 @@ export const usePipelineStore = () => {
     toolboxAsGrid: store.toolboxAsGrid,
     pipelines: store.pipelines,
     currentPipeline: store.currentPipeline,
-    hotFolderRead: store.hotFolderRead,
+    hotFolderReads: store.hotFolderReads,
     setCurrentPipeline: (currentPipeline: CurrentPipeline | ((prev: CurrentPipeline) => CurrentPipeline)) =>
       setState((prev) => ({
         ...prev,
@@ -147,12 +144,15 @@ export const usePipelineStore = () => {
         ...prev,
         currentPipeline: { ...prev.currentPipeline, isDirty },
       })),
-    setHotFolderRead: (hotFolderRead: HotFolderReadState | ((prev: HotFolderReadState) => HotFolderReadState)) =>
+    addHotFolderRead: (hotFolderRead: HotFolderReadState) =>
       setState((prev) => ({
         ...prev,
-        hotFolderRead: typeof hotFolderRead === 'function'
-          ? hotFolderRead(prev.hotFolderRead)
-          : hotFolderRead,
+        hotFolderReads: [...prev.hotFolderReads, hotFolderRead],
+      })),
+    updateHotFolderRead: (id: string, update: Partial<HotFolderReadState>) =>
+      setState((prev) => ({
+        ...prev,
+        hotFolderReads: prev.hotFolderReads.map((item) => item.id === id ? { ...item, ...update } : item),
       })),
     toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {

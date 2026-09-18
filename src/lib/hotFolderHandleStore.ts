@@ -1,6 +1,5 @@
 const DATABASE_NAME = 'couch-editor-hot-folder';
 const STORE_NAME = 'handles';
-const HANDLE_KEY = 'read-directory';
 
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -14,12 +13,12 @@ function openDatabase(): Promise<IDBDatabase> {
   });
 }
 
-export async function saveHotFolderReadHandle(handle: FileSystemDirectoryHandle): Promise<void> {
+export async function saveHotFolderReadHandle(id: string, handle: FileSystemDirectoryHandle): Promise<void> {
   const database = await openDatabase();
 
   await new Promise<void>((resolve, reject) => {
     const transaction = database.transaction(STORE_NAME, 'readwrite');
-    transaction.objectStore(STORE_NAME).put(handle, HANDLE_KEY);
+    transaction.objectStore(STORE_NAME).put(handle, id);
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
   });
@@ -27,11 +26,11 @@ export async function saveHotFolderReadHandle(handle: FileSystemDirectoryHandle)
   database.close();
 }
 
-export async function loadHotFolderReadHandle(): Promise<FileSystemDirectoryHandle | null> {
+export async function loadHotFolderReadHandle(id: string): Promise<FileSystemDirectoryHandle | null> {
   const database = await openDatabase();
 
   const handle = await new Promise<FileSystemDirectoryHandle | undefined>((resolve, reject) => {
-    const request = database.transaction(STORE_NAME, 'readonly').objectStore(STORE_NAME).get(HANDLE_KEY);
+    const request = database.transaction(STORE_NAME, 'readonly').objectStore(STORE_NAME).get(id);
     request.onsuccess = () => resolve(request.result as FileSystemDirectoryHandle | undefined);
     request.onerror = () => reject(request.error);
   });

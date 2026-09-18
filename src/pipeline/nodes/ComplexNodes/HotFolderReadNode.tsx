@@ -3,10 +3,10 @@ import { usePipelineStore } from '@/context/pipelineStore';
 import { loadHotFolderReadHandle, saveHotFolderReadHandle } from '@/lib/hotFolderHandleStore';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { FolderInput, Images } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const POLL_INTERVAL_MS = 1000;
@@ -22,6 +22,7 @@ const IMAGE_TYPES = new Set([
 
 type HotFolderReadData = {
   files?: File[];
+  selectedHotFolderId?: string;
 };
 
 type HotFolderPermissionDescriptor = { mode?: 'read' | 'readwrite' };
@@ -59,32 +60,71 @@ function HotFolderReadNode({
   data,
 }: NodeProps<Node<HotFolderReadData>>) {
   const { setNodes } = useReactFlow();
-  const { hotFolderRead, setHotFolderRead } = usePipelineStore();
+  const { hotFolderReads, addHotFolderRead, updateHotFolderRead } = usePipelineStore();
   const { t } = useTranslation();
   const directoryRef = useRef<HotFolderDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
   const snapshotRef = useRef<string | null>(null);
+  const selectedHotFolderIdRef = useRef(data.selectedHotFolderId);
   const [directoryName, setDirectoryName] = useState<string>();
   const [fileCount, setFileCount] = useState(data.files?.length ?? 0);
   const [status, setStatus] = useState(() => t('pipelineChooseFolderToWatch'));
+  const selectedHotFolder = hotFolderReads.find((item) => item.id === data.selectedHotFolderId);
 
   useEffect(() => {
-    if (!hotFolderRead.claim) return;
+    selectedHotFolderIdRef.current = data.selectedHotFolderId;
+  }, [data.selectedHotFolderId]);
+
+  const refreshFiles = useCallback(async (
+    directory: HotFolderDirectoryHandle | null = directoryRef.current,
+    selectedHotFolderId = selectedHotFolderIdRef.current,
+  ) => {
+    if (!directory || pollingRef.current) return;
+
+    pollingRef.current = true;
+
+    try {
+      const files = await readImageFiles(directory);
+      const snapshot = getFileSnapshot(files);
+      if (snapshot === snapshotRef.current) return;
+
+      snapshotRef.current = snapshot;
+      setNodes((current) => current.map((node) =>
+        node.id === id
+          ? { ...node, data: { ...node.data, files, selectedHotFolderId } }
+          : node
+      ));
+      setFileCount(files.length);
+      setStatus(files.length === 0 ? t('pipelineFolderEmpty') : t('pipelineFoundPhotos', { count: files.length }));
+      window.dispatchEvent(new CustomEvent('pipeline:changed'));
+    } catch (error: unknown) {
+      console.error('Failed to read hot folder:', error);
+      setStatus(t('pipelineCouldNotReadFolder'));
+    } finally {
+      pollingRef.current = false;
+    }
+  }, [id, setNodes, t]);
+
+  useEffect(() => {
+    directoryRef.current = null;
+    setDirectoryName(undefined);
+    if (!selectedHotFolder?.claim) return;
 
     let disposed = false;
 
-    void loadHotFolderReadHandle()
+    void loadHotFolderReadHandle(selectedHotFolder.id)
       .then(async (directory) => {
         if (!directory || disposed) return;
 
         const permission = await (directory as HotFolderDirectoryHandle).queryPermission({ mode: 'read' });
         if (disposed) return;
 
-        setHotFolderRead((current) => ({ ...current, permission }));
+        updateHotFolderRead(selectedHotFolder.id, { permission });
 
         directoryRef.current = directory as HotFolderDirectoryHandle;
         setDirectoryName(directory.name);
         setStatus(permission === 'granted' ? t('pipelineWatchingImageChanges') : t('pipelineReadPermissionDenied'));
+        if (permission === 'granted') void refreshFiles(directory as HotFolderDirectoryHandle);
       })
       .catch((error: unknown) => {
         if (!disposed) console.error('Failed to restore hot folder:', error);
@@ -93,60 +133,28 @@ function HotFolderReadNode({
     return () => {
       disposed = true;
     };
-  }, [hotFolderRead.claim, setHotFolderRead, t]);
+  }, [refreshFiles, selectedHotFolder?.claim, selectedHotFolder?.id, updateHotFolderRead, t]);
 
   useEffect(() => {
-    let disposed = false;
-
-    const poll = async () => {
-      const directory = directoryRef.current;
-      if (!directory || disposed || pollingRef.current) return;
-
-      pollingRef.current = true;
-
-      try {
-        const files = await readImageFiles(directory);
-        if (disposed) return;
-
-        const snapshot = getFileSnapshot(files);
-        if (snapshot !== snapshotRef.current) {
-          snapshotRef.current = snapshot;
-          setNodes((current) => current.map((node) =>
-            node.id === id
-              ? { ...node, data: { ...node.data, files } }
-              : node
-          ));
-          setFileCount(files.length);
-          setStatus(files.length === 0 ? t('pipelineFolderEmpty') : t('pipelineFoundPhotos', { count: files.length }));
-          window.dispatchEvent(new CustomEvent('pipeline:changed'));
-        }
-      } catch (error: unknown) {
-        if (!disposed) {
-          console.error('Failed to read hot folder:', error);
-          setStatus(t('pipelineCouldNotReadFolder'));
-        }
-      } finally {
-        pollingRef.current = false;
-      }
-    };
-
-    void poll();
-    const interval = window.setInterval(() => void poll(), POLL_INTERVAL_MS);
+    void refreshFiles();
+    const interval = window.setInterval(() => void refreshFiles(), POLL_INTERVAL_MS);
 
     return () => {
-      disposed = true;
       window.clearInterval(interval);
     };
-  }, [data, id, setNodes]);
+  }, [refreshFiles]);
 
   const chooseFolder = async () => {
     try {
-      let directory = directoryRef.current;
-      if (!directory) {
-        directory = await (window as unknown as Window & {
-          showDirectoryPicker: (options?: HotFolderPermissionDescriptor) => Promise<FileSystemDirectoryHandle>
-        }).showDirectoryPicker({ mode: 'read' }) as HotFolderDirectoryHandle;
-      }
+      const directory = await (window as unknown as Window & {
+        showDirectoryPicker: (options?: HotFolderPermissionDescriptor) => Promise<FileSystemDirectoryHandle>
+      }).showDirectoryPicker({ mode: 'read' }) as HotFolderDirectoryHandle;
+      const folder = {
+        id: `hot-folder-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        directory: directory.name,
+        permission: 'prompt' as PermissionState,
+        claim: true,
+      };
 
       const permission = await directory.requestPermission({ mode: 'read' });
 
@@ -159,8 +167,9 @@ function HotFolderReadNode({
       snapshotRef.current = null;
       setDirectoryName(directory.name);
       setStatus(t('pipelineWatchingImageChanges'));
-      await saveHotFolderReadHandle(directory);
-      setHotFolderRead({ directory: directory.name, permission, claim: true });
+      await saveHotFolderReadHandle(folder.id, directory);
+      addHotFolderRead({ ...folder, directory: directory.name, permission, claim: true });
+      await refreshFiles(directory, folder.id);
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
       console.error('Failed to choose hot folder:', error);
@@ -171,6 +180,22 @@ function HotFolderReadNode({
   return (
     <>
       <NodeWrapper type="hot-folder-read">
+        <TextField
+          select
+          size="small"
+          label={t('pipelineHotFolder')}
+          value={selectedHotFolder?.id ?? ''}
+          onChange={(event) => setNodes((current) => current.map((node) =>
+            node.id === id
+              ? { ...node, data: { ...node.data, selectedHotFolderId: event.target.value } }
+              : node
+          ))}
+          fullWidth
+        >
+          {hotFolderReads.map((folder) => (
+            <MenuItem key={folder.id} value={folder.id}>{folder.directory ?? folder.id}</MenuItem>
+          ))}
+        </TextField>
         <Button
           variant="outlined"
           startIcon={<FolderInput size={14} />}
