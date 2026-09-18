@@ -1,11 +1,11 @@
 ---
 name: readme-updater
-description: Update the CouchEditor README with accurate usage, development, toolkit, workflow, and screenshot documentation.
+description: When the user says a new version is being released, update the CouchEditor README with accurate usage, development, toolkit, workflow, and screenshot documentation as the release documentation check.
 ---
 
 # README Updater
 
-Maintain `README.md` as the user-facing guide for CouchEditor. Keep the writing practical and beginner-friendly while verifying product details against the current application source.
+Run this skill only when the user explicitly says that a new version is being released. At that point, maintain `README.md` as the user-facing guide for CouchEditor. Keep the writing practical and beginner-friendly while verifying product details against the current application source.
 
 ## Scope
 

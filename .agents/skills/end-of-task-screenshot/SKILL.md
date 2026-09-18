@@ -1,11 +1,11 @@
 ---
 name: end-of-task-screenshot
-description: At the end of every workspace task, run a Playwright smoke capture and save a timestamped screenshot of the application in screenshots.
+description: When the user says a new version is being released, run a Playwright smoke capture and save a timestamped screenshot of the application in screenshots as the release screenshot check.
 ---
 
 # End-of-Task Screenshot
 
-After completing every workspace task, capture the current application state with Playwright and save the PNG under `screenshots/`.
+Run this skill only when the user explicitly says that a new version is being released. At that point, capture the current application state with Playwright and save the PNG under `screenshots/`.
 
 ## Procedure
 

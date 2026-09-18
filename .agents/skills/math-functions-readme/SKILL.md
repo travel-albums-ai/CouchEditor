@@ -1,6 +1,6 @@
 ---
 name: math-functions-readme
-description: Generate and maintain MATH_FUNCTIONS.md with technical documentation for CouchEditor's image-processing stages, formulas, input ranges, clamping rules, and source references.
+description: Generate and maintain MATH_FUNCTIONS.md with technical documentation for CouchEditor's image-processing stages, formulas, input ranges, clamping rules, and source references. Run this skill when the user says a new version is being released, as part of the release documentation check.
 ---
 
 # Math Functions README
@@ -40,6 +40,8 @@ For every pipeline stage that has a corresponding generated help capture, includ
 `screenshots/help/help-item-${labelKey+groupKey}.png`
 
 Use the exact concatenated filename produced by `.agents/skills/end-of-task-screenshot/scripts/capture-screenshot.mjs`, with no separator between `labelKey` and `groupKey`. Use a concise, human-readable alt label. Do not invent an image for implementation-only helpers such as `detectFilmBaseColor` when no help capture exists.
+
+Identify the image for a stage by joining the stage's `NodePalette.tsx` entry to its `labelKey` and `groupKey`, then matching the corresponding pipeline node/function in `pipeline.worker.ts` or `utils.ts`. Do not assign images by section order, function order, or visual similarity. Split combined documentation headings when they represent separate palette nodes, such as RGB black point and RGB white point, so each node has its own image and separator.
 
 End every pipeline stage section with a Markdown horizontal rule (`---`) before the next stage heading. Keep the separator after the stage's image and technical notes; do not add it to cross-cutting notes or helper-only sections.
 
