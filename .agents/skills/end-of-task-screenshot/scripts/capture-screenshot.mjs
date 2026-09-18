@@ -26,6 +26,14 @@ const settingsOutputPath = path.join(
   screenshotsDirectory,
   `couch-editor-${timestamp}-settings.png`,
 );
+const templatesOutputPath = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-templates.png`,
+);
+const helpOutputPath = path.join(
+  screenshotsDirectory,
+  `couch-editor-${timestamp}-help.png`,
+);
 
 await mkdir(screenshotsDirectory, { recursive: true });
 
@@ -39,6 +47,14 @@ try {
   await page.locator('#settings-toggle').click();
   await page.screenshot({ path: settingsOutputPath, fullPage: true });
   console.log(`Settings screenshot captured: ${settingsOutputPath}`);
+  await page.keyboard.press('Escape');
+  await page.locator('#templates-toggle').click();
+  await page.screenshot({ path: templatesOutputPath, fullPage: true });
+  console.log(`Templates screenshot captured: ${templatesOutputPath}`);
+  await page.keyboard.press('Escape');
+  await page.locator('#help-toggle').click();
+  await page.screenshot({ path: helpOutputPath, fullPage: true });
+  console.log(`Help screenshot captured: ${helpOutputPath}`);
 } finally {
   await browser.close();
 }

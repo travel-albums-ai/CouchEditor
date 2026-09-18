@@ -14,7 +14,7 @@ export default function HelpToggle() {
   }
 
   return <>
-    <GenericToggleButtonGroup variant="standard" items={[
+    <GenericToggleButtonGroup variant="standard" id="help-toggle" items={[
       {
         kbd: 'Alt+m',
         meta: {
