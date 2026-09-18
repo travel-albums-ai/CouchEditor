@@ -1,4 +1,4 @@
-import SolidChip from '@/components/SolidChip';
+import NewChip from '@/components/NewChip';
 import { useTranslation } from 'react-i18next';
 import packageJson from '../../package.json';
 
@@ -8,14 +8,13 @@ export default function VersionStatus() {
   const version = packageJson.version;
 
   return (
-    <SolidChip
+    <NewChip
       count={version}
       label={t('versionPrefix')}
-      variant="header"
-      minWidth={80}
+      variant="text"
       fontSize={14}
-      height={30}
       borderless
+      disabled={true}
       tooltip={t('versionTooltip', { version })}
     />
   )

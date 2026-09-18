@@ -1,4 +1,4 @@
-import SolidChip from '@/components/SolidChip';
+import NewChip from '@/components/NewChip';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -44,13 +44,13 @@ export default function DomCounter() {
   }, [])
 
   return (
-    <SolidChip
+    <NewChip
       fontSize={14}
-      height={30}
       count={count}
+      disabled={true}
       label={"DOM/e"}
       variant="text"
-      minWidth={120}
+      borderless
       tooltip={t('domElementsTooltip')}
     />
   )

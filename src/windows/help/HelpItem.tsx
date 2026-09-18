@@ -21,6 +21,10 @@ export default function HelpItem({ paletteItem }: { paletteItem: any }) {
           px: 2,
           bgcolor: theme => theme.palette.background.paper,
           boxShadow: theme => `0 0 16px -3px ${theme.palette.divider}`,
+          transition: 'box-shadow 0.3s ease',
+          '&:hover': {
+            boxShadow: theme => `0 0 16px 0px ${theme.palette.divider}`,
+          },
         }}>
           <Box sx={{ height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <PreviewDemo paletteItem={paletteItem} />
