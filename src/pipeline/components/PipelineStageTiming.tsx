@@ -1,4 +1,4 @@
-import SolidChip from '@/components/SolidChip';
+import NewChip from '@/components/NewChip';
 import { Box, Skeleton, Tooltip } from '@mui/material';
 import { Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -55,17 +55,18 @@ export default function PipelineStageTiming({
 
   const displayInSeconds = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
 
-  return <Box>
+  return <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
     {isProcessing && <Box sx={{ opacity: 0.1 }}>
-      <Skeleton variant="rounded" width={64} sx={{ bgcolor: 'primary.main' }} height={24} />
+      <Skeleton variant="rounded" width={100} sx={{ bgcolor: 'primary.main', borderRadius: 2 }} height={32} />
     </Box>}
     {!isProcessing && <Tooltip title={`Time taken to process: ${displayInSeconds} s`}>
       <span>
-        <SolidChip
+        <NewChip
+          fontSize={18}
+          sx={{ width: '100px'}}
           count={displayInSeconds}
-          height={24}
-          minWidth={64}
-          icon={<Timer size={16} />} fontSize={11} variant="header" borderless/>
+          icon={<Timer size={16} />}
+          borderless/>
       </span>
     </Tooltip>}
   </Box>;

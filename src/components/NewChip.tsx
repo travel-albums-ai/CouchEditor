@@ -12,6 +12,7 @@ interface SidebarCoreButtonProps {
   borderless?: boolean;
   tooltip?: string;
   disabled?: boolean;
+  sx?: object;
 }
 
 export default function NewChip({
@@ -23,85 +24,95 @@ export default function NewChip({
   borderless = false,
   tooltip,
   disabled = false,
+  sx
 }: SidebarCoreButtonProps) {
-
-  const prevCount = useRef<number | string | undefined>(count);
-  const isFirstRender = useRef(true);
+  const previousCount = useRef(count);
   const [flash, setFlash] = useState(false);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      prevCount.current = count;
-      return;
-    }
+    if (previousCount.current === count) return;
 
-    if (prevCount.current !== count) {
-      setFlash(true);
-      const t = setTimeout(() => setFlash(false), 250);
-      prevCount.current = count;
-      return () => clearTimeout(t);
-    }
+    previousCount.current = count;
+    setFlash(true);
+
+    const timeout = window.setTimeout(() => {
+      setFlash(false);
+    }, 250);
+
+    return () => window.clearTimeout(timeout);
   }, [count]);
 
-  const domContent = <Box
-    sx={{
-      fontSize,
-      px: 1.5,
-      py: 0.75,
-      m: 0.25,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      opacity: 0.75,
-      boxShadow: theme => disabled ? 'unset' : `0 0 4px 0px ${theme.palette.divider}`,
-      bgcolor: theme => variant === 'important'
-        ? alpha(theme.palette.primary.main, 0.35)
-        : disabled ? alpha(theme.palette.divider, 0.05) : 'transparent',
-      border: borderless ? 'none' : '1px solid',
-      borderColor: 'divider',
-      borderRadius: 2,
-      position: 'relative',
-      overflow: 'hidden',
+  const content = (
+    <Box
+      sx={{
+        fontSize,
+        px: 1.5,
+        py: 0.75,
+        m: 0.25,
 
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        backgroundColor: 'text.primary',
-        opacity: 0,
-        pointerEvents: 'none',
-      },
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
 
-      '&.flash::after': {
-        animation: 'chipFlash 250ms ease',
-      },
+        opacity: 0.75,
 
-      '@keyframes chipFlash': {
-        '0%': { opacity: 0.35 },
-        '100%': { opacity: 0 },
-      },
-    }}
-    className={flash ? 'flash' : ''}
-  >
-    {icon &&
+        boxShadow: theme =>
+          disabled
+            ? 'none'
+            : `0 0 4px 0 ${theme.palette.divider}`,
+
+        bgcolor: theme => {
+          if (flash) {
+            return alpha(theme.palette.text.primary, 0.12);
+          }
+
+          if (variant === 'important') {
+            return alpha(theme.palette.primary.main, 0.35);
+          }
+
+          return disabled
+            ? alpha(theme.palette.divider, 0.05)
+            : 'transparent';
+        },
+
+        border: borderless ? 'none' : '1px solid',
+        borderColor: 'divider',
+        borderRadius: 2,
+
+        transition: 'background-color 250ms ease',
+
+        // Avoid transition when the component is disabled.
+        ...(disabled && {
+          transition: 'none',
+        }),
+        ...sx,
+      }}
+    >
+      {icon &&
         cloneElement(icon as React.ReactElement, {
           size: fontSize,
-          style: { marginRight: 4 },
+          style: {
+            marginRight: 4,
+          },
         })}
 
-    <Typography variant="body2" sx={{ fontSize, lineHeight: 1 }}>
-      {count} {label}
-    </Typography>
-  </Box>
+      <Typography
+        variant="body2"
+        sx={{
+          fontSize,
+          lineHeight: 1,
+        }}
+      >
+        {count} {label}
+      </Typography>
+    </Box>
+  );
 
-  return <>
-    {tooltip ? (
-      <Tooltip title={tooltip} placement="top" arrow>
-        {domContent}
-      </Tooltip>
-    ) : (
-      domContent
-    )}
-  </>
+  return tooltip ? (
+    <Tooltip title={tooltip} placement="top" arrow>
+      {content}
+    </Tooltip>
+  ) : (
+    content
+  );
 }
