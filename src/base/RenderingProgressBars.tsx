@@ -62,7 +62,7 @@ export default function RenderingProgressBars() {
   if (orderedNodes.length === 0) return null;
 
   return <>
-    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, p: 0, justifyContent: 'space-between', flex: 1 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.25, p: 0, justifyContent: 'space-between', flex: 1 }}>
       {orderedNodes.map(node => (
         <PipelineStageProgress nodeId={node.id} nodeType={node.type} key={node.id} />
       ))}
