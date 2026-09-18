@@ -89,6 +89,11 @@ type WorkerImage = {
   cacheKey?: string;
 };
 
+const MAX_PHASE_CACHE_BYTES = 384 * 1024 * 1024;
+const MAX_AI_CACHE_BYTES = 128 * 1024 * 1024;
+const aiImageCaches = new Set<Map<string, WorkerImage>>();
+const retiredBitmaps = new Set<ImageBitmap>();
+
 function getImageSetKey(image: WorkerImage): string | ImageBitmap {
   return image.cacheKey ?? image.name ?? image.bitmap;
 }
@@ -512,6 +517,7 @@ function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerIma
 // and hands back the canvas backing store as an ImageBitmap (no copy).
 async function renderImage(
   source: WorkerImage,
+  evaluationId: number,
   draw: (
     ctx: OffscreenCanvasRenderingContext2D,
     canvas: OffscreenCanvas,
@@ -526,50 +532,56 @@ async function renderImage(
     (source.width > IMAGE_TILE_SIZE || source.height > IMAGE_TILE_SIZE)
   ) {
     const [canvas, ctx] = createCanvas(source.width, source.height);
-    const tiles: Array<Promise<void>> = [];
+    const tiles: Array<[number, number, number, number]> = [];
 
     for (let y = 0; y < source.height; y += IMAGE_TILE_SIZE) {
       for (let x = 0; x < source.width; x += IMAGE_TILE_SIZE) {
-        const tileX = x;
-        const tileY = y;
-        const tileWidth = Math.min(IMAGE_TILE_SIZE, source.width - tileX);
-        const tileHeight = Math.min(IMAGE_TILE_SIZE, source.height - tileY);
-
-        tiles.push((async () => {
-          const [tileCanvas, tileContext] = createCanvas(tileWidth, tileHeight);
-          tileContext.drawImage(
-            source.bitmap,
-            tileX,
-            tileY,
-            tileWidth,
-            tileHeight,
-            0,
-            0,
-            tileWidth,
-            tileHeight
-          );
-          const tileSource: WorkerImage = {
-            bitmap: tileCanvas.transferToImageBitmap(),
-            width: tileWidth,
-            height: tileHeight,
-            name: source.name,
-            exif: source.exif,
-          };
-          const tile = await renderImage(
-            tileSource,
-            draw,
-            transformPixels,
-            undefined,
-            false
-          );
-
-          ctx.drawImage(tile.bitmap, tileX, tileY);
-          tile.bitmap.close();
-        })());
+        tiles.push([
+          x,
+          y,
+          Math.min(IMAGE_TILE_SIZE, source.width - x),
+          Math.min(IMAGE_TILE_SIZE, source.height - y),
+        ]);
       }
     }
 
-    await Promise.all(tiles);
+    await mapWithConcurrency(tiles, evaluationId, async ([tileX, tileY, tileWidth, tileHeight]) => {
+      const [tileCanvas, tileContext] = createCanvas(tileWidth, tileHeight);
+      tileContext.drawImage(
+        source.bitmap,
+        tileX,
+        tileY,
+        tileWidth,
+        tileHeight,
+        0,
+        0,
+        tileWidth,
+        tileHeight
+      );
+      const tileSource: WorkerImage = {
+        bitmap: tileCanvas.transferToImageBitmap(),
+        width: tileWidth,
+        height: tileHeight,
+        name: source.name,
+        exif: source.exif,
+      };
+
+      try {
+        const tile = await renderImage(
+          tileSource,
+          evaluationId,
+          draw,
+          transformPixels,
+          undefined,
+          false
+        );
+
+        ctx.drawImage(tile.bitmap, tileX, tileY);
+        tile.bitmap.close();
+      } finally {
+        tileSource.bitmap.close();
+      }
+    });
 
     return {
       bitmap: canvas.transferToImageBitmap(),
@@ -618,6 +630,7 @@ function renderImages(
   return mapWithConcurrency(sources, evaluationId, (source) =>
     renderImage(
       source,
+      evaluationId,
       draw,
       transformPixels,
       gpuOperation,
@@ -1211,6 +1224,7 @@ function createAIImageEditNodeDefinition(
 
     if (cacheKey) {
       cache.set(cacheKey, edited);
+      evictAIImageCache();
     }
 
     return edited;
@@ -1957,6 +1971,7 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
         };
         return renderImage(
           source,
+          inputs.evaluationId as number,
           drawSource,
           filmBaseRemoverStage(activeMask[0], activeMask[1], activeMask[2], strength, densityCompensation, filmAge),
           operation
@@ -2214,9 +2229,7 @@ type CachedNodeOutput = {
 
 // Keep phase results by their content signature rather than node id. This
 // lets equivalent phases share the same in-worker ImageBitmaps across runs.
-const MAX_CACHED_PHASES = 64;
 const phaseOutputCache = new Map<string, CachedNodeOutput>();
-const retiredBitmaps = new Set<ImageBitmap>();
 
 function getCachedPhaseOutput(signature: string): NodeOutputs | undefined {
   const cached = phaseOutputCache.get(signature);
@@ -2239,7 +2252,7 @@ function cachePhaseOutput(signature: string, outputs: NodeOutputs) {
     retireBitmaps(replaced.outputs);
   }
 
-  while (phaseOutputCache.size > MAX_CACHED_PHASES) {
+  while (getBitmapBytes(getCachedBitmapsFromPhaseCache()) > MAX_PHASE_CACHE_BYTES) {
     const oldestSignature = phaseOutputCache.keys().next().value;
 
     if (oldestSignature === undefined) break;
@@ -2251,6 +2264,29 @@ function cachePhaseOutput(signature: string, outputs: NodeOutputs) {
       retireBitmaps(evicted.outputs);
     }
   }
+}
+
+function getBitmapBytes(bitmaps: Set<ImageBitmap>): number {
+  let bytes = 0;
+
+  for (const bitmap of bitmaps) {
+    bytes += bitmap.width * bitmap.height * 4;
+  }
+
+  return bytes;
+}
+
+function outputOnlyReferencesInputs(outputs: NodeOutputs, inputs: NodeInputs): boolean {
+  const outputBitmaps = new Set<ImageBitmap>();
+  const inputBitmaps = new Set<ImageBitmap>();
+
+  collectBitmaps(outputs, outputBitmaps);
+
+  for (const value of Object.values(inputs)) {
+    collectBitmaps(value, inputBitmaps);
+  }
+
+  return outputBitmaps.size > 0 && [...outputBitmaps].every((bitmap) => inputBitmaps.has(bitmap));
 }
 
 function collectBitmaps(
@@ -2273,7 +2309,7 @@ function collectBitmaps(
   }
 }
 
-function getCachedBitmaps(): Set<ImageBitmap> {
+function getCachedBitmapsFromPhaseCache(): Set<ImageBitmap> {
   const bitmaps = new Set<ImageBitmap>();
 
   for (const cached of phaseOutputCache.values()) {
@@ -2281,6 +2317,52 @@ function getCachedBitmaps(): Set<ImageBitmap> {
   }
 
   return bitmaps;
+}
+
+function getCachedBitmaps(): Set<ImageBitmap> {
+  const bitmaps = getCachedBitmapsFromPhaseCache();
+
+  for (const cache of aiImageCaches) {
+    collectBitmaps([...cache.values()], bitmaps);
+  }
+
+  return bitmaps;
+}
+
+function getAICacheBytes(): number {
+  const bitmaps = new Set<ImageBitmap>();
+
+  for (const cache of aiImageCaches) {
+    collectBitmaps([...cache.values()], bitmaps);
+  }
+
+  return getBitmapBytes(bitmaps);
+}
+
+function evictAIImageCache() {
+  while (getAICacheBytes() > MAX_AI_CACHE_BYTES) {
+    let oldestCache: Map<string, WorkerImage> | undefined;
+    let oldestKey: string | undefined;
+
+    for (const cache of aiImageCaches) {
+      const key = cache.keys().next().value;
+
+      if (key !== undefined) {
+        oldestCache = cache;
+        oldestKey = key;
+        break;
+      }
+    }
+
+    if (!oldestCache || oldestKey === undefined) break;
+
+    const evicted = oldestCache.get(oldestKey);
+    oldestCache.delete(oldestKey);
+
+    if (evicted) {
+      retiredBitmaps.add(evicted.bitmap);
+    }
+  }
 }
 
 function retireBitmaps(outputs: NodeOutputs) {
@@ -2304,11 +2386,7 @@ function closeRetiredBitmaps(activeOutputs: Iterable<NodeOutputs>) {
 }
 
 function getEstimatedCacheBytes(): number {
-  let bytes = 0;
-
-  for (const bitmap of getCachedBitmaps()) {
-    bytes += bitmap.width * bitmap.height * 4;
-  }
+  let bytes = getBitmapBytes(getCachedBitmaps());
 
   if (gpuRenderer) {
     bytes += gpuRenderer.canvas.width * gpuRenderer.canvas.height * 4;
@@ -2626,7 +2704,9 @@ async function runEvaluation(
 
       throwIfStale(evaluationId);
 
-      cachePhaseOutput(signature, result);
+      if (!outputOnlyReferencesInputs(result, inputs)) {
+        cachePhaseOutput(signature, result);
+      }
 
       if (node.type === "exif-split") {
         const withExif = result.withExif as WorkerImage[] | undefined ?? [];

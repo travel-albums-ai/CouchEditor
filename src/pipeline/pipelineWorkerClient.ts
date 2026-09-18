@@ -85,6 +85,7 @@ let activeEvaluationId = 0;
 const pendingViewers = new Map<string, PendingViewer>();
 const objectUrlsByNode = new Map<string, string[]>();
 const objectUrlBytesByNode = new Map<string, number>();
+const progressPreviewUrls = new Map<string, string>();
 const liveViewerNodeIds = new Set<string>();
 let workerCacheBytes = 0;
 
@@ -115,6 +116,21 @@ function revokeObjectUrls(nodeId: string) {
   dispatchCacheMemory();
 }
 
+function revokeProgressPreview(nodeId: string) {
+  const url = progressPreviewUrls.get(nodeId);
+
+  if (!url) return;
+
+  URL.revokeObjectURL(url);
+  progressPreviewUrls.delete(nodeId);
+}
+
+function revokeAllProgressPreviews() {
+  for (const nodeId of progressPreviewUrls.keys()) {
+    revokeProgressPreview(nodeId);
+  }
+}
+
 function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
   const message = event.data;
 
@@ -126,6 +142,15 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
 
   switch (message.type) {
     case "progress": {
+      const previewUrl = message.preview
+        ? (() => {
+          revokeProgressPreview(message.nodeId);
+          const url = URL.createObjectURL(message.preview.blob);
+          progressPreviewUrls.set(message.nodeId, url);
+          return url;
+        })()
+        : undefined;
+
       // Relay to the node component's existing listener contract.
       window.dispatchEvent(
         new CustomEvent(`${message.nodeType}:progress`, {
@@ -134,9 +159,9 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
             runId: message.runId,
             completed: message.completed,
             total: message.total,
-            preview: message.preview
+            preview: message.preview && previewUrl
               ? {
-                src: URL.createObjectURL(message.preview.blob),
+                src: previewUrl,
                 width: message.preview.width,
                 height: message.preview.height,
                 name: message.preview.name,
@@ -161,6 +186,7 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
     }
 
     case "stageStarted": {
+      revokeProgressPreview(message.nodeId);
       window.dispatchEvent(
         new CustomEvent(`${message.nodeType}:stageStarted`, {
           detail: {
@@ -416,6 +442,8 @@ export function terminatePipelineWorker() {
   for (const nodeId of [...objectUrlsByNode.keys()]) {
     revokeObjectUrls(nodeId);
   }
+
+  revokeAllProgressPreviews();
 
   workerCacheBytes = 0;
   dispatchCacheMemory();
