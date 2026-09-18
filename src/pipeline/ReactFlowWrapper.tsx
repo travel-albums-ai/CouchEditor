@@ -1,4 +1,4 @@
-import { alpha, Box, useTheme } from '@mui/material';
+import { alpha, Box, useMediaQuery, useTheme } from '@mui/material';
 import {
   addEdge,
   Background,
@@ -76,6 +76,7 @@ function Pipeline() {
   const byokModel = useBYOKStoreSelector((state) => state.model);
   const byokServiceTier = useBYOKStoreSelector((state) => state.serviceTier);
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width: 999px)');
 
   const { screenToFlowPosition, fitView, getViewport, setViewport, zoomIn, zoomOut } = useReactFlow();
   const { trashRef, setTrashActive } = usePipelineTrash();
@@ -832,7 +833,7 @@ function Pipeline() {
           snapGrid={SNAP_GRID}
           connectionLineType={CONNECTION_LINE_TYPE}
           defaultEdgeOptions={{ type: CONNECTION_LINE_TYPE }}
-          minZoom={0.25}
+          minZoom={!isMobile ? 0.25 : 0.125}
           maxZoom={4}
           nodeTypes={pipelineNodeTypes}
           nodesDraggable={!lockReactflow}
@@ -853,7 +854,11 @@ function Pipeline() {
           zoomOnDoubleClick={false}
         >
           <Background gap={SNAP_GRID[0]} bgColor={theme.palette.background.default} color={theme.palette.text.disabled} />
-          <MiniMap position="top-right" style={{ top: 64 }} />
+          <MiniMap
+            position="top-right"
+            className="pipeline-minimap"
+            style={{ top: 'var(--pipeline-minimap-top)' }}
+          />
         </ReactFlow>
 
       </div>

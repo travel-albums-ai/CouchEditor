@@ -152,10 +152,17 @@ body {
 }
 
 .react-flow__minimap {
+  --pipeline-minimap-top: 64px;
   background: var(--bg-overlay);
   border: 1px solid var(--divider);
   border-radius: 8px;
   overflow: hidden;
+}
+
+@media (max-width: 1199px) {
+  .pipeline-minimap {
+    --pipeline-minimap-top: 134px;
+  }
 }
 
 .react-flow__minimap-node {

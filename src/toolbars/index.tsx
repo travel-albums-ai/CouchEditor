@@ -83,7 +83,7 @@ export default function Toolbars() {
       ],
     },
     'others': {
-      sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', justifyContent: 'center' },
+      sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'visible', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', maxWidth: '40%' },
       floatingSx: { },
       groups: [
         <>
