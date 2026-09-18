@@ -1,3 +1,9 @@
+## [1.185.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.185.0...v1.185.1) (2026-09-18)
+
+### 🐛 Fixes
+
+* adjust Button properties for consistent styling in DeleteButton component ([fbcc8f7](https://github.com/travel-albums-ai/CouchEditor/commit/fbcc8f76a2c00cb8e9b65f1d605601e5ca87fde2))
+
 ## [1.185.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.184.0...v1.185.0) (2026-09-18)
 
 ### ✨ Features
