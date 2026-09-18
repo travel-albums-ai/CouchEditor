@@ -1,3 +1,9 @@
+## [1.179.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.179.0...v1.179.1) (2026-09-18)
+
+### 🐛 Fixes
+
+* update tooltip title in DeleteButton and change keyboard shortcut in TemplatesToggle ([5f64b8c](https://github.com/travel-albums-ai/CouchEditor/commit/5f64b8ca0f116ff50f625f2e267e9b40da9d1e5d))
+
 ## [1.179.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.178.0...v1.179.0) (2026-09-18)
 
 ### ✨ Features
