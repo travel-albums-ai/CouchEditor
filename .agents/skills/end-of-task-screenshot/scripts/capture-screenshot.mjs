@@ -108,6 +108,9 @@ try {
   await copyFile(helpOutputPath, stableHelpOutputPath);
   console.log(`Help screenshot captured: ${helpOutputPath}`);
 
+  await page.locator('#help-independent-switch').click();
+  await page.locator('#help-next-independent-item').click();
+
   await page.keyboard.press('Escape');
 
   await page.locator('#toggle-toolbox-toggle').click();

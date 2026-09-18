@@ -64,6 +64,7 @@ export default function Help() {
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
               <Folder size={16} />
               <Switch
+                id="help-independent-switch"
                 size="small"
                 checked={helpIndependent}
                 onChange={(e) => setSetting(prev => ({ ...prev, helpIndependent: e.target.checked }))}
@@ -76,7 +77,7 @@ export default function Help() {
                 <IconButton size="small" onClick={prevIndependentItem}>
                   <ChevronsRight size={16} style={{ transform: 'rotate(180deg)' }} />
                 </IconButton>
-                <IconButton size="small" onClick={nextIndependentItem}>
+                <IconButton size="small" onClick={nextIndependentItem} id="help-next-independent-item">
                   <ChevronsRight size={16} />
                 </IconButton>
               </>
