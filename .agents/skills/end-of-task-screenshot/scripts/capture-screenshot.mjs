@@ -103,6 +103,7 @@ try {
   await page.keyboard.press('Escape');
 
   await page.locator('#help-toggle').click();
+  await page.waitForTimeout(300);
   await page.screenshot({ path: helpOutputPath, fullPage: true });
   await copyFile(helpOutputPath, stableHelpOutputPath);
   console.log(`Help screenshot captured: ${helpOutputPath}`);
