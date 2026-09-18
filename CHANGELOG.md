@@ -1,3 +1,9 @@
+## [1.180.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.179.1...v1.180.0) (2026-09-18)
+
+### ✨ Features
+
+* add new localization strings for German and Romanian languages ([440b8aa](https://github.com/travel-albums-ai/CouchEditor/commit/440b8aa2680cfd4f4001590e709795885b1be026))
+
 ## [1.179.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.179.0...v1.179.1) (2026-09-18)
 
 ### 🐛 Fixes
