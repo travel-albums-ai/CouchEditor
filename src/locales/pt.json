@@ -18,6 +18,7 @@
   "enterFullscreen": "Entrar em tela cheia",
   "exitFullscreen": "Sair da tela cheia",
   "performanceModeName": "Modo de desempenho",
+  "pipelineSequentialMode": "Modo de processamento sequencial",
   "performanceModeDescription": "Ativar ou desativar o modo de desempenho",
   "togglePerformanceTooltip": "Alternar modo de desempenho",
   "settingsName": "Configurações",

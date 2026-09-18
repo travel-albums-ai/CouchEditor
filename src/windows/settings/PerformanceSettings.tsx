@@ -1,6 +1,7 @@
 import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import SettingFieldRow from '@/windows/settings/components/SettingFieldRow';
+import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
 import { Cpu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,6 +12,7 @@ export default function PerformanceSettings() {
   const pipelinePhotoBatchSize = useSettingsStoreSelector((state) => state.pipelinePhotoBatchSize)
   const pipelineMaxAIRequests = useSettingsStoreSelector((state) => state.pipelineMaxAIRequests)
   const pipelineAICallDelayMs = useSettingsStoreSelector((state) => state.pipelineAICallDelayMs)
+  const pipelineSequentialMode = useSettingsStoreSelector((state) => state.pipelineSequentialMode)
 
   return <>
     <SettingsSection title={t('pipelineSettingsSection')} icon={<Cpu />}>
@@ -65,6 +67,14 @@ export default function PerformanceSettings() {
             pipelineAICallDelayMs: Math.max(0, Math.min(10000, parsed)),
           }))
         }}
+      />
+      <SettingToggleRow
+        label={t('pipelineSequentialMode')}
+        selected={pipelineSequentialMode}
+        onChange={() => setSetting((prev) => ({
+          ...prev,
+          pipelineSequentialMode: !prev.pipelineSequentialMode,
+        }))}
       />
     </SettingsSection>
 

@@ -72,6 +72,7 @@ function Pipeline() {
   const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
   const pipelineMaxAIRequests = useSettingsStoreSelector(s => s.pipelineMaxAIRequests)
   const pipelineAICallDelayMs = useSettingsStoreSelector(s => s.pipelineAICallDelayMs)
+  const pipelineSequentialMode = useSettingsStoreSelector(s => s.pipelineSequentialMode)
   const byokOpenAIKey = useBYOKStoreSelector((state) => state.byokOpenAIKey);
   const byokModel = useBYOKStoreSelector((state) => state.model);
   const byokServiceTier = useBYOKStoreSelector((state) => state.serviceTier);
@@ -315,7 +316,7 @@ function Pipeline() {
     if (!graphSignatureRef.current) return;
 
     evaluate();
-  }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize, pipelineMaxAIRequests, pipelineAICallDelayMs]);
+  }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize, pipelineMaxAIRequests, pipelineAICallDelayMs, pipelineSequentialMode]);
 
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
     setCurrentPipelineDirty(true);

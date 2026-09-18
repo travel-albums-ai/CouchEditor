@@ -18,6 +18,7 @@
   "enterFullscreen": "Entrar en pantalla completa",
   "exitFullscreen": "Salir de pantalla completa",
   "performanceModeName": "Modo rendimiento",
+  "pipelineSequentialMode": "Modo de procesamiento secuencial",
   "performanceModeDescription": "Activar o desactivar el modo rendimiento",
   "togglePerformanceTooltip": "Cambiar modo rendimiento",
   "settingsName": "Ajustes",

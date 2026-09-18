@@ -18,6 +18,7 @@
   "enterFullscreen": "Увімкнути повний екран",
   "exitFullscreen": "Вийти з повного екрана",
   "performanceModeName": "Режим продуктивності",
+  "pipelineSequentialMode": "Послідовний режим обробки",
   "performanceModeDescription": "Увімкнути або вимкнути режим продуктивності",
   "togglePerformanceTooltip": "Змінити режим продуктивності",
   "settingsName": "Налаштування",

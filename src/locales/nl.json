@@ -18,6 +18,7 @@
   "enterFullscreen": "Volledig scherm openen",
   "exitFullscreen": "Volledig scherm verlaten",
   "performanceModeName": "Prestatiemodus",
+  "pipelineSequentialMode": "Sequentiële verwerkingsmodus",
   "performanceModeDescription": "Prestatiemodus in- of uitschakelen",
   "togglePerformanceTooltip": "Prestatiemodus wisselen",
   "settingsName": "Instellingen",

@@ -18,6 +18,7 @@
   "enterFullscreen": "Přejít na celou obrazovku",
   "exitFullscreen": "Opustit celou obrazovku",
   "performanceModeName": "Režim výkonu",
+  "pipelineSequentialMode": "Sekvenční režim zpracování",
   "performanceModeDescription": "Zapnout nebo vypnout režim výkonu",
   "togglePerformanceTooltip": "Přepnout režim výkonu",
   "settingsName": "Nastavení",

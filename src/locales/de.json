@@ -18,6 +18,7 @@
   "enterFullscreen": "Vollbild öffnen",
   "exitFullscreen": "Vollbild verlassen",
   "performanceModeName": "Leistungsmodus",
+  "pipelineSequentialMode": "Sequentieller Verarbeitungsmodus",
   "performanceModeDescription": "Leistungsmodus umschalten",
   "togglePerformanceTooltip": "Leistungsmodus umschalten",
   "settingsName": "Einstellungen",

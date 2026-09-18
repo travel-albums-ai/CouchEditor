@@ -44,6 +44,7 @@
   "enterFullscreen": "Intră în ecran complet",
   "exitFullscreen": "Ieși din ecran complet",
   "performanceModeName": "Mod performanță",
+  "pipelineSequentialMode": "Mod de procesare secvențială",
   "performanceModeDescription": "Activează sau dezactivează modul de performanță",
   "togglePerformanceTooltip": "Comută modul de performanță",
   "settingsName": "Setări",

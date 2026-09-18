@@ -51,6 +51,7 @@
   "enterFullscreen": "Enter fullscreen",
   "exitFullscreen": "Exit fullscreen",
   "performanceModeName": "Performance Mode",
+  "pipelineSequentialMode": "Sequential processing mode",
   "performanceModeDescription": "Toggle the performance mode",
   "togglePerformanceTooltip": "Toggle performance mode",
   "settingsName": "Settings",

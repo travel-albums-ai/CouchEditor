@@ -2359,7 +2359,9 @@ async function runEvaluation(
   const { evaluationId, nodes, edges } = message;
   const startedAt = performance.now();
   const taskQueue = new PipelineTaskQueue(
-    Math.max(1, Math.min(32, Math.round(message.maxConcurrentTasks) || 5))
+    message.sequentialMode
+      ? 1
+      : Math.max(1, Math.min(32, Math.round(message.maxConcurrentTasks) || 5))
   );
   const aiRequestQueue = new AIRequestQueue(
     Math.max(1, Math.min(32, Math.round(message.maxAIRequests) || 2)),
@@ -2394,16 +2396,29 @@ async function runEvaluation(
 
       const incoming = edges.filter((edge) => edge.target === nodeId);
 
-      const inputEntries = await Promise.all(
-        incoming.map(async (edge) => {
-          const upstream = await evaluateNode(edge.source);
+      const inputEntries = message.sequentialMode
+        ? await incoming.reduce<Promise<Array<readonly [string, unknown]>>>(
+          async (entriesPromise, edge) => {
+            const entries = await entriesPromise;
+            const upstream = await evaluateNode(edge.source);
+            entries.push([
+              edge.targetHandle ?? "input",
+              upstream[edge.sourceHandle ?? "output"],
+            ] as const);
+            return entries;
+          },
+          Promise.resolve([])
+        )
+        : await Promise.all(
+          incoming.map(async (edge) => {
+            const upstream = await evaluateNode(edge.source);
 
-          return [
-            edge.targetHandle ?? "input",
-            upstream[edge.sourceHandle ?? "output"],
-          ] as const;
-        })
-      );
+            return [
+              edge.targetHandle ?? "input",
+              upstream[edge.sourceHandle ?? "output"],
+            ] as const;
+          })
+        );
 
       const inputs = Object.fromEntries(inputEntries);
 
@@ -2651,51 +2666,62 @@ async function runEvaluation(
 
   // Post each viewer's result as soon as it is ready instead of
   // waiting for the whole graph to finish.
-  const viewerPosts = nodes
-    .filter((node) => VIEWER_NODE_TYPES.has(node.type ?? ""))
-    .map((node) =>
-      evaluateNode(node.id)
-        .then(async (nodeOutputs) => {
-          throwIfStale(evaluationId);
+  const postViewer = async (node: PipelineWorkerNode) => {
+    try {
+      const nodeOutputs = await evaluateNode(node.id);
+      throwIfStale(evaluationId);
 
-          const images = (node.type === "image-picker"
-            ? nodeOutputs.pickerPreview
-            : nodeOutputs.image) as WorkerImage[] | undefined ?? [];
-          const payload = await taskQueue.run(
-            evaluationId,
-            () => encodeImagesForTransport(
-              images,
-              evaluationId,
-              Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10)),
-              node.id
-            )
-          );
+      const images = (node.type === "image-picker"
+        ? nodeOutputs.pickerPreview
+        : nodeOutputs.image) as WorkerImage[] | undefined ?? [];
+      const payload = await taskQueue.run(
+        evaluationId,
+        () => encodeImagesForTransport(
+          images,
+          evaluationId,
+          Math.max(1, Math.min(100, Math.round(message.photoBatchSize) || 10)),
+          node.id
+        )
+      );
 
-          throwIfStale(evaluationId);
+      throwIfStale(evaluationId);
 
-          workerScope.postMessage({
-            type: "viewer",
-            evaluationId,
-            nodeId: node.id,
-            images: payload,
-          });
-        })
-        .catch((error: unknown) => {
-          // Staleness is cancellation, not failure.
-          if (!(error instanceof StaleEvaluationError)) {
-            console.error(`Viewer node "${node.id}" failed:`, error);
-          }
-        })
-    );
+      workerScope.postMessage({
+        type: "viewer",
+        evaluationId,
+        nodeId: node.id,
+        images: payload,
+      });
+    } catch (error: unknown) {
+      // Staleness is cancellation, not failure.
+      if (!(error instanceof StaleEvaluationError)) {
+        console.error(`Viewer node "${node.id}" failed:`, error);
+      }
+    }
+  };
+
+  const viewerNodes = nodes.filter((node) => VIEWER_NODE_TYPES.has(node.type ?? ""));
 
   // Evaluate every node.
-  await Promise.all(nodes.map((node) => evaluateNode(node.id)));
+  if (message.sequentialMode) {
+    for (const node of nodes) {
+      await evaluateNode(node.id);
+    }
+  } else {
+    await Promise.all(nodes.map((node) => evaluateNode(node.id)));
+  }
 
   // The transport encode above is async, so without this await the
   // "done" message would overtake the viewer messages; the client
   // resolves still-pending viewers as empty on "done" and the real
   // results would be dropped.
-  await Promise.all(viewerPosts);
+  if (message.sequentialMode) {
+    for (const node of viewerNodes) {
+      await postViewer(node);
+    }
+  } else {
+    await Promise.all(viewerNodes.map(postViewer));
+  }
 
   closeRetiredBitmaps(await Promise.all(outputs.values()));
 

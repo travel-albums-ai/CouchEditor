@@ -18,6 +18,7 @@
   "enterFullscreen": "Włącz pełny ekran",
   "exitFullscreen": "Wyjdź z pełnego ekranu",
   "performanceModeName": "Tryb wydajności",
+  "pipelineSequentialMode": "Tryb przetwarzania sekwencyjnego",
   "performanceModeDescription": "Włącz lub wyłącz tryb wydajności",
   "togglePerformanceTooltip": "Przełącz tryb wydajności",
   "settingsName": "Ustawienia",

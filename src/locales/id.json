@@ -18,6 +18,7 @@
   "enterFullscreen": "Masuk layar penuh",
   "exitFullscreen": "Keluar dari layar penuh",
   "performanceModeName": "Mode performa",
+  "pipelineSequentialMode": "Mode pemrosesan berurutan",
   "performanceModeDescription": "Aktifkan atau nonaktifkan mode performa",
   "togglePerformanceTooltip": "Ganti mode performa",
   "settingsName": "Pengaturan",

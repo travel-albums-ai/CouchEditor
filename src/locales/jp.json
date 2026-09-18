@@ -18,6 +18,7 @@
   "enterFullscreen": "全画面にする",
   "exitFullscreen": "全画面を終了",
   "performanceModeName": "パフォーマンスモード",
+  "pipelineSequentialMode": "逐次処理モード",
   "performanceModeDescription": "パフォーマンスモードを切り替える",
   "togglePerformanceTooltip": "パフォーマンスモードを切り替える",
   "settingsName": "設定",

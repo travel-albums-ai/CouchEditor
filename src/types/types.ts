@@ -53,6 +53,7 @@ export type PipelineEvaluateMessage = {
   photoBatchSize: number;
   maxAIRequests: number;
   aiCallDelayMs: number;
+  sequentialMode: boolean;
   nodes: PipelineWorkerNode[];
   edges: PipelineWorkerEdge[];
 };

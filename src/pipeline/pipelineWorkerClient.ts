@@ -380,6 +380,7 @@ export async function evaluatePipeline(
       0,
       Math.min(10000, Math.round(getSettingsStore().pipelineAICallDelayMs) || 0)
     ),
+    sequentialMode: getSettingsStore().pipelineSequentialMode,
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),
   };

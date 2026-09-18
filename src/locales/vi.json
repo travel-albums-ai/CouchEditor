@@ -18,6 +18,7 @@
   "enterFullscreen": "Vào toàn màn hình",
   "exitFullscreen": "Thoát toàn màn hình",
   "performanceModeName": "Chế độ hiệu năng",
+  "pipelineSequentialMode": "Chế độ xử lý tuần tự",
   "performanceModeDescription": "Bật hoặc tắt chế độ hiệu năng",
   "togglePerformanceTooltip": "Chuyển chế độ hiệu năng",
   "settingsName": "Cài đặt",

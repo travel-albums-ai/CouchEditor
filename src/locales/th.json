@@ -18,6 +18,7 @@
   "enterFullscreen": "เข้าสู่โหมดเต็มหน้าจอ",
   "exitFullscreen": "ออกจากโหมดเต็มหน้าจอ",
   "performanceModeName": "โหมดประสิทธิภาพ",
+  "pipelineSequentialMode": "โหมดประมวลผลตามลำดับ",
   "performanceModeDescription": "เปิดหรือปิดโหมดประสิทธิภาพ",
   "togglePerformanceTooltip": "สลับโหมดประสิทธิภาพ",
   "settingsName": "การตั้งค่า",
