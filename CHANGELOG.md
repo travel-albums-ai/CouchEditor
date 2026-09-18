@@ -1,3 +1,13 @@
+## [1.185.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.184.0...v1.185.0) (2026-09-18)
+
+### ✨ Features
+
+* add a note about the build tools used for CouchEditor ([c36db74](https://github.com/travel-albums-ai/CouchEditor/commit/c36db742b92aacf400ab130f0910686be8607e8d))
+
+### 🧹 Refactors
+
+* update trashRef type to HTMLElement and replace Box with Button in DeleteButton for improved semantics ([3ed6043](https://github.com/travel-albums-ai/CouchEditor/commit/3ed604373841c038a2a4cd3314e787b082cebcff))
+
 ## [1.184.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.183.1...v1.184.0) (2026-09-18)
 
 ### ✨ Features
