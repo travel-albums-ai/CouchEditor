@@ -21,25 +21,32 @@ export default function PipelineStageTiming({
 }: PipelineStageTimingProps) {
   const [durationMs, setDurationMs] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
 
   useEffect(() => {
     const startedEventName = `${nodeType}:stageStarted`;
     const timingEventName = `${nodeType}:stageTiming`;
+
     const handleStarted = (event: Event) => {
       const { nodeId: startedNodeId } =
-        (event as CustomEvent<{ nodeId: string }>).detail;
+      (event as CustomEvent<{ nodeId: string }>).detail;
 
       if (startedNodeId === nodeId) {
         setIsProcessing(true);
-        isBusy?.(true)
+        setStartedAt(performance.now());
+        setElapsedMs(0);
+        isBusy?.(true);
       }
     };
+
     const handleTiming = (event: Event) => {
       const { nodeId: timingNodeId, durationMs: nextDurationMs } =
-        (event as CustomEvent<StageTimingDetail>).detail;
+      (event as CustomEvent<StageTimingDetail>).detail;
 
       if (timingNodeId === nodeId) {
         setIsProcessing(false);
+        setStartedAt(null);
         isBusy?.(false);
         setDurationMs(nextDurationMs);
       }
@@ -47,18 +54,57 @@ export default function PipelineStageTiming({
 
     window.addEventListener(startedEventName, handleStarted);
     window.addEventListener(timingEventName, handleTiming);
+
     return () => {
       window.removeEventListener(startedEventName, handleStarted);
       window.removeEventListener(timingEventName, handleTiming);
     };
   }, [nodeId, nodeType]);
 
+  useEffect(() => {
+    if (!isProcessing || startedAt === null) return;
+
+    const interval = setInterval(() => {
+      setElapsedMs(performance.now() - startedAt);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isProcessing, startedAt]);
+
   const displayInSeconds = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
 
   return <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-    {isProcessing && <Box sx={{ opacity: 0.1 }}>
-      <Skeleton variant="rounded" width={100} sx={{ bgcolor: 'primary.main', borderRadius: 2 }} height={32} />
-    </Box>}
+    {isProcessing && (
+      <Box sx={{ position: 'relative', width: 100, height: 32 }}>
+        <Skeleton
+          variant="rounded"
+          width={100}
+          height={32}
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            // bgcolor: 'primary.main',
+            borderRadius: 2,
+            opacity: 0.1,
+          }}
+        />
+
+        <Box
+          sx={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 18,
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
+          {Math.round(elapsedMs)} ms
+        </Box>
+      </Box>
+    )}
     {!isProcessing && <Tooltip title={`Time taken to process: ${displayInSeconds} s`}>
       <span>
         <NewChip
