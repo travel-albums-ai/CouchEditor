@@ -1,5 +1,6 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NoPhotos from '@/components/NoPhotos';
+import PictureInPictureButton from '@/components/PictureInPictureButton';
 import SolidChip from '@/components/SolidChip';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/pipeline/components/InputHandle';
@@ -26,7 +27,9 @@ function SinglePhotoViewerNode({
 
   return (<>
     <InputHandle id="image" position={Position.Top} />
-    <NodeWrapper type="viewer-single">
+    <NodeWrapper type="viewer-single" tools={<>
+      <PictureInPictureButton photo={match} />
+    </>}>
       <Box sx={{ height: '600px', width: '600px', overflow: 'auto' }}>
         {match ? (
           <>
@@ -34,6 +37,7 @@ function SinglePhotoViewerNode({
               <Typography variant="body2" noWrap sx={{ flex: 1, fontWeight: 'bold' }}>
                 {match.name}
               </Typography>
+              {/* <PictureInPictureButton photo={match} /> */}
               <SolidChip label={`${match.width} x ${match.height} px`} fontSize={14} minWidth={32} height={28} icon={<RulerDimensionLine />} />
               <SolidChip label={`${formatMegabytes(match.byteSize)}`} fontSize={14} minWidth={32} height={28} icon={<HardDrive />} />
             </Box>
