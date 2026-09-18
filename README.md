@@ -167,6 +167,12 @@ The screenshot refresh command used by maintainers is:
 npm run snaphot
 ```
 
+## 🤝 Looking for collaborators
+
+I am looking for collaborators, founders, and volunteers who are interested in building better tools for photo editing and creative workflows. Contributions can include product ideas, design, development, documentation, testing, or feedback.
+
+If CouchEditor sounds interesting, open an issue or pull request to introduce yourself and share how you would like to help.
+
 ## 📄 License
 
 See [LICENSE](LICENSE) for licensing information.
