@@ -176,3 +176,7 @@ If CouchEditor sounds interesting, open an issue or pull request to introduce yo
 ## 📄 License
 
 See [LICENSE](LICENSE) for licensing information.
+
+
+
+Build with love using Vite and React.
