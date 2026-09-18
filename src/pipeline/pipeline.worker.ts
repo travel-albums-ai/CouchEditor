@@ -2522,6 +2522,19 @@ async function runEvaluation(
       const cached = getCachedPhaseOutput(signature);
       if (cached) {
         console.log(`↺ reused ${node.id}`);
+        workerScope.postMessage({
+          type: "stageStarted",
+          evaluationId,
+          nodeType: node.type ?? "",
+          nodeId: node.id,
+        });
+        workerScope.postMessage({
+          type: "stageTiming",
+          evaluationId,
+          nodeType: node.type ?? "",
+          nodeId: node.id,
+          durationMs: 0,
+        });
         return cached;
       }
 

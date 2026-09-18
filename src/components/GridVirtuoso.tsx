@@ -8,6 +8,7 @@ type Props = {
   photos: ImageValue[];
   width?: number;
   height?: number;
+  isBusy?: boolean;
 };
 
 const GRID_STYLE = { height: '100%', overflowX: 'visible', borderRadius: '8px' } as const;
@@ -30,7 +31,7 @@ const GridList = ({ style, children, width, gap, ...props }: any) => {
   );
 };
 
-export default function GridVirtuoso({ photos }: Props) {
+export default function GridVirtuoso({ photos, isBusy = false }: Props) {
   const width = 300;
   const height = 300;
   const virtuosoRef = useRef<VirtuosoGridHandle>(null);
@@ -48,6 +49,8 @@ export default function GridVirtuoso({ photos }: Props) {
             display: 'block',
             width: '100%',
             height: '300px',
+            opacity: isBusy ? 0.5 : 1,
+            filter: isBusy ? 'blur(4px)' : 'none',
             objectFit: 'contain',
             borderRadius: '8px',
             padding: '1px',

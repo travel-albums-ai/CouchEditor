@@ -1,7 +1,7 @@
 import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
+import NewChip from '@/components/NewChip';
 import NoPhotos from '@/components/NoPhotos';
 import PictureInPictureButton from '@/components/PictureInPictureButton';
-import SolidChip from '@/components/SolidChip';
 import { useSettingsStoreSelector } from '@/context/settingsStore';
 import { InputHandle } from '@/pipeline/components/InputHandle';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
@@ -38,8 +38,8 @@ function SinglePhotoViewerNode({
                 {match.name}
               </Typography>
               {/* <PictureInPictureButton photo={match} /> */}
-              <SolidChip label={`${match.width} x ${match.height} px`} fontSize={14} minWidth={32} height={28} icon={<RulerDimensionLine />} />
-              <SolidChip label={`${formatMegabytes(match.byteSize)}`} fontSize={14} minWidth={32} height={28} icon={<HardDrive />} />
+              <NewChip label={`${match.width} x ${match.height} px`} fontSize={16} sx={{ height: 38 }} icon={<RulerDimensionLine />} />
+              <NewChip label={`${formatMegabytes(match.byteSize)}`} fontSize={16} sx={{ height: 38 }} icon={<HardDrive />} />
             </Box>
             <AlbumPhotoThumbnailBackgroundNg
               photo={{ name: match.name, src: match.src}}

@@ -1,6 +1,6 @@
 import GridVirtuoso from '@/components/GridVirtuoso';
+import NewChip from '@/components/NewChip';
 import NoPhotos from '@/components/NoPhotos';
-import SolidChip from '@/components/SolidChip';
 import { useSettings } from '@/context/settingsStore';
 import { InputHandle } from '@/pipeline/components/InputHandle';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
@@ -63,6 +63,7 @@ function ViewerNode({
   const [progress, setProgress] = useState<Progress | null>(null);
   const [downloading, setDownloading] = useState(false);
   const { setSetting } = useSettings();
+  const [isBusy, setIsBusy] = useState(false);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -115,7 +116,7 @@ function ViewerNode({
           </Typography>
         </Box>
       )}
-      <PipelineStageTiming nodeId={id} nodeType={'viewer'} />
+      <PipelineStageTiming nodeId={id} nodeType={'viewer'} isBusy={setIsBusy} />
     </>}>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
@@ -123,7 +124,7 @@ function ViewerNode({
           variant="outlined"
           fullWidth
           startIcon={<Download size={14} />}
-          disabled={images.length === 0 || downloading}
+          disabled={isBusy || progress?.completed !== progress?.total || images.length === 0 || downloading}
           onClick={() => {
             setSetting(prev => ({ ...prev,
               lightboxOpen: true,
@@ -143,18 +144,19 @@ function ViewerNode({
           variant="contained"
           fullWidth
           startIcon={<Download size={14} />}
-          disabled={images.length === 0 || downloading}
+          disabled={isBusy || progress?.completed !== progress?.total || images.length === 0 || downloading}
           onClick={handleDownload}
         >
           {downloading ? t('pipelineViewerZipping') : t('pipelineViewerDownloadAll')}
         </Button>
-        <SolidChip count={images.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={120} />
+        <NewChip count={images.length} label={t('pipelinePhotos')} fontSize={16} icon={<Images size={16} />} sx={{ height: 38 }} />
       </Box>
 
       <Box sx={{ height: '900px', width: '900px', overflow: 'auto' }} className="nowheel">
         {images.length > 0 ? (
           <GridVirtuoso
             photos={images.map((file) => ({ name: file.name, src: file.src }))}
+            isBusy={isBusy || progress?.completed !== progress?.total}
           />
         ) : (
           <NoPhotos />

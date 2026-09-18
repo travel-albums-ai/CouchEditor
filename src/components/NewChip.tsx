@@ -101,6 +101,7 @@ export default function NewChip({
         sx={{
           fontSize,
           lineHeight: 1,
+          textWrap: 'nowrap',
         }}
       >
         {count} {label}

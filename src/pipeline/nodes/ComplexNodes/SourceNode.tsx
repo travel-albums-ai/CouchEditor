@@ -1,6 +1,6 @@
 import GridVirtuoso from '@/components/GridVirtuoso';
+import NewChip from '@/components/NewChip';
 import NoPhotos from '@/components/NoPhotos';
-import SolidChip from '@/components/SolidChip';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
@@ -17,6 +17,8 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
   const [files, setFiles] = useState(data.files ?? []);
   const [progress, setProgress] = useState<Progress | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isBusy, setIsBusy] = useState(false);
+
   const totalSizeInMb = files.reduce(
     (total, file) => total + (file instanceof File ? file.size : 0),
     0
@@ -83,10 +85,10 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
           </Typography>
         </Box>
       )}
-      <PipelineStageTiming nodeId={id} nodeType={'source'} />
+      <PipelineStageTiming nodeId={id} nodeType={'source'} isBusy={setIsBusy} />
     </>}>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1, borderBottom: '1px dotted', borderColor: 'divider', pb: 2 }}>
         <Button
           sx={{
             bgcolor: theme => `color-mix(in srgb, ${theme.palette.background.paper} 80%, ${theme.palette.primary.main} 20%)`,
@@ -95,6 +97,7 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
             }
           }}
           fullWidth
+          disabled={isBusy || progress?.completed !== progress?.total}
           component="label"
           variant="contained"
           startIcon={<Upload size={16} />}
@@ -113,8 +116,8 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
             }}
           />
         </Button>
-        <SolidChip count={files.length} label={t('pipelinePhotos')} fontSize={16} height={38} icon={<Images size={16} />} minWidth={150} />
-        <SolidChip count={`${totalSizeInMb.toFixed(2)} MB`} label="" fontSize={16} height={38} icon={<HardDrive size={16} />} minWidth={120} />
+        <NewChip count={files.length} label={t('pipelinePhotos')} fontSize={16} icon={<Images size={16} />} sx={{ height: 38 }} />
+        <NewChip count={`${totalSizeInMb.toFixed(2)} MB`} label="" fontSize={16} icon={<HardDrive size={16} />} sx={{ height: 38 }} />
       </Box>
 
       <Box
@@ -171,6 +174,7 @@ function SourceNode({ id, data }: NodeProps<Node<{ files?: File[] }>>) {
         )}
         {previewUrls.length > 0 ? (
           <GridVirtuoso
+            isBusy={isBusy}
             photos={files
               .filter((file): file is File => file instanceof File)
               .map((file, index) => ({ name: file.name, src: previewUrls[index] }))}
