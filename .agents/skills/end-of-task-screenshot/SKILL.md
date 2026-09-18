@@ -39,3 +39,5 @@ After completing every workspace task, capture the current application state wit
 ## Validation
 
 The bundled script creates `screenshots/` when needed, launches Chromium, navigates to the configured URL, captures the initial, onboarding, settings, templates, help, and toolbox states, writes both date-based captures and stable aliases, and prints the absolute output paths. Playwright must be available in the environment, either from the repository dependencies or the agent's configured Node runtime.
+
+The per-function help captures are written under `screenshots/help/` using the exact DOM-derived name `help-item-${labelKey+groupKey}.png`. Preserve the concatenated `labelKey` and `groupKey` format without inserting a separator; these files are consumed by the math-functions documentation skill.
