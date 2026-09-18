@@ -15,6 +15,7 @@ export default function SettingsWindow() {
 
   return (
     <Dialog
+      id="settings-window"
       fullWidth
       maxWidth="xl"
       open={showWindow}
