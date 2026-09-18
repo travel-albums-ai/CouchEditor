@@ -1,3 +1,9 @@
+## [1.181.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.181.0...v1.181.1) (2026-09-18)
+
+### 🐛 Fixes
+
+* add missing id attribute to HelpToggle component ([397dc2d](https://github.com/travel-albums-ai/CouchEditor/commit/397dc2d654c98cea447d323a982976c2326cd1ab))
+
 ## [1.181.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.180.0...v1.181.0) (2026-09-18)
 
 ### ✨ Features
