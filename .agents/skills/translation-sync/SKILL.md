@@ -1,11 +1,11 @@
 ---
 name: translation-sync
-description: Keep localized JSON translations synchronized with en.json. Use when adding, translating, reviewing, or validating locale keys in src/locales, especially when a locale is missing English entries or has stale translation coverage.
+description: When the user says translations are needed, synchronize localized JSON translations with en.json and validate locale coverage.
 ---
 
 # Translation Sync
 
-Keep `src/locales/en.json` as the source of truth for translation keys. Preserve the existing locale file structure and terminology while adding translations for every English leaf key.
+Run this skill only when the user explicitly says that translations are needed. At that point, keep `src/locales/en.json` as the source of truth for translation keys. Preserve the existing locale file structure and terminology while adding translations for every English leaf key.
 
 ## Scope
 
