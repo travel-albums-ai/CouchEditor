@@ -26,9 +26,16 @@ export type CurrentPipeline = PipelineGraph & {
   isDirty: boolean
 }
 
+export type HotFolderReadState = {
+  directory: string | null
+  permission: PermissionState
+  claim: boolean
+}
+
 type PipelineStore = {
   pipelines: SavedPipeline[],
   currentPipeline: CurrentPipeline,
+  hotFolderRead: HotFolderReadState,
   lockReactflow: boolean,
   showToolbox: boolean,
   toolboxAsGrid: boolean,
@@ -59,6 +66,11 @@ const defaults: PipelineStore = {
     nodes: [],
     edges: [],
     isDirty: false,
+  },
+  hotFolderRead: {
+    directory: null,
+    permission: 'prompt',
+    claim: false,
   },
   lockReactflow: false,
   showToolbox: true,
@@ -109,6 +121,7 @@ export const usePipelineStore = () => {
     toolboxAsGrid: store.toolboxAsGrid,
     pipelines: store.pipelines,
     currentPipeline: store.currentPipeline,
+    hotFolderRead: store.hotFolderRead,
     setCurrentPipeline: (currentPipeline: CurrentPipeline | ((prev: CurrentPipeline) => CurrentPipeline)) =>
       setState((prev) => ({
         ...prev,
@@ -133,6 +146,13 @@ export const usePipelineStore = () => {
       setState((prev) => ({
         ...prev,
         currentPipeline: { ...prev.currentPipeline, isDirty },
+      })),
+    setHotFolderRead: (hotFolderRead: HotFolderReadState | ((prev: HotFolderReadState) => HotFolderReadState)) =>
+      setState((prev) => ({
+        ...prev,
+        hotFolderRead: typeof hotFolderRead === 'function'
+          ? hotFolderRead(prev.hotFolderRead)
+          : hotFolderRead,
       })),
     toggleToolbox: () => setState((prev) => ({ ...prev, showToolbox: !prev.showToolbox })),
     saveNew: (name: string, graph: PipelineGraph) => {

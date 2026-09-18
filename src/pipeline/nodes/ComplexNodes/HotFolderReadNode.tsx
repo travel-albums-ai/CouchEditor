@@ -1,4 +1,6 @@
 import SolidChip from '@/components/SolidChip';
+import { usePipelineStore } from '@/context/pipelineStore';
+import { loadHotFolderReadHandle, saveHotFolderReadHandle } from '@/lib/hotFolderHandleStore';
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Box, Button, Typography } from '@mui/material';
@@ -22,11 +24,18 @@ type HotFolderReadData = {
   files?: File[];
 };
 
+type HotFolderPermissionDescriptor = { mode?: 'read' | 'readwrite' };
+
+type HotFolderDirectoryHandle = FileSystemDirectoryHandle & {
+  queryPermission: (descriptor?: HotFolderPermissionDescriptor) => Promise<PermissionState>
+  requestPermission: (descriptor?: HotFolderPermissionDescriptor) => Promise<PermissionState>
+};
+
 function isImageFile(file: File): boolean {
   return IMAGE_TYPES.has(file.type) || /\.(avif|bmp|gif|jpe?g|png|tiff?|webp)$/i.test(file.name);
 }
 
-async function readImageFiles(directory: FileSystemDirectoryHandle): Promise<File[]> {
+async function readImageFiles(directory: HotFolderDirectoryHandle): Promise<File[]> {
   const files: File[] = [];
 
   for await (const entry of directory.values()) {
@@ -50,13 +59,41 @@ function HotFolderReadNode({
   data,
 }: NodeProps<Node<HotFolderReadData>>) {
   const { setNodes } = useReactFlow();
+  const { hotFolderRead, setHotFolderRead } = usePipelineStore();
   const { t } = useTranslation();
-  const directoryRef = useRef<FileSystemDirectoryHandle | null>(null);
+  const directoryRef = useRef<HotFolderDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
   const snapshotRef = useRef<string | null>(null);
   const [directoryName, setDirectoryName] = useState<string>();
   const [fileCount, setFileCount] = useState(data.files?.length ?? 0);
   const [status, setStatus] = useState(() => t('pipelineChooseFolderToWatch'));
+
+  useEffect(() => {
+    if (!hotFolderRead.claim) return;
+
+    let disposed = false;
+
+    void loadHotFolderReadHandle()
+      .then(async (directory) => {
+        if (!directory || disposed) return;
+
+        const permission = await (directory as HotFolderDirectoryHandle).queryPermission({ mode: 'read' });
+        if (disposed) return;
+
+        setHotFolderRead((current) => ({ ...current, permission }));
+
+        directoryRef.current = directory as HotFolderDirectoryHandle;
+        setDirectoryName(directory.name);
+        setStatus(permission === 'granted' ? t('pipelineWatchingImageChanges') : t('pipelineReadPermissionDenied'));
+      })
+      .catch((error: unknown) => {
+        if (!disposed) console.error('Failed to restore hot folder:', error);
+      });
+
+    return () => {
+      disposed = true;
+    };
+  }, [hotFolderRead.claim, setHotFolderRead, t]);
 
   useEffect(() => {
     let disposed = false;
@@ -104,7 +141,13 @@ function HotFolderReadNode({
 
   const chooseFolder = async () => {
     try {
-      const directory = await window.showDirectoryPicker({ mode: 'read' });
+      let directory = directoryRef.current;
+      if (!directory) {
+        directory = await (window as unknown as Window & {
+          showDirectoryPicker: (options?: HotFolderPermissionDescriptor) => Promise<FileSystemDirectoryHandle>
+        }).showDirectoryPicker({ mode: 'read' }) as HotFolderDirectoryHandle;
+      }
+
       const permission = await directory.requestPermission({ mode: 'read' });
 
       if (permission !== 'granted') {
@@ -116,6 +159,8 @@ function HotFolderReadNode({
       snapshotRef.current = null;
       setDirectoryName(directory.name);
       setStatus(t('pipelineWatchingImageChanges'));
+      await saveHotFolderReadHandle(directory);
+      setHotFolderRead({ directory: directory.name, permission, claim: true });
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
       console.error('Failed to choose hot folder:', error);
