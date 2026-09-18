@@ -1,31 +1,22 @@
-import { Box, Tooltip } from '@mui/material';
 import { Scan } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineCanvas } from '@/hooks/usePipelineCanvas';
 
 export default function ZoomTo100Button() {
   const { actionsRef } = usePipelineCanvas();
+  const { t } = useTranslation();
 
   return (
-    <Tooltip title="Zoom to 100%" placement="right">
-      <Box
-        sx={{
-          p: 1,
-          py: 2,
-          borderRadius: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '1px solid',
-          borderColor: 'divider',
-          bgcolor: 'background.default',
-          color: 'text.secondary',
-          cursor: 'pointer',
-        }}
-        onClick={() => actionsRef.current.zoomTo100()}
-      >
-        <Scan size={16} />
-      </Box>
-    </Tooltip>
+    <GenericToggleButtonGroup variant="standard" items={[
+      {
+        tooltip: t('zoomTo100ToggleTooltip'),
+        icon: <Scan size={16} />,
+        onClick: () => actionsRef.current.zoomTo100(),
+        selected: false,
+      },
+    ] satisfies GenericToggleButtonProps[]} />
   );
 }

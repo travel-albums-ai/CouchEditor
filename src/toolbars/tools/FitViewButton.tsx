@@ -1,31 +1,21 @@
-import { Box, Tooltip } from '@mui/material';
-import { Maximize2 } from 'lucide-react';
-
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineCanvas } from '@/hooks/usePipelineCanvas';
+import { Maximize2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function FitViewButton() {
   const { actionsRef } = usePipelineCanvas();
+  const { t } = useTranslation();
 
   return (
-    <Tooltip title="Fit to screen" placement="right">
-      <Box
-        sx={{
-          p: 1,
-          py: 2,
-          borderRadius: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '1px solid',
-          borderColor: 'divider',
-          bgcolor: 'background.default',
-          color: 'text.secondary',
-          cursor: 'pointer',
-        }}
-        onClick={() => actionsRef.current.fitView()}
-      >
-        <Maximize2 size={16} />
-      </Box>
-    </Tooltip>
+    <GenericToggleButtonGroup variant="standard" items={[
+      {
+        tooltip: t('fitViewToggleTooltip'),
+        icon: <Maximize2 size={16} />,
+        onClick: () => actionsRef.current.fitView(),
+        selected: false,
+      },
+    ] satisfies GenericToggleButtonProps[]} />
   );
 }

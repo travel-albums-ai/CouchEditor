@@ -87,14 +87,13 @@ export default function Toolbars() {
       floatingSx: { },
       groups: [
         <>
-          <Divider />
           <ZoomOutButton />
           <ZoomLevel />
           <ZoomInButton />
           <FitViewButton />
           <ZoomTo100Button />
-
-
+        </>,
+        <>
           <SettingsWindowToggle />
           <DarkLightStatus />
           <FullscreenToggle />

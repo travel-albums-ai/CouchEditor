@@ -1,31 +1,22 @@
-import { Box, Tooltip } from '@mui/material';
 import { ZoomIn } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
+import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
+import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { usePipelineCanvas } from '@/hooks/usePipelineCanvas';
 
 export default function ZoomInButton() {
   const { actionsRef } = usePipelineCanvas();
+  const { t } = useTranslation();
 
   return (
-    <Tooltip title="Zoom in" placement="right">
-      <Box
-        sx={{
-          p: 1,
-          py: 2,
-          borderRadius: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '1px solid',
-          borderColor: 'divider',
-          bgcolor: 'background.default',
-          color: 'text.secondary',
-          cursor: 'pointer',
-        }}
-        onClick={() => actionsRef.current.zoomIn()}
-      >
-        <ZoomIn size={16} />
-      </Box>
-    </Tooltip>
+    <GenericToggleButtonGroup variant="standard" items={[
+      {
+        tooltip: t('zoomInToggleTooltip'),
+        icon: <ZoomIn size={16} />,
+        onClick: () => actionsRef.current.zoomIn(),
+        selected: false,
+      },
+    ] satisfies GenericToggleButtonProps[]} />
   );
 }
