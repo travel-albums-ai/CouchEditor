@@ -1,3 +1,13 @@
+## [1.184.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.183.1...v1.184.0) (2026-09-18)
+
+### ✨ Features
+
+* add aria-labels and improve accessibility for various components ([ce01c7d](https://github.com/travel-albums-ai/CouchEditor/commit/ce01c7d180ee3c31123200e082cff4a6ca6bca59))
+
+### 🧹 Refactors
+
+* remove obsolete agent files and add ui-playwright-targeting skill documentation ([75e65b3](https://github.com/travel-albums-ai/CouchEditor/commit/75e65b36d7029f7c9758bca6df5ea5fa9b46f8de))
+
 ## [1.183.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.183.0...v1.183.1) (2026-09-18)
 
 ### 🐛 Fixes
