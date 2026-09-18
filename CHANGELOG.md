@@ -1,3 +1,9 @@
+## [1.181.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.180.0...v1.181.0) (2026-09-18)
+
+### ✨ Features
+
+* add end-of-task screenshot and translation sync skills with detailed procedures ([0c27e6b](https://github.com/travel-albums-ai/CouchEditor/commit/0c27e6baadac6bb1d72ab6e64faacc3f114dbdbe))
+
 ## [1.180.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.179.1...v1.180.0) (2026-09-18)
 
 ### ✨ Features
