@@ -40,6 +40,27 @@ import {
 } from './pipelineConfig';
 import { evaluatePipeline, terminatePipelineWorker } from "./pipelineWorkerClient";
 
+function getBlobBytes(value: unknown, seen = new Set<object>()): number {
+  if (value instanceof Blob) {
+    return value.size;
+  }
+
+  if (!value || typeof value !== 'object' || seen.has(value)) {
+    return 0;
+  }
+
+  seen.add(value);
+
+  if (Array.isArray(value)) {
+    return value.reduce((total, item) => total + getBlobBytes(item, seen), 0);
+  }
+
+  return Object.values(value).reduce(
+    (total, item) => total + getBlobBytes(item, seen),
+    0
+  );
+}
+
 function Pipeline() {
   const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
@@ -158,12 +179,27 @@ function Pipeline() {
 
   // Free the worker thread (and its in-memory phase result cache)
   // when the pipeline page unmounts.
-  useEffect(() => () => terminatePipelineWorker(), []);
+  useEffect(() => () => {
+    window.dispatchEvent(
+      new CustomEvent('pipeline:input-memory', { detail: { inputBytes: 0 } })
+    );
+    terminatePipelineWorker();
+  }, []);
 
   useEffect(() => {
     nodesRef.current = nodes;
     edgesRef.current = edges;
     updateCurrentPipeline({ nodes, edges }, currentPipeline.isDirty);
+
+    const seen = new Set<object>();
+    const inputBytes = nodes.reduce(
+      (total, node) => total + getBlobBytes(node.data, seen),
+      0
+    );
+
+    window.dispatchEvent(
+      new CustomEvent('pipeline:input-memory', { detail: { inputBytes } })
+    );
   }, [edges, nodes]);
 
   const evaluate = useCallback(async () => {

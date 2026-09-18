@@ -1,5 +1,6 @@
 import DomCounter from '@/base/DomCounter';
 import KeyboardMenu from '@/base/KeyboardMenu';
+import PipelineCacheMemory from '@/base/PipelineCacheMemory';
 import PipelineNodeCounter from '@/base/PipelineNodeCounter';
 import PipelineTotalTime from '@/base/PipelineTotalTime';
 import RenderingProgressBars from '@/base/RenderingProgressBars';
@@ -18,6 +19,7 @@ export default function StatusBar() {
       <Stack direction="row" data-side="left" divider={<Divider orientation="vertical" flexItem />} sx={{ display: 'flex', flex: 1, gap: 1, alignItems: 'center' }}>
         <PipelineNodeCounter />
         <PipelineTotalTime />
+        <PipelineCacheMemory />
       </Stack>
       <Stack direction="row" data-side="right" divider={<Divider orientation="vertical" flexItem />} sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <DomCounter />

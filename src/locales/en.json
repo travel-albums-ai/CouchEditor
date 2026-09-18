@@ -38,6 +38,8 @@
   "domElementsTooltip": "Number of DOM elements on the page",
   "pipelineNodesTooltip": "Number of nodes in the current pipeline",
   "pipelineTotalTimeTooltip": "Total time taken by the current pipeline",
+  "pipelineCacheMemoryTooltip": "Estimated memory retained by pipeline and viewer caches",
+  "pipelineClearCachesTooltip": "Clear pipeline caches and temporary buffers",
   "layoutTheme": "Theme",
   "toggleThemeTooltip": "Toggle theme",
   "toggleThemeName": "Toggle Theme",

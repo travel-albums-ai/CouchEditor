@@ -84,7 +84,22 @@ let activeEvaluationId = 0;
 
 const pendingViewers = new Map<string, PendingViewer>();
 const objectUrlsByNode = new Map<string, string[]>();
+const objectUrlBytesByNode = new Map<string, number>();
 const liveViewerNodeIds = new Set<string>();
+let workerCacheBytes = 0;
+
+function dispatchCacheMemory() {
+  const viewerBytes = [...objectUrlBytesByNode.values()].reduce(
+    (total, bytes) => total + bytes,
+    0
+  );
+
+  window.dispatchEvent(
+    new CustomEvent('pipeline:cache-memory', {
+      detail: { bytes: workerCacheBytes + viewerBytes },
+    })
+  );
+}
 
 function revokeObjectUrls(nodeId: string) {
   const urls = objectUrlsByNode.get(nodeId);
@@ -96,6 +111,8 @@ function revokeObjectUrls(nodeId: string) {
   }
 
   objectUrlsByNode.delete(nodeId);
+  objectUrlBytesByNode.delete(nodeId);
+  dispatchCacheMemory();
 }
 
 function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
@@ -204,8 +221,19 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
         message.nodeId,
         images.map((image) => image.src)
       );
+      objectUrlBytesByNode.set(
+        message.nodeId,
+        images.reduce((total, image) => total + image.byteSize, 0)
+      );
+      dispatchCacheMemory();
 
       pending.resolve(images);
+      return;
+    }
+
+    case "cacheMemory": {
+      workerCacheBytes = message.bytes;
+      dispatchCacheMemory();
       return;
     }
 
@@ -387,4 +415,12 @@ export function terminatePipelineWorker() {
   for (const nodeId of [...objectUrlsByNode.keys()]) {
     revokeObjectUrls(nodeId);
   }
+
+  workerCacheBytes = 0;
+  dispatchCacheMemory();
+}
+
+export function clearPipelineCaches() {
+  window.dispatchEvent(new CustomEvent('pipeline:clear-caches'));
+  terminatePipelineWorker();
 }

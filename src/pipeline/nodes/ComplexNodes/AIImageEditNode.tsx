@@ -85,8 +85,20 @@ export function createAIImageEditNode(config: AIImageEditNodeConfig) {
 
       window.addEventListener(`${config.type}:progress`, handler);
 
+      const clearPreview = () => {
+        if (previewUrl.current) {
+          URL.revokeObjectURL(previewUrl.current);
+          previewUrl.current = null;
+        }
+        setPreview(null);
+        setProgress(null);
+      };
+
+      window.addEventListener('pipeline:clear-caches', clearPreview);
+
       return () => {
         window.removeEventListener(`${config.type}:progress`, handler);
+        window.removeEventListener('pipeline:clear-caches', clearPreview);
         if (previewUrl.current) URL.revokeObjectURL(previewUrl.current);
       };
     }, [id]);

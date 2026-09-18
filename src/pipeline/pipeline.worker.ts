@@ -375,6 +375,8 @@ type GpuRenderer = {
   operationLocation: WebGLUniformLocation;
   paramsLocation: WebGLUniformLocation;
   resolutionLocation: WebGLUniformLocation;
+  textureWidth: number;
+  textureHeight: number;
 };
 
 let gpuRenderer: GpuRenderer | null | undefined;
@@ -460,6 +462,8 @@ function getGpuRenderer(): GpuRenderer | null {
       operationLocation,
       paramsLocation,
       resolutionLocation,
+      textureWidth: 0,
+      textureHeight: 0,
     };
   } catch {
     gpuRenderer = null;
@@ -486,6 +490,8 @@ function renderGpuImage(source: WorkerImage, operation: GpuOperation): WorkerIma
   gl.bindTexture(gl.TEXTURE_2D, renderer.texture);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source.bitmap);
+  renderer.textureWidth = source.width;
+  renderer.textureHeight = source.height;
   gl.uniform1i(renderer.operationLocation, gpuOperationIds[operation.kind]);
   gl.uniform1fv(renderer.paramsLocation, new Float32Array(operation.params ?? []));
   gl.uniform2f(renderer.resolutionLocation, source.width, source.height);
@@ -2287,6 +2293,21 @@ function closeRetiredBitmaps(activeOutputs: Iterable<NodeOutputs>) {
   retiredBitmaps.clear();
 }
 
+function getEstimatedCacheBytes(): number {
+  let bytes = 0;
+
+  for (const bitmap of getCachedBitmaps()) {
+    bytes += bitmap.width * bitmap.height * 4;
+  }
+
+  if (gpuRenderer) {
+    bytes += gpuRenderer.canvas.width * gpuRenderer.canvas.height * 4;
+    bytes += gpuRenderer.textureWidth * gpuRenderer.textureHeight * 4;
+  }
+
+  return bytes;
+}
+
 function serializeForCache(value: unknown): string {
   if (value instanceof File) {
     return JSON.stringify({
@@ -2669,6 +2690,12 @@ async function runEvaluation(
   closeRetiredBitmaps(await Promise.all(outputs.values()));
 
   throwIfStale(evaluationId);
+
+  workerScope.postMessage({
+    type: "cacheMemory",
+    evaluationId,
+    bytes: getEstimatedCacheBytes(),
+  });
 
   workerScope.postMessage({
     type: "done",

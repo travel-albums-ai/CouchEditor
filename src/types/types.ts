@@ -130,6 +130,12 @@ export type PipelineDoneMessage = {
   durationMs: number;
 };
 
+export type PipelineCacheMemoryMessage = {
+  type: "cacheMemory";
+  evaluationId: number;
+  bytes: number;
+};
+
 export type PipelineErrorMessage = {
   type: "error";
   evaluationId: number;
@@ -144,4 +150,5 @@ export type PipelineWorkerOutbound =
   | PipelineGpsStatsMessage
   | PipelineViewerMessage
   | PipelineDoneMessage
+  | PipelineCacheMemoryMessage
   | PipelineErrorMessage;

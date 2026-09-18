@@ -14,6 +14,7 @@ const SCALE_PRESETS = [
   { value: "0.5", labelKey: "pipelineRescalePreset50" },
   { value: "0.65", labelKey: "pipelineRescalePreset65" },
   { value: "0.85", labelKey: "pipelineRescalePreset85" },
+  { value: "1.2", labelKey: "120%" },
   { value: "1.5", labelKey: "pipelineRescalePreset150" },
   { value: "2", labelKey: "pipelineRescalePreset200" },
 ];
