@@ -1,3 +1,9 @@
+## [1.188.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.2...v1.188.3) (2026-09-19)
+
+### 🐛 Fixes
+
+* remove unused onProgress callback from PipelineStageProgress component ([00fcded](https://github.com/travel-albums-ai/CouchEditor/commit/00fcded1d9ac8fe5dedf4933d7bfbf853d0302a0))
+
 ## [1.188.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.1...v1.188.2) (2026-09-19)
 
 ### 🐛 Fixes
