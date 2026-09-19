@@ -29,6 +29,7 @@ import ImagePickerNode from '@/pipeline/nodes/ComplexNodes/ImagePickerNode';
 import InformationNode from '@/pipeline/nodes/ComplexNodes/InformationNode';
 import LutNode from '@/pipeline/nodes/ComplexNodes/LutNode';
 import MergeChannelsNode from '@/pipeline/nodes/ComplexNodes/MergeChannelsNode';
+import PdfSourceNode from '@/pipeline/nodes/ComplexNodes/PdfSourceNode';
 import PhotoHistogramNode from '@/pipeline/nodes/ComplexNodes/PhotoHistogramNode';
 import RescaleNode from '@/pipeline/nodes/ComplexNodes/RescaleNode';
 import ResizeLimitNode from '@/pipeline/nodes/ComplexNodes/ResizeLimitNode';
@@ -110,6 +111,7 @@ export const pipelineNodeTypes = {
   shadows: ShadowsNode,
   sharpen: SharpenNode,
   source: SourceNode,
+  'pdf-source': PdfSourceNode,
   vibrance: VibranceNode,
   viewer: ViewerNode,
   vignette: VignetteNode,

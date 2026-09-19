@@ -442,6 +442,14 @@ function Pipeline() {
   useEffect(() => {
     const handler = () => {
       setCurrentPipelineDirty(true);
+      const seen = new Set<object>();
+      const inputBytes = nodesRef.current.reduce(
+        (total, node) => total + getBlobBytes(node.data, seen),
+        0
+      );
+      window.dispatchEvent(
+        new CustomEvent('pipeline:input-memory', { detail: { inputBytes } })
+      );
       requestAnimationFrame(() => {
         void evaluate();
       });

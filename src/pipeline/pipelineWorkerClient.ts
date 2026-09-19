@@ -26,6 +26,7 @@ import type { Edge, Node } from "@xyflow/react";
 // React Flow internals) stays on the main thread.
 const NODE_DATA_KEYS = [
   "files",
+  "pdfPages",
   "lutFile",
   "photos",
   "amount",
@@ -239,7 +240,7 @@ function handleWorkerMessage(event: MessageEvent<PipelineWorkerOutbound>) {
         width: payload.width,
         height: payload.height,
         byteSize: payload.blob.size,
-        name: payload.name,
+        name: payload.name ?? 'image',
         exif: payload.exif,
       }));
 

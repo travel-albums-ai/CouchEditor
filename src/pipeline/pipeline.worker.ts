@@ -72,6 +72,7 @@ type WorkerScope = {
 
 const workerScope = self as unknown as WorkerScope;
 
+
 // ============================================================
 // In-worker image representation
 // ============================================================
@@ -221,9 +222,19 @@ async function mapWithConcurrency<T, R>(
 }
 
 const BATCH_INPUT_KEYS = ["image", "image-1", "image-2", "image-3", "image-4"];
+const FILE_SOURCE_NODE_TYPES = new Set([
+  "source",
+  "hot-folder-read",
+  "webcam",
+  "google-drive",
+]);
 
 function getBatchInputKeys(nodeType: string | undefined, inputs: NodeInputs): string[] {
-  if (nodeType === "source" || nodeType === "hot-folder-read" || nodeType === "webcam") {
+  if (nodeType === "pdf-source") {
+    return ["pdfPages"];
+  }
+
+  if (FILE_SOURCE_NODE_TYPES.has(nodeType ?? "")) {
     return ["files"];
   }
 
@@ -1616,6 +1627,22 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
     },
   },
 
+  "pdf-source": {
+    async execute(inputs) {
+      const files = inputs.pdfPages as File[] | undefined;
+
+      if (!files || files.length === 0) return { image: [] };
+
+      const image = await mapWithConcurrency(
+        files,
+        inputs.evaluationId as number,
+        loadFileImage
+      );
+
+      return { image };
+    },
+  },
+
   "hot-folder-read": {
     async execute(inputs) {
       const files = inputs.files as File[] | undefined;
@@ -2622,7 +2649,10 @@ async function runEvaluation(
 
       // Special case:
       // File-backed source nodes get their Files from node.data.
-      if (node.type === "source" || node.type === "hot-folder-read" || node.type === "webcam" || node.type === "google-drive") {
+      if (node.type === "pdf-source") {
+        inputs.pdfPages = node.data.pdfPages;
+        inputs.nodeId = node.id;
+      } else if (FILE_SOURCE_NODE_TYPES.has(node.type ?? "")) {
         inputs.files = node.data.files;
         inputs.nodeId = node.id;
       }
@@ -2781,7 +2811,7 @@ async function runEvaluation(
       inputs.signal = signal;
       inputs.aiRequestQueue = aiRequestQueue;
 
-      if (node.type === "source") {
+      if (FILE_SOURCE_NODE_TYPES.has(node.type ?? "")) {
         inputs.sourceProgressTotal = Array.isArray(inputs.files) ? inputs.files.length : 0;
         inputs.sourceProgressRunId = ++sourceRunSeq;
       }
