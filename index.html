@@ -35,9 +35,6 @@
   <meta name="twitter:image" content="https://couch-editor.com/couch-editor-purple-128x128.png" />
   <meta name="twitter:image:alt" content="CouchEditor visual photo editing workspace" />
   <title>CouchEditor | Visual photo editing pipelines</title>
-  <script>
-    document.body.style.backgroundColor = localStorage.getItem('data-background') || '#f4f5f8';
-  </script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -60,6 +57,9 @@
 </head>
 
 <body>
+  <script>
+    document.body.style.backgroundColor = localStorage.getItem('data-background') || '#f4f5f8';
+  </script>
   <div id="root">
   </div>
   <noscript>
