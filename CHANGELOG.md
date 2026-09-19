@@ -1,3 +1,9 @@
+## [1.187.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.187.0...v1.187.1) (2026-09-19)
+
+### 🐛 Fixes
+
+* update progress calculation and display current index in PipelineStageTiming ([d0b00ad](https://github.com/travel-albums-ai/CouchEditor/commit/d0b00adcfe56eb8e2b3898bdd37dbd1551d0f41b))
+
 ## [1.187.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.186.0...v1.187.0) (2026-09-19)
 
 ### ✨ Features
