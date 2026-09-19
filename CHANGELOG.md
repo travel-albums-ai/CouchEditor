@@ -1,3 +1,9 @@
+## [1.193.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.192.0...v1.193.0) (2026-09-19)
+
+### ✨ Features
+
+* add PDF source node to pipeline with image output capability ([506e742](https://github.com/travel-albums-ai/CouchEditor/commit/506e742452dd523447eb46e5c02e72c6e8add414))
+
 ## [1.192.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.191.0...v1.192.0) (2026-09-19)
 
 ### ✨ Features
