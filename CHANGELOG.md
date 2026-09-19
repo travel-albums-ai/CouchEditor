@@ -1,3 +1,9 @@
+## [1.194.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.194.0...v1.194.1) (2026-09-19)
+
+### 🐛 Fixes
+
+* update NewChip rendering logic to handle undefined count and adjust SinglePhotoViewerNode export ([fbae99c](https://github.com/travel-albums-ai/CouchEditor/commit/fbae99cdb464e655adcfde665389386f4f03d20a))
+
 ## [1.194.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.193.1...v1.194.0) (2026-09-19)
 
 ### ✨ Features
