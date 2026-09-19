@@ -1,3 +1,9 @@
+## [1.194.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.193.1...v1.194.0) (2026-09-19)
+
+### ✨ Features
+
+* add screen share node with adjustable capture settings and integrate into pipeline ([0649595](https://github.com/travel-albums-ai/CouchEditor/commit/064959551a2d44d0c3afe1e7bf2891465d195714))
+
 ## [1.193.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.193.0...v1.193.1) (2026-09-19)
 
 ### 🐛 Fixes
