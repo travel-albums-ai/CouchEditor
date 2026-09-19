@@ -1,3 +1,9 @@
+## [1.190.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.3...v1.190.0) (2026-09-19)
+
+### ✨ Features
+
+* enhance cache management with new clear functions and update tooltips ([85df0ff](https://github.com/travel-albums-ai/CouchEditor/commit/85df0ff11fdcee758c99e7285b12335ab4763e0b))
+
 ## [1.189.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.2...v1.189.3) (2026-09-19)
 
 ### 🐛 Fixes
