@@ -1052,7 +1052,7 @@ async function imageToPreview(source: WorkerImage): Promise<PipelineProgressPrev
   ctx.drawImage(source.bitmap, 0, 0, width, height);
 
   return {
-        blob: await canvas.convertToBlob({ type: "image/jpeg", quality: progressPreviewQuality }),
+    blob: await canvas.convertToBlob({ type: "image/jpeg", quality: progressPreviewQuality }),
     width,
     height,
     name: source.name,

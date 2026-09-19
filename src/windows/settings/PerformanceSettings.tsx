@@ -1,9 +1,58 @@
+import { SegmentedControl, SegmentedControlItem } from '@/components/SegmentedControl';
 import SettingsSection from '@/components/SettingsSection';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
 import SettingFieldRow from '@/windows/settings/components/SettingFieldRow';
+import SettingsGeneralRow from '@/windows/settings/components/SettingsGeneralRow';
 import SettingToggleRow from '@/windows/settings/components/SettingToggleRow';
-import { Cpu } from 'lucide-react';
+import { Banana, BicepsFlexed, Cpu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const performancePresets = {
+  poor: {
+    pipelineMaxConcurrentTasks: 1,
+    pipelinePhotoBatchSize: 4,
+    pipelineMaxAIRequests: 1,
+    pipelineAICallDelayMs: 750,
+    pipelineJpegQuality: 89,
+    pipelineImageConcurrency: 1,
+    pipelinePhaseCacheMB: 64,
+    pipelineAICacheMB: 32,
+    pipelineViewerMaxDimension: 1000,
+    pipelineProgressPreviewMaxDimension: 640,
+    pipelineProgressPreviewQuality: 70,
+    pipelineSequentialMode: true,
+  },
+  default: {
+    pipelineMaxConcurrentTasks: 5,
+    pipelinePhotoBatchSize: 10,
+    pipelineMaxAIRequests: 1,
+    pipelineAICallDelayMs: 500,
+    pipelineJpegQuality: 92,
+    pipelineImageConcurrency: 4,
+    pipelinePhaseCacheMB: 368,
+    pipelineAICacheMB: 128,
+    pipelineViewerMaxDimension: 1600,
+    pipelineProgressPreviewMaxDimension: 960,
+    pipelineProgressPreviewQuality: 84,
+    pipelineSequentialMode: true,
+  },
+  ultra: {
+    pipelineMaxConcurrentTasks: 16,
+    pipelinePhotoBatchSize: 20,
+    pipelineMaxAIRequests: 2,
+    pipelineAICallDelayMs: 250,
+    pipelineJpegQuality: 98,
+    pipelineImageConcurrency: 8,
+    pipelinePhaseCacheMB: 1024,
+    pipelineAICacheMB: 256,
+    pipelineViewerMaxDimension: 4096,
+    pipelineProgressPreviewMaxDimension: 1400,
+    pipelineProgressPreviewQuality: 90,
+    pipelineSequentialMode: false,
+  },
+} as const;
+
+
 
 export default function PerformanceSettings() {
   const { t } = useTranslation()
@@ -20,13 +69,29 @@ export default function PerformanceSettings() {
   const pipelineProgressPreviewMaxDimension = useSettingsStoreSelector((state) => state.pipelineProgressPreviewMaxDimension)
   const pipelineProgressPreviewQuality = useSettingsStoreSelector((state) => state.pipelineProgressPreviewQuality)
   const pipelineSequentialMode = useSettingsStoreSelector((state) => state.pipelineSequentialMode)
+  const pipelinePerformancePreset = useSettingsStoreSelector((state) => state.pipelinePerformancePreset)
 
   return <>
     <SettingsSection title={t('pipelineSettingsSection')} icon={<Cpu />}>
 
+      <SettingsGeneralRow icon={<BicepsFlexed />} label={'Performance'}>
+        <SegmentedControl
+          value={pipelinePerformancePreset}
+          onChange={(_, value) => {
+            if (value !== 'poor' && value !== 'default' && value !== 'ultra') return
 
-
-
+            setSetting((prev) => ({
+              ...prev,
+              ...performancePresets[value],
+              pipelinePerformancePreset: value,
+            }))
+          }}
+        >
+          <SegmentedControlItem value="poor" ><Banana size={16} style={{ marginRight: 4 }} /> Poor</SegmentedControlItem>
+          <SegmentedControlItem value="default" ><Cpu size={16} style={{ marginRight: 4 }} /> Average</SegmentedControlItem>
+          <SegmentedControlItem value="ultra" ><BicepsFlexed size={16} style={{ marginRight: 4 }} /> Ultra</SegmentedControlItem>
+        </SegmentedControl>
+      </SettingsGeneralRow>
 
 
       <SettingFieldRow
