@@ -1,3 +1,13 @@
+## [1.187.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.186.0...v1.187.0) (2026-09-19)
+
+### ✨ Features
+
+* enhance PipelineStageTiming with progress tracking and visual feedback ([311c818](https://github.com/travel-albums-ai/CouchEditor/commit/311c8184b2769412d46b5f875c5338d0160e6073))
+
+### 🧹 Refactors
+
+* remove PipelineCpuLoad component and update Toolbars ([2076a23](https://github.com/travel-albums-ai/CouchEditor/commit/2076a23fc95c115ede1c04b240a91d8b9d1ad6c3))
+
 ## [1.186.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.185.1...v1.186.0) (2026-09-18)
 
 ### ✨ Features
