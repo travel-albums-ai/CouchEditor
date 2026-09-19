@@ -1,6 +1,7 @@
 import { GenericToggleButtonProps } from '@/components/generics/GenericToggleButton';
 import GenericToggleButtonGroup from '@/components/generics/GenericToggleButtonGroup';
 import { useSettings, useSettingsStoreSelector } from '@/context/settingsStore';
+import { useTheme } from '@mui/material/styles';
 import { MoonStar, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,10 +9,12 @@ export default function DarkLightStatus() {
   const { setSetting } = useSettings()
   const themeMode = useSettingsStoreSelector((state) => state.themeMode);
   const { t } = useTranslation()
+  const theme = useTheme();
 
   const handleOnChange = (mode?: 'light' | 'dark') => {
     setSetting((prev) => ({ ...prev, themeMode: mode === 'light' ? 'dark' : 'light'}))
     localStorage.setItem("theme", mode === 'light' ? 'dark' : 'light');
+    localStorage.setItem('data-background', theme.palette.background.default);
   }
 
   return <>

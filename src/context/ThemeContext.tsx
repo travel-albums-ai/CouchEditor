@@ -27,16 +27,6 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-declare module '@mui/material/TextField' {
-  interface TextFieldPropsVariantOverrides {
-    roundness: true;
-  }
-
-  interface TextFieldProps {
-    roundness?: 'full' | 'rounded' | 'square';
-  }
-}
-
 type Props = {
   children: ReactNode;
 };

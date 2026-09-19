@@ -1,15 +1,17 @@
 import { useTranslation } from 'react-i18next';
 
+const size = 56
+
 export default function Logo() {
   const { t } = useTranslation()
 
   return <>
     <img
-      src="./couchLogoMini.png"
+      src="./couch-editor-purple-128x128.png"
       alt={t('logoAlt')}
-      width={45}
-      height={30}
-      style={{ width: 45, height: 30, filter: 'hue-rotate(250deg)' }}
+      width={size}
+      height={size}
+      style={{ width: `${size}px`, height: `${size}px`, margin: '-10px -4px'}}
       fetchPriority="high"
     />
   </>

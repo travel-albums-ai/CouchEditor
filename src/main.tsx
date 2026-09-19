@@ -23,6 +23,8 @@ import './index.css';
 
 const queryClient = new QueryClient()
 export const debug = true || process.env.NODE_ENV === 'development' || process.env.DEBUG === 'true'
+export const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
 
 declare global {
   interface Window {
@@ -35,8 +37,10 @@ const root = window.__ROOT__ ??= createRoot(container);
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <SpeedInsights />
-    <Analytics />
+    {!isLocalhost && <>
+      <SpeedInsights />
+      <Analytics />
+    </>}
     <AppProviders>
       <ReactFlowProvider>
         <PipelineTrashProvider>

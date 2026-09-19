@@ -6,6 +6,7 @@ import PipelineTotalTime from '@/base/PipelineTotalTime';
 import RenderingProgressBars from '@/base/RenderingProgressBars';
 import VersionStatus from '@/base/VersionStatus';
 import FloatingToolbar from '@/components/FloatingToolbar';
+import { usePipelineStoreSelector } from '@/context/pipelineStore';
 import { TOOLBAR_GAP } from '@/lib/utils';
 import AppName from '@/toolbars/tools/AppName';
 import DarkLightStatus from '@/toolbars/tools/DarkLightStatus';
@@ -38,6 +39,10 @@ type ToolbarItem = {
 };
 
 export default function Toolbars() {
+  const { nodes , edges } = usePipelineStoreSelector((state) => state.currentPipeline);
+
+  const isEmptyPipeline = nodes.length === 0 && edges.length === 0;
+
 
   const toolbarItems = {
     'toolbox': {
@@ -61,11 +66,13 @@ export default function Toolbars() {
       sx: { bottom: TOOLBAR_GAP * 1.5, left: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'auto', justifyContent: 'center', flexWrap: 'wrap' },
       floatingSx: {  },
       groups: [
-        <>
-          <PipelineNodeCounter />
-          <PipelineTotalTime />
-          <PipelineCacheMemory />
-        </>,
+        ...(isEmptyPipeline ? [] : [
+          <>
+            <PipelineNodeCounter />
+            <PipelineTotalTime />
+            <PipelineCacheMemory />
+          </>,
+        ]),
         <>
           <DomCounter />
           <KeyboardMenu />
@@ -86,13 +93,15 @@ export default function Toolbars() {
       sx: { top: TOOLBAR_GAP, right: TOOLBAR_GAP, overflow: 'visible', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', maxWidth: '40%' },
       floatingSx: { },
       groups: [
-        <>
-          <ZoomOutButton />
-          <ZoomLevel />
-          <ZoomInButton />
-          <FitViewButton />
-          <ZoomTo100Button />
-        </>,
+        ...(isEmptyPipeline ? [] : [
+          <>
+            <ZoomOutButton />
+            <ZoomLevel />
+            <ZoomInButton />
+            <FitViewButton />
+            <ZoomTo100Button />
+          </>,
+        ]),
         <>
           <SettingsWindowToggle />
           <DarkLightStatus />

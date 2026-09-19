@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/couchLogoMini.png" />
+  <link rel="icon" type="image/png" href="/couch-editor-purple-128x128.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="canonical" href="https://couch-editor.com/" />
   <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM-readable project information" />
@@ -26,15 +26,18 @@
   <meta property="og:description"
     content="Build reusable photo-editing recipes on a visual canvas, preview the results, and export pipelines as .cep files." />
   <meta property="og:url" content="https://couch-editor.com/" />
-  <meta property="og:image" content="https://couch-editor.com/couchLogo.png" />
+  <meta property="og:image" content="https://couch-editor.com/couch-editor-purple-128x128.png" />
   <meta property="og:image:alt" content="CouchEditor visual photo editing workspace" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="CouchEditor | Visual photo editing pipelines" />
   <meta name="twitter:description"
     content="Build reusable photo-editing recipes on a visual canvas, preview the results, and export pipelines as .cep files." />
-  <meta name="twitter:image" content="https://couch-editor.com/couchLogo.png" />
+  <meta name="twitter:image" content="https://couch-editor.com/couch-editor-purple-128x128.png" />
   <meta name="twitter:image:alt" content="CouchEditor visual photo editing workspace" />
   <title>CouchEditor | Visual photo editing pipelines</title>
+  <script>
+    document.body.style.backgroundColor = localStorage.getItem('data-background') || '#f4f5f8';
+  </script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,7 +48,7 @@
       "applicationCategory": "DesignApplication",
       "operatingSystem": "Web browser",
       "browserRequirements": "Requires JavaScript",
-      "image": "https://couch-editor.com/couchLogo.png",
+      "image": "https://couch-editor.com/couch-editor-purple-128x128.png",
       "author": {
         "@type": "Organization",
         "name": "Travel Albums AI",
@@ -56,7 +59,7 @@
   </script>
 </head>
 
-<body style="background-color: #f4f5f8;">
+<body>
   <div id="root">
   </div>
   <noscript>
@@ -68,11 +71,6 @@
         recipes as .cep pipeline files.</p>
     </main>
   </noscript>
-  <script>
-    if (localStorage.getItem("theme") === "light") {
-      document.body.style.backgroundColor = "#f4f5f8";
-    }
-  </script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
