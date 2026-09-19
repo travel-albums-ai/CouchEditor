@@ -106,7 +106,7 @@ export default function NewChip({
           textWrap: 'nowrap',
         }}
       >
-        {count + ' ' + label}
+        {count !== undefined ? count + ' ' + label : label}
       </Typography>
     </Box>
   );

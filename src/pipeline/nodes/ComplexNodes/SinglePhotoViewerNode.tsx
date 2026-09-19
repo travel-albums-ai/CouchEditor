@@ -1,4 +1,3 @@
-import AlbumPhotoThumbnailBackgroundNg from '@/components/AlbumPhotoThumbnailBackgroundNg';
 import NewChip from '@/components/NewChip';
 import NoPhotos from '@/components/NoPhotos';
 import PictureInPictureButton from '@/components/PictureInPictureButton';
@@ -14,7 +13,7 @@ function formatMegabytes(byteSize: number): string {
   return `${(byteSize / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function SinglePhotoViewerNode({
+export default function SinglePhotoViewerNode({
   data,
 }: NodeProps<Node<{ image?: ImageArray }>>) {
   const previewPhotoObj = useSettingsStoreSelector((state) => state.previewPhotoObj);
@@ -37,12 +36,13 @@ function SinglePhotoViewerNode({
               <Typography variant="body2" noWrap sx={{ flex: 1, fontWeight: 'bold' }}>
                 {match.name}
               </Typography>
-              {/* <PictureInPictureButton photo={match} /> */}
               <NewChip label={`${match.width} x ${match.height} px`} fontSize={16} sx={{ height: 38 }} icon={<RulerDimensionLine />} />
               <NewChip label={`${formatMegabytes(match.byteSize)}`} fontSize={16} sx={{ height: 38 }} icon={<HardDrive />} />
             </Box>
-            <AlbumPhotoThumbnailBackgroundNg
-              photo={match}
+
+
+            <img
+              src={match.src}
               alt=""
               style={{
                 display: 'block',
@@ -62,5 +62,3 @@ function SinglePhotoViewerNode({
     </NodeWrapper>
   </>);
 }
-
-export default SinglePhotoViewerNode;
