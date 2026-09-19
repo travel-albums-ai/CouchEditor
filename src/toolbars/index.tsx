@@ -57,8 +57,10 @@ export default function Toolbars() {
           <Divider />
           <TemplatesToggle />
           <ToggleToolbox />
-          <Divider />
-          <DeleteButton />
+          {!isEmptyPipeline && <>
+            <Divider />
+            <DeleteButton />
+          </>}
         </Box>
       ]
     },
