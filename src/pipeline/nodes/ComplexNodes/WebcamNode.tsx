@@ -6,8 +6,14 @@ import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react
 import { Camera, CircleStop } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-const MIN_CAPTURE_INTERVAL_MS = 1;
+const MIN_CAPTURE_INTERVAL_MS = 16;
 const MAX_CAPTURE_INTERVAL_MS = 1000;
+const MIN_CAPTURE_QUALITY = 0.1;
+const MAX_CAPTURE_QUALITY = 1;
+const MIN_CAPTURE_SIZE = 25;
+const MAX_CAPTURE_SIZE = 100;
+const DEFAULT_CAPTURE_QUALITY = 0.8;
+const DEFAULT_CAPTURE_SIZE = 75;
 
 type WebcamNodeData = {
   files?: File[];
@@ -19,11 +25,15 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
   const streamRef = useRef<MediaStream | null>(null);
   const captureTimerRef = useRef<number | null>(null);
   const captureInFlightRef = useRef(false);
+  const captureQualityRef = useRef(DEFAULT_CAPTURE_QUALITY);
+  const captureSizeRef = useRef(DEFAULT_CAPTURE_SIZE);
   const previewUrlRef = useRef<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   // const [status, setStatus] = useState('Camera is stopped');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [captureIntervalMs, setCaptureIntervalMs] = useState(MAX_CAPTURE_INTERVAL_MS);
+  const [captureQuality, setCaptureQuality] = useState(DEFAULT_CAPTURE_QUALITY);
+  const [captureSize, setCaptureSize] = useState(DEFAULT_CAPTURE_SIZE);
 
   const scheduleCapture = (intervalMs: number) => {
     if (captureTimerRef.current !== null) {
@@ -58,11 +68,11 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
 
     try {
       const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+      canvas.width = Math.max(1, Math.round(video.videoWidth * captureSizeRef.current / 100));
+      canvas.height = Math.max(1, Math.round(video.videoHeight * captureSizeRef.current / 100));
       canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', captureQualityRef.current));
       if (!blob || !streamRef.current) return;
 
       // const file = new File([blob], `webcam-${Date.now()}.jpg`, { type: 'image/jpeg' });
@@ -144,9 +154,9 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
             {previewUrl && (
               <img src={previewUrl} alt="Latest webcam capture" style={{ width: '80px', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: '8px' }} />
             )}
-            <Box sx={{ px: 1, flex: 1 }}>
+            <Box sx={{ px: 1, flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
               <AdjustmentSlider
-                description={'Capture interval (ms)'}
+                description={'Interval (ms)'}
                 min={MIN_CAPTURE_INTERVAL_MS}
                 max={MAX_CAPTURE_INTERVAL_MS}
                 step={1}
@@ -156,6 +166,32 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
                   const nextIntervalMs = Array.isArray(value) ? value[0] : value;
                   setCaptureIntervalMs(nextIntervalMs);
                   if (streamRef.current) scheduleCapture(nextIntervalMs);
+                }}
+              />
+              <AdjustmentSlider
+                description={'Quality'}
+                min={MIN_CAPTURE_QUALITY}
+                max={MAX_CAPTURE_QUALITY}
+                step={0.05}
+                debounceMs={250}
+                value={captureQuality}
+                onChange={(value) => {
+                  const nextQuality = Array.isArray(value) ? value[0] : value;
+                  captureQualityRef.current = nextQuality;
+                  setCaptureQuality(nextQuality);
+                }}
+              />
+              <AdjustmentSlider
+                description={'Size'}
+                min={MIN_CAPTURE_SIZE}
+                max={MAX_CAPTURE_SIZE}
+                step={5}
+                debounceMs={250}
+                value={captureSize}
+                onChange={(value) => {
+                  const nextSize = Array.isArray(value) ? value[0] : value;
+                  captureSizeRef.current = nextSize;
+                  setCaptureSize(nextSize);
                 }}
               />
             </Box>
