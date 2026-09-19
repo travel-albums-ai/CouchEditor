@@ -91,7 +91,10 @@ export default function PipelineStageTiming({
 
   const displayInSeconds = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
   const progressPercent = progress && progress.total > 0
-    ? Math.min(100, Math.max(0, (progress.completed / progress.total) * 100))
+    ? Math.min(100, Math.max(0, ((Math.min(progress.completed + 1, progress.total)) / progress.total) * 100))
+    : 0;
+  const currentIndex = progress && progress.total > 0
+    ? Math.min(progress.completed + 1, progress.total)
     : 0;
 
   return <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -104,7 +107,7 @@ export default function PipelineStageTiming({
             aria-label={`${progress.completed} of ${progress.total}`}
           />
           <Typography variant="caption" color="text.secondary" sx={{ display: 'block', textAlign: 'center' }}>
-            {progress.completed}/{progress.total}
+            {currentIndex}/{progress.total}
           </Typography>
         </Box> : <>
           <LinearProgress
