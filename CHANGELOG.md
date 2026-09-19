@@ -1,3 +1,13 @@
+## [1.189.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.1...v1.189.2) (2026-09-19)
+
+### 🐛 Fixes
+
+* update logo source to use base64 encoded image for NoPhotos and Logo components ([8d0df55](https://github.com/travel-albums-ai/CouchEditor/commit/8d0df55049527b7090c7cc82f5fb9500c4c04d4f))
+
+### 🧹 Refactors
+
+* replace TextField with InputBase for improved input handling in PipelineName component ([deaa52a](https://github.com/travel-albums-ai/CouchEditor/commit/deaa52a9e190399c29464deaf14509316488f458))
+
 ## [1.189.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.0...v1.189.1) (2026-09-19)
 
 ### 🐛 Fixes
