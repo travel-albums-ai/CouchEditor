@@ -1,3 +1,9 @@
+## [1.189.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.0...v1.189.1) (2026-09-19)
+
+### 🐛 Fixes
+
+* update logo paths and improve background color handling in various components ([ef20409](https://github.com/travel-albums-ai/CouchEditor/commit/ef204094eb16d233f1c571e88a8076e7d4fa8462))
+
 ## [1.189.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.3...v1.189.0) (2026-09-19)
 
 ### ✨ Features
