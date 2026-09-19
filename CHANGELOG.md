@@ -1,3 +1,9 @@
+## [1.195.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.194.1...v1.195.0) (2026-09-19)
+
+### ✨ Features
+
+* enhance WebcamNode with adjustable capture quality and size settings ([71f5051](https://github.com/travel-albums-ai/CouchEditor/commit/71f50512a0048f552860cd6f8b15d6f4541a58d9))
+
 ## [1.194.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.194.0...v1.194.1) (2026-09-19)
 
 ### 🐛 Fixes
