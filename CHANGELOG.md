@@ -1,3 +1,9 @@
+## [1.189.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.2...v1.189.3) (2026-09-19)
+
+### 🐛 Fixes
+
+* conditionally render DeleteButton and Divider in Toolbars based on pipeline state ([fa90bf9](https://github.com/travel-albums-ai/CouchEditor/commit/fa90bf91b7483c550c10791aa388bf5bc2378be7))
+
 ## [1.189.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.1...v1.189.2) (2026-09-19)
 
 ### 🐛 Fixes
