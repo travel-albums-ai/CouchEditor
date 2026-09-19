@@ -16,14 +16,12 @@ type PipelineStageTimingProps = {
   nodeId: string;
   nodeType: string;
   isBusy?: (busy: boolean) => void;
-  onProgress?: (nodeId: string, progress: number) => void;
 };
 
 export default function PipelineStageProgress({
   nodeId,
   nodeType,
   isBusy,
-  onProgress,
 }: PipelineStageTimingProps) {
   const [durationMs, setDurationMs] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -39,7 +37,6 @@ export default function PipelineStageProgress({
       setIsProcessing(false);
       progressRef.current = 0;
       setProgress(0);
-      onProgress?.(nodeId, 0);
       isBusy?.(false);
     };
     const handleStarted = (event: Event) => {
@@ -50,7 +47,6 @@ export default function PipelineStageProgress({
         setIsProcessing(true);
         progressRef.current = 0;
         setProgress(0);
-        onProgress?.(nodeId, 0);
         isBusy?.(true);
       }
     };
@@ -66,7 +62,6 @@ export default function PipelineStageProgress({
 
       progressRef.current = nextProgress;
       setProgress(nextProgress);
-      onProgress?.(nodeId, nextProgress);
     };
     const handleTiming = (event: Event) => {
       const { nodeId: timingNodeId, durationMs: nextDurationMs } =
@@ -78,7 +73,6 @@ export default function PipelineStageProgress({
         setDurationMs(nextDurationMs);
         progressRef.current = 1;
         setProgress(1);
-        onProgress?.(nodeId, 1);
       }
     };
 
@@ -92,7 +86,7 @@ export default function PipelineStageProgress({
       window.removeEventListener(progressEventName, handleProgress);
       window.removeEventListener(evaluationStartedEventName, handleEvaluationStarted);
     };
-  }, [nodeId, nodeType, onProgress]);
+  }, [nodeId, nodeType]);
 
   const displayDuration = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
 
