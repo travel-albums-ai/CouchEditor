@@ -1,5 +1,5 @@
 import { Box, LinearProgress, Tooltip } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type StageTimingDetail = {
   nodeId: string;
@@ -28,6 +28,7 @@ export default function PipelineStageProgress({
   const [durationMs, setDurationMs] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
 
   useEffect(() => {
     const startedEventName = `${nodeType}:stageStarted`;
@@ -36,6 +37,7 @@ export default function PipelineStageProgress({
     const evaluationStartedEventName = 'pipeline:evaluationStarted';
     const handleEvaluationStarted = () => {
       setIsProcessing(false);
+      progressRef.current = 0;
       setProgress(0);
       onProgress?.(nodeId, 0);
       isBusy?.(false);
@@ -46,6 +48,7 @@ export default function PipelineStageProgress({
 
       if (startedNodeId === nodeId) {
         setIsProcessing(true);
+        progressRef.current = 0;
         setProgress(0);
         onProgress?.(nodeId, 0);
         isBusy?.(true);
@@ -59,6 +62,9 @@ export default function PipelineStageProgress({
       const nextProgress = detail.total > 0
         ? Math.min(1, Math.max(0, detail.completed / detail.total))
         : 0;
+      if (nextProgress <= progressRef.current) return;
+
+      progressRef.current = nextProgress;
       setProgress(nextProgress);
       onProgress?.(nodeId, nextProgress);
     };
@@ -70,6 +76,7 @@ export default function PipelineStageProgress({
         setIsProcessing(false);
         isBusy?.(false);
         setDurationMs(nextDurationMs);
+        progressRef.current = 1;
         setProgress(1);
         onProgress?.(nodeId, 1);
       }
@@ -94,7 +101,7 @@ export default function PipelineStageProgress({
       <LinearProgress
         variant="determinate"
         value={progress * 100}
-        sx={{ height: 8, borderRadius: 1, opacity: isProcessing ? 1 : 0.4 }}
+        sx={{ height: 6, opacity: isProcessing ? 1 : 0.7 }}
       />
     </Tooltip>
   </Box>;
