@@ -72,12 +72,10 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
           padding: theme.spacing(2),
           overflowY: 'auto',
           border: `1px solid ${theme.palette.primary.main}42`,
-          backdropFilter: 'blur(16px)',
           borderRadius: Number(theme.shape.borderRadius) * 3,
           boxShadow: `0px 3px 12px -3px ${theme.palette.primary.main}`,
         }),
         backdrop: ({ theme }) => ({
-          backdropFilter: 'blur(1px)',
           backgroundColor: `${theme.palette.background.paper}42`,
         }),
       },
@@ -88,7 +86,6 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
           maxWidth: '500px',
           borderRadius: Number(theme.shape.borderRadius) * 2,
           backgroundColor: `${theme.palette.background.paper}DB`,
-          backdropFilter: 'blur(2px)',
           color: `${theme.palette.text.primary}`,
           boxShadow: theme.shadows[4],
 
@@ -119,8 +116,6 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: 'rgba(30, 30, 30, 0.4)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
         },
       },
     },
@@ -129,7 +124,6 @@ export const generateTheme = (tokens: ThemeOptions) => createTheme({
       styleOverrides: {
         paper: ({ theme }) => ({
           backgroundColor: `${theme.palette.background.paper}BD`,
-          backdropFilter: 'blur(16px)',
           borderRadius: Number(theme.shape.borderRadius) * 3,
           boxShadow: `0px 3px 12px -3px ${theme.palette.primary.main}`,
         }),

@@ -74,7 +74,7 @@ export default function Toolbars() {
       ],
     },
     'loadingBars': {
-      sx: { top: 0, left: '0%', right: '0%', overflow: 'auto', justifyContent: 'center' },
+      sx: { top: 0, left: '0%', right: '0%', overflow: 'auto', height: 6, justifyContent: 'center' },
       floatingSx: { width: '100%', border: 'unset', p: 0, m: 0 },
       groups: [
         <>

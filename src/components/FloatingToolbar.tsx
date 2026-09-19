@@ -29,7 +29,6 @@ export default function FloatingToolbar({
           p: asIs ? 0 : 1,
           borderRadius: 3,
           boxShadow: 2,
-          backdropFilter: 'blur(4px)',
           transition: 'box-shadow 0.35s ease, background-color 0.35s ease',
           '&:hover': {
             bgcolor: theme => alpha(theme.palette.background.paper, 0.95),

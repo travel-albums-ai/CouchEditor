@@ -47,6 +47,7 @@ export default function PipelineCacheMemory() {
   return (
     <>
       <NewChip
+        sx={{ minWidth: 110 }}
         icon={<MemoryStick />}
         count={formatMegabytes(cacheBytes + inputBytes)}
         label="MB"

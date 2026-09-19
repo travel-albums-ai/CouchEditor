@@ -26,6 +26,7 @@ export default function PipelineNodeCounter() {
   return (
     <NewChip
       count={count}
+      sx={{ minWidth: 110 }}
       icon={<Workflow />}
       label={"Nodes"}
       variant={count > 0 ? 'important' : 'text'}

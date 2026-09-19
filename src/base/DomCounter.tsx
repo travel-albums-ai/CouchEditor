@@ -45,6 +45,7 @@ export default function DomCounter() {
 
   return (
     <NewChip
+      sx={{ minWidth: 120 }}
       fontSize={14}
       count={count}
       disabled={true}

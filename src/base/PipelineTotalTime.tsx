@@ -28,6 +28,7 @@ export default function PipelineTotalTime() {
   return (
     <NewChip
       icon={<Timer />}
+      sx={{ minWidth: 130 }}
       count={durationMs === null ? '--' : durationMs.toFixed(1)}
       label="ms"
       variant="text"
