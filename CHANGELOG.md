@@ -1,3 +1,9 @@
+## [1.188.2](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.1...v1.188.2) (2026-09-19)
+
+### 🐛 Fixes
+
+* adjust opacity of LinearProgress component for better visibility ([b6e69c1](https://github.com/travel-albums-ai/CouchEditor/commit/b6e69c1987f2671e33bb83fb3237d668b9cc6d79))
+
 ## [1.188.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.0...v1.188.1) (2026-09-19)
 
 ### 🐛 Fixes
