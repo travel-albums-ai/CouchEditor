@@ -1,3 +1,9 @@
+## [1.191.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.190.0...v1.191.0) (2026-09-19)
+
+### ✨ Features
+
+* add new settings for image processing concurrency and cache management ([be61e68](https://github.com/travel-albums-ai/CouchEditor/commit/be61e6897979855d86609ce1545df50d7be44e2b))
+
 ## [1.190.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.189.3...v1.190.0) (2026-09-19)
 
 ### ✨ Features
