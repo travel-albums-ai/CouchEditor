@@ -5,8 +5,8 @@
 // - Images travel between stages as ImageBitmaps, so intermediate stages
 //   no longer pay a canvas.toDataURL base64 encode + <img> decode round
 //   trip per image per stage. Only the final viewer output is encoded.
-// - Per-image work (load / transform / encode / AI upload) is bounded by
-//   MAX_CONCURRENT_IMAGE_OPS so large batches don't exhaust memory.
+// - Per-image work (load / transform / encode / AI upload) is bounded so
+//   large batches don't exhaust memory.
 // - Every new evaluation cooperatively cancels the previous one: stale
 //   checks run between images and in-flight fetches are aborted.
 
@@ -90,8 +90,8 @@ type WorkerImage = {
   cacheKey?: string;
 };
 
-const MAX_PHASE_CACHE_BYTES = 384 * 1024 * 1024;
-const MAX_AI_CACHE_BYTES = 128 * 1024 * 1024;
+const DEFAULT_PHASE_CACHE_BYTES = 384 * 1024 * 1024;
+const DEFAULT_AI_CACHE_BYTES = 128 * 1024 * 1024;
 const aiImageCaches = new Set<Map<string, WorkerImage>>();
 const retiredBitmaps = new Set<ImageBitmap>();
 
@@ -101,10 +101,16 @@ function getImageSetKey(image: WorkerImage): string | ImageBitmap {
 
 // Bounds in-flight image work inside an individual node. The worker-wide
 // task queue below limits how many pipeline nodes can run at once.
-const MAX_CONCURRENT_IMAGE_OPS = Math.max(
+const DEFAULT_IMAGE_CONCURRENCY = Math.max(
   2,
   Math.min(4, navigator.hardwareConcurrency ?? 4)
 );
+let imageConcurrencyLimit = DEFAULT_IMAGE_CONCURRENCY;
+let phaseCacheLimitBytes = DEFAULT_PHASE_CACHE_BYTES;
+let aiCacheLimitBytes = DEFAULT_AI_CACHE_BYTES;
+let viewerMaxDimension = 1600;
+let progressPreviewMaxDimension = 480;
+let progressPreviewQuality = 0.84;
 
 class PipelineTaskQueue {
   private active = 0;
@@ -199,7 +205,7 @@ async function mapWithConcurrency<T, R>(
   let nextIndex = 0;
 
   const lanes = Array.from(
-    { length: Math.min(MAX_CONCURRENT_IMAGE_OPS, items.length) },
+    { length: Math.min(imageConcurrencyLimit, items.length) },
     async () => {
       while (nextIndex < items.length) {
         throwIfStale(evaluationId);
@@ -1035,8 +1041,10 @@ function postProgress(
 }
 
 async function imageToPreview(source: WorkerImage): Promise<PipelineProgressPreview> {
-  const maxDimension = 480;
-  const scale = Math.min(1, maxDimension / Math.max(source.width, source.height));
+  const scale = Math.min(
+    1,
+    progressPreviewMaxDimension / Math.max(source.width, source.height)
+  );
   const width = Math.max(1, Math.round(source.width * scale));
   const height = Math.max(1, Math.round(source.height * scale));
   const [canvas, ctx] = createCanvas(width, height);
@@ -1044,7 +1052,7 @@ async function imageToPreview(source: WorkerImage): Promise<PipelineProgressPrev
   ctx.drawImage(source.bitmap, 0, 0, width, height);
 
   return {
-    blob: await canvas.convertToBlob({ type: "image/jpeg", quality: 0.84 }),
+        blob: await canvas.convertToBlob({ type: "image/jpeg", quality: progressPreviewQuality }),
     width,
     height,
     name: source.name,
@@ -2227,8 +2235,6 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
 // Transport encoding (viewer output only)
 // ============================================================
 
-const MAX_VIEWER_PREVIEW_EDGE = 1600;
-
 // JPEG keeps the per-image encode fast and the posted payload small
 // for large batches; quality matches the AI upload path.
 async function encodeImagesForTransport(
@@ -2255,7 +2261,7 @@ async function encodeImagesForTransport(
         try {
           const scale = Math.min(
             1,
-            MAX_VIEWER_PREVIEW_EDGE / Math.max(image.width, image.height)
+            viewerMaxDimension / Math.max(image.width, image.height)
           );
           const previewWidth = Math.max(1, Math.round(image.width * scale));
           const previewHeight = Math.max(1, Math.round(image.height * scale));
@@ -2326,7 +2332,7 @@ function cachePhaseOutput(signature: string, outputs: NodeOutputs) {
     retireBitmaps(replaced.outputs);
   }
 
-  while (getBitmapBytes(getCachedBitmapsFromPhaseCache()) > MAX_PHASE_CACHE_BYTES) {
+  while (getBitmapBytes(getCachedBitmapsFromPhaseCache()) > phaseCacheLimitBytes) {
     const oldestSignature = phaseOutputCache.keys().next().value;
 
     if (oldestSignature === undefined) break;
@@ -2414,7 +2420,7 @@ function getAICacheBytes(): number {
 }
 
 function evictAIImageCache() {
-  while (getAICacheBytes() > MAX_AI_CACHE_BYTES) {
+  while (getAICacheBytes() > aiCacheLimitBytes) {
     let oldestCache: Map<string, WorkerImage> | undefined;
     let oldestKey: string | undefined;
 
@@ -2510,6 +2516,40 @@ async function runEvaluation(
 ): Promise<void> {
   const { evaluationId, nodes, edges } = message;
   const startedAt = performance.now();
+  imageConcurrencyLimit = Math.max(
+    1,
+    Math.min(8, Math.round(message.imageConcurrency) || DEFAULT_IMAGE_CONCURRENCY)
+  );
+  phaseCacheLimitBytes = Math.max(
+    0,
+    Math.min(
+      1024 * 1024 * 1024,
+      Number.isFinite(message.phaseCacheBytes)
+        ? Math.round(message.phaseCacheBytes)
+        : DEFAULT_PHASE_CACHE_BYTES
+    )
+  );
+  aiCacheLimitBytes = Math.max(
+    0,
+    Math.min(
+      512 * 1024 * 1024,
+      Number.isFinite(message.aiCacheBytes)
+        ? Math.round(message.aiCacheBytes)
+        : DEFAULT_AI_CACHE_BYTES
+    )
+  );
+  viewerMaxDimension = Math.max(
+    256,
+    Math.min(4096, Math.round(message.viewerMaxDimension) || 1600)
+  );
+  progressPreviewMaxDimension = Math.max(
+    128,
+    Math.min(1600, Math.round(message.progressPreviewMaxDimension) || 480)
+  );
+  progressPreviewQuality = Math.max(
+    0.1,
+    Math.min(1, message.progressPreviewQuality || 0.84)
+  );
   const taskQueue = new PipelineTaskQueue(
     message.sequentialMode
       ? 1

@@ -68,6 +68,13 @@ function Pipeline() {
   const pipelinePhotoBatchSize = useSettingsStoreSelector(s => s.pipelinePhotoBatchSize)
   const pipelineMaxAIRequests = useSettingsStoreSelector(s => s.pipelineMaxAIRequests)
   const pipelineAICallDelayMs = useSettingsStoreSelector(s => s.pipelineAICallDelayMs)
+  const pipelineJpegQuality = useSettingsStoreSelector(s => s.pipelineJpegQuality)
+  const pipelineImageConcurrency = useSettingsStoreSelector(s => s.pipelineImageConcurrency)
+  const pipelinePhaseCacheMB = useSettingsStoreSelector(s => s.pipelinePhaseCacheMB)
+  const pipelineAICacheMB = useSettingsStoreSelector(s => s.pipelineAICacheMB)
+  const pipelineViewerMaxDimension = useSettingsStoreSelector(s => s.pipelineViewerMaxDimension)
+  const pipelineProgressPreviewMaxDimension = useSettingsStoreSelector(s => s.pipelineProgressPreviewMaxDimension)
+  const pipelineProgressPreviewQuality = useSettingsStoreSelector(s => s.pipelineProgressPreviewQuality)
   const pipelineSequentialMode = useSettingsStoreSelector(s => s.pipelineSequentialMode)
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 999px)');
@@ -320,7 +327,7 @@ function Pipeline() {
     if (!graphSignatureRef.current) return;
 
     evaluate();
-  }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize, pipelineMaxAIRequests, pipelineAICallDelayMs, pipelineSequentialMode]);
+  }, [evaluate, pipelineMaxConcurrentTasks, pipelinePhotoBatchSize, pipelineMaxAIRequests, pipelineAICallDelayMs, pipelineJpegQuality, pipelineImageConcurrency, pipelinePhaseCacheMB, pipelineAICacheMB, pipelineViewerMaxDimension, pipelineProgressPreviewMaxDimension, pipelineProgressPreviewQuality, pipelineSequentialMode]);
 
   const handleNodesChange = useCallback((changes: Parameters<typeof onNodesChange>[0]) => {
     setCurrentPipelineDirty(true);

@@ -56,6 +56,12 @@ export type PipelineEvaluateMessage = {
   maxAIRequests: number;
   aiCallDelayMs: number;
   jpegQuality: number;
+  imageConcurrency: number;
+  phaseCacheBytes: number;
+  aiCacheBytes: number;
+  viewerMaxDimension: number;
+  progressPreviewMaxDimension: number;
+  progressPreviewQuality: number;
   sequentialMode: boolean;
   nodes: PipelineWorkerNode[];
   edges: PipelineWorkerEdge[];

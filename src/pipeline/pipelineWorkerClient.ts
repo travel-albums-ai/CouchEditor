@@ -413,6 +413,30 @@ export async function evaluatePipeline(
       0.1,
       Math.min(1, (Math.round(getSettingsStore().pipelineJpegQuality) || 92) / 100)
     ),
+    imageConcurrency: Math.max(
+      1,
+      Math.min(8, Math.round(getSettingsStore().pipelineImageConcurrency) || 4)
+    ),
+    phaseCacheBytes: Math.max(
+      0,
+      Math.min(1024, Math.round(getSettingsStore().pipelinePhaseCacheMB) || 0) * 1024 * 1024
+    ),
+    aiCacheBytes: Math.max(
+      0,
+      Math.min(512, Math.round(getSettingsStore().pipelineAICacheMB) || 0) * 1024 * 1024
+    ),
+    viewerMaxDimension: Math.max(
+      256,
+      Math.min(4096, Math.round(getSettingsStore().pipelineViewerMaxDimension) || 1600)
+    ),
+    progressPreviewMaxDimension: Math.max(
+      128,
+      Math.min(1600, Math.round(getSettingsStore().pipelineProgressPreviewMaxDimension) || 480)
+    ),
+    progressPreviewQuality: Math.max(
+      0.1,
+      Math.min(1, (Math.round(getSettingsStore().pipelineProgressPreviewQuality) || 84) / 100)
+    ),
     sequentialMode: getSettingsStore().pipelineSequentialMode,
     nodes: nodes.map(projectNode),
     edges: edges.map(projectEdge),
