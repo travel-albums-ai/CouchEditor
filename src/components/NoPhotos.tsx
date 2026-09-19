@@ -1,3 +1,4 @@
+import logoSrc from '@/assets/couch-editor-purple-128x128';
 import { Box } from '@mui/material';
 
 export default function NoPhotos() {
@@ -15,7 +16,7 @@ export default function NoPhotos() {
       }}
     >
       <img
-        src="./couch-editor-purple-128x128.png"
+        src={logoSrc}
         alt="Logo"
         width={128}
         height={128}

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import logoSrc from '../../assets/couch-editor-purple-128x128';
 
 const size = 56
 
@@ -7,7 +8,7 @@ export default function Logo() {
 
   return <>
     <img
-      src="./couch-editor-purple-128x128.png"
+      src={logoSrc}
       alt={t('logoAlt')}
       width={size}
       height={size}
