@@ -1,3 +1,9 @@
+## [1.188.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.0...v1.188.1) (2026-09-19)
+
+### 🐛 Fixes
+
+* improve progress handling in PipelineStageProgress component ([934e2af](https://github.com/travel-albums-ai/CouchEditor/commit/934e2af2fd386ba8e1b761c03fc58ecc5c7e6d54))
+
 ## [1.188.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.187.1...v1.188.0) (2026-09-19)
 
 ### ✨ Features
