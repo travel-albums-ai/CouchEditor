@@ -1,9 +1,10 @@
 import { usePipelineStore } from '@/context/pipelineStore';
 import PipelineStageProgress from '@/pipeline/components/PipelineStageProgress';
 import {
-  Box
+  Box, LinearProgress, Tooltip
 } from '@mui/material';
 import type { Edge, Node } from '@xyflow/react';
+import { useEffect, useState } from 'react';
 
 function sortNodesByPipelineOrder(nodes: Node[], edges: Edge[]) {
   const nodeOrder = new Map(nodes.map((node, index) => [node.id, index]));
@@ -58,13 +59,46 @@ export default function RenderingProgressBars() {
   const orderedNodes = currentPipeline
     ? sortNodesByPipelineOrder(currentPipeline.nodes, currentPipeline.edges)
     : [];
+  const [stageProgress, setStageProgress] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    setStageProgress({});
+  }, [currentPipeline?.id]);
+
+  useEffect(() => {
+    const handleEvaluationStarted = () => setStageProgress({});
+
+    window.addEventListener('pipeline:evaluationStarted', handleEvaluationStarted);
+    return () => window.removeEventListener('pipeline:evaluationStarted', handleEvaluationStarted);
+  }, []);
+
+  const overallProgress = orderedNodes.length === 0
+    ? 0
+    : orderedNodes.reduce((total, node) => total + (stageProgress[node.id] ?? 0), 0) / orderedNodes.length;
+  const overallProgressPercent = Math.round(overallProgress * 100);
+  const handleStageProgress = (nodeId: string, progress: number) => {
+    setStageProgress((current) => ({ ...current, [nodeId]: progress }));
+  };
 
   if (orderedNodes.length === 0) return null;
 
   return <>
+    <Tooltip title={`Pipeline progress: ${overallProgressPercent}%`} arrow placement="top">
+      <LinearProgress
+        variant="determinate"
+        value={overallProgressPercent}
+        aria-label={`Pipeline progress: ${overallProgressPercent}%`}
+        sx={{ height: 4, borderRadius: 1, mb: 0.25 }}
+      />
+    </Tooltip>
     <Box sx={{ display: 'flex', flexDirection: 'row', gap: 0.25, p: 0, justifyContent: 'space-between', flex: 1 }}>
       {orderedNodes.map(node => (
-        <PipelineStageProgress nodeId={node.id} nodeType={node.type} key={node.id} />
+        <PipelineStageProgress
+          nodeId={node.id}
+          nodeType={node.type}
+          onProgress={handleStageProgress}
+          key={node.id}
+        />
       ))}
     </Box>
 

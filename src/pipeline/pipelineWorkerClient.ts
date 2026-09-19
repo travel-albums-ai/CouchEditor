@@ -360,6 +360,9 @@ export async function evaluatePipeline(
   edges: Edge[]
 ): Promise<Map<string, Promise<ImageArray>>> {
   const evaluationId = ++activeEvaluationId;
+  window.dispatchEvent(new CustomEvent('pipeline:evaluationStarted', {
+    detail: { evaluationId },
+  }));
 
   // Settle viewers from the superseded run; the caller ignores
   // those results because its evaluation id no longer matches.
