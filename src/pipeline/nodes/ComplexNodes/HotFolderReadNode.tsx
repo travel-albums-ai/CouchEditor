@@ -4,7 +4,7 @@ import { deleteHotFolderReadHandle, loadHotFolderReadHandle, saveHotFolderReadHa
 import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import PipelineStageTiming from '@/pipeline/components/PipelineStageTiming';
-import { Box, Button, IconButton, MenuItem, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, LinearProgress, MenuItem, TextField, Typography } from '@mui/material';
 import { useReactFlow, type Node, type NodeProps } from '@xyflow/react';
 import { FolderInput, Images, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -37,14 +37,20 @@ function isImageFile(file: File): boolean {
   return IMAGE_TYPES.has(file.type) || /\.(avif|bmp|gif|jpe?g|png|tiff?|webp)$/i.test(file.name);
 }
 
-async function readImageFiles(directory: HotFolderDirectoryHandle): Promise<File[]> {
+async function readImageFiles(
+  directory: HotFolderDirectoryHandle,
+  onImageFound: (count: number) => void,
+): Promise<File[]> {
   const files: File[] = [];
 
   for await (const entry of directory.values()) {
     if (entry.kind !== 'file') continue;
 
     const file = await entry.getFile();
-    if (isImageFile(file)) files.push(file);
+    if (isImageFile(file)) {
+      files.push(file);
+      onImageFound(files.length);
+    }
   }
 
   return files.sort((left, right) => left.name.localeCompare(right.name));
@@ -63,10 +69,13 @@ function HotFolderReadNode({
   const { setNodes } = useReactFlow();
   const { hotFolderReads, addHotFolderRead, updateHotFolderRead, removeHotFolderRead } = usePipelineStore();
   const { t } = useTranslation();
+  const translatorRef = useRef(t);
+  const updateHotFolderReadRef = useRef(updateHotFolderRead);
   const directoryRef = useRef<HotFolderDirectoryHandle | null>(null);
   const pollingRef = useRef(false);
   const snapshotRef = useRef<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
+  const [isLoadingFiles, setIsLoadingFiles] = useState(false);
   const selectedHotFolderIdRef = useRef(data.selectedHotFolderId);
   const [directoryName, setDirectoryName] = useState<string>();
   const [fileCount, setFileCount] = useState(data.files?.length ?? 0);
@@ -77,6 +86,14 @@ function HotFolderReadNode({
     selectedHotFolderIdRef.current = data.selectedHotFolderId;
   }, [data.selectedHotFolderId]);
 
+  useEffect(() => {
+    translatorRef.current = t;
+  }, [t]);
+
+  useEffect(() => {
+    updateHotFolderReadRef.current = updateHotFolderRead;
+  }, [updateHotFolderRead]);
+
   const refreshFiles = useCallback(async (
     directory: HotFolderDirectoryHandle | null = directoryRef.current,
     selectedHotFolderId = selectedHotFolderIdRef.current,
@@ -84,9 +101,16 @@ function HotFolderReadNode({
     if (!directory || pollingRef.current) return;
 
     pollingRef.current = true;
+    const isInitialScan = snapshotRef.current === null;
+    if (isInitialScan) {
+      setIsLoadingFiles(true);
+      setFileCount(0);
+    }
 
     try {
-      const files = await readImageFiles(directory);
+      const files = await readImageFiles(directory, (count) => {
+        if (isInitialScan) setFileCount(count);
+      });
       const snapshot = getFileSnapshot(files);
       if (snapshot === snapshotRef.current) return;
 
@@ -97,18 +121,21 @@ function HotFolderReadNode({
           : node
       ));
       setFileCount(files.length);
-      setStatus(files.length === 0 ? t('pipelineFolderEmpty') : t('pipelineFoundPhotos', { count: files.length }));
+      setStatus(files.length === 0 ? translatorRef.current('pipelineFolderEmpty') : translatorRef.current('pipelineFoundPhotos', { count: files.length }));
       window.dispatchEvent(new CustomEvent('pipeline:changed'));
     } catch (error: unknown) {
       console.error('Failed to read hot folder:', error);
-      setStatus(t('pipelineCouldNotReadFolder'));
+      setStatus(translatorRef.current('pipelineCouldNotReadFolder'));
     } finally {
       pollingRef.current = false;
+      setIsLoadingFiles(false);
     }
-  }, [id, setNodes, t]);
+  }, [id, setNodes]);
 
   useEffect(() => {
     directoryRef.current = null;
+    snapshotRef.current = null;
+    setFileCount(0);
     setDirectoryName(undefined);
     if (!selectedHotFolder?.claim) return;
 
@@ -121,11 +148,11 @@ function HotFolderReadNode({
         const permission = await (directory as HotFolderDirectoryHandle).queryPermission({ mode: 'read' });
         if (disposed) return;
 
-        updateHotFolderRead(selectedHotFolder.id, { permission });
+        updateHotFolderReadRef.current(selectedHotFolder.id, { permission });
 
         directoryRef.current = directory as HotFolderDirectoryHandle;
         setDirectoryName(directory.name);
-        setStatus(permission === 'granted' ? t('pipelineWatchingImageChanges') : t('pipelineReadPermissionDenied'));
+        setStatus(permission === 'granted' ? translatorRef.current('pipelineWatchingImageChanges') : translatorRef.current('pipelineReadPermissionDenied'));
         if (permission === 'granted') void refreshFiles(directory as HotFolderDirectoryHandle);
       })
       .catch((error: unknown) => {
@@ -135,7 +162,7 @@ function HotFolderReadNode({
     return () => {
       disposed = true;
     };
-  }, [refreshFiles, selectedHotFolder?.claim, selectedHotFolder?.id, updateHotFolderRead, t]);
+  }, [refreshFiles, selectedHotFolder?.claim, selectedHotFolder?.id]);
 
   useEffect(() => {
     void refreshFiles();
@@ -243,7 +270,14 @@ function HotFolderReadNode({
         </Button>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <NewChip count={fileCount} label={t('pipelinePhotos')} fontSize={18} icon={<Images size={16} />} sx={{ py: 1.5 }} />
-          <Typography variant="caption" color="text.secondary">{status}</Typography>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            {isLoadingFiles ? <>
+              <LinearProgress aria-label={t('pipelinePhotos')} />
+              <Typography variant="caption" color="text.secondary">
+                {t('pipelinePhotos')}: {fileCount}
+              </Typography>
+            </> : <Typography variant="caption" color="text.secondary">{status}</Typography>}
+          </Box>
         </Box>
       </NodeWrapper>
       <OutputHandle id="image" />
