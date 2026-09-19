@@ -1,6 +1,6 @@
 // export { logoSrc as default } from '../toolbars/tools/Logo'
 
-export const logoSrc = `data:image/png;base64,
+const logoSrc = `data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAlTElEQVR42u2de5ifV1XvP2vv/f4u
 c8tMJskkTdI0vaRpSukdaAum5SJyBzmNqKjnUU9FrQLq8fH2mEaPDxylIHcRjg9HULCj8KBFQFEa
 QEWgtECTXtLm1txmJjOZy29+l/d9917nj/3+fjMN6uNzTEtC32+eN5eZ323etfZ3rfVda+9AiRIl

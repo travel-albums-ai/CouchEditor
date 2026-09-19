@@ -72,7 +72,7 @@ export default function VignetteNode({ id, data }: NodeProps<Node<VignetteData>>
           description={config.labelKey ? t(config.labelKey) : undefined}
           min={config.min ?? 0}
           max={config.max ?? 100}
-          throttleMs={1000}
+          debounceMs={250}
           step={config.step ?? 1}
           value={typeof data[config.key as keyof VignetteData] === 'number'
             ? data[config.key as keyof VignetteData] as number

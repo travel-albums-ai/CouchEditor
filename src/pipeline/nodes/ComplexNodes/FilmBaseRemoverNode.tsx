@@ -99,7 +99,7 @@ export default function FilmBaseRemoverNode({ id, data }: NodeProps<Node<FilmBas
             min={config.min}
             max={config.max}
             step={config.step ?? 1}
-            throttleMs={1000}
+            debounceMs={250}
             value={typeof data[config.key as keyof FilmBaseRemoverData] === 'number'
               ? data[config.key as keyof FilmBaseRemoverData] as number
               : config.defaultValue ?? 0}

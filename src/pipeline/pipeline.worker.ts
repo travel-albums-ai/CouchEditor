@@ -226,6 +226,7 @@ const FILE_SOURCE_NODE_TYPES = new Set([
   "source",
   "hot-folder-read",
   "webcam",
+  "screen-share",
   "google-drive",
 ]);
 
@@ -1660,6 +1661,16 @@ const nodeDefinitions: Record<string, PipelineNodeDefinition> = {
   },
 
   webcam: {
+    async execute(inputs) {
+      const files = inputs.files as File[] | undefined;
+
+      if (!files || files.length === 0) return { image: [] };
+
+      return { image: [await loadFileImage(files[0])] };
+    },
+  },
+
+  "screen-share": {
     async execute(inputs) {
       const files = inputs.files as File[] | undefined;
 

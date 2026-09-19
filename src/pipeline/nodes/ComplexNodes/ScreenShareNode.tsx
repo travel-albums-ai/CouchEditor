@@ -3,27 +3,34 @@ import NodeWrapper from '@/pipeline/components/NodeWrapper';
 import { OutputHandle } from '@/pipeline/components/OutputHandle';
 import { Box, Button } from '@mui/material';
 import { Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
-import { Camera, CircleStop } from 'lucide-react';
+import { CircleStop, MonitorUp } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
-const MIN_CAPTURE_INTERVAL_MS = 1;
+const MIN_CAPTURE_INTERVAL_MS = 16;
 const MAX_CAPTURE_INTERVAL_MS = 1000;
+const MIN_CAPTURE_QUALITY = 0.1;
+const MAX_CAPTURE_QUALITY = 1;
+const MIN_CAPTURE_SIZE = 25;
+const MAX_CAPTURE_SIZE = 100;
 
-type WebcamNodeData = {
+type ScreenShareNodeData = {
   files?: File[];
 };
 
-function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
+function ScreenShareNode({ id }: NodeProps<Node<ScreenShareNodeData>>) {
   const { setNodes } = useReactFlow();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const captureTimerRef = useRef<number | null>(null);
   const captureInFlightRef = useRef(false);
+  const captureQualityRef = useRef(MAX_CAPTURE_QUALITY);
+  const captureSizeRef = useRef(MAX_CAPTURE_SIZE);
   const previewUrlRef = useRef<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
-  // const [status, setStatus] = useState('Camera is stopped');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [captureIntervalMs, setCaptureIntervalMs] = useState(MAX_CAPTURE_INTERVAL_MS);
+  const [captureQuality, setCaptureQuality] = useState(MAX_CAPTURE_QUALITY);
+  const [captureSize, setCaptureSize] = useState(MAX_CAPTURE_SIZE);
 
   const scheduleCapture = (intervalMs: number) => {
     if (captureTimerRef.current !== null) {
@@ -35,7 +42,7 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
     }
   };
 
-  const stopCamera = () => {
+  const stopScreenShare = () => {
     if (captureTimerRef.current !== null) {
       window.clearInterval(captureTimerRef.current);
       captureTimerRef.current = null;
@@ -45,7 +52,6 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
     streamRef.current = null;
     if (videoRef.current) videoRef.current.srcObject = null;
     setIsRunning(false);
-    // setStatus('Camera is stopped');
   };
 
   const captureFrame = async () => {
@@ -58,15 +64,14 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
 
     try {
       const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+      canvas.width = Math.max(1, Math.round(video.videoWidth * captureSizeRef.current / 100));
+      canvas.height = Math.max(1, Math.round(video.videoHeight * captureSizeRef.current / 100));
       canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', captureQualityRef.current));
       if (!blob || !streamRef.current) return;
 
-      // const file = new File([blob], `webcam-${Date.now()}.jpg`, { type: 'image/jpeg' });
-      const file = new File([blob], `webcam.jpg`, { type: 'image/jpeg' });
+      const file = new File([blob], 'screen-share.jpg', { type: 'image/jpeg' });
       setNodes((current) => current.map((node) =>
         node.id === id ? { ...node, data: { ...node.data, files: [file] } } : node
       ));
@@ -76,43 +81,37 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
         previewUrlRef.current = next;
         return next;
       });
-      // setStatus('Latest photo ready');
       window.dispatchEvent(new CustomEvent('pipeline:changed'));
     } finally {
       captureInFlightRef.current = false;
     }
   };
 
-  const startCamera = async () => {
+  const startScreenShare = async () => {
     if (streamRef.current) return;
 
-    if (!navigator.mediaDevices?.getUserMedia) {
-      // setStatus('Webcam access is unavailable');
-      return;
-    }
+    if (!navigator.mediaDevices?.getDisplayMedia) return;
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false });
       streamRef.current = stream;
+      stream.getVideoTracks()[0]?.addEventListener('ended', stopScreenShare);
       if (!videoRef.current) return;
 
       videoRef.current.srcObject = stream;
       await videoRef.current.play();
       setIsRunning(true);
-      // setStatus('Capturing latest photo');
       await captureFrame();
       scheduleCapture(captureIntervalMs);
     } catch (error: unknown) {
-      console.error('Failed to start webcam:', error);
-      stopCamera();
-      // setStatus('Webcam permission was denied');
+      console.error('Failed to start screen sharing:', error);
+      stopScreenShare();
     }
   };
 
   useEffect(() => () => {
     if (captureTimerRef.current !== null) {
       window.clearInterval(captureTimerRef.current);
-      captureTimerRef.current = null;
     }
     streamRef.current?.getTracks().forEach((track) => track.stop());
     if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
@@ -120,33 +119,33 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
 
   return (
     <>
-      <NodeWrapper type="webcam" tools={<>
+      <NodeWrapper type="screen-share" tools={<>
         <Button
           variant={isRunning ? 'outlined' : 'contained'}
           color={isRunning ? 'error' : 'primary'}
-          startIcon={isRunning ? <CircleStop size={16} /> : <Camera size={16} />}
-          onClick={() => (isRunning ? stopCamera() : void startCamera())}
+          startIcon={isRunning ? <CircleStop size={16} /> : <MonitorUp size={16} />}
+          onClick={() => (isRunning ? stopScreenShare() : void startScreenShare())}
         >
-          {isRunning ? 'Stop' : 'Start'}
+          {isRunning ? 'Stop' : 'Share screen'}
         </Button>
       </>}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Box sx={{ borderRadius: 8, overflow: 'hidden' }}>
+          <Box sx={{ borderRadius: 8, overflow: 'hidden', mb: 1 }}>
             <video
               ref={videoRef}
               muted
               autoPlay
               playsInline
-              style={{ width: '500px', aspectRatio: '4 / 3', objectFit: 'cover' }}
+              style={{ width: '500px', aspectRatio: '16 / 9', objectFit: 'contain' }}
             />
           </Box>
           <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
             {previewUrl && (
-              <img src={previewUrl} alt="Latest webcam capture" style={{ width: '80px', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: '8px' }} />
+              <img src={previewUrl} alt="Latest screen capture" style={{ width: '80px', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: '8px' }} />
             )}
-            <Box sx={{ px: 1, flex: 1 }}>
+            <Box sx={{ px: 1, flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
               <AdjustmentSlider
-                description={'Capture interval (ms)'}
+                description={'Interval (ms)'}
                 min={MIN_CAPTURE_INTERVAL_MS}
                 max={MAX_CAPTURE_INTERVAL_MS}
                 step={1}
@@ -158,6 +157,32 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
                   if (streamRef.current) scheduleCapture(nextIntervalMs);
                 }}
               />
+              <AdjustmentSlider
+                description={'Quality'}
+                min={MIN_CAPTURE_QUALITY}
+                max={MAX_CAPTURE_QUALITY}
+                step={0.05}
+                debounceMs={250}
+                value={captureQuality}
+                onChange={(value) => {
+                  const nextQuality = Array.isArray(value) ? value[0] : value;
+                  captureQualityRef.current = nextQuality;
+                  setCaptureQuality(nextQuality);
+                }}
+              />
+              <AdjustmentSlider
+                description={'Size'}
+                min={MIN_CAPTURE_SIZE}
+                max={MAX_CAPTURE_SIZE}
+                step={5}
+                debounceMs={250}
+                value={captureSize}
+                onChange={(value) => {
+                  const nextSize = Array.isArray(value) ? value[0] : value;
+                  captureSizeRef.current = nextSize;
+                  setCaptureSize(nextSize);
+                }}
+              />
             </Box>
           </Box>
         </Box>
@@ -167,4 +192,4 @@ function WebcamNode({ id }: NodeProps<Node<WebcamNodeData>>) {
   );
 }
 
-export default WebcamNode;
+export default ScreenShareNode;

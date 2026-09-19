@@ -1,11 +1,12 @@
 import { blackAndWhiteStage, brightnessStage, contrastStage, exposureStage, fadeStage, filmBaseRemoverStage, gammaStage, grainStage, hdrEffectStage, highlightsStage, hueRotationStage, invertStage, luminosityStage, popStage, rgbBlackPointStage, rgbMidtonesStage, rgbWhitePointStage, saturationStage, sepiaStage, shadowsStage, sharpenStage, splitToningStage, temperatureTintStage, vibranceStage, vignetteStage, whitesBlacksStage } from '@/lib/utils';
-import { Angle, Astroid, Camera, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, FileText, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
+import { Angle, Astroid, Camera, ChartColumn, CheckSquare, Cloud, Contrast, Crop, EyeDashed, FileImage, FileText, Film, FolderInput, FolderOutput, Gem, GitFork, Group, HardDrive, Image, Images, ImageUpscale, Info, Landmark, Lightbulb, MapPinned, Merge, Minus, MonitorUp, Moon, Mountain, Palette, Pipette, Plus, Slice, SlidersHorizontal, Split, SquareCenterlineDashedHorizontal, SquareCenterlineDashedVertical, SquareDashedMousePointer, SquaresExclude, Sun, SwatchBook, Theater, Thermometer, Wheat } from 'lucide-react';
 
 export enum NodeType {
   Source = 'source',
   PdfSource = 'pdf-source',
   HotFolderRead = 'hot-folder-read',
   Webcam = 'webcam',
+  ScreenShare = 'screen-share',
   GoogleDrive = 'google-drive',
   Information = 'information',
   SelectedPhoto = 'selected-photo',
@@ -125,6 +126,12 @@ const sourceStages: Array<NodeStageItem> = [
     labelKey: "Webcam", icon: <Camera size={16} />,
     processing: 'static',
     labelDescription: 'Captures the latest photo from your webcam.',
+  },
+  {
+    type: NodeType.ScreenShare,
+    labelKey: "Screen share", icon: <MonitorUp size={16} />,
+    processing: 'static',
+    labelDescription: 'Captures the latest image from a shared screen.',
   },
   {
     type: NodeType.GoogleDrive,

@@ -49,7 +49,7 @@ export function createSliderNode(config: SliderNodeConfig) {
               min={config.min || 0}
               max={config.max || 100}
               step={config.step || 1}
-              throttleMs={1000}
+              debounceMs={250}
               value={data[config.key] ?? 0}
               onChange={(value) => {
                 setNodes((current) => current.map((node) => node.id === id

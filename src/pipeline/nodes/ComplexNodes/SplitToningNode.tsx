@@ -90,7 +90,7 @@ export default function SplitToningNode({
           description={config.labelKey ? t(config.labelKey) : ""}
           min={config.min ?? 0}
           max={config.max ?? 100}
-          throttleMs={1000}
+          debounceMs={250}
           step={config.step ?? 1}
           value={data[config.key] ?? 0}
           onChange={(value) => {

@@ -1,6 +1,6 @@
 import SolidChip from '@/components/SolidChip';
-import { Box, Slider, Typography, useTheme } from '@mui/material';
-import { useCallback, useEffect, useRef } from 'react';
+import { Box, Slider, Typography } from '@mui/material';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type AdjustmentSliderProps = {
   description?: string;
@@ -9,7 +9,7 @@ type AdjustmentSliderProps = {
   step: number;
   value: number;
   onChange: (value: number) => void;
-  throttleMs?: number;
+  debounceMs?: number;
   disabled?: boolean;
 };
 
@@ -20,38 +20,36 @@ export default function AdjustmentSlider({
   step,
   value,
   onChange,
-  throttleMs = 100,
+  debounceMs = 250,
   disabled,
 }: AdjustmentSliderProps) {
-  const lastChangeAt = useRef(0);
+  const [localValue, setLocalValue] = useState(value);
   const pendingChange = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const theme = useTheme()
 
   const dispatchPipelineChange = useCallback(() => {
     window.dispatchEvent(new CustomEvent('pipeline:changed'));
   }, []);
 
-  const schedulePipelineChange = useCallback(() => {
-    const elapsed = Date.now() - lastChangeAt.current;
-
-    if (elapsed >= throttleMs) {
-      lastChangeAt.current = Date.now();
-      dispatchPipelineChange();
-      return;
+  const scheduleChange = useCallback((nextValue: number) => {
+    if (pendingChange.current !== null) {
+      clearTimeout(pendingChange.current);
     }
-
-    if (pendingChange.current !== null) return;
 
     pendingChange.current = setTimeout(() => {
       pendingChange.current = null;
-      lastChangeAt.current = Date.now();
+      onChange(nextValue);
       dispatchPipelineChange();
-    }, throttleMs - elapsed);
-  }, [dispatchPipelineChange, throttleMs]);
+    }, debounceMs);
+  }, [debounceMs, dispatchPipelineChange, onChange]);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
 
   useEffect(() => () => {
     if (pendingChange.current !== null) {
       clearTimeout(pendingChange.current);
+      pendingChange.current = null;
     }
   }, []);
 
@@ -81,16 +79,16 @@ export default function AdjustmentSlider({
           },
 
         }}
-        value={value}
+        value={localValue}
         onChange={(_, nextValue) => {
           const nextAmount = Array.isArray(nextValue) ? nextValue[0] : nextValue;
 
-          onChange(nextAmount);
-          schedulePipelineChange();
+          setLocalValue(nextAmount);
+          scheduleChange(nextAmount);
         }}
       />
 
-      <SolidChip count={value} fontSize={14} height={28} minWidth={50} />
+      <SolidChip count={localValue} fontSize={14} height={28} minWidth={50} />
     </Box>
   );
 }

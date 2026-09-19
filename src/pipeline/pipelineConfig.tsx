@@ -33,6 +33,7 @@ import PdfSourceNode from '@/pipeline/nodes/ComplexNodes/PdfSourceNode';
 import PhotoHistogramNode from '@/pipeline/nodes/ComplexNodes/PhotoHistogramNode';
 import RescaleNode from '@/pipeline/nodes/ComplexNodes/RescaleNode';
 import ResizeLimitNode from '@/pipeline/nodes/ComplexNodes/ResizeLimitNode';
+import ScreenShareNode from '@/pipeline/nodes/ComplexNodes/ScreenShareNode';
 import SelectedPhotoNode from '@/pipeline/nodes/ComplexNodes/SelectedPhotoNode';
 import SinglePhotoViewerNode from '@/pipeline/nodes/ComplexNodes/SinglePhotoViewerNode';
 import SourceNode from '@/pipeline/nodes/ComplexNodes/SourceNode';
@@ -70,6 +71,7 @@ export const pipelineNodeTypes = {
   'gps-split': GpsSplitNode,
   'hot-folder-read': HotFolderReadNode,
   webcam: WebcamNode,
+  'screen-share': ScreenShareNode,
   'hot-folder-write': HotFolderWriteNode,
   'hue-rotation': HueRotationNode,
   'image-picker': ImagePickerNode,
