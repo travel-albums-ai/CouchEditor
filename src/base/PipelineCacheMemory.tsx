@@ -1,7 +1,11 @@
 import NewChip from '@/components/NewChip';
-import { clearPipelineCaches } from '@/pipeline/pipelineWorkerClient';
+import {
+  clearPipelineCaches,
+  clearPipelineViewerCaches,
+  clearPipelineWorkerCaches,
+} from '@/pipeline/pipelineWorkerClient';
 import { IconButton, Tooltip } from '@mui/material';
-import { Eraser, MemoryStick } from 'lucide-react';
+import { Eraser, ImageOff, MemoryStick, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -55,13 +59,31 @@ export default function PipelineCacheMemory() {
         fontSize={14}
         tooltip={t('pipelineCacheMemoryTooltip')}
       />
+      <Tooltip title={t('pipelineClearWorkerCachesTooltip')} placement="top" arrow>
+        <IconButton
+          aria-label={t('pipelineClearWorkerCachesTooltip')}
+          size="small"
+          onClick={clearPipelineWorkerCaches}
+        >
+          <Eraser size={14} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={t('pipelineClearViewerCachesTooltip')} placement="top" arrow>
+        <IconButton
+          aria-label={t('pipelineClearViewerCachesTooltip')}
+          size="small"
+          onClick={clearPipelineViewerCaches}
+        >
+          <ImageOff size={14} />
+        </IconButton>
+      </Tooltip>
       <Tooltip title={t('pipelineClearCachesTooltip')} placement="top" arrow>
         <IconButton
           aria-label={t('pipelineClearCachesTooltip')}
           size="small"
           onClick={clearPipelineCaches}
         >
-          <Eraser size={14} />
+          <Trash2 size={14} />
         </IconButton>
       </Tooltip>
     </>

@@ -435,7 +435,7 @@ export async function evaluatePipeline(
 // Frees the worker thread, its in-memory phase result cache, and every
 // outstanding object URL. Called when the pipeline page unmounts; the
 // worker respawns lazily on the next evaluation.
-export function terminatePipelineWorker() {
+function stopPipelineWorker() {
   worker?.terminate();
   worker = null;
 
@@ -446,17 +446,30 @@ export function terminatePipelineWorker() {
 
   pendingViewers.clear();
 
+  workerCacheBytes = 0;
+  dispatchCacheMemory();
+}
+
+export function clearPipelineViewerCaches() {
+  window.dispatchEvent(new CustomEvent('pipeline:clear-caches'));
+
   for (const nodeId of [...objectUrlsByNode.keys()]) {
     revokeObjectUrls(nodeId);
   }
 
   revokeAllProgressPreviews();
+}
 
-  workerCacheBytes = 0;
-  dispatchCacheMemory();
+export function clearPipelineWorkerCaches() {
+  stopPipelineWorker();
+}
+
+export function terminatePipelineWorker() {
+  clearPipelineViewerCaches();
+  stopPipelineWorker();
 }
 
 export function clearPipelineCaches() {
-  window.dispatchEvent(new CustomEvent('pipeline:clear-caches'));
-  terminatePipelineWorker();
+  clearPipelineWorkerCaches();
+  clearPipelineViewerCaches();
 }
