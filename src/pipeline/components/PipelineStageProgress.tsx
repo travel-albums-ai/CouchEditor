@@ -101,7 +101,10 @@ export default function PipelineStageProgress({
       <LinearProgress
         variant="determinate"
         value={progress * 100}
-        sx={{ height: 6, opacity: isProcessing ? 1 : 0.7 }}
+        sx={{
+          height: 6,
+          opacity: 0.8,
+        }}
       />
     </Tooltip>
   </Box>;
