@@ -1,3 +1,9 @@
+## [1.189.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.3...v1.189.0) (2026-09-19)
+
+### ✨ Features
+
+* add workflow documentation for CouchEditor pipeline flow ([74096d6](https://github.com/travel-albums-ai/CouchEditor/commit/74096d6ed93cf10d5cabe880543ad2166050e2f3))
+
 ## [1.188.3](https://github.com/travel-albums-ai/CouchEditor/compare/v1.188.2...v1.188.3) (2026-09-19)
 
 ### 🐛 Fixes
