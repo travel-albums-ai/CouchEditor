@@ -1,3 +1,9 @@
+## [1.188.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.187.1...v1.188.0) (2026-09-19)
+
+### ✨ Features
+
+* add progress tracking and visual feedback for pipeline stages ([6fae535](https://github.com/travel-albums-ai/CouchEditor/commit/6fae5359ef8f7e90ffe5d044cdda2c49b17a0f95))
+
 ## [1.187.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.187.0...v1.187.1) (2026-09-19)
 
 ### 🐛 Fixes
