@@ -1,11 +1,17 @@
 import NewChip from '@/components/NewChip';
-import { Box, Skeleton, Tooltip } from '@mui/material';
+import { Box, LinearProgress, Tooltip, Typography } from '@mui/material';
 import { Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 type StageTimingDetail = {
   nodeId: string;
   durationMs: number;
+};
+
+type StageProgressDetail = {
+  nodeId: string;
+  completed: number;
+  total: number;
 };
 
 type PipelineStageTimingProps = {
@@ -23,10 +29,12 @@ export default function PipelineStageTiming({
   const [isProcessing, setIsProcessing] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
   const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [progress, setProgress] = useState<StageProgressDetail | null>(null);
 
   useEffect(() => {
     const startedEventName = `${nodeType}:stageStarted`;
     const timingEventName = `${nodeType}:stageTiming`;
+    const progressEventName = `${nodeType}:progress`;
 
     const handleStarted = (event: Event) => {
       const { nodeId: startedNodeId } =
@@ -36,8 +44,15 @@ export default function PipelineStageTiming({
         setIsProcessing(true);
         setStartedAt(performance.now());
         setElapsedMs(0);
+        setProgress(null);
         isBusy?.(true);
       }
+    };
+
+    const handleProgress = (event: Event) => {
+      const detail = (event as CustomEvent<StageProgressDetail>).detail;
+
+      if (detail.nodeId === nodeId) setProgress(detail);
     };
 
     const handleTiming = (event: Event) => {
@@ -49,15 +64,18 @@ export default function PipelineStageTiming({
         setStartedAt(null);
         isBusy?.(false);
         setDurationMs(nextDurationMs);
+        setProgress(null);
       }
     };
 
     window.addEventListener(startedEventName, handleStarted);
     window.addEventListener(timingEventName, handleTiming);
+    window.addEventListener(progressEventName, handleProgress);
 
     return () => {
       window.removeEventListener(startedEventName, handleStarted);
       window.removeEventListener(timingEventName, handleTiming);
+      window.removeEventListener(progressEventName, handleProgress);
     };
   }, [nodeId, nodeType]);
 
@@ -72,37 +90,49 @@ export default function PipelineStageTiming({
   }, [isProcessing, startedAt]);
 
   const displayInSeconds = durationMs === null ? '--' : (durationMs / 1000).toFixed(2);
+  const progressPercent = progress && progress.total > 0
+    ? Math.min(100, Math.max(0, (progress.completed / progress.total) * 100))
+    : 0;
 
   return <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
     {isProcessing && (
-      <Box sx={{ position: 'relative', width: 100, height: 32 }}>
-        <Skeleton
-          variant="rounded"
-          width={100}
-          height={32}
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            // bgcolor: 'primary.main',
-            borderRadius: 2,
-            opacity: 0.1,
-          }}
-        />
+      <Box sx={{ position: 'relative', width: 100, minHeight: 32, display: 'flex', alignItems: 'center' }}>
+        {progress && progress.total > 0 ? <Box sx={{ width: '100%' }}>
+          <LinearProgress
+            variant="determinate"
+            value={progressPercent}
+            aria-label={`${progress.completed} of ${progress.total}`}
+          />
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', textAlign: 'center' }}>
+            {progress.completed}/{progress.total}
+          </Typography>
+        </Box> : <>
+          <LinearProgress
+            variant="indeterminate"
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              height: 32,
+              borderRadius: 2,
+              opacity: 0.2,
+            }}
+          />
 
-        <Box
-          sx={{
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 18,
-            fontVariantNumeric: 'tabular-nums',
-          }}
-        >
-          {Math.round(elapsedMs)} ms
-        </Box>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 18,
+              fontVariantNumeric: 'tabular-nums',
+            }}
+          >
+            {(elapsedMs / 1000).toFixed(2)} s
+          </Box>
+        </>}
       </Box>
     )}
     {!isProcessing && <Tooltip title={`Time taken to process: ${displayInSeconds} s`}>
