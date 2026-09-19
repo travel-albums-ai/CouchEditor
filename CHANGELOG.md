@@ -1,3 +1,9 @@
+## [1.192.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.191.0...v1.192.0) (2026-09-19)
+
+### ✨ Features
+
+* add performance presets for pipeline settings and update UI components ([d102cb4](https://github.com/travel-albums-ai/CouchEditor/commit/d102cb4c1a7219d6aa303e0f30bf19f68f084fb5))
+
 ## [1.191.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.190.0...v1.191.0) (2026-09-19)
 
 ### ✨ Features
