@@ -1,3 +1,9 @@
+## [1.193.1](https://github.com/travel-albums-ai/CouchEditor/compare/v1.193.0...v1.193.1) (2026-09-19)
+
+### 🐛 Fixes
+
+* move background color script to body for proper rendering ([7b57e6a](https://github.com/travel-albums-ai/CouchEditor/commit/7b57e6ae8827e11747233bca18ac1bcd38f89307))
+
 ## [1.193.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.192.0...v1.193.0) (2026-09-19)
 
 ### ✨ Features
