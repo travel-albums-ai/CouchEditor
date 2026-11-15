@@ -12,7 +12,7 @@ export async function loadGlobEntries<T>(
 ): Promise<LoadEntry<T>[]> {
   const entries = Object.entries(modules);
 
-  const withTimeout = <P>(promise: Promise<P>, ms: number): Promise<P> => {
+  const withTimeout = <P,>(promise: Promise<P>, ms: number): Promise<P> => {
     if (ms <= 0) return promise;
 
     return new Promise<P>((resolve, reject) => {

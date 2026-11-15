@@ -1,7 +1,9 @@
 import react from '@vitejs/plugin-react';
+import { fileURLToPath } from "node:url";
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
+import autoI18n, { hosted, HostedService } from 'vite-plugin-ai-auto-i18n';
 
 function inlineCss(): Plugin {
   return {
@@ -81,12 +83,26 @@ function inlineCss(): Plugin {
   };
 }
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
   const shouldVisualize =
     process.env.VITE_BUNDLE_VISUALIZE === 'true' &&
     command === 'build';
 
+  const env = { ...loadEnv(mode, fileURLToPath(new URL(".", import.meta.url)), ""), ...process.env };
+
   const plugins: Plugin[] = [
+    autoI18n({
+      locales: ["en", "de"],
+      sourceLocale: "en",
+      delivery: "runtime",
+      failOnMissingProvider: true,
+      debug: true,
+      componentProps: { Button: ["children"] },
+      provider: {
+        primary: env.PRIMARY_PROVIDER === "" ? undefined : env.PRIMARY_PROVIDER,
+        openai: hosted(HostedService.OpenAI, env.OPENAI_API_KEY, env.OPENAI_MODEL),
+      },
+    }),
     react(),
     inlineCss(),
   ];
