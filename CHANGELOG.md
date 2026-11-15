@@ -1,3 +1,13 @@
+## [1.196.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.195.0...v1.196.0) (2026-11-15)
+
+### ✨ Features
+
+* add auto-i18n support with German and English locales, including registry and localization files ([6f8877e](https://github.com/travel-albums-ai/CouchEditor/commit/6f8877ef8aa6c5317e065307d22929fa842f4c8b))
+
+### 🔧 Chore
+
+* update dependencies to latest versions for improved stability and features ([f12c40a](https://github.com/travel-albums-ai/CouchEditor/commit/f12c40aeeaf2f2073842ab5e5f362bbe3c85d4da))
+
 ## [1.195.0](https://github.com/travel-albums-ai/CouchEditor/compare/v1.194.1...v1.195.0) (2026-09-19)
 
 ### ✨ Features
